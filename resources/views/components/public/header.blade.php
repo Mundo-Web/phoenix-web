@@ -226,11 +226,19 @@
 
 
 <header>
-
-    <div
+    @foreach ($datosgenerales as $item)
+        <div
+            class="bg-[#4598d3] h-[50px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center mb-7">
+            <h3 class="text-white font-Urbanist_Semibold text-base tracking-wider text-center hidden lg:flex">
+                ENVÍO GRATUITO EN LIMA METROPOLITANA POR COMPRAS SUPERIORES A S./149.90
+            </h3>
+        </div>
+    @endforeach
+    
+    {{-- <div
         class="bg-[#F5F5F7] h-10 flex lg:justify-end justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
         <div class="text-[#111111] font-Helvetica_Medium font-medium  text-end flex gap-5 text-sm">
-            {{-- <a href="">Encuentra una tienda </a> |  --}}
+            
             <a href="{{ route('help') }}">Ayuda </a> |
 
             @if (Auth::user() == null)
@@ -270,173 +278,173 @@
                 </div>
             @endif
         </div>
-    </div>
+    </div> --}}
 
     <div>
-        <div id="header-menu" class="flex justify-between gap-5 w-full px-[5%] xl:px-[8%] py-4  text-[17px] relative ">
+        <div id="header-menu" class="flex w-full px-[5%] py-2 flex-row text-[17px] relative bg-black">
+            
+            {{-- Menu hamburguesa --}}
             <div id="menu-burguer" class="lg:hidden z-10 w-max">
                 <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/img/menu_hamburguer.png') }}"
                     alt="menu hamburguesa" onclick="show()" />
             </div>
 
-            <div class="w-auto">
-                <a href="/">
-                    <img id="logo-boostperu" class="w-[200px] "
-                        src="{{ asset($isIndex ? 'images\svg\wolfcarlogo.svg' : 'images\svg\wolfcarlogo.svg') }}"
-                        alt="boostperu" />
-                </a>
-            </div>
-
-            <div class="hidden lg:flex items-center justify-center ">
-                <div>
-                    <nav id="menu-items"
-                        class=" text-[#333] text-base font-Helvetica_Medium flex gap-5 xl:gap-10 items-center justify-center "
-                        x-data="{ openCatalogo: false, openSubMenu: null }">
-                        <a href="/" class="font-medium hover:opacity-75 ">
-                            <span class="underline-this">Inicio</span>
-                        </a>
-
-                        <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
-                            <span class="underline-this">Autoradios</span>
-                            {{-- <div id="productos-link-h" class="w-0"></div> --}}
-
-                        </a>
-
-                        {{-- @if ($offerExists) --}}
-                        <a href="{{ route('Ofertas.jsx') }}" class="font-medium hover:opacity-75">
-                            <span class="underline-this">Accesorios</span>
-                        </a>
-                        {{-- @endif --}}
-
-                        <a href="/contacto" class="font-medium hover:opacity-75  ">
-                            <span class="underline-this">Contacto</span>
-                        </a>
-                        @if ($tags->count() > 0)
-                            @foreach ($tags as $item)
-                                <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75    "
-                                    style="color: {{ $item->color }}">
-                                    <span class="underline-this  ">
-                                        {{ $item->name }} </span>
-                                </a>
-                            @endforeach
-
-                        @endif
-
-                    </nav>
-                </div>
-            </div>
-
-            <div class="flex justify-end md:w-auto md:justify-center items-center gap-3">
-
-                {{-- @if (Auth::user() == null)
-                  <a class="hidden md:flex" href="{{ route('login') }}"><img class="bg-white rounded-lg"
-                      src="{{ asset('images/svg/header_user.svg') }}" alt="user" /></a>
-                @else
-                  <div class="relative  hidden md:inline-flex" x-data="{ open: false }">
-                    <button class="px-3 py-5 inline-flex justify-center items-center group" aria-haspopup="true"
-                      @click.prevent="open = !open" :aria-expanded="open">
-                      <div class="flex items-center truncate">
-                        <span id="username"
-                          class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-[#272727] ">{{ Auth::user()->name }}</span>
-                        <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
-                          <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
-                        </svg>
-                      </div>
-                    </button>
-                    <div
-                      class="origin-top-right z-10 absolute top-full min-w-44 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1"
-                      @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
-                      <ul>
-                        <li class="hover:bg-gray-100">
-                          <a class="font-medium text-sm text-black flex items-center py-1 px-3"
-                            href="{{ route('micuenta') }}" @click="open = false" @focus="open = true"
-                            @focusout="open = false">Mi Cuenta</a>
-                        </li>
-
-                        <li class="hover:bg-gray-100">
-                          <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <button type="submit" class="font-medium text-sm text-black flex items-center py-1 px-3"
-                              @click.prevent="$root.submit(); open = false">
-                              {{ __('Cerrar sesión') }}
-                            </button>
-                          </form>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                @endif --}}
-                {{-- <div class="bg-[#EB5D2C] flex justify-center items-center rounded-full w-7 h-7">
-                    <span id="itemsCount" class="text-white"></span>
-                  </div> --}}
-
-                <div class="relative w-64  pb-8 lg:py-0 hidden lg:flex">
-                    <input id="buscarproducto" type="text" placeholder="Buscar..."
-                        class="w-full pl-8 pr-10 py-2 border bg-[#F5F5F7] lg:border-[#E6E4E5] rounded-3xl focus:outline-none focus:ring-0 focus:border-[#E6E4E5] text-[#082252] placeholder:text-[#CCCCCC]">
+            {{-- Input Search --}}
+            <div class="relative flex w-1/5 lg:py-0  items-center justify-center">
+                <div class="w-full">
+                    <input id="buscarproducto" type="text" placeholder="Buscar productos"
+                        class="font-Urbanist_Light w-full text-sm pl-8 bg-black pr-10 py-2 border border-t-0 border-x-0 border-b-[1px] border-b-white focus:border-b-white focus:outline-none focus:ring-0 text-white placeholder:text-white lg:placeholder:text-white">
 
                     <span class="absolute inset-y-0 left-0 flex items-start lg:items-center px-2 pb-2 pt-[9px] lg:p-2">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg width="17" height="17" viewBox="0 0 20 20" fill="none"
+                            xmlns="http://www.w3.org/2000/svg" class="rotate-90">
                             <path
                                 d="M14.6851 13.6011C14.3544 13.2811 13.8268 13.2898 13.5068 13.6206C13.1868 13.9514 13.1955 14.4789 13.5263 14.7989L14.6851 13.6011ZM16.4206 17.5989C16.7514 17.9189 17.2789 17.9102 17.5989 17.5794C17.9189 17.2486 17.9102 16.7211 17.5794 16.4011L16.4206 17.5989ZM15.2333 9.53333C15.2333 12.6814 12.6814 15.2333 9.53333 15.2333V16.9C13.6018 16.9 16.9 13.6018 16.9 9.53333H15.2333ZM9.53333 15.2333C6.38531 15.2333 3.83333 12.6814 3.83333 9.53333H2.16667C2.16667 13.6018 5.46484 16.9 9.53333 16.9V15.2333ZM3.83333 9.53333C3.83333 6.38531 6.38531 3.83333 9.53333 3.83333V2.16667C5.46484 2.16667 2.16667 5.46484 2.16667 9.53333H3.83333ZM9.53333 3.83333C12.6814 3.83333 15.2333 6.38531 15.2333 9.53333H16.9C16.9 5.46484 13.6018 2.16667 9.53333 2.16667V3.83333ZM13.5263 14.7989L16.4206 17.5989L17.5794 16.4011L14.6851 13.6011L13.5263 14.7989Z"
-                                fill="#CCCCCC" class="fill-fillAzulPetroleo lg:fill-fillPink" />
+                                fill="#E6E4E5" class="fill-fillAzulPetroleo lg:fill-fillPink" />
                         </svg>
                     </span>
 
-                    <div class="bg-white z-60 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px] z-10"
+                    <div class="bg-white z-60 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]"
                         id="resultados"></div>
                 </div>
+            </div>
 
+            {{-- Logo--}}
+            <div class="w-3/5 flex items-center justify-center">
+                <a href="#">
+                    {{-- <img id="logo-boostperu" class="w-[170px]  " 
+                src="{{ asset($isIndex ? 'images/svg/LOGO2.png' : 'images/svg/LOGO2.png') }}" alt="boostperu" /> --}}
+                    <h2 class="text-2xl font-bold text-white tracking-widest font-Urbanist_Semibold">AMERICAN BRANDS</h2>
+                </a>
+            </div>
 
-                <div class="flex justify-center items-center">
-                    <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
-                        <span id="itemsCount"
-                            class="bg-[#EB5D2C] text-xs font-medium text-white text-center px-[7px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
-                        <img src="{{ asset('images/svg/bag_boost.svg') }}"
-                            class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" />
-                    </div>
-                    {{-- <input type="checkbox" class="bag__modal" id="check" /> --}}
-                    {{-- <div id="cart-modal"
-                        class="bag !fixed top-0 right-0 md:w-[450px] cartContainer border shadow-2xl  !rounded-none !p-0 !z-30"
-                        style="display: none">
-                        <div class="p-4 flex flex-col h-screen justify-between gap-2">
-                            <div class="flex flex-col">
-                                <div class="flex justify-between ">
-                                    <h2 class="font-semibold font-Inter_Medium text-[28px] text-[#151515] pb-5">Carrito
-                                    </h2>
-                                    <div id="close-cart" class="cursor-pointer">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                                            <path stroke="#272727" stroke-linecap="round" stroke-linejoin="round"
-                                                d="M6 18 18 6M6 6l12 12" />
-                                        </svg>
-                                    </div>
+            {{-- Iconos --}}
+            <div class="flex w-1/5 justify-end md:justify-end items-center gap-2 max-w-96 my-auto">
+                <div class="flex flex-row justify-between gap-4 mt-1">
+                    @if (Auth::user() == null)
+                        <a class="hidden md:flex" href="{{ route('login') }}"><i
+                                class="fa-solid fa-user-large fa-xl text-white !leading-none"></i></a>
+                    @else
+                        <div class="relative  hidden md:inline-flex" x-data="{ open: false }">
+                            <button class="px-3 py-5 inline-flex justify-center items-center group" aria-haspopup="true"
+                                @click.prevent="open = !open" :aria-expanded="open">
+                                <div class="flex items-center truncate">
+                                    <span id="username"
+                                        class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-[#272727] ">
+                                        {{ explode(' ', Auth::user()->name)[0] }}</span>
+                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
+                                        <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                                    </svg>
                                 </div>
-                                <div class="overflow-y-scroll h-[calc(100vh-200px)] scroll__carrito">
-                                    <table class="w-full">
-                                        <tbody id="itemsCarrito">
-                                           
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="flex flex-col gap-2 pt-2">
-                                <div class="text-[#006BF6]  text-xl flex justify-between items-center">
-                                    <p class="font-Inter_Medium font-semibold">Total</p>
-                                    <p class="font-Inter_Medium font-semibold" id="itemsTotal">S/ 0.00</p>
-                                </div>
-                                <div>
-                                    <a href="/carrito"
-                                        class="font-normal font-Inter_Medium text-lg bg-[#006BF6] py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Ir
-                                        a pagar</a>
-                                </div>
+                            </button>
+                            <div class="origin-top-right z-10 absolute top-full min-w-44 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1"
+                                @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
+                                <ul>
+                                    <li class="hover:bg-gray-100">
+                                        <a class="font-medium text-sm text-black flex items-center py-1 px-3"
+                                            href="{{ route('micuenta') }}" @click="open = false" @focus="open = true"
+                                            @focusout="open = false">Mi Cuenta</a>
+                                    </li>
+
+                                    <li class="hover:bg-gray-100">
+                                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                            @csrf
+                                            <button type="submit"
+                                                class="font-medium text-sm text-black flex items-center py-1 px-3"
+                                                @click.prevent="$root.submit(); open = false">
+                                                {{ __('Cerrar sesión') }}
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                    </div> --}}
+                    @endif
+
+                    <div class="flex justify-center items-center">
+                        <i class="fa-solid fa-location-dot fa-xl text-white !leading-none -mt-1"></i>
+                    </div>
+
+                    <div class="flex justify-center items-center">
+                        <i class="fa-solid fa-heart  fa-xl text-white !leading-none -mt-1"></i>
+                    </div>
+
+                    <div class="flex justify-center items-center min-w-[38px]">
+                        <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
+                            <span id="itemsCount"
+                                class="bg-[#EB5D2C] text-xs font-medium text-white text-center px-[7px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
+                            {{-- <img src="{{ asset('images/svg/bag_boost.svg') }}"
+                    class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" /> --}}
+                            <i class="fa-solid fa-suitcase-rolling fa-xl text-white !leading-none -mt-1"></i>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
         </div>
     </div>
+
+
+    <div>
+        <div class="hidden lg:flex items-center justify-center ">
+          <div>
+            <nav id="menu-items"
+              class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
+              x-data="{ openCatalogo: false, openSubMenu: null }">
+              
+              <a href="/" class="font-medium hover:opacity-75 other-class">
+                <span class="underline-this">HOMBRE</span>
+              </a>
+
+              <a href="/nosotros" class="font-medium hover:opacity-75 other-class">
+                <span class="underline-this">MUJER</span>
+              </a>
+
+              <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
+                <span class="underline-this">ACCESORIOS</span>
+                <div id="#" class="w-0"></div>
+              </a>
+
+              {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
+                <span class="underline-this">PRODUCTOS</span>
+                <div id="productos-link-h" class="w-0"></div>
+              </a> --}}
+
+              @if ($offerExists)
+                <a href="{{ route('Ofertas.jsx') }}" class="font-medium hover:opacity-75 other-class">
+                  <span class="underline-this">MARCAS</span>
+                </a>
+              @endif
+
+              @if ($blog > 0)
+                <a href="/blog/0" class="font-medium hover:opacity-75 other-class">
+                  <span class="underline-this">BLOG </span>
+                </a>
+              @endif
+
+              <a href="/contacto" class="font-medium hover:opacity-75  other-class">
+                <span class="underline-this">MARCAS</span>
+              </a>
+
+              <a href="/contacto" class="font-medium hover:opacity-75  other-class bg-red-600 text-white px-4">
+                <span class="underline-this">OUTLET</span>
+              </a>
+              
+              @if ($tags->count() > 0)
+                @foreach ($tags as $item)
+                  <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75 other-class"
+                    style="color: {{ $item->color }}">
+                    <span class="underline-this  ">
+                      {{ $item->name }} </span>
+                  </a>
+                @endforeach
+              @endif
+
+            </nav>
+          </div>
+        </div> 
+    </div>
+
 
     <div class="flex justify-end relative">
         <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px]">
@@ -447,18 +455,13 @@
         </div>
     </div>
 
-    {{-- <div id="myOverlay" class="overlay" style="z-index: 200;">
-        <span class="closebtn" onclick="closeSearch()">×</span>
-        <div class="overlay-content w-3/4 md:w-1/2 z-30">
-            <form>
-                <input type="text" placeholder="Buscar.." name="search" id="buscarproducto"
-                    class="rounded-2xl ">
-            </form>
-            <div id="resultados" class="bg-white p-[1px] rounded-xl  overflow-y-auto max-h-[300px]"></div>
-        </div>
-    </div> --}}
-
+   
 </header>
+
+
+
+
+
 
 
 <div id="cart-modal"

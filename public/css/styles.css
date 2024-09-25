@@ -1231,3 +1231,33 @@ border-radius: 1rem;
     src: url("/fonts/helvetica_medium.woff") format("woff");
     }
     
+    @font-face {
+        font-family: "Urbanist_Black";
+        src: url("/fonts/Urbanist-Black.woff") format("woff");
+        }
+        
+        @font-face {
+        font-family: "Urbanist_Bold";
+        src: url("/fonts/Urbanist-Bold.woff") format("woff");
+        }
+        
+        @font-face {
+        font-family: "Urbanist_Light";
+        src: url("/fonts/Urbanist-Light.woff") format("woff");
+        }
+        
+        @font-face {
+        font-family: "Urbanist_Medium";
+        src: url("/fonts/Urbanist-Medium.woff") format("woff");
+        }
+        
+        @font-face {
+        font-family: "Urbanist_Regular";
+        src: url("/fonts/Urbanist-Regular.woff") format("woff");
+        }
+        
+        @font-face {
+        font-family: "Urbanist_Semibold";
+        src: url("/fonts/Urbanist-SemiBold.woff") format("woff");
+        }
+    

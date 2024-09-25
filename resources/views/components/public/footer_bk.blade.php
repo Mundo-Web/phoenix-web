@@ -19,94 +19,91 @@
         }
     </style>
 
-    <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-20 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] py-8 lg:py-16 bg-cover object-cover"
+        style="background-image: url('{{ asset('images/img/fondofooter.png') }}');">
 
-        <div class="flex flex-col  text-base gap-2">
-            <h3 class="font-Urbanist_Semibold text-xl pb-3">SOBRE NOSOTROS</h3>
-            <p>Tiempos y costos de envío</p>
-            <p>Cambios y devoluciones</p>
-            <p>Plazos de reembolso</p>
+        <div class="flex flex-col text-white text-base gap-1">
+            <h3 class="font-semibold text-lg tracking-wider text-white pb-3">Contacta con Nosotros</h3>
+            <p>{{ config('app.name') }}</p>
+            <p>{{ $datosgenerales->address }}</p>
+            <p>{{ $datosgenerales->city }} - {{ $datosgenerales->country }}</p>
+            <p>{{ $datosgenerales->cellphone }}</p>
+            <p>{{ $datosgenerales->email }}</p>
         </div>
 
-        <div class="flex flex-col text-base gap-2">
-            <h3 class="font-Urbanist_Semibold text-xl pb-3">AYUDA & APOYO</h3>
-            <a href="#">Términos y condiciones</a>
-            <a href="#">Tratamiento adicional de datos</a>
-            <a href="#">Política de Cookies</a>
-            <a href="#">Campañas publicitarias</a>
-            <a href="#">Beneficios 0% interese</a>
+        <div class="flex flex-col text-white text-base gap-1">
+            <h3 class="font-semibold text-lg tracking-wider text-white pb-3">Información</h3>
+            <a href="/">Inicio</a>
+            <a href="{{ route('Catalogo.jsx') }}">Autoradios</a>
+            <a href="#">Accesorios</a>
         </div>
 
-        <div class="flex flex-col text-base gap-2">
-            <h3 class="font-Urbanist_Semibold text-xl pb-3">SERVICIO AL CLIENTE</h3>
-            <a href="#">Contáctanos</a>
-            <a href="#">Seguimiento de Pedido</a>
-            <a href="#">Nuestras Tienda</a>
-            <a href="#">Politica de Datos</a>
-            <div class="mt-3"><a class="px-4 py-2 border text-xs"><i class="fa-thin fa-book-open pr-2"></i> LIBRO DE
-                    RECLAMACIONES</a></div>
+        <div class="flex flex-col text-white text-base gap-1">
+            <h3 class="font-semibold text-lg tracking-wider text-white pb-3">Servicio al Cliente</h3>
+            <a href="/contacto">Contacto</a>
+            <a id="linkTerminos">Terminos y condiciones </a>
+            <a id="linkPoliticas">Politicas de devolucion </a>
+
+            <a href="{{ route('librodereclamaciones') }}"><img class="w-24 mt-2"
+                    src="{{ asset('images/img/reclamaciones.png') }}" /></a>
         </div>
 
-        <div class=" flex flex-col text-base gap-2 justify-start items-start">
-            <h3 class="font-Urbanist_Semibold text-xl pb-3">PAGO SEGURO</h3>
-            <img class="h-16 bg-contain object-contain" src="{{ asset('images/img/logosvisa.png') }}" />
-
-        </div>
-
-    </div>
-
-    <div class="bg-black text-white pt-10 pb-20 flex items-center justify-center">
-        <div class="flex flex-col justify-center items-center gap-5 w-full px-[5%]">
-
-            <div class="flex flex-row gap-8 text-white mb-5">
+        <div class="flex flex-col text-white text-base gap-1">
+            <h3 class="font-semibold text-lg tracking-wider text-white pb-3">Siguenos en nuestras redes</h3>
+            <div class="flex flex-row gap-4 text-white pt-2">
                 @if ($datosgenerales->facebook)
-                    <a href="{{ $datosgenerales->facebook }}" target="_blank">
-                        <i class="fa-brands fa-facebook fa-xl"></i>
+                    <a href="{{ $datosgenerales->facebook }}">
+                        <i class="fa-brands fa-facebook fa-2xl"></i>
                     </a>
                 @endif
                 @if ($datosgenerales->instagram)
-                    <a href="{{ $datosgenerales->instagram }}" target="_blank">
-                        <i class="fa-brands fa-instagram fa-xl"></i>
+                    <a href="{{ $datosgenerales->instagram }}">
+                        <i class="fa-brands fa-instagram fa-2xl"></i>
                     </a>
                 @endif
                 @if ($datosgenerales->linkedin)
-                    <a href="{{ $datosgenerales->linkedin }}" target="_blank">
-                        <i class="fa-brands fa-linkedin fa-xl"></i>
+                    <a href="{{ $datosgenerales->linkedin }}">
+                        <i class="fa-brands fa-linkedin fa-2xl"></i>
                     </a>
                 @endif
                 @if ($datosgenerales->tiktok)
-                    <a href="{{ $datosgenerales->tiktok }}" target="_blank">
-                        <i class="fa-brands fa-tiktok fa-xl"></i>
+                    <a href="{{ $datosgenerales->tiktok }}">
+                        <i class="fa-brands fa-tiktok fa-2xl"></i>
                     </a>
                 @endif
                 @if ($datosgenerales->twitter)
-                    <a href="{{ $datosgenerales->twitter }}" target="_blank">
-                        <i class="fa-brands fa-twitter fa-xl"></i>
+                    <a href="{{ $datosgenerales->twitter }}">
+                        <i class="fa-brands fa-twitter fa-2xl"></i>
                     </a>
                 @endif
                 @if ($datosgenerales->youtube)
-                    <a href="{{ $datosgenerales->youtube }}" target="_blank">
+                    <a href="{{ $datosgenerales->youtube }}">
                         <i class="fa-brands fa-youtube fa-2xl"></i>
                     </a>
                 @endif
             </div>
+        </div>
 
+    </div>
+
+    <div class="bg-[#F8F8F8] py-4 flex items-center justify-center">
+        <div class="flex flex-col lg:flex-row justify-between items-center gap-5 w-full px-[5%]">
             <div class="text-center">
-                <p class="font-Urbanist_Light text-sm ">
+                <p class="font-normal text-sm text-[#444444]">
                     Copyright &copy; 2023 {{ config('app.name') }}. Reservados todos los derechos. Powered by <a
-                        href="https://www.mundoweb.pe" target="_blank" class="text-white border-b border-white"> Mundo
-                        Web
+                        href="https://www.mundoweb.pe" target="_blank" class="text-[#006BF6] border-b border-[#006BF6]">
+                        Mundo Web
                     </a>
                 </p>
             </div>
-
-            <div>
-                <a href="#">
-                    <h2 class="text-xl font-bold text-white tracking-widest font-Urbanist_Semibold">AMERICAN BRANDS</h2>
-                </a>
+            <div class="flex gap-2 items-center justify-center">
+                <img src="{{ asset('images/svg/visa.svg') }}" alt="visa" class="h-7 md:h-10" />
+                <img src="{{ asset('images/svg/american.svg') }}" alt="american" class="h-7 md:h-10" />
+                <img src="{{ asset('images/svg/mastercad.svg') }}" alt="mastercad" class="h-7 md:h-10" />
+                <img src="{{ asset('images/svg/stripe.svg') }}" alt="stripe" class="h-7 md:h-10" />
+                <img src="{{ asset('images/svg/paypal.svg') }}" alt="paypal" class="h-7 md:h-10" />
+                <img src="{{ asset('images/svg/pay.svg') }}" alt="pay" class="h-7 md:h-10" />
             </div>
-
         </div>
     </div>
 
@@ -117,20 +114,26 @@
             <p class="font-Inter_Regular  prose grid grid-cols-1">{!! $terminos->content ?? '' !!}</p>
         </div>
     </div>
-
+    
     <div id="modalPoliticasDev" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
         <!-- Modal body -->
         <div class="p-4 ">
             <h1 class="font-Inter_SemiBold">Politicas de devolucion</h1>
+
             <p class="font-Inter_Regular  prose grid grid-cols-1 ">{!! $politicas->content ?? '' !!}</p>
+
+
         </div>
     </div>
-
+    
     <div id="modallinkPoliticasDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
         <!-- Modal body -->
         <div class="p-4 ">
             <h1 class="font-Inter_SemiBold">Politicas de Datos</h1>
+
             <p class="font-Inter_Regular  prose grid grid-cols-1">{!! $politicaDatos->content ?? '' !!}</p>
+
+
         </div>
     </div>
 

@@ -34,6 +34,13 @@ export default {
                 Helvetica_Black: ["Helvetica_Black"],
                 Helvetica_Light: ["Helvetica_Light"],
                 Helvetica_Medium: ["Helvetica_Medium"],
+
+                Urbanist_Black: ["Urbanist_Black"],
+                Urbanist_Bold: ["Urbanist_Bold"],
+                Urbanist_Light: ["Urbanist_Light"],
+                Urbanist_Medium: ["Urbanist_Medium"],
+                Urbanist_Regular: ["Urbanist_Regular"],
+                Urbanist_Semibold: ["Urbanist_Semibold"],
             },
 
             screens: {
