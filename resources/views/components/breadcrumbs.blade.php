@@ -1,17 +1,17 @@
 @if (isset($breadcrumbs) && is_array($breadcrumbs) && count($breadcrumbs) > 0)
-  <div class="bg-[#F8F8F8] py-7 2xl:py-8 flex items-center justify-center font-Helvetica_Medium w-full px-[5%] xl:px-[8%]">
-    <nav aria-label="breadcrumb" class="flex gap-4 items-center w-full">
+  <div class="pt-5 flex items-center justify-center font-Urbanist_Bold w-full">
+    <nav aria-label="breadcrumb" class="flex gap-4 items-center justify-center w-full">
       <ol class="breadcrumb flex flex-row items-center gap-3">
         @foreach ($breadcrumbs as $index => $breadcrumb)
           @if ($index > 0)
-            <li class="text-base mx-6 font-Helvetica_Medium">/</li>
+            <li class="text-base mx-6 font-Urbanist_Bold"><i class="fa-solid fa-greater-than"></i></li>
           @endif
           @if ($loop->last)
-            <li class="breadcrumb-item active text-base text-gray-700 font-Helvetica_Medium" aria-current="page">
+            <li class="breadcrumb-item active text-base text-gray-700 font-Urbanist_Bold" aria-current="page">
               {{ $breadcrumb['title'] }}
             </li>
           @else
-            <li class="breadcrumb-item text-base font-Helvetica_Medium"><a
+            <li class="breadcrumb-item text-base font-Urbanist_Bold"><a
                 href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['title'] }}</a></li>
           @endif
         @endforeach

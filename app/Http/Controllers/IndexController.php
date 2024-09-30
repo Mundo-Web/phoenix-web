@@ -115,9 +115,9 @@ class IndexController extends Controller
     // $categories = Category::with('subcategories')->where('visible', true)->get();
     $categories = Category::with(['subcategories' => function ($query) {
       $query->whereHas('products');
-    }])->where('visible', true)->get();
+    }])->where('visible', true)->where('status', true)->get();
 
-    $tags = Tag::where('visible', true)->get();
+    $tags = Tag::where('visible', true)->where('status', true)->get();
 
     $minPrice = Products::select()
       ->where('visible', true)
@@ -130,7 +130,9 @@ class IndexController extends Controller
       ->with('attribute')
       ->join('attributes', 'attributes.id', '=', 'attributes_values.attribute_id')
       ->where('attributes_values.visible', true)
+      ->where('attributes_values.status', true)
       ->where('attributes.visible', true)
+      ->where('attributes.status', true)
       ->get();
 
     return Inertia::render('Catalogo', [

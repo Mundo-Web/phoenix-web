@@ -40,19 +40,19 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
   }
 
   return (<>
-    <button className="w-full py-3 text-base bg-[#FD1F4A] tracking-wider text-white text-center font-Helvetica_Medium rounded-2xl" type="reset">
+    <button className="w-full py-3 text-base bg-black tracking-wider text-white text-center font-Urbanist_Bold" type="reset">
       Limpiar filtros
     </button>
 
     <FilterItem title="Rango de precio" className="flex flex-row gap-4 w-full mt-3">
-      <input type="number" className="w-1/2 rounded-md ring-0 border focus:border-[#FD1F4A] focus:ring-[#FD1F4A]" placeholder="Desde" min={minPrice} max={maxPrice} step={0.01} onChange={setMinPrice} />
-      <input type="number" className="w-1/2 rounded-md ring-0 border focus:border-[#FD1F4A] focus:ring-[#FD1F4A]" placeholder="Hasta" min={minPrice} max={maxPrice} step={0.01} onChange={setMaxPrice} />
+      <input type="number" className="w-1/2 rounded-md ring-0 border focus:border-black focus:ring-black" placeholder="Desde" min={minPrice} max={maxPrice} step={0.01} onChange={setMinPrice} />
+      <input type="number" className="w-1/2 rounded-md ring-0 border focus:border-black focus:ring-black" placeholder="Hasta" min={minPrice} max={maxPrice} step={0.01} onChange={setMaxPrice} />
     </FilterItem>
     {
       categories.length > 0 && (
 
         <div className="w-full ">
-          <h2 className="font-Helvetica_Light tracking-wide font-bold text-base mb-4">Categorias</h2>
+          <h2 className="font-Urbanist_Bold tracking-wide font-bold text-base mb-4">Categorias</h2>
           <div className='bg-black p-[1px] -mt-2 mb-5'></div>
           {categories.map((item) => {
             
@@ -61,8 +61,8 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
            return categories.length > 0 && (<div key={item.id} className="w-full">
               <div className="flex flex-row justify-between gap-3 mb-2">
 
-              <label key={item.id} htmlFor={`item-category-${item.id}`} className="text-custom-border flex flex-row gap-2  items-center cursor-pointer">
-                          <input id={`item-category-${item.id}`} name='category' type="checkbox" className="bg-[#DEE2E6] text-[#FD1F4A]  rounded-sm  border-none focus:ring-0" value={item.id} onClick={(e) => onClick(`category_id`, e.target.value, e.target.checked)}
+              <label key={item.id} htmlFor={`item-category-${item.id}`} className="font-Urbanist_Medium text-custom-border flex flex-row gap-2  items-center cursor-pointer">
+                          <input id={`item-category-${item.id}`} name='category' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm  border-none focus:ring-0" value={item.id} onClick={(e) => onClick(`category_id`, e.target.value, e.target.checked)}
                             defaultChecked={isCheckedfilter}
                           />
                           {item.name}
@@ -117,12 +117,12 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
     {
       tags.length > 0 && <div className="flex flex-col gap-4 w-full">
         <h2 className="font-semibold">Etiquetas</h2>
-        <div className='flex flex-row gap-4 w-full flex-wrap'>
+        <div className='flex flex-row gap-4 w-full flex-wrap font-Urbanist_Medium'>
           {tags.map(item => {
             const isChecked = item.id === Number(tag_id);
 
-            return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="text-custom-border flex flex-row gap-2  items-center cursor-pointer">
-              <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)}
+            return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="font-Urbanist_Medium text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+              <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none font-Urbanist_Medium" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)}
                 defaultChecked={isChecked} />
               {item.name}
             </label>)

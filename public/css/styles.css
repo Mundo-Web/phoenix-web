@@ -1,7 +1,12 @@
 .img-container {
 overflow: hidden;
 }
-
+/* .img-complementarias{
+    width: 100%;
+    max-width: 940px;
+    height: 500px;
+    margin: 0 auto;
+} */
 .newsletter {
 position: relative;
 top: 150px;
@@ -386,9 +391,9 @@ opacity: 1;
 } */
 
 /* ------ */
-.swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+/* .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
 background-color: #f7beab !important;
-}
+} */
 
 /* select comentario */
 

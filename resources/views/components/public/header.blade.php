@@ -70,6 +70,10 @@
         bottom: 0;
         z-index: 900;
     }
+
+    .productos-link-container{
+       z-index: 999;
+    }
 </style>
 
 <div class="navigation shadow-xl px-5 overflow-y-auto" style="z-index: 9999; background-color: #fff !important ">
@@ -325,12 +329,12 @@
                         <a class="hidden md:flex" href="{{ route('login') }}"><i
                                 class="fa-solid fa-user-large fa-xl text-white !leading-none"></i></a>
                     @else
-                        <div class="relative  hidden md:inline-flex" x-data="{ open: false }">
+                        <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
                             <button class="px-3 py-5 inline-flex justify-center items-center group" aria-haspopup="true"
                                 @click.prevent="open = !open" :aria-expanded="open">
                                 <div class="flex items-center truncate">
                                     <span id="username"
-                                        class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-[#272727] ">
+                                        class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-white ">
                                         {{ explode(' ', Auth::user()->name)[0] }}</span>
                                     <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
                                         <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
@@ -392,15 +396,16 @@
               class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
               x-data="{ openCatalogo: false, openSubMenu: null }">
               
-              <a href="/" class="font-medium hover:opacity-75 other-class">
+              <a id="productos-link" href="/" class="font-medium ">
                 <span class="underline-this">HOMBRE</span>
+                <div id="productos-link-h" class="w-0"></div>
               </a>
 
               <a href="/nosotros" class="font-medium hover:opacity-75 other-class">
                 <span class="underline-this">MUJER</span>
               </a>
 
-              <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
+              <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class">
                 <span class="underline-this">ACCESORIOS</span>
                 <div id="#" class="w-0"></div>
               </a>
@@ -416,23 +421,17 @@
                 </a>
               @endif
 
-              @if ($blog > 0)
-                <a href="/blog/0" class="font-medium hover:opacity-75 other-class">
-                  <span class="underline-this">BLOG </span>
-                </a>
-              @endif
-
-              <a href="/contacto" class="font-medium hover:opacity-75  other-class">
+              <a href="/contacto" class="font-medium hover:opacity-75 other-class">
                 <span class="underline-this">MARCAS</span>
               </a>
 
-              <a href="/contacto" class="font-medium hover:opacity-75  other-class bg-red-600 text-white px-4">
+              <a href="/contacto" class="font-medium hover:opacity-75 bg-red-600 text-white px-4 other-class">
                 <span class="underline-this">OUTLET</span>
               </a>
               
               @if ($tags->count() > 0)
                 @foreach ($tags as $item)
-                  <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75 other-class"
+                  <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75"
                     style="color: {{ $item->color }}">
                     <span class="underline-this  ">
                       {{ $item->name }} </span>
@@ -487,7 +486,7 @@
             </div>
         </div>
         <div class="flex flex-col gap-2 pt-2">
-            <div class="text-[#111111]  text-xl flex justify-between items-center">
+            <div class="text-[#111111]  text-xl flex justify-between items-center ">
                 <p class="font-Helvetica_Medium font-semibold">Total</p>
                 <p class="font-Helvetica_Medium font-semibold" id="itemsTotal">S/ 0.00</p>
             </div>
@@ -524,7 +523,6 @@
   })
   @endauth
 </script>
-
 
 <script>
     let clockSearch;
@@ -658,8 +656,8 @@
         mostrarTotalItems()
     })
 </script>
-<script src="{{ asset('js/storage.extend.js') }}"></script>
 
+<script src="{{ asset('js/storage.extend.js') }}"></script>
 
 <script>
     var articulosCarrito = []
@@ -811,6 +809,7 @@
         }
     });
 </script>
+
 <script>
     $(document).ready(function() {
         $(document).on('mouseenter', '.other-class', function() {
@@ -821,6 +820,7 @@
 
     const categorias = @json($categorias);
     var activeHover = false
+    
     document.getElementById('productos-link').addEventListener('mouseenter', function(event) {
         if (event.target === this) {
             // mostrar submenú de productos 
@@ -828,7 +828,7 @@
             let divcontainer = document.createElement('div');
             divcontainer.id = 'productos-link-container';
             divcontainer.className =
-                'absolute top-[90px] left-1/2 transform -translate-x-1/2 m-0 flex flex-row bg-white z-[60] rounded-lg shadow-lg gap-4 p-4 w-[80vw] overflow-x-auto';
+                'absolute top-[219px] border-b-2 border-b-black z-[10] left-1/2 transform -translate-x-1/2 m-0 flex flex-row bg-white gap-4 p-4 w-full overflow-x-auto';
 
             divcontainer.addEventListener('mouseenter', function() {
                 this.addEventListener('mouseleave', cerrar);
@@ -838,9 +838,10 @@
                 if (element.subcategories.length == 0) return;
                 let ul = document.createElement('ul');
                 ul.className =
-                    'text-[#006BF6] font-bold font-poppins text-md py-2 px-3    duration-300 w-full whitespace-nowrap gap-4';
+                    'text-[#006BF6]  font-bold font-poppins text-md py-2 px-3 max-w-lg mx-auto  duration-300 w-full whitespace-nowrap gap-4';
 
                 ul.innerHTML = element.name;
+                
                 element.subcategories.forEach(subcategoria => {
                     let li = document.createElement('li');
                     li.style.setProperty('padding-left', '4px', 'important');
@@ -858,6 +859,7 @@
                     li.appendChild(a);
                     ul.appendChild(li);
                 });
+                
                 divcontainer.appendChild(ul);
             });
 
@@ -969,6 +971,7 @@
 
         })
     }
+    
     $(document).on('click', '#btnAgregarCarritoPr', function() {
         let url = window.location.href;
         let partesURL = url.split('/');

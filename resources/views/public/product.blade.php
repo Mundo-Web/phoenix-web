@@ -95,41 +95,47 @@
     }
 
   @endphp
-  {{-- @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-  @endcomponent --}}
+  
+  @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+  @endcomponent
+
   <main class="font-Inter_Regular" id="mainSection">
         @csrf
-        <section class="w-full px-[5%] md:px-[8%]">
-            <div class="grid grid-cols-1 2md:grid-cols-2 gap-10 md:gap-16 pt-8 lg:pt-16">
+        <section class="w-full px-[5%]">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10  pt-8 lg:pt-16">
 
-                <div class="flex flex-col justify-start items-center gap-5">
+                <div class="flex flex-row lg:col-span-3  justify-start items-center lg:items-start gap-2">
+                    
+                    <div class="w-1/5">
+                      <x-product-slider :product="$product" />
+                    </div>
                     <div id="containerProductosdetail"
-                        class="w-full flex justify-center items-center h-[330px] 2xs:h-[400px] sm:h-[450px] xl:h-[550px] rounded-3xl overflow-hidden">
+                        class="w-4/5 flex justify-center items-center  aspect-square  overflow-hidden">
                         <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain"
                             data-aos="fade-up" data-aos-offset="150"
                             onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
                     </div>
-                    <x-product-slider :product="$product" />
+
                 </div>
 
-                <div class="flex flex-col gap-6  mt-2">
-                    @foreach ($atributos as $item)
+                <div class="flex flex-col lg:col-span-2 gap-3">
+                    {{-- @foreach ($atributos as $item) --}}
                      @foreach ($valorAtributo as $value)
-                            @if ($value->attribute_id == $item->id)
+                            {{-- @if ($value->attribute_id == $item->id) --}}
                               
                                   @isset($valoresdeatributo)
                                       @foreach($valoresdeatributo as $valorat)
                                         @if($valorat->attribute_value_id == $value->id)
-                                          <img src={{asset($value->imagen)}} class="w-24 h-12 object-contain"/>
+                                          <img src={{asset($value->imagen)}} class="w-28 h-auto object-contain"/>
                                         @endif
                                       @endforeach
                                   @endisset
                               
-                            @endif
+                            {{-- @endif --}}
                       @endforeach
-                    @endforeach
+                    {{-- @endforeach --}}
                     <div class="flex flex-col">
-                        <h3 class="font-Helvetica_Medium text-4xl text-[#111111] font-normal tracking-tight">
+                        <h3 class="font-Urbanist_Black text-3xl text-[#cccccc]">
                             {{ $product->producto }}</h3>
                         {{-- <p class="font-Inter_Regular text-base gap-2">Disponibilidad:
                             @if ($product->stock == 0)
@@ -149,14 +155,14 @@
                         <div class="flex flex-row gap-3 content-center items-center">
                             @if ($product->descuento == 0)
                                 <div class="content-center flex flex-row gap-2 items-center">
-                                    <span class="font-Helvetica_Bold text-3xl gap-2 text-[#FD1F4A]">S/
+                                    <span class="font-Urbanist_Bold text-2xl gap-2 text-[#c12730]">S/
                                         {{ $product->precio }}</span>
                                 </div>
                             @else
                                 <div class="content-center flex flex-row gap-2 items-center">
-                                    <span class="font-Helvetica_Bold text-3xl gap-2 text-[#FD1F4A]">S/
+                                    <span class="font-Urbanist_Bold text-2xl gap-2 text-[#c12730]">S/
                                         {{ $product->descuento }}</span>
-                                    <span class="text-[#111111] font-Helvetica_Medium line-through text-lg">S/
+                                    <span class="text-[#acacac] font-Urbanist_Regular line-through text-lg">S/
                                         {{ $product->precio }}</span>
                                 </div>
                                 @php
@@ -165,22 +171,74 @@
                                     );
                                 @endphp
                                 <span
-                                    class="ml-2 font-Helvetica_Medium text-center content-center text-sm gap-2 bg-[#FD1F4A] text-white h-9 w-16 rounded-3xl px-2">
-                                    -{{ $descuento }}% </span>
+                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 bg-[#c12730] text-white px-4 py-1 rounded-lg">
+                                    -{{ $descuento }} % </span>
                             @endif
                         </div>
+
+                        <div class="h-1 border-b-[2px] border-b-[#cccccc] my-4"></div>
                         
-                        <div class="font-medium text-base font-Helvetica_Light w-full mt-4 text-[#444]">
-                            {!! $product->description !!}
+                        <div class="flex flex-col gap-5">
+                              <div class="flex flex-row gap-3">
+                                    <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
+                                          <h2>Colores</h2>
+                                    </div>
+
+                                    <div class="grid grid-cols-10 w-4/5 gap-3">
+                                        <div class="flex justify-center items-center"> 
+                                            <label class="cursor-pointer">
+                                                <input class="hidden" name="color" type="radio" value="red" />
+                                                <div class="bg-red-600 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
+                                            </label>
+                                        </div>
+                                       <div class="flex justify-center items-center"> 
+                                            <label class="cursor-pointer">
+                                                <input class="hidden" name="color" type="radio" value="red" />
+                                                <div class="bg-black w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
+                                            </label>
+                                        </div>
+                                        <div class="flex justify-center items-center"> 
+                                            <label class="cursor-pointer">
+                                                <input class="hidden" name="color" type="radio" value="red" />
+                                                <div class="bg-blue-800 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
+                                            </label>
+                                        </div>
+                                        <div class="flex justify-center items-center"> 
+                                            <label class="cursor-pointer">
+                                                <input class="hidden" name="color" type="radio" value="red" />
+                                                <div class="bg-slate-700 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
+                                            </label>
+                                        </div>
+                                    </div>
+                              </div>
+
+                              <div class="flex flex-row gap-3">
+                                     <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
+                                          <h2>Tallas</h2>
+                                    </div>
+
+                                    <div class="grid grid-cols-10 w-4/5 gap-3 justify-center items-center font-Urbanist_Medium">
+                                        <div class="flex justify-center items-center">28</div>
+                                        <div class="flex justify-center items-center">30</div>
+                                        <div class="flex justify-center items-center">32</div>
+                                        <div class="flex justify-center items-center">34</div>
+                                    </div>
+                              </div>
+
+                              <div class="flex flex-row">
+                                  <div class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
+                                        <img class="h-4 object-contain" src="{{asset('images/img/ruler.png')}}"/>
+                                        <p class="font-Urbanist_Bold text-sm">GUÍA DE TALLAS</p>
+                                  </div>
+                              </div>   
                         </div>
 
-                        @if ($product->sku)
-                            <p class="font-Helvetica_Light text-base gap-2 text-[#444] mt-2">SKU: {{ $product->sku }}
-                            </p>
-                        @endif
+
+                        <div class="h-1 border-b-[2px] border-b-[#cccccc] my-4"></div>
+ 
                     </div>
                     
-                     @if ($otherProducts->isNotEmpty())
+                     {{-- @if ($otherProducts->isNotEmpty())
                         <p class="mb-2 "><b>Característica</b>:
                         <span class="block bg-[#F5F5F7] p-3 mt-2" tippy> {{ $product->color }}</span>
                         
@@ -192,7 +250,8 @@
                                 @endforeach
                             </div>
 
-                    @endif
+                    @endif --}}
+
                     {{-- @if (!$product->attributes->isEmpty())
                         <div class="flex flex-col gap-8 mt-4 font-Inter_Regular text-lg">
                             @php
@@ -221,7 +280,7 @@
                         </div>
                     @endif --}}
 
-                    @if (!$especificaciones->isEmpty())
+                    {{-- @if (!$especificaciones->isEmpty())
                         <p class="font-Inter_Medium text-base gap-2 ">Especificaciones: </p>
                         <div class="min-w-full divide-y divide-gray-200">
                             <table class=" divide-y divide-gray-200 ">
@@ -239,127 +298,63 @@
                                 </tbody>
                             </table>
                         </div>
-                    @endif
+                    @endif --}}
 
                 
                     <div class="flex flex-col gap-4">
-                        <div class="flex flex-col xl:flex-row gap-5 items-center">
-                            <div class="flex">
-                                <div
-                                    class="flex justify-center items-center bg-[#F5F5F5] cursor-pointer rounded-l-3xl">
-                                    <button class="py-2.5 px-5 text-lg font-Helvetica_Bold rounded-full bg-black m-1 text-white" id=disminuir
-                                        type="button">-</button>
-                                </div>
-                                <div id=cantidadSpan
-                                    class="py-2.5 px-5 flex justify-center items-center bg-[#F5F5F5] text-lg font-Helvetica_Bold">
-                                    <span>1</span>
-                                </div>
-                                <div
-                                    class="flex justify-center items-center bg-[#F5F5F5] cursor-pointer rounded-r-3xl">
-                                    <button class="py-2.5 px-5 text-lg font-Helvetica_Bold rounded-full bg-black m-1 text-white" id=aumentar
-                                        type="button">+</button>
-                                </div>
-                            </div>
-                            <div class="xl:ml-8 flex flex-row gap-5 justify-start items-center w-full">
+                        <div class="flex flex-col md:flex-row gap-1 md:gap-5 items-start">
+                            <div class="flex flex-row gap-5 justify-start items-center w-auto order-2 md:order-1">
                                 @if ($product->status == 1 && $product->visible == 1)
                                   <button id="btnAgregarCarritoPr" data-id="{{ $product->id }}"
-                                      class="bg-[#FD1F4A] w-full py-3  text-white text-center rounded-full font-Helvetica_Medium tracking-wide text-lg hover:bg-[#e61e45]">
+                                      class="bg-black w-full py-3 px-5 xl:px-8  text-white text-center uppercase font-Urbanist_Medium tracking-wide text-base">
                                       Agregar
-                                      al Carrito
+                                      a la bolsa
                                   </button>
                                 @endif
                             </div>
+                            <div class="flex order-1 md:order-2">
+                                <div
+                                    class="flex justify-center items-center cursor-pointer rounded-l-3xl">
+                                    <button class="py-2.5 px-5 text-lg font-Helvetica_Bold rounded-full bg-transparent m-1 text-black" id=disminuir
+                                        type="button">-</button>
+                                </div>
+                                <div id=cantidadSpan
+                                    class="py-2.5 px-5 flex justify-center items-center bg-transparent text-lg font-Urbanist_Bold">
+                                    <span>1</span>
+                                </div>
+                                <div
+                                    class="flex justify-center items-center cursor-pointer rounded-r-3xl">
+                                    <button class="py-2.5 px-5 text-lg font-Helvetica_Bold rounded-full bg-transparent m-1 text-black" id=aumentar
+                                        type="button">+</button>
+                                </div>
+                            </div>
+                            
                         </div>
                     </div>
-                 
 
-                    <div class="flex flex-col gap-2" data-aos="fade-up">
-                         <div class="flex flex-row gap-5 justify-start items-center w-full">
-                                <a
-                                    class="bg-[#25D366] flex justify-center items-center w-full py-3  text-white text-center rounded-full font-Helvetica_Medium tracking-wide text-lg hover:bg-[#1fcf61]">
-                                    <span class="text-sm mr-3">Agente Emilio</span>Consulta vía WhatsApp
-                                </a>
-                          </div>
-                          <div class="flex flex-row gap-5 justify-start items-center w-full">
-                                <a
-                                    class="bg-[#25D366] flex justify-center items-center w-full py-3  text-white text-center rounded-full font-Helvetica_Medium tracking-wide text-lg hover:bg-[#1fcf61]">
-                                    <span class="text-sm mr-3">Agente Emilio</span>Consulta vía WhatsApp
-                                </a>
-                          </div>
+                    @if ($product->sku)
+                          <p class="font-Urbanist_Regular text-base text-[#444] mt-2">SKU: {{ $product->sku }}
+                          </p>
+                    @endif 
+
+                    <div class="!text-lg !font-Urbanist_Regular w-full mt-2 text-[#444]">
+                            {!! $product->description !!}
                     </div>
+
+                       
+                 
                 </div>
             </div>
         </section>
 
 
-        <section class="w-full px-[5%] md:px-[8%] py-12 lg:py-20">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
-              <div class="flex flex-col gap-4 justify-center">
-                   <h3 class="font-Helvetica_Medium text-4xl text-[#111111] font-normal tracking-tight">
-                            Llamadas, mensajes, música y mucho más ¡Actualiza tu auto!</h3>
-                   <p class="font-medium text-base font-Helvetica_Light w-full text-[#444]">
-                            Apple CarPlay & Android Auto hace que resulte más fácil que nunca navegar, comunicarse y 
-                            reproducir música en la carretera. Solo tienes que conectar tu iPhone para ver todo lo 
-                            que quieras en la amplia pantalla táctil.
-                    </p>  
-                    <img src={{ asset('images/img/logosandroid.png') }} class="w-1/2 h-auto object-contain mt-2"/>      
-              </div>
 
-              <div>
-                    <img src={{ asset('images/img/portadaproducto.png') }} class="w-full h-96 object-contain mt-2"/>      
-              </div>
-            </div>
-        </section>
-
-
-         <section class="w-full px-[5%] md:px-[8%] py-12 lg:py-20 bg-[#F5F5F7] space-y-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-10">
-              <div class="order-2 lg:order-1">
-                    <img src={{ asset('images/img/portadaproducto1.png') }} class="w-full h-80 lg:h-96 object-contain mt-2"/>      
-              </div>
-
-              <div class="flex flex-col gap-4 justify-center order-1 lg:order-2">
-                   <h3 class="font-Helvetica_Medium text-4xl text-[#111111] font-normal tracking-tight">
-                            Disfrute de sus aplicaciones favoritas</h3>
-                   <p class="font-medium text-base font-Helvetica_Light w-full text-[#444]">
-                            ¿Le gusta utilizar Spotify, Apple Music o cualquier otra plataforma en línea? 
-                            ¿Navegas con Waze o Google maps?. Apple CarPlay & Android Auto funciona con las 
-                            aplicaciones de su smartphone, para que pueda disfrutar de un entretenimiento sin 
-                            límites mientras conduce.
-                    </p>   
-              </div>
-            </div>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-3 lg:gap-10">
-              <div class="flex flex-col gap-4 justify-center">
-                   <h3 class="font-Helvetica_Medium text-4xl text-[#111111] font-normal tracking-tight">
-                            ¿Necesitas instalación?</h3>
-                   <p class="font-medium text-base font-Helvetica_Light w-full text-[#444]">
-                            Contamos con Talleres especializados ubicados en los puntos más céntricos de Lima y 
-                            Provincias para asegurar su correcta instalación y funcionamiento.
-                    </p>  
-                    <div class="mt-3">
-                      <a 
-                        class="bg-[#FD1F4A] px-5 py-3  text-white text-center rounded-full font-Helvetica_Medium tracking-wide text-base hover:bg-[#e61e45]">
-                         Ver Talleres Autorizados            
-                      </a>                          
-                    </div> 
-              </div>
-
-              <div>
-                    <img src={{ asset('images/img/portadaproducto2.png') }} class="w-full h-80 lg:h-96 object-contain mt-2"/>      
-              </div>
-            </div>
-        </section>
-
-
-
+        <div class="px-[5%]"><div class="h-1 border-b-[2px] border-b-[#cccccc] mt-16"></div></div>
 
         <section class="bg-white py-10 lg:py-14">
-            <div class="w-full px-[5%] md:px-[8%]">
+            <div class="w-full px-[5%]">
                 <div class="flex flex-col">
-                    <h3 class="text-lg font-Helvetica_Light tracking-tight text-[#FD1F4A]">Apúrate que se acaban</h3>
-                    <h1 class="text-4xl font-Helvetica_Medium tracking-tight">También te puede interesar</h1>
+                    <h1 class="text-3xl font-Urbanist_Bold text-center tracking-tight">PODRÍA GUSTARTE</h1>
                 </div>
                 <div class="grid grid-cols-4 gap-4 mt-14 w-full">
                     @foreach ($ProdComplementarios->take(4) as $item)

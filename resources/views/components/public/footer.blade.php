@@ -1,4 +1,4 @@
-<footer class="font-Helvetica_Light bg-[#FFFFFF] mt-5">
+<footer>
     <style>
         #modalPoliticasDev #modalTerminosCondiciones #modallinkPoliticasDatos {
             height: 70vh;

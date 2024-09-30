@@ -24,36 +24,30 @@
   </div>
 </div> --}}
 
-<div class="grid grid-cols-3 w-full">
-  <div class="col-span-3 h-full">
-    <div class="swiper img-complementarias">
+<div class="flex flex-col w-full">
+    <div class="swiper img-complementarias h-60 sm:h-96 xl:h-[32rem]">
       <div class="swiper-wrapper">
-        <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-azulboost"
+        <div class="swiper-slide w-auto h-full  overflow-hidden "
           id="img-complementariaPROD-0">
-          <div class="flex gap-2 items-center justify-center h-full">
-            <div class="flex justify-center items-center h-full">
-              <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl"
+          <div class="flex items-center justify-center h-full cursor-pointer">
+              <img class="object-center object-contain h-full w-full shadow-xl aspect-square"
                 src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}"
                 onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
-            </div>
           </div>
         </div>
 
         @foreach ($product->galeria as $index => $image)
-          <div class="swiper-slide w-full h-full col-span-1 rounded-lg overflow-hidden border-2 border-[#E5E7EB]"
+          <div class="swiper-slide w-auto h-full overflow-hidden "
             id="img-complementariaPROD-{{ $index }}">
-            <div class="flex gap-2 items-center justify-center h-full">
-              <div class="flex justify-center items-center h-full">
-                <img class="object-center object-contain rounded-lg h-40 w-full shadow-xl"
+            <div class="flex items-center justify-center h-full cursor-pointer">
+                <img class="object-center object-contain h-full w-full shadow-xl aspect-square"
                   src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}"
                   onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
-              </div>
             </div>
           </div>
         @endforeach
       </div>
     </div>
-  </div>
 </div>
 
 <script>
@@ -63,6 +57,7 @@
     loop: false,
     // {{ count($product->galeria) > 1 ? 'true' : 'false' }},
     centeredSlides: false,
+    direction: 'vertical',
     initialSlide: 0, // Empieza en el cuarto slide (índice 3) */
     /* pagination: {
       el: ".swiper-pagination-estadisticas",
@@ -71,21 +66,15 @@
     //allowSlideNext: false,  //Bloquea el deslizamiento hacia el siguiente slide
     //allowSlidePrev: false,  //Bloquea el deslizamiento hacia el slide anterior
     allowTouchMove: {{ count($product->galeria) > 1 ? 'true' : 'false' }}, // Bloquea el movimiento táctil
-    // autoplay: {
-    //   delay: 5500,
-    //   disableOnInteraction: true,
-    //   pauseOnMouseEnter: true
-    // },
-
     breakpoints: {
       0: {
-        slidesPerView: 2,
+        slidesPerView: 3,
         // centeredSlides: {{ count($product->galeria) <= 2 ? 'true' : 'false' }},
-        centeredSlides: false,
-        loop: {{ count($product->galeria) > 1 ? 'true' : 'false' }},
+        spaceBetween: 0,
+        //loop: {{ count($product->galeria) > 1 ? 'true' : 'false' }},
       },
       1024: {
-        slidesPerView: 3,
+        slidesPerView: 4,
       },
     },
   });
@@ -103,7 +92,7 @@
     $(this).removeClass('border-[#E5E7EB]').addClass('border-azulboost');
 
     img.src = $(this).find('img').attr('src');
-    img.classList.add('w-full', 'h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]', 'object-contain',
+    img.classList.add('w-full', 'aspect-square', 'object-contain',
       'ease-in', 'duration-500',
       'transform', 'hover:scale-105', 'opacity-0', 'transition-opacity', 'duration-200');
     $("#containerProductosdetail").html(img);
@@ -124,7 +113,7 @@
     img.src = $(this).find('img').attr('src');
     img.classList.add('w-full', 'h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]', 'object-contain', 'ease-in', 'duration-300',
       'transform', 'hover:scale-105', 'opacity-0', 'transition-opacity', 'duration-500');
-    
+    h-[330px]', '2xs:h-[400px]', 'sm:h-[450px]', 'xl:h-[550px]'
     let container = $("#containerProductosdetail");
     container.append(img);
     

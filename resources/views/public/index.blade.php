@@ -5,58 +5,546 @@
 @stop
 
 @php
-  $bannersBottom = array_filter($banners, function ($banner) {
-      return $banner['potition'] === 'bottom';
-  });
-  $bannerMid = array_filter($banners, function ($banner) {
-      return $banner['potition'] === 'mid';
-  });
+    $bannersBottom = array_filter($banners, function ($banner) {
+        return $banner['potition'] === 'bottom';
+    });
+    $bannerMid = array_filter($banners, function ($banner) {
+        return $banner['potition'] === 'mid';
+    });
 @endphp
 
 <style>
-  @media (max-width: 600px) {
-    .fixedWhastapp {
-      right: 13px !important;
+    @media (max-width: 600px) {
+        .fixedWhastapp {
+            right: 13px !important;
+        }
     }
-  }
+
+    .swiper-pagination-slider .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #4598d3 !important;
+        border: 2px solid #4598d3;
+    }
+
+    .swiper-pagination-slider .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: white !important;
+        border: 2px solid black;
+        opacity: 1;
+    }
+
+    .swiper-pagination-cat .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #4598d3 !important;
+        border: 2px solid #4598d3;
+    }
+
+    .swiper-pagination-cat .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: white !important;
+        border: 2px solid black;
+        opacity: 1;
+    }
+
+    .swiper-pagination-promo .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #4598d3 !important;
+        border: 2px solid #4598d3;
+    }
+
+    .swiper-pagination-promo .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: white !important;
+        border: 2px solid black;
+        opacity: 1;
+    }
+
+    .swiper-pagination-otrasmarcas .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #4598d3 !important;
+        border: 2px solid #4598d3;
+    }
+
+    .swiper-pagination-otrasmarcas .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: white !important;
+        border: 2px solid black;
+        opacity: 1;
+    }
 </style>
 
 
 
 @section('content')
 
-   <main class="z-[15] ">
-  @if (count($slider) > 0) 
-    <section class="">
-      <x-swipper-card :items="$slider" />
-    </section>
-   @endif
+    <main class="z-[15] ">
 
-   @if (count($logos) > 0) 
-    <section class="w-full px-[5%] lg:px-[8%] py-12 lg:py-20 flex flex-col gap-10">
-        <div class="text-center">
-            {{-- <h3 class="font-Helvetica_Medium text-[#FD1F4A] text-base">Selecciona la marca de tu automóvil</h3> --}}
-            <h2 class="font-Helvetica_Bold text-[#010101] text-4xl">Autoradios IOS</h2>
-        </div>
+        {{-- @if (count($slider) > 0) 
+        <section class="">
+          <x-swipper-card :items="$slider" />
+        </section>
+      @endif --}}
 
-        <div class="flex flex-wrap justify-between gap-8 ">
-            @foreach ($logos as $logo)
-                <img class="w-32 object-contain mx-auto" src="{{ asset($logo->url_image) }}" />
-            @endforeach
-        </div>
-    </section>
-   @endif
 
-    {{-- seccion Gran Descuento  --}}
-    @if (count($bannerMid) > 0)
+        <section class="w-full relative mx-auto">
+            <div class="swiper sliderab h-max">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="w-full">
+                            <div class="h-[450px] w-full md:h-auto relative z-10 flex flex-col items-end justify-end">
+                                <img class="block h-full w-full object-cover md:object-contain object-bottom"
+                                    {{-- src="{{ asset($item->url_image . $item->name_image) }}" alt=""> --}} src="{{ asset('images/img/banner_AB.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="w-full">
+                            <div class="h-[450px] w-full md:h-auto relative z-10 flex flex-col items-end justify-end">
+                                <img class="block h-full w-full object-cover md:object-contain object-bottom"
+                                    {{-- src="{{ asset($item->url_image . $item->name_image) }}" alt=""> --}} src="{{ asset('images/img/banner_AB.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-center items-center relative">
+                    <div class="swiper-pagination-slider absolute top-full bottom-0 z-10 right-full !left-1/2"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+            <div class="swiper carruseltop h-max">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            <div class="flex flex-row justify-end items-end w-full ">
+                                <div class="flex flex-row md:w-2/3">
+                                    <h2
+                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
+                                        JEANS Y PANTALONES
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            <div class="flex flex-row justify-end items-end w-full ">
+                                <div class="flex flex-row md:w-2/3">
+                                    <h2
+                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
+                                        CASACAS Y POLERAS
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            <div class="flex flex-row justify-end items-end w-full ">
+                                <div class="flex flex-row md:w-2/3">
+                                    <h2
+                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
+                                        CAMISAS Y BLUSAS
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            <div class="flex flex-row justify-end items-end w-full ">
+                                <div class="flex flex-row md:w-2/3">
+                                    <h2
+                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
+                                        ACCESORIOS
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            <div class="flex flex-row justify-end items-end w-full ">
+                                <div class="flex flex-row md:w-2/3">
+                                    <h2
+                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
+                                        JEANS Y PANTALONES
+                                    </h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-center items-center relative mt-10">
+                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="flex flex-col w-full gap-12 relative pt-12 lg:pt-16 px-[5%]">
+
+            <div class="swiper promo h-max flex flex-row w-full">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+
+                            <div class="flex flex-col gap-5 lg:gap-10 justify-center items-start w-[95%] lg:w-[85%] text-left">
+                                <h2 class="font-Urbanist_Black text-2xl lg:text-3xl text-black">
+                                    NUEVOS FITS
+                                </h2>
+
+                                <h1 class="font-Urbanist_Black text-5xl lg:text-8xl text-[#cccccc]">
+                                    Wide leg
+                                </h1>
+
+                                <p class="font-Urbanist_Light text-2xl lg:text-3xl text-black">
+                                    Lorem ipsum dolor sit amet, consectetuer
+                                    adipiscing elit, sed diam nonummy nibh euismod
+                                </p>
+
+                                <a class="font-Urbanist_Light text-lg lg:text-xl text-black px-10 py-2 border border-black">
+                                    COMPRA AQUÍ
+                                </a>
+                            </div>
+
+                            <div class="flex flex-col justify-center items-center">
+                                <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
+                                    <img src="{{ asset('images/img/carrusel3_AB.png') }}" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+
+
+                            <div class="flex flex-col gap-5 lg:gap-10 justify-center items-start w-[95%] lg:w-[85%] text-left">
+                                <h2 class="font-Urbanist_Black text-2xl lg:text-3xl text-black">
+                                    NUEVOS FITS
+                                </h2>
+
+                                <h1 class="font-Urbanist_Black text-5xl lg:text-8xl text-[#cccccc]">
+                                    Wide leg
+                                </h1>
+
+                                <p class="font-Urbanist_Light text-2xl lg:text-3xl text-black">
+                                    Lorem ipsum dolor sit amet, consectetuer
+                                    adipiscing elit, sed diam nonummy nibh euismod
+                                </p>
+
+                                <a class="font-Urbanist_Light text-lg lg:text-xl text-black px-10 py-2 border border-black">
+                                    COMPRA AQUÍ
+                                </a>
+                            </div>
+
+                            <div class="flex flex-col justify-center items-center">
+                                <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
+                                    <img src="{{ asset('images/img/carrusel3_AB.png') }}" class="w-full h-full object-cover lg:object-contain" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="flex flex-row justify-center items-center relative  mt-10">
+                    <div class="swiper-pagination-promo absolute top-full bottom-0 z-10 right-full !left-1/2"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 md:gap-8 relative mx-auto pt-12 lg:pt-16">
+            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                </div>
+            </div>
+
+            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                </div>
+            </div>
+            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">TAMBIÉN PUEDES ENCONTRAR</h2>
+        </section>
+
+         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+            <div class="swiper otrasmarcas h-max">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            <div class="flex flex-col justify-center  h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
+                                <div class="flex flex-col justify-end items-center w-full">
+                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
+                                <div class="flex flex-col justify-end items-center w-full">
+                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
+                                <div class="flex flex-col justify-end items-center w-full">
+                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
+                                <div class="flex flex-col justify-end items-center w-full">
+                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
+                                <div class="flex flex-col justify-end items-center w-full">
+                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-center items-center relative mt-10">
+                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">COMPLEMENTA TU ESTILO</h2>
+        </section>
+
+         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+            <div class="swiper complementos h-max">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="flex flex-row justify-center items-center">
+                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                          </div>
+                        </div>
+                        
+                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                          <p class="font-Urbanist_Semibold text-base text-black line-clamp-1">HOMBRE</p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f] line-clamp-1">Gorro BAUCO DRILL</h2>
+                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        
+                        <div class="flex flex-row justify-center items-center">
+                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                          </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
+                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        
+                        <div class="flex flex-row justify-center items-center">
+                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                          </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
+                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        
+                        <div class="flex flex-row justify-center items-center">
+                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                          </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
+                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        
+                       <div class="flex flex-row justify-center items-center">
+                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                          </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
+                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                        </div>
+                    </div>
+
+                    <div class="swiper-slide">
+                        
+                        <div class="flex flex-row justify-center items-center">
+                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                          </div>
+                        </div>
+
+                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
+                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                        </div>
+                    </div>
+
+                    
+                <div class="flex flex-row justify-center items-center relative mt-10">
+                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
+              <span class="font-Urbanist_Regular italic"> @americanbrandspe </span></h2>
+        </section>
+
+        <section class="w-full relative mx-auto pt-12 lg:pt-16">
+            <div class="swiper instagram h-max">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                        </div>
+                    </div>  
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                        </div>
+                    </div>  
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                        </div>
+                    </div>  
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                        </div>
+                    </div>  
+                    <div class="swiper-slide">
+                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
+                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                        </div>
+                    </div>       
+                </div>
+            </div>
+        </section>
+        
+
+        {{-- @if (count($logos) > 0) 
+      <section class="w-full px-[5%] lg:px-[8%] py-12 lg:py-20 flex flex-col gap-10">
+          <div class="text-center">
+              <h2 class="font-Helvetica_Bold text-[#010101] text-4xl">Autoradios IOS</h2>
+          </div>
+
+          <div class="flex flex-wrap justify-between gap-8 ">
+              @foreach ($logos as $logo)
+                  <img class="w-32 object-contain mx-auto" src="{{ asset($logo->url_image) }}" />
+              @endforeach
+          </div>
+      </section>
+    @endif --}}
+
+        {{-- seccion Gran Descuento  --}}
+
+        {{-- @if (count($bannerMid) > 0)
       <section>
         <x-banner-section-cover :banner="$bannerMid" />
       </section>
-    @endif
+    @endif --}}
 
 
-    {{-- seccion Productos populares  --}}
-    @if ($productosPupulares->count() > 0)
+        {{-- seccion Productos populares  --}}
+
+        {{-- @if ($productosPupulares->count() > 0)
       <section>
         <div class="w-full px-[5%] py-14 lg:py-20">
           <div class="flex flex-col md:flex-row justify-between w-full gap-3">
@@ -75,16 +563,16 @@
              
               @foreach ($taken as $item)
                 <x-product.container width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" />
-                {{-- <x-productos-card width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" /> --}}
+                
               @endforeach
             </div>
           @endforeach
         </div>
       </section>
-    @endif
-    
+    @endif --}}
 
-    @php
+
+        {{-- @php
           $categories = $categoriasindex;
           $chunks = $categories->chunk(3);
           $processedCategories = collect();
@@ -185,11 +673,11 @@
                     @endforeach
                 </div>
           @endif
-    @endif
+    @endif --}}
 
 
-    {{-- seccion Ultimos Productos  --}}
-    @if ($ultimosProductos->count() > 0)
+        {{-- seccion Ultimos Productos  --}}
+        {{-- @if ($ultimosProductos->count() > 0)
     <section>
       <div class="w-full px-[5%] py-14 lg:py-20">
         <div class="flex flex-col md:flex-row justify-between w-full gap-3">
@@ -206,21 +694,21 @@
           <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 md:flex-row gap-6 mt-14 w-full">
             @foreach ($taken as $item)
               <x-product.container width="w-full" bgcolor="bg-[#FFFFFF]" :item="$item" />
-              {{-- <x-productos-card width="w-1/4" bgcolor="bg-[#FFFFFF]" :item="$item" /> --}}
+              
             @endforeach
           </div>
         @endforeach
       </div>
     </section>
-    @endif
+    @endif --}}
 
 
-    
-    
-  
 
-    {{-- Seccion Blog --}}
-    {{-- @if ($blogs->count() > 0)
+
+
+
+        {{-- Seccion Blog --}}
+        {{-- @if ($blogs->count() > 0)
       <section class="w-full px-[5%] py-7 lg:py-14" data-aos="fade-up">
         <div class="flex flex-col md:flex-row justify-between w-full gap-3">
           <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Blog & Eventos</h1>
@@ -237,8 +725,8 @@
     @endif --}}
 
 
-    {{-- gran descuento --}}
-    {{-- @if (count($bannersBottom) > 0)
+        {{-- gran descuento --}}
+        {{-- @if (count($bannersBottom) > 0)
       <section class="w-full px-[5%] mt-7 lg:mt-10 " data-aos="zoom-out-right">
         <div class="bg-gradient-to-b from-gray-50 to-white flex flex-col md:flex-row justify-between bg-[#EEEEEE]">
           <x-banner-section :banner="$bannersBottom" />
@@ -247,7 +735,7 @@
     @endif --}}
 
 
-    {{-- @if ($benefit->count() > 0)
+        {{-- @if ($benefit->count() > 0)
       <section class="py-10 lg:py-13 bg-[#F8F8F8] w-full px[5%]" data-aos="zoom-out-right">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 ">
           @foreach ($benefit as $item)
@@ -263,63 +751,254 @@
 
 
 
-  </main>
+    </main>
 
 
 
-  <!-- Main modal -->
-  <div id="modalofertas" class="modal modalbanner">
-    <!-- Modal body -->
-    <div class="p-1 ">
-      <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+    <!-- Main modal -->
+    <div id="modalofertas" class="modal modalbanner">
+        <!-- Modal body -->
+        <div class="p-1 ">
+            <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+        </div>
     </div>
-  </div>
 
 
 @section('scripts_importados')
 
-  <script>
-    let pops = @json($popups);
+    <script>
+        let pops = @json($popups);
 
-    function calcularTotal() {
-      let articulos = Local.get('carrito')
-      let total = articulos.map(item => {
-        let monto
-        if (Number(item.descuento) !== 0) {
-          monto = item.cantidad * Number(item.descuento)
-        } else {
-          monto = item.cantidad * Number(item.precio)
+        function calcularTotal() {
+            let articulos = Local.get('carrito')
+            let total = articulos.map(item => {
+                let monto
+                if (Number(item.descuento) !== 0) {
+                    monto = item.cantidad * Number(item.descuento)
+                } else {
+                    monto = item.cantidad * Number(item.precio)
+
+                }
+                return monto
+
+            })
+            const suma = total.reduce((total, elemento) => total + elemento, 0);
+
+            $('#itemsTotal').text(`S/. ${suma.toFixed(2)} `)
 
         }
-        return monto
+        $(document).ready(function() {
+            console.log(pops.length)
+            if (pops.length > 0) {
+                $('#modalofertas').modal({
+                    show: true,
+                    fadeDuration: 100
+                })
 
-      })
-      const suma = total.reduce((total, elemento) => total + elemento, 0);
+            }
 
-      $('#itemsTotal').text(`S/. ${suma.toFixed(2)} `)
 
-    }
-    $(document).ready(function() {
-      console.log(pops.length)
-      if (pops.length > 0) {
-        $('#modalofertas').modal({
-          show: true,
-          fadeDuration: 100
+            $(document).ready(function() {
+                articulosCarrito = Local.get('carrito') || [];
+
+                // PintarCarrito();
+            });
+
         })
+    </script>
 
-      }
+    <script>
+        var swiper = new Swiper(".sliderab", {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            pagination: {
+                el: ".swiper-pagination-slider",
+                clickable: true,
+            },
 
 
-      $(document).ready(function() {
-        articulosCarrito = Local.get('carrito') || [];
-
-        // PintarCarrito();
-      });
-
-    })
-  </script>
+        });
 
 
+        var swiper = new Swiper(".carruseltop", {
+            slidesPerView: 4,
+            spaceBetween: 25,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination-cat",
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 25,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                },
+                1350: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+            },
+        });
+
+        var swiper = new Swiper(".otrasmarcas", {
+            slidesPerView: 4,
+            spaceBetween: 25,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination-otrasmarcas",
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 25,
+                },
+                768: {
+                    slidesPerView: 2,
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                },
+                1350: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+            },
+        });
+
+
+        var swiper = new Swiper(".complementos", {
+            slidesPerView: 5,
+            spaceBetween: 25,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination-complementos",
+                clickable: true,
+                dynamicBullets: true,
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 25,
+                },
+                600: {
+                    slidesPerView: 2,
+                    spaceBetween: 25,
+                },
+                768: {
+                    slidesPerView: 3,
+                    spaceBetween: 25,
+                },
+                1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 25,
+                },
+                1350: {
+                    slidesPerView: 5,
+                    spaceBetween: 25,
+                },
+            },
+        });
+
+
+        var swiper = new Swiper(".instagram", {
+            slidesPerView: 6,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                  
+                },
+                600: {
+                    slidesPerView: 2,
+                   
+                },
+                768: {
+                    slidesPerView: 3,
+                   
+                },
+                1024: {
+                    slidesPerView: 4,
+                  
+                },
+                1350: {
+                    slidesPerView: 5,
+                    
+                },
+            },
+        });
+
+
+        var swiper = new Swiper(".promo", {
+            slidesPerView: 1,
+            spaceBetween: 50,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            pagination: {
+                el: ".swiper-pagination-promo",
+                clickable: true,
+            },
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 50,
+                },
+                768: {
+                    slidesPerView: 1,
+                    spaceBetween: 50,
+                },
+                1024: {
+                    slidesPerView: 1,
+                    spaceBetween: 50,
+                },
+            },
+        });
+    </script>
 @stop
 
 @stop
