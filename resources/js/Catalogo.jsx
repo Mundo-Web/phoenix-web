@@ -252,7 +252,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
             <span className="font-normal text-[17px] text-[#666666] xl:ml-3">
               Mostrando {((currentPage - 1) * take) + 1} - {currentPage * take > totalCount ? totalCount : currentPage * take} de {totalCount} resultados
             </span>
-            <button type="button" className='lg:hidden text-[#006BF6]' onClick={() => setShowModal(true)}> Mostrar Filtros</button>
+            <button type="button" className='lg:hidden text-black' onClick={() => setShowModal(true)}> Mostrar Filtros</button>
           </div>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-4 md:pr-4">

@@ -171,7 +171,7 @@
                                     );
                                 @endphp
                                 <span
-                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 bg-[#c12730] text-white px-4 py-1 rounded-lg">
+                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 bg-[#c12730] text-white px-4 py-1">
                                     -{{ $descuento }} % </span>
                             @endif
                         </div>

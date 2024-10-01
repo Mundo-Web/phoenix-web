@@ -14,7 +14,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
       className={`flex flex-col relative w-full md:${width} ${bgcolor}`} data-aos="zoom-in-left"
     >
       <div className={`${bgcolor} product_container basis-4/5 flex flex-col justify-center relative border`}>
-        <div className="absolute top-2 left-2 w-max">
+        <div className="absolute top-2 left-0 w-max">
           {item.tags?.map((tag) => (
             <div className="px-4 mb-1" key={tag.id}>
               <span
@@ -26,10 +26,10 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
             </div>
           ))}
           {
-            item.descuento > 0 && <div className="px-4 mb-1">
+            item.descuento > 0 && <div className="mb-1">
               <span
-                className="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-3 flex-initial w-full text-center text-white rounded-[5px] relative top-[18px] z-10"
-                style={{ backgroundColor: '#10c469' }}
+                className="block font-Urbanist_Semibold text-[8px] md:text-[12px] bg-black py-1 px-3 flex-initial w-full text-center text-white relative top-[3%] z-10"
+                style={{ backgroundColor: '#c12730' }}
               >
                 -{Math.round(100 - ((item.descuento * 100) / item.precio))}%
               </span>
@@ -63,7 +63,8 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
               />
             )}
           </div>
-          <div className="addProduct text-center flex justify-center h-0">
+
+          {/* <div className="addProduct text-center flex justify-center h-0">
             <div className='flex flex-row gap-2 items-center'>
               <a
                 href={`/producto/${item.id}`}
@@ -79,11 +80,9 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
 
                 </button>
               </Tippy>
-
-
             </div>
+          </div> */}
 
-          </div>
         </div>
       </div>
       <a href={`/producto/${item.id}`} className='p-2'>
