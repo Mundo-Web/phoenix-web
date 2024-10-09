@@ -74,6 +74,7 @@ class StrengthController extends Controller
 			$fortaleza->titulo = $request->titulo;
 			$fortaleza->descripcionshort = $request->descripcionshort;
 			$fortaleza->descripcion = $request->descripcion;
+			$fortaleza->link1 = $request->link1;
 			$fortaleza->save();
 
 			return redirect()->route('strength.index')->with('success', 'Publicación creado exitosamente.');
@@ -144,6 +145,7 @@ class StrengthController extends Controller
 			$fortaleza->titulo = $request->titulo;
 			$fortaleza->descripcionshort = $request->descripcionshort;
 			$fortaleza->descripcion = $request->descripcion;
+			$fortaleza->link1 = $request->link1;
 			$fortaleza->save();
 
 			return redirect()->route('strength.index')->with('success', 'Publicación creado exitosamente.');

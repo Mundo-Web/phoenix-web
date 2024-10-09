@@ -10,6 +10,7 @@ use Intervention\Image\Drivers\Gd\Driver;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Spatie\FlareClient\Http\Client;
 
 class LogosClientController extends Controller
 {
@@ -50,40 +51,35 @@ class LogosClientController extends Controller
             $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
                
             $img =  $manager->read($request->file('imagen'));
-
-            //seteamos el tamaño de que deben de tener las imagenes que se suban
-             $qwidth = 808;
-             $qheight = 445;
-
-            // Obtener las dimensiones de la imagen que se esta subiendo
-            $width = $img->width();
-            $height = $img->height();
-
-            if($width > $height){
-                //dd('Horizontal');
-                //si es horizontal igualamos el alto de la imagen a alto que queremos
-                
-                // $img->resize(height: 445)->crop(808, 445);
-
-            }else{
-                //dd('Vertical');
-                //En caso sea vertical la imagen
-                //gualamos el ancho y cropeamos
-                
-                // $img->resize(width: 808)->crop(808, 445);
-           }
-                     
+       
             $ruta = 'storage/images/logos/';
             if (!file_exists($ruta)) {
                 mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
             }
             
             $img->save($ruta.$nombreImagen);
-            
-           
-            
             $post->url_image =  $ruta.$nombreImagen; 
         }
+
+
+        if($request->hasFile("imagen2")){
+           
+            $manager = new ImageManager(new Driver());
+            
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagen2')->getClientOriginalName();
+               
+            $img =  $manager->read($request->file('imagen2'));
+       
+            $ruta = 'storage/images/logos/';
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+            }
+            
+            $img->save($ruta.$nombreImagen);
+            $post->url_image2 =  $ruta.$nombreImagen; 
+        }
+
+
 
         $post->title = $request->title;
         $post->description = $request->description;
@@ -144,5 +140,45 @@ class LogosClientController extends Controller
         // Eliminar el logo de la base de datos
         $logo->delete();
         return response()->json(['message'=>'Logo eliminado']);
+    }
+
+
+
+    public function updateVisible(Request $request)
+    {
+        // Lógica para manejar la solicitud AJAX
+        $cantidad = $this->contarCategoriasDestacadas();
+
+
+        if ($cantidad >= 10000 && $request->status == 1) {
+            return response()->json(['message' => 'Solo puedes destacar 10000 categorias'], 409);
+        }
+
+
+        $id = $request->id;
+
+        $field = $request->field;
+
+        $status = $request->status;
+
+        $category = ClientLogos::findOrFail($id);
+
+        $category->$field = $status;
+
+        $category->save();
+
+        $cantidad = $this->contarCategoriasDestacadas();
+
+
+        return response()->json(['message' => 'Marca modificada',  'cantidad' => $cantidad]);
+    }
+
+
+    public function contarCategoriasDestacadas()
+    {
+
+        $cantidad = ClientLogos::where('destacar', '=', 1)->count();
+
+        return  $cantidad;
     }
 }

@@ -23,17 +23,54 @@
             <thead>
               <tr>
                 <th class="w-32">Imagen</th>
+                <th class="w-32">Fondo</th>
                 <th>Titulo</th>
-                <th>Descripcion</th>
+                {{-- <th>Descripcion</th> --}}
+                <th class="w-32">Destacar</th>
+                <th class="w-32">Visible</th>
                 <th class="w-32">Acciones</th>
               </tr>
             </thead>
             <tbody>
               @foreach ($logos as $logo)
                 <tr>
-                  <td class="dark:bg-slate-800">{{ $logo->url_image }}</td>
+                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}"/></td>
+                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}"/></td>
                   <td class="dark:bg-slate-800">{{ $logo->title }}</td>
-                  <td class="dark:bg-slate-800">{{ $logo->description }}</td>
+                   <td class="">
+                    <form method="POST" action="">
+                      @csrf
+                      <input type="checkbox" id="hs-basic-usage"
+                        class="check_d btn_swithc relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent 
+                                            rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none 
+                                            checked:bg-none checked:text-blue-600 checked:border-blue-600 focus:checked:border-blue-600 dark:bg-gray-800 dark:border-gray-700 
+                                            dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-600 before:inline-block before:size-6
+                                            before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
+                                            before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
+                        id='{{ 'd_' . $logo->id }}' data-field='destacar' data-idService='{{ $logo->id }}'
+                        data-titleService='{{ $logo->title }}' {{ $logo->destacar == 1 ? 'checked' : '' }}>
+                      <label for="{{ 'v_' . $logo->id }}"></label>
+                    </form>
+
+
+
+                  </td>
+                  <td class="">
+                    <form method="POST" action="">
+                      @csrf
+                      <input type="checkbox" id="hs-basic-usage"
+                        class="check_v btn_swithc relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent 
+                                            rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none 
+                                            checked:bg-none checked:text-blue-600 checked:border-blue-600 focus:checked:border-blue-600 dark:bg-gray-800 dark:border-gray-700 
+                                            dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-600 before:inline-block before:size-6
+                                            before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
+                                            before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
+                        id='{{ 'v_' . $logo->id }}' data-field='visible' data-idService='{{ $logo->id }}'
+                        data-titleService='{{ $logo->title }}' {{ $logo->visible == 1 ? 'checked' : '' }}>
+                      <label for="{{ 'v_' . $logo->id }}"></label>
+                    </form>
+                  </td>
+                  
                   <td class="dark:bg-slate-800">
                     <form action=" " method="POST">
                       @csrf
@@ -52,8 +89,11 @@
             <tfoot>
               <tr>
                 <th>Imagen</th>
+                <th class="w-32">Fondo</th>
                 <th>Titulo</th>
-                <th>Descripcion</th>
+                <th class="w-32">Destacar</th>
+                <th class="w-32">Visible</th>
+                {{-- <th>Descripcion</th> --}}
                 <th>Acciones</th>
               </tr>
             </tfoot>
@@ -162,24 +202,82 @@
       });
 
 
-      /*
+      $(".btn_swithc").on("change", function() {
 
-         $(".btn_swithc").on("change", function() {
+        var status = 0;
+        var id = $(this).attr('data-idService');
+        let contenedor = $(this);
+        var titleService = $(this).attr('data-titleService');
+        var field = $(this).attr('data-field');
 
-           var status = 0;
-           var id = $(this).attr('data-idService');
-           var titleService = $(this).attr('data-titleService');
-           var field = $(this).attr('data-field');
+        if ($(this).is(':checked')) {
+          status = 1;
 
-           if ($(this).is(':checked')) {
-             status = 1;
-           } else {
-             status = 0;
-           }
+        } else {
+          status = 0;
+        }
 
 
 
-            */
+        $.ajax({
+          url: "{{ route('logos.updateVisible') }}",
+          method: 'POST',
+          data: {
+            _token: $('input[name="_token"]').val(),
+            status: status,
+            id: id,
+            field: field,
+          },
+          success: function(response) {
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: titleService + " a sido modificado",
+              showConfirmButton: false,
+              timer: 1500
+
+            });
+
+            if (response.cantidad >= 4) {
+
+
+              Swal.fire({
+                position: "top-center",
+                icon: "success",
+                title: "Ya no puedes destacar más",
+                showConfirmButton: false,
+                timer: 2000
+
+              });
+
+              // Deshabilitar todos los checkboxes con la clase .check_d
+              $('.check_d:not(:checked)').prop('disabled', true);
+
+
+
+            } else {
+
+              // Habilitar todos los checkboxes con la clase .check_d
+              $('.check_d').prop('disabled', false);
+            }
+
+          },
+          error: function(response) {
+
+            Swal.close();
+            Swal.fire({
+              title: response.responseJSON.message,
+              icon: "error",
+            });
+
+            contenedor[0].checked = !contenedor[0].checked;
+
+          }
+        })
+
+
+
+      });
 
 
 

@@ -25,7 +25,7 @@ class SubCategoryController extends Controller
 
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::where('status', true)->get();
         return view('pages.subcategories.save')
             ->with('categories', $categories)
             ->with('subcategory', new SubCategory());
@@ -34,7 +34,7 @@ class SubCategoryController extends Controller
     public function edit($id)
     {
         $subcategory = SubCategory::find($id);
-        $categories = Category::all();
+        $categories = Category::where('status', true)->get();
         return view('pages.subcategories.save')
             ->with('categories', $categories)
             ->with('subcategory', $subcategory);
@@ -48,6 +48,29 @@ class SubCategoryController extends Controller
         $body = $request->all();
         $body['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $body['destacar'] = isset($request->destacar);
+
+        if ($request->hasFile("imagen")) {
+
+            $manager = new ImageManager(Driver::class);
+
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
+
+            $img =  $manager->read($request->file('imagen'));
+
+            // Obtener las dimensiones de la imagen que se esta subiendo
+            // $img->coverDown(640, 640, 'center');
+
+            $ruta = 'storage/images/subcategories/';
+
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+            }
+
+            $img->save($ruta . $nombreImagen);
+
+            $body['url_image'] = $ruta;
+            $body['name_image'] = $nombreImagen;
+        }
 
         $jpa = SubCategory::find($request->id);
         if (!$jpa) {
@@ -81,10 +104,10 @@ class SubCategoryController extends Controller
         try {
             if ($request->field == 'destacar') {
                 $countDestacados = SubCategory::where('destacar', true)->count();
-                if ($countDestacados >= 4) {
+                if ($countDestacados >= 10000) {
                     return response([
                         'status' => 409,
-                        'message' => 'Solo puedes destacar 4 categorias'
+                        'message' => 'Solo puedes destacar 10000 categorias'
                     ], 409);
                 }
             }
@@ -107,10 +130,10 @@ class SubCategoryController extends Controller
         }
         $countDestacados = SubCategory::where('destacar', true)->count();
 
-        if ($countDestacados >= 4) {
+        if ($countDestacados >= 10000) {
             return response([
                 'status' => 409,
-                'message' => 'Solo puedes destacar 4 categorias'
+                'message' => 'Solo puedes destacar 10000 categorias'
             ], 409);
         }
 

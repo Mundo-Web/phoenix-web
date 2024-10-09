@@ -85,294 +85,154 @@
         </section>
       @endif --}}
 
-
+    @if (count($slider) > 0) 
         <section class="w-full relative mx-auto">
             <div class="swiper sliderab h-max">
                 <div class="swiper-wrapper">
+                  @foreach ($slider as $slide)                      
                     <div class="swiper-slide">
                         <div class="w-full">
                             <div class="h-[450px] w-full md:h-auto relative z-10 flex flex-col items-end justify-end">
                                 <img class="block h-full w-full object-cover md:object-contain object-bottom"
-                                    {{-- src="{{ asset($item->url_image . $item->name_image) }}" alt=""> --}} src="{{ asset('images/img/banner_AB.png') }}" alt="">
+                                    src="{{ asset($slide->url_image . $slide->name_image) }}" 
+                                    onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"
+                                    alt="">
                             </div>
                         </div>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="w-full">
-                            <div class="h-[450px] w-full md:h-auto relative z-10 flex flex-col items-end justify-end">
-                                <img class="block h-full w-full object-cover md:object-contain object-bottom"
-                                    {{-- src="{{ asset($item->url_image . $item->name_image) }}" alt=""> --}} src="{{ asset('images/img/banner_AB.png') }}" alt="">
-                            </div>
-                        </div>
-                    </div>
+                  @endforeach 
                 </div>
-                <div class="flex flex-row justify-center items-center relative">
+                {{-- <div class="flex flex-row justify-center items-center relative">
                     <div class="swiper-pagination-slider absolute top-full bottom-0 z-10 right-full !left-1/2"></div>
-                </div>
+                </div> --}}
             </div>
         </section>
+    @endif
 
-
+    @if (count($subcategorias) > 0) 
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper carruseltop h-max">
                 <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                            <div class="flex flex-row justify-end items-end w-full ">
-                                <div class="flex flex-row md:w-2/3">
-                                    <h2
-                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
-                                        JEANS Y PANTALONES
-                                    </h2>
+                    @foreach ($subcategorias as $subcategoria)       
+                        <div class="swiper-slide">
+                          <a href="/catalogo?subcategoria={{$subcategoria->id}}">      
+                            <div class="bg-no-repeat object-top bg-center bg-cover min-h-[350px] aspect-square flex flex-row  items-center p-5 "
+                                style=" background-image: url('{{ asset($subcategoria->url_image . $subcategoria->name_image) }}')">
+                                <div class="flex flex-row justify-end items-end w-full ">
+                                    <div class="flex flex-row md:w-2/3">
+                                        <h2
+                                            class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right uppercase">
+                                            {{$subcategoria->name}}
+                                        </h2>
+                                    </div>
                                 </div>
                             </div>
+                          </a>      
                         </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                            <div class="flex flex-row justify-end items-end w-full ">
-                                <div class="flex flex-row md:w-2/3">
-                                    <h2
-                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
-                                        CASACAS Y POLERAS
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                            <div class="flex flex-row justify-end items-end w-full ">
-                                <div class="flex flex-row md:w-2/3">
-                                    <h2
-                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
-                                        CAMISAS Y BLUSAS
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                            <div class="flex flex-row justify-end items-end w-full ">
-                                <div class="flex flex-row md:w-2/3">
-                                    <h2
-                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
-                                        ACCESORIOS
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                            <div class="flex flex-row justify-end items-end w-full ">
-                                <div class="flex flex-row md:w-2/3">
-                                    <h2
-                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-right">
-                                        JEANS Y PANTALONES
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach 
                 </div>
                 <div class="flex flex-row justify-center items-center relative mt-10">
                     <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
                 </div>
             </div>
         </section>
+    @endif
 
+    @if (count($bannerMid) > 0)
+      <section>
+        <x-banner-section-cover :banner="$bannerMid" />
+      </section>
+    @endif
+
+    @if (count($benefit) > 0) 
         <section class="flex flex-col w-full gap-12 relative pt-12 lg:pt-16 px-[5%]">
 
             <div class="swiper promo h-max flex flex-row w-full">
                 <div class="swiper-wrapper">
+                   @foreach ($benefit as $benefi)         
+                        <div class="swiper-slide">
+                            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
 
-                    <div class="swiper-slide">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
+                                <div class="flex flex-col gap-5 lg:gap-10 justify-center items-start w-[95%] lg:w-[85%] text-left">
+                                    <h2 class="font-Urbanist_Black text-2xl lg:text-3xl text-black">
+                                        {{$benefi->descripcionshort}}
+                                    </h2>
 
-                            <div class="flex flex-col gap-5 lg:gap-10 justify-center items-start w-[95%] lg:w-[85%] text-left">
-                                <h2 class="font-Urbanist_Black text-2xl lg:text-3xl text-black">
-                                    NUEVOS FITS
-                                </h2>
+                                    <h1 class="font-Urbanist_Black text-5xl lg:text-8xl text-[#cccccc]">
+                                        {{$benefi->titulo}}
+                                    </h1>
 
-                                <h1 class="font-Urbanist_Black text-5xl lg:text-8xl text-[#cccccc]">
-                                    Wide leg
-                                </h1>
+                                    <div class="font-Urbanist_Light text-2xl lg:text-3xl text-black">
+                                        {{$benefi->descripcion}}
+                                    </div>
 
-                                <p class="font-Urbanist_Light text-2xl lg:text-3xl text-black">
-                                    Lorem ipsum dolor sit amet, consectetuer
-                                    adipiscing elit, sed diam nonummy nibh euismod
-                                </p>
-
-                                <a class="font-Urbanist_Light text-lg lg:text-xl text-black px-10 py-2 border border-black">
-                                    COMPRA AQUÍ
-                                </a>
-                            </div>
-
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
-                                    <img src="{{ asset('images/img/carrusel3_AB.png') }}" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
+                                    <a href="{{$benefi->link1}}" class="font-Urbanist_Light text-lg lg:text-xl text-black px-10 py-2 border border-black">
+                                        COMPRA AQUÍ
+                                    </a>
                                 </div>
-                            </div>
 
-
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-
-
-                            <div class="flex flex-col gap-5 lg:gap-10 justify-center items-start w-[95%] lg:w-[85%] text-left">
-                                <h2 class="font-Urbanist_Black text-2xl lg:text-3xl text-black">
-                                    NUEVOS FITS
-                                </h2>
-
-                                <h1 class="font-Urbanist_Black text-5xl lg:text-8xl text-[#cccccc]">
-                                    Wide leg
-                                </h1>
-
-                                <p class="font-Urbanist_Light text-2xl lg:text-3xl text-black">
-                                    Lorem ipsum dolor sit amet, consectetuer
-                                    adipiscing elit, sed diam nonummy nibh euismod
-                                </p>
-
-                                <a class="font-Urbanist_Light text-lg lg:text-xl text-black px-10 py-2 border border-black">
-                                    COMPRA AQUÍ
-                                </a>
-                            </div>
-
-                            <div class="flex flex-col justify-center items-center">
-                                <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
-                                    <img src="{{ asset('images/img/carrusel3_AB.png') }}" class="w-full h-full object-cover lg:object-contain" />
+                                <div class="flex flex-col justify-center items-center">
+                                    <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
+                                        <img src="{{ asset('images/img/carrusel3_AB.png') }}" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
+                                    </div>
                                 </div>
+
+
                             </div>
-
-
-                        </div>
-                    </div>
-
+                        </div> 
+                    @endforeach 
                 </div>
                 <div class="flex flex-row justify-center items-center relative  mt-10">
                     <div class="swiper-pagination-promo absolute top-full bottom-0 z-10 right-full !left-1/2"></div>
                 </div>
             </div>
         </section>
+    @endif
 
-
+    @if (count($logosdestacados) > 0) 
         <section class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 md:gap-8 relative mx-auto pt-12 lg:pt-16">
-            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+           @foreach ($logosdestacados as $logosd)        
+                <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset($logosd->url_image2) }}')">
+                    <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                        <img src="{{ asset($logosd->url_image) }}" class="h-16 object-contain"/>
+                    </div>
                 </div>
-            </div>
-            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                </div>
-            </div>
-            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                </div>
-            </div>
-
-            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                </div>
-            </div>
-            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                </div>
-            </div>
-            <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                </div>
-            </div>
+           @endforeach 
         </section>
-
+    @endif
+        
+        
+        
+    @if (count($logos) > 0)    
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
               <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">TAMBIÉN PUEDES ENCONTRAR</h2>
         </section>
-
+    
          <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper otrasmarcas h-max">
                 <div class="swiper-wrapper">
+                  @foreach ($logos as $logosn)  
                     <div class="swiper-slide">
                         <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                            style=" background-image: url('{{ asset($logosn->url_image2) }}')">
                             <div class="flex flex-col justify-center  h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
                                 <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
+                                    <img src="{{ asset($logosn->url_image) }}" class="h-16 object-contain"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
-                                <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
-                                <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
-                                <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                             <div class="flex flex-col justify-center h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
-                                <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset('images/img/visa.png') }}" class="h-16 object-contain"/>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  @endforeach   
                 </div>
                 <div class="flex flex-row justify-center items-center relative mt-10">
                     <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
                 </div>
             </div>
         </section>
+    @endif
 
+
+    @if (count($destacados) > 0)  
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
               <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">COMPLEMENTA TU ESTILO</h2>
         </section>
@@ -380,101 +240,32 @@
          <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper complementos h-max">
                 <div class="swiper-wrapper">
+                  @foreach ($destacados as $productosd)       
                     <div class="swiper-slide">
                         <div class="flex flex-row justify-center items-center">
                           <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
+                              style=" background-image: url('{{ asset($productosd->imagen) }}')">
                           </div>
                         </div>
                         
                         <div class="flex flex-col justify-center items-center gap-1 mt-3">
                           <p class="font-Urbanist_Semibold text-base text-black line-clamp-1">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f] line-clamp-1">Gorro BAUCO DRILL</h2>
-                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
+                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f] line-clamp-1">{{$productosd->producto}}</h2>
+                          @if($productosd->descuento > 0)
+                            <p class="font-Urbanist_Semibold text-lg text-black">S/ {{$productosd->descuento}} <span class="text-sm line-through text-[#8f8f8f]"> S/ {{$productosd->precio}}</span></p>
+                          @else
+                            <p class="font-Urbanist_Semibold text-lg text-black">S/ {{$productosd->precio}}</p>
+                          @endif
                         </div>
                     </div>
-
-                    <div class="swiper-slide">
-                        
-                        <div class="flex flex-row justify-center items-center">
-                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                          </div>
-                        </div>
-
-                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
-                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        
-                        <div class="flex flex-row justify-center items-center">
-                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                          </div>
-                        </div>
-
-                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
-                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        
-                        <div class="flex flex-row justify-center items-center">
-                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                          </div>
-                        </div>
-
-                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
-                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        
-                       <div class="flex flex-row justify-center items-center">
-                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                          </div>
-                        </div>
-
-                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
-                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
-                        </div>
-                    </div>
-
-                    <div class="swiper-slide">
-                        
-                        <div class="flex flex-row justify-center items-center">
-                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                          </div>
-                        </div>
-
-                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f]">Gorro BAUCO DRILL</h2>
-                          <p class="font-Urbanist_Semibold text-lg text-black">S/ 39.90 <span class="text-sm line-through text-[#8f8f8f]"> S/ 149.9</span></p>
-                        </div>
-                    </div>
-
-                    
+                  @endforeach   
                 <div class="flex flex-row justify-center items-center relative mt-10">
                     <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
                 </div>
             </div>
         </section>
+
+    @endif
 
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
               <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
@@ -535,11 +326,7 @@
 
         {{-- seccion Gran Descuento  --}}
 
-        {{-- @if (count($bannerMid) > 0)
-      <section>
-        <x-banner-section-cover :banner="$bannerMid" />
-      </section>
-    @endif --}}
+       
 
 
         {{-- seccion Productos populares  --}}
@@ -810,7 +597,7 @@
     <script>
         var swiper = new Swiper(".sliderab", {
             slidesPerView: 1,
-            spaceBetween: 20,
+            spaceBetween: 0,
             loop: true,
             grabCursor: true,
             centeredSlides: false,

@@ -31,6 +31,7 @@ use App\Models\Price;
 use App\Models\Sale;
 use App\Models\Specifications;
 use App\Models\Status;
+use App\Models\SubCategory;
 use App\Models\Tag;
 use App\Models\TermsAndCondition;
 use App\Models\User;
@@ -80,6 +81,7 @@ class IndexController extends Controller
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
     $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();
+    $subcategorias = SubCategory::where('destacar', '=', 1)->where('visible', '=', 1)->get();
     $categoriasAll = Category::where('visible', '=', 1)->get();
     $destacados = Products::where('products.destacar', '=', 1)->where('products.status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
@@ -95,11 +97,12 @@ class IndexController extends Controller
     $slider = Slider::where('status', '=', 1)->where('visible', '=', 1)->get();
     $category = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
 
-    $logos = ClientLogos::where('status', '=', 1)->get();
+    $logosdestacados = ClientLogos::where('status', '=', 1)->where('destacar', '=', 1)->get();
+    $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->get();
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
 
 
-    return view('public.index', compact('url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex','logos'));
+    return view('public.index', compact('subcategorias','url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex','logos','logosdestacados'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)
@@ -119,6 +122,8 @@ class IndexController extends Controller
 
     $tags = Tag::where('visible', true)->where('status', true)->get();
 
+    $marcas = ClientLogos::where('status', true)->get();
+    
     $minPrice = Products::select()
       ->where('visible', true)
       ->where('descuento', '>', 0)
@@ -137,6 +142,7 @@ class IndexController extends Controller
 
     return Inertia::render('Catalogo', [
       'component' => 'Catalogo',
+      'marcas'=> $marcas,
       'minPrice' => $minPrice,
       'maxPrice' => $maxPrice,
       'categories' => $categories,

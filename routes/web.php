@@ -182,6 +182,10 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         //Crud Logos
         Route::resource('/logos', LogosClientController::class);
         Route::post('/logos/deleteLogo', [LogosClientController::class, 'deleteLogo'])->name('logos.deleteLogo');
+        Route::post('/logos/updateVisible', [LogosClientController::class, 'updateVisible'])->name('logos.updateVisible');
+        Route::get('/logos/contarCategorias', [LogosClientController::class, 'contarCategoriasDestacadas'])->name('logos.contarCategoriasDestacadas');
+
+
 
         //Equipo
         Route::resource('/staff', StaffController::class);

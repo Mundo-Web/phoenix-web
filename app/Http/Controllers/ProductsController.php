@@ -7,6 +7,7 @@ use App\Models\AttributeProductValues;
 use App\Models\Attributes;
 use App\Models\AttributesValues;
 use App\Models\Category;
+use App\Models\ClientLogos;
 use App\Models\dxDataGrid;
 use App\Models\Galerie;
 use App\Models\Products;
@@ -230,11 +231,12 @@ class ProductsController extends Controller
     $atributos = Attributes::where("status", "=", true)->get();
     $valorAtributo = AttributesValues::where("status", "=", true)->get();
     $tags = Tag::where("status", "=", true)->get();
+    $marcas = ClientLogos::where("status", "=", true)->get();
     $categoria = Category::all();
     $subcategories = SubCategory::all();
     $galery = [];
     $especificacion = [json_decode('{"tittle":"", "specifications":""}', false)];
-    return view('pages.products.save', compact('product', 'atributos', 'valorAtributo', 'categoria', 'tags', 'especificacion', 'subcategories', 'galery'));
+    return view('pages.products.save', compact('product', 'marcas', 'atributos', 'valorAtributo', 'categoria', 'tags', 'especificacion', 'subcategories', 'galery'));
   }
 
   public function edit(string $id)
@@ -246,12 +248,13 @@ class ProductsController extends Controller
     $especificacion = Specifications::where("product_id", "=", $id)->get();
     if ($especificacion->count() == 0) $especificacion = [json_decode('{"tittle":"", "specifications":""}', false)];
     $tags = Tag::where('status', 1)->get();
+    $marcas = ClientLogos::where("status", "=", true)->get();
     $categoria = Category::all();
     $subcategories = SubCategory::all();
     $valoresdeatributo = AttributeProductValues::where("product_id", "=", $id)->get();
     $galery = Galerie::where("product_id", "=", $id)->get();
 
-    return view('pages.products.save', compact('product', 'atributos', 'valorAtributo', 'tags', 'categoria', 'especificacion', 'subcategories', 'galery', 'valoresdeatributo'));
+    return view('pages.products.save', compact('product', 'marcas', 'atributos', 'valorAtributo', 'tags', 'categoria', 'especificacion', 'subcategories', 'galery', 'valoresdeatributo'));
   }
 
   private function saveImg(Request $request, string $field)

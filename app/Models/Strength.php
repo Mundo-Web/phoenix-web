@@ -11,6 +11,8 @@ class Strength extends Model
     protected $filleable = ['titulo',
     'descripcion',
     'icono',
+    'descripcionshort',
+    'link1',
     'imagen',
     'status'] ; 
 }

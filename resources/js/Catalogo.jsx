@@ -14,7 +14,7 @@ import axios from 'axios'
 
 
 
-const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category, tag_id, subCatId }) => {
+const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category, tag_id, subCatId, marcas }) => {
   const take = 12
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState({});
@@ -39,12 +39,21 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
     // Leer el parámetro 'tag' de la URL
     const params = new URLSearchParams(window.location.search);
     const tag = params.get('tag');
+    const marcas = params.get('marcas');
 
     // Actualizar el filtro con el 'tag_id' si existe
     if (tag) {
       setFilter(prevFilter => ({
         ...prevFilter,
         'txp.tag_id': [tag]
+      }));
+    }
+
+    // Actualizar el filtro con el 'tag_id' si existe
+    if (marcas) {
+      setFilter(prevFilter => ({
+        ...prevFilter,
+        'txp.marcas_id': [marcas]
       }));
     }
 
@@ -139,6 +148,19 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
         }
       });
       filterBody.push(tagsFilter);
+    }
+
+
+    if (filter['txp.marcas_id'] && filter['txp.marcas_id'].length > 0) {
+      const marcasFilter = [];
+      filter['txp.marcas_id'].forEach((x, i) => {
+        if (i === 0) {
+          marcasFilter.push(['txp.marcas_id', '=', x]);
+        } else {
+          marcasFilter.push('or', ['txp.marcas_id', '=', x]);
+        }
+      });
+      filterBody.push(marcasFilter);
     }
 
     for (const key in filter) {
@@ -244,7 +266,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
     <form className="flex flex-col lg:flex-row gap-6  mx-auto font-Helvetica_Light font-bold w-full p-5 lg:p-10">
       {/* sticky */}
       <section className="hidden lg:flex md:flex-col gap-4 md:basis-3/12 bg-white p-6 rounded-lg h-max top-2">
-        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} />
+        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} marcas={marcas} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} />
       </section>
       <section className="flex flex-col gap-6 md:basis-9/12">
         <div className="w-full bg-white rounded-lg font-medium flex flex-row justify-between items-center px-2 py-3">

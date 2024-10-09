@@ -121,17 +121,15 @@
                 <div class="flex flex-col lg:col-span-2 gap-3">
                     {{-- @foreach ($atributos as $item) --}}
                      @foreach ($valorAtributo as $value)
-                            {{-- @if ($value->attribute_id == $item->id) --}}
-                              
+                            @if ($value->attribute_id == 1)
                                   @isset($valoresdeatributo)
                                       @foreach($valoresdeatributo as $valorat)
                                         @if($valorat->attribute_value_id == $value->id)
-                                          <img src={{asset($value->imagen)}} class="w-28 h-auto object-contain"/>
+                                          <img src="{{asset($value->imagen)}}" class="w-28 h-auto object-contain"/>
                                         @endif
                                       @endforeach
                                   @endisset
-                              
-                            {{-- @endif --}}
+                            @endif
                       @endforeach
                     {{-- @endforeach --}}
                     <div class="flex flex-col">
@@ -180,11 +178,11 @@
                         
                         <div class="flex flex-col gap-5">
                               <div class="flex flex-row gap-3">
-                                    <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
+                                    {{-- <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
                                           <h2>Colores</h2>
                                     </div>
 
-                                    <div class="grid grid-cols-10 w-4/5 gap-3">
+                                    <div class="flex flex-wrap w-4/5 gap-4">
                                         <div class="flex justify-center items-center"> 
                                             <label class="cursor-pointer">
                                                 <input class="hidden" name="color" type="radio" value="red" />
@@ -209,21 +207,78 @@
                                                 <div class="bg-slate-700 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
                                             </label>
                                         </div>
-                                    </div>
-                              </div>
+                                    </div> --}}
+                                    @if ($otherProducts->isNotEmpty())
+                                        <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
+                                              <h2>Colores</h2>
+                                        </div>
 
-                              <div class="flex flex-row gap-3">
+                                    {{-- <span class="block bg-[#F5F5F7] p-3 mt-2" tippy> {{ $product->color }}</span> --}}
+                                          <div class="flex flex-wrap w-4/5 gap-4">
+                                                <a class="ring-2 rounded-full p-[3px] ring-black" tippy data-tippy-content="Seleccionado"> 
+                                                    <div class="flex justify-center items-center">  
+                                                          <div class="w-7 h-7 rounded-full" style="background-color: {{$product->color}}"></div>   
+                                                    </div>
+                                                </a>
+                                                @foreach ($otherProducts as $x)
+                                                  <a class="ring-2 rounded-full p-[3px] ring-transparent hover:ring-black" href="{{route('producto',$x->id)}}">
+                                                    <div class="flex justify-center items-center">  
+                                                          <div class="w-7 h-7 rounded-full" style="background-color: {{$x->color}}"></div>   
+                                                    </div>
+                                                  </a>
+                                                @endforeach
+                                          </div>
+                                    @endif  
+                              </div>
+                              
+                              
+
+                              @if (!$product->attributes->isEmpty())
+                                <div class="flex flex-row gap-3">
+                                  @php
+                                    $groupedAttributes = $product->attributes->groupBy('titulo');
+                                  @endphp
+                      
+                                  @foreach ($groupedAttributes as $titulo => $items)
+                                    @php
+                                      $filteredItems = $items->filter(function($item) {
+                                        return in_array($item->pivot->attribute_id, [3]);
+                                      });
+                                    @endphp
+                                    @if ($filteredItems->isNotEmpty())
+                                        <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
+                                          <span>{{ $titulo }}:</span>
+                                        </div>
+                                        <div class="flex flex-wrap w-4/5 gap-5 justify-start items-center font-Urbanist_Medium">
+                                          @foreach ($items as $item)
+                                            
+                                              @php
+                                                $atributo = $valorAtributo->firstWhere('id', $item->pivot->attribute_value_id);
+                                              @endphp
+
+                                              @if ($atributo)
+                                                <span class="flex justify-center items-center">{{ $atributo->valor }}</span>
+                                              @endif
+                                            
+                                          @endforeach
+                                        </div>
+                                    @endif
+                                  @endforeach
+                                </div>
+                              @endif
+                              
+                              {{-- <div class="flex flex-row gap-3">
                                      <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
                                           <h2>Tallas</h2>
                                     </div>
 
-                                    <div class="grid grid-cols-10 w-4/5 gap-3 justify-center items-center font-Urbanist_Medium">
+                                    <div class="flex flex-wrap w-4/5 gap-5 justify-start items-center font-Urbanist_Medium">
                                         <div class="flex justify-center items-center">28</div>
                                         <div class="flex justify-center items-center">30</div>
                                         <div class="flex justify-center items-center">32</div>
                                         <div class="flex justify-center items-center">34</div>
                                     </div>
-                              </div>
+                              </div> --}}
 
                               <div class="flex flex-row">
                                   <div class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">

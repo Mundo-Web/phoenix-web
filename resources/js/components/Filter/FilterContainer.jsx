@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import FilterItem from './FilterItem'
 import FilterItemSelect2 from './FilterItemSelect2'
 
-const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], brands = [], sizes = [], colors = [], attribute_values, tag_id, selected_category }) => {
+const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], marcas = [], brands = [], sizes = [], colors = [], attribute_values, tag_id, marcas_id, selected_category }) => {
   const categoryRef = useRef()
 
   const [openCategories, setOpenCategories] = useState({});
@@ -116,7 +116,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
     }
     {
       tags.length > 0 && <div className="flex flex-col gap-4 w-full">
-        <h2 className="font-semibold">Etiquetas</h2>
+        <h2 className="font-Urbanist_Bold tracking-wide font-bold text-base mb-4">Etiquetas</h2>
         <div className='flex flex-row gap-4 w-full flex-wrap font-Urbanist_Medium'>
           {tags.map(item => {
             const isChecked = item.id === Number(tag_id);
@@ -130,6 +130,26 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
         </div>
       </div>
     }
+
+    {
+      marcas.length > 0 && <div className="flex flex-col gap-4 w-full">
+        <h2 className="font-Urbanist_Bold tracking-wide font-bold text-base">Marcas</h2>
+        <div className='bg-black p-[1px]'></div>
+        <div className='flex flex-row gap-4 w-full flex-wrap font-Urbanist_Medium'>
+          {marcas.map(item => {
+            const isChecked = item.id === Number(marcas_id);
+
+            return (<label key={`item-marcas-${item.id}`} htmlFor={`item-marcas-${item.id}`} className="font-Urbanist_Medium text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+              <input id={`item-marcas-${item.id}`} name='marcas' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none font-Urbanist_Medium" value={item.id} onClick={(e) => onClick(`txp.marcas_id`, e.target.value, e.target.checked)}
+                defaultChecked={isChecked} />
+              {item.title}
+            </label>)
+          })}
+        </div>
+      </div>
+    }
+
+
     {
       attribute_values.map((x, i) => (
         <FilterItem key={`attribute-${i}`} title={x[0].attribute.titulo} items={x} itemName='valor' itemImg='imagen' onClick={onClick} />

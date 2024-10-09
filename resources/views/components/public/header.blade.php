@@ -424,7 +424,7 @@
                 <span class="underline-this">MARCAS</span>
               </a>
 
-              <a href="/contacto" class="font-medium hover:opacity-75 bg-red-600 text-white px-4 other-class">
+              <a href="/contacto" class="font-medium hover:opacity-75 bg-[#c1272d] text-white px-4 other-class">
                 <span class="underline-this">OUTLET</span>
               </a>
               

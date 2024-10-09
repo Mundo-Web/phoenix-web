@@ -35,13 +35,20 @@ class Products extends Model
     'slug',
     'sku',
     'max_stock', 
-    'precio_reseller'
+    'precio_reseller',
+    'marca_id'
   ];
 
   public function categoria()
   {
     return Category::find($this->categoria_id);
   }
+
+  public function marca()
+  {
+    return ClientLogos::find($this->marca_id);
+  }
+
   public function category()
   {
     return $this->belongsTo(Category::class, 'categoria_id');

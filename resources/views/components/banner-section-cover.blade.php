@@ -1,5 +1,5 @@
-<div class="flex flex-col md:flex-row justify-between bg-[#EEEEEE] bg-center bg-cover object-cover h-auto lg:h-[500px]"  @foreach ($banner as $item) style="background-image: url('{{ asset($item['image']) }}');"  @endforeach>
-  <div class="w-full lg:w-1/2 flex flex-col items-start gap-8 justify-center py-10 px-[5%] lg:pl-[8%] ">
+<div class="flex flex-col md:flex-row justify-between  bg-center bg-no-repeat bg-contain object-cover h-auto lg:h-[500px]"  @foreach ($banner as $item) style="background-image: url('{{ asset($item['image']) }}');"  @endforeach>
+  {{-- <div class="w-full lg:w-1/2 flex flex-col items-start gap-8 justify-center py-10 px-[5%] lg:pl-[8%] ">
     <h2 class="text-white text-3xl lg:text-5xl font-normal font-Helvetica_Medium !leading-tight">
       @foreach ($banner as $item)
         {{ $item['title'] }}
@@ -17,10 +17,11 @@
         {{ $item['title_btn'] }}
       </a>
     @endforeach
-  </div>
-  <div class="w-full lg:w-1/2 flex items-end justify-center content-center relative px-[5%] ">
-    {{-- @foreach ($banner as $item)
+  </div> --}}
+  {{-- <div class="w-full lg:w-1/2 flex items-end justify-center content-center relative px-[5%] ">
+    @foreach ($banner as $item)
       <img src="{{ asset($item['image']) }}" alt="" class="object-contain lg:-mt-24 object-bottom md:h-[400px] lg:h-[450px]">
-    @endforeach --}}
-  </div>
+    @endforeach
+  </div> --}}
 </div>
+
