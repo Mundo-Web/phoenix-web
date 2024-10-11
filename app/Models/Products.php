@@ -54,6 +54,20 @@ class Products extends Model
     return $this->belongsTo(Category::class, 'categoria_id');
   }
 
+  public function marcas()
+  {
+    return $this->belongsTo(ClientLogos::class, 'marca_id');
+  }
+
+  public function colors()
+  {
+      return $this->hasMany(Products::class, 'producto', 'producto')
+          ->whereNotNull('color')
+          ->select('color', 'producto','imagen') 
+          ->distinct(); 
+  }
+
+
   public function subcategory()
   {
     return SubCategory::find($this->subcategory_id);

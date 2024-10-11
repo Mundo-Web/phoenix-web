@@ -16,7 +16,7 @@
     nav a .underline-this {
         position: relative;
         overflow: hidden;
-        display: inline-block;
+        /*display: inline-block;*/
         text-decoration: none;
         /* padding-bottom: 4px; */
     }
@@ -28,7 +28,7 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        height: 2px;
+        /*height: 2px;*/
         background-color: #FF5E14;
         transform: scaleX(0);
         transition: transform 0.3s ease;
@@ -432,7 +432,7 @@
                 @foreach ($tags as $item)
                   <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75"
                     style="color: {{ $item->color }}">
-                    <span class="underline-this  ">
+                    <span class="">
                       {{ $item->name }} </span>
                   </a>
                 @endforeach

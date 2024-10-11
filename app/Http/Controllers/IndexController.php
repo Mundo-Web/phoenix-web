@@ -112,9 +112,9 @@ class IndexController extends Controller
 
     $catId = $request->input('category');
     $subCatId = $request->input('subcategoria');
-    $tag_id = $request->input('tag');
+    $marcas_id = $request->input('marcas');
     $id_cat = $id_cat ?? $catId;
-
+    
     // $categories = Category::with('subcategories')->where('visible', true)->get();
     $categories = Category::with(['subcategories' => function ($query) {
       $query->whereHas('products');
@@ -143,6 +143,7 @@ class IndexController extends Controller
     return Inertia::render('Catalogo', [
       'component' => 'Catalogo',
       'marcas'=> $marcas,
+      'marcas_id'=> $marcas_id,
       'minPrice' => $minPrice,
       'maxPrice' => $maxPrice,
       'categories' => $categories,

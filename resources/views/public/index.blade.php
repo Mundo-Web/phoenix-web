@@ -769,6 +769,7 @@
             pagination: {
                 el: ".swiper-pagination-promo",
                 clickable: true,
+                dynamicBullets: true,
             },
             breakpoints: {
                 0: {

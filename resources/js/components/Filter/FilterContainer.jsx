@@ -45,15 +45,15 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
     </button>
 
     <FilterItem title="Rango de precio" className="flex flex-row gap-4 w-full mt-3">
-      <input type="number" className="w-1/2 rounded-md ring-0 border focus:border-black focus:ring-black" placeholder="Desde" min={minPrice} max={maxPrice} step={0.01} onChange={setMinPrice} />
-      <input type="number" className="w-1/2 rounded-md ring-0 border focus:border-black focus:ring-black" placeholder="Hasta" min={minPrice} max={maxPrice} step={0.01} onChange={setMaxPrice} />
+      <input type="number" className="w-1/2 rounded-md ring-0 border tracking-wider font-light font-Urbanist_Light focus:border-black focus:ring-black" placeholder="Desde" min={minPrice} max={maxPrice} step={0.01} onChange={setMinPrice} />
+      <input type="number" className="w-1/2 rounded-md ring-0 border tracking-wider font-Urbanist_Light focus:border-black focus:ring-black" placeholder="Hasta" min={minPrice} max={maxPrice} step={0.01} onChange={setMaxPrice} />
     </FilterItem>
     {
       categories.length > 0 && (
 
         <div className="w-full ">
-          <h2 className="font-Urbanist_Bold tracking-wide font-bold text-base mb-4">Categorias</h2>
-          <div className='bg-black p-[1px] -mt-2 mb-5'></div>
+          <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-4">Categorias</h2>
+          <div className='bg-[#808080] pb-[1px] -mt-2 mb-5'></div>
           {categories.map((item) => {
             
            const isCheckedfilter = Array.isArray(filter?.categoria_id) && filter.categoria_id.includes(String(item.id));
@@ -61,12 +61,12 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
            return categories.length > 0 && (<div key={item.id} className="w-full">
               <div className="flex flex-row justify-between gap-3 mb-2">
 
-              <label key={item.id} htmlFor={`item-category-${item.id}`} className="font-Urbanist_Medium text-custom-border flex flex-row gap-2  items-center cursor-pointer">
-                          <input id={`item-category-${item.id}`} name='category' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm  border-none focus:ring-0" value={item.id} onClick={(e) => onClick(`category_id`, e.target.value, e.target.checked)}
-                            defaultChecked={isCheckedfilter}
-                          />
-                          {item.name}
-              </label>
+                <label key={item.id} htmlFor={`item-category-${item.id}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2  items-center cursor-pointer">
+                            <input id={`item-category-${item.id}`} name='category' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm  border-none focus:ring-0" value={item.id} onClick={(e) => onClick(`category_id`, e.target.value, e.target.checked)}
+                              defaultChecked={isCheckedfilter}
+                            />
+                            {item.name}
+                </label>
 
                 {/* <button
                   type="button"
@@ -85,6 +85,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
                   </svg>
                 </button> */}
               </div>
+
               {/* {openCategories[item.id] && (
                 <div className="p-4 border border-t-0 border-gray-200 space-y-4">
                   {
@@ -105,48 +106,56 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
 
                 </div>
               )} */}
+
             </div>
             )
-
           }
           )}
         </div>
 
       )
     }
+    
     {
       tags.length > 0 && <div className="flex flex-col gap-4 w-full">
-        <h2 className="font-Urbanist_Bold tracking-wide font-bold text-base mb-4">Etiquetas</h2>
-        <div className='flex flex-row gap-4 w-full flex-wrap font-Urbanist_Medium'>
+        <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Etiquetas</h2>
+        <div className='bg-[#808080] pb-[1px] -mt-2'></div>
+        <div className='flex flex-col gap-2 w-full flex-wrap font-Urbanist_Light'>
+            
           {tags.map(item => {
             const isChecked = item.id === Number(tag_id);
 
-            return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="font-Urbanist_Medium text-custom-border flex flex-row gap-2 items-center cursor-pointer">
-              <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none font-Urbanist_Medium" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)}
+            return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+              <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm focus:ring-0 border-none font-Urbanist_Light" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)}
                 defaultChecked={isChecked} />
               {item.name}
             </label>)
           })}
+
         </div>
       </div>
     }
 
     {
-      marcas.length > 0 && <div className="flex flex-col gap-4 w-full">
-        <h2 className="font-Urbanist_Bold tracking-wide font-bold text-base">Marcas</h2>
-        <div className='bg-black p-[1px]'></div>
-        <div className='flex flex-row gap-4 w-full flex-wrap font-Urbanist_Medium'>
-          {marcas.map(item => {
+      marcas.length > 0 && (
+        
+        <div className="flex flex-col gap-4 w-full">
+        <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Marcas</h2>
+        <div className='bg-[#808080] pb-[1px] -mt-2'></div>
+        <div className='flex flex-col gap-2 w-full flex-wrap font-Urbanist_Light'>
+          {marcas.map((item) => {
             const isChecked = item.id === Number(marcas_id);
 
-            return (<label key={`item-marcas-${item.id}`} htmlFor={`item-marcas-${item.id}`} className="font-Urbanist_Medium text-custom-border flex flex-row gap-2 items-center cursor-pointer">
-              <input id={`item-marcas-${item.id}`} name='marcas' type="checkbox" className="bg-[#DEE2E6] rounded-sm  border-none font-Urbanist_Medium" value={item.id} onClick={(e) => onClick(`txp.marcas_id`, e.target.value, e.target.checked)}
+            return (<label key={`item-marcas-${item.id}`} htmlFor={`item-marcas-${item.id}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+              <input id={`item-marcas-${item.id}`} name='marcas' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm focus:ring-0 border-none font-Urbanist_Light" value={item.id} onClick={(e) => onClick(`marca_id`, e.target.value, e.target.checked)}
                 defaultChecked={isChecked} />
               {item.title}
             </label>)
           })}
         </div>
       </div>
+
+      )
     }
 
 

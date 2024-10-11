@@ -63,13 +63,22 @@ class ProductsController extends Controller
       $instance = Products::select([
         DB::raw('DISTINCT products.*')
       ])
-        ->with(['category', 'tags'])
+        ->with(['category', 'tags', 'marcas' ,'colors'])
         ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
         ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
         ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id')
         ->leftJoin('categories', 'categories.id', 'products.categoria_id') 
-        ->where('categories.visible', 1);    
+        ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
+        // ->whereIn('products.id', function($query) {
+        //   $query->select(DB::raw('MIN(id)'))  
+        //         ->from('products')
+        //         ->groupBy('producto');  
+        // })
+        ->where('categories.visible', 1); 
         
+        
+       
+
         if(Auth::check()){
           $user = Auth::user();
           $user = $user->hasRole('Reseller');
@@ -106,6 +115,9 @@ class ProductsController extends Controller
       } else {
         $instance->orderBy('products.id', 'DESC');
       }
+
+      
+
 
       $totalCount = 0;
       if ($request->requireTotalCount) {

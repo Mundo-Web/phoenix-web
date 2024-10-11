@@ -119,7 +119,12 @@
                 </div>
 
                 <div class="flex flex-col lg:col-span-2 gap-3">
-                    {{-- @foreach ($atributos as $item) --}}
+                    
+                    @if($product->marcas)
+                            <img src="{{ asset($product->marcas->url_image) }}" class="w-28 h-auto object-contain"/>
+                    @endif
+
+                    {{-- @foreach ($atributos as $item)
                      @foreach ($valorAtributo as $value)
                             @if ($value->attribute_id == 1)
                                   @isset($valoresdeatributo)
@@ -131,7 +136,7 @@
                                   @endisset
                             @endif
                       @endforeach
-                    {{-- @endforeach --}}
+                    @endforeach --}}
                     <div class="flex flex-col">
                         <h3 class="font-Urbanist_Black text-3xl text-[#cccccc]">
                             {{ $product->producto }}</h3>
@@ -153,12 +158,12 @@
                         <div class="flex flex-row gap-3 content-center items-center">
                             @if ($product->descuento == 0)
                                 <div class="content-center flex flex-row gap-2 items-center">
-                                    <span class="font-Urbanist_Bold text-2xl gap-2 text-[#c12730]">S/
+                                    <span class="font-Urbanist_Bold text-2xl gap-2 text-[#c1272d]">S/
                                         {{ $product->precio }}</span>
                                 </div>
                             @else
                                 <div class="content-center flex flex-row gap-2 items-center">
-                                    <span class="font-Urbanist_Bold text-2xl gap-2 text-[#c12730]">S/
+                                    <span class="font-Urbanist_Bold text-2xl gap-2 text-[#c1272d]">S/
                                         {{ $product->descuento }}</span>
                                     <span class="text-[#acacac] font-Urbanist_Regular line-through text-lg">S/
                                         {{ $product->precio }}</span>
@@ -169,7 +174,7 @@
                                     );
                                 @endphp
                                 <span
-                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 bg-[#c12730] text-white px-4 py-1">
+                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 bg-[#c1272d] text-white px-4 py-1">
                                     -{{ $descuento }} % </span>
                             @endif
                         </div>

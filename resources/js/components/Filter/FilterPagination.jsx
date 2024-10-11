@@ -33,12 +33,12 @@ const FilterPagination = ({ current, setCurrent, pages }) => {
               </li>
             }
             return <li key={`item-${i}`} className={(i + 1) > current - 4 && (i + 1) < current + 4 ? 'block' : 'hidden'}>
-              <button aria-current="page" className={`cursor-pointer z-10 flex items-center justify-center px-4 h-10 w-10 leading-tight  hover:bg-[#FD1F4A] rounded-full ${current == i + 1 ? 'bg-[#FD1F4A] text-white' : 'bg-gray-100 text-gray-500 hover:text-gray-700'}`} onClick={() => setCurrent(i + 1)} type='button'>{i + 1}</button>
+              <button aria-current="page" className={`cursor-pointer z-10 flex items-center justify-center px-4 h-10 w-10 leading-tight  hover:bg-[#FD1F4A] rounded-full ${current == i + 1 ? 'bg-[#FD1F4A] text-white' : 'bg-gray-100 text-gray-500 hover:text-white'}`} onClick={() => setCurrent(i + 1)} type='button'>{i + 1}</button>
             </li>
           })
         }
         <li>
-          <button className="cursor-pointer flex items-center justify-center px-4 h-10 w-10 leading-tight text-gray-500 hover:bg-white rounded-full bg-gray-100 hover:text-gray-700" onClick={onNextPageClicked} type='button'>
+          <button className="cursor-pointer flex items-center justify-center px-4 h-10 w-10 leading-tight text-gray-500 hover:bg-white rounded-full bg-gray-100 hover:text-white" onClick={onNextPageClicked} type='button'>
             <span className="sr-only">Next</span>
             <svg className="w-3 h-3 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
               <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 9 4-4-4-4" />
