@@ -173,7 +173,7 @@
 
                                 <div class="flex flex-col justify-center items-center">
                                     <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
-                                        <img src="{{ asset('images/img/carrusel3_AB.png') }}" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
+                                        <img src="{{ asset($benefi->imagen) }}" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
                                     </div>
                                 </div>
 
@@ -191,12 +191,14 @@
 
     @if (count($logosdestacados) > 0) 
         <section class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 md:gap-8 relative mx-auto pt-12 lg:pt-16">
-           @foreach ($logosdestacados as $logosd)        
+           @foreach ($logosdestacados as $logosd)
+             <a href="/catalogo?marcas={{$logosd->id}}">
                 <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset($logosd->url_image2) }}')">
                     <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                        <img src="{{ asset($logosd->url_image) }}" class="h-16 object-contain"/>
+                        {{-- <img src="{{ asset($logosd->url_image) }}" class="h-16 object-contain"/> --}}
                     </div>
                 </div>
+              </a>
            @endforeach 
         </section>
     @endif
@@ -213,14 +215,16 @@
                 <div class="swiper-wrapper">
                   @foreach ($logos as $logosn)  
                     <div class="swiper-slide">
+                      <a href="/catalogo?marcas={{$logosn->id}}">
                         <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
                             style=" background-image: url('{{ asset($logosn->url_image2) }}')">
                             <div class="flex flex-col justify-center  h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
                                 <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset($logosn->url_image) }}" class="h-16 object-contain"/>
+                                    {{-- <img src="{{ asset($logosn->url_image) }}" class="h-16 object-contain"/> --}}
                                 </div>
                             </div>
                         </div>
+                      </a>
                     </div>
                   @endforeach   
                 </div>
