@@ -606,6 +606,10 @@
             grabCursor: true,
             centeredSlides: false,
             initialSlide: 0,
+             autoplay: {
+                delay: 3000,
+            },
+
             pagination: {
                 el: ".swiper-pagination-slider",
                 clickable: true,
