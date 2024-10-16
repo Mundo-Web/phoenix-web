@@ -36,7 +36,9 @@ class Products extends Model
     'sku',
     'max_stock', 
     'precio_reseller',
-    'marca_id'
+    'marca_id',
+    'codigo',
+    'brand_id'
   ];
 
   public function categoria()

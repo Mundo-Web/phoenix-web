@@ -10,6 +10,7 @@ use App\Http\Controllers\SaleDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ExcelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +53,7 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
     Route::get('/offers', [OfferController::class, 'all'])->name('offers.all');
     Route::patch('/offers', [OfferController::class, 'save'])->name('offers.save');
     Route::delete('/offers/{offer_id}', [OfferController::class, 'delete'])->name('offers.delete');
+
+    Route::post('/upload/items', [ExcelController::class, 'items'])->name('upload.items');
+    Route::post('/upload/images', [ExcelController::class, 'items'])->name('upload.images');
 });

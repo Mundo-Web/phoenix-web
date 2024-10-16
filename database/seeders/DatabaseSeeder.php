@@ -32,9 +32,9 @@ class DatabaseSeeder extends Seeder
             MarketerSeeder::class,
             CampaignMarketerSeeder::class,
             */
-            CategorySeeder::class,
-            ProductSeeder::class,
-            AttributesSeeder::class,
+            // CategorySeeder::class,
+            // ProductSeeder::class,
+            // AttributesSeeder::class,
             RoleSeeder::class,
             UsersSeeder::class,
             MessageSeeder::class,
@@ -42,7 +42,7 @@ class DatabaseSeeder extends Seeder
             FaqsSeeder::class,
             BeneficiosSeeder::class,
             SliderSeeder::class,
-            SubCategorySeeder::class,
+            // SubCategorySeeder::class,
             
             StatusSeeder::class,
             PricesTableSeeder::class,
