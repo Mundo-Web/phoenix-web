@@ -10,6 +10,8 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
     setMainImage(colorImage);
   };
   
+  console.log(mainImage);
+
   const category = item.category;
   const tags = item.tags;
   const colors = item.colors;

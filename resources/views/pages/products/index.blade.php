@@ -170,13 +170,33 @@
 
   <form id="file-excel-modal" class="modal !py-6">
     <p class="mb-2">
+      <b>Carga un zip (Imagenes sueltas)</b>
+    </p>
+    <input
+      class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+      aria-describedby="images_input_help" id="image_input" type="file" accept=".zip">
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300 mb-4" id="images_input_help">
+      Los nombres deben ir en formato: <br>
+      <code>
+        <span class="mention">Código Interno</span>_<span class="mention">{Color}</span>*.jpg
+      </code>
+    </p>
+
+    <p class="mb-2">
       <b>Carga un archivo excel</b>
       (<a href="/storage/templates/Items.xlsx" download="Items" class="text-blue-500 underline">Descargar formato</a>)
     </p>
     <input
       class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
       aria-describedby="file_input_help" id="file_input" type="file" accept=".xlsx,.xls">
-    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300" id="file_input_help">XLSX o XLS (Solo archivo Excel)</p>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-300 mb-4" id="file_input_help">XLSX o XLS (Solo archivo Excel)
+    </p>
+
+    {{-- <div class="mb-2">
+      <label for="first_name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ruta de
+        imagen</label>
+      <div id="image_route_pattern_editor" class="rounded-lg"></div>
+    </div> --}}
 
     <div id="progress-container" class="mt-4 hidden">
       <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
@@ -195,6 +215,59 @@
 </x-app-layout>
 
 <script>
+  // var quill = new Quill('#image_route_pattern_editor', {
+  //   theme: 'snow', // Tema de Quill
+  //   modules: {
+  //     toolbar: false,
+  //     mention: {
+  //       // Personalizar el activador a '{'
+  //       mentionDenotationChars: ["{"],
+  //       source: function(searchTerm, renderList, mentionChar) {
+  //         const variables = [{
+  //             id: 'sku',
+  //             value: 'Código (SKU)'
+  //           },
+  //           {
+  //             id: 'codigo',
+  //             value: 'Código Interno'
+  //           },
+  //           {
+  //             id: 'producto',
+  //             value: 'Producto'
+  //           },
+  //           {
+  //             id: 'category',
+  //             value: 'Categoría'
+  //           },
+  //           {
+  //             id: 'subcategory',
+  //             value: 'Subcategoría'
+  //           },
+  //           {
+  //             id: 'brand',
+  //             value: 'Marca'
+  //           },
+  //           {
+  //             id: 'color',
+  //             value: 'Color'
+  //           },
+  //         ];
+
+  //         const matches = variables.filter(variable => variable.value.toLowerCase().includes(searchTerm
+  //           .toLowerCase()));
+  //         renderList(matches, searchTerm);
+  //       },
+  //       onSelect: function(item, insertItem, ...props) {
+  //         item.denotationChar = ''
+  //         insertItem(item)
+  //       }
+  //     }
+  //   },
+  //   placeholder: 'Escribe {variable} aquí...',
+  //   bounds: '#editor-container',
+  //   // formats: []
+  // });
+
   $(document).on('click', '#file-excel-button', () => {
     $('#file-excel-modal').modal('show');
   });
@@ -205,13 +278,29 @@
     const fileInput = $('#file_input')[0];
     const file = fileInput.files[0];
 
+    const zipInput = $('#image_input')[0];
+    const zip = zipInput.files[0];
+
     if (!file) {
-      alert('Por favor, selecciona un archivo Excel.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Archivo requerido',
+        text: 'Por favor, selecciona un archivo Excel.'
+      });
       return;
     }
 
     const formData = new FormData();
     formData.append('file', file);
+    if (zip) formData.append('zip', zip)
+
+    // const element = $('<div>' + structuredClone(quill.root.innerHTML) + '</div>');
+    // element.find('.mention').each(function(e) {
+    //   this.textContent = '{' + this.getAttribute('data-id') + '}'
+    // })
+
+    // formData.append('image_route_pattern', element.text().trim());
+    formData.append('image_route_pattern', '{1}_{10}');
 
     $.ajax({
       url: "{{ route('upload.items') }}",
@@ -236,21 +325,31 @@
         return xhr;
       },
       success: function(response) {
-        alert('Archivo cargado exitosamente');
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Archivo cargado exitosamente.'
+        });
         $('#file-excel-modal').modal('hide');
         // Aquí puedes agregar código adicional para manejar la respuesta del servidor
       },
       error: function(xhr, status, error) {
-        alert('Error al cargar el archivo: ' + error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al cargar el archivo: ' + error
+        });
       },
       complete: function() {
         $('#progress-container').addClass('hidden');
         $('#progress-bar').css('width', '0%');
         $('#progress-text').text('0%');
         $('#file_input').val('');
+        $('#image_input').val('');
       }
     });
   });
+
   const salesDataGrid = $('#gridContainer').dxDataGrid({
     language: "es",
     dataSource: {

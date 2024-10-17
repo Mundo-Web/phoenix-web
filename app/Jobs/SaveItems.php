@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Galerie;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -16,6 +17,8 @@ use App\Models\SubCategory;
 use App\Models\Tag;
 
 use Illuminate\Support\Str;
+use SoDe\Extend\File;
+use SoDe\Extend\JSON;
 use SoDe\Extend\Text;
 
 class SaveItems implements ShouldQueue
@@ -23,16 +26,33 @@ class SaveItems implements ShouldQueue
   use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
   private array $items;
+  private string $image_route_pattern;
 
-  public function __construct(array $items)
+  public function __construct(array $items, string $image_route_pattern)
   {
     $this->items = $items;
+    $this->image_route_pattern = $image_route_pattern;
   }
 
   public function handle()
   {
+
+    $path2search = "./storage/images/products/";
+
+    $images = [];
     try {
-      foreach ($this->items as $item) {
+      $images = File::scan($path2search);
+    } catch (\Throwable $th) {
+      // dump($th->getMessage());
+    }
+
+    foreach ($this->items as $item) {
+      try {
+        $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
+        $imageRoute = \str_replace('{10}', $item[10], $imageRoute);
+
+        $productImages = \array_filter($images, fn($image) => Text::startsWith($image, $imageRoute));
+
         // Searching or Creating a Category
         $categoryJpa = Category::where('name', $item[5])->first();
         if (!$categoryJpa) {
@@ -78,6 +98,25 @@ class SaveItems implements ShouldQueue
           'stock' => $item[13]
         ]);
 
+        $i = 0;
+        foreach ($productImages as $image) {
+          try {
+            $productImage = 'storage/images/products/' . $image;
+            if ($i == 0) {
+              $productJpa->imagen = $productImage;
+              $productJpa->save();
+            } else {
+              Galerie::updateOrCreate([
+                'product_id' => $productJpa->id,
+                'imagen' => $productImage
+              ]);
+            }
+          } catch (\Throwable $th) {
+            // dump($th->getMessage());
+          }
+          $i++;
+        }
+
         // Searching or Creating Tags
         $tags = array_map(fn($x) => trim($x), explode(',', $item[14] ?? ''));
         ProductTag::where('producto_id')->delete();
@@ -105,9 +144,9 @@ class SaveItems implements ShouldQueue
             'specifications' => $item[11]
           ]);
         }
+      } catch (\Throwable $th) {
+        // dump($th->getMessage());
       }
-    } catch (\Throwable $th) {
-      // dump($th->getMessage());
     }
   }
 }

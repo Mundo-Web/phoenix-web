@@ -53,6 +53,11 @@
   <!-- Select2 -->
   <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.snow.css">
+  <script src="https://cdn.jsdelivr.net/npm/quill@1.3.6/dist/quill.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill-mention@2.2.1/dist/quill.mention.min.js"></script>
+
   <!-- Scripts -->
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -79,6 +84,25 @@
   <style>
     .jquery-modal.blocker.current {
       z-index: 40;
+    }
+
+    .mention {
+      color: #3f83f8;
+      background-color: rgba(187, 187, 187, .25);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .ql-mention-list-container {
+      width: max-content;
+      background-color: #fff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, .25)
+    }
+
+    .ql-mention-list-item {
+      padding: 6px 12px;
+      line-height: unset;
+      cursor: pointer;
     }
   </style>
 

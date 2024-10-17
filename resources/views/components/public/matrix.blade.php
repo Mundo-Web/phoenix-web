@@ -10,12 +10,10 @@
   <meta charset="UTF-8">
   <meta name="language" content="spanish">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-    content="">
+  <meta name="description" content="">
   {{-- <title> Boost Peru</title> --}}
   <title>@yield('title', config('app.name', 'Laravel'))</title>
-  <meta name="keywords"
-    content="" />
+  <meta name="keywords" content="" />
 
   <link rel="icon" type="image/svg+xml" href="{{ asset('images/svg/Boost.svg') }}">
 
