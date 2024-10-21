@@ -8,6 +8,7 @@ use App\Models\Attributes;
 use App\Models\AttributesValues;
 use App\Models\Category;
 use App\Models\ClientLogos;
+use App\Models\Discount;
 use App\Models\dxDataGrid;
 use App\Models\Galerie;
 use App\Models\Products;
@@ -246,9 +247,10 @@ class ProductsController extends Controller
     $marcas = ClientLogos::where("status", "=", true)->get();
     $categoria = Category::all();
     $subcategories = SubCategory::all();
+    $descuentos = Discount::where("status", "=", true)->get();
     $galery = [];
     $especificacion = [json_decode('{"tittle":"", "specifications":""}', false)];
-    return view('pages.products.save', compact('product', 'marcas', 'atributos', 'valorAtributo', 'categoria', 'tags', 'especificacion', 'subcategories', 'galery'));
+    return view('pages.products.save', compact('descuentos','product', 'marcas', 'atributos', 'valorAtributo', 'categoria', 'tags', 'especificacion', 'subcategories', 'galery'));
   }
 
   public function edit(string $id)
@@ -262,11 +264,12 @@ class ProductsController extends Controller
     $tags = Tag::where('status', 1)->get();
     $marcas = ClientLogos::where("status", "=", true)->get();
     $categoria = Category::all();
+    $descuentos = Discount::where("status", "=", true)->get();
     $subcategories = SubCategory::all();
     $valoresdeatributo = AttributeProductValues::where("product_id", "=", $id)->get();
     $galery = Galerie::where("product_id", "=", $id)->get();
 
-    return view('pages.products.save', compact('product', 'marcas', 'atributos', 'valorAtributo', 'tags', 'categoria', 'especificacion', 'subcategories', 'galery', 'valoresdeatributo'));
+    return view('pages.products.save', compact('descuentos','product', 'marcas', 'atributos', 'valorAtributo', 'tags', 'categoria', 'especificacion', 'subcategories', 'galery', 'valoresdeatributo'));
   }
 
   private function saveImg(Request $request, string $field)
@@ -370,6 +373,10 @@ class ProductsController extends Controller
 
       if (!isset($cleanedData['stock'])) {
          $cleanedData['stock'] = 0 ;
+      }
+
+      if (!isset($cleanedData['discount_id']) || $cleanedData['discount_id'] === '') {
+        $cleanedData['discount_id'] = null;
       }
 
       $slug = strtolower(str_replace(' ', '-', $request->producto . '-' . $request->color));

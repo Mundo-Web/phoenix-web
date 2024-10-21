@@ -18,7 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->decimal('precio', 12, 2)->default(0);
             $table->decimal('descuento', 12, 2)->default(0);
-            $table->decimal('stock', 12, 2)->default(0);
+            $table->decimal('stock', 12)->default(0);
             $table->decimal('costo_x_art', 12, 2)->default(0);
             $table->string('peso')->nullable();
             $table->string('imagen')->nullable();
@@ -28,12 +28,14 @@ return new class extends Migration
             $table->boolean('destacar')->default(false);
             $table->boolean('recomendar')->default(false);
             $table->unsignedBigInteger('categoria_id')->nullable();
+            $table->string('discount_id')->nullable();
 
             $table->boolean('visible')->default(true);
             $table->boolean('status')->default(true);
             $table->timestamps();
 
             $table->foreign('categoria_id')->references('id')->on('categories');
+            //$table->foreign('discount_id')->references('id')->on('discounts');
             
         });
     }

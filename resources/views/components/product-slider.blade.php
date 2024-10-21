@@ -95,7 +95,7 @@
     img.classList.add('w-full', 'aspect-square', 'object-contain',
       'ease-in', 'duration-500',
       'transform', 'hover:scale-105', 'opacity-0', 'transition-opacity', 'duration-200');
-    $("#containerProductosdetail").html(img);
+    $("#imagenProducto").html(img);
     setTimeout(function() {
       img.classList.remove('opacity-0');
     }, 100);

@@ -38,7 +38,8 @@ class Products extends Model
     'precio_reseller',
     'marca_id',
     'codigo',
-    'brand_id'
+    'brand_id',
+    'discount_id'
   ];
 
   public function categoria()
@@ -65,7 +66,8 @@ class Products extends Model
   {
       return $this->hasMany(Products::class, 'producto', 'producto')
           ->whereNotNull('color')
-          ->select('color', 'producto','imagen') 
+          ->select('color','producto','imagen') 
+          ->groupBy('color')
           ->distinct(); 
   }
 
@@ -103,5 +105,10 @@ class Products extends Model
   public function wishedByUsers()
   {
     return $this->hasMany(Wishlist::class, 'product_id');
+  }
+
+  public function discount()
+  {
+        return $this->belongsTo(Discount::class, 'discount_id');
   }
 }

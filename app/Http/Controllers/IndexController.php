@@ -239,6 +239,22 @@ class IndexController extends Controller
     return redirect()->route('comentario')->with(['mensaje' => $mensaje, 'alerta' => $alert]);
   }
 
+  public function buscarTalla(Request $request)
+  {
+  
+    $productId = $request->idproduct;
+    
+    $producto = Products::where('id','=',$productId)->get();
+
+    return response()->json(
+      [
+        'status' => true,
+        'producto' => $producto,
+      ],
+      200,
+    );
+  }
+
   public function contacto()
   {
     $general = General::first();
@@ -698,9 +714,19 @@ class IndexController extends Controller
     $otherProducts = Products::select()
       ->where('id', '<>', $id)
       ->where('producto', $product->producto)
+      ->where('color', '<>', $product->color)
       ->whereNotNull('color')
+      ->groupBy('color')
       ->get();
 
+      $tallasdeProductos = Products::select()
+      ->where('id', '<>', $id)  // Excluir el producto actual
+      ->where('producto', $product->producto)  // Mismo tipo de producto
+      ->where('color', $product->color)  // Mismo color que el producto actual
+      ->whereNotNull('peso')  // Asegurarse de que la talla no sea nula
+      ->get();
+
+   
     $galery = Galerie::where('product_id', $product->id)->get();
 
     $general = General::first();
@@ -725,7 +751,7 @@ class IndexController extends Controller
 
     if (!$combo) $combo = new Offer();
 
-    return view('public.product', compact('is_reseller', 'atributos', 'isWhishList', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery', 'combo', 'valoresdeatributo'));
+    return view('public.product', compact('tallasdeProductos', 'is_reseller', 'atributos', 'isWhishList', 'testimonios', 'general', 'valorAtributo', 'ProdComplementarios', 'productosConGalerias', 'especificaciones', 'url_env', 'product', 'capitalizeFirstLetter', 'categorias', 'destacados', 'otherProducts', 'galery', 'combo', 'valoresdeatributo'));
   }
 
   public function wishListAdd(Request $request)

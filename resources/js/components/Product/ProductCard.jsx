@@ -28,26 +28,32 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
     >
       <div className={`${bgcolor} product_container basis-4/5 flex flex-col justify-center relative`}>
         <div className="absolute top-2 left-0 w-max">
-          {item.tags?.map((tag) => (
-            <div className="px-4 mb-1" key={tag.id}>
-              <span
-                className="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-3 flex-initial w-full text-center text-white rounded-[5px] relative top-[18px] z-10"
-                style={{ backgroundColor: tag.color }}
-              >
-                {tag.name}
-              </span>
+          <div className='flex flex-wrap gap-1.5'>
+            
+            {
+              item.descuento > 0 && 
+              <div className="mb-1">
+                <span
+                  className="block font-Urbanist_Semibold text-[8px] md:text-[12px] bg-black py-1 px-3 flex-initial w-full text-center rounded-none text-white relative z-10"
+                  style={{ backgroundColor: '#c1272d' }}
+                >
+                  -{Math.round(100 - ((item.descuento * 100) / item.precio))}%
+                </span>
+              </div>
+            }
+
+            {item.tags?.map((tag) => (
+              <div className="mb-1" key={tag.id}>
+                <span
+                  className="block font-semibold text-[8px] font-Urbanist_Regular md:text-[12px] bg-black py-1 px-2 flex-initial w-full text-center text-white rounded-none relative z-10"
+                  style={{ backgroundColor: tag.color }}
+                >
+                  {tag.name}
+                </span>
+              </div>
+            ))}
+            
             </div>
-          ))}
-          {
-            item.descuento > 0 && <div className="mb-1">
-              <span
-                className="block font-Urbanist_Semibold text-[8px] md:text-[12px] bg-black py-1 px-3 flex-initial w-full text-center text-white relative top-[3%] z-10"
-                style={{ backgroundColor: '#c1272d' }}
-              >
-                -{Math.round(100 - ((item.descuento * 100) / item.precio))}%
-              </span>
-            </div>
-          }
         </div>
 
         <div>
@@ -78,15 +84,17 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
                     
                     <a 
                       key={color.color} 
-                      id={`producto-${item.id}-${color.color}`}
+                      id={`producto-${item.id}-${color.imagen}`}
                       className="ring-1 rounded-full p-[2px] ring-transparent hover:ring-[#808080]"
                       onClick={() => handleColorClick(color.imagen)}
                     >
                       
-                      <div 
-                        className="w-4 md:w-[18px] h-4 md:h-[18px] rounded-full" 
-                        style={{ backgroundColor: color.color }}
-                      ></div>
+                      <div
+                        className="w-4 md:w-[30px] h-4 md:h-[30px] rounded-full overflow-hidden" 
+                        //style={{ backgroundColor: color.color }}
+                      >
+                        <img className='object-contain object-center' src={color.imagen ? `/${color.imagen}` : '/images/img/noimagen.jpg'} />
+                      </div>
                     </a>
                   ))}
                   

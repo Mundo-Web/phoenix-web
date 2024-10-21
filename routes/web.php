@@ -24,6 +24,7 @@ use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\GalerieController;
@@ -49,6 +50,7 @@ use App\Http\Controllers\ValoresAtributosController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TermsAndConditionController;
 use App\Models\AboutUs;
+use App\Models\Discount;
 use App\Models\LibroReclamaciones;
 
 /*
@@ -108,6 +110,7 @@ Route::post('guardarUserNewsLetter', [NewsletterSubscriberController::class, 'gu
 Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmailView'])->name('ConfirmEmail.jsx');
 Route::get('/confirmation/{token}', [AuthController::class, 'loginView']);
 
+Route::post('buscarTalla', [IndexController::class, 'buscarTalla'])->name('buscarTalla');
 
 Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {
 
@@ -142,6 +145,11 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::resource('/testimonios', TestimonyController::class);
         Route::post('/testimonios/deleteTestimony', [TestimonyController::class, 'deleteTestimony'])->name('testimonios.deleteTestimony');
         Route::post('/testimonios/updateVisible', [TestimonyController::class, 'updateVisible'])->name('testimonios.updateVisible');
+
+        //Reglas de descuento
+        Route::resource('/reglasDescuentos', DiscountController::class);
+        Route::post('/reglasDescuentos/deletereglasDescuentos', [DiscountController::class, 'deletereglasDescuentos'])->name('reglasDescuentos.deletereglasDescuentos');
+        Route::post('/reglasDescuentos/updateVisible', [DiscountController::class, 'updateVisible'])->name('reglasDescuentos.updateVisible');
 
         // Estados
         Route::resource('/estados', StatusController::class);

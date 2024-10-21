@@ -123,6 +123,9 @@
         <x-menu.item id="valoresattributes" href="{{ route('valoresattributes.index') }}">
           Valor de atributo
         </x-menu.item>
+        <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">
+          Reglas de descuento
+        </x-menu.item>
         <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">
           Costos de Envio
         </x-menu.item>

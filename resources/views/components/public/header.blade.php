@@ -468,7 +468,7 @@
     <div class="p-4 flex flex-col h-[90vh] justify-between gap-2">
         <div class="flex flex-col">
             <div class="flex justify-between ">
-                <h2 class="font-semibold font-Helvetica_Medium text-[28px] text-[#151515] pb-5">Carrito</h2>
+                <h2 class="font-semibold font-Urbanist_Bold text-[28px] text-[#151515] tracking-tight pb-5">Carrito de compras</h2>
                 <div id="close-cart" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -486,13 +486,13 @@
         </div>
         <div class="flex flex-col gap-2 pt-2">
             <div class="text-[#111111]  text-xl flex justify-between items-center ">
-                <p class="font-Helvetica_Medium font-semibold">Total</p>
-                <p class="font-Helvetica_Medium font-semibold" id="itemsTotal">S/ 0.00</p>
+                <p class="font-Urbanist_Bold font-semibold">Total</p>
+                <p class="font-Urbanist_Bold font-semibold" id="itemsTotal">S/ 0.00</p>
             </div>
             <div>
                 <a href="/carrito"
-                    class="font-normal font-Helvetica_Medium text-lg bg-[#FD1F4A]  py-3 px-5 rounded-2xl text-white cursor-pointer w-full inline-block text-center">Ir al
-                    Carrito</a>
+                    class="font-normal font-Urbanist_Bold text-lg bg-black  py-3 px-5 rounded-none text-white cursor-pointer w-full inline-block text-center">Ir al
+                    carrito</a>
             </div>
         </div>
     </div>
@@ -512,8 +512,6 @@
 
     firstLName = firstLName ? firstLName.charAt(0).toUpperCase() + firstLName.slice(1) : ''
     SecondLName = SecondLName ? SecondLName.charAt(0).toUpperCase() + SecondLName.slice(1) : ''
-
-    console.log(firstName, SecondName, firstLName, SecondLName)
 
     $('#usernamelogin').text(
       `${firstName ? firstName : ''} ${SecondName ? SecondName : ''} ${firstLName ? firstLName : ''} ${SecondLName ? SecondLName : ''}`
@@ -731,9 +729,8 @@
         /* contenedorCarrito.innerHTML=''; */
         $('#itemsCarrito').html('')
         $('#itemsCarritoCheck').html('')
-
-
     }
+
     var appUrl = "{{ env('APP_URL') }}";
 
     $(document).ready(function() {
@@ -881,6 +878,115 @@
         padre.innerHTML = '';
     }
 
+    function aplicarDescuentosEnCarrito(articulosCarrito) {
+        // Agrupar productos que tienen un discount_id
+        let productosConDescuento = articulosCarrito.filter(item => item.discount_id !== null);
+        // Agrupar por discount_id
+        let gruposDescuentos = {};
+
+        productosConDescuento.forEach(item => {
+            if (!gruposDescuentos[item.discount_id]) {
+                gruposDescuentos[item.discount_id] = {
+                    productos: [],
+                    take_product: item.take_product,
+                    payment_product: item.payment_product,
+                    type_id: item.type_id,
+                };
+            }
+            gruposDescuentos[item.discount_id].productos.push(item);
+        });
+
+        
+
+        // Aplicar descuentos a cada grupo
+        for (let discount_id in gruposDescuentos) {
+            let grupo = gruposDescuentos[discount_id];
+            let cantidadTotal = grupo.productos.reduce((total, item) => total + item.cantidad, 0);
+            let take_product = grupo.take_product;
+            let payment_product = grupo.payment_product;
+            let descuentoTipo = grupo.type_id;
+            let productosDeMismoNombre = {}
+
+         
+
+            grupo.productos.forEach(item => {
+                if (!productosDeMismoNombre[item.producto]) {
+                    productosDeMismoNombre[item.producto] = {
+                        productosf: [], // Lista de productos con el mismo nombre
+                    };
+                }
+                productosDeMismoNombre[item.producto].productosf.push(item); // Agregar productos al grupo por nombre
+            });
+
+           
+
+            switch (descuentoTipo) {
+                case 1: // Descuento por Unidad
+                    for (let productoNombre in productosDeMismoNombre) {
+                        let productos = productosDeMismoNombre[productoNombre].productosf;
+                        let cantidadTotalPorNombre = productos.reduce((total, item) => total + item.cantidad, 0);
+
+                        if (cantidadTotalPorNombre >= take_product) {
+                            let cantidadADescontar = Math.floor(cantidadTotalPorNombre / take_product) * (take_product - payment_product);
+                            let productosRestantes = cantidadADescontar;
+                            
+                            productos.forEach(item => {
+                                let cantidadProducto = item.cantidad;
+                                // Aplicar descuento a los productos
+                                if (cantidadADescontar > 0 && item.cantidad >= take_product) {
+                                    // En este caso, pagas por 1 producto de cada 2
+                                     console.log("sss");
+              
+                                    item.precioFinal = item.precio * payment_product / take_product; // Precio ajustado
+                                    cantidadADescontar -= item.cantidad;
+                                } else {
+                                    item.precioFinal = item.precio; // Sin descuento
+                                }
+                            });
+                        }
+                    }
+                    break;
+
+                case 2: // Descuento Porcentual
+                    if (cantidadTotal >= take_product) {
+                        let porcentajeDescuento = payment_product / 100; 
+                        grupo.productos.forEach(producto => {
+                            producto.precioFinal = producto.precio * porcentajeDescuento;
+                        });
+                    }
+                    break;
+
+                case 3: // Descuento por Precio Fijo
+                    if (cantidadTotal >= take_product) {
+                        
+                        let grupos = Math.floor(cantidadTotal / take_product);
+                        let totalProductosConDescuento = grupos * payment_product;
+                        let totalProductosSinDescuento = cantidadTotal % take_product;
+
+                        grupo.productos.forEach(producto => {
+                            if (totalProductosConDescuento > 0) {
+                                producto.precioFinal = payment_product / take_product; 
+                                totalProductosConDescuento -= producto.cantidad;
+                            } else {
+                                producto.precioFinal = producto.precio; 
+                            }
+                        });
+                    }
+                    break;
+
+                default:
+                   
+                    grupo.productos.forEach(producto => {
+                        producto.precioFinal = producto.precio;
+                    });
+                    break;
+            }
+        }
+
+       
+        return articulosCarrito;
+    }
+
     function agregarAlCarrito(item, cantidad) {
         $.ajax({
 
@@ -893,6 +999,7 @@
 
             },
             success: function(success) {
+                console.log(success)
                 let {
                     producto,
                     id,
@@ -900,16 +1007,43 @@
                     precio,
                     imagen,
                     color,
-                    precio_reseller
-                } = success.data
-                let is_reseller = success.is_reseller
+                    peso,
+                    precio_reseller,
+                    discount_id,
+                    discount
 
+                } = success.data
+
+                let is_reseller = success.is_reseller
 
                 if (is_reseller) {
                     descuento = precio_reseller
                 }
 
+                if (discount_id && discount) {
+                    // Si existe un descuento, desestructuramos las propiedades
+                    ({ 
+                        take_product, 
+                        payment_product, 
+                        type_id, 
+                        status 
+                    } = discount);
+                } else {
+                    // Si no existe descuento, inicializamos las variables con valores por defecto
+                    take_product = null;
+                    payment_product = null;
+                    type_id = null;
+                    status = null;
+                }
+
+                /*let have_discount = success.discount_id
+                if (!have_discount) {
+                    take_product = null;
+                    payment_product = 
+                }*/
+
                 let cantidad = Number(success.cantidad)
+                
                 let detalleProducto = {
                     id,
                     producto,
@@ -918,12 +1052,26 @@
                     precio,
                     imagen,
                     cantidad,
-                    color
-
+                    color,
+                    peso,
+                    discount_id,
+                    take_product, 
+                    payment_product, 
+                    type_id, 
+                    status 
                 }
+                
+                 /*if(discount_id){
+                    let { precioPago, cantidadTotal } = aplicarDescuento(detalleProducto, cantidad);
+                    detalleProducto.precio = precioPago;
+                    detalleProducto.cantidad = cantidadTotal;
+                 }*/
+
+
                 let existeArticulo = articulosCarrito.some(item => item.id === detalleProducto.id && item
                     .isCombo ==
                     false, )
+
                 if (existeArticulo) {
                     //sumar al articulo actual 
                     const prodRepetido = articulosCarrito.map(item => {
@@ -940,6 +1088,10 @@
 
                 }
 
+                articulosCarrito = aplicarDescuentosEnCarrito(articulosCarrito);
+
+                console.log(articulosCarrito);
+
                 Local.set('carrito', articulosCarrito)
                 let itemsCarrito = $('#itemsCarrito')
                 let ItemssubTotal = $('#ItemssubTotal')
@@ -955,14 +1107,6 @@
                     type: 'success',
                 })
 
-                /* Swal.fire({
-
-                  icon: "success",
-                  title: `Producto agregado correctamente`,
-                  showConfirmButton: true
-
-
-                }); */
             },
             error: function(error) {
                 console.log(error)
@@ -972,24 +1116,23 @@
     }
     
     $(document).on('click', '#btnAgregarCarritoPr', function() {
-        let url = window.location.href;
-        let partesURL = url.split('/');
-        let productoEncontrado = partesURL.find(parte => parte === 'producto');
-
+        //let url = window.location.href;
+        //let partesURL = url.split('/');
+        //let productoEncontrado = partesURL.find(parte => parte === 'producto');
         let item
         let cantidad
 
+        let tallaSelected = $('.tallaSelected');
+        let productId = tallaSelected.data('productid');
 
-        item = partesURL[partesURL.length - 1]
-        cantidad = Number($('#cantidadSpan span').text())
-        item = $(this).data('id')
-
+        //item = partesURL[partesURL.length - 1]
+        cantidad = Number($('#cantidadSpan span').text());
+        //item = $(this).data('id');
         try {
-            agregarAlCarrito(item, cantidad)
+            agregarAlCarrito(productId, cantidad)
 
         } catch (error) {
             console.log(error)
-
         }
     })
 

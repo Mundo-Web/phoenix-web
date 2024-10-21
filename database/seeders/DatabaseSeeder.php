@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             // CategorySeeder::class,
             // ProductSeeder::class,
             // AttributesSeeder::class,
+            DiscountTypeSeeder::class,
             RoleSeeder::class,
             UsersSeeder::class,
             MessageSeeder::class,
