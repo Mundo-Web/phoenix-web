@@ -181,10 +181,14 @@
                                     );
                                 @endphp
                                 <div
-                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 bg-[#c1272d] text-white px-4 py-1">
+                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 font-bold bg-[#c1272d] text-white px-4 py-1">
                                     -<span id="porcentajedescuento">{{ $descuento }}</span> % </div>
                             @endif
                         </div>
+
+                        @isset ($product->discount)
+                            <span class="text-[#c1272d] ">👀 {{$product->discount->name}}</span>
+                        @endisset
 
                         <div class="h-1 border-b-[2px] border-b-[#cccccc] my-4"></div>
 

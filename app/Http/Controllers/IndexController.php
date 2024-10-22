@@ -670,7 +670,7 @@ class IndexController extends Controller
 
     // $productos = Products::where('id', '=', $id)->first();
     // $especificaciones = Specifications::where('product_id', '=', $id)->get();
-    $product = Products::findOrFail($id);
+    $product = Products::with(['discount'])->findOrFail($id);
     $especificaciones = Specifications::where('product_id', '=', $id)
       ->where(function ($query) {
         $query->whereNotNull('tittle')

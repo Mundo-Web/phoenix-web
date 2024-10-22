@@ -463,9 +463,9 @@
 
 
 <div id="cart-modal"
-    class="bag !absolute top-0 right-0 md:w-[450px] cartContainer border shadow-2xl  !rounded-sm !p-0 !z-30"
+    class="bag !absolute top-0 right-0 md:w-[450px] cartContainer border shadow-2xl  !rounded-l-2xl !p-0 !z-30"
     style="display: none">
-    <div class="p-4 flex flex-col h-[90vh] justify-between gap-2">
+    <div class="p-4 flex flex-col h-[calc(100vh-2px)] justify-between gap-2">
         <div class="flex flex-col">
             <div class="flex justify-between ">
                 <h2 class="font-semibold font-Urbanist_Bold text-[28px] text-[#151515] tracking-tight pb-5">Carrito de compras</h2>
@@ -937,6 +937,7 @@
                                     // En este caso, pagas por 1 producto de cada 2
                                      console.log("sss");
               
+                                    item.recalcularcuando = 
                                     item.precioFinal = item.precio * payment_product / take_product; // Precio ajustado
                                     cantidadADescontar -= item.cantidad;
                                 } else {

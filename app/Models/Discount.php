@@ -14,6 +14,7 @@ class Discount extends Model
         'take_product', 
         'payment_product', 
         'type_id',
+        'apply_to',
         'visible',
         'status'
     ];

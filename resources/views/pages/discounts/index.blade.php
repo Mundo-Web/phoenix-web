@@ -26,7 +26,7 @@
                 <th>Lleva</th>
                 <th>Paga</th>
                 <th>Tipo de descuento</th>
-                {{-- <th>Visible</th> --}}
+                <th>Aplicar al</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -38,6 +38,18 @@
                   <td>{{ $item->take_product }}</td>
                   <td>{{ $item->payment_product }}</td>
                   <td>{{ $item->discountType->name ?? 'Asigna un tipo de descuento' }}</td>
+                  <td>
+                    @switch($item->apply_to)
+                      @case('higher')
+                        Precio mas alto
+                        @break
+                      @case('lower')
+                        Precio mas bajo
+                        @break
+                      @default
+                        Producto
+                    @endswitch
+                  </td>
                   {{-- <td>
                     <form method="POST" action="">
                       @csrf
@@ -77,7 +89,7 @@
                 <th>Lleva</th>
                 <th>Paga</th>
                 <th>Tipo de descuento</th>
-                {{-- <th>Visible</th> --}}
+                <th>Aplicar al</th>
                 <th>Acciones</th>
               </tr>
             </tfoot>

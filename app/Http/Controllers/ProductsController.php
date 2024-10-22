@@ -436,7 +436,7 @@ class ProductsController extends Controller
 
       return redirect()->route('products.index')->with('success', 'Publicación creado exitosamente.');
     } catch (\Throwable $th) {
-      //  dump($th->getMessage());
+       dump($th->getMessage());
       
     }
   }

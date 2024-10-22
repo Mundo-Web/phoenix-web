@@ -101,6 +101,21 @@
                     placeholder="Nombre de regla de descuento">
                 </div>
               </div>
+
+              <div class="md:col-span-5">
+                <label for="apply_to">Aplicar sobre</label>
+                <div class="relative mb-2  mt-2">
+                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                        <i class="fa fa-pen text-lg"></i>
+                    </div>
+                    <select name="apply_to"
+                        class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                         <option value="self">Mismo producto</option>
+                         <option value="higher">Precio mas alto</option>
+                         <option value="lower">Precio mas bajo</option>
+                    </select>
+                </div>
+              </div>
               
               <div class="md:col-span-5 text-right mt-6 flex justify-between">
                 <div class="inline-flex items-end">
@@ -109,7 +124,7 @@
                 <div class="inline-flex items-end">
                   <button type="submit"
                     class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
-                    Guardar Atributo
+                    Guardar
                   </button>
                 </div>
               </div>
