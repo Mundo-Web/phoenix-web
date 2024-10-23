@@ -440,7 +440,7 @@
         caption: 'STOCK'
       },
       {
-        caption: 'ESTADO',
+        caption: 'IMAGEN',
         cellTemplate: (container, {
           data
         }) => {
