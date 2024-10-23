@@ -82,7 +82,7 @@ class AppServiceProvider extends ServiceProvider
                 'categoriasMenu' => $categoriasMenu,
                 'tags' => $tags,
                 'offerExists' => $offerExists,
-                'categorias' => $categorias
+                'categorias' => $categorias,
             ]);
         });
 

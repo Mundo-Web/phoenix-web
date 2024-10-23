@@ -477,7 +477,7 @@
                     </svg>
                 </div>
             </div>
-            <div class="overflow-y-scroll h-[calc(90vh-200px)] scroll__carrito">
+            <div class="overflow-y-scroll h-[calc(90vh-130px)] scroll__carrito">
                 <table class="w-full">
                     <tbody id="itemsCarrito">
                     </tbody>
@@ -504,7 +504,6 @@
   $(document).ready(function() {
     let name = "{{ Auth::user()->name }}" ?? ''
     let lastname = "{{ Auth::user()->lastname }}" ?? ''
-    console.log()
     lastname = lastname.toLowerCase()
     let [firstName, SecondName] = name.split(' ')
     let [firstLName, SecondLName] = lastname.split(' ')
@@ -598,14 +597,6 @@
 </script>
 
 <script>
-    function mostrarTotalItems() {
-        let articulos = Local.get('carrito')
-        let contarArticulos = articulos.reduce((total, articulo) => {
-            return total + articulo.cantidad;
-        }, 0);
-
-        $('#itemsCount').text(contarArticulos)
-    }
     $(document).ready(function() {
         if ({{ $isIndex ? 1 : 0 }}) {
             $(window).scroll(function() {
@@ -707,7 +698,6 @@
         }
 
         if (duplicates.length > 0) {
-            console.log('Duplicate IDs found:', duplicates);
             let index = articulosCarrito.findIndex(item => item.id === id && item.isCombo == isCombo);
             if (index > -1) {
                 articulosCarrito.splice(index, 1);
@@ -809,7 +799,6 @@
 <script>
     $(document).ready(function() {
         $(document).on('mouseenter', '.other-class', function() {
-            console.log('detected hover');
             cerrar()
         });
     })
@@ -872,7 +861,6 @@
 
 
     function cerrar() {
-        console.log('cerrando')
         let padre = document.getElementById('productos-link-h');
         activeHover = false
         padre.innerHTML = '';
@@ -935,7 +923,6 @@
                                 // Aplicar descuento a los productos
                                 if (cantidadADescontar > 0 && item.cantidad >= take_product) {
                                     // En este caso, pagas por 1 producto de cada 2
-                                     console.log("sss");
               
                                     item.recalcularcuando = 
                                     item.precioFinal = item.precio * payment_product / take_product; // Precio ajustado
@@ -1000,7 +987,6 @@
 
             },
             success: function(success) {
-                console.log(success)
                 let {
                     producto,
                     id,
@@ -1012,7 +998,6 @@
                     precio_reseller,
                     discount_id,
                     discount
-
                 } = success.data
 
                 let is_reseller = success.is_reseller
@@ -1056,17 +1041,12 @@
                     color,
                     peso,
                     discount_id,
+                    discount,
                     take_product, 
                     payment_product, 
                     type_id, 
                     status 
                 }
-                
-                 /*if(discount_id){
-                    let { precioPago, cantidadTotal } = aplicarDescuento(detalleProducto, cantidad);
-                    detalleProducto.precio = precioPago;
-                    detalleProducto.cantidad = cantidadTotal;
-                 }*/
 
 
                 let existeArticulo = articulosCarrito.some(item => item.id === detalleProducto.id && item
@@ -1091,8 +1071,6 @@
 
                 articulosCarrito = aplicarDescuentosEnCarrito(articulosCarrito);
 
-                console.log(articulosCarrito);
-
                 Local.set('carrito', articulosCarrito)
                 let itemsCarrito = $('#itemsCarrito')
                 let ItemssubTotal = $('#ItemssubTotal')
@@ -1110,7 +1088,7 @@
 
             },
             error: function(error) {
-                console.log(error)
+                console.error(error)
             }
 
         })
@@ -1133,7 +1111,7 @@
             agregarAlCarrito(productId, cantidad)
 
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     })
 
@@ -1146,7 +1124,7 @@
             agregarAlCarrito(item, cantidad)
 
         } catch (error) {
-            console.log(error)
+            console.error(error)
 
         }
 

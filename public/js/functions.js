@@ -40,7 +40,7 @@ const card = document.querySelector(".cartContainer");
 // }
 
 // Detener la propagación de clics dentro del nav para evitar cerrarlo al hacer clic dentro
-if (bag){
+if (bag) {
   bag.addEventListener("click", function (event) {
     event.stopPropagation(); // Evitar que el clic se propague al documento
   });
@@ -381,7 +381,7 @@ radProvincia.forEach((item) => {
 var input = document.querySelector(".input-box");
 
 (input ?? {}).onclick = function () {
-  
+
   this.classList.toggle("open");
   let list = this.nextElementSibling;
   if (list.style.maxHeight) {
@@ -397,7 +397,7 @@ var input = document.querySelector(".input-box");
 var rad = document.querySelectorAll(".radio");
 rad.forEach((item) => {
   item.addEventListener("change", () => {
-    
+
     input.innerHTML = item.nextElementSibling.innerHTML;
     input.click();
   });
@@ -418,51 +418,215 @@ cuentas.forEach((cuenta) => {
   });
 });
 
+Math.sum = function (...items) {
+  let total = 0
+  items.filter(Number).forEach(x => {
+    total += Number(x)
+  })
+  return total
+}
 
+const Number2Currency = (number, currency = 'en-US') => {
+  return (Number(number) || 0)
+    .toLocaleString(currency, {
+      maximumFractionDigits: 2,
+      minimumFractionDigits: 2
+    })
+}
 
 function PintarCarrito() {
-  
-  console.log(articulosCarrito)
 
   let itemsCarrito = $('#itemsCarrito')
   let itemsCarritoCheck = $('#itemsCarritoCheck')
 
-  articulosCarrito.forEach(element => {
+  const carrito = Local.get('carrito') ?? []
+  const carritoDescuentoMismoProducto = []
+  const carritoDescuentoDistintoProducto = []
+  const carritoSinDescuento = [];
 
-    const prices = [Number(element.precio), Number(element.descuento), Number(element.precioFinal)].filter(Boolean)
-    const minPrice = Math.min(...prices)
-    
-    let plantilla = `<tr class=" font-Urbanist_Regular border-b">
+  const carritoPorProcesar = [];
+
+  const descuentosPorProcesar = [];
+
+  for (const item of carrito) {
+    if (!item.discount_id) {
+      carritoSinDescuento.push(item)
+      continue
+    }
+    const cantidadAgrupar = item.cantidad % item.discount.take_product
+
+    const cantidadSinAgrupar = item.cantidad - cantidadAgrupar
+
+    if (cantidadSinAgrupar != 0) carritoDescuentoMismoProducto.push({ ...item, cantidad: cantidadSinAgrupar })
+    if (item.cantidad - cantidadSinAgrupar != 0) {
+      if (!descuentosPorProcesar.find(x => x.id == item.discount_id)) descuentosPorProcesar.push(item.discount)
+      const suelto = item.cantidad - cantidadSinAgrupar
+      carritoPorProcesar.push({
+        ...item,
+        cantidad: suelto,
+      })
+    }
+  }
+
+  // Procesando distintos productos
+  for (const discount of descuentosPorProcesar) {
+    // Filtra productos que tienen el mismo descuento y los ordena por el precio
+    const products = carritoPorProcesar
+      .filter(item => item.discount_id == discount.id)
+      .sort((a, b) => b.precio - a.precio)
+    const totalByDiscount = Math.sum(...products.map(x => x.cantidad)); // total de productos con un mismo descuento
+    if (totalByDiscount >= discount.take_product) {
+      const modulo = totalByDiscount % discount.take_product
+      const descuentoDistintoProducto = [] // productos que forman parte de un descuento
+      let cuota = totalByDiscount - modulo // total de producto
+      for (const item of products) {
+        const cantidadPorProducto = cuota >= item.cantidad ? item.cantidad : item.cantidad - cuota;
+        if (cuota >= item.cantidad) {
+          descuentoDistintoProducto.push({ ...item, cantidad: cantidadPorProducto })
+        } else {
+          descuentoDistintoProducto.push({ ...item, cantidad: cuota })
+          carritoSinDescuento.push({ ...item, cantidad: cantidadPorProducto, discount: null })
+        }
+        cuota -= cantidadPorProducto
+      }
+      carritoDescuentoDistintoProducto.push(descuentoDistintoProducto)
+    } else {
+      carritoSinDescuento.push(...(products.map(x => ({ ...x, discount: null }))))
+    }
+  }
+
+  const carritoFinal = [
+    ...carritoDescuentoMismoProducto.map(x => ([x])),
+    ...carritoDescuentoDistintoProducto,
+    ...carritoSinDescuento.map(x => ([x]))
+  ];
+
+  const carritoParaPintar = [];
+
+  for (const group of carritoFinal) {
+    let cuota = group[0].discount?.take_product ?? null
+    const payment = group[0].discount?.payment_product ?? null
+    for (const index in group) {
+      const item = group[index]
+
+      let offering = false;
+      let flag = ''
+      let finalPrice = Math.min(Number(item.precio), Number(item.descuento));
+      if (item.discount) {
+        offering = true
+        if (item.discount.type_id == 1) {
+          finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
+        } else {
+          finalPrice = (item.precio * payment) / 100
+          flag = '-' + Math.round(100 - payment) + '%'
+        }
+      }
+
+      cuota -= item.cantidad
+
+      const found = carritoParaPintar.findIndex(x => x.id == item.id)
+      if (found == -1) {
+        carritoParaPintar.push({
+          ...item,
+          finalPrice,
+          totalPrice: finalPrice * item.cantidad
+        })
+      } else {
+        carritoParaPintar[found].cantidad += item.cantidad
+        carritoParaPintar[found].totalPrice += finalPrice * item.cantidad
+      }
+
+      // let plantilla = `<tr class="font-Urbanist_Regular ${index == (group.length - 1) && offering ? 'border-b-2' : ''}">
+      //     <td class="p-2 w-24">
+      //       <img src="${appUrl}/${item.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
+      //     </td>
+
+      //     <td class="p-2">
+      //       <div class="flex flex-col mb-1">
+      //         <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
+      //           ${item.producto}
+      //         </p>
+      //         <span class="font-light text-[12px] text-[#151515]">${item.color} - ${item.peso}</span>
+      //       </div>
+      //       <div class="flex gap-2 items-center">
+      //         <div class="flex w-15 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md">
+      //           <button type="button" onClick="(deleteOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px]  py-0 flex justify-center items-center ">
+      //           <div><i class="fa-solid fa-minus text-xs"></i></div>
+      //           </button>
+      //           <div class="w-5 h-5 text-[14px] flex justify-center items-center">
+      //             <span  class="font-semibold text-sm">${item.cantidad}</span>
+      //           </div>
+      //           <button type="button" onClick="(addOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px] py-0  flex justify-center items-center ">
+      //             <div><i class="fa-solid fa-plus text-xs"></i></div>
+      //           </button>
+      //         </div>
+      //         <div class="text-[12px] text-[#151515] font-bold">
+      //         <span class="block">S/.${Number2Currency(item.precio)} c/u</span>
+      //         </div>
+              
+      //         </div>
+      //         ${item.discount ? `<span class="block text-[#c1272d] text-[12px] mt-1 truncate text-ellipsis">${item.discount.name}</span>` : ''}
+      //     </td>
+
+      //     <td class="p-2 text-end">
+      //       ${item.precio > finalPrice ? `<p class="text-[12px] text-[#acacac] line-through text-nowrap">S/ ${Number2Currency(item.precio * item.cantidad)}</p>` : ''}
+      //       <p class="font-semibold text-[14px] text-[#151515] text-nowrap">
+      //         S/ ${Number2Currency(finalPrice * item.cantidad)}
+      //       </p>
+      //       <button type="button" onClick="(deleteItem(${item.id} , ${item.isCombo}))" class="h-6 text-xl text-[#272727]">
+      //         <i class="fa fa-trash-alt"></i>
+      //       </button>
+      //     </td>
+
+      //   </tr>`
+
+      // itemsCarrito.append(plantilla)
+      // itemsCarritoCheck.append(plantilla)
+    }
+  }
+
+  let total = 0;
+
+  carritoParaPintar.forEach(item => {
+    total += item.totalPrice
+    let plantilla = `<tr class="font-Urbanist_Regular border-b">
           <td class="p-2 w-24">
-            <img src="${appUrl}/${element.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
+            <img src="${appUrl}/${item.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
           </td>
 
           <td class="p-2">
-            <div class="flex flex-col">
+            <div class="flex flex-col mb-1">
               <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
-                ${element.producto}
+                ${item.producto}
               </p>
-              <span class="font-semibold text-[12px] text-[#151515]">${element.color} - ${element.peso}</span>
+              <span class="font-light text-[12px] text-[#151515]">${item.color} - ${item.peso}</span>
             </div>
-            <div class="flex w-20 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md mt-1">
-              <button type="button" onClick="(deleteOnCarBtn(${element.id}, ${element.isCombo}))" class="w-6  py-0 flex justify-center items-center ">
-               <div><i class="fa-solid fa-minus text-xs"></i></div>
-              </button>
-              <div class="w-6 py-1 flex justify-center items-center">
-                <span  class="font-semibold text-sm">${element.cantidad}</span>
+            <div class="flex gap-2 items-center">
+              <div class="flex w-15 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md">
+                <button type="button" onClick="(deleteOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px]  py-0 flex justify-center items-center ">
+                <div><i class="fa-solid fa-minus text-xs"></i></div>
+                </button>
+                <div class="w-5 h-5 text-[14px] flex justify-center items-center">
+                  <span  class="font-semibold text-sm">${item.cantidad}</span>
+                </div>
+                <button type="button" onClick="(addOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px] py-0  flex justify-center items-center ">
+                  <div><i class="fa-solid fa-plus text-xs"></i></div>
+                </button>
               </div>
-              <button type="button" onClick="(addOnCarBtn(${element.id}, ${element.isCombo}))" class="w-6 py-0  flex justify-center items-center ">
-                <div><i class="fa-solid fa-plus text-xs"></i></div>
-              </button>
-            </div>
+              <div class="text-[12px] text-[#151515] font-bold">
+              <span class="block">S/.${Number2Currency(item.precio)} c/u</span>
+              </div>
+              
+              </div>
+              ${item.discount ? `<span class="block text-[#c1272d] text-[12px] mt-1 truncate text-ellipsis">${item.discount.name}</span>` : ''}
           </td>
 
           <td class="p-2 text-end">
-            ${element.precio > minPrice ? `<p class="text-[12px] text-[#acacac] line-through text-nowrap">S/ ${element.precio}</p>`: ''}
+            ${item.precio > item.finalPrice ? `<p class="text-[12px] text-[#acacac] line-through text-nowrap">S/ ${Number2Currency(item.precio * item.cantidad)}</p>` : ''}
             <p class="font-semibold text-[14px] text-[#151515] text-nowrap">
-              S/ ${minPrice.toFixed(2)}
+              S/ ${Number2Currency(item.totalPrice)}
             </p>
-            <button type="button" onClick="(deleteItem(${element.id} , ${element.isCombo}))" class="h-6 text-xl text-[#272727]">
+            <button type="button" onClick="(deleteItem(${item.id} , ${item.isCombo}))" class="h-6 text-xl text-[#272727]">
               <i class="fa fa-trash-alt"></i>
             </button>
           </td>
@@ -471,12 +635,77 @@ function PintarCarrito() {
 
     itemsCarrito.append(plantilla)
     itemsCarritoCheck.append(plantilla)
+  })
 
-  });
+  $('#itemsTotal').text(`S/. ${Number2Currency(total)} `)
+
+  // carrito.forEach(item => {
+
+  //   let offering = false;
+  //   let finalPrice = Math.min(Number(item.precio), Number(item.descuento));
+  //   if (item.discount) {
+  //     offering = true
+  //     finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
+  //   }
+
+  //   let plantilla = `<tr class=" font-Urbanist_Regular border-b">
+  //         <td class="p-2 w-24">
+  //           <img src="${appUrl}/${item.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
+  //         </td>
+
+  //         <td class="p-2">
+  //           <div class="flex flex-col mb-1">
+  //             <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
+  //               ${item.producto}
+  //             </p>
+  //             <span class="font-light text-[12px] text-[#151515]">${item.color} - ${item.peso}</span>
+  //           </div>
+  //           <div class="flex gap-2 items-center">
+  //             <div class="flex w-15 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md">
+  //               <button type="button" onClick="(deleteOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px]  py-0 flex justify-center items-center ">
+  //               <div><i class="fa-solid fa-minus text-xs"></i></div>
+  //               </button>
+  //               <div class="w-5 h-5 text-[14px] flex justify-center items-center">
+  //                 <span  class="font-semibold text-sm">${item.cantidad}</span>
+  //               </div>
+  //               <button type="button" onClick="(addOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px] py-0  flex justify-center items-center ">
+  //                 <div><i class="fa-solid fa-plus text-xs"></i></div>
+  //               </button>
+  //             </div>
+  //             ${offering ? '<span class="text-[#c1272d] text-[12px]">En promoción</span>' : ''}
+  //           </div>
+  //         </td>
+
+  //         <td class="p-2 text-end">
+  //           ${item.precio > finalPrice ? `<p class="text-[12px] text-[#acacac] line-through text-nowrap">S/ ${item.precio}</p>` : ''}
+  //           <p class="font-semibold text-[14px] text-[#151515] text-nowrap">
+  //             S/ ${finalPrice.toFixed(2)}
+  //           </p>
+  //           <button type="button" onClick="(deleteItem(${item.id} , ${item.isCombo}))" class="h-6 text-xl text-[#272727]">
+  //             <i class="fa fa-trash-alt"></i>
+  //           </button>
+  //         </td>
+
+  //       </tr>`
+
+  //   itemsCarrito.append(plantilla)
+  //   itemsCarritoCheck.append(plantilla)
+
+  // });
 
   mostrarTotalItems()
-  calcularTotal()
+  // calcularTotal()
 }
+
+function mostrarTotalItems() {
+  let articulos = Local.get('carrito')
+  let contarArticulos = articulos.reduce((total, articulo) => {
+    return total + articulo.cantidad;
+  }, 0);
+
+  $('#itemsCount').text(contarArticulos)
+}
+
 function calcularTotal() {
   let articulos = Local.get('carrito')
   let total = articulos.map(item => {
