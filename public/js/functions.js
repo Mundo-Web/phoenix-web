@@ -434,6 +434,31 @@ const Number2Currency = (number, currency = 'en-US') => {
     })
 }
 
+function generateDiscountArray(quantity, take, pay) {
+  const result = new Array(quantity).fill(0)
+  let remainingPay = pay
+  let currentTake = 0
+
+  for (let i = 0; i < quantity; i++) {
+    if (currentTake === take) {
+      currentTake = 0
+      remainingPay = pay
+    }
+
+    if (remainingPay >= 1) {
+      result[i] = 1
+      remainingPay -= 1
+    } else if (remainingPay > 0) {
+      result[i] = remainingPay
+      remainingPay = 0
+    }
+
+    currentTake++
+  }
+
+  return result.sort((a, b) => b - a)
+}
+
 function PintarCarrito() {
 
   let itemsCarrito = $('#itemsCarrito')
@@ -504,18 +529,43 @@ function PintarCarrito() {
   const carritoParaPintar = [];
 
   for (const group of carritoFinal) {
-    let cuota = group[0].discount?.take_product ?? null
-    const payment = group[0].discount?.payment_product ?? null
-    const countJust = (group.length * payment) / cuota
+    let cuota = Number(group[0].discount?.take_product ?? 0)
+    const payment = Number(group[0].discount?.payment_product ?? 0)
+    const cantidadTotal = Math.sum(...group.map(x => x.cantidad))
+    let discountArray = generateDiscountArray(cantidadTotal, cuota, payment)
+    let iterator = 0
+
+    console.log({
+      cantidadTotal,
+      cuota,
+      payment,
+      discountArray
+    })
+
     for (const index in group) {
       const item = group[index]
 
       let finalPrice = Math.min(...[Number(item.precio), Number(item.descuento)].filter(Boolean));
+      let totalPrice = finalPrice * item.cantidad
       if (item.discount) {
         if (item.discount.type_id == 1) {
-          finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
+          if (item.discount.apply_to == 'self') {
+            finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
+            totalPrice = finalPrice * item.cantidad
+          } else if (item.discount.apply_to == 'lower') {
+            finalPrice = 0
+            totalPrice = 0
+            for (let index = 0; index < item.cantidad; index++) {
+              const cobrar = discountArray[iterator]
+              console.log(item.producto, ':', cobrar)
+              finalPrice += item.precio * cobrar / item.cantidad
+              totalPrice += item.precio * cobrar
+              iterator++
+            }
+          }
         } else {
           finalPrice = (item.precio * payment) / 100
+          totalPrice = finalPrice * item.cantidad
         }
       }
 
@@ -526,59 +576,12 @@ function PintarCarrito() {
         carritoParaPintar.push({
           ...item,
           finalPrice,
-          totalPrice: finalPrice * item.cantidad
+          totalPrice
         })
       } else {
         carritoParaPintar[found].cantidad += item.cantidad
-        carritoParaPintar[found].totalPrice += finalPrice * item.cantidad
+        carritoParaPintar[found].totalPrice += totalPrice
       }
-
-      // let plantilla = `<tr class="font-Urbanist_Regular ${index == (group.length - 1) && offering ? 'border-b-2' : ''}">
-      //     <td class="p-2 w-24">
-      //       <img src="${appUrl}/${item.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
-      //     </td>
-
-      //     <td class="p-2">
-      //       <div class="flex flex-col mb-1">
-      //         <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
-      //           ${item.producto}
-      //         </p>
-      //         <span class="font-light text-[12px] text-[#151515]">${item.color} - ${item.peso}</span>
-      //       </div>
-      //       <div class="flex gap-2 items-center">
-      //         <div class="flex w-15 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md">
-      //           <button type="button" onClick="(deleteOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px]  py-0 flex justify-center items-center ">
-      //           <div><i class="fa-solid fa-minus text-xs"></i></div>
-      //           </button>
-      //           <div class="w-5 h-5 text-[14px] flex justify-center items-center">
-      //             <span  class="font-semibold text-sm">${item.cantidad}</span>
-      //           </div>
-      //           <button type="button" onClick="(addOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px] py-0  flex justify-center items-center ">
-      //             <div><i class="fa-solid fa-plus text-xs"></i></div>
-      //           </button>
-      //         </div>
-      //         <div class="text-[12px] text-[#151515] font-bold">
-      //         <span class="block">S/.${Number2Currency(item.precio)} c/u</span>
-      //         </div>
-
-      //         </div>
-      //         ${item.discount ? `<span class="block text-[#c1272d] text-[12px] mt-1 truncate text-ellipsis">${item.discount.name}</span>` : ''}
-      //     </td>
-
-      //     <td class="p-2 text-end">
-      //       ${item.precio > finalPrice ? `<p class="text-[12px] text-[#acacac] line-through text-nowrap">S/ ${Number2Currency(item.precio * item.cantidad)}</p>` : ''}
-      //       <p class="font-semibold text-[14px] text-[#151515] text-nowrap">
-      //         S/ ${Number2Currency(finalPrice * item.cantidad)}
-      //       </p>
-      //       <button type="button" onClick="(deleteItem(${item.id} , ${item.isCombo}))" class="h-6 text-xl text-[#272727]">
-      //         <i class="fa fa-trash-alt"></i>
-      //       </button>
-      //     </td>
-
-      //   </tr>`
-
-      // itemsCarrito.append(plantilla)
-      // itemsCarritoCheck.append(plantilla)
     }
   }
 
