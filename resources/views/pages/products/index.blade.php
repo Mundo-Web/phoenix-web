@@ -429,7 +429,7 @@
         cellTemplate: (container, {
           data
         }) => {
-          container.html(`<b class="block">${}</b><small>${data.discount.name}</small>`)
+          container.html(`<b class="block">${data.producto}</b><small>${data.discount?.name ?? ''}</small>`)
         }
       },
       {
