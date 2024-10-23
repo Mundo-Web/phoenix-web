@@ -425,7 +425,12 @@
     columns: [{
         dataField: 'producto',
         caption: 'PRODUCTO',
-        width: '40%'
+        width: '40%',
+        cellTemplate: (container, {
+          data
+        }) => {
+          container.html(`<b class="block">${}</b><small>${data.discount.name}</small>`)
+        }
       },
       {
         dataField: 'precio',
