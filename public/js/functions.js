@@ -506,19 +506,16 @@ function PintarCarrito() {
   for (const group of carritoFinal) {
     let cuota = group[0].discount?.take_product ?? null
     const payment = group[0].discount?.payment_product ?? null
+    const countJust = (group.length * payment) / cuota
     for (const index in group) {
       const item = group[index]
 
-      let offering = false;
-      let flag = ''
       let finalPrice = Math.min(Number(item.precio), Number(item.descuento));
       if (item.discount) {
-        offering = true
         if (item.discount.type_id == 1) {
           finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
         } else {
           finalPrice = (item.precio * payment) / 100
-          flag = '-' + Math.round(100 - payment) + '%'
         }
       }
 
@@ -563,7 +560,7 @@ function PintarCarrito() {
       //         <div class="text-[12px] text-[#151515] font-bold">
       //         <span class="block">S/.${Number2Currency(item.precio)} c/u</span>
       //         </div>
-              
+
       //         </div>
       //         ${item.discount ? `<span class="block text-[#c1272d] text-[12px] mt-1 truncate text-ellipsis">${item.discount.name}</span>` : ''}
       //     </td>
