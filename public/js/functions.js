@@ -535,13 +535,6 @@ function PintarCarrito() {
     let discountArray = generateDiscountArray(cantidadTotal, cuota, payment)
     let iterator = 0
 
-    console.log({
-      cantidadTotal,
-      cuota,
-      payment,
-      discountArray
-    })
-
     for (const index in group) {
       const item = group[index]
 
@@ -557,7 +550,6 @@ function PintarCarrito() {
             totalPrice = 0
             for (let index = 0; index < item.cantidad; index++) {
               const cobrar = discountArray[iterator]
-              console.log(item.producto, ':', cobrar)
               finalPrice += item.precio * cobrar / item.cantidad
               totalPrice += item.precio * cobrar
               iterator++
