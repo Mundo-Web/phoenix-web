@@ -9,16 +9,11 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
   const handleColorClick = (colorImage) => {
     setMainImage(colorImage);
   };
-  
-  console.log(mainImage);
 
   const category = item.category;
   const tags = item.tags;
   const colors = item.colors;
   const marcas = item.marcas;
-
-  
-  console.log(colors);
 
   return (
     <div
@@ -120,6 +115,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
               {item.producto}
             </h2>
           </Tippy>
+          <span className='text-[12px]'>{item.color} - {item.peso}</span>
         
           {
             is_reseller ?
