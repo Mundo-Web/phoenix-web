@@ -510,7 +510,7 @@ function PintarCarrito() {
     for (const index in group) {
       const item = group[index]
 
-      let finalPrice = Math.min(Number(item.precio), Number(item.descuento));
+      let finalPrice = Math.min(...[Number(item.precio), Number(item.descuento)].filter(Boolean));
       if (item.discount) {
         if (item.discount.type_id == 1) {
           finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
