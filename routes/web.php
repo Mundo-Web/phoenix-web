@@ -77,10 +77,10 @@ Route::get('/libro-de-reclamaciones', [IndexController::class, 'librodereclamaci
 Route::get('/blog/{filtro}', [IndexController::class, 'blog'])->name('blog');
 Route::get('/post/{id}', [IndexController::class, 'detalleBlog'])->name('detalleBlog');
 /* Proceso de pago */
-Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
-Route::get('/pago', [IndexController::class, 'pago'])->name('pago');
+
+Route::post('/agradecimiento', [IndexController::class, 'agradecimiento'])->name('agradecimiento');
+
 Route::post('/procesar/pago', [IndexController::class, 'procesarPago'])->name('procesar.pago');
-Route::get('/agradecimiento', [IndexController::class, 'agradecimiento'])->name('agradecimiento');
 /* Catálogo y producto */
 Route::get('/producto/{id}', [IndexController::class, 'producto'])->name('producto');
 // Route::get('/catalogo', [IndexController::class, 'catalogo'])->name('catalogo.all');
@@ -252,12 +252,12 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::resource('/banners', BannersController::class);
         Route::post('/banners/deleteBanner', [BannersController::class, 'deleteBanner'])->name('banners.deleteBanner');
         Route::post('/banners/updateVisible', [BannersController::class, 'updateVisible'])->name('banner.updateVisible');
-      
+
         Route::resource('/popup', PopupController::class);
         Route::post('/popup/deleteBanner', [PopupController::class, 'deleteBanner'])->name('popup.deleteBanner');
         Route::post('/popup/updateVisible', [PopupController::class, 'updateVisible'])->name('popup.updateVisible');
 
-        Route::get('/subscripciones', [NewsletterSubscriberController::class, 'showSubscripciones'])->name('subscripciones') ;
+        Route::get('/subscripciones', [NewsletterSubscriberController::class, 'showSubscripciones'])->name('subscripciones');
 
         Route::fallback(function () {
             return view('pages/utility/404');
@@ -267,7 +267,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
 
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-
+    Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
+    Route::get('/pago/{code}', [IndexController::class, 'pago'])->name('pago');
     Route::get('/micuenta', [IndexController::class, 'micuenta'])->name('micuenta');
     Route::get('/micuenta/pedidos', [IndexController::class, 'pedidos'])->name('pedidos');
     Route::get('/micuenta/direccion', [IndexController::class, 'direccion'])->name('direccion');
@@ -280,5 +281,4 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     Route::post('/micuenta/actualizarPerfil', [IndexController::class, 'actualizarPerfil'])->name('actualizarPerfil');
     Route::post('/micuenta/wishList', [IndexController::class, 'wishListAdd'])->name('wishlist.store');
-
 });

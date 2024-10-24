@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Sale;
 use App\Http\Classes\dxResponse;
 use App\Models\dxDataGrid;
+use App\Models\Price;
+use App\Models\Products;
+use App\Models\SaleDetail;
 use App\Models\Status;
 use App\Models\User;
 use SoDe\Extend\JSON;
@@ -23,6 +26,75 @@ class SaleController extends Controller
         $statuses = Status::all();
         return view('pages.pedidos.index')
             ->with('statuses', $statuses);
+    }
+
+    public function save(Request $request)
+    {
+        $response = Response::simpleTryCatch(function () use ($request) {
+            $user = Auth::user();
+            
+            $cart = ProductsController::process($request->cart);
+            $address = $request->address;
+            $priceJpa = Price::find($address['price_id'] ?? null);
+
+            $delivery = 0;
+            if ($priceJpa) {
+                $delivery = $priceJpa->price;
+            }
+
+            $microtime = microtime(true);
+            $fechaActual = date('YmdHis');
+            $microsegundos = sprintf("%06d", ($microtime - floor($microtime)) * 1000000);
+            $orderId = $fechaActual . $microsegundos;
+
+            $saleJpa = new Sale();
+            $saleJpa->code = $orderId;
+            $saleJpa->name = $user->name;
+            $saleJpa->lastname = $user->lastname ?? '-';
+            $saleJpa->email = $user->email;
+            $saleJpa->phone = $user->phone ?? '-';
+            $saleJpa->address_department = $address['department'] ?? '-';
+            $saleJpa->address_province = $address['province'] ?? '-';
+            $saleJpa->address_district = $address['district'] ?? '-';
+            $saleJpa->address_price = $delivery;
+            $saleJpa->address_street = $address['street'] ?? '-';
+            $saleJpa->address_number = $address['number'] ?? '-';
+            $saleJpa->address_description = $address['description'] ?? '-';
+            $saleJpa->total = array_sum(array_map(fn($item) => $item['totalPrice'], $cart));
+            $saleJpa->status_id = 1;
+            $saleJpa->status_message = 'La orden ha sido creada - Aún no se ha realizado un pago';
+            $saleJpa->save();
+
+            foreach ($cart as $item) {
+                $detailJpa = new SaleDetail();
+                $detailJpa->sale_id = $saleJpa->id;
+                $detailJpa->product_image = $item['imagen'];
+                $detailJpa->product_name = $item['producto'];
+                $detailJpa->quantity = $item['cantidad'];
+                $detailJpa->price = $item['precio'];
+                $detailJpa->final_price = $item['totalPrice'];
+                $detailJpa->product_color = $item['color'];
+                $detailJpa->talla = $item['peso'];
+                $detailJpa->save();
+            }
+            return $saleJpa;
+        });
+
+        return \response($response->toArray(), $response->status);
+    }
+
+    public function updateBilling(Request $request) {
+        $response = Response::simpleTryCatch(function () use ($request) {
+            $saleJpa = Sale::where('code', $request->ordenId)->first();
+            $saleJpa->phone = $request->phone;
+            $saleJpa->tipo_comprobante = $request->billing_type;
+            $saleJpa->doc_number = $request->billing_number;
+            $saleJpa->razon_fact = $request->billing_name;
+            $saleJpa->direccion_fact = $request->billing_address;
+            $saleJpa->save();
+        });
+
+        return response($response->toArray(), $response->status);
     }
 
     public function paginate(Request $request): HttpResponse|ResponseFactory

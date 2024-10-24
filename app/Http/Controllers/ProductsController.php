@@ -55,39 +55,39 @@ class ProductsController extends Controller
     // dump($user->hasRole('Reseller'));
 
     $user = false;
-   
 
-    
-    
+
+
+
     $response =  new dxResponse();
     try {
       $instance = Products::select([
         DB::raw('DISTINCT products.*')
       ])
-        ->with(['category', 'tags', 'marcas' ,'colors', 'discount'])
+        ->with(['category', 'tags', 'marcas', 'colors', 'discount'])
         ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
         ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
         ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id')
-        ->leftJoin('categories', 'categories.id', 'products.categoria_id') 
+        ->leftJoin('categories', 'categories.id', 'products.categoria_id')
         ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
         // ->whereIn('products.id', function($query) {
         //   $query->select(DB::raw('MIN(id)'))  
         //         ->from('products')
         //         ->groupBy('producto');  
         // })
-        ->where('categories.visible', 1); 
-        
-        
-       
+        ->where('categories.visible', 1);
 
-        if(Auth::check()){
-          $user = Auth::user();
-          $user = $user->hasRole('Reseller');
-          if ($user) { // Cambia 'admin' por el rol que deseas validar
-            $instance->where('products.precio_reseller', '>', 0);
-         }
+
+
+
+      if (Auth::check()) {
+        $user = Auth::user();
+        $user = $user->hasRole('Reseller');
+        if ($user) { // Cambia 'admin' por el rol que deseas validar
+          $instance->where('products.precio_reseller', '>', 0);
         }
-        
+      }
+
 
       if ($request->group != null) {
         [$grouping] = $request->group;
@@ -117,7 +117,7 @@ class ProductsController extends Controller
         $instance->orderBy('products.id', 'DESC');
       }
 
-      
+
 
 
       $totalCount = 0;
@@ -146,7 +146,7 @@ class ProductsController extends Controller
       $response->message = 'Operación correcta';
       $response->data = $jpas;
       $response->totalCount = $totalCount;
-      $response->is_proveedor = $user ; 
+      $response->is_proveedor = $user;
     } catch (\Throwable $th) {
       $response->status = 400;
       $response->message = $th->getMessage() . " " . $th->getFile() . ' Ln.' . $th->getLine();
@@ -250,7 +250,7 @@ class ProductsController extends Controller
     $descuentos = Discount::where("status", "=", true)->get();
     $galery = [];
     $especificacion = [json_decode('{"tittle":"", "specifications":""}', false)];
-    return view('pages.products.save', compact('descuentos','product', 'marcas', 'atributos', 'valorAtributo', 'categoria', 'tags', 'especificacion', 'subcategories', 'galery'));
+    return view('pages.products.save', compact('descuentos', 'product', 'marcas', 'atributos', 'valorAtributo', 'categoria', 'tags', 'especificacion', 'subcategories', 'galery'));
   }
 
   public function edit(string $id)
@@ -269,7 +269,7 @@ class ProductsController extends Controller
     $valoresdeatributo = AttributeProductValues::where("product_id", "=", $id)->get();
     $galery = Galerie::where("product_id", "=", $id)->get();
 
-    return view('pages.products.save', compact('descuentos','product', 'marcas', 'atributos', 'valorAtributo', 'tags', 'categoria', 'especificacion', 'subcategories', 'galery', 'valoresdeatributo'));
+    return view('pages.products.save', compact('descuentos', 'product', 'marcas', 'atributos', 'valorAtributo', 'tags', 'categoria', 'especificacion', 'subcategories', 'galery', 'valoresdeatributo'));
   }
 
   private function saveImg(Request $request, string $field)
@@ -308,7 +308,7 @@ class ProductsController extends Controller
       return null;
     } catch (\Throwable $th) {
       //throw $th;
-      
+
     }
   }
 
@@ -317,11 +317,11 @@ class ProductsController extends Controller
    */
   public function store(Request $request)
   {
-    
+
     try {
       $especificaciones = [];
       $data = $request->all();
-      
+
       $atributos = null;
       $tagsSeleccionados = $request->input('tags_id');
       // $valorprecio = $request->input('precio') - 0.1;
@@ -372,7 +372,7 @@ class ProductsController extends Controller
       });
 
       if (!isset($cleanedData['stock'])) {
-         $cleanedData['stock'] = 0 ;
+        $cleanedData['stock'] = 0;
       }
 
       if (!isset($cleanedData['discount_id']) || $cleanedData['discount_id'] === '') {
@@ -436,8 +436,7 @@ class ProductsController extends Controller
 
       return redirect()->route('products.index')->with('success', 'Publicación creado exitosamente.');
     } catch (\Throwable $th) {
-       dump($th->getMessage());
-      
+      // dump($th->getMessage());
     }
   }
 
@@ -652,5 +651,187 @@ class ProductsController extends Controller
       $field => $status
     ]);
     return response()->json(['message' => 'registro actualizado']);
+  }
+
+  private static function generateDiscountArray($quantity, $take, $pay)
+  {
+    $result = array_fill(0, $quantity, 0);
+    $remainingPay = $pay;
+    $currentTake = 0;
+
+    for ($i = 0; $i < $quantity; $i++) {
+      if ($currentTake === $take) {
+        $currentTake = 0;
+        $remainingPay = $pay;
+      }
+
+      if ($remainingPay >= 1) {
+        $result[$i] = 1;
+        $remainingPay -= 1;
+      } elseif ($remainingPay > 0) {
+        $result[$i] = $remainingPay;
+        $remainingPay = 0;
+      }
+
+      $currentTake++;
+    }
+
+    // Ordenar el resultado en orden descendente
+    rsort($result);
+
+    return $result;
+  }
+
+
+  public static function process(array $cart = [])
+  {
+    $ids = array_map(fn($item) => $item['id'], $cart);
+
+    $productsJpa = Products::with(['discount'])
+      ->whereIn('id', $ids)
+      ->get();
+
+    $cartSameDiscount = [];
+    $cartDiffDiscount = [];
+    $cartWODiscount = [];
+
+    $cart2process = [];
+    $discounts2Process = [];
+
+    foreach ($productsJpa as $productJpa) {
+      $product = $productJpa->toArray();
+      $item = array_filter($cart, fn($cartItem) => $cartItem['id'] == $product['id']);
+      $item = reset($item);
+      if (!$product['discount']) {
+        $cartWODiscount[] = array_merge($product, [
+          'cantidad' => $item['cantidad']
+        ]);
+        continue;
+      }
+      $quantityGroup = $item['cantidad'] % $product['discount']['take_product'];
+      $quantityWOGroup = $item['cantidad'] - $quantityGroup;
+      if ($quantityWOGroup != 0) {
+        $cartSameDiscount[] = array_merge($product, [
+          'cantidad' => $quantityWOGroup
+        ]);
+      }
+      if ($item['cantidad'] - $quantityWOGroup != 0) {
+        if (!in_array($product['discount'], $discounts2Process)) {
+          $discounts2Process[] = $product['discount'];
+        }
+        $suelto = $item['cantidad'] - $quantityWOGroup;
+        $cart2process[] = array_merge($product, [
+          'cantidad' => $suelto
+        ]);
+      }
+    }
+
+    foreach ($discounts2Process as $discount) {
+      // Filtrar productos que tienen el mismo descuento y ordenarlos por precio
+      $products = array_filter($cart2process, fn($item) => $item['discount']['id'] == $discount['id']);
+
+      // Ordenar los productos por precio (de mayor a menor)
+      usort($products, fn($a, $b) => $b['precio'] <=> $a['precio']);
+
+      // Total de productos con el mismo descuento
+      $totalByDiscount = array_sum(array_map(fn($x) => $x['cantidad'], $products));
+
+      if ($totalByDiscount >= $discount['take_product']) {
+        $modulo = $totalByDiscount % $discount['take_product'];
+        $descuentoDistintoProducto = []; // Productos que forman parte del descuento
+        $cuota = $totalByDiscount - $modulo; // Total de productos a procesar para el descuento
+
+        foreach ($products as $item) {
+          $cantidadPorProducto = $cuota >= $item['cantidad'] ? $item['cantidad'] : $cuota;
+
+          if ($cuota >= $item['cantidad']) {
+            // Si la cuota cubre la cantidad del producto, se añade al grupo con descuento
+            $descuentoDistintoProducto[] = array_merge($item, ['cantidad' => $cantidadPorProducto]);
+          } else {
+            // Si no, parte va con descuento y parte sin descuento
+            $descuentoDistintoProducto[] = array_merge($item, ['cantidad' => $cuota]);
+            $cartWODiscount[] = array_merge($item, [
+              'cantidad' => $item['cantidad'] - $cuota,
+              'discount' => null
+            ]);
+          }
+          // Reducir la cuota según la cantidad procesada
+          $cuota -= $cantidadPorProducto;
+        }
+
+        // Añadir productos procesados con descuento
+        $cartDiffDiscount[] = $descuentoDistintoProducto;
+      } else {
+        // Si no se alcanza el mínimo para el descuento, todos van sin descuento
+        foreach ($products as $product) {
+          $cartWODiscount[] = array_merge($product, ['discount' => null]);
+        }
+      }
+    }
+
+    // Combinar los tres arreglos en un solo carrito final
+    $cartFinal = array_merge(
+      array_map(fn($x) => [$x], $cartSameDiscount),
+      $cartDiffDiscount,
+      array_map(fn($x) => [$x], $cartWODiscount)
+    );
+
+    $cartToDraw = [];
+
+    foreach ($cartFinal as $group) {
+      $cuota = isset($group[0]['discount']['take_product']) ? (float) $group[0]['discount']['take_product'] : 0;
+      $payment = isset($group[0]['discount']['payment_product']) ? (float) $group[0]['discount']['payment_product'] : 0;
+      $cantidadTotal = array_sum(array_map(fn($x) => $x['cantidad'], $group));
+
+      // Generar un arreglo de descuento (presumo que tienes una función `generateDiscountArray` en PHP)
+      $discountArray = ProductsController::generateDiscountArray($cantidadTotal, $cuota, $payment);
+
+      $iterator = 0;
+
+      foreach ($group as $index => $item) {
+        // Calcular el precio final y total
+        $finalPrice = min(array_filter([floatval($item['precio']), floatval($item['descuento'])]));
+        $totalPrice = $finalPrice * $item['cantidad'];
+
+        if (isset($item['discount'])) {
+          if ($item['discount']['type_id'] == 1) {
+            if ($item['discount']['apply_to'] == 'self') {
+              $finalPrice = ($item['precio'] * $item['discount']['payment_product']) / $item['discount']['take_product'];
+              $totalPrice = $finalPrice * $item['cantidad'];
+            } elseif ($item['discount']['apply_to'] == 'lower') {
+              $finalPrice = 0;
+              $totalPrice = 0;
+
+              for ($i = 0; $i < $item['cantidad']; $i++) {
+                $cobrar = $discountArray[$iterator];
+                $finalPrice += $item['precio'] * $cobrar / $item['cantidad'];
+                $totalPrice += $item['precio'] * $cobrar;
+                $iterator++;
+              }
+            }
+          } else {
+            $finalPrice = ($item['precio'] * $payment) / 100;
+            $totalPrice = $finalPrice * $item['cantidad'];
+          }
+        }
+
+        $cuota -= $item['cantidad'];
+
+        // Verificar si el item ya está en el carrito para pintar, si no, añadirlo
+        $foundIndex = array_search($item['id'], array_column($cartToDraw, 'id'));
+
+        if ($foundIndex === false) {
+          $cartToDraw[] = array_merge($item, [
+            'finalPrice' => $finalPrice,
+            'totalPrice' => $totalPrice
+          ]);
+        } else {
+          $cartToDraw[$foundIndex]['cantidad'] += $item['cantidad'];
+          $cartToDraw[$foundIndex]['totalPrice'] += $totalPrice;
+        }
+      }
+    }
+
+    return $cartToDraw;
   }
 }

@@ -72,4 +72,9 @@
     </section>
   </main>
 
+  <script>
+    Local.delete('carrito')
+    Local.delete('address')
+  </script>
+
 @stop

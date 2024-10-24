@@ -1,8 +1,118 @@
 @extends('components.public.matrix', ['pagina' => ''])
 
+<script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
+  kr-public-key="{{ env('IZIPAY_PUBLIC_KEY') }}"
+  kr-post-url-success="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}"></script>
+
+<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic-reset.min.css">
+<script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script>
+
+<style type="text/css">
+  /* to choice the embedded size */
+  .kr-embedded {
+    width: 33% !important;
+  }
+
+  /* to use the CSS Flexbox (Flexible Box) */
+  .kr-embedded .flex-container {
+    flex-direction: row !important;
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+  }
+
+  /* to have the email field  the same width as the KR fields */
+  .kr-embedded .flex-container .kr-email {
+    width: 100%;
+  }
+
+  /* to center the button with the class kr-payment-button */
+  .kr-embedded .kr-payment-button {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: 100%;
+    /* border-color: rgb(42, 210, 201) !important; */
+    color: #fff !important;
+    border-radius: 92px;
+    padding: 10px;
+    margin: 17px;
+    background-color: black !important;
+  }
+
+  .kr-popin-button {
+    color: #ffffff !important;
+    background-color: black !important;
+    border-radius: 92px;
+  }
+
+  @media (max-width: 700px) {
+
+    /* Coloca aquí tus reglas CSS específicas para pantallas pequeñas */
+    .kr-field-element .kr-pan {
+      /* Asegura que cada hijo tome un tercio del ancho del contenedor */
+      flex: none !important;
+      /* Añade algo de espacio entre los elementos si es necesario */
+      margin: 0 5px !important;
+    }
+
+    .kr-embedded .flex-container {
+      flex-direction: column !important;
+
+      justify-content: space-between;
+      width: 100%;
+      display: flex;
+      gap: 5px;
+
+      /* Hace que los elementos se apilen verticalmente */
+
+      /* Añade espacio entre los elementos */
+
+    }
+
+    .kr-field-element {
+      width: 100%;
+      /* Asegura que los elementos ocupen todo el ancho disponible */
+      min-height: 40px;
+      /* Aumenta la altura para facilitar la interacción */
+    }
+
+    .kr-field-element.kr-pan,
+    .kr-field-element.kr-expiry,
+    .kr-field-element.kr-security-code {
+      font-size: 16px;
+      /* Aumenta el tamaño de la fuente para mejorar la legibilidad */
+    }
+
+    /* Ajustes específicos para los elementos de tamaño medio */
+    .kr-field-element.kr-size-half {
+      width: 100%;
+      /* En dispositivos móviles, usa todo el ancho en lugar de la mitad */
+    }
+
+
+  }
+
+  .kr-card-form {
+
+    min-width: 300px !important;
+  }
+
+  .kr-popin-modal-header-background-image {
+    background-color: #000 !important;
+  }
+  .kr-popin-modal-header > span.kr-popin-shop-name > span {
+    color: #fff !important;
+  }
+
+  
+</style>
+
 @section('css_importados')
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <script src="https://sandbox-checkout.izipay.pe/payments/v1/js/index.js"></script>
 
 @stop
 <style>
@@ -87,7 +197,8 @@
                       </div>
 
                       <div class="basis-2/3 flex flex-row gap-2 ">
-                        <input id="termsandconditions" type="checkbox" required class="border-2 rounded-sm w-5 h-5 text-[#c1272d] ring-0 focus:ring-0" />
+                        <input id="termsandconditions" type="checkbox" required
+                          class="border-2 rounded-sm w-5 h-5 text-[#c1272d] ring-0 focus:ring-0" />
                         <label for="termsandconditions" class="font-medium text-sm text-[#6C7275]">Estoy de acuerdo con
                           los <a class="font-bold" href="{{ route('terms_condition') }}" target="_blanck">terminos y
                             condiciones</a></label>
@@ -96,7 +207,7 @@
                     </div>
                   </div>
 
-                  <div class="flex flex-col gap-5 pb-10 w-full">
+                  {{-- <div class="flex flex-col gap-5 pb-10 w-full">
                     <h2 class="font-semibold text-xl tracking-wide text-[#151515]">
                       Dirección de envío
                     </h2>
@@ -267,7 +378,7 @@
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
 
 
 
@@ -305,7 +416,7 @@
             <div class="font-poppins flex flex-col gap-5">
               <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p class="font-normal text-[16px]">Envío</p>
-                <p id="precioEnvio" class="font-semibold text-[16px]">Gratis</p>
+                <p id="precioEnvio" class="font-semibold text-[16px]">S/. {{ $sale->address_price }}</p>
               </div>
 
               <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
@@ -320,7 +431,26 @@
               </div>
 
               <button id="btnPagar"
-                class="text-white bg-black tracking-wider w-full py-3 rounded-none cursor-pointer font-semibold text-lg inline-block text-center">Pagar</button>
+                class="text-white bg-black tracking-wider w-full py-3 rounded-none cursor-pointer font-semibold text-lg inline-block text-center">Validar datos</button>
+
+              <div id="contenedorIzypay" hidden>
+                <div class="flex justify-center content-center ">
+                  <div
+                    class="kr-embedded text-white bg-[#74A68D] w-full py-3 rounded-3xl cursor-pointer border-2 font-semibold text-[16px] inline-block text-center border-none"
+                    kr-popin kr-form-token="{{ $formToken }}">
+                    <div class="flex-container">
+                      <div class="kr-pan"> </div>
+                      <div class="kr-expiry"></div>
+                      <div class="kr-security-code"></div>
+                    </div>
+
+
+
+                    <button class="kr-payment-button"></button>
+                  </div>
+                </div>
+
+              </div>
             </div>
           </div>
         </div>
@@ -328,88 +458,87 @@
     </form>
   </main>
 
-  <script src="https://checkout.culqi.com/js/v4"></script>
   <script>
     $('#direccionContainer').fadeOut(0)
 
     const hasDefaultAddress = {{ $hasDefaultAddress ? 'true' : 'false' }};
-    Culqi.publicKey = "{{ $culqi_public_key }}";
+    // Culqi.publicKey = "{{ $culqi_public_key }}";
 
-    const culqi = async () => {
-      try {
-        const carrito = Local.get('carrito') ?? []
-        if (Culqi.token) {
-          const body = {
-            _token: $('[name="_token"]').val(),
-            cart: carrito.map((x) => ({
-              id: x.id,
-              quantity: x.cantidad,
-              isCombo: x.isCombo || false
-            })),
-            contact: {
-              name: $('#nombre').val(),
-              lastname: $('#apellidos').val(),
-              email: $('#email').val(),
-              phone: $('#celular').val(),
-              doc_number: $('#DNI').val() || $('#RUC').val(),
-              doc_type: $('#tipo-comprobante').val() ?? 'nota_venta',
-              razon_fact: $('#razonFact').val(),
-              direccion_fact: $('#direccionFact').val(),
+    // const culqi = async () => {
+    //   try {
+    //     const carrito = Local.get('carrito') ?? []
+    //     if (Culqi.token) {
+    //       const body = {
+    //         _token: $('[name="_token"]').val(),
+    //         cart: carrito.map((x) => ({
+    //           id: x.id,
+    //           quantity: x.cantidad,
+    //           isCombo: x.isCombo || false
+    //         })),
+    //         contact: {
+    //           name: $('#nombre').val(),
+    //           lastname: $('#apellidos').val(),
+    //           email: $('#email').val(),
+    //           phone: $('#celular').val(),
+    //           doc_number: $('#DNI').val() || $('#RUC').val(),
+    //           doc_type: $('#tipo-comprobante').val() ?? 'nota_venta',
+    //           razon_fact: $('#razonFact').val(),
+    //           direccion_fact: $('#direccionFact').val(),
 
 
-            },
-            address: null,
-            saveAddress: !Boolean($('#addresses').val()),
-            culqi: Culqi.token,
-            tipo_comprobante: $('#tipo-comprobante').val()
-          }
-          if ($('[name="envio"]:checked').val() == 'express') {
-            body.address = {
-              id: $('#distrito_id option:selected').attr('price-id'),
-              city: $('#distrito_id option:selected').text(),
-              street: $('#nombre_calle').val(),
-              number: $('#numero_calle').val(),
-              description: $('#direccion').val()
-            }
-          }
+    //         },
+    //         address: null,
+    //         saveAddress: !Boolean($('#addresses').val()),
+    //         culqi: Culqi.token,
+    //         tipo_comprobante: $('#tipo-comprobante').val()
+    //       }
+    //       if ($('[name="envio"]:checked').val() == 'express') {
+    //         body.address = {
+    //           id: $('#distrito_id option:selected').attr('price-id'),
+    //           city: $('#distrito_id option:selected').text(),
+    //           street: $('#nombre_calle').val(),
+    //           number: $('#numero_calle').val(),
+    //           description: $('#direccion').val()
+    //         }
+    //       }
 
-          const res = await fetch("{{ route('payment.culqi') }}", {
-            method: 'POST',
-            headers: {
-              'Content-type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          })
-          const data = await res.json()
-          if (!res.ok) throw new Error(data?.message ?? 'Ocurrio un error inesperado al generar el cargo')
+    //       const res = await fetch("{{ route('payment.culqi') }}", {
+    //         method: 'POST',
+    //         headers: {
+    //           'Content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(body)
+    //       })
+    //       const data = await res.json()
+    //       if (!res.ok) throw new Error(data?.message ?? 'Ocurrio un error inesperado al generar el cargo')
 
-          /* Swal.fire({
-            title: `Bien!!`,
-            text: `Se ha generado el cargo por S/. ${data.data.amount.toFixed(2)}`,
-            icon: "success",
-          }); */
+    //       /* Swal.fire({
+    //         title: `Bien!!`,
+    //         text: `Se ha generado el cargo por S/. ${data.data.amount.toFixed(2)}`,
+    //         icon: "success",
+    //       }); */
 
-          Local.delete('carrito')
+    //       Local.delete('carrito')
 
-          location.href = `/agradecimiento?code=${data.data.reference_code}`
+    //       location.href = `/agradecimiento?code=${data.data.reference_code}`
 
-        } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
-          const order = Culqi.order;
-          console.log('Se ha creado el objeto Order: ', order);
+    //     } else if (Culqi.order) { // ¡Objeto Order creado exitosamente!
+    //       const order = Culqi.order;
+    //       console.log('Se ha creado el objeto Order: ', order);
 
-        } else {
-          // Mostramos JSON de objeto error en consola
-          console.log('Error : ', Culqi.error);
-          throw new Error(Culqi.error.message);
-        }
-      } catch (error) {
-        Swal.fire({
-          title: `Error!!`,
-          text: error.message,
-          icon: "error",
-        });
-      }
-    }
+    //     } else {
+    //       // Mostramos JSON de objeto error en consola
+    //       console.log('Error : ', Culqi.error);
+    //       throw new Error(Culqi.error.message);
+    //     }
+    //   } catch (error) {
+    //     Swal.fire({
+    //       title: `Error!!`,
+    //       text: error.message,
+    //       icon: "error",
+    //     });
+    //   }
+    // }
 
 
     $(document).on('change', '#tipo-comprobante', function() {
@@ -486,7 +615,7 @@
 
     });
 
-    $('#paymentForm').on('submit', function(e) {
+    $('#paymentForm').on('submit', async function(e) {
       e.preventDefault();
 
       const precioProductos = getTotalPrice()
@@ -542,31 +671,25 @@
           return
         }
       }
-      const paymentMethods = { // las opciones se ordenan según se configuren
-        tarjeta: true,
-        yape: true,
-        billetera: true,
-        bancaMovil: true,
-        agente: true,
-        cuotealo: true,
-      }
 
-
-      Culqi.settings({
-        title: 'American Brands',
-        currency: 'PEN',
-        amount: Math.round((precioProductos + precioEnvio) * 100),
-      });
-      Culqi.options({
-        paymentMethods: paymentMethods,
-        paymentMethodsSort: Object.keys(paymentMethods),
-        style: {
-          logo: `${location.origin}/images/svg/isotipo.svg`,
-          bannerColor: '#272727'
-
-        }
+      const resSale = await fetch("{{route('sales.update')}}", {
+        method: 'PATCH',
+        headers: {
+          Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
+        },
+        body: JSON.stringify({
+          'ordenId': "{{$sale->code}}",
+          'phone': $('#celular').val(),
+          'billing_type': $('#tipo-comprobante option:selected').text(),
+          'billing_number': (ExisteDni ? $('#DNI').val(): $('#RUC').val()) || null,
+          'billing_name': $('#razonFact').val(),
+          'billing_address': $('#direccionFact').val()
+        })
       })
-      Culqi.open();
+      
+      $('#contenedorIzypay').fadeIn()
     })
 
     $('[name="envio"]').on('click', () => {
@@ -709,13 +832,15 @@
     }
 
     function calcularTotal() {
-      const precioProductos = getTotalPrice()
-      $('#itemSubtotal').text(`S/. ${precioProductos.toFixed(2)}`)
-      const precioEnvio = getCostoEnvio()
-      const total = precioProductos + precioEnvio
+      PintarCarrito()
 
-      $('#itemTotal').text(`S/. ${total.toFixed(2)} `)
-      $('#itemsTotal').text(`S/. ${total.toFixed(2)} `)
+      // const precioProductos = getTotalPrice()
+      // $('#itemSubtotal').text(`S/. ${precioProductos.toFixed(2)}`)
+      // const precioEnvio = getCostoEnvio()
+      // const total = precioProductos + precioEnvio
+
+      // $('#itemTotal').text(`S/. ${total.toFixed(2)} `)
+      // $('#itemsTotal').text(`S/. ${total.toFixed(2)} `)
     }
     const getTotalPrice = () => {
       const carrito = Local.get('carrito') ?? []
@@ -730,14 +855,12 @@
       return productPrice
     }
 
-    const getCostoEnvio = () => {
-      console.log('getcostoEnvio', $('[name="envio"]:checked').val());
-
-      if ($('[name="envio"]:checked').val() == 'recoger') return 0
-      const priceStr = $('#distrito_id option:selected').attr('data-price')
-      const price = Number(priceStr) || 0
-      return price
-    }
+    // const getCostoEnvio = () => {
+    //   if ($('[name="envio"]:checked').val() == 'recoger') return 0
+    //   const priceStr = $('#distrito_id option:selected').attr('data-price')
+    //   const price = Number(priceStr) || 0
+    //   return price
+    // }
   </script>
 
 

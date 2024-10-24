@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ExcelController;
+use App\Http\Controllers\IzipayController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,10 @@ Route::get('/offers/{id}', [OfferController::class, 'get'])->name('offers.get');
 
 Route::post('login-rev-api', [AuthController::class, 'login']);
 Route::post('signup', [AuthController::class, 'signup']);
+
+Route::post('/izipay/token', [IzipayController::class, 'token'])->name('izipay.token');
+Route::post('/sales', [SaleController::class, 'save'])->name('sales.save');
+Route::patch('/sales', [SaleController::class, 'updateBilling'])->name('sales.update');
 
 Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
 

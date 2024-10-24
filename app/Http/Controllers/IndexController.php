@@ -53,6 +53,7 @@ use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use phpseclib3\File\ASN1\Maps\AttributeValue;
+use SoDe\Extend\JSON;
 use SoDe\Extend\Response;
 
 use function PHPUnit\Framework\isNull;
@@ -69,14 +70,14 @@ class IndexController extends Controller
     $productos =  Products::with('tags')->get();
     $ultimosProductos = Products::select('products.*')->join('categories', 'products.categoria_id', '=', 'categories.id')->where('categories.visible', 1)->where('products.status', '=', 1)->where('products.visible', '=', 1)->orderBy('products.id', 'desc')->take(4)->get();
     $productosPupulares = Products::select('products.*')
-          ->join('categories', 'products.categoria_id', '=', 'categories.id')
-          ->where('categories.visible', 1)
-          ->where('products.status', '=', 1)
-          ->where('products.visible', '=', 1)
-          ->where('products.destacar', '=', 1)
-          ->orderBy('products.id', 'desc')
-          ->take(8)
-          ->get();
+      ->join('categories', 'products.categoria_id', '=', 'categories.id')
+      ->where('categories.visible', 1)
+      ->where('products.status', '=', 1)
+      ->where('products.visible', '=', 1)
+      ->where('products.destacar', '=', 1)
+      ->orderBy('products.id', 'desc')
+      ->take(8)
+      ->get();
     $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(3)->get();
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
@@ -102,7 +103,7 @@ class IndexController extends Controller
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
 
 
-    return view('public.index', compact('subcategorias','url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex','logos','logosdestacados'));
+    return view('public.index', compact('subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)
@@ -114,7 +115,7 @@ class IndexController extends Controller
     $subCatId = $request->input('subcategoria');
     $marcas_id = $request->input('marcas');
     $id_cat = $id_cat ?? $catId;
-    
+
     // $categories = Category::with('subcategories')->where('visible', true)->get();
     $categories = Category::with(['subcategories' => function ($query) {
       $query->whereHas('products');
@@ -123,7 +124,7 @@ class IndexController extends Controller
     $tags = Tag::where('visible', true)->where('status', true)->get();
 
     $marcas = ClientLogos::where('status', true)->get();
-    
+
     $minPrice = Products::select()
       ->where('visible', true)
       ->where('descuento', '>', 0)
@@ -142,8 +143,8 @@ class IndexController extends Controller
 
     return Inertia::render('Catalogo', [
       'component' => 'Catalogo',
-      'marcas'=> $marcas,
-      'marcas_id'=> $marcas_id,
+      'marcas' => $marcas,
+      'marcas_id' => $marcas_id,
       'minPrice' => $minPrice,
       'maxPrice' => $maxPrice,
       'categories' => $categories,
@@ -191,10 +192,11 @@ class IndexController extends Controller
       'id_cat' => $id_cat
     ])->rootView('app');
   }
-  public function nosotros(){
+  public function nosotros()
+  {
     $nosotros = AboutUs::all();
     $benefit = Strength::where('status', '=', 1)->take(3)->get();
-    return view('public.nosotros' , compact('nosotros','benefit'));
+    return view('public.nosotros', compact('nosotros', 'benefit'));
   }
 
 
@@ -241,10 +243,10 @@ class IndexController extends Controller
 
   public function buscarTalla(Request $request)
   {
-  
+
     $productId = $request->idproduct;
-    
-    $producto = Products::where('id','=',$productId)->get();
+
+    $producto = Products::where('id', '=', $productId)->get();
 
     return response()->json(
       [
@@ -268,17 +270,73 @@ class IndexController extends Controller
 
   public function carrito()
   {
-    //
+
+    $user = auth()->user();
+
+    $departments = Price::select([
+      'departments.id AS id',
+      'departments.description AS description',
+    ])
+      ->join('districts', 'districts.id', 'prices.distrito_id')
+      ->join('provinces', 'provinces.id', 'districts.province_id')
+      ->join('departments', 'departments.id', 'provinces.department_id')
+      ->where('departments.active', 1)
+      ->where('status', 1)
+      ->groupBy('id', 'description')
+      ->get();
+
+    $provinces = Price::select([
+      'provinces.id AS id',
+      'provinces.description AS description',
+      'provinces.department_id AS department_id'
+    ])
+      ->join('districts', 'districts.id', 'prices.distrito_id')
+      ->join('provinces', 'provinces.id', 'districts.province_id')
+      ->where('provinces.active', 1)
+      ->groupBy('id', 'description', 'department_id')
+      ->get();
+
+    $districts = Price::select([
+      'districts.id AS id',
+      'districts.description AS description',
+      'districts.province_id AS province_id',
+      'prices.id AS price_id',
+      'prices.price AS price'
+    ])
+      ->join('districts', 'districts.id', 'prices.distrito_id')
+      ->where('districts.active', 1)
+      ->groupBy('id', 'description', 'province_id', 'price', 'price_id')
+      ->get();
+
+    $addresses = [];
+    $hasDefaultAddress = false;
+    if (Auth::check()) {
+      $addresses = Address::with([
+        'price',
+        'price.district',
+        'price.district.province',
+        'price.district.province.department'
+      ])
+        ->where('email', $user->email)
+        ->get();
+      $hasDefaultAddress = Address::where('email', $user->email)
+        ->where('isDefault', true)
+        ->exists();
+    }
+
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
     $categorias = Category::all();
     $url_env = env('APP_URL');
-    return view('public.checkout_carrito', compact('url_env', 'categorias', 'destacados'));
+    return view('public.checkout_carrito', compact('url_env', 'categorias', 'destacados', 'districts', 'provinces', 'departments', 'addresses', 'hasDefaultAddress'));
   }
 
-  public function pago()
+  public function pago(Request $request, string $code)
   {
-    //
+
+    $sale = Sale::where('code', $code)->first();
+    if (!$sale) return \redirect()->route('index');
+
     $detalleUsuario = [];
     $user = auth()->user();
 
@@ -350,7 +408,9 @@ class IndexController extends Controller
         ->exists();
     }
 
-    return view('public.checkout_pago', compact('url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress'));
+    $formToken = IzipayController::token($sale);
+
+    return view('public.checkout_pago', compact('sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress', 'formToken'));
   }
 
   public function procesarPago(Request $request)
@@ -478,12 +538,29 @@ class IndexController extends Controller
 
   public function agradecimiento(Request $request)
   {
-    if (!$request->code) return redirect('/');
+
+    $body = $request->all();
+    $answer = JSON::parse($body['kr-answer']);
+
+    $saleJpa = Sale::where('code', $answer['orderDetails']['orderId'])->first();
+
+    if (!$saleJpa) return \redirect()->route('index');
+
+    if ($answer['orderStatus'] != 'PAID') {
+      $saleJpa->status_id = 2;
+      $saleJpa->status_message = 'Se ha rechazado la orden';
+      $saleJpa->save();
+      return \redirect()->route('index');
+    }
+
+    $saleJpa->status_id = 3;
+    $saleJpa->status_message = 'Pagado correctamente';
+    $saleJpa->save();
 
     $categorias = Category::all();
     return view('public.checkout_agradecimiento')
       ->with('categorias', $categorias)
-      ->with('code', $request->code);
+      ->with('code', $request->codigoCompra);
   }
 
   public function cambiofoto(Request $request)
@@ -660,13 +737,12 @@ class IndexController extends Controller
   public function producto(string $id)
   {
 
-    
-    $is_reseller = false; 
-    if(Auth::check()){
-     $user = Auth::user();
-     $is_reseller = $user->hasRole('Reseller');
-     
-   }
+
+    $is_reseller = false;
+    if (Auth::check()) {
+      $user = Auth::user();
+      $is_reseller = $user->hasRole('Reseller');
+    }
 
     // $productos = Products::where('id', '=', $id)->first();
     // $especificaciones = Specifications::where('product_id', '=', $id)->get();
@@ -719,14 +795,14 @@ class IndexController extends Controller
       ->groupBy('color')
       ->get();
 
-      $tallasdeProductos = Products::select()
+    $tallasdeProductos = Products::select()
       ->where('id', '<>', $id)  // Excluir el producto actual
       ->where('producto', $product->producto)  // Mismo tipo de producto
       ->where('color', $product->color)  // Mismo color que el producto actual
       ->whereNotNull('peso')  // Asegurarse de que la talla no sea nula
       ->get();
 
-   
+
     $galery = Galerie::where('product_id', $product->id)->get();
 
     $general = General::first();
@@ -1030,8 +1106,8 @@ class IndexController extends Controller
         </body>
       </html>
       ';
-      $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente', );
-      $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial', );
+      $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente',);
+      $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial',);
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
@@ -1199,8 +1275,8 @@ class IndexController extends Controller
         </body>
       </html>
       ';
-      $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente', );
-      $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial', );
+      $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente',);
+      $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial',);
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
@@ -1286,10 +1362,9 @@ class IndexController extends Controller
 
 
   public function help()
-  { 
+  {
     $faqs = Faqs::where('status', '=', 1)->where('visible', '=', 1)->get();
     $url_env = env('APP_URL');
-    return view('public.help', compact('url_env','faqs'));
+    return view('public.help', compact('url_env', 'faqs'));
   }
 }
-

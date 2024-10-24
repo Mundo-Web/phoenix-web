@@ -464,6 +464,9 @@ function PintarCarrito() {
   let itemsCarrito = $('#itemsCarrito')
   let itemsCarritoCheck = $('#itemsCarritoCheck')
 
+  itemsCarrito.empty()
+  itemsCarritoCheck.empty()
+
   const carrito = Local.get('carrito') ?? []
   const carritoDescuentoMismoProducto = []
   const carritoDescuentoDistintoProducto = []
@@ -629,64 +632,19 @@ function PintarCarrito() {
     itemsCarritoCheck.append(plantilla)
   })
 
-  $('#itemsTotal').text(`S/. ${Number2Currency(total)} `)
+  const costoEnvio = getCostoEnvio()
 
-  // carrito.forEach(item => {
-
-  //   let offering = false;
-  //   let finalPrice = Math.min(Number(item.precio), Number(item.descuento));
-  //   if (item.discount) {
-  //     offering = true
-  //     finalPrice = (item.precio * item.discount.payment_product) / item.discount.take_product
-  //   }
-
-  //   let plantilla = `<tr class=" font-Urbanist_Regular border-b">
-  //         <td class="p-2 w-24">
-  //           <img src="${appUrl}/${item.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
-  //         </td>
-
-  //         <td class="p-2">
-  //           <div class="flex flex-col mb-1">
-  //             <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
-  //               ${item.producto}
-  //             </p>
-  //             <span class="font-light text-[12px] text-[#151515]">${item.color} - ${item.peso}</span>
-  //           </div>
-  //           <div class="flex gap-2 items-center">
-  //             <div class="flex w-15 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md">
-  //               <button type="button" onClick="(deleteOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px]  py-0 flex justify-center items-center ">
-  //               <div><i class="fa-solid fa-minus text-xs"></i></div>
-  //               </button>
-  //               <div class="w-5 h-5 text-[14px] flex justify-center items-center">
-  //                 <span  class="font-semibold text-sm">${item.cantidad}</span>
-  //               </div>
-  //               <button type="button" onClick="(addOnCarBtn(${item.id}, ${item.isCombo}))" class="w-5 h-5 text-[14px] py-0  flex justify-center items-center ">
-  //                 <div><i class="fa-solid fa-plus text-xs"></i></div>
-  //               </button>
-  //             </div>
-  //             ${offering ? '<span class="text-[#c1272d] text-[12px]">En promoción</span>' : ''}
-  //           </div>
-  //         </td>
-
-  //         <td class="p-2 text-end">
-  //           ${item.precio > finalPrice ? `<p class="text-[12px] text-[#acacac] line-through text-nowrap">S/ ${item.precio}</p>` : ''}
-  //           <p class="font-semibold text-[14px] text-[#151515] text-nowrap">
-  //             S/ ${finalPrice.toFixed(2)}
-  //           </p>
-  //           <button type="button" onClick="(deleteItem(${item.id} , ${item.isCombo}))" class="h-6 text-xl text-[#272727]">
-  //             <i class="fa fa-trash-alt"></i>
-  //           </button>
-  //         </td>
-
-  //       </tr>`
-
-  //   itemsCarrito.append(plantilla)
-  //   itemsCarritoCheck.append(plantilla)
-
-  // });
+  $('#itemSubtotal').text(`S/. ${Number2Currency(total)}`)
+  $('#itemTotal').text(`S/. ${Number2Currency(total + costoEnvio)} `)
+  $('#itemsTotal').text(`S/. ${Number2Currency(total + costoEnvio)} `)
 
   mostrarTotalItems()
-  // calcularTotal()
+}
+
+const getCostoEnvio = () => {
+  const address = Local.get('address') ?? {}
+  if (address.envio == 'recoger') return 0
+  return Number(address.price ?? 0)
 }
 
 function mostrarTotalItems() {
@@ -713,7 +671,7 @@ function calcularTotal() {
   })
   const suma = total.reduce((total, elemento) => total + elemento, 0);
 
-  $('#itemsTotal').text(`S/. ${suma.toFixed(2)} `)
+  // $('#itemsTotal').text(`S/. ${suma.toFixed(2)} `)
   // console.log("tofixed  ", suma.toFixed(2))
 
 }
