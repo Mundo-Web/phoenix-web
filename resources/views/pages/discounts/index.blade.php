@@ -1,10 +1,10 @@
 <x-app-layout>
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
 
-    {{-- <section class="py-4 border-b border-slate-100 dark:border-slate-700">
+    <section class="py-4 border-b border-slate-100 dark:border-slate-700">
       <a href="{{ route('reglasDescuentos.create') }}"
         class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar descuento</a>
-    </section> --}}
+    </section>
 
 
     <div
