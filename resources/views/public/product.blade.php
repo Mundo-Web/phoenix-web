@@ -101,7 +101,7 @@
 
     <main class="font-Inter_Regular" id="mainSection">
         @csrf
-        <section class="w-full px-[5%]">
+        <section class="w-full px-[5%] pb-10 lg:pb-20">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-10  pt-8 lg:pt-16">
 
                 <div class="flex flex-row lg:col-span-3  justify-start items-center lg:items-start gap-2">
@@ -112,8 +112,10 @@
                     
                     <div id="containerProductosdetail"
                         class="w-4/5 flex justify-center items-center  aspect-square  overflow-hidden relative">
-                        <div class="absolute top-[20px] left-0 z-10 text-[14px] sm:text-base font-Urbanist_Regular text-center content-center gap-2 bg-[#c1272d] text-white px-3 lg:px-4 py-[2px] lg:py-1">
-                            -<span id="porcentajedescuento">50</span> % 
+                        <div id="descuento-container">
+                            <div  class="absolute top-[20px] left-0 z-10 text-[14px] sm:text-base font-Urbanist_Regular text-center content-center gap-2 bg-[#c1272d] text-white px-3 lg:px-4 py-[2px] lg:py-1">
+                                -<span id="porcentajedescuento">50</span> % 
+                            </div>
                         </div>
                         <div id="imagenProducto" class="w-full h-full">
                             <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain"
@@ -128,7 +130,7 @@
                 <div class="flex flex-col lg:col-span-2 gap-3">
 
                     @if ($product->marcas)
-                        <img src="{{ asset($product->marcas->url_image) }}" class="w-28 h-auto object-contain" />
+                        <img src="{{ asset($product->marcas->url_image) }}" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" class="w-28 h-auto object-contain" />
                     @endif
 
                     {{-- @foreach ($atributos as $item)
@@ -462,9 +464,9 @@
         </section>
 
 
-
+    @if (count($ProdComplementarios) > 0)
         <div class="px-[5%]">
-            <div class="h-1 border-b-[2px] border-b-[#cccccc] mt-16"></div>
+            <div class="h-1 border-b-[2px] border-b-[#cccccc]"></div>
         </div>
 
         <section class="bg-white py-10 lg:py-14">
@@ -472,16 +474,21 @@
                 <div class="flex flex-col">
                     <h1 class="text-3xl font-Urbanist_Bold text-center tracking-tight">PODRÍA GUSTARTE</h1>
                 </div>
-                <div class="grid grid-cols-4 gap-4 mt-14 w-full">
-                    @foreach ($ProdComplementarios->take(4) as $item)
-                        {{-- <x-product.container-combinalo width="" height="h-[400px]" bgcolor="bg-[#FFFFFF]"
-              textpx="text-[20px]" :item="$item" /> --}}
-                        <x-product.container width="col-span-1 " bgcolor="bg-[#FFFFFF]" :item="$item" />
-                    @endforeach
+                <div class="mt-12">
+                    <div class="swiper productos-relacionados h-max">
+                        <div class="swiper-wrapper">
+                            @foreach ($ProdComplementarios as $item)
+                                <div class="swiper-slide">
+                                    <x-product.container width="col-span-1 " bgcolor="bg-[#FFFFFF]" :item="$item" />
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-
+    @endif
+       
 
 
     </main>
@@ -586,6 +593,7 @@
              
               let porcentajeDescuento = 0;
               let seccionPrecioHTML = '';
+              let descuentoHTML = '';
 
               // Validar si hay descuento
               if (descuento > 0 && descuento < precio) {
@@ -603,6 +611,13 @@
                           -<span id="porcentajedescuento-value">${porcentajeDescuento}</span> %
                       </div>
                   `;
+
+                   descuentoHTML = `
+                        <div class="absolute top-[20px] left-0 z-10 text-[14px] sm:text-base font-Urbanist_Regular text-center content-center gap-2 bg-[#c1272d] text-white px-3 lg:px-4 py-[2px] lg:py-1">
+                            -<span id="porcentajedescuento">${porcentajeDescuento}</span> %
+                        </div>
+                    `;
+
               } else {
                   seccionPrecioHTML += `
                       <div class="content-center flex flex-row gap-2 items-center">
@@ -612,7 +627,13 @@
                       </div>
                   `;
               }
-  
+              
+                if (descuento > 0 && descuento < precio) {
+                    $('#descuento-container').html(descuentoHTML);
+                } else {
+                    $('#descuento-container').empty();
+                }     
+
               $('#seccionprecio').html(seccionPrecioHTML);
 
               if (Number(stock) > 0) {

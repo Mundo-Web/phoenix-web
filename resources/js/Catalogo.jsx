@@ -9,12 +9,12 @@ import arrayJoin from './Utils/ArrayJoin'
 import ProductCard from './components/Product/ProductCard'
 import { set } from 'sode-extend-react/sources/cookies'
 import axios from 'axios'
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 
 
 
-
-const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category, tag_id, subCatId, marcas, marcas_id }) => {
+const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_cat: selected_category, tag_id, subCatId, marcas, marcas_id, colores, sizes, media }) => {
   const take = 12
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState({});
@@ -23,7 +23,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
   const [showModal, setShowModal] = useState(false);
   const is_proveedor = useRef(false);
   const cancelTokenSource = useRef(null);
-
+ 
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "js/notify.extend.min.js";
@@ -39,7 +39,8 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
     // Leer el parámetro 'tag' de la URL
     const params = new URLSearchParams(window.location.search);
     const tag = params.get('tag');
-    const marcas = params.get('marcas');
+    //const color = params.get('color');
+    
 
     // Actualizar el filtro con el 'tag_id' si existe
     if (tag) {
@@ -50,12 +51,20 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
     }
 
     // Actualizar el filtro con el 'marcas_id' si existe
-    if (marcas) {
+    if (marcas_id) {
       setFilter(prevFilter => ({
         ...prevFilter,
-        'marca_id': [marcas]
+        'marca_id': [marcas_id]
       }));
     }
+
+    // if (color) {
+    //   setFilter(prevFilter => ({
+    //     ...prevFilter,
+    //     'color': [color]
+
+    //   }));
+    // }
 
     // Si hay una categoría seleccionada, agregarla al filtro
     if (selected_category) {
@@ -165,6 +174,36 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
       filterBody.push(marcasFilter);
     }
 
+
+
+    if (filter['color'] && filter['color'].length > 0) {
+      const coloresFilter = [];
+      filter['color'].forEach((x, i) => {
+        if (i === 0) {
+          coloresFilter.push(['color', '=', x]);
+        } else {
+          coloresFilter.push('or', ['color', '=', x]);
+        }
+      });
+      filterBody.push(coloresFilter);
+     
+    }
+
+
+    if (filter['peso'] && filter['peso'].length > 0) {
+      const sizesFilter = [];
+      filter['peso'].forEach((x, i) => {
+        if (i === 0) {
+          sizesFilter.push(['peso', '=', x]);
+        } else {
+          sizesFilter.push('or', ['peso', '=', x]);
+        }
+      });
+      filterBody.push(sizesFilter);
+     
+    }
+      
+
     for (const key in filter) {
       if (!key.startsWith('attribute-')) continue;
       if (filter[key].length === 0) continue;
@@ -268,7 +307,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
     <form className="flex flex-col lg:flex-row gap-6  mx-auto font-Helvetica_Light font-bold w-full p-5 lg:p-10">
       {/* sticky */}
       <section className="hidden lg:flex md:flex-col gap-4 md:basis-3/12 bg-white p-6 rounded-lg h-max top-2">
-        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} marcas={marcas} marcas_id={marcas_id} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} />
+        <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} marcas={marcas} marcas_id={marcas_id} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} colores={colores} sizes={sizes}/>
       </section>
       <section className="flex flex-col gap-6 md:basis-9/12">
         <div className="w-full bg-white rounded-lg font-medium flex flex-row justify-between items-center px-2 py-3">
@@ -295,8 +334,8 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
 
         </div>
 
-        <div className='flex flex-col gap-4 w-full bg-white p-6 rounded-lg top-2 overflow-y-auto mt-10' style={{ maxHeight: '90vh', maxWidth: "85vh" }}>
-          <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} />
+        <div className='flex flex-col gap-4 w-full bg-white p-6 rounded-lg top-2 overflow-y-auto mt-32' style={{ maxHeight: '90vh', maxWidth: "85vh" }}>
+          <FilterContainer setFilter={setFilter} filter={filter} minPrice={minPrice ?? 0} maxPrice={maxPrice ?? 0} categories={categories} tags={tags} attribute_values={Object.values(attributes)} selected_category={selected_category} tag_id={tag_id} colores={colores} sizes={sizes} marcas={marcas} marcas_id={marcas_id} />
         </div>
 
       </div>)}
@@ -304,47 +343,55 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
 
     </form>
     
-    <section className="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-              <h2 className="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
-              <span className="font-Urbanist_Regular italic"> @americanbrandspe </span></h2>
-        </section>
-
-        {/* <section class="w-full relative mx-auto pt-12 lg:pt-16">
-            <div class="swiper instagram h-max">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
-                            style=" background-image: url({imginstagram})">
-                        </div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                        </div>
-                    </div>  
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                        </div>
-                    </div>  
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                        </div>
-                    </div>  
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                        </div>
-                    </div>  
-                    <div class="swiper-slide">
-                        <div class="bg-no-repeat object-top bg-center bg-cover aspect-square flex flex-row  items-center"
-                            style=" background-image: url('{{ asset('images/img/banner_AB.png') }}')">
-                        </div>
-                    </div>       
-                </div>
-            </div>
-        </section> */}
+      <section className="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+                <h2 className="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
+                <span className="font-Urbanist_Regular italic"> @americanbrandspe </span></h2>
+      </section>
+      
+      <section className="w-full relative mx-auto pt-12 lg:pt-16">
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={5}
+          loop={true}
+          className="instagram h-max"
+        >
+          {media.slice(0, 6).map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative group aspect-square h-full">
+                {item.media_type === 'IMAGE' || item.media_type === 'CAROUSEL_ALBUM' ? (
+                  <>
+                    <img
+                      src={item.media_url}
+                      alt="Image"
+                      className="object-cover h-full w-full"
+                    />
+                    <a
+                      href={item.permalink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70"
+                    ></a>
+                  </>
+                ) : item.media_type === 'VIDEO' ? (
+                  <div className="h-full overflow-hidden">
+                    <video className="min-h-full min-w-full" controls>
+                      <source src={item.media_url} type="video/mp4" />
+                      Your browser does not support the video tag.
+                    </video>
+                    <a
+                      href={item.permalink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70"
+                    ></a>
+                  </div>
+                ) : null}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+        
     </div>
   </>)
 }

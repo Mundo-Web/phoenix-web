@@ -3,7 +3,7 @@
 
     <section class="py-4 border-b border-slate-100 dark:border-slate-700">
       <a href="{{ route('logos.create') }}"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar logo</a>
+        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar marca</a>
     </section>
 
 
@@ -12,7 +12,7 @@
 
 
       <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Logos</h2>
+        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Marcas</h2>
       </header>
       <div class="p-3">
 
@@ -34,8 +34,8 @@
             <tbody>
               @foreach ($logos as $logo)
                 <tr>
-                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}"/></td>
-                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}"/></td>
+                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"/></td>
+                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"/></td>
                   <td class="dark:bg-slate-800">{{ $logo->title }}</td>
                    <td class="">
                     <form method="POST" action="">
@@ -71,7 +71,11 @@
                     </form>
                   </td>
                   
-                  <td class="dark:bg-slate-800">
+                  <td class="flex flex-row justify-center items-center gap-5">
+                    <a href="{{ route('logos.edit', $logo->id) }}"
+                      class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
+                        class="fa-regular fa-pen-to-square"></i></a>
+
                     <form action=" " method="POST">
                       @csrf
                       <a data-idService='{{ $logo->id }} ' href=""
@@ -109,6 +113,7 @@
     $('document').ready(function() {
 
       new DataTable('#tabladatos', {
+            ordering:false,
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
             layout: {
                 topStart: 'buttons'
@@ -238,7 +243,7 @@
 
             });
 
-            if (response.cantidad >= 4) {
+            if (response.cantidad >= 100000) {
 
 
               Swal.fire({

@@ -3,18 +3,26 @@
 namespace App\Providers;
 
 use App\Http\Controllers\IndexController;
+use App\Models\BeneficiosSinIntereses;
 use App\Models\Blog;
+use App\Models\CampanasPublicitarias;
 use App\Models\Category;
 use App\Models\Discount;
 use App\Models\General;
 use App\Models\LibroReclamaciones;
 use App\Models\Message;
+use App\Models\NuestrasTiendas;
+use App\Models\PlazosDeReembolso;
 use App\Models\PoliticaDatos;
+use App\Models\PoliticasCookies;
 use App\Models\PolyticsCondition;
 use App\Models\Products;
 use App\Models\Sale;
+use App\Models\SeguimientoPedido;
 use App\Models\Tag;
 use App\Models\TermsAndCondition;
+use App\Models\TimeAndPriceDelivery;
+use App\Models\TratamientoAdicionalDatos;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Support\Facades\View;
@@ -53,7 +61,17 @@ class AppServiceProvider extends ServiceProvider
             $termsAndCondicitions = TermsAndCondition::first();
             $politicaDatos = PoliticaDatos::first();
 
-            $view->with(['datosgenerales' => $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
+            $TimeAndPriceDelivery = TimeAndPriceDelivery::first();
+            $PlazosDeReembolso = PlazosDeReembolso::first();
+            $TratamientoAdicionalDatos = TratamientoAdicionalDatos::first();
+            $PoliticasCookies = PoliticasCookies::first();
+            $CampanasPublicitarias = CampanasPublicitarias::first();
+            $BeneficiosSinIntereses = BeneficiosSinIntereses::first();
+            $SeguimientoPedido = SeguimientoPedido::first();
+            $NuestrasTiendas = NuestrasTiendas::first();
+
+
+            $view->with(['NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'datosgenerales' => $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
         });
 
         View::composer('components.public.header', function ($view) {

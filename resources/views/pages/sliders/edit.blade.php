@@ -100,7 +100,7 @@
               <div class="md:col-span-5">
                 <label for="description">Imagen de servicio</label>
                 <div class="relative mb-2 mt-2">
-                  <img src="{{ asset('storage/images/slider/' . $slider->name_image) }}"
+                  <img src="{{ asset('storage/images/slider/' . $slider->name_image) }}"  onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"
                     class="max-w-xs max-h-48 object-cover  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
               </div>
@@ -120,7 +120,7 @@
 
               <div class="md:col-span-5 text-right mt-6 flex justify-between">
                 <div class="inline-flex items-end">
-                  <a href="{{ URL::previous() }}"  class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Volver</a>
+                  <a href="{{ route('slider.index') }}"  class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Volver</a>
                 </div>
                 <div class="inline-flex items-end">
                   <button type="submit"

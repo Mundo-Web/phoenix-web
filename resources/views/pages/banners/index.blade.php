@@ -22,8 +22,9 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th>Titulo</th>
                 <th>Foto</th>
+                <th>Titulo</th>
+                <th>Posición</th>
                 <th>Visible</th>
                 <th>Acciones</th>
               </tr>
@@ -32,8 +33,9 @@
 
               @foreach ($banners as $item)
                 <tr>
+                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"></td>
                   <td>{{ $item->title }}</td>
-                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt=""></td>
+                  <td>{{ $item->potition }}</td>
                   <td>
                     <form method="POST" action="">
                       @csrf
@@ -73,8 +75,9 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Titulo</th>
                 <th>Foto</th>
+                <th>Titulo</th>
+                <th>Posición</th>
                 <th>Visible</th>
                 <th>Acciones</th>
               </tr>

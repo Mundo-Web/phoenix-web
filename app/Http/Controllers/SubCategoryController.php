@@ -18,7 +18,9 @@ class SubCategoryController extends Controller
      */
     public function index()
     {
-        $subcategories = SubCategory::where('status', true)->get();
+        $subcategories = SubCategory::where('status', true)
+        ->orderByDesc('created_at')
+        ->get();
 
         return view('pages.subcategories.index', compact('subcategories'));
     }

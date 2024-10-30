@@ -21,7 +21,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $category = Category::where("status", "=", true)->get();
+        $category = Category::where("status", "=", true)
+        ->orderByDesc('created_at')
+        ->get();
 
         return view('pages.categories.index', compact('category'));
     }

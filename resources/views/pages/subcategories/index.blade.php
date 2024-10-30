@@ -22,8 +22,8 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
+                <th class="px-3 py-2">Imagen</th>
                 <th class="px-3 py-2">Nombre</th>
-                <th class="px-3 py-2">Descripción</th>
                 <th class="px-3 py-2">Categoria</th>
                 <th class="px-3 py-2">Destacar</th>
                 <th class="px-3 py-2">Visible</th>
@@ -34,8 +34,9 @@
 
               @foreach ($subcategories as $item)
                 <tr>
+                  
+                  <td class="px-3 py-2"><img class="w-20 object-contain" src="{{ asset($item->url_image . $item->name_image) }}" onerror="this.onerror=null; this.src='{{ asset('images/img/noimagen.jpg') }}';"  /></td>
                   <td class="px-3 py-2">{{ $item->name }}</td>
-                  <td class="px-3 py-2">{{ $item->description }}</td>
                   <td class="px-3 py-2">{{ $item->category()->name }}</td>
                   <td>
                     <label class="inline-flex items-center cursor-pointer">
@@ -72,8 +73,8 @@
             </tbody>
             <tfoot>
               <tr>
+                <th>Imagen</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
                 <th>Categoria</th>
                 <th>Destacar</th>
                 <th>Visible</th>
@@ -92,6 +93,7 @@
     $('document').ready(function() {
 
       new DataTable('#tabladatos', {
+        ordering: false,
         buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
         layout: {
           topStart: 'buttons'

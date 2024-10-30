@@ -315,9 +315,8 @@
             {{-- Logo--}}
             <div class="w-9/12 flex items-center justify-center">
                 <a href="/">
-                    {{-- <img id="logo-boostperu" class="w-[170px]  " 
-                src="{{ asset($isIndex ? 'images/svg/LOGO2.png' : 'images/svg/LOGO2.png') }}" alt="boostperu" /> --}}
-                    <h2 class="text-2xl font-bold text-white tracking-widest font-Urbanist_Semibold text-center">AMERICAN BRANDS</h2>
+                    <img id="logo-boostperu" class="min-w-56 w-60" src="{{ asset($isIndex ? 'images/svg/LOGOAB.svg' : 'images/svg/LOGOAB.svg') }}" alt="american brands" />
+                    {{-- <h2 class="text-2xl font-bold text-white tracking-widest font-Urbanist_Semibold text-center">AMERICAN BRANDS</h2> --}}
                 </a>
             </div>
 
@@ -325,8 +324,10 @@
             <div class="flex w-3/12 justify-end md:justify-end items-center gap-2 max-w-96 my-auto">
                 <div class="flex flex-row justify-between gap-2 lg:gap-4 mt-1">
                     @if (Auth::user() == null)
-                        <a class="hidden md:flex" href="{{ route('login') }}"><i
-                                class="fa-solid fa-user-large fa-xl text-white !leading-none"></i></a>
+                        <a class="hidden md:flex" href="{{ route('login') }}">
+                            {{-- <i class="fa-solid fa-user-large fa-xl text-white !leading-none"></i> --}}
+                            <img src="{{asset('images/svg/USER.svg')}}" class="text-white w-7" /></a>
+                        </a>
                     @else
                         <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
                             <button class="px-3 py-5 inline-flex justify-center items-center group" aria-haspopup="true"
@@ -340,7 +341,7 @@
                                     </svg>
                                 </div>
                             </button>
-                            <div class="origin-top-right z-10 absolute top-full min-w-44 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1"
+                            <div class="bg-white origin-top-right z-10 absolute top-full min-w-44 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1"
                                 @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
                                 <ul>
                                     <li class="hover:bg-gray-100">
@@ -350,7 +351,7 @@
                                     </li>
 
                                     <li class="hover:bg-gray-100">
-                                        <form method="POST" action="{{ route('logout') }}" x-data>
+                                        <form class="mb-0" method="POST" action="{{ route('logout') }}" x-data>
                                             @csrf
                                             <button type="submit"
                                                 class="font-medium text-sm text-black flex items-center py-1 px-3"
@@ -364,21 +365,22 @@
                         </div>
                     @endif
 
-                    <div class="hidden lg:flex justify-center items-center">
+                    {{-- <div class="hidden lg:flex justify-center items-center">
                         <i class="fa-solid fa-location-dot fa-xl text-white !leading-none -mt-1"></i>
-                    </div>
+                    </div> --}}
 
-                    <div class="hidden lg:flex justify-center items-center">
+                    {{-- <div class="hidden lg:flex justify-center items-center">
                         <i class="fa-solid fa-heart  fa-xl text-white !leading-none -mt-1"></i>
-                    </div>
+                    </div> --}}
 
                     <div class="flex justify-center items-center min-w-[38px]">
                         <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
                             <span id="itemsCount"
-                                class="bg-[#EB5D2C] text-xs font-medium text-white text-center px-[7px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
+                                class="bg-[#c1272d] text-xs font-medium font-Urbanist_Regular text-white text-center px-[7px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
                             {{-- <img src="{{ asset('images/svg/bag_boost.svg') }}"
                     class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" /> --}}
-                            <i class="fa-solid fa-suitcase-rolling fa-xl text-white !leading-none -mt-1"></i>
+                            {{-- <i class="fa-solid fa-suitcase-rolling fa-xl text-white !leading-none -mt-1"></i> --}}
+                            <img src="{{asset('images/svg/CARRITO.svg')}}" class="text-white w-7" /></a>
                         </div>
                     </div>
                 </div>
@@ -445,10 +447,10 @@
 
 
     <div class="flex justify-end relative">
-        <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px]">
-            <a href="https://api.whatsapp.com/send?phone={{ $datosgenerales[0]->whatsapp }}&text={{ $datosgenerales[0]->mensaje_whatsapp }}"
+        <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px] animate-bounce animate-twice"  >
+            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $datosgenerales[0]->whatsapp }}&text={{ $datosgenerales[0]->mensaje_whatsapp }}"
                 class="">
-                <img src="{{ asset('images/img/WhatsApp.png') }}" alt="whatsapp" class="w-20" />
+                <img src="{{ asset('images/svg/botonwhatsapp.svg') }}" alt="whatsapp" class="w-16"  />
             </a>
         </div>
     </div>

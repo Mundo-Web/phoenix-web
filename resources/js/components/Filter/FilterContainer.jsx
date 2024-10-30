@@ -2,9 +2,9 @@ import React, { useRef, useState } from 'react'
 import FilterItem from './FilterItem'
 import FilterItemSelect2 from './FilterItemSelect2'
 
-const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], marcas = [], brands = [], sizes = [], colors = [], attribute_values, tag_id, marcas_id, selected_category }) => {
+const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [], tags = [], marcas = [], brands = [], sizes = [], colors = [], colores = [], attribute_values, tag_id, marcas_id, selected_category}) => {
   const categoryRef = useRef()
-
+  
   const [openCategories, setOpenCategories] = useState({});
 
   const toggleAccordion = (id) => {
@@ -115,6 +115,28 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
 
       )
     }
+
+
+    {
+      sizes.length > 0 && (
+         
+        <div className="flex flex-col gap-4 w-full">
+        <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Tallas</h2>
+        <div className='bg-[#808080] pb-[1px] -mt-2'></div>
+        <div className='flex flex-wrap gap-2 w-full font-Urbanist_Light'>
+          {sizes.map((item) => {
+            return (<label key={`item-tallas-${item}`} htmlFor={`item-tallas-${item}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+              <input id={`item-tallas-${item}`} name='tallas' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm focus:ring-0 border-none font-Urbanist_Light" value={item} onClick={(e) => onClick(`peso`, e.target.value, e.target.checked)}
+                />
+              {item}
+            </label>)
+          })}
+        </div>
+      </div>
+
+      )
+    }
+
     
     {
       tags.length > 0 && <div className="flex flex-col gap-4 w-full">
@@ -142,7 +164,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
         <div className="flex flex-col gap-4 w-full">
         <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Marcas</h2>
         <div className='bg-[#808080] pb-[1px] -mt-2'></div>
-        <div className='flex flex-col gap-2 w-full flex-wrap font-Urbanist_Light'>
+        <div className='flex flex-col gap-2 w-full font-Urbanist_Light max-h-60 overflow-y-auto'>
           {marcas.map((item) => {
             const isChecked = item.id === Number(marcas_id);
 
@@ -158,6 +180,27 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
       )
     }
 
+      
+    {
+      colores.length > 0 && (
+         
+        <div className="flex flex-col gap-4 w-full">
+        <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Colores</h2>
+        <div className='bg-[#808080] pb-[1px] -mt-2'></div>
+        <div className='flex flex-col gap-2 w-full flex-wrap font-Urbanist_Light max-h-60 overflow-y-auto'>
+          {colores.map((item) => {
+            return (<label key={`item-colores-${item}`} htmlFor={`item-colores-${item}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+              <input id={`item-colores-${item}`} name='colores' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm focus:ring-0 border-none font-Urbanist_Light" value={item} onClick={(e) => onClick(`color`, e.target.value, e.target.checked)}
+                />
+              {item}
+            </label>)
+          })}
+        </div>
+      </div>
+
+      )
+    }
+  
 
     {
       attribute_values.map((x, i) => (

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('subcategories', function (Blueprint $table) {
            
             $table->boolean('destacar')->nullable();
-            $table->boolean('visible')->nullable();
+            $table->boolean('visible')->nullable()->default(true);
             $table->string('slug')->nullable();
             $table->string('image')->nullable();
             

@@ -53,18 +53,20 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
 
         <div>
           <div className="relative flex justify-center items-center h-max">
-            <img
-              style={{
-                // opacity: !item.imagen_ambiente || !showAmbiente ? '1' : '0',
-                // scale: !item.imagen_ambiente || !showAmbiente ? '1.05' : '1',
-                backgroundColor: '#eeeeee'
-              }}
-              //src={item.imagen ? `/${item.imagen}` : '/images/img/noimagen.jpg'}
-              src={mainImage ? `/${mainImage}` : '/images/img/noimagen.jpg'}
-              alt={item.name}
-              onError={(e) => e.target.src = '/images/img/noimagen.jpg'}
-              className={`transition ease-out duration-300 transform w-full aspect-square object-cover inset-0`}
-            />
+            <a href={`/producto/${item.id}`}>
+              <img
+                style={{
+                  // opacity: !item.imagen_ambiente || !showAmbiente ? '1' : '0',
+                  // scale: !item.imagen_ambiente || !showAmbiente ? '1.05' : '1',
+                  backgroundColor: '#eeeeee'
+                }}
+                //src={item.imagen ? `/${item.imagen}` : '/images/img/noimagen.jpg'}
+                src={mainImage ? `/${mainImage}` : '/images/img/noimagen.jpg'}
+                alt={item.name}
+                onError={(e) => e.target.src = '/images/img/noimagen.jpg'}
+                className={`transition ease-out duration-300 transform w-full aspect-square object-cover inset-0`}
+              />
+            </a> 
           </div>
         </div>
 
@@ -115,7 +117,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
               {item.producto}
             </h2>
           </Tippy>
-          <span className='text-[12px]'>{item.color} - {item.peso}</span>
+          {/* <span className='text-[12px] font-Urbanist_Light'>{item.color} - {item.peso}</span> */}
         
           {
             is_reseller ?

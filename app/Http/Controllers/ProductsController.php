@@ -53,7 +53,7 @@ class ProductsController extends Controller
     //validar el rol del usuario logueado 
     // $user = Auth::user();
     // dump($user->hasRole('Reseller'));
-
+    
     $user = false;
 
 
@@ -65,11 +65,12 @@ class ProductsController extends Controller
         DB::raw('DISTINCT products.*')
       ])
         ->with(['category', 'tags', 'marcas', 'colors', 'discount'])
-        ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
-        ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
+        // ->leftJoin('attribute_product_values AS apv', 'products.id', 'apv.product_id')
+        // ->leftJoin('attributes AS a', 'apv.attribute_id', 'a.id')
         ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id')
         ->leftJoin('categories', 'categories.id', 'products.categoria_id')
         ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
+        
         // ->whereIn('products.id', function($query) {
         //   $query->select(DB::raw('MIN(id)'))  
         //         ->from('products')
@@ -78,7 +79,7 @@ class ProductsController extends Controller
         ->where('categories.visible', 1);
 
 
-
+        
 
       if (Auth::check()) {
         $user = Auth::user();
@@ -87,7 +88,8 @@ class ProductsController extends Controller
           $instance->where('products.precio_reseller', '>', 0);
         }
       }
-
+      
+      
 
       if ($request->group != null) {
         [$grouping] = $request->group;
@@ -103,6 +105,7 @@ class ProductsController extends Controller
           dxDataGrid::filter($query, $request->filter ?? [], false);
         });
       }
+      
 
       if ($request->sort != null) {
         foreach ($request->sort as $sorting) {
@@ -141,7 +144,7 @@ class ProductsController extends Controller
       //   $result = JSON::unflatten($jpa->toArray(), '__');
       //   $results[] = $result;
       // }
-
+      
       $response->status = 200;
       $response->message = 'Operación correcta';
       $response->data = $jpas;

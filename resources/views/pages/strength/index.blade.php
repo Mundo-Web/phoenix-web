@@ -3,7 +3,7 @@
 
     <section class="py-4 border-b border-slate-100 dark:border-slate-700">
       <a href="{{ route('strength.create') }}"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar beneficio</a>
+        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar fit</a>
     </section>
 
 
@@ -12,7 +12,7 @@
 
 
       <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Beneficios </h2>
+        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Fits </h2>
       </header>
       <div class="p-3">
 
@@ -22,10 +22,9 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th>Titulo </th>
-                <th>Descripcion</th>
-                {{-- <th>Icono</th> --}}
                 <th>Imagen</th>
+                <th>Titulo </th>
+                <th>Descripcion</th> 
                 <th>Visible</th>
                 <th>Acciones</th>
               </tr>
@@ -34,12 +33,10 @@
 
               @foreach ($strength as $item)
                 <tr>
-                  <td>{{ $item->titulo }}</td>
-                  <td>{!! Str::limit($item->descripcion, 120) !!}</td>
+                  <td class="px-3 py-2"><img class="w-20 h-20 object-contain" src="{{ asset($item->imagen) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" ></td>
+                  <td>{{ Str::limit($item->titulo, 100) }}</td>
+                  <td>{!! Str::limit($item->descripcion, 100) !!}</td>
                   {{-- <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->icono) }}" alt=""></td> --}}
-
-                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->imagen) }}" alt=""></td>
-
                   <td>
                     <form method="POST" action="">
                       @csrf
@@ -54,13 +51,9 @@
                         data-titleService='{{ $item->title }}' {{ $item->status == 1 ? 'checked' : '' }}>
                       <label for="{{ 'v_' . $item->id }}"></label>
                     </form>
-
-
-
                   </td>
 
-                  <td class="flex flex-row justify-end items-center gap-5">
-
+                  <td class="flex flex-row justify-center items-center gap-5">
                     <a href="{{ route('strength.edit', $item->id) }}"
                       class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
                         class="fa-regular fa-pen-to-square"></i></a>
@@ -71,7 +64,6 @@
                         class="btn_delete bg-red-600 px-3 py-2 rounded text-white cursor-pointer"><i
                           class="fa-regular fa-trash-can"></i></a>
                     </form>
-
                   </td>
                 </tr>
               @endforeach
@@ -79,10 +71,9 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Titulo </th>
-                <th>Descripcion</th>
-                {{-- <th>Icono</th> --}}
                 <th>Imagen</th>
+                <th>Titulo </th>
+                <th>Descripcion</th> 
                 <th>Visible</th>
                 <th>Acciones</th>
               </tr>

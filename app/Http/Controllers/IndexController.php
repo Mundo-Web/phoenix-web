@@ -55,6 +55,7 @@ use Inertia\Inertia;
 use phpseclib3\File\ASN1\Maps\AttributeValue;
 use SoDe\Extend\JSON;
 use SoDe\Extend\Response;
+use App\Services\InstagramService;
 
 use function PHPUnit\Framework\isNull;
 
@@ -63,6 +64,13 @@ class IndexController extends Controller
   /**
    * Display a listing of the resource.
    */
+  protected $instagramService;
+
+  public function __construct(InstagramService $instagramService)
+  {
+    $this->instagramService = $instagramService;
+  }
+
   public function index()
   {
     // $productos = Products::all();
@@ -85,7 +93,7 @@ class IndexController extends Controller
     $subcategorias = SubCategory::where('destacar', '=', 1)->where('visible', '=', 1)->get();
     $categoriasAll = Category::where('visible', '=', 1)->get();
     $destacados = Products::where('products.destacar', '=', 1)->where('products.status', '=', 1)
-      ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
+      ->where('visible', '=', 1)->with('tags')->with('category')->activeDestacado()->get();
     $descuentos = Products::where('products.descuento', '>', 0)->where('products.status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
 
@@ -101,9 +109,9 @@ class IndexController extends Controller
     $logosdestacados = ClientLogos::where('status', '=', 1)->where('destacar', '=', 1)->get();
     $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->get();
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
+    $media = $this->instagramService->getUserMedia();
 
-
-    return view('public.index', compact('subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
+    return view('public.index', compact('media','subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)
@@ -125,10 +133,17 @@ class IndexController extends Controller
 
     $marcas = ClientLogos::where('status', true)->get();
 
+    $colores = Products::select('color')->distinct()->pluck('color');
+
+    $sizes = Products::select('peso')->distinct()->pluck('peso');
+
+    $media = $this->instagramService->getUserMedia();
+
     $minPrice = Products::select()
       ->where('visible', true)
       ->where('descuento', '>', 0)
       ->min('descuento');
+
     if ($minPrice) Products::where('visible', true)->min('precio');
     $maxPrice = Products::max('precio');
 
@@ -152,6 +167,9 @@ class IndexController extends Controller
       'attribute_values' => $attribute_values,
       'id_cat' => $id_cat,
       'tag_id' => $tag_id,
+      'colores' => $colores,
+      'sizes' => $sizes,
+      'media' => $media,
       'subCatId' => $subCatId
     ])->rootView('app');
   }
@@ -765,6 +783,8 @@ class IndexController extends Controller
     // $IdProductosComplementarios = $IdProductosComplementarios[0]['categoria_id'];
 
     $ProdComplementarios = Products::select()
+      ->with('colors')
+      ->with('marcas')
       ->where('id', '<>', $id)
       ->where('categoria_id', '=', $product->categoria_id)
       ->where('status', '=', true)

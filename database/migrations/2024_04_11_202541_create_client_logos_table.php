@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('url_image2')->nullable();
             $table->boolean('visible')->default(true);
             $table->boolean('destacar')->default(false);
-            $table->boolean('status')->default(false);
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

@@ -5,6 +5,7 @@ use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AttributesController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BannersController;
+use App\Http\Controllers\BeneficiosSinInteresesController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TestimonyController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CampanasPublicitariasController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FaqsController;
@@ -33,13 +35,17 @@ use App\Http\Controllers\LogosClientController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LibroReclamacionesController;
 use App\Http\Controllers\NewsletterSubscriberController;
+use App\Http\Controllers\NuestrasTiendasController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\PlazosDeReembolsoController;
 use App\Http\Controllers\PoliticaDatosController;
+use App\Http\Controllers\PoliticasCookiesController;
 use App\Http\Controllers\PolyticsConditionController;
 use App\Http\Controllers\PopupController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SaleController;
+use App\Http\Controllers\SeguimientoPedidoController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StatusController;
@@ -49,6 +55,8 @@ use App\Http\Controllers\ValoresAtributosController;
 
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TermsAndConditionController;
+use App\Http\Controllers\TimeAndPriceDeliveryController;
+use App\Http\Controllers\TratamientoAdicionalDatosController;
 use App\Models\AboutUs;
 use App\Models\Discount;
 use App\Models\LibroReclamaciones;
@@ -121,8 +129,17 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::get('/dashboard/fintech', [DashboardController::class, 'fintech'])->name('fintech');
 
         Route::resource('/politicas-de-devolucion', PolyticsConditionController::class);
-
         Route::resource('/terminos-y-condiciones', TermsAndConditionController::class);
+
+        Route::resource('/tiempo-y-costos-envio', TimeAndPriceDeliveryController::class);
+        Route::resource('/plazos-de-reembolso', PlazosDeReembolsoController::class);
+        Route::resource('/tratamiento-adicional-datos', TratamientoAdicionalDatosController::class);
+        Route::resource('/politica-cookies', PoliticasCookiesController::class);
+        Route::resource('/campanas-publicitarias', CampanasPublicitariasController::class);
+        Route::resource('/beneficios-cero-intereses', BeneficiosSinInteresesController::class);
+        Route::resource('/seguimiento-de-pedido', SeguimientoPedidoController::class);
+        Route::resource('/nuestras-tiendas', NuestrasTiendasController::class);
+
 
 
         Route::resource('/pedidos', SaleController::class);

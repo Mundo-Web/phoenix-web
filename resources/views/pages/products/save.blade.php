@@ -60,8 +60,8 @@
 
                     </div>
                   </div>
-                  <div class="col-span-5 md:col-span-5 mt-2">
 
+                  {{-- <div class="col-span-5 md:col-span-5 mt-2">
                     <label for="extract">Extracto</label>
 
                     <div class="relative mb-2  mt-2">
@@ -71,10 +71,9 @@
                       <input type="text" id="extract" name="extract" value="{{ $product->extract }}"
                         class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Extracto">
-
-
                     </div>
-                  </div>
+                  </div> --}}
+
                   <div class="col-span-5 md:col-span-5">
                     <label for="description">Descripcion</label>
                     <div class="relative mb-2 mt-2">
@@ -91,9 +90,10 @@
                     <label for=""
                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Previsualizacion del
                       producto</label>
-                    <div class="flex flex-wrap items-center gap-4">
-                      <div for="imagen_ambiente" x-data="{ showAmbiente: false }" @mouseenter="showAmbiente = true"
-                        @mouseleave="showAmbiente = false"
+                    <div class="flex flex-wrap items-end gap-4">
+                      <div for="imagen_ambiente" x-data="{ showAmbiente: false }" 
+                        {{-- @mouseenter="showAmbiente = true"
+                        @mouseleave="showAmbiente = false" --}}
                         class="relative flex justify-center items-center h-[256px] w-[192px] border rounded-lg">
                         @if ($product->imagen)
                           <img id="imagen_previewer" x-show="!showAmbiente"
@@ -112,7 +112,7 @@
                             src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
                             class="bg-[#f2f2f2] w-full h-full object-contain absolute inset-0 rounded-lg" />
                         @endif
-                        @if ($product->imagen_ambiente)
+                        {{-- @if ($product->imagen_ambiente)
                           <img id="imagen_ambiente_previewer" x-show="showAmbiente"
                             x-transition:enter="transition ease-out duration-300 transform"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
@@ -129,7 +129,7 @@
                             x-transition:leave-start="opacity-100 scale-100"
                             x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/img/noimagen.jpg') }}"
                             alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
-                        @endif
+                        @endif --}}
                       </div>
                       <div>
                         {{-- <div class="mb-4">
@@ -154,14 +154,14 @@
                             id="imagen" name="imagen" type="file" accept="image/*"
                             title="Cargar imagen de producto" tippy>
                         </div>
-                        <div>
+                        {{-- <div>
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             for="imagen_ambiente">Imagen Secundaria</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*"
                             title="Cargar imagen de ambiente" tippy>
-                        </div>
+                        </div> --}}
                       </div>
                     </div>
                   </div>
@@ -269,7 +269,8 @@
 
 
                 </div>
-                <div class="md:col-span-3">
+
+                {{-- <div class="md:col-span-3">
                   <label for="precio_reseller">Precio para revendedor</label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -280,8 +281,9 @@
                       class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Precio para revendedor">
                   </div>
-                </div>
-                <div class="md:col-span-5">
+                </div> --}}
+
+                {{-- <div class="md:col-span-5">
                   <label for="costo_x_art">Costo por articulo</label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -291,7 +293,8 @@
                       class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Costo por articulo">
                   </div>
-                </div>
+                </div> --}}
+
                 <div class="md:col-span-3">
                   <label for="sku">Sku</label>
                   <div class="relative mb-2  mt-2">
@@ -376,7 +379,7 @@
                   </div>
                 </div>
 
-                <div class="md:col-span-5 mt-2">
+                {{-- <div class="md:col-span-5 mt-2">
                   <div class=" flex items-end justify-between gap-2 ">
                     <label for="specifications">Especificaciones </label>
                     <button type="button" id="AddEspecifiacion"
@@ -410,10 +413,10 @@
                       </div>
                     </div>
                   @endforeach
-                </div>
+                </div> --}}
 
 
-                <div class="md:col-span-5">
+                {{-- <div class="md:col-span-5">
                   <label for="producto">Atributos</label>
                  
                  
@@ -457,7 +460,7 @@
                       </div>
                     @endforeach
                   </div>
-                </div>
+                </div> --}}
 
               </div>
               <div
@@ -483,7 +486,7 @@
                     </div>
                   </div>
                   <div class="w-full">
-                    <label for="peso">Peso
+                    <label for="peso">Talla
 
                     </label>
 

@@ -19,7 +19,9 @@ class LogosClientController extends Controller
      */
     public function index()
     {
-        $logos = ClientLogos::where("status", "=", true)->get();
+        $logos = ClientLogos::where("status", "=", true)
+        ->orderByDesc('created_at')
+        ->get();
         return view('pages.logos.index', compact('logos'));
     }
 
@@ -33,6 +35,19 @@ class LogosClientController extends Controller
         return view('pages.logos.create');
     }
 
+
+    public function saveImg($file, $route, $nombreImagen){
+		$manager = new ImageManager(new Driver());
+		$img =  $manager->read($file);
+
+		if (!file_exists($route)) {
+			mkdir($route, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+	}
+
+		$img->save($route . $nombreImagen);
+	}
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -42,53 +57,31 @@ class LogosClientController extends Controller
             'title'=>'required',
         ]);
 
-        $post = new ClientLogos();
+        $logo = new ClientLogos();
 
         if($request->hasFile("imagen")){
-           
-            $manager = new ImageManager(new Driver());
-            
-            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-               
-            $img =  $manager->read($request->file('imagen'));
-       
-            $ruta = 'storage/images/logos/';
-            if (!file_exists($ruta)) {
-                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
-            }
-            
-            $img->save($ruta.$nombreImagen);
-            $post->url_image =  $ruta.$nombreImagen; 
+
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName(); 
+            $file =  $request->file('imagen');
+            $route = 'storage/images/logos/';
+            $this->saveImg($file, $route, $nombreImagen);
+            $logo->url_image =  $route.$nombreImagen; 
         }
 
 
         if($request->hasFile("imagen2")){
            
-            $manager = new ImageManager(new Driver());
-            
-            $nombreImagen = Str::random(10) . '_' . $request->file('imagen2')->getClientOriginalName();
-               
-            $img =  $manager->read($request->file('imagen2'));
-       
-            $ruta = 'storage/images/logos/';
-            if (!file_exists($ruta)) {
-                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
-            }
-            
-            $img->save($ruta.$nombreImagen);
-            $post->url_image2 =  $ruta.$nombreImagen; 
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagen2')->getClientOriginalName();   
+            $file =  $request->file('imagen2');
+            $route = 'storage/images/logos/';
+            $this->saveImg($file, $route, $nombreImagen);
+            $logo->url_image2 =  $route.$nombreImagen; 
         }
 
-
-
-        $post->title = $request->title;
-        $post->description = $request->description;
-        
-        $post->status = 1;
-
-       
-
-        $post->save();
+        $logo->title = $request->title;
+        $logo->description = $request->description;
+        $logo->status = 1;
+        $logo->save();
         return redirect()->route('logos.index')->with('success', 'Publicación creado exitosamente.');
     }
 
@@ -105,7 +98,8 @@ class LogosClientController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $logo = ClientLogos::find($id);
+        return view('pages.logos.edit', compact('logo'));
     }
 
     /**
@@ -113,7 +107,47 @@ class LogosClientController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            'title'=>'required',
+        ]);
+
+        $logo = ClientLogos::find($id);
+        
+        try {
+			if($request->hasFile("imagen")){
+
+                $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName(); 
+                $file =  $request->file('imagen');
+                $route = 'storage/images/logos/';
+               
+                $this->saveImg($file, $route, $nombreImagen);
+    
+                $logo->url_image =  $route.$nombreImagen; 
+            }
+    
+    
+            if($request->hasFile("imagen2")){
+               
+                $nombreImagen = Str::random(10) . '_' . $request->file('imagen2')->getClientOriginalName();   
+                $file =  $request->file('imagen2');
+                $route = 'storage/images/logos/';
+                
+                $this->saveImg($file, $route, $nombreImagen);
+               
+                $logo->url_image2 =  $route.$nombreImagen; 
+            }
+	
+			$logo->title = $request->title;
+            $logo->description = $request->description;
+			$logo->save();
+
+			return redirect()->route('logos.index')->with('success', 'Publicación creado exitosamente.');
+
+
+		} catch (\Throwable $th) {
+			return response()->json(['messge' => 'Verifique sus datos '], 400); 
+		}
+
     }
 
     /**
@@ -150,7 +184,7 @@ class LogosClientController extends Controller
         $cantidad = $this->contarCategoriasDestacadas();
 
 
-        if ($cantidad >= 10000 && $request->status == 1) {
+        if ($cantidad >= 100000 && $request->status == 1) {
             return response()->json(['message' => 'Solo puedes destacar 10000 categorias'], 409);
         }
 

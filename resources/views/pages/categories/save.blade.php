@@ -49,8 +49,8 @@
               </div>
 
 
-              <label class="mb-2 text-gray-900 dark:text-white">Visualizacion de productos:</label>
-              <ul class="md:col-span-5 grid w-full gap-6 md:grid-cols-4">
+              <label class=" hidden mb-2 text-gray-900 dark:text-white">Visualizacion de productos:</label>
+              <ul class="hidden md:col-span-5  w-full gap-6 md:grid-cols-4">
                 <li>
                   <input type="radio" id="object-cover" name="fit" value="cover" class="hidden peer"
                     @if ($category->fit == 'cover') checked @endif required @if($category->fit == null) checked @endif>

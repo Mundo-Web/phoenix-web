@@ -6,10 +6,10 @@
 
 @php
     $bannersBottom = array_filter($banners, function ($banner) {
-        return $banner['potition'] === 'bottom';
+        return $banner['potition'] === 'inferior';
     });
     $bannerMid = array_filter($banners, function ($banner) {
-        return $banner['potition'] === 'mid';
+        return $banner['potition'] === 'medio';
     });
 @endphp
 
@@ -79,7 +79,7 @@
 
     <main class="z-[15] ">
 
-        {{-- @if (count($slider) > 0) 
+    {{-- @if (count($slider) > 0) 
         <section class="">
           <x-swipper-card :items="$slider" />
         </section>
@@ -92,12 +92,14 @@
                   @foreach ($slider as $slide)                      
                     <div class="swiper-slide">
                         <div class="w-full">
+                          <a href="{{$slide->link2}}">  
                             <div class="h-[450px] w-full md:h-auto relative z-10 flex flex-col items-end justify-end">
                                 <img class="block h-full w-full object-cover md:object-contain object-bottom"
                                     src="{{ asset($slide->url_image . $slide->name_image) }}" 
                                     onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"
                                     alt="">
                             </div>
+                          </a>      
                         </div>
                     </div>
                   @endforeach 
@@ -111,6 +113,28 @@
 
     @if (count($subcategorias) > 0) 
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+          <div class="w-full">  
+            <div class="swiper carruseltop h-max">
+                <div class="swiper-wrapper">
+                    @foreach ($subcategorias as $subcategoria)       
+                        <div class="swiper-slide">
+                          <div class="flex flex-col max-w-[450px] mx-auto">  
+                            <a href="/catalogo?subcategoria={{$subcategoria->id}}">       
+                                <img class="w-full h-full object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
+                            </a>
+                           </div>       
+                        </div>
+                    @endforeach 
+                </div>
+                <div class="flex flex-row justify-center items-center relative mt-10">
+                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                </div>
+            </div>
+          </div>  
+        </section>
+    @endif
+
+    {{-- <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper carruseltop h-max">
                 <div class="swiper-wrapper">
                     @foreach ($subcategorias as $subcategoria)       
@@ -135,14 +159,14 @@
                     <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
                 </div>
             </div>
-        </section>
-    @endif
+    </section> --}}
 
     @if (count($bannerMid) > 0)
       <section>
         <x-banner-section-cover :banner="$bannerMid" />
       </section>
     @endif
+
 
     @if (count($benefit) > 0) 
         <section class="flex flex-col w-full gap-12 relative pt-12 lg:pt-16 px-[5%]">
@@ -189,13 +213,15 @@
         </section>
     @endif
 
+
+
     @if (count($logosdestacados) > 0) 
         <section class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 md:gap-8 relative mx-auto pt-12 lg:pt-16">
            @foreach ($logosdestacados as $logosd)
              <a href="/catalogo?marcas={{$logosd->id}}">
-                <div class="flex flex-col justify-end bg-black h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover"  style=" background-image: url('{{ asset($logosd->url_image2) }}')">
-                    <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                        {{-- <img src="{{ asset($logosd->url_image) }}" class="h-16 object-contain"/> --}}
+                <div class="flex flex-col justify-end bg-white w-full bg-no-repeat object-top bg-center bg-contain min-w-[300px]">
+                    <div class="flex flex-center justify-center items-center w-full">
+                        <img class="w-full h-full object-contain" src="{{$logosd->url_image2}}" />
                     </div>
                 </div>
               </a>
@@ -203,9 +229,53 @@
         </section>
     @endif
         
+
+    {{-- @if (count($logosdestacados) > 0) 
+        <section class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 md:gap-8 relative mx-auto pt-12 lg:pt-16">
+           @foreach ($logosdestacados as $logosd)
+             <a href="/catalogo?marcas={{$logosd->id}}">
+                <div class="flex flex-col justify-end bg-white h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-contain" 
+                 style=" background-image: url('{{ asset($logosd->url_image2) }}')"
+                 >
+                    <div class="flex flex-col justify-end items-center w-full pb-[7%]">
+                        
+                        <img src="{{ asset($logosd->url_image) }}" class="h-16 object-contain"/>
+                    </div>
+                </div>
+              </a>
+           @endforeach 
+        </section>
+    @endif     --}}
         
-        
+
     @if (count($logos) > 0)    
+        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">TAMBIÉN PUEDES ENCONTRAR</h2>
+        </section>
+    
+         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
+            <div class="swiper otrasmarcas h-max">
+                <div class="swiper-wrapper">
+                  @foreach ($logos as $logosn)  
+                    <div class="swiper-slide">
+                      <a href="/catalogo?marcas={{$logosn->id}}">
+                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] flex flex-row  items-center p-2 ">
+                            <img class="w-full h-full object-contain" src="{{ asset($logosn->url_image2) }}" />
+                        </div>
+                      </a>
+                    </div>
+                  @endforeach   
+                </div>
+                <div class="flex flex-row justify-center items-center relative mt-10">
+                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                </div>
+            </div>
+        </section>
+    @endif
+
+
+
+    {{-- @if (count($logos) > 0)    
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
               <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">TAMBIÉN PUEDES ENCONTRAR</h2>
         </section>
@@ -220,7 +290,7 @@
                             style=" background-image: url('{{ asset($logosn->url_image2) }}')">
                             <div class="flex flex-col justify-center  h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
                                 <div class="flex flex-col justify-end items-center w-full">
-                                    {{-- <img src="{{ asset($logosn->url_image) }}" class="h-16 object-contain"/> --}}
+                                    <img src="{{ asset($logosn->url_image) }}" class="h-16 object-contain"/>
                                 </div>
                             </div>
                         </div>
@@ -233,28 +303,32 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
 
 
     @if (count($destacados) > 0)  
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
               <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">COMPLEMENTA TU ESTILO</h2>
         </section>
-
+            
          <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper complementos h-max">
                 <div class="swiper-wrapper">
+                
                   @foreach ($destacados as $productosd)       
                     <div class="swiper-slide">
-                        <div class="flex flex-row justify-center items-center">
-                          <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
-                              style=" background-image: url('{{ asset($productosd->imagen) }}')">
-                          </div>
-                        </div>
-                        
+                        <a href="{{route('producto', $productosd->id)}}">
+                            <div class="flex flex-row justify-center items-center">
+                            <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                                style=" background-image: url('{{ asset($productosd->imagen) }}')">
+                            </div>
+                            </div>
+                        </a>
                         <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black line-clamp-1">HOMBRE</p>
-                          <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f] line-clamp-1">{{$productosd->producto}}</h2>
+                          <p class="font-Urbanist_Semibold text-base text-black line-clamp-1">{{ optional($productosd->category)->name }}</p>
+                          <a href="{{route('producto', $productosd->id)}}">  
+                            <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f] line-clamp-1">{{$productosd->producto}}</h2>
+                          </a>  
                           @if($productosd->descuento > 0)
                             <p class="font-Urbanist_Semibold text-lg text-black">S/ {{$productosd->descuento}} <span class="text-sm line-through text-[#8f8f8f]"> S/ {{$productosd->precio}}</span></p>
                           @else
@@ -268,8 +342,9 @@
                 </div>
             </div>
         </section>
-
     @endif
+
+
 
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
               <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
@@ -277,6 +352,42 @@
         </section>
 
         <section class="w-full relative mx-auto pt-12 lg:pt-16">
+            <div class="swiper instagram h-max">
+                <div class="swiper-wrapper">
+                    @foreach (array_slice($media, 0, 6) as $item)
+                        <div class="swiper-slide">
+                            <div class="relative group aspect-square h-full">
+                                @if ($item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM')
+                                    <img src="{{ $item['media_url'] }}" alt="Image" class="object-cover h-full w-full">
+                                    <a href="{{ $item['permalink'] }}" target="_blank"
+                                        class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
+                                    </a>
+                                    {{-- <img
+                                        class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                        src="{{ asset('img_donas/instagram.svg') }}"> --}}
+                                @elseif ($item['media_type'] === 'VIDEO')
+                                    <div class="h-full overflow-hidden">
+                                        <video class="min-h-full min-w-full">
+                                            <source src="{{ $item['media_url'] }}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <a href="{{ $item['permalink'] }}" target="_blank"
+                                            class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
+                                        </a>
+                                        {{-- <img
+                                            class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+                                            src="{{ asset('img_donas/instagram.svg') }}"> --}}
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </section>
+
+
+        {{-- <section class="w-full relative mx-auto pt-12 lg:pt-16">
             <div class="swiper instagram h-max">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide">
@@ -311,7 +422,7 @@
                     </div>       
                 </div>
             </div>
-        </section>
+        </section> --}}
         
 
         {{-- @if (count($logos) > 0) 

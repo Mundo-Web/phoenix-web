@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\ClientLogos;
 use App\Models\Galerie;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -76,9 +77,9 @@ class SaveItems implements ShouldQueue
         }
 
         // Searching or Creating a Brand
-        $brandJpa = Brand::where('name', $item[7])->first();
+        $brandJpa = ClientLogos::where('name', $item[7])->first();
         if (!$brandJpa) {
-          $brandJpa = Brand::create(['name' => $item[7]]);
+          $brandJpa = ClientLogos::create(['name' => $item[7]]);
         }
 
         $productJpa = Products::updateOrCreate([
@@ -90,7 +91,7 @@ class SaveItems implements ShouldQueue
           'description' => $item[4],
           'categoria_id' => $categoryJpa->id,
           'subcategory_id' => $subcategoryJpa->id,
-          'brand_id' => $brandJpa->id,
+          'marca_id' => $brandJpa->id,
           'precio' => $item[8],
           'descuento' => $item[9] ?? 0,
           'color' => $item[10],
