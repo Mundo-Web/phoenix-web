@@ -303,7 +303,7 @@
     formData.append('image_route_pattern', '{1}_{10}');
 
     $.ajax({
-      url: "{{ route('upload.items') }}",
+      url: "/api/upload/items",
       type: 'POST',
       headers: {
         'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
