@@ -354,7 +354,7 @@
     language: "es",
     dataSource: {
       load: async (params) => {
-        const res = await fetch("{{ route('products.paginate') }}", {
+        const res = await fetch("/api/products/paginate", {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
