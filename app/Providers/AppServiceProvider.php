@@ -27,7 +27,7 @@ use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Pagination\Paginator as PaginationPaginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\URL;
+// use Illuminate\Support\Facades\URL;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -45,9 +45,9 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        if (env('APP_ENV') === 'production') {
-            URL::forceScheme('https');
-        }
+        // if (env('APP_ENV') === 'production') {
+        //     URL::forceScheme('https');
+        // }
 
         View::composer('auth.register', function ($view) {
             $termsAndCondicitions = TermsAndCondition::first();
