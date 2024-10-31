@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('mensaje_whatsapp')->nullable();
             $table->text('aboutus')->nullable();
             $table->text('htop')->nullable();
+            $table->string('ig_token')->nullable();
 
 
             $table->timestamps();

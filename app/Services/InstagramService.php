@@ -14,7 +14,7 @@ class InstagramService
         $general = General::find(1);
         
         $this->client = new Client();
-        $this->accessToken = "IGQWRPSlllaC12OURScjRNRl93bHZAvci1VTGpWVUxUeW5Kd3BMWlM2dkNfbnp5YURkR2sxOUtmT2ZAwaFktYUxvU2JwRVRBMDgzTUJYNEVHdDhHWnJQLXRuZA0ZAHX3U1V2t5YmREU1RaenRmVWdIdkVHYzNvRkFsblEZD";
+        $this->accessToken = $general->ig_token;
     }
 
     public function getUserMedia()

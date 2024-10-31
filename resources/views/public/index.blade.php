@@ -197,7 +197,7 @@
 
                                 <div class="flex flex-col justify-center items-center">
                                     <div class="w-full h-[500px] lg:[400px] xl:h-[700px] overflow-hidden relative bg-cover bg-center">
-                                        <img src="{{ asset($benefi->imagen) }}" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
+                                        <img src="{{ asset($benefi->imagen) }}" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" class="mx-auto w-auto lg:w-full h-full object-cover lg:object-contain" />
                                     </div>
                                 </div>
 
