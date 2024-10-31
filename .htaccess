@@ -3,11 +3,11 @@ RewriteCond %{REQUEST_URI} !^public
 RewriteRule ^(.*)$ public/$1 [L]
 
 # Aumentar los límites de subida y POST
-php_value upload_max_filesize 4096M
-php_value post_max_size 4096M
-php_value memory_limit 4096M
-php_value max_execution_time 3600
-php_value max_input_time 3600
+# php_value upload_max_filesize 4096M
+# php_value post_max_size 4096M
+# php_value memory_limit 4096M
+# php_value max_execution_time 3600
+# php_value max_input_time 3600
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the ea-php81 package as the default PHP programming language
