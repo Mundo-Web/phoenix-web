@@ -319,7 +319,7 @@
                     <div class="swiper-slide">
                         <a href="{{route('producto', $productosd->id)}}">
                             <div class="flex flex-row justify-center items-center">
-                            <div class="bg-no-repeat object-top bg-center bg-cover h-[250px] rounded-full aspect-square flex flex-row  items-center p-5 "
+                            <div class="bg-no-repeat object-top bg-center bg-cover  rounded-full aspect-square flex flex-row  items-center p-5 "
                                 style=" background-image: url('{{ asset($productosd->imagen) }}')">
                             </div>
                             </div>
