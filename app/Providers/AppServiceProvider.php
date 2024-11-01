@@ -7,6 +7,7 @@ use App\Models\BeneficiosSinIntereses;
 use App\Models\Blog;
 use App\Models\CampanasPublicitarias;
 use App\Models\Category;
+use App\Models\ClientLogos;
 use App\Models\Discount;
 use App\Models\General;
 use App\Models\LibroReclamaciones;
@@ -90,7 +91,8 @@ class AppServiceProvider extends ServiceProvider
                 $query->whereHas('products');
             }])->get();
 
-
+            $marcas = ClientLogos::where('status', true)->where('visible', true)->get();
+                 
             $tags = Tag::where('is_menu', 1)
                 ->whereHas('productos')
                 ->get();
@@ -105,6 +107,7 @@ class AppServiceProvider extends ServiceProvider
                 'blog' => $blog,
                 'categoriasMenu' => $categoriasMenu,
                 'tags' => $tags,
+                'marcas' => $marcas,
                 'offerExists' => $offerExists,
                 'categorias' => $categorias,
             ]);

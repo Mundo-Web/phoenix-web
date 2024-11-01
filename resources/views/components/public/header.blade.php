@@ -326,7 +326,7 @@
                     @if (Auth::user() == null)
                         <a class="hidden md:flex" href="{{ route('login') }}">
                             {{-- <i class="fa-solid fa-user-large fa-xl text-white !leading-none"></i> --}}
-                            <img src="{{asset('images/svg/USER.svg')}}" class="text-white w-7" /></a>
+                            <img src="{{asset('images/svg/user.svg')}}" class="text-white w-7" /></a>
                         </a>
                     @else
                         <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
@@ -380,7 +380,7 @@
                             {{-- <img src="{{ asset('images/svg/bag_boost.svg') }}"
                     class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" /> --}}
                             {{-- <i class="fa-solid fa-suitcase-rolling fa-xl text-white !leading-none -mt-1"></i> --}}
-                            <img src="{{asset('images/svg/CARRITO.svg')}}" class="text-white w-7" /></a>
+                            <img src="{{asset('images/svg/carrito.svg')}}" class="text-white w-7" /></a>
                         </div>
                     </div>
                 </div>
@@ -397,43 +397,29 @@
               class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
               x-data="{ openCatalogo: false, openSubMenu: null }">
               
-              <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
+              <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium">
                 <span class="underline-this">HOMBRE</span>
                 <div id="productos-link-h" class="w-0"></div>
               </a>
 
-              <a href="{{ route('Catalogo.jsx') }}" class="font-medium other-class">
+              <a href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
                 <span class="underline-this">MUJER</span>
               </a>
 
-              <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class">
+              <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
                 <span class="underline-this">ACCESORIOS</span>
                 <div id="#" class="w-0"></div>
               </a>
 
-              {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium ">
-                <span class="underline-this">PRODUCTOS</span>
-                <div id="productos-link-h" class="w-0"></div>
-              </a> --}}
-
-              {{-- @if ($offerExists)
-                <a href="{{ route('Ofertas.jsx') }}" class="font-medium hover:opacity-75 other-class">
-                  <span class="underline-this">MARCAS</span>
-                </a>
-              @endif --}}
-
-              <a href="/contacto" class="font-medium hover:opacity-75 other-class">
+              <a id="productos-link2" class="font-medium">
                 <span class="underline-this">MARCAS</span>
+                <div id="productos-link-m" class="w-0"></div>
               </a>
-
-              <a href="/contacto" class="font-medium hover:opacity-75 bg-[#c1272d] text-white px-4 other-class">
-                <span class="underline-this">OUTLET</span>
-              </a>
-              
+             
               @if ($tags->count() > 0)
                 @foreach ($tags as $item)
-                  <a href="/catalogo?tag={{ $item->id }}" class="font-medium hover:opacity-75"
-                    style="color: {{ $item->color }}">
+                  <a href="/catalogo?tag={{ $item->id }}" class="font-medium text-white px-4 other-class other-class2"
+                    style="background-color: {{ $item->color }}">
                     <span class="">
                       {{ $item->name }} </span>
                   </a>
@@ -599,52 +585,52 @@
 </script>
 
 <script>
-    $(document).ready(function() {
-        if ({{ $isIndex ? 1 : 0 }}) {
-            $(window).scroll(function() {
-                var scroll = $(window).scrollTop();
-                var categoriasOffset = $('#categorias').offset().top;
+    // $(document).ready(function() {
+    //     if ({{ $isIndex ? 1 : 0 }}) {
+    //         $(window).scroll(function() {
+    //             var scroll = $(window).scrollTop();
+    //             var categoriasOffset = $('#categorias').offset().top;
 
-                const headerMenu = $('#header-menu')
-                const logo = $('#logo-decotab')
-                const items = $('#menu-items')
-                const username = $('#username')
-                const burguer = $('#menu-burguer')
-                if (scroll >= categoriasOffset) {
-                    headerMenu
-                        .removeClass('absolute bg-transparent text-white')
-                        .addClass('fixed top-0 bg-white shadow-lg');
-                    items
-                        .removeClass('text-white')
-                        .addClass('text-[#272727]')
-                    username
-                        .removeClass('text-white')
-                        .addClass('text-[#272727]')
-                    // burguer
-                    //   .removeClass('absolute')
-                    //   .addClass('fixed')
-                    logo.attr('src', 'images/svg/logo_decotab_header.svg')
-                    $('#header-menu svg').attr('stroke', '#272727');
-                } else {
-                    headerMenu
-                        .removeClass('fixed bg-white shadow-lg')
-                        .addClass('absolute bg-transparent text-white');
-                    items
-                        .removeClass('text-[#272727]')
-                        .addClass('text-white')
-                    username
-                        .removeClass('text-[#272727]')
-                        .addClass('text-white')
-                    // burguer
-                    //   .removeClass('fixed')
-                    //   .addClass('absolute')
-                    logo.attr('src', '')
-                    $('#header-menu svg').attr('stroke', 'white');
-                }
-            });
-        }
-        mostrarTotalItems()
-    })
+    //             const headerMenu = $('#header-menu')
+    //             const logo = $('#logo-decotab')
+    //             const items = $('#menu-items')
+    //             const username = $('#username')
+    //             const burguer = $('#menu-burguer')
+    //             if (scroll >= categoriasOffset) {
+    //                 headerMenu
+    //                     .removeClass('absolute bg-transparent text-white')
+    //                     .addClass('fixed top-0 bg-white shadow-lg');
+    //                 items
+    //                     .removeClass('text-white')
+    //                     .addClass('text-[#272727]')
+    //                 username
+    //                     .removeClass('text-white')
+    //                     .addClass('text-[#272727]')
+    //                 // burguer
+    //                 //   .removeClass('absolute')
+    //                 //   .addClass('fixed')
+    //                 logo.attr('src', 'images/svg/logo_decotab_header.svg')
+    //                 $('#header-menu svg').attr('stroke', '#272727');
+    //             } else {
+    //                 headerMenu
+    //                     .removeClass('fixed bg-white shadow-lg')
+    //                     .addClass('absolute bg-transparent text-white');
+    //                 items
+    //                     .removeClass('text-[#272727]')
+    //                     .addClass('text-white')
+    //                 username
+    //                     .removeClass('text-[#272727]')
+    //                     .addClass('text-white')
+    //                 // burguer
+    //                 //   .removeClass('fixed')
+    //                 //   .addClass('absolute')
+    //                 logo.attr('src', '')
+    //                 $('#header-menu svg').attr('stroke', 'white');
+    //             }
+    //         });
+    //     }
+    //     mostrarTotalItems()
+    // })
 </script>
 
 <script src="{{ asset('js/storage.extend.js') }}"></script>
@@ -868,6 +854,8 @@
         padre.innerHTML = '';
     }
 
+
+
     function aplicarDescuentosEnCarrito(articulosCarrito) {
         // Agrupar productos que tienen un discount_id
         let productosConDescuento = articulosCarrito.filter(item => item.discount_id !== null);
@@ -972,8 +960,6 @@
                     break;
             }
         }
-
-       
         return articulosCarrito;
     }
 
@@ -1129,10 +1115,75 @@
             console.error(error)
 
         }
-
-
     })
 
     
 </script>
+
+
+<script>
+    const marcas = @json($marcas);
+
+    $(document).ready(function() {
+        $(document).on('mouseenter', '.other-class2', function() {
+            cerrarmarca()
+        });
+    })
+    // Evento para mostrar el megamenú de marcas
+    document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
+        if (event.target === this) {
+                // Muestra submenú de marcas
+                let padre = document.getElementById('productos-link-m');
+                let divcontainer = document.createElement('div');
+                divcontainer.id = 'productos-link-m-container';
+                divcontainer.className =
+                    'absolute top-[219px] border-b-2 border-b-black z-[10] left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+
+                // Definimos el grid para las columnas
+                let gridContainer = document.createElement('div');
+                gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
+                gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
+                gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
+                gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
+                gridContainer.style.justifyItems = 'center';
+                gridContainer.style.justifyContent = 'center';
+                gridContainer.style.alignItems = 'center';
+
+                divcontainer.addEventListener('mouseenter', function() {
+                    this.addEventListener('mouseleave', cerrarmarca);
+                });
+
+                // Agregar cada marca al grid
+                marcas.forEach(marca => {
+                    let li = document.createElement('li');
+                    li.className =
+                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
+                    li.style.maxWidth = '150px'; // Ancho máximo de cada marca
+
+                    let a = document.createElement('a');
+                    a.href = `/catalogo?marcas=${marca.id}`;
+                    a.innerHTML = marca.title;
+                    a.className = 'w-full h-full text-center'; // Centrado del texto
+
+                    li.appendChild(a);
+                    gridContainer.appendChild(li);
+                });
+
+                divcontainer.appendChild(gridContainer);
+
+                if (!activeHover) {
+                    padre.appendChild(divcontainer);
+                    activeHover = true;
+                }
+            }
+    });
+    
+
+    function cerrarmarca() {
+        let padre = document.getElementById('productos-link-m');
+        activeHover = false;
+        padre.innerHTML = ''; // Limpia el contenido del menú
+    }
+</script>
+
 

@@ -131,7 +131,7 @@ class IndexController extends Controller
 
     $tags = Tag::where('visible', true)->where('status', true)->get();
 
-    $marcas = ClientLogos::where('status', true)->get();
+    $marcas = ClientLogos::where('status', true)->where('visible', true)->get();
 
     $colores = Products::select('color')->distinct()->pluck('color');
 
