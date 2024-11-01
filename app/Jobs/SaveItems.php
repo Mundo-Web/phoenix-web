@@ -77,9 +77,9 @@ class SaveItems implements ShouldQueue
         }
 
         // Searching or Creating a Brand
-        $brandJpa = ClientLogos::where('name', $item[7])->first();
+        $brandJpa = ClientLogos::where('title', $item[7])->first();
         if (!$brandJpa) {
-          $brandJpa = ClientLogos::create(['name' => $item[7]]);
+          $brandJpa = ClientLogos::create(['title' => $item[7]]);
         }
 
         $productJpa = Products::updateOrCreate([
