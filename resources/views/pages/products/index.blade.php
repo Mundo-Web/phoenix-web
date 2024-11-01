@@ -303,7 +303,7 @@
     formData.append('image_route_pattern', '{1}_{10}');
 
     $.ajax({
-      url: "{{ route('upload.items') }}",
+      url: "/api/upload/items",
       type: 'POST',
       headers: {
         'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
@@ -354,7 +354,7 @@
     language: "es",
     dataSource: {
       load: async (params) => {
-        const res = await fetch("{{ route('products.paginate') }}", {
+        const res = await fetch("/api/products/paginate", {
           method: 'POST',
           headers: {
             'Accept': 'application/json',
