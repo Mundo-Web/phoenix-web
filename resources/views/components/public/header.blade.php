@@ -411,7 +411,7 @@
                 <div id="#" class="w-0"></div>
               </a>
 
-              <a id="productos-link2" href="/contacto" class="font-medium">
+              <a id="productos-link2" class="font-medium">
                 <span class="underline-this">MARCAS</span>
                 <div id="productos-link-m" class="w-0"></div>
               </a>
