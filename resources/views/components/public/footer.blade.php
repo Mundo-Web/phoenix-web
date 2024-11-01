@@ -84,21 +84,21 @@
                  @if ($datosgenerales->instagram)
                     <a href="{{ $datosgenerales->instagram }}" target="_blank">
                         {{-- <i class="fa-brands fa-instagram fa-xl"></i> --}}
-                        <img class="w-5" src="{{asset('images/svg/INSTAGRAMWHITE.svg')}}" />
+                        <img class="w-5" src="{{asset('images/svg/instagramwhite.svg')}}" />
                     </a>
                 @endif
 
                 @if ($datosgenerales->tiktok)
                     <a href="{{ $datosgenerales->tiktok }}" target="_blank">
                         {{-- <i class="fa-brands fa-tiktok fa-xl"></i> --}}
-                        <img class="w-5" src="{{asset('images/svg/TIKTOK.svg')}}" />
+                        <img class="w-5" src="{{asset('images/svg/tiktok.svg')}}" />
                     </a>
                 @endif
 
                 @if ($datosgenerales->facebook)
                     <a href="{{ $datosgenerales->facebook }}" target="_blank">
                         {{-- <i class="fa-brands fa-facebook fa-xl"></i> --}}
-                        <img class="w-5" src="{{asset('images/svg/FACEBOOK.svg')}}" />
+                        <img class="w-5" src="{{asset('images/svg/facebook.svg')}}" />
                     </a>
                 @endif
                 
@@ -122,7 +122,7 @@
                 @endif --}}
                  @if ($datosgenerales->whatsapp)
                     <a href="https://api.whatsapp.com/send?phone={{ $datosgenerales->whatsapp }}&text={{ $datosgenerales->mensaje_whatsapp }}" target="_blank">
-                        <img class="w-5" src="{{asset('images/svg/WHATSAPP.svg')}}" /> 
+                        <img class="w-5" src="{{asset('images/svg/whatsapp.svg')}}" /> 
                     </a>
                 @endif
             </div>
@@ -139,7 +139,7 @@
             <div>
                 <a href="{{route('index')}}">
                     {{-- <h2 class="text-xl font-bold text-white tracking-widest font-Urbanist_Semibold">AMERICAN BRANDS</h2> --}}
-                    <img id="logo-boostperu" class="min-w-56 w-60" src="{{ asset('images/svg/LOGOAB.svg') }}" alt="american brands" />
+                    <img id="logo-boostperu" class="min-w-56 w-60" src="{{ asset('images/svg/logoab.svg') }}" alt="american brands" />
                 </a>
             </div>
 

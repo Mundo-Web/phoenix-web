@@ -326,7 +326,7 @@
                     @if (Auth::user() == null)
                         <a class="hidden md:flex" href="{{ route('login') }}">
                             {{-- <i class="fa-solid fa-user-large fa-xl text-white !leading-none"></i> --}}
-                            <img src="{{asset('images/svg/USER.svg')}}" class="text-white w-7" /></a>
+                            <img src="{{asset('images/svg/user.svg')}}" class="text-white w-7" /></a>
                         </a>
                     @else
                         <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
@@ -380,7 +380,7 @@
                             {{-- <img src="{{ asset('images/svg/bag_boost.svg') }}"
                     class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" /> --}}
                             {{-- <i class="fa-solid fa-suitcase-rolling fa-xl text-white !leading-none -mt-1"></i> --}}
-                            <img src="{{asset('images/svg/CARRITO.svg')}}" class="text-white w-7" /></a>
+                            <img src="{{asset('images/svg/carrito.svg')}}" class="text-white w-7" /></a>
                         </div>
                     </div>
                 </div>
