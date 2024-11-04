@@ -101,6 +101,12 @@ class SaveItems implements ShouldQueue
 
         $i = 0;
         Galerie::where('product_id', $productJpa->id)->delete();
+
+        if (\count($productImages) == 0) {
+          $productJpa->visible = false;
+          $productJpa->save();
+        }
+
         foreach ($productImages as $image) {
           try {
             $productImage = 'storage/images/products/' . $image;
