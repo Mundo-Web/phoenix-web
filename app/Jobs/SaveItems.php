@@ -120,7 +120,7 @@ class SaveItems implements ShouldQueue
 
         // Searching or Creating Tags
         $tags = array_map(fn($x) => trim($x), explode(',', $item[14] ?? ''));
-        ProductTag::where('producto_id')->delete();
+        ProductTag::where('producto_id', $productJpa->id)->delete();
         foreach ($tags as $tag) {
           if (Text::nullOrEmpty($tag)) continue;
           $tagJpa = Tag::where('name', $tag)->first();
