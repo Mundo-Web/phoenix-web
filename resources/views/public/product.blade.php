@@ -148,7 +148,7 @@
                     @endforeach --}}
                     <div class="flex flex-col">
                         <h3 class="font-Urbanist_Black text-3xl text-[#cccccc]">
-                            {{ $product->producto }}</h3>
+                            {{ $product->producto }}: <span class="text-xl"> {{ $product->color }} - {{ $product->peso }}</span></h3>
                         {{-- <p class="font-Inter_Regular text-base gap-2">Disponibilidad:
                             @if ($product->stock == 0)
                                 <span class="text-[#f6000c]">No hay Stock disponible</span>
@@ -331,13 +331,15 @@
                                         <div class="flex justify-center items-center">34</div>
                                     </div>
                               </div> --}}
-
-                            <div class="flex flex-row">
-                                <div class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
-                                    <img class="h-4 object-contain" src="{{ asset('images/img/ruler.png') }}" />
-                                    <p class="font-Urbanist_Bold text-sm">GUÍA DE TALLAS</p>
+                            @if ($product->category->img_talla)
+                                <div class="flex flex-row">
+                                    <div id="linkmodal" class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
+                                        <img class="h-4 object-contain" src="{{ asset('images/img/ruler.png') }}" />
+                                        <p class="font-Urbanist_Bold text-sm">GUÍA DE TALLAS</p>
+                                    </div>
                                 </div>
-                            </div>
+                            @endif    
+                            
                         </div>
 
 
@@ -462,7 +464,7 @@
                 </div>
             </div>
         </section>
-
+        
 
     @if (count($ProdComplementarios) > 0)
         <div class="px-[5%]">
@@ -477,7 +479,7 @@
                 <div class="mt-12">
                     <div class="swiper productos-relacionados h-max">
                         <div class="swiper-wrapper">
-                            @foreach ($ProdComplementarios as $item)
+                            @foreach ($ProdComplementarios->take(10) as $item)
                                 <div class="swiper-slide">
                                     <x-product.container width="col-span-1 " bgcolor="bg-[#FFFFFF]" :item="$item" />
                                 </div>
@@ -490,11 +492,39 @@
     @endif
        
 
+    <div id="modaltallas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
+        <!-- Modal body -->
+        <div  class="p-1 flex flex-col overflow-hidden">
+            <img id="zoomImage" class="object-contain w-full h-full" src="{{asset($product->category->img_talla)}}" />
+        </div>
+    </div>
 
     </main>
 
+    <style>
+        #zoomImage {
+            transition: transform 0.3s ease;
+        }
+    </style>
+
 @section('scripts_importados')
-    
+    <script>
+        const zoomImage = document.getElementById('zoomImage');
+
+        zoomImage.addEventListener('mousemove', (e) => {
+            const rect = zoomImage.getBoundingClientRect();
+            const x = e.clientX - rect.left; // Posición X del mouse en la imagen
+            const y = e.clientY - rect.top;  // Posición Y del mouse en la imagen
+
+            // Ajustar el nivel de zoom y la posición
+            zoomImage.style.transformOrigin = `${x}px ${y}px`;
+            zoomImage.style.transform = 'scale(1.5)'; // Ajusta el nivel de zoom según sea necesario
+        });
+
+        zoomImage.addEventListener('mouseleave', () => {
+            zoomImage.style.transform = 'scale(1)'; // Restaura el zoom al salir
+        });
+    </script>
     <script>
         var headerServices = new Swiper(".productos-relacionados", {
             slidesPerView: 4,
@@ -565,7 +595,16 @@
     </script>
     
     <script>
-     
+        $(document).ready(function() {
+
+            $(document).on('click', '#linkmodal', function() {
+            $('#modaltallas').modal({
+                show: true,
+                fadeDuration: 400,
+            })
+        })
+            
+        })
     </script>
 
     <script>

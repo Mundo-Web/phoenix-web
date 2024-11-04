@@ -21,11 +21,11 @@
             </div>
         </section> --}}
 
-    <section class="font-poppins my-8 md:my-16">
+    <section class="font-Urbanist_Regular my-8 md:my-16">
       <div class="flex flex-col gap-12 md:flex-row md:gap-16 lg:gap-28 w-full md:w-11/12 mx-auto">
         <x-side-section-dashboard :user="$user" />
 
-        <div class="basis-7/12 font-poppins w-11/12 md:w-full mx-auto">
+        <div class="basis-7/12 font-Urbanist_Regular w-11/12 md:w-full mx-auto">
           <h2 class="text-[#151515] font-semibold text-[20px]">
             Historial de pedidos
           </h2>

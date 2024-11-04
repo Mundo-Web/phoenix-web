@@ -6,13 +6,13 @@
 
 <style>
     .limited-text {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;  
-    overflow: hidden;
-    text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
-    
+
     nav a .underline-this {
         position: relative;
         overflow: hidden;
@@ -71,8 +71,8 @@
         z-index: 900;
     }
 
-    .productos-link-container{
-       z-index: 999;
+    .productos-link-container {
+        z-index: 999;
     }
 </style>
 
@@ -88,7 +88,7 @@
             <li>
                 <a href="/"
                     class="text-[#272727] font-medium font-Urbanist_Semibold text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $isIndex ? 'text-black' : '' }}">
-                    <span >
+                    <span>
                         <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                             viewBox="0 0 20 20">
@@ -196,7 +196,7 @@
                     </span></a>
             </li>
 
-             <li>
+            <li>
                 <a href="/"
                     class="text-black font-medium font-Urbanist_Semibold text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
                     <span>
@@ -237,7 +237,7 @@
             </h3>
         </div>
     @endforeach
-    
+
     {{-- <div
         class="bg-[#F5F5F7] h-10 flex lg:justify-end justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
         <div class="text-[#111111] font-Helvetica_Medium font-medium  text-end flex gap-5 text-sm">
@@ -285,11 +285,11 @@
 
     <div>
         <div id="header-menu" class="flex w-full px-[5%] py-2 flex-row text-[17px] relative bg-black">
-            
+
             {{-- Menu hamburguesa --}}
             <div id="menu-burguer" class="flex w-3/12 lg:hidden z-10 justify-start items-center">
-                <img class="h-9 w-9 cursor-pointer" src="{{ asset('images/svg/menubar.svg') }}"
-                    alt="menu hamburguesa" onclick="show()" />
+                <img class="h-9 w-9 cursor-pointer" src="{{ asset('images/svg/menubar.svg') }}" alt="menu hamburguesa"
+                    onclick="show()" />
             </div>
 
             {{-- Input Search --}}
@@ -312,10 +312,12 @@
                 </div>
             </div>
 
-            {{-- Logo--}}
+            {{-- Logo --}}
             <div class="w-9/12 flex items-center justify-center">
                 <a href="/">
-                    <img id="logo-boostperu" class="min-w-56 w-60" src="{{ asset($isIndex ? 'images/svg/LOGOAB.svg' : 'images/svg/LOGOAB.svg') }}" alt="american brands" />
+                    <img id="logo-boostperu" class="min-w-56 w-60"
+                        src="{{ asset($isIndex ? 'images/svg/LOGOAB.svg' : 'images/svg/LOGOAB.svg') }}"
+                        alt="american brands" />
                     {{-- <h2 class="text-2xl font-bold text-white tracking-widest font-Urbanist_Semibold text-center">AMERICAN BRANDS</h2> --}}
                 </a>
             </div>
@@ -326,17 +328,18 @@
                     @if (Auth::user() == null)
                         <a class="hidden md:flex" href="{{ route('login') }}">
                             {{-- <i class="fa-solid fa-user-large fa-xl text-white !leading-none"></i> --}}
-                            <img src="{{asset('images/svg/user.svg')}}" class="text-white w-7" /></a>
+                            <img src="{{ asset('images/svg/user.svg') }}" class="text-white w-7" /></a>
                         </a>
                     @else
                         <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
-                            <button class="px-3 py-5 inline-flex justify-center items-center group" aria-haspopup="true"
-                                @click.prevent="open = !open" :aria-expanded="open">
+                            <button class="px-3 py-5 inline-flex justify-center items-center group"
+                                aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
                                 <div class="flex items-center truncate">
                                     <span id="username"
                                         class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-white ">
                                         {{ explode(' ', Auth::user()->name)[0] }}</span>
-                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400" viewBox="0 0 12 12">
+                                    <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
+                                        viewBox="0 0 12 12">
                                         <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
                                     </svg>
                                 </div>
@@ -346,8 +349,8 @@
                                 <ul>
                                     <li class="hover:bg-gray-100">
                                         <a class="font-medium text-sm text-black flex items-center py-1 px-3"
-                                            href="{{ route('micuenta') }}" @click="open = false" @focus="open = true"
-                                            @focusout="open = false">Mi Cuenta</a>
+                                            href="{{ route('micuenta') }}" @click="open = false"
+                                            @focus="open = true" @focusout="open = false">Mi Cuenta</a>
                                     </li>
 
                                     <li class="hover:bg-gray-100">
@@ -380,68 +383,81 @@
                             {{-- <img src="{{ asset('images/svg/bag_boost.svg') }}"
                     class="bg-white rounded-lg p-1 max-w-full h-auto cursor-pointer" /> --}}
                             {{-- <i class="fa-solid fa-suitcase-rolling fa-xl text-white !leading-none -mt-1"></i> --}}
-                            <img src="{{asset('images/svg/carrito.svg')}}" class="text-white w-7" /></a>
+                            <img src="{{ asset('images/svg/carrito.svg') }}" class="text-white w-7" /></a>
                         </div>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </div>
 
 
     <div>
         <div class="hidden lg:flex items-center justify-center ">
-          <div>
-            <nav id="menu-items"
-              class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
-              x-data="{ openCatalogo: false, openSubMenu: null }">
-              
-              <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium">
+            <div>
+                <nav id="menu-items"
+                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
+                    x-data="{ openCatalogo: false, openSubMenu: null }">
+
+
+                    {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
                 <span class="underline-this">HOMBRE</span>
                 <div id="productos-link-h" class="w-0"></div>
               </a>
 
-              <a href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
+
+              <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
                 <span class="underline-this">MUJER</span>
+                <div id="productos-link-h" class="w-0"></div>
               </a>
 
               <a id="#" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
                 <span class="underline-this">ACCESORIOS</span>
-                <div id="#" class="w-0"></div>
-              </a>
+                <div id="productos-link-h" class="w-0"></div>
+              </a> --}}
 
-              <a id="productos-link2" class="font-medium">
-                <span class="underline-this">MARCAS</span>
-                <div id="productos-link-m" class="w-0"></div>
-              </a>
-             
-              @if ($tags->count() > 0)
-                @foreach ($tags as $item)
-                  <a href="/catalogo?tag={{ $item->id }}" class="font-medium text-white px-4 other-class other-class2"
-                    style="background-color: {{ $item->color }}">
-                    <span class="">
-                      {{ $item->name }} </span>
-                  </a>
-                @endforeach
-              @endif
+                    @foreach ($categorias as $categoria)
+                        <a id="categoria-{{ $categoria->id }}" href="{{ route('Catalogo.jsx') }}"
+                            class="font-medium  other-class2">
+                            <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
+                            <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
+                        </a>
+                    @endforeach
 
-            </nav>
-          </div>
-        </div> 
+                    <a id="productos-link2" class="font-medium">
+                        <span class="underline-this other-class">MARCAS</span>
+                        <div id="productos-link-m" class="w-0"></div>
+                    </a>
+
+                    @if ($tags->count() > 0)
+                        @foreach ($tags as $item)
+                            <a href="/catalogo?tag={{ $item->id }}"
+                                class="font-medium text-white px-4 other-class other-class2"
+                                style="background-color: {{ $item->color }}">
+                                <span class="">
+                                    {{ $item->name }} </span>
+                            </a>
+                        @endforeach
+                    @endif
+
+                </nav>
+            </div>
+        </div>
     </div>
 
 
     <div class="flex justify-end relative">
-        <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px] animate-bounce animate-twice"  >
-            <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $datosgenerales[0]->whatsapp }}&text={{ $datosgenerales[0]->mensaje_whatsapp }}"
+        <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px] animate-bounce animate-twice">
+            <a target="_blank"
+                href="https://api.whatsapp.com/send?phone={{ $datosgenerales[0]->whatsapp }}&text={{ $datosgenerales[0]->mensaje_whatsapp }}"
                 class="">
-                <img src="{{ asset('images/svg/botonwhatsapp.svg') }}" alt="whatsapp" class="w-16"  />
+                <img src="{{ asset('images/svg/botonwhatsapp.svg') }}" alt="whatsapp" class="w-16" />
             </a>
         </div>
     </div>
 
-   
+
 </header>
 
 
@@ -456,7 +472,8 @@
     <div class="p-4 flex flex-col h-[calc(100vh-2px)] justify-between gap-2">
         <div class="flex flex-col">
             <div class="flex justify-between ">
-                <h2 class="font-semibold font-Urbanist_Bold text-[28px] text-[#151515] tracking-tight pb-5">Carrito de compras</h2>
+                <h2 class="font-semibold font-Urbanist_Bold text-[28px] text-[#151515] tracking-tight pb-5">Carrito de
+                    compras</h2>
                 <div id="close-cart" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -479,7 +496,8 @@
             </div>
             <div>
                 <a href="/carrito"
-                    class="font-normal font-Urbanist_Bold text-lg bg-black  py-3 px-5 rounded-none text-white cursor-pointer w-full inline-block text-center">Ir al
+                    class="font-normal font-Urbanist_Bold text-lg bg-black  py-3 px-5 rounded-none text-white cursor-pointer w-full inline-block text-center">Ir
+                    al
                     carrito</a>
             </div>
         </div>
@@ -488,24 +506,24 @@
 
 
 <script>
-  @auth
-  $(document).ready(function() {
-    let name = "{{ Auth::user()->name }}" ?? ''
-    let lastname = "{{ Auth::user()->lastname }}" ?? ''
-    lastname = lastname.toLowerCase()
-    let [firstName, SecondName] = name.split(' ')
-    let [firstLName, SecondLName] = lastname.split(' ')
+    @auth
+    $(document).ready(function() {
+        let name = "{{ Auth::user()->name }}" ?? ''
+        let lastname = "{{ Auth::user()->lastname }}" ?? ''
+        lastname = lastname.toLowerCase()
+        let [firstName, SecondName] = name.split(' ')
+        let [firstLName, SecondLName] = lastname.split(' ')
 
 
-    firstLName = firstLName ? firstLName.charAt(0).toUpperCase() + firstLName.slice(1) : ''
-    SecondLName = SecondLName ? SecondLName.charAt(0).toUpperCase() + SecondLName.slice(1) : ''
+        firstLName = firstLName ? firstLName.charAt(0).toUpperCase() + firstLName.slice(1) : ''
+        SecondLName = SecondLName ? SecondLName.charAt(0).toUpperCase() + SecondLName.slice(1) : ''
 
-    $('#usernamelogin').text(
-      `${firstName ? firstName : ''} ${SecondName ? SecondName : ''} ${firstLName ? firstLName : ''} ${SecondLName ? SecondLName : ''}`
-    )
+        $('#usernamelogin').text(
+            `${firstName ? firstName : ''} ${SecondName ? SecondName : ''} ${firstLName ? firstLName : ''} ${SecondLName ? SecondLName : ''}`
+        )
 
-  })
-  @endauth
+    })
+    @endauth
 </script>
 
 <script>
@@ -550,9 +568,9 @@
                   <img class="w-20 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
                 </div>
                 <div class="flex flex-col justify-center w-[60%] px-2 line-clamp-2">
-                  <h2 class="text-left text-[12px] line-clamp-2">${result.producto}</h2>
+                  <h2 class="text-left text-[12px] font-Urbanist_Regular line-clamp-2">${result.producto}</h2>
                 </div>
-                <div class="flex flex-col justify-center w-[15%]">
+                <div class="flex flex-col justify-center w-[15%] font-Urbanist_Regular">
                   <p class="text-right w-max text-[14px] ">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
                   ${discount > 0 ? `<p class="text-[12px] text-right line-through text-slate-500 w-max">S/ ${price.toFixed(2)}</p>` : ''}
                 </div>
@@ -784,7 +802,7 @@
     });
 </script>
 
-<script>
+{{-- <script>
     $(document).ready(function() {
         $(document).on('mouseenter', '.other-class', function() {
             cerrar()
@@ -854,8 +872,155 @@
         padre.innerHTML = '';
     }
 
+</script> --}}
+
+<script>
+    const categorias = @json($categorias);
+    const marcas = @json($marcas);
+    var activeHover = false;
+
+    function cerrarmarca() {
+        let padre = document.getElementById('productos-link-m');
+        activeHover = false;
+        padre.innerHTML = ''; // Limpia el contenido del menú
+    }
+
+    $(document).ready(function() {
+        $(document).on('mouseenter', '.other-class', function() {
+            cerrar();
+        });
+        $(document).on('mouseenter', '.other-class2', function() {
+            cerrarmarca();
+        });
+    });
 
 
+    categorias.forEach(categoria => {
+        document.getElementById(`categoria-${categoria.id}`).addEventListener('mouseenter', function(event) {
+            if (event.target === this) {
+                // Obtener el contenedor específico de la categoría
+                let padre = document.getElementById(`productos-link-${categoria.id}`);
+
+                // Crear contenedor del mega menú
+                let divcontainer = document.createElement('div');
+                divcontainer.id = `productos-link-container-${categoria.id}`;
+                divcontainer.className =
+                    'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+
+                // Definimos el grid para las columnas de subcategorías
+                let gridContainer = document.createElement('div');
+                gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
+                gridContainer.style.gridTemplateColumns =
+                'repeat(auto-fill, 150px)'; // Columnas de 150px
+                gridContainer.style.gridAutoRows = 'auto';
+                gridContainer.style.maxWidth = '80%'; // Ancho máximo del contenedor
+                gridContainer.style.justifyItems = 'center';
+                gridContainer.style.justifyContent = 'center';
+                gridContainer.style.alignItems = 'center';
+
+                divcontainer.addEventListener('mouseenter', function() {
+                    this.addEventListener('mouseleave', cerrar);
+                });
+
+
+                // Agregar cada subcategoría al grid
+                categoria.subcategories.forEach(subcategoria => {
+                    let li = document.createElement('li');
+                    li.className =
+                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
+                    li.style.maxWidth = '150px';
+
+                    // Crear enlace de subcategoría
+                    let a = document.createElement('a');
+                    a.href = `/catalogo?subcategoria=${subcategoria.id}`;
+                    a.innerHTML = subcategoria.name;
+                    a.className = 'w-full h-full text-center';
+
+                    li.appendChild(a);
+                    gridContainer.appendChild(li);
+                });
+
+                divcontainer.appendChild(gridContainer);
+
+                // Limpiar hijos y agregar el contenedor
+                if (!activeHover) {
+                    padre.appendChild(divcontainer);
+                    activeHover = true;
+                }
+            }
+        });
+    });
+
+
+    document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
+        if (event.target === this) {
+            // Muestra submenú de marcas
+            let padre = document.getElementById('productos-link-m');
+            let divcontainer = document.createElement('div');
+            divcontainer.id = 'productos-link-m-container';
+            divcontainer.className =
+                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+
+            // Definimos el grid para las columnas
+            let gridContainer = document.createElement('div');
+            gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
+            gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
+            gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
+            gridContainer.style.justifyItems = 'center';
+            gridContainer.style.justifyContent = 'center';
+            gridContainer.style.alignItems = 'center';
+
+            divcontainer.addEventListener('mouseenter', function() {
+                this.addEventListener('mouseleave', cerrarmarca);
+            });
+
+            // Agregar cada marca al grid
+            marcas.forEach(marca => {
+                let li = document.createElement('li');
+                li.className =
+                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
+                li.style.maxWidth = '150px'; // Ancho máximo de cada marca
+
+                let a = document.createElement('a');
+                a.href = `/catalogo?marcas=${marca.id}`;
+                a.innerHTML = marca.title;
+                a.className = 'w-full h-full text-center'; // Centrado del texto
+
+                li.appendChild(a);
+                gridContainer.appendChild(li);
+            });
+
+            divcontainer.appendChild(gridContainer);
+
+            if (!activeHover) {
+                padre.appendChild(divcontainer);
+                activeHover = true;
+            }
+        }
+    });
+
+    function cerrar() {
+    categorias.forEach(categoria => {
+        let padre = document.getElementById(`productos-link-${categoria.id}`);
+        let megaMenu = document.getElementById(`productos-link-container-${categoria.id}`);
+        if (megaMenu) {
+            padre.removeChild(megaMenu);
+        }
+    });
+
+    // También cerramos el menú de marcas si está abierto
+    let marcasMenu = document.getElementById('productos-link-m-container');
+    if (marcasMenu) {
+        document.getElementById('productos-link-m').removeChild(marcasMenu);
+    }
+
+    activeHover = false;
+}
+</script>
+
+
+<script>
     function aplicarDescuentosEnCarrito(articulosCarrito) {
         // Agrupar productos que tienen un discount_id
         let productosConDescuento = articulosCarrito.filter(item => item.discount_id !== null);
@@ -874,7 +1039,7 @@
             gruposDescuentos[item.discount_id].productos.push(item);
         });
 
-        
+
 
         // Aplicar descuentos a cada grupo
         for (let discount_id in gruposDescuentos) {
@@ -885,7 +1050,7 @@
             let descuentoTipo = grupo.type_id;
             let productosDeMismoNombre = {}
 
-         
+
 
             grupo.productos.forEach(item => {
                 if (!productosDeMismoNombre[item.producto]) {
@@ -893,10 +1058,11 @@
                         productosf: [], // Lista de productos con el mismo nombre
                     };
                 }
-                productosDeMismoNombre[item.producto].productosf.push(item); // Agregar productos al grupo por nombre
+                productosDeMismoNombre[item.producto].productosf.push(
+                item); // Agregar productos al grupo por nombre
             });
 
-           
+
 
             switch (descuentoTipo) {
                 case 1: // Descuento por Unidad
@@ -905,17 +1071,19 @@
                         let cantidadTotalPorNombre = productos.reduce((total, item) => total + item.cantidad, 0);
 
                         if (cantidadTotalPorNombre >= take_product) {
-                            let cantidadADescontar = Math.floor(cantidadTotalPorNombre / take_product) * (take_product - payment_product);
+                            let cantidadADescontar = Math.floor(cantidadTotalPorNombre / take_product) * (take_product -
+                                payment_product);
                             let productosRestantes = cantidadADescontar;
-                            
+
                             productos.forEach(item => {
                                 let cantidadProducto = item.cantidad;
                                 // Aplicar descuento a los productos
                                 if (cantidadADescontar > 0 && item.cantidad >= take_product) {
                                     // En este caso, pagas por 1 producto de cada 2
-              
-                                    item.recalcularcuando = 
-                                    item.precioFinal = item.precio * payment_product / take_product; // Precio ajustado
+
+                                    item.recalcularcuando =
+                                        item.precioFinal = item.precio * payment_product /
+                                        take_product; // Precio ajustado
                                     cantidadADescontar -= item.cantidad;
                                 } else {
                                     item.precioFinal = item.precio; // Sin descuento
@@ -927,7 +1095,7 @@
 
                 case 2: // Descuento Porcentual
                     if (cantidadTotal >= take_product) {
-                        let porcentajeDescuento = payment_product / 100; 
+                        let porcentajeDescuento = payment_product / 100;
                         grupo.productos.forEach(producto => {
                             producto.precioFinal = producto.precio * porcentajeDescuento;
                         });
@@ -936,24 +1104,24 @@
 
                 case 3: // Descuento por Precio Fijo
                     if (cantidadTotal >= take_product) {
-                        
+
                         let grupos = Math.floor(cantidadTotal / take_product);
                         let totalProductosConDescuento = grupos * payment_product;
                         let totalProductosSinDescuento = cantidadTotal % take_product;
 
                         grupo.productos.forEach(producto => {
                             if (totalProductosConDescuento > 0) {
-                                producto.precioFinal = payment_product / take_product; 
+                                producto.precioFinal = payment_product / take_product;
                                 totalProductosConDescuento -= producto.cantidad;
                             } else {
-                                producto.precioFinal = producto.precio; 
+                                producto.precioFinal = producto.precio;
                             }
                         });
                     }
                     break;
 
                 default:
-                   
+
                     grupo.productos.forEach(producto => {
                         producto.precioFinal = producto.precio;
                     });
@@ -996,11 +1164,11 @@
 
                 if (discount_id && discount) {
                     // Si existe un descuento, desestructuramos las propiedades
-                    ({ 
-                        take_product, 
-                        payment_product, 
-                        type_id, 
-                        status 
+                    ({
+                        take_product,
+                        payment_product,
+                        type_id,
+                        status
                     } = discount);
                 } else {
                     // Si no existe descuento, inicializamos las variables con valores por defecto
@@ -1017,7 +1185,7 @@
                 }*/
 
                 let cantidad = Number(success.cantidad)
-                
+
                 let detalleProducto = {
                     id,
                     producto,
@@ -1030,10 +1198,10 @@
                     peso,
                     discount_id,
                     discount,
-                    take_product, 
-                    payment_product, 
-                    type_id, 
-                    status 
+                    take_product,
+                    payment_product,
+                    type_id,
+                    status
                 }
 
 
@@ -1081,7 +1249,7 @@
 
         })
     }
-    
+
     $(document).on('click', '#btnAgregarCarritoPr', function() {
         //let url = window.location.href;
         //let partesURL = url.split('/');
@@ -1116,74 +1284,19 @@
 
         }
     })
-
-    
 </script>
-
 
 <script>
-    const marcas = @json($marcas);
+     document.addEventListener('click', function(event) {
+      var input = document.getElementById('buscarproducto');
+      var resultados = document.getElementById('resultados');
+      var isClickInsideInput = input.contains(event.target);
+      var isClickInsideResultados = resultados.contains(event.target);
 
-    $(document).ready(function() {
-        $(document).on('mouseenter', '.other-class2', function() {
-            cerrarmarca()
-        });
-    })
-    // Evento para mostrar el megamenú de marcas
-    document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
-        if (event.target === this) {
-                // Muestra submenú de marcas
-                let padre = document.getElementById('productos-link-m');
-                let divcontainer = document.createElement('div');
-                divcontainer.id = 'productos-link-m-container';
-                divcontainer.className =
-                    'absolute top-[219px] border-b-2 border-b-black z-[10] left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
-
-                // Definimos el grid para las columnas
-                let gridContainer = document.createElement('div');
-                gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
-                gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
-                gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
-                gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
-                gridContainer.style.justifyItems = 'center';
-                gridContainer.style.justifyContent = 'center';
-                gridContainer.style.alignItems = 'center';
-
-                divcontainer.addEventListener('mouseenter', function() {
-                    this.addEventListener('mouseleave', cerrarmarca);
-                });
-
-                // Agregar cada marca al grid
-                marcas.forEach(marca => {
-                    let li = document.createElement('li');
-                    li.className =
-                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
-                    li.style.maxWidth = '150px'; // Ancho máximo de cada marca
-
-                    let a = document.createElement('a');
-                    a.href = `/catalogo?marcas=${marca.id}`;
-                    a.innerHTML = marca.title;
-                    a.className = 'w-full h-full text-center'; // Centrado del texto
-
-                    li.appendChild(a);
-                    gridContainer.appendChild(li);
-                });
-
-                divcontainer.appendChild(gridContainer);
-
-                if (!activeHover) {
-                    padre.appendChild(divcontainer);
-                    activeHover = true;
-                }
-            }
-    });
-    
-
-    function cerrarmarca() {
-        let padre = document.getElementById('productos-link-m');
-        activeHover = false;
-        padre.innerHTML = ''; // Limpia el contenido del menú
-    }
+      if (!isClickInsideInput && !isClickInsideResultados) {
+          input.value = '';
+          $('#resultados').empty();
+      }
+  });
 </script>
-
 

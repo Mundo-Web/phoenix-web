@@ -117,16 +117,16 @@
           container.addClass('!px-3 !py-2')
           const div = $('<div>')
           const orderContainer = $('<a>', {
-            class: 'block text-sm font-medium truncate dark:text-white text-blue-500 cursor-pointer max-w-max',
+            class: 'block text-sm font-Urbanist_Regular truncate dark:text-white text-blue-500 cursor-pointer max-w-max',
             text: `#${data.code}`
           })
           if (data.confirmation_client) {
-            orderContainer.append(`<span class="ms-1 inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-green-900 dark:text-green-300 w-max" title="El cliente confirmo la recepcion del producto" tippy>
+            orderContainer.append(`<span class="ms-1 inline-flex items-center bg-green-100 text-green-800 text-xs font-Urbanist_Regular px-2.5 py-1 rounded-full dark:bg-green-900 dark:text-green-300 w-max" title="El cliente confirmo la recepcion del producto" tippy>
               <i class="fa fa-solid fa-user-check"></i>  
             </span>`)
           }
           if (data.confirmation_user) {
-            orderContainer.append(`<span class="ms-1 inline-flex items-center bg-green-100 text-green-800 text-xs font-medium px-2.5 py-1 rounded-full dark:bg-green-900 dark:text-green-300 w-max" title="El vendedor confirmo la entrega del producto" tippy>
+            orderContainer.append(`<span class="ms-1 inline-flex items-center bg-green-100 text-green-800 text-xs font-Urbanist_Regular px-2.5 py-1 rounded-full dark:bg-green-900 dark:text-green-300 w-max" title="El vendedor confirmo la entrega del producto" tippy>
               <i class="fa fa-solid fa-check-to-slot"></i>  
             </span>`)
           }
@@ -160,7 +160,7 @@
           container.addClass('!px-3 !py-2 !text-center')
           container.css('vertical-align', 'middle')
           container.html(
-            `<span class="inline-flex items-center bg-[${data.status?.color ?? '#000000'}77] text-[${data.status?.color ?? '#000000'}30] text-xs font-medium px-2.5 py-0.5 rounded-full dark:bg-[${data.status?.color ?? '#000000'}22] dark:text-[${data.status?.color ?? '#000000'}bb] w-max">${data.status?.name ?? 'Sin estado'}</span>`
+            `<span class="inline-flex items-center bg-[${data.status?.color ?? '#000000'}77] text-[${data.status?.color ?? '#000000'}30] text-xs font-Urbanist_Regular px-2.5 py-0.5 rounded-full dark:bg-[${data.status?.color ?? '#000000'}22] dark:text-[${data.status?.color ?? '#000000'}bb] w-max">${data.status?.name ?? 'Sin estado'}</span>`
           )
         }
       },
