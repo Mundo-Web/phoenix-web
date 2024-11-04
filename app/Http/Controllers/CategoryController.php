@@ -77,6 +77,29 @@ class CategoryController extends Controller
             $body['name_image'] = $nombreImagen;
         }
 
+        if ($request->hasFile("img_talla")) {
+
+            $manager = new ImageManager(Driver::class);
+
+            $nombreImagen = Str::random(10) . '_' . $request->file('img_talla')->getClientOriginalName();
+
+            $img =  $manager->read($request->file('img_talla'));
+
+            // Obtener las dimensiones de la imagen que se esta subiendo
+            // $img->coverDown(640, 640, 'center');
+
+            $ruta = 'storage/images/categories/';
+
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+            }
+
+            $img->save($ruta . $nombreImagen);
+
+            $body['img_talla'] = $ruta . $nombreImagen;
+            
+        }
+
         $slug = strtolower(str_replace(' ', '-', $request->name));
 
         if (Category::where('slug', $slug)->exists()) {

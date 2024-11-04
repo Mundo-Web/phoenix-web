@@ -905,7 +905,7 @@
                 let divcontainer = document.createElement('div');
                 divcontainer.id = `productos-link-container-${categoria.id}`;
                 divcontainer.className =
-                    'absolute top-[219px] border-b-2 border-b-black z-[10] left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+                    'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
                 // Definimos el grid para las columnas de subcategorías
                 let gridContainer = document.createElement('div');
@@ -959,7 +959,7 @@
             let divcontainer = document.createElement('div');
             divcontainer.id = 'productos-link-m-container';
             divcontainer.className =
-                'absolute top-[219px] border-b-2 border-b-black z-[10] left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
             // Definimos el grid para las columnas
             let gridContainer = document.createElement('div');
@@ -1284,5 +1284,19 @@
 
         }
     })
+</script>
+
+<script>
+     document.addEventListener('click', function(event) {
+      var input = document.getElementById('buscarproducto');
+      var resultados = document.getElementById('resultados');
+      var isClickInsideInput = input.contains(event.target);
+      var isClickInsideResultados = resultados.contains(event.target);
+
+      if (!isClickInsideInput && !isClickInsideResultados) {
+          input.value = '';
+          $('#resultados').empty();
+      }
+  });
 </script>
 

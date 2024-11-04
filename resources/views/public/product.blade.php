@@ -148,7 +148,7 @@
                     @endforeach --}}
                     <div class="flex flex-col">
                         <h3 class="font-Urbanist_Black text-3xl text-[#cccccc]">
-                            {{ $product->producto }}</h3>
+                            {{ $product->producto }}: <span> {{ $product->color }} - {{ $product->peso }}</span></h3>
                         {{-- <p class="font-Inter_Regular text-base gap-2">Disponibilidad:
                             @if ($product->stock == 0)
                                 <span class="text-[#f6000c]">No hay Stock disponible</span>
@@ -333,7 +333,8 @@
                               </div> --}}
 
                             <div class="flex flex-row">
-                                <div class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
+                               
+                                <div id="imagentallas" class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
                                     <img class="h-4 object-contain" src="{{ asset('images/img/ruler.png') }}" />
                                     <p class="font-Urbanist_Bold text-sm">GUÍA DE TALLAS</p>
                                 </div>
@@ -490,6 +491,12 @@
     @endif
        
 
+    <div id="modaltallas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
+        <!-- Modal body -->
+        <div class="p-4 flex flex-col gap-2">
+            {{-- <img src="{{$product->}}" /> --}}
+        </div>
+    </div>
 
     </main>
 
