@@ -112,7 +112,7 @@
   <script>
     $('document').ready(function() {
 
-      new DataTable('#tabladatos', {
+      let table = new DataTable('#tabladatos', {
             ordering:false,
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
             layout: {
@@ -207,7 +207,7 @@
       });
 
 
-      $(".btn_swithc").on("change", function() {
+      $("#tabladatos").on("change", ".btn_swithc", function() {
 
         var status = 0;
         var id = $(this).attr('data-idService');
