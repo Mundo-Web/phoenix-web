@@ -69,10 +69,10 @@ class SaveItems implements ShouldQueue
         // }
 
         // Searching or Creating a Subcategory
-        $subcategoryJpa = SubCategory::select()
-          ->where('category_id', $categoryJpa->id)
-          ->where('name', $item[6])
-          ->first();
+        // $subcategoryJpa = SubCategory::select()
+        //   ->where('category_id', $categoryJpa->id)
+        //   ->where('name', $item[6])
+        //   ->first();
 
         $subcategoryJpa = SubCategory::updateOrCreate([
           'category_id' => $categoryJpa->id,
@@ -91,10 +91,16 @@ class SaveItems implements ShouldQueue
         // }
 
         // Searching or Creating a Brand
-        $brandJpa = ClientLogos::where('title', $item[7])->first();
-        if (!$brandJpa) {
-          $brandJpa = ClientLogos::create(['title' => $item[7]]);
-        }
+        // $brandJpa = ClientLogos::where('title', $item[7])->first();
+        // if (!$brandJpa) {
+        //   $brandJpa = ClientLogos::create(['title' => $item[7]]);
+        // }
+
+        $brandJpa = ClientLogos::updateOrCreate([
+          'title' => $item[7]
+        ], [
+          'title' => $item[7]
+        ]);
 
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
