@@ -55,26 +55,40 @@ class SaveItems implements ShouldQueue
         $productImages = \array_filter($images, fn($image) => Text::startsWith($image, $imageRoute));
 
         // Searching or Creating a Category
-        $categoryJpa = Category::where('name', $item[5])->first();
-        if (!$categoryJpa) {
-          $categoryJpa = Category::create([
-            'name' => $item[5],
-            'slug' => Str::slug($item[5])
-          ]);
-        }
+        $categoryJpa = Category::updateOrCreate([
+          'name' => $item[5]
+        ], [
+          'name' => $item[5],
+          'slug' => Str::slug($item[5])
+        ]);
+        // if (!$categoryJpa) {
+        //   $categoryJpa = Category::create([
+        //     'name' => $item[5],
+        //     'slug' => Str::slug($item[5])
+        //   ]);
+        // }
 
         // Searching or Creating a Subcategory
         $subcategoryJpa = SubCategory::select()
           ->where('category_id', $categoryJpa->id)
           ->where('name', $item[6])
           ->first();
-        if (!$subcategoryJpa) {
-          $subcategoryJpa = SubCategory::create([
-            'category_id' => $categoryJpa->id,
-            'name' => $item[6],
-            'slug' => Str::slug($item[6])
-          ]);
-        }
+
+        $subcategoryJpa = SubCategory::updateOrCreate([
+          'category_id' => $categoryJpa->id,
+          'name' => $item[6]
+        ], [
+          'category_id' => $categoryJpa->id,
+          'name' => $item[6],
+          'slug' => Str::slug($item[6])
+        ]);
+        // if (!$subcategoryJpa) {
+        //   $subcategoryJpa = SubCategory::create([
+        //     'category_id' => $categoryJpa->id,
+        //     'name' => $item[6],
+        //     'slug' => Str::slug($item[6])
+        //   ]);
+        // }
 
         // Searching or Creating a Brand
         $brandJpa = ClientLogos::where('title', $item[7])->first();
