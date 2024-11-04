@@ -44,12 +44,16 @@ class SaveItems implements ShouldQueue
     try {
       $images = File::scan($path2search);
     } catch (\Throwable $th) {
-      // dump($th->getMessage());
+      dump($th->getMessage());
     }
 
-    Category::where('visible', 1)->update(['visible', 0]);
-    SubCategory::where('visible', 1)->update(['visible', 0]);
-    ClientLogos::where('visible', 1)->update(['visible', 0]);
+    try {
+      Category::where('visible', 1)->update(['visible', 0]);
+      SubCategory::where('visible', 1)->update(['visible', 0]);
+      ClientLogos::where('visible', 1)->update(['visible', 0]);
+    } catch (\Throwable $th) {
+      dump($th->getMessage());
+    }
 
     foreach ($this->items as $item) {
       try {
@@ -148,7 +152,7 @@ class SaveItems implements ShouldQueue
               ]);
             }
           } catch (\Throwable $th) {
-            // dump($th->getMessage());
+            dump($th->getMessage());
           }
           $i++;
         }
@@ -181,10 +185,10 @@ class SaveItems implements ShouldQueue
           ]);
         }
       } catch (\Throwable $th) {
-        // dump($th->getMessage());
+        dump($th->getMessage());
       }
     }
 
-    // \dump('Finalizó la carga masiva');
+    dump('Finalizó la carga masiva');
   }
 }
