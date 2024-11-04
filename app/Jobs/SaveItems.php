@@ -47,6 +47,10 @@ class SaveItems implements ShouldQueue
       // dump($th->getMessage());
     }
 
+    Category::where('visible', 1)->update('visible', 0);
+    SubCategory::where('visible', 1)->update('visible', 0);
+    ClientLogos::where('visible', 1)->update('visible', 0);
+
     foreach ($this->items as $item) {
       try {
         $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
@@ -54,12 +58,14 @@ class SaveItems implements ShouldQueue
 
         $productImages = \array_filter($images, fn($image) => Text::startsWith($image, $imageRoute));
 
+        
         // Searching or Creating a Category
         $categoryJpa = Category::updateOrCreate([
           'name' => $item[5]
         ], [
           'name' => $item[5],
-          'slug' => Str::slug($item[5])
+          'slug' => Str::slug($item[5]),
+          'visible' => 1
         ]);
         // if (!$categoryJpa) {
         //   $categoryJpa = Category::create([
@@ -73,14 +79,15 @@ class SaveItems implements ShouldQueue
         //   ->where('category_id', $categoryJpa->id)
         //   ->where('name', $item[6])
         //   ->first();
-
+        
         $subcategoryJpa = SubCategory::updateOrCreate([
           'category_id' => $categoryJpa->id,
           'name' => $item[6]
         ], [
           'category_id' => $categoryJpa->id,
           'name' => $item[6],
-          'slug' => Str::slug($item[6])
+          'slug' => Str::slug($item[6]),
+          'visible' => 1
         ]);
         // if (!$subcategoryJpa) {
         //   $subcategoryJpa = SubCategory::create([
@@ -95,11 +102,12 @@ class SaveItems implements ShouldQueue
         // if (!$brandJpa) {
         //   $brandJpa = ClientLogos::create(['title' => $item[7]]);
         // }
-
+        
         $brandJpa = ClientLogos::updateOrCreate([
           'title' => $item[7]
         ], [
-          'title' => $item[7]
+          'title' => $item[7],
+          'visible' => 1
         ]);
 
         $productJpa = Products::updateOrCreate([
