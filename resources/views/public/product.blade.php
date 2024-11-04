@@ -477,7 +477,7 @@
                 <div class="mt-12">
                     <div class="swiper productos-relacionados h-max">
                         <div class="swiper-wrapper">
-                            @foreach ($ProdComplementarios as $item)
+                            @foreach ($ProdComplementarios->take(10) as $item)
                                 <div class="swiper-slide">
                                     <x-product.container width="col-span-1 " bgcolor="bg-[#FFFFFF]" :item="$item" />
                                 </div>
