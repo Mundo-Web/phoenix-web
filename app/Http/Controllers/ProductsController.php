@@ -76,7 +76,8 @@ class ProductsController extends Controller
         //         ->from('products')
         //         ->groupBy('producto');  
         // })
-        ->where('categories.visible', 1);
+        ->where('categories.visible', 1)
+        ->where('products.status', 1);
 
 
         
