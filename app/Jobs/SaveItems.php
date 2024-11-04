@@ -47,9 +47,9 @@ class SaveItems implements ShouldQueue
       // dump($th->getMessage());
     }
 
-    Category::where('visible', 1)->update('visible', 0);
-    SubCategory::where('visible', 1)->update('visible', 0);
-    ClientLogos::where('visible', 1)->update('visible', 0);
+    Category::where('visible', 1)->update(['visible', 0]);
+    SubCategory::where('visible', 1)->update(['visible', 0]);
+    ClientLogos::where('visible', 1)->update(['visible', 0]);
 
     foreach ($this->items as $item) {
       try {
