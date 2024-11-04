@@ -48,9 +48,9 @@ class SaveItems implements ShouldQueue
     }
 
     try {
-      Category::where('visible', 1)->update(['visible', 0]);
-      SubCategory::where('visible', 1)->update(['visible', 0]);
-      ClientLogos::where('visible', 1)->update(['visible', 0]);
+      Category::where('visible', 1)->update(['visible' => 0]);
+      SubCategory::where('visible', 1)->update(['visible' => 0]);
+      ClientLogos::where('visible', 1)->update(['visible' => 0]);
     } catch (\Throwable $th) {
       dump($th->getMessage());
     }
