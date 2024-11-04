@@ -913,7 +913,7 @@
                 gridContainer.style.gridTemplateColumns =
                 'repeat(auto-fill, 150px)'; // Columnas de 150px
                 gridContainer.style.gridAutoRows = 'auto';
-                gridContainer.style.maxWidth = '60%'; // Ancho máximo del contenedor
+                gridContainer.style.maxWidth = '80%'; // Ancho máximo del contenedor
                 gridContainer.style.justifyItems = 'center';
                 gridContainer.style.justifyContent = 'center';
                 gridContainer.style.alignItems = 'center';
