@@ -148,7 +148,7 @@
                     @endforeach --}}
                     <div class="flex flex-col">
                         <h3 class="font-Urbanist_Black text-3xl text-[#cccccc]">
-                            {{ $product->producto }}: <span> {{ $product->color }} - {{ $product->peso }}</span></h3>
+                            {{ $product->producto }}: <span class="text-xl"> {{ $product->color }} - {{ $product->peso }}</span></h3>
                         {{-- <p class="font-Inter_Regular text-base gap-2">Disponibilidad:
                             @if ($product->stock == 0)
                                 <span class="text-[#f6000c]">No hay Stock disponible</span>
