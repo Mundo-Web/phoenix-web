@@ -10,7 +10,7 @@
 
 
   <main>
-    <form id="modal-address" class="!max-w-[600px]" style="display: none; padding: 0">
+    <form id="modal-address" class="!max-w-[600px] font-Urbanist_Regular" style="display: none; padding: 0">
       @csrf
       <input type="hidden" id="id" name="id" value="">
       <div class="flex flex-col gap-4 p-8">
@@ -87,7 +87,7 @@
           </div>
         </div>
         <button type="submit"
-          class="w-max text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          class="w-max text-white bg-[#000000] hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
           Agregar direccion
           <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
             fill="none" viewBox="0 0 14 10">
@@ -99,17 +99,17 @@
     </form>
 
     <!--  -->
-    <section class="font-poppins my-8 md:my-16">
+    <section class="font-Urbanist_Regular my-8 md:my-16">
       <div class="flex flex-col gap-12 md:flex-row md:gap-24 w-full md:w-11/12 mx-auto">
         <x-side-section-dashboard :user="$user" />
 
-        <div class="basis-7/12 font-poppins w-11/12 md:w-full mx-auto">
+        <div class="basis-7/12  font-Urbanist_Regular w-11/12 md:w-full mx-auto">
           <div
             class="w-full p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
             <div class="flex items-center justify-between mb-4">
               <h5 class="text-xl font-bold leading-none text-gray-900 dark:text-white">Mi lista de direcciones</h5>
               <a id="btn-add" href="#modal-address" rel="modal:open"
-                class="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">
+                class="text-sm font-medium text-black hover:underline dark:text-blue-500">
                 + Agregar
               </a>
             </div>
