@@ -162,7 +162,7 @@
     </section> --}}
 
     @if (count($bannerMid) > 0)
-      <section>
+      <section class="w-full">
         <x-banner-section-cover :banner="$bannerMid" />
       </section>
     @endif
