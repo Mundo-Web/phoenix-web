@@ -103,7 +103,7 @@ class SaveItems implements ShouldQueue
         Galerie::where('product_id', $productJpa->id)->delete();
 
         if (\count($productImages) == 0) {
-          $productJpa->visible = false;
+          $productJpa->visible = 0;
           $productJpa->save();
         }
 
@@ -156,5 +156,7 @@ class SaveItems implements ShouldQueue
         // dump($th->getMessage());
       }
     }
+
+    // \dump('Finalizó la carga masiva');
   }
 }
