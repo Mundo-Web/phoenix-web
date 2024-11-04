@@ -32,7 +32,7 @@
     <meta name="robots" content="all" />
     <meta NAME="subjects" content="moda">
    
-    <link rel="icon" type="image/svg+xml" href="{{ asset('images/svg/Boost.svg') }}">
+    <link rel="icon" type="image/svg+xml" href="{{ asset('favicon.ico') }}">
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     @vite([...$sources, 'resources/css/app.css', 'resources/js/app.js'])
