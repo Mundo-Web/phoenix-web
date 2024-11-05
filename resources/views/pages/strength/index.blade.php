@@ -22,6 +22,7 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
+                <th>Orden</th>
                 <th>Imagen</th>
                 <th>Titulo </th>
                 <th>Descripcion</th> 
@@ -33,6 +34,7 @@
 
               @foreach ($strength as $item)
                 <tr>
+                  <td>{{$item->order}}</td>
                   <td class="px-3 py-2"><img class="w-20 h-20 object-contain" src="{{ asset($item->imagen) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" ></td>
                   <td>{{ Str::limit($item->titulo, 100) }}</td>
                   <td>{!! Str::limit($item->descripcion, 100) !!}</td>
@@ -71,6 +73,7 @@
             </tbody>
             <tfoot>
               <tr>
+                <th>Orden</th>
                 <th>Imagen</th>
                 <th>Titulo </th>
                 <th>Descripcion</th> 
@@ -93,6 +96,7 @@
   $('document').ready(function() {
 
     new DataTable('#tabladatos', {
+            ordering:false,
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
             layout: {
                 topStart: 'buttons'
@@ -141,7 +145,7 @@
         ]
         });
 
-    $(".btn_swithc").on("change", function() {
+     $("#tabladatos").on("change", ".btn_swithc", function() {
 
       let status = 0;
       let id = $(this).attr('data-idService');

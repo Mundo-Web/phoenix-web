@@ -18,8 +18,8 @@ class BeneficiosSeeder extends Seeder
             'id' => 1
         ], [
             'titulo' => 'Entrega gratis',
-            'descripcionshort' => 'Descubre Una Amplia Gama de Pisos, Tableros y Paneles',
-            'descripcion' => '<p>Y devoluciones gratuitas. Ver pago para fechas de entrega.</p>',
+            'descripcionshort' => 'Wide Leg',
+            'descripcion' => '',
             'icono' => 'images\img\box.png'
         ]);
     }

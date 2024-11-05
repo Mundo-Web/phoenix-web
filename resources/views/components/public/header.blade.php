@@ -316,7 +316,7 @@
             <div class="w-9/12 flex items-center justify-center">
                 <a href="/">
                     <img id="logo-boostperu" class="min-w-56 w-60"
-                        src="{{ asset($isIndex ? 'images/svg/LOGOAB.svg' : 'images/svg/LOGOAB.svg') }}"
+                        src="{{ asset($isIndex ? 'images/svg/logoab.svg' : 'images/svg/logoab.svg') }}"
                         alt="american brands" />
                     {{-- <h2 class="text-2xl font-bold text-white tracking-widest font-Urbanist_Semibold text-center">AMERICAN BRANDS</h2> --}}
                 </a>

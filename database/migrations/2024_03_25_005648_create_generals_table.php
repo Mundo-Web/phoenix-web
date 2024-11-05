@@ -32,6 +32,9 @@ return new class extends Migration
             $table->string('form_email')->nullable();
             $table->string('business_hours')->nullable();
             $table->string('mensaje_whatsapp')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
             $table->text('aboutus')->nullable();
             $table->text('htop')->nullable();
             $table->string('ig_token')->nullable();

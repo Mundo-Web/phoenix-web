@@ -46,6 +46,7 @@ use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SeguimientoPedidoController;
+use App\Http\Controllers\ShortcodeController;
 use App\Http\Controllers\SliderController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StatusController;
@@ -140,7 +141,7 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::resource('/seguimiento-de-pedido', SeguimientoPedidoController::class);
         Route::resource('/nuestras-tiendas', NuestrasTiendasController::class);
 
-
+        Route::resource('/shortcode', ShortcodeController::class);
 
         Route::resource('/pedidos', SaleController::class);
 

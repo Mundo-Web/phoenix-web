@@ -22,6 +22,7 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
+                <th class="px-3 py-2">Orden</th>
                 <th class="px-3 py-2">Imagen</th>
                 <th class="px-3 py-2">Nombre</th>
                 <th class="px-3 py-2">Categoria</th>
@@ -34,7 +35,7 @@
 
               @foreach ($subcategories as $item)
                 <tr>
-                  
+                  <td class="px-3 py-2">{{ $item->order }}</td>
                   <td class="px-3 py-2"><img class="w-20 object-contain" src="{{ asset($item->url_image . $item->name_image) }}" onerror="this.onerror=null; this.src='{{ asset('images/img/noimagen.jpg') }}';"  /></td>
                   <td class="px-3 py-2">{{ $item->name }}</td>
                   <td class="px-3 py-2">{{ $item->category()->name }}</td>
@@ -73,6 +74,7 @@
             </tbody>
             <tfoot>
               <tr>
+                <th>Orden</th>
                 <th>Imagen</th>
                 <th>Nombre</th>
                 <th>Categoria</th>

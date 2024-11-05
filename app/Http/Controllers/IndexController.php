@@ -90,7 +90,7 @@ class IndexController extends Controller
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
     $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();
-    $subcategorias = SubCategory::where('destacar', '=', 1)->where('visible', '=', 1)->get();
+    $subcategorias = SubCategory::where('destacar', '=', 1)->where('visible', '=', 1)->orderBy('order', 'desc')->get();
     $categoriasAll = Category::where('visible', '=', 1)->get();
     $destacados = Products::where('products.destacar', '=', 1)->where('products.status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->with('category')->activeDestacado()->get();
@@ -100,14 +100,14 @@ class IndexController extends Controller
     $popups = Popup::where('status', '=', 1)->where('visible', '=', 1)->get();
 
     $general = General::all();
-    $benefit = Strength::where('status', '=', 1)->take(4)->get();
+    $benefit = Strength::where('status', '=', 1)->orderBy('order', 'asc')->get();
     $faqs = Faqs::where('status', '=', 1)->where('visible', '=', 1)->get();
     $testimonie = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
-    $slider = Slider::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $slider = Slider::where('status', '=', 1)->where('visible', '=', 1)->orderBy('order', 'asc')->get();
     $category = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
 
-    $logosdestacados = ClientLogos::where('status', '=', 1)->where('destacar', '=', 1)->get();
-    $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->get();
+    $logosdestacados = ClientLogos::where('status', '=', 1)->where('destacar', '=', 1)->orderBy('order', 'asc')->get();
+    $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->orderBy('order', 'asc')->get();
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
     $media = $this->instagramService->getUserMedia();
 

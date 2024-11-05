@@ -16,14 +16,11 @@ class SliderSeeder extends Seeder
         Slider::updateOrCreate([
             'id' =>1 
         ],[
-            'title' => 'Serie de Cargadores Premium',
-            'description' => 'Funciones empaquetadas a un mejor precio que nunca Potentes sensores para
-controla tu estado físico',
-            'botontext1' => 'VENTA HASTA 30% DE DESCUENTO',
-            'link1' => '/catalogo/0',
+            'title' => 'Slide 1',
+            'description' => '',
+            'botontext1' => '',
+            'link1' => '/',
             'botontext2' => 'Comprar Ahora',
-            'link1' => '#',
-
         ]);
     }
 }

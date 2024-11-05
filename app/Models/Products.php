@@ -40,7 +40,11 @@ class Products extends Model
     'fit_id',
     'codigo',
     'brand_id',
-    'discount_id'
+    'discount_id',
+    'meta_title',
+    'meta_description',
+    'meta_keywords'
+
   ];
 
   public function categoria()

@@ -20,7 +20,7 @@ class LogosClientController extends Controller
     public function index()
     {
         $logos = ClientLogos::where("status", "=", true)
-        ->orderByDesc('created_at')
+        ->orderBy('order', 'asc')
         ->get();
         return view('pages.logos.index', compact('logos'));
     }
@@ -80,6 +80,7 @@ class LogosClientController extends Controller
 
         $logo->title = $request->title;
         $logo->description = $request->description;
+        $logo->order = $request->order;
         $logo->status = 1;
         $logo->save();
         return redirect()->route('logos.index')->with('success', 'Publicación creado exitosamente.');
@@ -138,6 +139,7 @@ class LogosClientController extends Controller
             }
 	
 			$logo->title = $request->title;
+            $logo->order = $request->order;
             $logo->description = $request->description;
 			$logo->save();
 
