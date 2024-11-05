@@ -397,8 +397,7 @@
         <div class="hidden lg:flex items-center justify-center ">
             <div>
                 <nav id="menu-items"
-                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
-                    x-data="{ openCatalogo: false, openSubMenu: null }">
+                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8">
 
 
                     {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
@@ -419,7 +418,7 @@
 
                     @foreach ($categorias as $categoria)
                         <a id="categoria-{{ $categoria->id }}" href="{{ route('Catalogo.jsx') }}"
-                            class="font-medium  other-class2">
+                            class="font-medium  other-class2 other-class-{{$categoria->id}}">
                             <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
                             <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
                         </a>
@@ -885,6 +884,24 @@
         padre.innerHTML = ''; // Limpia el contenido del menú
     }
 
+    function cerrar() {
+        categorias.forEach(categoria => {
+            let padre = document.getElementById(`productos-link-${categoria.id}`);
+            let megaMenu = document.getElementById(`productos-link-container-${categoria.id}`);
+            if (megaMenu) {
+                padre.removeChild(megaMenu);
+            }
+        });
+
+        // También cerramos el menú de marcas si está abierto
+        let marcasMenu = document.getElementById('productos-link-m-container');
+        if (marcasMenu) {
+            document.getElementById('productos-link-m').removeChild(marcasMenu);
+        }
+
+        activeHover = false;
+    }
+
     $(document).ready(function() {
         $(document).on('mouseenter', '.other-class', function() {
             cerrar();
@@ -909,11 +926,11 @@
 
                 // Definimos el grid para las columnas de subcategorías
                 let gridContainer = document.createElement('div');
-                gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
+                gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
                 gridContainer.style.gridTemplateColumns =
                 'repeat(auto-fill, 150px)'; // Columnas de 150px
                 gridContainer.style.gridAutoRows = 'auto';
-                gridContainer.style.maxWidth = '80%'; // Ancho máximo del contenedor
+                gridContainer.style.maxWidth = '60%'; // Ancho máximo del contenedor
                 gridContainer.style.justifyItems = 'center';
                 gridContainer.style.justifyContent = 'center';
                 gridContainer.style.alignItems = 'center';
@@ -927,7 +944,7 @@
                 categoria.subcategories.forEach(subcategoria => {
                     let li = document.createElement('li');
                     li.className =
-                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
+                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
                     li.style.maxWidth = '150px';
 
                     // Crear enlace de subcategoría
@@ -963,7 +980,7 @@
 
             // Definimos el grid para las columnas
             let gridContainer = document.createElement('div');
-            gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
+            gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
             gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
             gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
             gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
@@ -979,7 +996,7 @@
             marcas.forEach(marca => {
                 let li = document.createElement('li');
                 li.className =
-                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
+                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
                 li.style.maxWidth = '150px'; // Ancho máximo de cada marca
 
                 let a = document.createElement('a');
@@ -999,26 +1016,7 @@
             }
         }
     });
-
-    function cerrar() {
-    categorias.forEach(categoria => {
-        let padre = document.getElementById(`productos-link-${categoria.id}`);
-        let megaMenu = document.getElementById(`productos-link-container-${categoria.id}`);
-        if (megaMenu) {
-            padre.removeChild(megaMenu);
-        }
-    });
-
-    // También cerramos el menú de marcas si está abierto
-    let marcasMenu = document.getElementById('productos-link-m-container');
-    if (marcasMenu) {
-        document.getElementById('productos-link-m').removeChild(marcasMenu);
-    }
-
-    activeHover = false;
-}
 </script>
-
 
 <script>
     function aplicarDescuentosEnCarrito(articulosCarrito) {
