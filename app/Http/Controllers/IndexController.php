@@ -687,13 +687,12 @@ class IndexController extends Controller
   {
     $query = $request->input('query');
     $resultados = Products::select('products.*')
+      ->where('products.visible', 1)
       ->where('producto', 'like', "%$query%")
       ->join('categories', 'categories.id', 'products.categoria_id')
       ->where('categories.visible', 1)
       ->get();
-
-
-
+      
     return response()->json($resultados);
   }
 
