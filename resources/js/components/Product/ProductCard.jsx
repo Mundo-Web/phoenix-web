@@ -103,7 +103,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
                 <img
                   src={`/${marcas.url_image}`} // Asegúrate de que la ruta sea correcta
                   alt={marcas.title} // O el texto alternativo que desees usar
-                  className="h-5 w-auto" // Ajusta el tamaño como necesites
+                  className="h-4 w-auto" // Ajusta el tamaño como necesites
                   onError={(e) => e.target.src = '/images/img/noimagen.jpg'} // Imagen por defecto si falla
                 />
               </div>)
