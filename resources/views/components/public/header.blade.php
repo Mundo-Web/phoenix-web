@@ -232,8 +232,8 @@
     @foreach ($datosgenerales as $item)
         <div
             class="bg-[#4598d3] h-[50px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center mb-7">
-            <h3 class="text-white font-Urbanist_Semibold text-base tracking-wider text-center hidden lg:flex">
-                ENVÍO GRATUITO EN LIMA METROPOLITANA POR COMPRAS SUPERIORES A S./149.90
+            <h3 class="text-white font-Urbanist_Semibold text-sm sm:text-base tracking-wider text-center flex">
+                {{$item->htop ?? "Ingrese un texto"}}
             </h3>
         </div>
     @endforeach
