@@ -927,6 +927,11 @@ categorias.forEach(categoria => {
             divcontainer.className =
                 'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
+            let titulo = document.createElement('h3');
+            titulo.className = 'text-2xl font-font-Urbanist_Bold font-bold text-center mb-4';
+            titulo.innerText = `Ropa de ${categoria.name}`; // Cambia el texto según prefieras
+            divcontainer.appendChild(titulo);
+
             // Definimos el grid para las columnas de subcategorías
             let gridContainer = document.createElement('div');
             gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
@@ -994,7 +999,7 @@ categorias.forEach(categoria => {
             gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
             gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
             gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
-            gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
+            gridContainer.style.maxWidth = '600px'; // Ajuste opcional para el ancho máximo del contenedor
             gridContainer.style.justifyItems = 'center';
             gridContainer.style.justifyContent = 'center';
             gridContainer.style.alignItems = 'center';
