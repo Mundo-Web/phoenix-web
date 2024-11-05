@@ -135,7 +135,7 @@ class IndexController extends Controller
 
     $colores = Products::select('color')->distinct()->pluck('color');
 
-    $sizes = Products::select('peso')->distinct()->orderBy('asc')->pluck('peso');
+    $sizes = Products::select('peso')->distinct()->orderBy('peso','asc')->pluck('peso');
 
     $media = $this->instagramService->getUserMedia();
 
