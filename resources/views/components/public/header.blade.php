@@ -369,8 +369,8 @@
                     @endif
 
                     <div class="hidden lg:flex justify-center items-center">
-                        <a href="" target="_blank">
-                         <i class="fa-solid fa-location-dot fa-xl text-white !leading-none -mt-1"></i>
+                        <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==" target="_blank">
+                            <img src="{{ asset('images/svg/tienda.svg') }}" class="text-white w-7" />
                         </a>
                     </div>
 
