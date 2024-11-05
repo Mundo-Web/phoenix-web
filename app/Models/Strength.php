@@ -9,6 +9,7 @@ class Strength extends Model
 {
     use HasFactory;
     protected $filleable = ['titulo',
+    'order',
     'descripcion',
     'icono',
     'descripcionshort',
