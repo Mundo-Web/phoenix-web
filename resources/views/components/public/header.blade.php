@@ -418,7 +418,7 @@
 
                     @foreach ($categorias as $categoria)
                         <a id="categoria-{{ $categoria->id }}" href="{{ route('Catalogo.jsx') }}"
-                            class="font-medium px-2 py-2 other-class2">
+                            class="font-medium px-4 py-4 other-class2">
                             <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
                             <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
                         </a>
@@ -932,7 +932,7 @@ categorias.forEach(categoria => {
             gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
             gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
             gridContainer.style.gridAutoRows = 'auto';
-            gridContainer.style.maxWidth = '60%';
+            gridContainer.style.maxWidth = '600px';
             gridContainer.style.justifyItems = 'center';
             gridContainer.style.justifyContent = 'center';
             gridContainer.style.alignItems = 'center';
@@ -975,7 +975,7 @@ categorias.forEach(categoria => {
                 padre.innerHTML = '';
                 activeHover = false;
             }
-        }, 40); // Añadimos un pequeño retraso para que detecte bien la salida
+        }, 80); // Añadimos un pequeño retraso para que detecte bien la salida
     }
 });
 
