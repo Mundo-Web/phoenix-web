@@ -928,20 +928,23 @@ categorias.forEach(categoria => {
                 'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
             let titulo = document.createElement('h3');
-            titulo.className = 'text-2xl font-font-Urbanist_Bold font-bold text-center mb-4';
-            titulo.innerText = `Ropa de ${categoria.name}`; // Cambia el texto según prefieras
-            divcontainer.appendChild(titulo);
+            titulo.className = 'text-lg font-font-Urbanist_Bold font-bold text-left mb-4 uppercase';
+            titulo.innerText = `ROPA DE ${categoria.name}`; 
+            titulo.style.gridColumn = '1 / -1';
+          
+     
 
             // Definimos el grid para las columnas de subcategorías
             let gridContainer = document.createElement('div');
-            gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
+            gridContainer.className = 'grid gap-2 px-4 pt-3 pb-7 list-none';
             gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
             gridContainer.style.gridAutoRows = 'auto';
             gridContainer.style.maxWidth = '600px';
-            gridContainer.style.justifyItems = 'center';
+            gridContainer.style.justifyItems = 'start';
             gridContainer.style.justifyContent = 'center';
             gridContainer.style.alignItems = 'center';
 
+            gridContainer.appendChild(titulo);
             // Agregar cada subcategoría al grid
             categoria.subcategories.forEach(subcategoria => {
                 let li = document.createElement('li');
