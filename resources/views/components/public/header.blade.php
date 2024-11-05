@@ -397,7 +397,7 @@
         <div class="hidden lg:flex items-center justify-center ">
             <div>
                 <nav id="menu-items"
-                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8">
+                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-16 items-center justify-center py-8">
 
 
                     {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
@@ -418,7 +418,7 @@
 
                     @foreach ($categorias as $categoria)
                         <a id="categoria-{{ $categoria->id }}" href="{{ route('Catalogo.jsx') }}"
-                            class="font-medium px-2 py-2">
+                            class="font-medium px-2 py-2 other-class2">
                             <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
                             <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
                         </a>
@@ -898,20 +898,17 @@
     //     activeHover = false;
     // }
 
-    // function cerrarmarca() {
-    //     let padre = document.getElementById('productos-link-m');
-    //     activeHovermarca = false;
-    //     padre.innerHTML = ''; // Limpia el contenido del menú
-    // }
+    function cerrarmarca() {
+        let padre = document.getElementById('productos-link-m');
+        activeHovermarca = false;
+        padre.innerHTML = ''; // Limpia el contenido del menú
+    }
 
-    // $(document).ready(function() {
-    //     $(document).on('mouseenter', '.other-class', function() {
-    //         cerrar();
-    //     });
-    //     $(document).on('mouseenter', '.other-class2', function() {
-    //         cerrarmarca();
-    //     });
-    // });
+    $(document).ready(function() {
+        $(document).on('mouseenter', '.other-class2', function() {
+            cerrarmarca();
+        });
+    });
 
 
     
@@ -983,53 +980,53 @@ categorias.forEach(categoria => {
 });
 
 
-    // document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
-    //     if (event.target === this) {
-    //         // Muestra submenú de marcas
-    //         let padre = document.getElementById('productos-link-m');
-    //         let divcontainer = document.createElement('div');
-    //         divcontainer.id = 'productos-link-m-container';
-    //         divcontainer.className =
-    //             'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+    document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
+        if (event.target === this) {
+            // Muestra submenú de marcas
+            let padre = document.getElementById('productos-link-m');
+            let divcontainer = document.createElement('div');
+            divcontainer.id = 'productos-link-m-container';
+            divcontainer.className =
+                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
-    //         // Definimos el grid para las columnas
-    //         let gridContainer = document.createElement('div');
-    //         gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
-    //         gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
-    //         gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
-    //         gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
-    //         gridContainer.style.justifyItems = 'center';
-    //         gridContainer.style.justifyContent = 'center';
-    //         gridContainer.style.alignItems = 'center';
+            // Definimos el grid para las columnas
+            let gridContainer = document.createElement('div');
+            gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
+            gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
+            gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
+            gridContainer.style.justifyItems = 'center';
+            gridContainer.style.justifyContent = 'center';
+            gridContainer.style.alignItems = 'center';
 
-    //         divcontainer.addEventListener('mouseenter', function() {
-    //             this.addEventListener('mouseleave', cerrarmarca);
-    //         });
+            divcontainer.addEventListener('mouseenter', function() {
+                this.addEventListener('mouseleave', cerrarmarca);
+            });
 
-    //         // Agregar cada marca al grid
-    //         marcas.forEach(marca => {
-    //             let li = document.createElement('li');
-    //             li.className =
-    //                 'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
-    //             li.style.maxWidth = '150px'; // Ancho máximo de cada marca
+            // Agregar cada marca al grid
+            marcas.forEach(marca => {
+                let li = document.createElement('li');
+                li.className =
+                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
+                li.style.maxWidth = '150px'; // Ancho máximo de cada marca
 
-    //             let a = document.createElement('a');
-    //             a.href = `/catalogo?marcas=${marca.id}`;
-    //             a.innerHTML = marca.title;
-    //             a.className = 'w-full h-full text-center'; // Centrado del texto
+                let a = document.createElement('a');
+                a.href = `/catalogo?marcas=${marca.id}`;
+                a.innerHTML = marca.title;
+                a.className = 'w-full h-full text-center'; // Centrado del texto
 
-    //             li.appendChild(a);
-    //             gridContainer.appendChild(li);
-    //         });
+                li.appendChild(a);
+                gridContainer.appendChild(li);
+            });
 
-    //         divcontainer.appendChild(gridContainer);
+            divcontainer.appendChild(gridContainer);
 
-    //         if (!activeHovermarca) {
-    //             padre.appendChild(divcontainer);
-    //             activeHovermarca = true;
-    //         }
-    //     }
-    // });
+            if (!activeHovermarca) {
+                padre.appendChild(divcontainer);
+                activeHovermarca = true;
+            }
+        }
+    });
 </script>
 
 <script>
@@ -1312,3 +1309,67 @@ categorias.forEach(categoria => {
   });
 </script>
 
+{{-- <script>
+    document.getElementById('productos-link2').addEventListener('mouseenter', function(event) { 
+        if (event.target === this && !activeHovermarca) {
+            let padre = document.getElementById('productos-link-m');
+            
+            // Crear el contenedor del menú de marcas
+            let divcontainer = document.createElement('div');
+            divcontainer.id = 'productos-link-m-container';
+            divcontainer.className =
+                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+
+            let gridContainer = document.createElement('div');
+            gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
+            gridContainer.style.gridAutoRows = 'auto';
+            gridContainer.style.maxWidth = '60%';
+            gridContainer.style.justifyItems = 'center';
+            gridContainer.style.justifyContent = 'center';
+            gridContainer.style.alignItems = 'center';
+
+            // Agregar cada marca al grid
+            marcas.forEach(marca => {
+                let li = document.createElement('li');
+                li.className =
+                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
+                li.style.maxWidth = '150px';
+
+                let a = document.createElement('a');
+                a.href = `/catalogo?marcas=${marca.id}`;
+                a.innerHTML = marca.title;
+                a.className = 'w-full h-full text-center';
+
+                li.appendChild(a);
+                gridContainer.appendChild(li);
+            });
+
+            divcontainer.appendChild(gridContainer);
+
+            // Limpiar hijos y agregar el contenedor del menú
+            padre.innerHTML = '';
+            padre.appendChild(divcontainer);
+            activeHovermarca = true;
+
+            // Agregar eventos de `mouseleave` para cerrar el menú
+            document.getElementById('productos-link2').addEventListener('mouseleave', scheduleCloseMarca);
+            divcontainer.addEventListener('mouseenter', () => clearTimeout(closeTimeoutMarca));
+            divcontainer.addEventListener('mouseleave', scheduleCloseMarca);
+        }
+    });
+
+    let closeTimeoutMarca; // Temporizador para cerrar el menú
+
+    function scheduleCloseMarca() {
+        closeTimeoutMarca = setTimeout(() => {
+            cerrarmarca();
+        }, 100); // Retardo para evitar cierres bruscos
+    }
+
+    function cerrarmarca() {
+        let padre = document.getElementById('productos-link-m');
+        activeHovermarca = false;
+        padre.innerHTML = ''; // Limpia el contenido del menú
+    }
+</script> --}}
