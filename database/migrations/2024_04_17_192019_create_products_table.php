@@ -25,6 +25,7 @@ return new class extends Migration
             $table->json('atributes')->nullable();
             $table->string('sku')->nullable();
             $table->string('marca_id')->nullable();
+            $table->string('fit_id')->nullable();
             $table->boolean('destacar')->default(false);
             $table->boolean('recomendar')->default(false);
             $table->unsignedBigInteger('categoria_id')->nullable();

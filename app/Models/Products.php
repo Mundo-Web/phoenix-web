@@ -37,6 +37,7 @@ class Products extends Model
     'max_stock', 
     'precio_reseller',
     'marca_id',
+    'fit_id',
     'codigo',
     'brand_id',
     'discount_id'
