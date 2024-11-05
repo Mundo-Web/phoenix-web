@@ -368,9 +368,11 @@
                         </div>
                     @endif
 
-                    {{-- <div class="hidden lg:flex justify-center items-center">
-                        <i class="fa-solid fa-location-dot fa-xl text-white !leading-none -mt-1"></i>
-                    </div> --}}
+                    <div class="hidden lg:flex justify-center items-center">
+                        <a href="" target="_blank">
+                         <i class="fa-solid fa-location-dot fa-xl text-white !leading-none -mt-1"></i>
+                        </a>
+                    </div>
 
                     {{-- <div class="hidden lg:flex justify-center items-center">
                         <i class="fa-solid fa-heart  fa-xl text-white !leading-none -mt-1"></i>

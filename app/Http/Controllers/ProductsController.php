@@ -71,11 +71,11 @@ class ProductsController extends Controller
         ->leftJoin('categories', 'categories.id', 'products.categoria_id')
         ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
         
-        // ->whereIn('products.id', function($query) {
-        //   $query->select(DB::raw('MIN(id)'))  
-        //         ->from('products')
-        //         ->groupBy('producto');  
-        // })
+        ->whereIn('products.id', function($query) {
+          $query->select(DB::raw('MIN(id)'))  
+                ->from('products')
+                ->groupBy('producto');  
+        })
         ->where('categories.visible', 1)
         ->where('products.visible', 1)
         ->where('products.status', 1);
