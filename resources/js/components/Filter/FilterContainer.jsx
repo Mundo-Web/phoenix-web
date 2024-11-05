@@ -102,7 +102,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
           <div className="bg-[#808080] pb-[1px] -mt-2 mb-5"></div>
           {categories.map((item) =>
             item.subcategories.length > 0 && (
-              <div key={item.id} className="w-full">
+              <div key={item.id} className="w-full max-h-60 overflow-y-auto">
                 {item.subcategories.map((subitem) => {
                   const isCheckedfilter = Array.isArray(filter?.categoria_id) && filter.categoria_id.includes(String(subitem.id));
                   return (
