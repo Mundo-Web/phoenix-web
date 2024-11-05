@@ -12,7 +12,7 @@
 </style>
 
 @section('content')
-  <section class="w-11/12 mx-auto font-poppins">
+  <section class="w-11/12 mx-auto font-Urbanist_Regular">
     @if ($errors->has('g-recaptcha-response'))
       <span class="help-block">
         <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
@@ -29,14 +29,14 @@
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="fullname" class="font-medium text-[12px] text-[#6C7275]">Nombre</label>
           <input id="fullname" type="text" placeholder="Nombre Completo" required name="fullname"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
 
         <div class="flex flex-col col-span-4 lg:col-span-1 gap-2">
           <label for="type_document" class="font-medium text-[12px] text-[#6C7275]">Tipo de documento</label>
           <select id="type_document" required name="type_document"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
             <option>RUC</option>
             <option>C.E</option>
             <option>PASAPORTE</option>
@@ -48,26 +48,26 @@
         <div class="flex flex-col col-span-4 lg:col-span-1 gap-2">
           <label for="number_document" class="font-medium text-[12px] text-[#6C7275]">Numero de indentidad</label>
           <input id="number_document" type="text" placeholder="Numero de indentidad" required name="number_document"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="cellphone" class="font-medium text-[12px] text-[#6C7275]">Celular</label>
           <input id="cellphone" type="text" placeholder="Numero celular" required name="cellphone"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="email" class="font-medium text-[12px] text-[#6C7275]">Correo
             Electrónico</label>
           <input type="email" placeholder="hola@gmail.com" required name="email" id="email"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0" />
         </div>
 
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="department" class="font-medium text-[12px] text-[#6C7275]">Departamento</label>
           <select id="selectDepartamento" placeholder="Departamento" required name="department"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
             <option value="">Seleccionar departamento </option>
             @foreach ($departamentofiltro as $item)
               <option value="{{ $item->id }}">{{ $item->description }}</option>
@@ -78,7 +78,7 @@
         <div class="flex flex-col col-span-4 lg:col-span-1 gap-2">
           <label for="province" class="font-medium text-[12px] text-[#6C7275]">Provincia</label>
           <select id="selectProvincia" type="text" placeholder="Provincia" required name="province"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
             <option value="">Seleccionar provincia </option>
           </select>
         </div>
@@ -86,7 +86,7 @@
         <div class="flex flex-col col-span-4 lg:col-span-1 gap-2">
           <label for="district" class="font-medium text-[12px] text-[#6C7275]">Distrito</label>
           <select id="selectDistrito" type="text" placeholder="Distrito" required name="district"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
             <option value="">Seleccionar distrito </option>
           </select>
         </div>
@@ -94,7 +94,7 @@
         <div class="flex flex-col col-span-4 gap-2">
           <label for="address" class="font-medium text-[12px] text-[#6C7275]">Direccion</label>
           <input id="address" type="text" placeholder="Direccion" required name="address"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
 
@@ -106,7 +106,7 @@
           <label for="typeitem" class="font-medium text-[12px] text-[#6C7275]">¿Fue un producto o
             Servicio?</label>
           <select id="typeitem" required name="typeitem"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
             <option>Producto</option>
             <option>Servicio</option>
           </select>
@@ -115,14 +115,14 @@
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="amounttotal" class="font-medium text-[12px] text-[#6C7275]">Monto reclamado</label>
           <input id="amounttotal" type="text" placeholder="Monto total reclamado" required name="amounttotal"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
         {{-- <div class="flex flex-col col-span-4 lg:col-span-1 gap-2">
                     <label for="category_product_service" class="font-medium text-[12px] text-[#6C7275]">Tipo de
                         bien</label>
                     <select id="category_product_service" type="text" required name="category_product_service"
-                        class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+                        class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
                         <option>Producto</option>
                         <option>Servicio</option>
                     </select>
@@ -133,7 +133,7 @@
             producto</label>
           <input id="description" type="text" placeholder="Nombre de producto y/o servicios, codigo(opcional)"
             required name="description"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
         <h2 class="col-span-4 font-semibold text-[24px] leading-none md:leading-tight">Detalle del reclamo del
@@ -143,7 +143,7 @@
         <div class="flex flex-col col-span-4 gap-2">
           <label for="type_claim" class="font-medium text-[12px] text-[#6C7275]">¿Es un reclamo o queja?</label>
           <select id="type_claim" type="text" required name="type_claim"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]">
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]">
             <option>Reclamo</option>
             <option>Queja</option>
           </select>
@@ -153,26 +153,26 @@
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="date_incident" class="font-medium text-[12px] text-[#6C7275]">Fecha de ocurrencia</label>
           <input id="date_incident" type="date" placeholder="Provincia" required name="date_incident"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
         <div class="flex flex-col col-span-4 lg:col-span-2 gap-2">
           <label for="address_incident" class="font-medium text-[12px] text-[#6C7275]">Numero de Pedido</label>
           <input id="address_incident" type="text" placeholder="Numero de pedido: #95825548" required
             name="address_incident"
-            class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+            class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
         </div>
 
         <div class="flex flex-col col-span-4 gap-2">
           <label for="detail_incident" class="font-medium text-[12px] text-[#6C7275]">Detalle de reclamo o
             queja</label>
           <textarea name="detail_incident" id="detail_incident" cols="30" rows="3"
-            class="border-gray-200 border-[1.5px] rounded-xl focus:outline-none" placeholder="Detalle de reclamo" required></textarea>
+            class=" focus:ring-black focus:border-black  border-gray-200 border-[1.5px] rounded-0 focus:outline-none" placeholder="Detalle de reclamo" required></textarea>
         </div>
 
 
         <div class="flex flex-row col-span-4 gap-2 ">
-          <input id="termsandconditions" type="checkbox" required class="border-2 rounded-sm w-5 h-5" />
+          <input id="termsandconditions" type="checkbox" required class="border-2 rounded-sm w-5 h-5 text-black focus:ring-0" />
           <label for="termsandconditions" class="font-medium text-sm text-[#6C7275]">Estoy de acuerdo con los
             <a target="_blank" class="font-bold" href="{{ route('terms_condition') }} ">terminos y
               condiciones</a></label>
@@ -182,7 +182,7 @@
                     <label for="archivo" class="font-medium text-[12px] text-[#6C7275]">Adjuntar archivos
                         (opcional)</label>
                     <input id="archivo" type="file"  name="archivo"
-                        class="w-full py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
+                        class="w-full py-3 px-4 focus:ring-black focus:border-black focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-0 text-[#6C7275]" />
                 </div> --}}
 
 
@@ -193,7 +193,7 @@
 
         <div class="flex flex-row col-span-2 gap-2 ">
           <input type="submit" value="Enviar a libro de reclamaciones" id="btnAjax"
-            class="col-span-4 text-white bg-[#006BF6] py-3 rounded-2xl cursor-pointer border-2 font-semibold text-[16px] text-center border-none w-full md:w-auto px-10 inline-block" />
+            class="col-span-4 text-white bg-black py-3 rounded-0 cursor-pointer border-2 font-semibold text-[16px] text-center border-none w-full md:w-auto px-10 inline-block" />
         </div>
 
       </div>
