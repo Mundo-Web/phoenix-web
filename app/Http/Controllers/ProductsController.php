@@ -49,7 +49,7 @@ class ProductsController extends Controller
     ])->rootView('admin');
   }
 
-  public function paginate(Request $request, Integer $valor)
+  public function paginate(Request $request)
   {
     //validar el rol del usuario logueado 
     // $user = Auth::user();
@@ -78,7 +78,7 @@ class ProductsController extends Controller
                 ->groupBy('producto');  
         })
         ->where('categories.visible', 1)
-        ->where('products.visible', 1)
+        // ->where('products.visible', 1)
         ->where('products.status', 1);
 
 
