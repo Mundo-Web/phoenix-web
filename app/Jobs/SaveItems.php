@@ -44,7 +44,15 @@ class SaveItems implements ShouldQueue
     try {
       $images = File::scan($path2search);
     } catch (\Throwable $th) {
-      // dump($th->getMessage());
+      dump($th->getMessage());
+    }
+
+    try {
+      Category::where('visible', 1)->update(['visible' => 0]);
+      SubCategory::where('visible', 1)->update(['visible' => 0]);
+      ClientLogos::where('visible', 1)->update(['visible' => 0]);
+    } catch (\Throwable $th) {
+      dump($th->getMessage());
     }
 
     foreach ($this->items as $item) {
@@ -54,33 +62,57 @@ class SaveItems implements ShouldQueue
 
         $productImages = \array_filter($images, fn($image) => Text::startsWith($image, $imageRoute));
 
+        
         // Searching or Creating a Category
-        $categoryJpa = Category::where('name', $item[5])->first();
-        if (!$categoryJpa) {
-          $categoryJpa = Category::create([
-            'name' => $item[5],
-            'slug' => Str::slug($item[5])
-          ]);
-        }
+        $categoryJpa = Category::updateOrCreate([
+          'name' => $item[5]
+        ], [
+          'name' => $item[5],
+          'slug' => Str::slug($item[5]),
+          'visible' => 1
+        ]);
+        // if (!$categoryJpa) {
+        //   $categoryJpa = Category::create([
+        //     'name' => $item[5],
+        //     'slug' => Str::slug($item[5])
+        //   ]);
+        // }
 
         // Searching or Creating a Subcategory
-        $subcategoryJpa = SubCategory::select()
-          ->where('category_id', $categoryJpa->id)
-          ->where('name', $item[6])
-          ->first();
-        if (!$subcategoryJpa) {
-          $subcategoryJpa = SubCategory::create([
-            'category_id' => $categoryJpa->id,
-            'name' => $item[6],
-            'slug' => Str::slug($item[6])
-          ]);
-        }
+        // $subcategoryJpa = SubCategory::select()
+        //   ->where('category_id', $categoryJpa->id)
+        //   ->where('name', $item[6])
+        //   ->first();
+        
+        $subcategoryJpa = SubCategory::updateOrCreate([
+          'category_id' => $categoryJpa->id,
+          'name' => $item[6]
+        ], [
+          'category_id' => $categoryJpa->id,
+          'name' => $item[6],
+          'slug' => Str::slug($item[6]),
+          'visible' => 1
+        ]);
+        // if (!$subcategoryJpa) {
+        //   $subcategoryJpa = SubCategory::create([
+        //     'category_id' => $categoryJpa->id,
+        //     'name' => $item[6],
+        //     'slug' => Str::slug($item[6])
+        //   ]);
+        // }
 
         // Searching or Creating a Brand
-        $brandJpa = ClientLogos::where('title', $item[7])->first();
-        if (!$brandJpa) {
-          $brandJpa = ClientLogos::create(['title' => $item[7]]);
-        }
+        // $brandJpa = ClientLogos::where('title', $item[7])->first();
+        // if (!$brandJpa) {
+        //   $brandJpa = ClientLogos::create(['title' => $item[7]]);
+        // }
+        
+        $brandJpa = ClientLogos::updateOrCreate([
+          'title' => $item[7]
+        ], [
+          'title' => $item[7],
+          'visible' => 1
+        ]);
 
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
@@ -100,6 +132,13 @@ class SaveItems implements ShouldQueue
         ]);
 
         $i = 0;
+        Galerie::where('product_id', $productJpa->id)->delete();
+
+        if (\count($productImages) == 0) {
+          $productJpa->visible = 0;
+          $productJpa->save();
+        }
+
         foreach ($productImages as $image) {
           try {
             $productImage = 'storage/images/products/' . $image;
@@ -113,7 +152,7 @@ class SaveItems implements ShouldQueue
               ]);
             }
           } catch (\Throwable $th) {
-            // dump($th->getMessage());
+            dump($th->getMessage());
           }
           $i++;
         }
@@ -146,8 +185,10 @@ class SaveItems implements ShouldQueue
           ]);
         }
       } catch (\Throwable $th) {
-        // dump($th->getMessage());
+        dump($th->getMessage());
       }
     }
+
+    dump('Finalizó la carga masiva');
   }
 }
