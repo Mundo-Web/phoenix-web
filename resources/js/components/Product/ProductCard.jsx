@@ -79,7 +79,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
             <div className="flex justify-start items-center mt-2 gap-1">
                   
                   {item.colors?.map(color => (
-                    <Tippy content={color.imagen}>
+                    <Tippy content={color.color}>
                     <a 
                       key={color.color} 
                       id={`producto-${item.id}-${color.imagen}`}
