@@ -44,7 +44,12 @@
   .kr-popin-button {
     color: #ffffff !important;
     background-color: black !important;
-    border-radius: 92px;
+    border-radius: 0px;
+    font-family: 'Urbanist_Regular', sans-serif; /* Asegúrate de tener la fuente Urbanist importada */
+    font-weight: 600; /* Equivale a font-semibold */
+    text-transform: capitalize;
+    display: inline-block;
+    text-align: center;
   }
 
   @media (max-width: 700px) {
