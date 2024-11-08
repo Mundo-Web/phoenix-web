@@ -75,6 +75,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
       <div className='flex flex-col items-start justify-start h-[120px]'>
             
         {item.colors && item.colors.length > 0 && ( 
+          <Tippy content={color.imagen}>
             <div className="flex justify-start items-center mt-2 gap-1">
                   
                   {item.colors?.map(color => (
@@ -95,7 +96,9 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
                     </a>
                   ))}
                   
-            </div>)       
+            </div>
+          </Tippy>
+            )       
           } 
         
           {marcas &&  (

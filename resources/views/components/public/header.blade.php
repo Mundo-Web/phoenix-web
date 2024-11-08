@@ -419,7 +419,7 @@
               </a> --}}
 
                     @foreach ($categorias as $categoria)
-                        <a id="categoria-{{ $categoria->id }}" href="{{ route('Catalogo.jsx') }}"
+                        <a id="categoria-{{ $categoria->id }}" href="/catalogo?categoria={{ $categoria->id }}"
                             class="font-medium  other-class2">
                             <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
                             <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
