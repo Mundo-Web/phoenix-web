@@ -5,20 +5,48 @@
       echo json_encode($item->tags);
     @endphp --}}
 
-    <div class="absolute top-2 left-2">
-      @if ($item->tags)
-        @foreach ($item->tags as $tag)
-          <div class="px-4 mb-1">
-            <span
-              class="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-2 flex-initial w-24 text-center text-white rounded-[5px] relative top-[18px] z-10"
-              style="background-color: {{ $tag->color }}">
+    {{-- <div class="absolute top-2 left-2 w-max">
+      <div className='flex flex-wrap gap-1.5'>
+        @if ($item->tags)
+          @foreach ($item->tags as $tag)
+            <div class="px-4 mb-1">
+              <span
+                class="block font-semibold text-[8px] md:text-[12px] bg-black py-2 px-2 flex-initial w-24 text-center text-white rounded-[5px] relative top-[18px] z-10"
+                style="background-color: {{ $tag->color }}">
 
-              {{ $tag->name }}
+                {{ $tag->name }}
+              </span>
+            </div>
+          @endforeach
+        @endif
+      </div>     
+    </div> --}}
+    <div class="absolute top-2 left-2 w-max">
+      <div class='flex flex-wrap gap-1.5'>
+        @if ($item->descuento > 0)
+          <div class="mb-1">
+            <span
+              class="block font-Urbanist_Semibold text-[8px] md:text-[12px] bg-black py-1 px-3 flex-initial w-full text-center rounded-none text-white relative z-10"
+              style="background-color: #c1272d;"
+            >
+              -{{ round(100 - (($item->descuento * 100) / $item->precio)) }}%
             </span>
           </div>
-        @endforeach
-      @endif
-
+        @endif
+    
+        @if ($item->tags)
+          @foreach ($item->tags as $tag)
+            <div class="mb-1">
+              <span
+                class="block font-semibold text-[8px] font-Urbanist_Regular md:text-[12px] bg-black py-1 px-2 flex-initial w-full text-center text-white rounded-none relative z-10"
+                style="background-color: {{ $tag->color }}"
+              >
+                {{ $tag->name }}
+              </span>
+            </div>
+          @endforeach
+        @endif
+      </div>     
     </div>
     <a href="{{ route('producto', $item->id) }}">
       <div>
