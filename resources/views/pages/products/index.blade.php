@@ -363,6 +363,7 @@
           },
           body: JSON.stringify({
             _token: $('[name="_token"]').val(),
+            is_admin: true,
             ...params
           })
         })
