@@ -141,7 +141,7 @@ class SaveItems implements ShouldQueue
 
         foreach ($productImages as $image) {
           try {
-            $productImage = 'storage/images/products/' . $image;
+            $productImage = 'images/products/' . $image;
             if ($i == 0) {
               $productJpa->imagen = $productImage;
               $productJpa->save();
