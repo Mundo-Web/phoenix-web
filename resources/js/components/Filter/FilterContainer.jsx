@@ -103,14 +103,14 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
           <div className="bg-[#808080] pb-[1px] -mt-2 mb-5"></div>
           <div className='flex flex-col gap-2'>
           {categories.map((item) =>
-
-             
+            <div key={item.id}>
+              <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-2">{item.name}</h2>
             
-            item.subcategories.length > 0 && (
+              {item.subcategories.length > 0 && (
              
               <div key={item.id} className="w-full max-h-60 overflow-y-auto">
 
-                <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-2">{item.name}</h2>
+                
                 
                 {item.subcategories.map((subitem) => {
                   const isCheckedfilter = Array.isArray(filter?.categoria_id) && filter.categoria_id.includes(String(subitem.id));
@@ -132,8 +132,12 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
                   );
                 })}
               </div>
-            )
+              )}
+
+            </div>
           )}
+
+
           </div>
         </div>
       )
