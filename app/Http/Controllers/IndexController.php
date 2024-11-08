@@ -689,6 +689,11 @@ class IndexController extends Controller
     $resultados = Products::select('products.*')
       ->where('products.visible', 1)
       ->where('producto', 'like', "%$query%")
+      ->whereIn('products.id', function($subquery) {
+        $subquery->select(DB::raw('MIN(id)'))
+                 ->from('products')
+                 ->groupBy('producto');
+      })
       ->join('categories', 'categories.id', 'products.categoria_id')
       ->where('categories.visible', 1)
       ->get();

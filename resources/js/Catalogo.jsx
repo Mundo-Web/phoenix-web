@@ -23,7 +23,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
   const [showModal, setShowModal] = useState(false);
   const is_proveedor = useRef(false);
   const cancelTokenSource = useRef(null);
- 
+  
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "js/notify.extend.min.js";
