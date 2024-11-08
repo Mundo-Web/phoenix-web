@@ -63,7 +63,7 @@
             <h3 class="font-Urbanist_Semibold text-xl pb-3">SERVICIO AL CLIENTE</h3>
             <a href="#">Contáctanos</a>
             {{-- <a id="linkSeguimientoPedido">Seguimiento de Pedido</a> --}}
-            <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">Nuestras Tienda</a>
+            <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">Nuestras Tiendas</a>
             <a id="linkPoliticasDatos">Politica de Datos</a>
             <div class="flex flex-row">
                 <a href="{{route('librodereclamaciones')}}"><div class="flex flex-row justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs"><img class="w-6 h-auto object-contain" src="{{asset('images/img/libro.png')}}" /> LIBRO DE
