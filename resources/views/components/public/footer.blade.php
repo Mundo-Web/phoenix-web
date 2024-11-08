@@ -44,7 +44,7 @@
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-20 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
 
         <div class="flex flex-col  text-base gap-2">
-            <h3 class="font-Urbanist_Semibold text-xl pb-3">SOBRE NOSOTROS</h3>
+            <h3 class="font-Urbanist_Semibold text-xl pb-3">LEGALES</h3>
             <a id="linkTiempoEnvios">Tiempos y costos de envío</a>
             <a id="linkPoliticas">Cambios y devoluciones</a>
             <a id="linkPlazoReembolso">Plazos de reembolso</a>
