@@ -327,7 +327,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
       </section>
       {/* modal */}
 
-      {showModal && (<div className="fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center max-h-[100vh] p-5" id="modal">
+      {showModal && (<div className="fixed z-40 top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center max-h-[76vh] p-5" id="modal">
         {/* btn para cerrar modal */}
         <div className="z-50 flex items-center content-center justify-center absolute  p-4 bg-black rounded-full h-6 w-6" style={{ top: '20px', right: '20px' }}>
           <button type='button' onClick={() => setShowModal(false)} className="text-white text-md ">X</button>
