@@ -85,12 +85,12 @@
 
         <x-menu.item id="tiempo-y-costos-envio" href="{{ route('tiempo-y-costos-envio.edit', 1) }}" icon="fas fa-file-contract">Tiempo y Costos de Envío</x-menu.item>
         <x-menu.item id="plazos-de-reembolso" href="{{ route('plazos-de-reembolso.edit', 1) }}" icon="fas fa-file-contract">Plazos de Reembolso</x-menu.item>
-        <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item>
-        <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item>
-        <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item>
+        {{-- <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item> --}}
+        {{-- <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item> --}}
+        {{-- <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item> --}}
         <x-menu.item id="beneficios-cero-intereses" href="{{ route('beneficios-cero-intereses.edit', 1) }}" icon="fas fa-file-contract">Beneficios 0 Intereses</x-menu.item>
-        <x-menu.item id="seguimiento-de-pedido" href="{{ route('seguimiento-de-pedido.edit', 1) }}" icon="fas fa-file-contract">Seguimiento de pedido</x-menu.item>
-        <x-menu.item id="nuestras-tiendas" href="{{ route('nuestras-tiendas.edit', 1) }}" icon="fas fa-file-contract">Nuestras tiendas</x-menu.item>
+        {{-- <x-menu.item id="seguimiento-de-pedido" href="{{ route('seguimiento-de-pedido.edit', 1) }}" icon="fas fa-file-contract">Seguimiento de pedido</x-menu.item> --}}
+        {{-- <x-menu.item id="nuestras-tiendas" href="{{ route('nuestras-tiendas.edit', 1) }}" icon="fas fa-file-contract">Nuestras tiendas</x-menu.item> --}}
 
         {{-- <x-menu.item id="sobrenosotros" href="{{ route('aboutus.index') }}" icon="fas fa-address-card">Sobre Nosotros</x-menu.item>  --}}
         {{-- <x-menu.item id="faqs" href="{{ route('faqs.index') }}" icon="fas fa-address-card"> Preguntas Frecuentes</x-menu.item> --}}
