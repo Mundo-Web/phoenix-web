@@ -73,9 +73,9 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
           <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-4">Género</h2>
           <div className='bg-[#808080] pb-[1px] -mt-2 mb-5'></div>
           {categories.map((item) => {
-            
+          //  const isChecked = item.id === Number(tag_id);
            const isCheckedfilter = Array.isArray(filter?.categoria_id) && filter.categoria_id.includes(String(item.id));
-           
+           console.log(isCheckedfilter);
            return categories.length > 0 && (<div key={item.id} className="w-full">
               <div className="flex flex-row justify-between gap-3 mb-2">
 

@@ -69,7 +69,6 @@ class ProductsController extends Controller
         ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id')
         ->leftJoin('categories', 'categories.id', 'products.categoria_id')
         ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
-        ->where('categories.visible', 1)
         ->where('products.status', 1);
 
         if (!$admin) {
@@ -78,7 +77,8 @@ class ProductsController extends Controller
                   ->from('products')
                   ->groupBy('producto');
           })
-          ->where('products.visible', 1);
+          ->where('products.visible', 1)
+          ->where('categories.visible', 1);
         }   
         
 
