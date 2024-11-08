@@ -46,7 +46,7 @@
     background-color: black !important;
     border-radius: 0px;
     font-family: 'Urbanist_Regular', sans-serif; /* Asegúrate de tener la fuente Urbanist importada */
-    font-weight: 600; /* Equivale a font-semibold */
+    font-weight: 500; /* Equivale a font-semibold */
     text-transform: capitalize;
     display: inline-block;
     text-align: center;
