@@ -799,6 +799,7 @@ class IndexController extends Controller
       ->where('categoria_id', '=', $product->categoria_id)
       ->where('status', '=', true)
       ->where('visible', '=', true)
+      ->inRandomOrder()
       ->get();
 
     $atributos = Attributes::where("status", "=", true)->get();
