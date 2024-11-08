@@ -775,6 +775,7 @@ class IndexController extends Controller
           ->orWhereNotNull('specifications');
       })
       ->get();
+
     $productosConGalerias = DB::select("
             SELECT products.*, galeries.*
             FROM products
@@ -790,10 +791,16 @@ class IndexController extends Controller
       ->with('colors')
       ->with('marcas')
       ->where('id', '<>', $id)
+      ->whereIn('products.id', function($subquery) {
+        $subquery->select(DB::raw('MIN(id)'))
+                 ->from('products')
+                 ->groupBy('producto');
+      })
       ->where('categoria_id', '=', $product->categoria_id)
       ->where('status', '=', true)
       ->where('visible', '=', true)
       ->get();
+
     $atributos = Attributes::where("status", "=", true)->get();
     $valorAtributo = AttributesValues::where("status", "=", true)->get();
     $valoresdeatributo = AttributeProductValues::where("product_id", "=", $id)->get();
