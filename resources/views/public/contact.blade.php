@@ -42,7 +42,7 @@
                     <aside class="flex flex-col mt-12 max-w-full w-full max-md:mt-10 ">
                         <div class="flex flex-col w-full">
                             <h2 class="text-xl font-semibold text-black font-Urbanist_Regular">Horario de oficina</h2>
-                            <p class="flex flex-col mt-2 max-w-full text-base font-light text-neutral-900 w-full">
+                            <p class="flex flex-col mt-2 max-w-[300px] text-base font-light text-neutral-900 w-full">
                                 @if ($general->schedule)
                                     <span>{{ $general->schedule }}</span>
                                 @endif
