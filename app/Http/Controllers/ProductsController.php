@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use SoDe\Extend\JSON;
 use Illuminate\Support\Facades\Auth;
+use Ramsey\Uuid\Type\Integer;
 
 use function PHPUnit\Framework\isNull;
 
@@ -77,7 +78,7 @@ class ProductsController extends Controller
         //         ->groupBy('producto');  
         // })
         ->where('categories.visible', 1)
-        ->where('products.visible', 1)
+        // ->where('products.visible', 1)
         ->where('products.status', 1);
 
 

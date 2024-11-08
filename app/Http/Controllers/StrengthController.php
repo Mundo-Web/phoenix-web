@@ -16,7 +16,7 @@ class StrengthController extends Controller
 	 */
 	public function index()
 	{
-		$strength = Strength::all();
+		$strength = Strength::orderBy('order', 'asc')->get();
 		return view('pages.strength.index', compact('strength'));
 	}
 
@@ -75,6 +75,7 @@ class StrengthController extends Controller
 			$fortaleza->descripcionshort = $request->descripcionshort;
 			$fortaleza->descripcion = $request->descripcion;
 			$fortaleza->link1 = $request->link1;
+			$fortaleza->order = $request->order;
 			$fortaleza->save();
 
 			return redirect()->route('strength.index')->with('success', 'Publicación creado exitosamente.');
@@ -146,6 +147,7 @@ class StrengthController extends Controller
 			$fortaleza->descripcionshort = $request->descripcionshort;
 			$fortaleza->descripcion = $request->descripcion;
 			$fortaleza->link1 = $request->link1;
+			$fortaleza->order = $request->order;
 			$fortaleza->save();
 
 			return redirect()->route('strength.index')->with('success', 'Publicación creado exitosamente.');

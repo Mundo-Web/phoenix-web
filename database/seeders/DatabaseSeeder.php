@@ -38,18 +38,18 @@ class DatabaseSeeder extends Seeder
             DiscountTypeSeeder::class,
             RoleSeeder::class,
             UsersSeeder::class,
-            MessageSeeder::class,
+            //MessageSeeder::class,
             GeneralSeeder::class,
-            FaqsSeeder::class,
-            BeneficiosSeeder::class,
-            SliderSeeder::class,
+            //FaqsSeeder::class,
+            //BeneficiosSeeder::class,
+            //SliderSeeder::class,
             // SubCategorySeeder::class,
             
             StatusSeeder::class,
             PricesTableSeeder::class,
             PoliticasDatos::class,
-            AboutUsSeeder::class
-            
+            AboutUsSeeder::class,
+            ShortcodeSeeder::class,
             //ServiceSeeder::class,
         ]);
         

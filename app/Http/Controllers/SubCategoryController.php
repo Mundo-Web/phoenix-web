@@ -17,9 +17,9 @@ class SubCategoryController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {
+    {   
         $subcategories = SubCategory::where('status', true)
-        ->orderByDesc('created_at')
+        ->orderBy('order', 'asc')
         ->get();
 
         return view('pages.subcategories.index', compact('subcategories'));
@@ -46,10 +46,12 @@ class SubCategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function save(Request $request)
-    {
+    {   
+       
         $body = $request->all();
         $body['slug'] = strtolower(str_replace(' ', '-', $request->name));
         $body['destacar'] = isset($request->destacar);
+        $body['order'] = $request->order;
 
         if ($request->hasFile("imagen")) {
 
@@ -72,6 +74,7 @@ class SubCategoryController extends Controller
 
             $body['url_image'] = $ruta;
             $body['name_image'] = $nombreImagen;
+          
         }
 
         $jpa = SubCategory::find($request->id);

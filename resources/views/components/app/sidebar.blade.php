@@ -69,6 +69,7 @@
 
       <x-menu.group title="Datos de la empresa">
         <x-menu.item id="datosgenerales" href="{{ route('datosgenerales.edit', 1) }}" icon="fas fa-address-card">Datos Generales</x-menu.item>
+        <x-menu.item id="shortcode" href="{{ route('shortcode.edit', 1) }}" icon="fas fa-address-card">Shortcode Head/Body</x-menu.item>
 
         <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fas fa-sliders-h">Sliders</x-menu.item>
         <x-menu.item id="banners" href="{{ route('banners.index') }}" icon="fa fa-solid fa-image">Banners</x-menu.item>

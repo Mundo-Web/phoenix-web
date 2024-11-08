@@ -242,7 +242,7 @@
           </div>
         </div>
       </div>
-      @if ($destacados->count() > 0)
+      {{-- @if ($destacados->count() > 0)
         <h1 class="text-2xl md:text-3xl font-semibold font-Urbanist_Bold text-[#323232] mb-2 mt-4">Aprovecha estas
           ofertas
           especiales
@@ -265,7 +265,7 @@
           </div>
         </div>
 
-      @endif
+      @endif --}}
 
     </section>
   </main>

@@ -19,7 +19,7 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $slider = Slider::where("status", "=", true)->get();
+        $slider = Slider::where("status", "=", true)->orderBy('order', 'asc')->get();
 
         return view('pages.sliders.index', compact('slider'));
     }
@@ -70,6 +70,7 @@ class SliderController extends Controller
         $slider ->link2 = $request->link2;
         $slider ->title = $request->title;
         $slider ->description = $request->description;
+        $slider ->order = $request->order;
         
 
 
@@ -109,6 +110,7 @@ class SliderController extends Controller
         $slider ->link1 = $request->link1;
         $slider ->botontext2 = $request->botontext2;
         $slider ->link2 = $request->link2;
+        $slider ->order = $request->order;
        
 
         if ($request->hasFile("imagen")) {

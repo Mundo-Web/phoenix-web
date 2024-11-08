@@ -8,10 +8,7 @@
 <head>
     @viteReactRefresh
     <meta charset="UTF-8">
-    <meta name="language" content="spanish">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    {{-- <title> Boost Peru</title> --}}
     <title>{{ env('APP_NAME') }}</title>
     <title>American Brands | Ofertas en americanbrands.pe</title>
     <meta HTTP-EQUIV="bulletin-text" content="Arma tu outfit con 50% de descuento en las mejores marcas Bronco Jeans, Lois Perú, Machine, 1921 International, Tayssir y más.">
@@ -142,9 +139,13 @@
         }
     </style>
 
+    @include('components.shortcode.contain_head')
 </head>
 
 <body class="body overflow-x-hidden">
+    
+    @include('components.shortcode.contain_body')
+
     <div class="overlay"></div>
     @include('components.public.header')
 

@@ -232,8 +232,8 @@
     @foreach ($datosgenerales as $item)
         <div
             class="bg-[#4598d3] h-[50px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center mb-7">
-            <h3 class="text-white font-Urbanist_Semibold text-base tracking-wider text-center hidden lg:flex">
-                ENVÍO GRATUITO EN LIMA METROPOLITANA POR COMPRAS SUPERIORES A S./149.90
+            <h3 class="text-white font-Urbanist_Semibold text-sm sm:text-base tracking-wider text-center flex">
+                {{$item->htop ?? "Ingrese un texto"}}
             </h3>
         </div>
     @endforeach
@@ -316,7 +316,7 @@
             <div class="w-9/12 flex items-center justify-center">
                 <a href="/">
                     <img id="logo-boostperu" class="min-w-56 w-60"
-                        src="{{ asset($isIndex ? 'images/svg/LOGOAB.svg' : 'images/svg/LOGOAB.svg') }}"
+                        src="{{ asset($isIndex ? 'images/svg/logoab.svg' : 'images/svg/logoab.svg') }}"
                         alt="american brands" />
                     {{-- <h2 class="text-2xl font-bold text-white tracking-widest font-Urbanist_Semibold text-center">AMERICAN BRANDS</h2> --}}
                 </a>
@@ -368,9 +368,11 @@
                         </div>
                     @endif
 
-                    {{-- <div class="hidden lg:flex justify-center items-center">
-                        <i class="fa-solid fa-location-dot fa-xl text-white !leading-none -mt-1"></i>
-                    </div> --}}
+                    <div class="hidden lg:flex justify-center items-center">
+                        <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">
+                            <img src="{{ asset('images/svg/tienda.svg') }}" class="text-white w-7" />
+                        </a>
+                    </div>
 
                     {{-- <div class="hidden lg:flex justify-center items-center">
                         <i class="fa-solid fa-heart  fa-xl text-white !leading-none -mt-1"></i>
@@ -397,8 +399,7 @@
         <div class="hidden lg:flex items-center justify-center ">
             <div>
                 <nav id="menu-items"
-                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-10 items-center justify-center py-8"
-                    x-data="{ openCatalogo: false, openSubMenu: null }">
+                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-16 items-center justify-center py-8">
 
 
                     {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
@@ -418,7 +419,7 @@
               </a> --}}
 
                     @foreach ($categorias as $categoria)
-                        <a id="categoria-{{ $categoria->id }}" href="{{ route('Catalogo.jsx') }}"
+                        <a id="categoria-{{ $categoria->id }}" href="/catalogo?categoria={{ $categoria->id }}"
                             class="font-medium  other-class2">
                             <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
                             <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
@@ -877,79 +878,116 @@
 <script>
     const categorias = @json($categorias);
     const marcas = @json($marcas);
-    var activeHover = false;
+    let activeHover = false;
+    var activeHovermarca = false;
+    
+
+    // function cerrar() {
+    //     categorias.forEach(categoria => {
+    //         let padre = document.getElementById(`productos-link-${categoria.id}`);
+    //         let megaMenu = document.getElementById(`productos-link-container-${categoria.id}`);
+    //         if (megaMenu) {
+    //             padre.removeChild(megaMenu);
+    //         }
+    //     });
+
+    //     // También cerramos el menú de marcas si está abierto
+    //     let marcasMenu = document.getElementById('productos-link-m-container');
+    //     if (marcasMenu) {
+    //         document.getElementById('productos-link-m').removeChild(marcasMenu);
+    //     }
+
+    //     activeHover = false;
+    // }
 
     function cerrarmarca() {
         let padre = document.getElementById('productos-link-m');
-        activeHover = false;
+        activeHovermarca = false;
         padre.innerHTML = ''; // Limpia el contenido del menú
     }
 
     $(document).ready(function() {
-        $(document).on('mouseenter', '.other-class', function() {
-            cerrar();
-        });
         $(document).on('mouseenter', '.other-class2', function() {
             cerrarmarca();
         });
     });
 
 
-    categorias.forEach(categoria => {
-        document.getElementById(`categoria-${categoria.id}`).addEventListener('mouseenter', function(event) {
-            if (event.target === this) {
-                // Obtener el contenedor específico de la categoría
-                let padre = document.getElementById(`productos-link-${categoria.id}`);
+    
+let insideMenu = false; // Variable auxiliar para saber si el ratón está dentro del área del menú
 
-                // Crear contenedor del mega menú
-                let divcontainer = document.createElement('div');
-                divcontainer.id = `productos-link-container-${categoria.id}`;
-                divcontainer.className =
-                    'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+categorias.forEach(categoria => {
+    const categoriaElement = document.getElementById(`categoria-${categoria.id}`);
+    categoriaElement.addEventListener('mouseenter', function(event) {
+        if (event.target === this && !activeHover) {
+            // Obtener el contenedor específico de la categoría
+            let padre = document.getElementById(`productos-link-${categoria.id}`);
 
-                // Definimos el grid para las columnas de subcategorías
-                let gridContainer = document.createElement('div');
-                gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
-                gridContainer.style.gridTemplateColumns =
-                'repeat(auto-fill, 150px)'; // Columnas de 150px
-                gridContainer.style.gridAutoRows = 'auto';
-                gridContainer.style.maxWidth = '80%'; // Ancho máximo del contenedor
-                gridContainer.style.justifyItems = 'center';
-                gridContainer.style.justifyContent = 'center';
-                gridContainer.style.alignItems = 'center';
+            // Crear contenedor del mega menú
+            let divcontainer = document.createElement('div');
+            divcontainer.id = `productos-link-container-${categoria.id}`;
+            divcontainer.className =
+                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
-                divcontainer.addEventListener('mouseenter', function() {
-                    this.addEventListener('mouseleave', cerrar);
-                });
+            let titulo = document.createElement('h3');
+            titulo.className = 'text-lg font-font-Urbanist_Bold font-bold text-left mb-4 uppercase';
+            titulo.innerText = `ROPA DE ${categoria.name}`; 
+            titulo.style.gridColumn = '1 / -1';
+          
+     
 
+            // Definimos el grid para las columnas de subcategorías
+            let gridContainer = document.createElement('div');
+            gridContainer.className = 'grid gap-2 px-4 pt-3 pb-7 list-none';
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
+            gridContainer.style.gridAutoRows = 'auto';
+            gridContainer.style.maxWidth = '600px';
+            gridContainer.style.justifyItems = 'start';
+            gridContainer.style.justifyContent = 'center';
+            gridContainer.style.alignItems = 'center';
 
-                // Agregar cada subcategoría al grid
-                categoria.subcategories.forEach(subcategoria => {
-                    let li = document.createElement('li');
-                    li.className =
-                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
-                    li.style.maxWidth = '150px';
+            gridContainer.appendChild(titulo);
+            // Agregar cada subcategoría al grid
+            categoria.subcategories.forEach(subcategoria => {
+                let li = document.createElement('li');
+                li.className = 'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
+                li.style.maxWidth = '150px';
 
-                    // Crear enlace de subcategoría
-                    let a = document.createElement('a');
-                    a.href = `/catalogo?subcategoria=${subcategoria.id}`;
-                    a.innerHTML = subcategoria.name;
-                    a.className = 'w-full h-full text-center';
+                // Crear enlace de subcategoría
+                let a = document.createElement('a');
+                a.href = `/catalogo?subcategoria=${subcategoria.id}`;
+                a.innerHTML = subcategoria.name;
+                a.className = 'w-full h-full text-center';
 
-                    li.appendChild(a);
-                    gridContainer.appendChild(li);
-                });
+                li.appendChild(a);
+                gridContainer.appendChild(li);
+            });
 
-                divcontainer.appendChild(gridContainer);
+            divcontainer.appendChild(gridContainer);
 
-                // Limpiar hijos y agregar el contenedor
-                if (!activeHover) {
-                    padre.appendChild(divcontainer);
-                    activeHover = true;
-                }
-            }
-        });
+            // Limpiar el contenedor de hijos y agregar el nuevo contenedor
+            padre.innerHTML = ''; // Asegura que el contenedor esté vacío antes de agregar
+            padre.appendChild(divcontainer);
+            activeHover = true;
+
+            // Agregar evento para que el menú permanezca abierto mientras el ratón esté sobre el enlace o el menú
+            categoriaElement.addEventListener('mouseleave', checkCloseMenu);
+            divcontainer.addEventListener('mouseenter', () => insideMenu = true);
+            divcontainer.addEventListener('mouseleave', checkCloseMenu);
+        }
     });
+
+    function checkCloseMenu() {
+        insideMenu = false;
+        setTimeout(() => {
+            if (!insideMenu) {
+                let padre = document.getElementById(`productos-link-${categoria.id}`);
+                padre.innerHTML = '';
+                activeHover = false;
+            }
+        }, 80); // Añadimos un pequeño retraso para que detecte bien la salida
+    }
+});
 
 
     document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
@@ -963,10 +1001,10 @@
 
             // Definimos el grid para las columnas
             let gridContainer = document.createElement('div');
-            gridContainer.className = 'grid gap-3 px-4 py-7 list-none';
+            gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
             gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)'; // Columnas de 100px máximo
             gridContainer.style.gridAutoRows = 'auto'; // Altura automática para cada fila
-            gridContainer.style.maxWidth = '60%'; // Ajuste opcional para el ancho máximo del contenedor
+            gridContainer.style.maxWidth = '600px'; // Ajuste opcional para el ancho máximo del contenedor
             gridContainer.style.justifyItems = 'center';
             gridContainer.style.justifyContent = 'center';
             gridContainer.style.alignItems = 'center';
@@ -979,7 +1017,7 @@
             marcas.forEach(marca => {
                 let li = document.createElement('li');
                 li.className =
-                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-base py-2 w-full line-clamp-1';
+                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
                 li.style.maxWidth = '150px'; // Ancho máximo de cada marca
 
                 let a = document.createElement('a');
@@ -993,32 +1031,13 @@
 
             divcontainer.appendChild(gridContainer);
 
-            if (!activeHover) {
+            if (!activeHovermarca) {
                 padre.appendChild(divcontainer);
-                activeHover = true;
+                activeHovermarca = true;
             }
         }
     });
-
-    function cerrar() {
-    categorias.forEach(categoria => {
-        let padre = document.getElementById(`productos-link-${categoria.id}`);
-        let megaMenu = document.getElementById(`productos-link-container-${categoria.id}`);
-        if (megaMenu) {
-            padre.removeChild(megaMenu);
-        }
-    });
-
-    // También cerramos el menú de marcas si está abierto
-    let marcasMenu = document.getElementById('productos-link-m-container');
-    if (marcasMenu) {
-        document.getElementById('productos-link-m').removeChild(marcasMenu);
-    }
-
-    activeHover = false;
-}
 </script>
-
 
 <script>
     function aplicarDescuentosEnCarrito(articulosCarrito) {
@@ -1300,3 +1319,67 @@
   });
 </script>
 
+{{-- <script>
+    document.getElementById('productos-link2').addEventListener('mouseenter', function(event) { 
+        if (event.target === this && !activeHovermarca) {
+            let padre = document.getElementById('productos-link-m');
+            
+            // Crear el contenedor del menú de marcas
+            let divcontainer = document.createElement('div');
+            divcontainer.id = 'productos-link-m-container';
+            divcontainer.className =
+                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+
+            let gridContainer = document.createElement('div');
+            gridContainer.className = 'grid gap-2 px-4 py-7 list-none';
+            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
+            gridContainer.style.gridAutoRows = 'auto';
+            gridContainer.style.maxWidth = '60%';
+            gridContainer.style.justifyItems = 'center';
+            gridContainer.style.justifyContent = 'center';
+            gridContainer.style.alignItems = 'center';
+
+            // Agregar cada marca al grid
+            marcas.forEach(marca => {
+                let li = document.createElement('li');
+                li.className =
+                    'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
+                li.style.maxWidth = '150px';
+
+                let a = document.createElement('a');
+                a.href = `/catalogo?marcas=${marca.id}`;
+                a.innerHTML = marca.title;
+                a.className = 'w-full h-full text-center';
+
+                li.appendChild(a);
+                gridContainer.appendChild(li);
+            });
+
+            divcontainer.appendChild(gridContainer);
+
+            // Limpiar hijos y agregar el contenedor del menú
+            padre.innerHTML = '';
+            padre.appendChild(divcontainer);
+            activeHovermarca = true;
+
+            // Agregar eventos de `mouseleave` para cerrar el menú
+            document.getElementById('productos-link2').addEventListener('mouseleave', scheduleCloseMarca);
+            divcontainer.addEventListener('mouseenter', () => clearTimeout(closeTimeoutMarca));
+            divcontainer.addEventListener('mouseleave', scheduleCloseMarca);
+        }
+    });
+
+    let closeTimeoutMarca; // Temporizador para cerrar el menú
+
+    function scheduleCloseMarca() {
+        closeTimeoutMarca = setTimeout(() => {
+            cerrarmarca();
+        }, 100); // Retardo para evitar cierres bruscos
+    }
+
+    function cerrarmarca() {
+        let padre = document.getElementById('productos-link-m');
+        activeHovermarca = false;
+        padre.innerHTML = ''; // Limpia el contenido del menú
+    }
+</script> --}}

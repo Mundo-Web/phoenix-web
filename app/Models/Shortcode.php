@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClientLogos extends Model
+class Shortcode extends Model
 {
     use HasFactory;
-    protected $fillable = ['order','title', 'description', 'url_image', 'url_image2', 'destacar','visible', 'status'];
 
+    protected $fillable = ['head', 'body'];
 }

@@ -20,6 +20,7 @@ use App\Models\PolyticsCondition;
 use App\Models\Products;
 use App\Models\Sale;
 use App\Models\SeguimientoPedido;
+use App\Models\Shortcode;
 use App\Models\Tag;
 use App\Models\TermsAndCondition;
 use App\Models\TimeAndPriceDelivery;
@@ -123,6 +124,19 @@ class AppServiceProvider extends ServiceProvider
                 ->with('salesCount', $salesCount)
                 ->with('mensajes', $mensajes)
                 ->with('reclamo', $reclamo);
+        });
+
+        View::composer('components.shortcode.contain_body', function ($view) {
+            $shortcode = Shortcode::find(1);
+           
+            $view->with('shortcode', $shortcode);
+        });
+
+
+        View::composer('components.shortcode.contain_head', function ($view) {
+            $shortcode = Shortcode::find(1);
+           
+            $view->with('shortcode', $shortcode);
         });
 
         PaginationPaginator::useTailwind();
