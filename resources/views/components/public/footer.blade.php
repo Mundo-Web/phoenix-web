@@ -61,7 +61,7 @@
 
         <div class="flex flex-col text-base gap-2">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">SERVICIO AL CLIENTE</h3>
-            <a href="#">Contáctanos</a>
+            <a href="{{route('contacto')}}">Contáctanos</a>
             {{-- <a id="linkSeguimientoPedido">Seguimiento de Pedido</a> --}}
             <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">Nuestras Tiendas</a>
             <a id="linkPoliticasDatos">Politica de Datos</a>

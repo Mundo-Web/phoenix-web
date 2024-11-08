@@ -11,34 +11,37 @@
     <main>
 
         <section
-            class="flex relative flex-col justify-center items-center px-[5%] py-28 text-base font-medium min-h-[345px] text-neutral-900 max-md:py-24">
+            class="flex relative flex-col justify-center items-center px-[5%] py-32 text-base font-medium min-h-[345px] text-neutral-900 max-md:py-32">
             <img loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f15375dac970433a2abe3921fa2c31e35c32f7b26a37b841431aaba1861d380?placeholderIfAbsent=true&apiKey=72fae0f4c808496790606e16dad566da"
-                alt="" class="object-cover absolute inset-0 size-full opacity-15" />
-            <div class="flex relative flex-col max-w-full w-[499px]">
-                <h2 class="self-center text-[#FD1F4A] font-Helvetica_Medium">Contacto</h2>
-                <h3 class="mt-3 text-5xl text-center max-md:max-w-full font-Helvetica_Medium">Comunícate</h3>
-                <p class="mt-3 text-lg font-light text-center max-md:max-w-full ">
+                src="{{asset('images/img/banner_AB.png')}}"
+                alt="" class="object-cover absolute inset-0 size-full object-top" />
+                <div class="absolute inset-0 bg-black bg-opacity-50 "></div>
+            <div class="flex relative flex-col max-w-full w-[550px]">
+                {{-- <h2 class="self-center text-[#FD1F4A] font-Helvetica_Medium">Contacto</h2> --}}
+                <h3 class="mt-3 text-5xl text-white text-center max-md:max-w-full font-Urbanist_Bold">Contáctanos</h3>
+                {{-- <p class="mt-3 text-lg font-light text-center max-md:max-w-full ">
                     Donec vehicula, lectus vel pharetra semper, justo massa pharetra nunc, non venenatis ante augue quis
                     est.
-                </p>
+                </p> --}}
             </div>
+            
         </section>
 
 
-        <section class="flex flex-col mt-8 lg:mt-16 font-Helvetica_Light">
+        <section class="flex flex-col my-8 lg:my-16 font-Urbanist_Regular">
             <div class="flex flex-wrap gap-10 items-start px-[5%] lg:px-[8%] w-full">
                 <div class="flex flex-col grow shrink min-w-[240px] w-[390px] max-md:max-w-full">
                     <header class="flex flex-col max-w-full text-neutral-900 w-[488px]">
-                        <h1 class="text-5xl font-medium max-md:max-w-full font-Helvetica_Medium">A nuestro amable equipo le
+                        <h1 class="text-5xl font-medium max-md:max-w-full font-Urbanist_Bold">A nuestro amable equipo le
                             encantaría saber de
                             usted</h1>
-                        <p class="mt-3 text-base font-light max-md:max-w-full">Donec vehicula, lectus vel pharetra semper,
-                            justo massa pharetra nunc, non venenatis ante augue quis est.</p>
+                        <p class="mt-3 text-base font-Urbanist_Regular max-md:max-w-full"> ¿Tienes alguna pregunta o necesitas ayuda? Estamos aquí para asistirte. 
+                            No dudes en ponerte en contacto con nosotros para resolver cualquier inquietud, 
+                            recibir asesoría personalizada o conocer más sobre nuestros servicios. </p>
                     </header>
-                    <aside class="flex flex-col mt-12 max-w-full w-full max-md:mt-10">
+                    <aside class="flex flex-col mt-12 max-w-full w-full max-md:mt-10 ">
                         <div class="flex flex-col w-full">
-                            <h2 class="text-xl font-medium text-[#FD1F4A] font-Helvetica_Medium">Horario de oficina</h2>
+                            <h2 class="text-xl font-semibold text-black font-Urbanist_Regular">Horario de oficina</h2>
                             <p class="flex flex-col mt-2 max-w-full text-base font-light text-neutral-900 w-full">
                                 @if ($general->schedule)
                                     <span>{{ $general->schedule }}</span>
@@ -46,8 +49,8 @@
                             </p>
                         </div>
                         <div class="flex flex-col mt-8 w-full">
-                            <h2 class="text-xl font-medium text-[#FD1F4A] font-Helvetica_Medium">Nuestra dirección</h2>
-                            <address class="flex flex-col mt-2 max-w-full text-base font-light text-neutral-900 w-full">
+                            <h2 class="text-xl font-semibold text-black font-Urbanist_Regular">Nuestra dirección</h2>
+                            <div class="flex flex-col mt-2 max-w-full text-base font-light text-neutral-900 w-full">
                                 @if ($general->address && is_null($general->inside))
                                     <span>{{ $general->address }}</span>
                                 @elseif(is_null($general->address) && $general->inside)
@@ -64,10 +67,10 @@
                                     <span>{{ $general->district }}, {{ $general->city }}</span>
                                 @endif
 
-                            </address>
+                            </div>
                         </div>
                         <div class="flex flex-col mt-8 w-full">
-                            <h2 class="text-xl font-medium text-[#FD1F4A] font-Helvetica_Medium">Ponerse en contacto</h2>
+                            <h2 class="text-xl font-semibold text-black font-Urbanist_Regular">Ponerse en contacto</h2>
                             <p class="flex flex-col mt-2 max-w-full text-base font-light text-neutral-900 w-full">
                                 @if ($general->cellphone)
                                     <a href="tel:+51{{ $general->cellphone }}">{{ $general->cellphone }}</a>
@@ -82,7 +85,7 @@
                 </div>
                 <div class="flex flex-col grow shrink justify-center px-0 lg:px-10 min-w-[240px] w-[494px]">
                     <header class="flex flex-col w-full text-neutral-900 max-md:max-w-full">
-                        <h2 class="text-3xl font-medium max-md:max-w-full font-Helvetica_Medium">Ponerse en contacto</h2>
+                        <h2 class="text-3xl font-semibold max-md:max-w-full font-Helvetica_Medium">Ponerse en contacto</h2>
                         <p class="mt-4 text-base font-light max-md:max-w-full">Donec vehicula, lectus vel pharetra semper,
                             justo massa pharetra nunc, non venenatis ante augue quis est.</p>
                     </header>
@@ -91,13 +94,13 @@
                             <div class="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
                                 <label for="nombre" class="text-[15px] font-medium font-Helvetica_Medium">Nombre</label>
                                 <input id="nombre" type="text" placeholder="Ingresa tu nombre" name="name"
-                                    class="px-4 py-3 mt-1.5 w-full text-base font-light bg-white rounded-lg border border-gray-300 border-solid shadow-sm"
+                                    class="focus:ring-black focus:border-black px-4 py-2 mt-1.5 w-full text-base font-light bg-white rounded-0 border border-gray-300 border-solid shadow-sm"
                                     aria-label="Ingresa tu nombre">
                             </div>
                             <div class="flex flex-col flex-1 shrink basis-0 min-w-[240px]">
                                 <label for="apellido" class="text-[15px] font-medium font-Helvetica_Medium">Apellido</label>
                                 <input id="apellido" type="text" placeholder="Ingresa tu apellido" name="lastname"
-                                    class="px-4 py-3 mt-1.5 w-full text-base font-light bg-white rounded-lg border border-gray-300 border-solid shadow-sm"
+                                    class="focus:ring-black focus:border-black px-4 py-2 mt-1.5 w-full text-base font-light bg-white rounded-0 border border-gray-300 border-solid shadow-sm"
                                     aria-label="Ingresa tu apellido">
                             </div>
                         </div>
@@ -105,14 +108,14 @@
                             <label for="email" class="text-[15px] font-medium font-Helvetica_Medium">E-mail</label>
                             <input id="email" type="email" placeholder="Ingresa tu dirección de correo electrónico"
                                 name="email"
-                                class="px-4 py-3 mt-1.5 w-full text-base font-light bg-white rounded-lg border border-gray-300 border-solid shadow-sm max-md:max-w-full"
+                                class="focus:ring-black focus:border-black px-4 py-2 mt-1.5 w-full text-base font-light bg-white rounded-0 border border-gray-300 border-solid shadow-sm"
                                 aria-label="Ingresa tu dirección de correo electrónico">
                         </div>
                         <div class="flex flex-col mt-6 w-full whitespace-nowrap text-neutral-900 max-md:max-w-full">
                             <label for="telefono"
                                 class="text-[15px] font-medium max-md:max-w-full font-Helvetica_Medium">Telefono</label>
                             <input id="telefono" type="tel" placeholder="+51..." name="phone"
-                                class="px-4 py-3 mt-1.5 w-full text-base font-light bg-white rounded-lg border border-gray-300 border-solid shadow-sm max-md:max-w-full"
+                                class="focus:ring-black focus:border-black px-4 py-2 mt-1.5 w-full text-base font-light bg-white rounded-0 border border-gray-300 border-solid shadow-sm"
                                 aria-label="Ingresa tu número de teléfono">
                         </div>
                         <div class="flex flex-col mt-6 w-full text-neutral-900 max-md:max-w-full">
@@ -120,26 +123,21 @@
                                 class="text-[15px] font-medium max-md:max-w-full font-Helvetica_Medium">Escribe un
                                 mensaje</label>
                             <textarea id="mensaje" placeholder="Escríbenos tu pregunta aquí" name="message"
-                                class="px-4 py-3 mt-1.5 w-full text-base font-light bg-white rounded-lg border border-gray-300 border-solid shadow-sm max-md:max-w-full"
+                                class="focus:ring-black focus:border-black px-4 py-2 mt-1.5 w-full text-base font-light bg-white rounded-0 border border-gray-300 border-solid shadow-sm"
                                 rows="3" aria-label="Escribe tu mensaje"></textarea>
                         </div>
                         <div class="flex flex-wrap gap-3 items-center mt-6 w-full max-md:max-w-full">
                             <input type="checkbox" id="privacy-policy" required
-                                class="w-5 h-5 bg-white rounded-md border border-gray-300 border-solid">
+                                class="w-5 h-5 bg-white text-black focus:ring-0 rounded-0 border border-gray-300 border-solid">
                             <label for="privacy-policy"
                                 class="text-[15px] font-light text-neutral-900 font-Helvetica_Light">Usted acepta nuestra
                                 amigable política de privacidad.</label>
                         </div>
                         <button type="submit"
-                            class="font-Helvetica_Medium tracking-wider gap-2.5 self-stretch px-4 py-3 mt-8 w-full text-base font-bold text-center text-white bg-[#FD1F4A] rounded-3xl min-h-[43px] max-md:max-w-full">Enviar
+                            class="font-Urbanist_Regular font-semibold tracking-wider gap-2.5 self-stretch px-4 py-3 mt-8 w-full text-base text-center text-white bg-black rounded-0 min-h-[43px] max-md:max-w-full">Enviar
                             mensaje</button>
                     </form>
                 </div>
-            </div>
-            <div class="flex flex-row items-start justify-start">
-                <img loading="lazy" src="{{ asset('images/img/fondofwc.png') }}"
-                    class="object-contain self-center mt-10 lg:-mt-20 max-w-full aspect-[1.84] shadow-[-179px_91px_56px_rgba(0,0,0,0)] w-full lg:w-2/3 "
-                    alt="">
             </div>
         </section>
 
