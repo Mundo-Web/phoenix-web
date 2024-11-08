@@ -86,8 +86,8 @@
                 <div class="flex flex-col grow shrink justify-center px-0 lg:px-10 min-w-[240px] w-[494px]">
                     <header class="flex flex-col w-full text-neutral-900 max-md:max-w-full">
                         <h2 class="text-3xl font-semibold max-md:max-w-full font-Helvetica_Medium">Ponerse en contacto</h2>
-                        <p class="mt-4 text-base font-light max-md:max-w-full">Donec vehicula, lectus vel pharetra semper,
-                            justo massa pharetra nunc, non venenatis ante augue quis est.</p>
+                        <p class="mt-4 text-base font-light max-md:max-w-full">Puedes llamarnos, enviarnos un correo o completar el formulario de contacto. 
+                            ¡Estamos a tu disposición!</p>
                     </header>
                     <form class="flex flex-col mt-12 w-full max-md:mt-10 max-md:max-w-full" id="formContactos">
                         <div class="flex flex-wrap gap-4 items-start w-full text-neutral-900 max-md:max-w-full">
