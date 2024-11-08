@@ -369,7 +369,7 @@
                     @endif
 
                     <div class="hidden lg:flex justify-center items-center">
-                        <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==" target="_blank">
+                        <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">
                             <img src="{{ asset('images/svg/tienda.svg') }}" class="text-white w-7" />
                         </a>
                     </div>

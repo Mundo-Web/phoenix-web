@@ -53,20 +53,22 @@
         <div class="flex flex-col text-base gap-2">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">AYUDA & APOYO</h3>
             <a id="linkTerminos">Términos y condiciones</a>
-            <a id="linkTratamientoDatos">Tratamiento adicional de datos</a>
+            {{-- <a id="linkTratamientoDatos">Tratamiento adicional de datos</a>
             <a id="linkPoliticasCookies">Política de Cookies</a>
-            <a id="linkCampanasPublicitarias">Campañas publicitarias</a>
-            <a id="linkBeneficios">Beneficios 0% interese</a>
+            <a id="linkCampanasPublicitarias">Campañas publicitarias</a> --}}
+            <a id="linkBeneficios">Beneficios 0% intereses</a>
         </div>
 
         <div class="flex flex-col text-base gap-2">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">SERVICIO AL CLIENTE</h3>
             <a href="#">Contáctanos</a>
-            <a id="linkSeguimientoPedido">Seguimiento de Pedido</a>
-            <a id="linkNuestrasTiendas">Nuestras Tienda</a>
+            {{-- <a id="linkSeguimientoPedido">Seguimiento de Pedido</a> --}}
+            <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">Nuestras Tienda</a>
             <a id="linkPoliticasDatos">Politica de Datos</a>
-            <div class="mt-3"><a href="{{route('librodereclamaciones')}}" class="px-4 py-2 border text-xs"><i class="fa-thin fa-book-open pr-2"></i> LIBRO DE
-                    RECLAMACIONES</a></div>
+            <div class="flex flex-row">
+                <a href="{{route('librodereclamaciones')}}"><div class="flex flex-row justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs"><img class="w-6 h-auto object-contain" src="{{asset('images/img/libro.png')}}" /> LIBRO DE
+                        RECLAMACIONES</div></a>
+            </div>
         </div>
 
         <div class=" flex flex-col text-base gap-2 justify-start items-start">
