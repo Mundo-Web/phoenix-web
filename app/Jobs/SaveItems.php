@@ -5,6 +5,7 @@ namespace App\Jobs;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ClientLogos;
+use App\Models\Discount;
 use App\Models\Galerie;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -114,6 +115,8 @@ class SaveItems implements ShouldQueue
           'visible' => 1
         ]);
 
+        $discountJpa = Discount::where('name', $item[15])->first();
+
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
         ], [
@@ -128,7 +131,8 @@ class SaveItems implements ShouldQueue
           'descuento' => $item[9] ?? 0,
           'color' => $item[10],
           'peso' => $item[12],
-          'stock' => $item[13]
+          'stock' => $item[13],
+          'discount_id' => $discountJpa?->id
         ]);
 
         $i = 0;
@@ -141,7 +145,7 @@ class SaveItems implements ShouldQueue
 
         foreach ($productImages as $image) {
           try {
-            $productImage = 'images/products/' . $image;
+            $productImage = 'storage/images/products/' . $image;
             if ($i == 0) {
               $productJpa->imagen = $productImage;
               $productJpa->save();
