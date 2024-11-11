@@ -56,9 +56,7 @@ class ProductsController extends Controller
     // dump($user->hasRole('Reseller'));
     
     $user = false;
-
-
-
+    $admin = $request->is_admin ? true : false;
 
     $response =  new dxResponse();
     try {
@@ -71,17 +69,17 @@ class ProductsController extends Controller
         ->leftJoin('tags_xproducts AS txp', 'txp.producto_id', 'products.id')
         ->leftJoin('categories', 'categories.id', 'products.categoria_id')
         ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
-        
-        // ->whereIn('products.id', function($query) {
-        //   $query->select(DB::raw('MIN(id)'))  
-        //         ->from('products')
-        //         ->groupBy('producto');  
-        // })
-        ->where('categories.visible', 1)
-        // ->where('products.visible', 1)
         ->where('products.status', 1);
 
-
+        if (!$admin) {
+          $instance->whereIn('products.id', function($query) {
+            $query->select(DB::raw('MIN(id)'))
+                  ->from('products')
+                  ->groupBy('producto');
+          })
+          ->where('products.visible', 1)
+          ->where('categories.visible', 1);
+        }   
         
 
       if (Auth::check()) {

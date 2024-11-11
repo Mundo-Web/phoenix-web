@@ -75,11 +75,11 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
       <div className='flex flex-col items-start justify-start h-[120px]'>
             
         {item.colors && item.colors.length > 0 && ( 
-          <Tippy content={color.imagen}>
+          
             <div className="flex justify-start items-center mt-2 gap-1">
                   
                   {item.colors?.map(color => (
-                    
+                    <Tippy content={color.color}>
                     <a 
                       key={color.color} 
                       id={`producto-${item.id}-${color.imagen}`}
@@ -94,20 +94,21 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
                         <img className='object-contain object-center' src={color.imagen ? `/${color.imagen}` : '/images/img/noimagen.jpg'} />
                       </div>
                     </a>
+                    </Tippy>
                   ))}
                   
             </div>
-          </Tippy>
+          
             )       
           } 
         
           {marcas &&  (
               <div className="flex justify-start items-center mt-0 md:mt-1 h-6 lg:h-7">  
                 <img
-                  src={`/${marcas.url_image}`} // Asegúrate de que la ruta sea correcta
-                  alt={marcas.title} // O el texto alternativo que desees usar
-                  className="h-3 w-auto" // Ajusta el tamaño como necesites
-                  onError={(e) => e.target.src = '/images/img/noimagen.jpg'} // Imagen por defecto si falla
+                  src={`/${marcas.url_image}`} 
+                  alt={marcas.title} 
+                  className="h-3 w-auto" 
+                  onError={(e) => e.target.src = '/images/img/noimagen.jpg'} 
                 />
               </div>)
           } 

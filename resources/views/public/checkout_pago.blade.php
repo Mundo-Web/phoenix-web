@@ -44,7 +44,12 @@
   .kr-popin-button {
     color: #ffffff !important;
     background-color: black !important;
-    border-radius: 92px;
+    border-radius: 0px;
+    font-family: 'Urbanist_Regular', sans-serif; /* Asegúrate de tener la fuente Urbanist importada */
+    font-weight: 500; /* Equivale a font-semibold */
+    text-transform: capitalize;
+    display: inline-block;
+    text-align: center;
   }
 
   @media (max-width: 700px) {
@@ -200,7 +205,7 @@
                         <input id="termsandconditions" type="checkbox" required
                           class="border-2 rounded-sm w-5 h-5 text-[#c1272d] ring-0 focus:ring-0" />
                         <label for="termsandconditions" class="font-medium text-sm text-[#6C7275]">Estoy de acuerdo con
-                          los <a class="font-bold" href="{{ route('terms_condition') }}" target="_blanck">terminos y
+                          los <a class="font-bold" id="terminoslibro" target="_blanck">terminos y
                             condiciones</a></label>
 
                       </div>
@@ -436,7 +441,7 @@
               <div id="contenedorIzypay" hidden>
                 <div class="flex justify-center content-center ">
                   <div
-                    class="kr-embedded text-white bg-[#74A68D] w-full py-3 rounded-3xl cursor-pointer border-2 font-semibold text-[16px] inline-block text-center border-none"
+                    class="kr-embedded text-white w-full py-3 rounded-none cursor-pointer border-2 font-Urbanist_Regular font-semibold text-lg inline-block text-center border-none"
                     kr-popin kr-form-token="{{ $formToken }}">
                     <div class="flex-container">
                       <div class="kr-pan"> </div>

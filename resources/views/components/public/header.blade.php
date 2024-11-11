@@ -419,7 +419,7 @@
               </a> --}}
 
                     @foreach ($categorias as $categoria)
-                        <a id="categoria-{{ $categoria->id }}" href="/catalogo?categoria={{ $categoria->id }}"
+                        <a id="categoria-{{ $categoria->id }}" href="/catalogo?category={{ $categoria->id }}"
                             class="font-medium  other-class2">
                             <span class="underline-this">{{ strtoupper($categoria->name) }}</span>
                             <div id="productos-link-{{ $categoria->id }}" class="w-0"></div>
