@@ -49,9 +49,9 @@ class SaleController extends Controller
 
             $saleJpa = new Sale();
             $saleJpa->code = $orderId;
-            $saleJpa->name = $user->name;
+            $saleJpa->name = $user->name ?? '-';
             $saleJpa->lastname = $user->lastname ?? '-';
-            $saleJpa->email = $user->email;
+            $saleJpa->email = $user->email ?? '-';
             $saleJpa->phone = $user->phone ?? '-';
             $saleJpa->address_department = $address['department'] ?? '-';
             $saleJpa->address_province = $address['province'] ?? '-';
