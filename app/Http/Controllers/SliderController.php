@@ -64,8 +64,24 @@ class SliderController extends Controller
             $slider ->name_image = $nombreImagen;
         }
 
+        if ($request->hasFile("link1")) {
+
+            $manager = new ImageManager(new Driver());
+
+            $nombreImagen = Str::random(10) . '_' . $request->file('link1')->getClientOriginalName();
+            $img =  $manager->read($request->file('link1'));
+            $ruta = 'storage/images/slider/';
+           
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true); 
+            }
+            
+            $img->save($ruta.$nombreImagen);
+            $slider->link1 = $ruta.$nombreImagen;
+            
+        }
+
         $slider ->botontext1 = $request->botontext1;
-        $slider ->link1 = $request->link1;
         $slider ->botontext2 = $request->botontext2;
         $slider ->link2 = $request->link2;
         $slider ->title = $request->title;
@@ -116,11 +132,8 @@ class SliderController extends Controller
         if ($request->hasFile("imagen")) {
 
             $manager = new ImageManager(new Driver());
-
-
             $ruta = storage_path() . '/app/public/images/slider/' . $slider->name_image;
 
-            // dd($ruta);
             if (File::exists($ruta)) {
                 File::delete($ruta);
             }
@@ -128,17 +141,38 @@ class SliderController extends Controller
             $rutanueva = 'storage/images/slider/';
             $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
             $img =  $manager->read($request->file('imagen'));
-            // $img->coverDown(968, 351, 'center');
            
             if (!file_exists($rutanueva)) {
-                mkdir($rutanueva, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+                mkdir($rutanueva, 0777, true); 
             }
             
             $img->save($rutanueva . $nombreImagen);
-
-
             $slider->url_image = $rutanueva;
             $slider->name_image = $nombreImagen;
+        }
+
+
+        if ($request->hasFile("imagemobile")) {
+
+            $manager = new ImageManager(new Driver());
+            $ruta =  $slider->link1;
+
+            if (File::exists($ruta)) {
+                File::delete($ruta);
+            }
+
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagemobile')->getClientOriginalName();
+            $img =  $manager->read($request->file('imagemobile'));
+            $ruta = 'storage/images/slider/';
+           
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true); 
+            }
+            
+            $img->save($ruta.$nombreImagen);
+
+            $slider->link1 = $ruta.$nombreImagen;
+            
         }
 
 

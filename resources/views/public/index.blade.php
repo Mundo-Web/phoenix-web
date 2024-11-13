@@ -93,9 +93,15 @@
                     <div class="swiper-slide">
                         <div class="w-full">
                           <a href="{{$slide->link2}}">  
-                            <div class="h-[450px] w-full md:h-auto relative z-10 flex flex-col items-end justify-end">
-                                <img class="block h-full w-full object-cover md:object-contain object-bottom"
+                            <div class="hidden md:flex h-[450px] w-full md:h-auto relative z-10 md:flex-col items-end justify-end">
+                                <img class="block h-full w-full object-contain object-bottom"
                                     src="{{ asset($slide->url_image . $slide->name_image) }}" 
+                                    onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"
+                                    alt="">
+                            </div>
+                            <div class="flex flex-col md:hidden h-auto w-full md:h-auto relative z-10  items-end justify-end">
+                                <img class="block h-full w-full object-contain object-bottom"
+                                    src="{{ asset($slide->link1) }}" 
                                     onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"
                                     alt="">
                             </div>

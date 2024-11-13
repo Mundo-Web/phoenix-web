@@ -107,7 +107,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
                 <img
                   src={`/${marcas.url_image}`} 
                   alt={marcas.title} 
-                  className="h-3 w-auto" 
+                  className="h-4 w-auto" 
                   onError={(e) => e.target.src = '/images/img/noimagen.jpg'} 
                 />
               </div>)
