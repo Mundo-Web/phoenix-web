@@ -307,7 +307,7 @@
                         </svg>
                     </span>
 
-                    <div class="bg-white z-60 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]"
+                    <div class="bg-white z-50 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]"
                         id="resultados"></div>
                 </div>
             </div>
