@@ -13,7 +13,7 @@
         <section
             class="flex relative flex-col justify-center items-center px-[5%] py-32 text-base font-medium min-h-[345px] text-neutral-900 max-md:py-32">
             <img loading="lazy"
-                src="{{asset('images/img/banner_AB.png')}}"
+                src="{{asset('images/img/contactanosf.jpg')}}"
                 alt="" class="object-cover absolute inset-0 size-full object-top" />
                 <div class="absolute inset-0 bg-black bg-opacity-50 "></div>
             <div class="flex relative flex-col max-w-full w-[550px]">

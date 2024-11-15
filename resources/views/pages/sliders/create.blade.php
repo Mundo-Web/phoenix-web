@@ -92,10 +92,17 @@
 
 
                                             <div class="md:col-span-5">
-                                                    <label for="address">Subir una Foto</label>
+                                                    <label for="imagen">Subir una imagen (.png/.jpg) (Version Desktop)</label>
                                                     <div class="relative mb-2  mt-2">
-                                                        <input name="imagen" class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                                        <input id="imagen" name="imagen" class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
                                                     </div>
+                                             </div>
+
+                                             <div class="md:col-span-5">
+                                                <label for="link1">Subir una imagen (.png/.jpg) (Version Mobile)</label>
+                                                <div class="relative mb-2  mt-2">
+                                                    <input id="link1" name="link1" class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                                </div>
                                              </div>
 
                                              

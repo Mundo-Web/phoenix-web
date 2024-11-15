@@ -82,7 +82,7 @@
       <div class="flex justify-start items-center mt-0 md:mt-1 h-6 lg:h-7">
           <img
               src="{{ asset($item->marcas->url_image) }}"
-              class="h-3 w-auto"
+              class="h-4 w-auto"
           />
       </div>
     @endif
