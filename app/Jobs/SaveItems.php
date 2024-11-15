@@ -56,6 +56,10 @@ class SaveItems implements ShouldQueue
       dump($th->getMessage());
     }
 
+    $discountsJpa = Discount::all();
+
+    dump($discountsJpa->toArray());
+
     foreach ($this->items as $item) {
       try {
         $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
