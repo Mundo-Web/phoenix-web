@@ -56,10 +56,6 @@ class SaveItems implements ShouldQueue
       dump($th->getMessage());
     }
 
-    $discountsJpa = Discount::all();
-
-    dump($discountsJpa->toArray());
-
     foreach ($this->items as $item) {
       try {
         $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
@@ -119,7 +115,7 @@ class SaveItems implements ShouldQueue
           'visible' => 1
         ]);
 
-        $discountJpa = Discount::where('name', '=', $item[15])->first();
+        $discountJpa = Discount::where('name', '=', $item[15])->where('status', true)->first();
 
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
@@ -193,7 +189,7 @@ class SaveItems implements ShouldQueue
           ]);
         }
 
-        dump("{$item[15]}\n{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
+        dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
       } catch (\Throwable $th) {
         dump($th->getMessage());
       }
