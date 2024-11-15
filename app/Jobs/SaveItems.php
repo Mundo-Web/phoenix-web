@@ -135,6 +135,8 @@ class SaveItems implements ShouldQueue
           'discount_id' => $discountJpa?->id
         ]);
 
+        dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
+
         $i = 0;
         Galerie::where('product_id', $productJpa->id)->delete();
 
