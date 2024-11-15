@@ -10,11 +10,14 @@ use App\Models\Products;
 use App\Models\SaleDetail;
 use App\Models\Status;
 use App\Models\User;
+use App\Models\UserDetails;
+use Exception;
 use SoDe\Extend\JSON;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use SoDe\Extend\Response;
 use Throwable;
 
@@ -31,27 +34,74 @@ class SaleController extends Controller
     public function save(Request $request)
     {
         $response = Response::simpleTryCatch(function () use ($request) {
-            $user = Auth::user();
-            
+           
             $cart = ProductsController::process($request->cart);
             $address = $request->address;
-            $priceJpa = Price::find($address['price_id'] ?? null);
+            $invited = $request->datos;
+            
 
-            $delivery = 0;
-            if ($priceJpa) {
-                $delivery = $priceJpa->price;
-            }
+            $priceJpa = Price::find($address['price_id'] ?? null);
 
             $microtime = microtime(true);
             $fechaActual = date('YmdHis');
             $microsegundos = sprintf("%06d", ($microtime - floor($microtime)) * 1000000);
             $orderId = $fechaActual . $microsegundos;
 
+            $delivery = 0;
+            if ($priceJpa) {
+                $delivery = $priceJpa->price;
+            }
+
+            $existeUser = UserDetails::where('email', $invited['email'])->get()->toArray();
+           
+            
+            if (count($existeUser) === 0) {
+
+                UserDetails::create([
+                    'email' => $invited['email'],
+                    'departamento_id' => $address['department_id'] ?? '-',
+                    'provincia_id' => $address['province_id'] ?? '-',
+                    'distrito_id' => $address['district_id'] ?? '-',
+                    'dir_av_calle' => $address['street'] ?? '-',
+                    'dir_numero' => $address['number'] ?? '-',
+                    'dir_bloq_lote' => $address['description'] ?? '-',
+                ]);   
+                // return response()->json(['message' => 'Data procesada correctamente']);
+            }else{
+                
+                // $existeUsuario = User::where('email', $invited['email'])->first();
+               
+                // if ($existeUsuario) {
+                //     $user = Auth::user();
+
+                //     if (!$user || $user->email === null) { 
+                //         throw new Exception("Por favor regístrese e inicie sesión");
+                //     } else {
+                //         return response()->json(['message' => 'Todos los datos están correctos']);
+                //     }
+                    
+                    
+                // } else { 
+                    $userdetailU = UserDetails::where('email', $invited['email'])->first();
+                    $userdetailU->update([
+                        'email' => $invited['email'],
+                        'departamento_id' => $address['department_id'] ?? '-',
+                        'provincia_id' => $address['province_id'] ?? '-',
+                        'distrito_id' => $address['district_id'] ?? '-',
+                        'dir_av_calle' => $address['street'] ?? '-',
+                        'dir_numero' => $address['number'] ?? '-',
+                        'dir_bloq_lote' => $address['description'] ?? '-',
+                    ]);
+                // }
+
+            }
+
+
             $saleJpa = new Sale();
             $saleJpa->code = $orderId;
             $saleJpa->name = $user->name ?? '-';
             $saleJpa->lastname = $user->lastname ?? '-';
-            $saleJpa->email = $user->email ?? '-';
+            $saleJpa->email = $user->email ?? $invited['email'];
             $saleJpa->phone = $user->phone ?? '-';
             $saleJpa->address_department = $address['department'] ?? '-';
             $saleJpa->address_province = $address['province'] ?? '-';
@@ -85,7 +135,17 @@ class SaleController extends Controller
 
     public function updateBilling(Request $request) {
         $response = Response::simpleTryCatch(function () use ($request) {
+            $userdetailU = UserDetails::where('email', $request->email)->first();
+           
+            $userdetailU->update([
+                'nombre' => $request->name ?? '-',
+                'apellidos' => $request->lastname ?? '-',
+                'phone' => $request->phone ?? '-',
+            ]);
+            
             $saleJpa = Sale::where('code', $request->ordenId)->first();
+            $saleJpa->name = $request->name;
+            $saleJpa->lastname = $request->lastname;
             $saleJpa->phone = $request->phone;
             $saleJpa->tipo_comprobante = $request->billing_type;
             $saleJpa->doc_number = $request->billing_number;

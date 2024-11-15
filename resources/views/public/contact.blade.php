@@ -14,8 +14,11 @@
             class="flex relative flex-col justify-center items-center px-[5%] py-32 text-base font-medium min-h-[345px] text-neutral-900 max-md:py-32">
             <img loading="lazy"
                 src="{{asset('images/img/contactanosf.jpg')}}"
-                alt="" class="object-cover absolute inset-0 size-full object-top" />
-                <div class="absolute inset-0 bg-black bg-opacity-50 "></div>
+                alt="" class="object-cover absolute inset-0 size-full object-top hidden md:flex" />
+            <img loading="lazy"
+                src="{{asset('images/img/contactanosmovil.jpg')}}"
+                alt="" class="object-cover absolute inset-0 size-full object-top flex md:hidden" />
+            <div class="absolute inset-0 bg-black bg-opacity-50 "></div>
             <div class="flex relative flex-col max-w-full w-[550px]">
                 {{-- <h2 class="self-center text-[#FD1F4A] font-Helvetica_Medium">Contacto</h2> --}}
                 <h3 class="mt-3 text-5xl text-white text-center max-md:max-w-full font-Urbanist_Bold">Contáctanos</h3>

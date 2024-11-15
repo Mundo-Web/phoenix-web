@@ -22,7 +22,8 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th>Foto</th>
+                <th>Imagen Desktop</th>
+                <th>Imagen Mobile</th>
                 <th>Titulo</th>
                 <th>Posición</th>
                 <th>Visible</th>
@@ -34,6 +35,7 @@
               @foreach ($banners as $item)
                 <tr>
                   <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"></td>
+                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->price) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"></td>
                   <td>{{ $item->title }}</td>
                   <td>{{ $item->potition }}</td>
                   <td>
@@ -75,8 +77,8 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Foto</th>
-                <th>Titulo</th>
+                <th>Imagen Desktop</th>
+                <th>Imagen Mobile</th>
                 <th>Posición</th>
                 <th>Visible</th>
                 <th>Acciones</th>

@@ -462,6 +462,9 @@ class IndexController extends Controller
     } finally {
       return response($response->toArray(), $response->status);
     }
+
+
+
     $codigoAleatorio = '';
     $mensajes2compra = [
       'email.required' => 'El campo Email es obligatorio.',
@@ -475,13 +478,14 @@ class IndexController extends Controller
     ];
 
     try {
+
       $reglasPrimeraCompra = [
         'email' => 'required',
       ];
       $mensajes = [
         'email.required' => 'El campo Email es obligatorio.',
-
       ];
+
       $request->validate($reglasPrimeraCompra, $mensajes);
 
       $email = $request->email;
@@ -617,6 +621,7 @@ class IndexController extends Controller
     $phone = $request->phone;
     $user = User::findOrFail($request->id);
 
+    
 
     if ($request->password !== null || $request->newpassword !== null || $request->confirmnewpassword !== null) {
       if (!Hash::check($request->password, $user->password)) {
@@ -630,13 +635,12 @@ class IndexController extends Controller
     }
 
 
-    if ($user->name == $name &&  $user->lastname == $lastname && $user->email == $email && $user->phone == $phone) {
+    if ($user->name == $name &&  $user->lastname == $lastname && $user->phone == $phone && $user->email == $email) {
       $imprimir = "Sin datos que actualizar";
       $alert = "question";
     } else {
       $user->name = $name;
       $user->lastname = $lastname;
-      $user->email = $email;
       $user->phone = $phone;
       $alert = "success";
       $imprimir = "Datos actualizados";

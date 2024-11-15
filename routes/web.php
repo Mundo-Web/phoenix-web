@@ -87,7 +87,8 @@ Route::get('/blog/{filtro}', [IndexController::class, 'blog'])->name('blog');
 Route::get('/post/{id}', [IndexController::class, 'detalleBlog'])->name('detalleBlog');
 
 /* Proceso de pago */
-
+Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
+Route::get('/pago/{code}', [IndexController::class, 'pago'])->name('pago');
 Route::post('/agradecimiento', [IndexController::class, 'agradecimiento'])->name('agradecimiento');
 
 
@@ -288,9 +289,7 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
 
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-    
-    Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
-    Route::get('/pago/{code}', [IndexController::class, 'pago'])->name('pago');
+
     
     Route::get('/micuenta', [IndexController::class, 'micuenta'])->name('micuenta');
     Route::get('/micuenta/pedidos', [IndexController::class, 'pedidos'])->name('pedidos');

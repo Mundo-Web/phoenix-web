@@ -44,10 +44,21 @@
             </div>
           </x-ecommerce.gateway.container>
           <div class="flex flex-col gap-5 pb-10 w-full">
-            <h2 class="font-semibold text-xl tracking-wide text-[#151515]">
+            <h2 class="font-semibold text-xl tracking-wide text-[#151515] font-Urbanist_Bold">
+              Información de usuario
+            </h2>
+            <div class="w-full flex flex-col gap-2 font-Urbanist_Regular">
+              <label for="email" class="font-medium text-[13px] text-[#6C7275]">E-mail <span
+                  class="text-[#c1272d]">*</span></label>
+              <input id="email" type="email" placeholder="Correo electrónico" 
+                name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}"
+                class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
+                required>
+            </div>
+            <h2 class="font-semibold text-xl tracking-wide text-[#151515] font-Urbanist_Bold">
               Dirección de envío
             </h2>
-            <ul class="grid w-full gap-6 md:grid-cols-3">
+            <ul class="grid w-full gap-6 md:grid-cols-3 font-Urbanist_Regular">
               {{-- <li>
                 <input type="radio" name="envio" id="recoger-option" value="recoger" class="hidden peer" required
                   @if (!$hasDefaultAddress) checked @endif>
@@ -87,7 +98,7 @@
                 </label>
               </li>
             </ul>
-            <div id="direccionContainer" class="flex flex-col gap-5">
+            <div id="direccionContainer" class="flex flex-col gap-5 font-Urbanist_Regular">
               <div class="flex flex-col gap-5">
                 @if (count($addresses) > 0)
                   <div class="flex flex-col gap-5 md:flex-row">
@@ -566,6 +577,14 @@
       })
     })
 
+    $('#email').on('change', function() {
+      const email = Local.get('datospersonales') ?? {}
+      Local.set('datospersonales', {
+        ...email,
+        email: this.value
+      })
+    })
+
     $('#nombre_calle').val(addressStrg.street ?? '')
     $('#numero_calle').val(addressStrg.number ?? '')
     $('#direccion').val(addressStrg.description ?? '')
@@ -668,10 +687,10 @@
 
       })
     })
+
     $('input[type="radio"][name="bordered-radio"]').on('click', function() {
       // Obtener el valor del radio button seleccionado
       const valorSeleccionado = $(this).val();
-
 
       articulosCarrito = Local.get('carrito') ?? []
       let carritoCheck = articulosCarrito.map(item => {
@@ -695,9 +714,28 @@
       limpiarHTML()
       PintarCarrito()
     });
-    $('#btnSiguiente').on('click', async function(e) {
-      const cart = Local.get('carrito') ?? []
 
+    function validarEmail(value) {
+        const regex =
+            /^(([^<>()\[\]\\.,;:\s@”]+(\.[^<>()\[\]\\.,;:\s@”]+)*)|(“.+”))@((\[[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}\.[0–9]{1,3}])|(([a-zA-Z\-0–9]+\.)+[a-zA-Z]{2,}))$/
+        
+            if (!regex.test(value)) {
+
+              Swal.fire({
+                title: `Ups!!`,
+                text: `Por favor, asegúrate de ingresar una dirección de correo electrónico válida`,
+                icon: "error"
+              });
+              return false;
+            }
+        return true;
+    }
+
+    $('#btnSiguiente').on('click', async function(e) {
+      const datos = Local.get('datospersonales') ?? [];
+      const cart = Local.get('carrito') ?? []
+      const address = Local.get('address') ?? {envio: 'recoger'}
+      
       if (cart.length == 0) {
         Swal.fire({
           title: `Ups!!`,
@@ -707,7 +745,48 @@
         return
       }
 
-      const address = Local.get('address') ?? {envio: 'recoger'}
+      if (address.district_id == '') {
+        Swal.fire({
+          title: `Ups!!`,
+          text: `Debes seleccionar un distrito`,
+          icon: "warning"
+        });
+        return
+      }
+
+      if (address.street == '') {
+        Swal.fire({
+          title: `Ups!!`,
+          text: `Debes ingresar una direccion`,
+          icon: "warning"
+        });
+        return
+      }
+
+      if (address.number == '') {
+        Swal.fire({
+          title: `Ups!!`,
+          text: `Debes ingresar un numero`,
+          icon: "warning"
+        });
+        return
+      }
+
+      const email = $('#email').val();
+
+      if (email == '') {
+          Swal.fire({
+            title: `Ups!!`,
+            text: 'Por favor ingrese su correo electronico',
+            icon: "warning",
+          });
+          return
+      }
+      
+      if (!validarEmail(email)) {
+        return;
+      }
+      
 
       const resOrder = await fetch("{{ route('sales.save') }}", {
         method: 'POST',
@@ -717,21 +796,26 @@
           'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
         },
         body: JSON.stringify({
-          cart, address
+          cart, address, datos
         })
       })
 
-      if (!resOrder) {
-        return Swal.fire({
-          title: `Error!!`,
-          text: `Ocurrió un error al intentar procesar tu compra`,
-          icon: "error"
-        })
+     
+      if (!resOrder.ok) {
+        const errorData = await resOrder.json();
+          return Swal.fire({
+            title: `Error!!`,
+            text: errorData?.message ?? `Ocurrió un error al intentar procesar tu compra`,
+            icon: "error"
+          });
+        
+      }else{
+        const dataOrder = await resOrder.json()
+        location.href = `/pago/${dataOrder.data.code}`
       }
+      
 
-      const dataOrder = await resOrder.json()
-
-      location.href = `/pago/${dataOrder.data.code}`
+      
     })
   </script>
 @stop

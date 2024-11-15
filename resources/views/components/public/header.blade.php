@@ -231,57 +231,12 @@
 <header>
     @foreach ($datosgenerales as $item)
         <div
-            class="bg-[#4598d3] h-[50px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center mb-7">
-            <h3 class="text-white font-Urbanist_Semibold text-sm sm:text-base tracking-wider text-center flex">
-                {{$item->htop ?? "Ingrese un texto"}}
+            class="bg-[#4598d3] h-[50px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center ">
+            <h3 class="text-white font-Urbanist_Semibold text-sm sm:text-base tracking-wider text-center flex ">
+                <marquee class="w-[400px] sm:w-[800px]">{{$item->htop ?? "Ingrese un texto"}}</marquee>
             </h3>
         </div>
     @endforeach
-
-    {{-- <div
-        class="bg-[#F5F5F7] h-10 flex lg:justify-end justify-center w-full px-[5%] xl:px-[8%] py-3 text-base items-center">
-        <div class="text-[#111111] font-Helvetica_Medium font-medium  text-end flex gap-5 text-sm">
-            
-            <a href="{{ route('help') }}">Ayuda </a> |
-
-            @if (Auth::user() == null)
-                <a href="/login">Crear Usuario </a> | <a href="/register">Iniciar Sesion</a>
-            @else
-                <div class=" relative md:inline-flex" x-data="{ open: false }">
-                    <button class="inline-flex justify-center items-center group" aria-haspopup="true"
-                        @click.prevent="open = !open" :aria-expanded="open">
-                        <div class="flex items-center truncate ">
-                        <span id="usernamelogin" class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200">
-
-                        </span>
-                        <i class="fas fa-angle-down ms-2"></i>
-                        </div>
-                    </button>
-                    <div
-                        class="origin-top-right z-10 text-red-600 bg-red-100 absolute top-full min-w-44  dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1"
-                        @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
-                        <ul>
-                        <li class=" hover:bg-rose-700 hover:text-white transition duration-100 ease-in">
-                            <a class="font-medium text-sm  flex items-center py-1 px-3 " href="/micuenta" @click="open = false"
-                            @focus="open = true" @focusout="open = false">Mi
-                            Cuenta</a>
-                        </li>
-
-                        <li class=" hover:bg-rose-700 hover:text-white transition duration-100 ease-in">
-                            <form method="POST" action="{{ route('logout') }}" x-data>
-                            @csrf
-                            <button type="submit" class="font-medium text-sm  flex items-center py-1 px-3"
-                                @click.prevent="$root.submit(); open = false">
-                                {{ __('Cerrar sesión') }}
-                            </button>
-                            </form>
-                        </li>
-                        </ul>
-                    </div>
-                </div>
-            @endif
-        </div>
-    </div> --}}
 
     <div>
         <div id="header-menu" class="flex w-full px-[5%] py-2 flex-row text-[17px] relative bg-black">
@@ -927,7 +882,7 @@ categorias.forEach(categoria => {
             let divcontainer = document.createElement('div');
             divcontainer.id = `productos-link-container-${categoria.id}`;
             divcontainer.className =
-                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+                'absolute top-[191px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
             let titulo = document.createElement('h3');
             titulo.className = 'text-lg font-font-Urbanist_Bold font-bold text-left mb-4 uppercase';
@@ -997,7 +952,7 @@ categorias.forEach(categoria => {
             let divcontainer = document.createElement('div');
             divcontainer.id = 'productos-link-m-container';
             divcontainer.className =
-                'absolute top-[219px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+                'absolute top-[191px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
             // Definimos el grid para las columnas
             let gridContainer = document.createElement('div');

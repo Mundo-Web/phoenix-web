@@ -40,6 +40,17 @@
         }
     </style>
 
+    <div class="grid grid-cols-3 lg:grid-cols-6 gap-10 md:justify-center w-full px-[5%] py-10 md:py-16 bg-black text-white font-Urbanist_Light tracking-wider">
+           
+                <img src="" />
+                <img src="" />
+                <img src="" />
+                <img src="" />
+                <img src="" />
+                <img src="" />
+        
+    </div>
+
     <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-20 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
 
