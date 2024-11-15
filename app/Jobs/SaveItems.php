@@ -63,7 +63,7 @@ class SaveItems implements ShouldQueue
 
         $productImages = \array_filter($images, fn($image) => Text::startsWith($image, $imageRoute));
 
-        
+
         // Searching or Creating a Category
         $categoryJpa = Category::updateOrCreate([
           'name' => $item[5]
@@ -84,7 +84,7 @@ class SaveItems implements ShouldQueue
         //   ->where('category_id', $categoryJpa->id)
         //   ->where('name', $item[6])
         //   ->first();
-        
+
         $subcategoryJpa = SubCategory::updateOrCreate([
           'category_id' => $categoryJpa->id,
           'name' => $item[6]
@@ -107,7 +107,7 @@ class SaveItems implements ShouldQueue
         // if (!$brandJpa) {
         //   $brandJpa = ClientLogos::create(['title' => $item[7]]);
         // }
-        
+
         $brandJpa = ClientLogos::updateOrCreate([
           'title' => $item[7]
         ], [
@@ -115,7 +115,7 @@ class SaveItems implements ShouldQueue
           'visible' => 1
         ]);
 
-        $discountJpa = Discount::where('name', $item[15])->first();
+        $discountJpa = Discount::where('name', '=', $item[15])->where('status', true)->first();
 
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
@@ -188,6 +188,8 @@ class SaveItems implements ShouldQueue
             'specifications' => $item[11]
           ]);
         }
+
+        dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
       } catch (\Throwable $th) {
         dump($th->getMessage());
       }
