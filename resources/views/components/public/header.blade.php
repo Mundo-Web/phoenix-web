@@ -28,8 +28,8 @@
         bottom: 0;
         left: 0;
         width: 100%;
-        /*height: 2px;*/
-        background-color: #FF5E14;
+        height: 2px;
+        background-color: #9b9b9b;
         transform: scaleX(0);
         transition: transform 0.3s ease;
     }
@@ -391,7 +391,7 @@
                             <a href="/catalogo?tag={{ $item->id }}"
                                 class="font-medium text-white px-4 other-class other-class2"
                                 style="background-color: {{ $item->color }}">
-                                <span class="">
+                                <span class="underline-this">
                                     {{ $item->name }} </span>
                             </a>
                         @endforeach
