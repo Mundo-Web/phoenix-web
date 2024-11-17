@@ -391,7 +391,7 @@
                             <a href="/catalogo?tag={{ $item->id }}"
                                 class="font-medium text-white px-4 other-class other-class2"
                                 style="background-color: {{ $item->color }}">
-                                <span class="underline-this">
+                                <span class="">
                                     {{ $item->name }} </span>
                             </a>
                         @endforeach
