@@ -189,7 +189,10 @@ class SaveItems implements ShouldQueue
           ]);
         }
 
-        dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
+        if ($productJpa->codigo == '038007802') {
+          dump($productImages);
+          dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
+        }
       } catch (\Throwable $th) {
         dump($th->getMessage());
       }
