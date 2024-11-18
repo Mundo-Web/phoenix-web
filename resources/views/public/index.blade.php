@@ -124,10 +124,19 @@
                 <div class="swiper-wrapper">
                     @foreach ($subcategorias as $subcategoria)       
                         <div class="swiper-slide">
-                          <div class="flex flex-col max-w-[450px] mx-auto">  
+                          <div class="flex flex-col max-w-[450px] mx-auto relative">  
                             <a href="/catalogo?subcategoria={{$subcategoria->id}}">       
                                 <img class="w-full h-full object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
                             </a>
+                            <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="flex flex-row w-full absolute bottom-5">
+                                <div class="flex flex-row justify-center items-center w-full">
+                                    <h2
+                                        class="text-white text-2xl tracking-widest font-Urbanist_Semibold font-bold text-center uppercase">
+                                        {{$subcategoria->name}}
+                                    </h2>
+                                </div>
+                            </div>
                            </div>       
                         </div>
                     @endforeach 
@@ -273,7 +282,7 @@
                   @endforeach   
                 </div>
                 <div class="flex flex-row justify-center items-center relative mt-10">
-                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                    <div class="swiper-pagination-otrasmarcas absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
                 </div>
             </div>
         </section>

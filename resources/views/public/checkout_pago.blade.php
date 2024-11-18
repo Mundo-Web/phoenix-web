@@ -161,24 +161,7 @@
                       Información del contacto
                     </h2>
                     <div class="flex flex-col gap-5">
-                      <div class="flex flex-col md:flex-row gap-5">
-                        <div class="basis-2/3 flex flex-col gap-2">
-                          <label for="email" class="font-medium text-[13px] text-[#6C7275]">E-mail <span
-                              class="text-[#c1272d]">*</span></label>
-                          <input id="email" type="email" placeholder="Correo electrónico" required=""
-                            name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
-                            required>
-                        </div>
-                        <div class="basis-1/3 flex flex-col gap-2">
-                          <label for="celular" class="font-medium text-[13px] text-[#6C7275]">Celular <span
-                              class="text-[#c1272d]">*</span></label>
-                          <input id="celular" type="text" placeholder="(+51) 000 000 000" name="phone"
-                            value="{{ auth()->check() ? auth()->user()->phone : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl"
-                            required>
-                        </div>
-                      </div>
+                      
                       <div class="flex flex-col md:flex-row gap-5">
                         <div class="basis-1/2 flex flex-col gap-2">
                           <label for="nombre" class="font-medium text-[13px] text-[#6C7275]">Nombre <span
@@ -195,10 +178,25 @@
                             value="{{ auth()->check() ? auth()->user()->lastname : '' }}"
                             class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
                             required>
-
                         </div>
-
-
+                      </div>
+                      <div class="flex flex-col md:flex-row gap-5 ">
+                        <div class="basis-2/3  flex-col gap-2 hidden">
+                          <label for="email" class="font-medium text-[13px] text-[#6C7275]">E-mail <span
+                              class="text-[#c1272d]">*</span></label>
+                          <input id="email" type="email" placeholder="Correo electrónico" required=""
+                            name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}"
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
+                            required>
+                        </div>
+                        <div class="basis-full flex flex-col gap-2">
+                          <label for="celular" class="font-medium text-[13px] text-[#6C7275]">Celular <span
+                              class="text-[#c1272d]">*</span></label>
+                          <input id="celular" type="text" placeholder="(+51) 000 000 000" name="phone"
+                            value="{{ auth()->check() ? auth()->user()->phone : '' }}"
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl"
+                            required>
+                        </div>
                       </div>
 
                       <div class="basis-2/3 flex flex-row gap-2 ">
@@ -448,14 +446,11 @@
                       <div class="kr-expiry"></div>
                       <div class="kr-security-code"></div>
                     </div>
-
-
-
                     <button class="kr-payment-button"></button>
                   </div>
                 </div>
-
               </div>
+
             </div>
           </div>
         </div>
@@ -620,6 +615,13 @@
 
     });
 
+    $(document).ready(function() {
+      const datos = Local.get('datospersonales') ?? [];
+      if ($('#email').val().trim() === '') {
+        $('#email').val(datos.email || ''); 
+      }
+    });
+
     $('#paymentForm').on('submit', async function(e) {
       e.preventDefault();
 
@@ -686,6 +688,9 @@
         },
         body: JSON.stringify({
           'ordenId': "{{$sale->code}}",
+          'email': $('#email').val(),
+          'name': $('#nombre').val(),
+          'lastname': $('#apellidos').val(),
           'phone': $('#celular').val(),
           'billing_type': $('#tipo-comprobante option:selected').text(),
           'billing_number': (ExisteDni ? $('#DNI').val(): $('#RUC').val()) || null,
@@ -838,7 +843,6 @@
 
     function calcularTotal() {
       PintarCarrito()
-
       // const precioProductos = getTotalPrice()
       // $('#itemSubtotal').text(`S/. ${precioProductos.toFixed(2)}`)
       // const precioEnvio = getCostoEnvio()
@@ -898,13 +902,11 @@
       }
 
     }
+
     $('#numero_tarjeta').on('input', function() {
       let input = $('#numero_tarjeta').val()
-
       let svg = obtnerSvg(input)
       $('#iconoTarjeta').html(svg)
-
-
     })
   </script>
   <script>

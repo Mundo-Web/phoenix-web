@@ -20,6 +20,7 @@ use App\Models\PolyticsCondition;
 use App\Models\Products;
 use App\Models\Sale;
 use App\Models\SeguimientoPedido;
+use App\Models\Service;
 use App\Models\Shortcode;
 use App\Models\Tag;
 use App\Models\TermsAndCondition;
@@ -77,9 +78,10 @@ class AppServiceProvider extends ServiceProvider
             $BeneficiosSinIntereses = BeneficiosSinIntereses::first();
             $SeguimientoPedido = SeguimientoPedido::first();
             $NuestrasTiendas = NuestrasTiendas::first();
+            $logosfooter = Service::where('visible', true)->get();
 
 
-            $view->with(['NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'datosgenerales' => $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
+            $view->with(['logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'datosgenerales' => $datosgenerales, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
         });
 
         View::composer('components.public.header', function ($view) {

@@ -11,7 +11,8 @@ use SoDe\Extend\Response;
 class IzipayController extends Controller
 {
     public static function token(Sale $sale)
-    {
+    {   
+    
         $clientId = env('IZIPAY_CLIENT_ID');
         $clientSecret = env('IZIPAY_CLIENT_SECRET');
         $auth = base64_encode($clientId . ':' . $clientSecret);
@@ -19,7 +20,7 @@ class IzipayController extends Controller
         $url = env('IZIPAY_URL');
 
         $totalAmount = $sale->total + $sale->address_price;
-
+        
         $res = new Fetch($url, [
             'method' => 'POST',
             'headers' => [

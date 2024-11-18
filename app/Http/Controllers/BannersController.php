@@ -44,6 +44,7 @@ class BannersController extends Controller
             $banner =   Banners::create($body);
          
             $banner->image = $this->saveImg($request, 'image');
+            $banner->price = $this->saveImg($request, 'price');
             $banner->save();
           
         } else {
@@ -52,6 +53,12 @@ class BannersController extends Controller
                 $body['image'] = $jpa->image;
             } else {
                 $body['image'] = $this->saveImg($request, 'image');
+            }
+
+            if(!$request->hasFile('price')) {
+              $body['price'] = $jpa->image;
+            } else {
+              $body['price'] = $this->saveImg($request, 'price');
             }
             
 

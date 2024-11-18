@@ -69,42 +69,18 @@ class ServiceController extends Controller
             $manager = new ImageManager(new Driver());
 
             $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-
             $img =  $manager->read($request->file('imagen'));
-
-            //seteamos el tamaño de que deben de tener las imagenes que se suban
-            $qwidth = 808;
-            $qheight = 445;
-
-            // Obtener las dimensiones de la imagen que se esta subiendo
-            $width = $img->width();
-            $height = $img->height();
-
-            if ($width > $height) {
-                //dd('Horizontal');
-                //si es horizontal igualamos el alto de la imagen a alto que queremos
-                $img->resize(height: 445)->crop(808, 445);
-            } else {
-                //dd('Vertical');
-                //En caso sea vertical la imagen
-                //igualamos el ancho y cropeamos
-                $img->resize(width: 808)->crop(808, 445);
-            }
-
-
-            $ruta = 'storage/images/servicios/';
-
+            // $img->coverDown(968, 351, 'center');
+            $ruta = 'storage/images/logosfooter/';
            
-
-            
             if (!file_exists($ruta)) {
                 mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
             }
             
             $img->save($ruta.$nombreImagen);
 
-            $service->url_image = $ruta;
-            $service->name_image = $nombreImagen;
+            $service ->url_image = $ruta;
+            $service ->name_image = $nombreImagen;
         }
 
         $service->link = $request->link;
@@ -153,44 +129,21 @@ class ServiceController extends Controller
         if ($request->hasFile("imagen")) {
 
             $manager = new ImageManager(new Driver());
+            $ruta = storage_path() . '/app/public/images/logosfooter/' . $service->name_image;
 
-
-            $ruta = storage_path() . '/app/public/images/servicios/' . $service->name_image;
-
-            // dd($ruta);
             if (File::exists($ruta)) {
                 File::delete($ruta);
             }
 
-            $rutanueva = storage_path() . 'storage/images/servicios/';
+            $rutanueva = 'storage/images/logosfooter/';
             $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-
             $img =  $manager->read($request->file('imagen'));
-
-            $width = $img->width();
-            $height = $img->height();
-
-            $qwidth = 808;
-            $qheight = 445;
-
-            if ($width > $height) {
-                //dd('Horizontal');
-                //si es horizontal igualamos el alto de la imagen a alto que queremos
-                $img->resize(height: 445)->crop(808, 445);
-            } else {
-                //dd('Vertical');
-                //En caso sea vertical la imagen
-                //igualamos el ancho y cropeamos
-                $img->resize(width: 808)->crop(808, 445);
-            }
-            
+           
             if (!file_exists($rutanueva)) {
-                mkdir($rutanueva, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+                mkdir($rutanueva, 0777, true); 
             }
             
             $img->save($rutanueva . $nombreImagen);
-
-
             $service->url_image = $rutanueva;
             $service->name_image = $nombreImagen;
         }
