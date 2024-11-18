@@ -128,7 +128,7 @@
                             <a href="/catalogo?subcategoria={{$subcategoria->id}}">       
                                 <img class="w-full h-full object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
                             </a>
-                            <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/95 to-transparent"></div>
                             <div class="flex flex-row w-full absolute bottom-5">
                                 <div class="flex flex-row justify-center items-center w-full">
                                     <h2
