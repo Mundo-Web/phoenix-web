@@ -362,7 +362,7 @@
 
 
         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW U <span class="font-Urbanist_Regular"> ON </span> 
+              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
               <span class="font-Urbanist_Regular italic"> @americanbrandspe </span></h2>
         </section>
 
