@@ -71,6 +71,19 @@
         border: 2px solid black;
         opacity: 1;
     }
+
+    .swiper-pagination-complementos .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #4598d3 !important;
+        border: 2px solid #4598d3;
+    }
+
+    .swiper-pagination-complementos .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: white !important;
+        border: 2px solid black;
+        opacity: 1;
+    }
 </style>
 
 
