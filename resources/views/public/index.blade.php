@@ -139,7 +139,7 @@
                         <div class="swiper-slide">
                           <div class="flex flex-col max-w-[450px] mx-auto relative">  
                             <a href="/catalogo?subcategoria={{$subcategoria->id}}">       
-                                <img class="w-full h-auto object-cover" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
+                                <img class="w-full h-auto object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
                             </a>
                             <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/95 to-transparent"></div>
                             <div class="flex flex-row w-full absolute bottom-5">
@@ -383,7 +383,7 @@
                 <div class="swiper-wrapper">
                     @foreach (array_slice($media, 0, 6) as $item)
                         <div class="swiper-slide">
-                            <div class="relative group h-full">
+                            <div class="relative group aspect-square h-full">
                                 @if ($item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM')
                                     <img src="{{ $item['media_url'] }}" alt="Image" class="object-cover h-full w-full">
                                     <a href="{{ $item['permalink'] }}" target="_blank"
