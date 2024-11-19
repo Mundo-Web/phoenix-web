@@ -329,7 +329,6 @@
          <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper complementos h-max">
                 <div class="swiper-wrapper">
-                
                   @foreach ($destacados as $productosd)       
                     <div class="swiper-slide">
                         <a href="{{route('producto', $productosd->id)}}">
@@ -351,10 +350,10 @@
                           @endif
                         </div>
                     </div>
-                  @endforeach   
-                <div class="flex flex-row justify-center items-center relative mt-10">
-                    <div class="swiper-pagination-complementos absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
-                </div>
+                  @endforeach    
+            </div>
+            <div class="flex flex-row justify-center items-center relative mt-10">
+                <div class="swiper-pagination-complementos absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
             </div>
         </section>
     @endif
