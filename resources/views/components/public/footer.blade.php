@@ -43,7 +43,9 @@
     <div class="w-full">
         <div class="grid grid-cols-3 lg:grid-cols-6 gap-5 lg:gap-10 md:justify-center w-full px-[7%] pt-16 md:pt-20 bg-black text-white font-Urbanist_Light tracking-wider">
                 @foreach ($logosfooter as $logofoot)
-                    <img class="w-auto object-contain object-center" src="{{asset($logofoot->url_image.$logofoot->name_image)}}" />    
+                    <div class="flex flex-row justify-center items-center">
+                        <img class="w-auto mx-auto" src="{{asset($logofoot->url_image.$logofoot->name_image)}}" />    
+                    </div>
                 @endforeach
         </div>
         <div class="w-11/12 h-1 border-b border-white pb-5 lg:pb-10 bg-black mx-auto"></div>
