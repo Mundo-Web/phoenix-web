@@ -353,7 +353,7 @@
                     </div>
                   @endforeach   
                 <div class="flex flex-row justify-center items-center relative mt-10">
-                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
+                    <div class="swiper-pagination-complementos absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
                 </div>
             </div>
         </section>
