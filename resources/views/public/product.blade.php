@@ -243,16 +243,19 @@
                                                 </div>
                                             </div>
                                         </a>
+                                       
                                         @foreach ($otherProducts as $x)
-                                            <a class="ring-1 rounded-full p-[3px] ring-transparent hover:ring-[#3f3f3f]"
-                                                href="{{ route('producto', $x->id) }}">
-                                                <div class="flex justify-center items-center">
-                                                    <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
-                                                        <img class="object-contain object-center"
-                                                            src="{{ asset($x->imagen) }}" />
+                                            @if (!empty($x->imagen))
+                                                <a class="ring-1 rounded-full p-[3px] ring-transparent hover:ring-[#3f3f3f]"
+                                                    href="{{ route('producto', $x->id) }}">
+                                                    <div class="flex justify-center items-center">
+                                                        <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
+                                                            <img class="object-contain object-center"
+                                                                src="{{ asset($x->imagen) }}" />
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </a>
+                                                </a> 
+                                            @endif
                                         @endforeach
                                     </div>
                                 @endif
