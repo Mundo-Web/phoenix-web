@@ -333,10 +333,10 @@
                   @foreach ($destacados as $productosd)       
                     <div class="swiper-slide">
                         <a href="{{route('producto', $productosd->id)}}">
-                            <div class="flex flex-row justify-center items-center">
-                            <div class="bg-no-repeat object-top bg-center bg-cover max-w-[350px] rounded-full aspect-square flex flex-row  items-center p-5 ">
-                                <img class="w-full h-full object-contain rounded-full" src="{{ asset($productosd->imagen) }}" />
-                            </div>
+                            <div class="flex flex-row justify-center items-center aspect-square">
+                                <div class="max-w-[350px] rounded-full  flex flex-col items-center p-5 ">
+                                    <img class="w-full h-full object-contain rounded-full" src="{{ asset($productosd->imagen) }}" />
+                                </div>
                             </div>
                         </a>
                         <div class="flex flex-col justify-center items-center gap-1 mt-3">
