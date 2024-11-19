@@ -126,7 +126,7 @@
                         <div class="swiper-slide">
                           <div class="flex flex-col max-w-[450px] mx-auto relative">  
                             <a href="/catalogo?subcategoria={{$subcategoria->id}}">       
-                                <img class="w-full h-full object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
+                                <img class="w-full h-auto object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
                             </a>
                             <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/95 to-transparent"></div>
                             <div class="flex flex-row w-full absolute bottom-5">
