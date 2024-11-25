@@ -381,7 +381,23 @@
         <section class="w-full relative mx-auto pt-12 lg:pt-16">
             <div class="swiper instagram h-max">
                 <div class="swiper-wrapper">
-                    @foreach (array_slice($media, 0, 6) as $item)
+                    @php
+                        // Filtrar los elementos para incluir solo IMAGE o CAROUSEL_ALBUM
+                        $filteredMedia = array_filter($media, function ($item) {
+                            return $item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM';
+                        });
+                    @endphp
+                    @foreach (array_slice($filteredMedia, 0, 12) as $item)
+                        <div class="swiper-slide">
+                            <div class="relative group aspect-square h-full">
+                                <img src="{{ $item['media_url'] }}" alt="Image" class="object-cover h-full w-full">
+                                <a href="{{ $item['permalink'] }}" target="_blank"
+                                    class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach    
+                    {{-- @foreach (array_slice($media, 0, 12) as $item)
                         <div class="swiper-slide">
                             <div class="relative group aspect-square h-full">
                                 @if ($item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM')
@@ -389,9 +405,9 @@
                                     <a href="{{ $item['permalink'] }}" target="_blank"
                                         class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
                                     </a>
-                                    {{-- <img
+                                    <img
                                         class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                        src="{{ asset('img_donas/instagram.svg') }}"> --}}
+                                        src="{{ asset('img_donas/instagram.svg') }}">
                                 @elseif ($item['media_type'] === 'VIDEO')
                                     <div class="h-full overflow-hidden">
                                         <video class="min-h-full min-w-full">
@@ -401,14 +417,14 @@
                                         <a href="{{ $item['permalink'] }}" target="_blank"
                                             class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
                                         </a>
-                                        {{-- <img
+                                        <img
                                             class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                            src="{{ asset('img_donas/instagram.svg') }}"> --}}
+                                            src="{{ asset('img_donas/instagram.svg') }}">
                                     </div>
                                 @endif
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
         </section>

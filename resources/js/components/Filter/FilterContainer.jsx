@@ -75,7 +75,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
           <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-4">Género</h2>
           <div className='bg-[#808080] pb-[1px] -mt-2 mb-5'></div>
           {categories.map((item) => {
-        
+           
            const isCheckedfilter = Array.isArray(filter?.category_id) && filter.category_id.includes(String(item.id));
            
            return categories.length > 0 && (<div key={item.id} className="w-full">
@@ -102,43 +102,85 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
           <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-4">Tipo de producto</h2>
           <div className="bg-[#808080] pb-[1px] -mt-2 mb-5"></div>
           <div className='flex flex-col gap-4'>
-          {categories.map((item) =>
-            <div key={item.id}>
-              
-              <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-2">{item.name}</h2>
+            {categories.map((item) => {
             
-              {item.subcategories.length > 0 && (
-             
-              <div key={item.id} className="w-full max-h-60 overflow-y-auto">
-  
-                {item.subcategories.map((subitem) => {
-                  const isCheckedfilter = Array.isArray(filter?.categoria_id) && filter.categoria_id.includes(String(subitem.id));
-                  return (
-                    <div className="flex flex-row justify-between gap-3 mb-2" key={subitem.id}>
-                      <label htmlFor={`item-subcategory-${subitem.id}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
-                        <input
-                          id={`item-subcategory-${subitem.id}`}
-                          name="subcategory"
-                          type="checkbox"
-                          className="bg-[#DEE2E6] text-black rounded-sm border-none focus:ring-0"
-                          value={subitem.id}
-                          onClick={(e) => onClick("subcategory_id", e.target.value, e.target.checked)}
-                          defaultChecked={isCheckedfilter}
-                        />
-                        {subitem.name}
-                      </label>
+                const isCheckedfilter = Array.isArray(filter?.category_id) && filter.category_id.includes(String(item.id));
+                const showSubcategories = !filter?.category_id?.length || isCheckedfilter;   
+
+                return (
+                  showSubcategories && (
+                    <div key={item.id}>
+                      <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-2">{item.name}</h2>
+                      {item.subcategories.length > 0 && (
+                        <div className="w-full max-h-60 overflow-y-auto">
+                          {item.subcategories.map((subitem) => {
+                            const isCheckedSubcategory =
+                              Array.isArray(filter?.subcategory_id) &&
+                              filter.subcategory_id.includes(String(subitem.id));
+                            return (
+                              <div className="flex flex-row justify-between gap-3 mb-2" key={subitem.id}>
+                                <label
+                                  htmlFor={`item-subcategory-${subitem.id}`}
+                                  className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer"
+                                >
+                                  <input
+                                    id={`item-subcategory-${subitem.id}`}
+                                    name="subcategory"
+                                    type="checkbox"
+                                    className="bg-[#DEE2E6] text-black rounded-sm border-none focus:ring-0"
+                                    value={subitem.id}
+                                    onClick={(e) => onClick("subcategory_id", e.target.value, e.target.checked)}
+                                    checked={isCheckedSubcategory}
+                                  />
+                                  {subitem.name}
+                                </label>
+                              </div>
+                            );
+                          })}
+                        </div>
+                      )}
                     </div>
-                  );
-                })}
+                  )
+                );
 
-              </div>
+                // return (
+                //   <div key={item.id}>
+                    
+                //     <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base mb-2">{item.name}</h2>
+                  
+                //     {item.subcategories.length > 0 && showSubcategories && (
+                  
+                //       <div key={item.id} className="w-full max-h-60 overflow-y-auto">
+          
+                //           {item.subcategories.map((subitem) => {
+                //             const isCheckedfilter = Array.isArray(filter?.categoria_id) && filter.categoria_id.includes(String(subitem.id));
+                //             const isCheckedSubcategory = Array.isArray(filter?.subcategory_id) && filter.subcategory_id.includes(String(subitem.id));
+                //             return (
+                //               <div className="flex flex-row justify-between gap-3 mb-2" key={subitem.id}>
+                //                 <label htmlFor={`item-subcategory-${subitem.id}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
+                //                   <input
+                //                     id={`item-subcategory-${subitem.id}`}
+                //                     name="subcategory"
+                //                     type="checkbox"
+                //                     className="bg-[#DEE2E6] text-black rounded-sm border-none focus:ring-0"
+                //                     value={subitem.id}
+                //                     onClick={(e) => onClick("subcategory_id", e.target.value, e.target.checked)}
+                //                     checked={isCheckedSubcategory }
+                //                   />
+                //                   {subitem.name}
+                //                 </label>
+                //               </div>
+                //             );
+                //           })}
 
-              )}
+                //       </div>
 
-            </div>
-          )}
+                //     )}
+                //   </div>
+                // );
 
-
+            })}
+            
           </div>
         </div>
       )
