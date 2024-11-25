@@ -10,6 +10,7 @@ use App\Http\Controllers\SaleDetailController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CuponController;
 use App\Http\Controllers\ExcelController;
 use App\Http\Controllers\IzipayController;
 
@@ -61,4 +62,8 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
 
     Route::post('/upload/items', [ExcelController::class, 'items'])->name('upload.items');
     Route::post('/upload/images', [ExcelController::class, 'items'])->name('upload.images');
+
+    Route::post('/cupon', [CuponController::class, 'addHistorico'] );
+    Route::delete('/cupon/{id}', [CuponController::class, 'deletecupon'] );
+    Route::post('/cupones/validar', [CuponController::class, 'validar'] );
 });

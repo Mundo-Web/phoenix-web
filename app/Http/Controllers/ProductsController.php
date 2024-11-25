@@ -71,15 +71,15 @@ class ProductsController extends Controller
         ->leftJoin('client_logos', 'client_logos.id', 'products.marca_id')
         ->where('products.status', 1);
 
-        if (!$admin) {
-          $instance->whereIn('products.id', function($query) {
-            $query->select(DB::raw('MIN(id)'))
-                  ->from('products')
-                  ->groupBy('producto');
-          })
-          ->where('products.visible', 1)
-          ->where('categories.visible', 1);
-        }   
+        // if (!$admin) {
+        //   $instance->whereIn('products.id', function($query) {
+        //     $query->select(DB::raw('MIN(id)'))
+        //           ->from('products')
+        //           ->groupBy('producto');
+        //   })
+        //   ->where('products.visible', 1)
+        //   ->where('categories.visible', 1);
+        // }   
         
 
       if (Auth::check()) {

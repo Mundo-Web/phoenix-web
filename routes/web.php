@@ -26,6 +26,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CampanasPublicitariasController;
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CuponController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\FooterController;
@@ -203,7 +204,6 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/servicios/deleteService', [ServiceController::class, 'deleteService'])->name('servicio.deleteService');
         Route::post('/servicios/updateVisible', [ServiceController::class, 'updateVisible'])->name('servicio.updateVisible');
 
-
         //Blog
         Route::resource('/blog', BlogController::class);
         Route::post('/blog/deleteBlog', [BlogController::class, 'deleteBlog'])->name('blog.deleteBlog');
@@ -215,7 +215,9 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/logos/updateVisible', [LogosClientController::class, 'updateVisible'])->name('logos.updateVisible');
         Route::get('/logos/contarCategorias', [LogosClientController::class, 'contarCategoriasDestacadas'])->name('logos.contarCategoriasDestacadas');
 
-
+        //Crud cupones
+        Route::resource('/cupones', CuponController::class);
+        Route::post('/cupones/updateVisible', [CuponController::class, 'updateVisible'])->name('cupones.updateVisible');
 
         //Equipo
         Route::resource('/staff', StaffController::class);
