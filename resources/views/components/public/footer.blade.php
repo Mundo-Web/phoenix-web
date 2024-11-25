@@ -1,4 +1,4 @@
-<footer>
+<footer class="bg-black">
     <style>
         #modalPoliticasDev 
         #modalTerminosCondiciones 
@@ -39,15 +39,22 @@
             margin-top: 0% !important;
         }
     </style>
-
-    <div class="grid grid-cols-3 lg:grid-cols-6 gap-5 lg:gap-10 md:justify-center w-full px-[5%] pt-10 md:pt-20 bg-black text-white font-Urbanist_Light tracking-wider">
-            @foreach ($logosfooter as $logofoot)
-                <img class="w-auto" src="{{asset($logofoot->url_image.$logofoot->name_image)}}" />    
-            @endforeach
+    
+    <div class="w-full">
+        <div class="grid grid-cols-3 lg:grid-cols-6 gap-5 lg:gap-10 md:justify-center w-full px-[7%] pt-16 md:pt-20 bg-black text-white font-Urbanist_Light tracking-wider">
+                @foreach ($logosfooter as $logofoot)
+                    <div class="flex flex-row justify-center items-center">
+                        <img class="w-auto mx-auto" src="{{asset($logofoot->url_image.$logofoot->name_image)}}" />    
+                    </div>
+                @endforeach
+        </div>
+        <div class="w-11/12 h-1 border-b border-white pb-5 lg:pb-10 bg-black mx-auto"></div>
     </div>
-
+    
+    
+    
     <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-10 lg:pt-20 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-10 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
 
         <div class="flex flex-col  text-base gap-2">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">LEGALES</h3>
@@ -85,7 +92,7 @@
 
     </div>
 
-    <div class="bg-black text-white pt-10 pb-20 flex items-center justify-center">
+    <div class="bg-black text-white pt-5 pb-16 lg:pb-20 flex items-center justify-center">
         <div class="flex flex-col justify-center items-center gap-5 w-full px-[5%]">
 
             <div class="flex flex-row gap-5 text-white mb-5">

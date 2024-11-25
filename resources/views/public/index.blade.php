@@ -20,6 +20,10 @@
         }
     }
 
+    .claseocultar {
+        display: none;
+    }
+
     .swiper-pagination-slider .swiper-pagination-bullet {
         width: 15px;
         height: 15px;
@@ -67,6 +71,19 @@
     }
 
     .swiper-pagination-otrasmarcas .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: white !important;
+        border: 2px solid black;
+        opacity: 1;
+    }
+
+    .swiper-pagination-complementos .swiper-pagination-bullet {
+        width: 15px;
+        height: 15px;
+        background-color: #4598d3 !important;
+        border: 2px solid #4598d3;
+    }
+
+    .swiper-pagination-complementos .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
         background-color: white !important;
         border: 2px solid black;
         opacity: 1;
@@ -126,9 +143,9 @@
                         <div class="swiper-slide">
                           <div class="flex flex-col max-w-[450px] mx-auto relative">  
                             <a href="/catalogo?subcategoria={{$subcategoria->id}}">       
-                                <img class="w-full h-full object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
+                                <img class="w-full h-auto object-cover aspect-square" src="{{ asset($subcategoria->url_image . $subcategoria->name_image) }}" /> 
                             </a>
-                            <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/80 to-transparent"></div>
+                            <div class="absolute inset-x-0 bottom-0 h-[150px] bg-gradient-to-t from-black/95 to-transparent"></div>
                             <div class="flex flex-row w-full absolute bottom-5">
                                 <div class="flex flex-row justify-center items-center w-full">
                                     <h2
@@ -329,14 +346,13 @@
          <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
             <div class="swiper complementos h-max">
                 <div class="swiper-wrapper">
-                
                   @foreach ($destacados as $productosd)       
                     <div class="swiper-slide">
                         <a href="{{route('producto', $productosd->id)}}">
-                            <div class="flex flex-row justify-center items-center">
-                            <div class="bg-no-repeat object-top bg-center bg-cover max-w-[350px] rounded-full aspect-square flex flex-row  items-center p-5 ">
-                                <img class="w-full h-full object-contain rounded-full" src="{{ asset($productosd->imagen) }}" />
-                            </div>
+                            <div class="flex flex-row justify-center items-center aspect-square">
+                                <div class="max-w-[350px] rounded-full  flex flex-col items-center p-5 ">
+                                    <img class="w-full h-full object-contain rounded-full" src="{{ asset($productosd->imagen) }}" />
+                                </div>
                             </div>
                         </a>
                         <div class="flex flex-col justify-center items-center gap-1 mt-3">
@@ -351,10 +367,10 @@
                           @endif
                         </div>
                     </div>
-                  @endforeach   
-                <div class="flex flex-row justify-center items-center relative mt-10">
-                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
-                </div>
+                  @endforeach    
+            </div>
+            <div class="flex flex-row justify-center items-center relative mt-10">
+                <div class="swiper-pagination-complementos absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
             </div>
         </section>
     @endif
@@ -369,7 +385,23 @@
         <section class="w-full relative mx-auto pt-12 lg:pt-16">
             <div class="swiper instagram h-max">
                 <div class="swiper-wrapper">
-                    @foreach (array_slice($media, 0, 6) as $item)
+                    @php
+                        // Filtrar los elementos para incluir solo IMAGE o CAROUSEL_ALBUM
+                        $filteredMedia = array_filter($media, function ($item) {
+                            return $item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM';
+                        });
+                    @endphp
+                    @foreach (array_slice($filteredMedia, 0, 12) as $item)
+                        <div class="swiper-slide">
+                            <div class="relative group aspect-square h-full">
+                                <img src="{{ $item['media_url'] }}" alt="Image" class="object-cover h-full w-full">
+                                <a href="{{ $item['permalink'] }}" target="_blank"
+                                    class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
+                                </a>
+                            </div>
+                        </div>
+                    @endforeach    
+                    {{-- @foreach (array_slice($media, 0, 12) as $item)
                         <div class="swiper-slide">
                             <div class="relative group aspect-square h-full">
                                 @if ($item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM')
@@ -377,9 +409,9 @@
                                     <a href="{{ $item['permalink'] }}" target="_blank"
                                         class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
                                     </a>
-                                    {{-- <img
+                                    <img
                                         class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                        src="{{ asset('img_donas/instagram.svg') }}"> --}}
+                                        src="{{ asset('img_donas/instagram.svg') }}">
                                 @elseif ($item['media_type'] === 'VIDEO')
                                     <div class="h-full overflow-hidden">
                                         <video class="min-h-full min-w-full">
@@ -389,14 +421,14 @@
                                         <a href="{{ $item['permalink'] }}" target="_blank"
                                             class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
                                         </a>
-                                        {{-- <img
+                                        <img
                                             class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                            src="{{ asset('img_donas/instagram.svg') }}"> --}}
+                                            src="{{ asset('img_donas/instagram.svg') }}">
                                     </div>
                                 @endif
                             </div>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
         </section>
@@ -680,8 +712,31 @@
         </div>
     </div>
 
+    @if(Session::has('welcome_message'))
+    <div id="welcome-popup" class="claseocultar fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white p-6 rounded shadow-lg text-center">
+                <h2 class="text-lg font-bold mb-4">{{ Session::get('welcome_message') }}</h2>
+                <button id="close-popup" class="bg-blue-500 text-white px-4 py-2 rounded">Cerrar</button>
+            </div>
+        </div>
+    @endif
+
 
 @section('scripts_importados')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.getElementById('welcome-popup');
+            const closeButton = document.getElementById('close-popup');
+
+            if (popup) {
+                popup.classList.remove('hidden'); // Mostrar el popup
+
+                closeButton.addEventListener('click', () => {
+                    popup.classList.add('hidden'); // Ocultar el popup
+                });
+            }
+        });
+    </script>  
 
     <script>
         let pops = @json($popups);
@@ -871,23 +926,23 @@
             breakpoints: {
                 0: {
                     slidesPerView: 1,
-                  
+                    spaceBetween: 0,
                 },
                 600: {
                     slidesPerView: 2,
-                   
+                    spaceBetween: 0,
                 },
                 768: {
                     slidesPerView: 3,
-                   
+                    spaceBetween: 0,
                 },
                 1024: {
                     slidesPerView: 4,
-                  
+                    spaceBetween: 0,
                 },
                 1350: {
                     slidesPerView: 5,
-                    
+                    spaceBetween: 0,    
                 },
             },
         });

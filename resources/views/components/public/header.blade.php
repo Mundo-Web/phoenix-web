@@ -83,11 +83,11 @@
         </svg>
     </button>
 
-    <nav class="w-full h-full overflow-y-auto p-5" x-data="{ openCatalogo: true, openSubMenu: null }">
+    <nav class="w-full h-full overflow-y-auto p-5" x-data="{ openCatalogo: true, openSubMenu: null, openMarcas:false }">
         <ul class="space-y-1">
             <li>
                 <a href="/"
-                    class="text-[#272727] font-medium font-Urbanist_Semibold text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $isIndex ? 'text-black' : '' }}">
+                    class="text-[#272727] font-medium font-Urbanist_Semibold text-base py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $isIndex ? 'text-black' : '' }}">
                     <span>
                         <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -95,14 +95,14 @@
                             <path
                                 d="m19.707 9.293-2-2-7-7a1 1 0 0 0-1.414 0l-7 7-2 2a1 1 0 0 0 1.414 1.414L2 10.414V18a2 2 0 0 0 2 2h3a1 1 0 0 0 1-1v-4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4a1 1 0 0 0 1 1h3a2 2 0 0 0 2-2v-7.586l.293.293a1 1 0 0 0 1.414-1.414Z" />
                         </svg>
-                        HOMBRE
+                        Inicio
                     </span>
                 </a>
             </li>
 
             <li>
                 <a @click="openCatalogo = !openCatalogo" href="javascript:void(0)"
-                    class="text-[#272727] flex justify-between items-center font-medium font-Urbanist_Semibold text-sm py-2 px-3 hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'catalogo' ? 'text-[#FF5E14]' : '' }}">
+                    class="text-black flex justify-between items-center font-medium font-Urbanist_Semibold text-base py-2 px-3">
                     <span>
                         <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
@@ -112,7 +112,7 @@
                             <path
                                 d="M1 18h16a1 1 0 0 0 1-1v-6h-4.439a.99.99 0 0 0-.908.6 3.978 3.978 0 0 1-7.306 0 .99.99 0 0 0-.908-.6H0v6a1 1 0 0 0 1 1Z" />
                         </svg>
-                        MUJER
+                        Categorias
                     </span>
                     <span :class="{ 'rotate-180': openCatalogo }"
                         class="ms-1 inline-block transform transition-transform duration-300">↓</span>
@@ -120,7 +120,7 @@
                 <ul x-show="openCatalogo" x-transition class="ml-3 mt-1 space-y-1 border-l border-gray-300">
                     <li>
                         <a href="{{ route('Catalogo.jsx') }}"
-                            class="text-black flex items-center font-Urbanist_Semibold py-2 px-3 hover:opacity-75 transition-opacity duration-300">
+                            class="text-black flex items-center text-base font-Urbanist_Semibold py-2 px-3 hover:opacity-75 transition-opacity duration-300">
                             <span>
                                 Todas las categorías
                             </span>
@@ -167,62 +167,58 @@
             </li>
 
             <li>
-                <a href="/"
-                    class="text-black font-medium font-Urbanist_Semibold text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
+                <a @click="openMarcas = !openMarcas" href="javascript:void(0)"
+                    class="text-black flex justify-between items-center font-medium font-Urbanist_Semibold text-base py-2 px-3 ">
                     <span>
                         <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 14 20">
+                            viewBox="0 0 20 20">
                             <path
-                                d="M12 0H2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2ZM7.5 17.5h-1a1 1 0 0 1 0-2h1a1 1 0 0 1 0 2ZM12 13H2V4h10v9Z" />
+                                d="M19 4h-1a1 1 0 1 0 0 2v11a1 1 0 0 1-2 0V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1ZM3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm9 13H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Z" />
+                            <path d="M6 5H5v1h1V5Z" />
                         </svg>
-                        ACCESORIOS
+                        Marcas
                     </span>
+                    <span :class="{ 'rotate-180': openMarcas }"
+                    class="ms-1 inline-block transform transition-transform duration-300">↓</span>
                 </a>
-            </li>
-
-            <li>
-                <a href="/"
-                    class="text-black font-medium font-Urbanist_Semibold text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
-                    <span>
-                        <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path
-                                d="M19 4h-1a1 1 0 1 0 0 2v11a1 1 0 0 1-2 0V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1ZM3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm9 13H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Z" />
-                            <path d="M6 5H5v1h1V5Z" />
-                        </svg>
-                        MARCAS
-                    </span></a>
-            </li>
-
-            <li>
-                <a href="/"
-                    class="text-black font-medium font-Urbanist_Semibold text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
-                    <span>
-                        <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
-                            aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-                            viewBox="0 0 20 20">
-                            <path
-                                d="M19 4h-1a1 1 0 1 0 0 2v11a1 1 0 0 1-2 0V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1ZM3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm9 13H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Z" />
-                            <path d="M6 5H5v1h1V5Z" />
-                        </svg>
-                        OUTLET
-                    </span></a>
+                <ul x-show="openMarcas" x-transition class="ml-3 mt-1 space-y-1 border-l border-gray-300">
+                    @if (count($marcas) > 0)
+                        @foreach ($marcas as $marca)
+                            <li>
+                                <a href="/catalogo?marcas={{$marca->id}}"
+                                    class="text-black flex items-center text-base font-Urbanist_Semibold py-2 px-3 hover:opacity-75 transition-opacity duration-300">
+                                    <span>
+                                        {{$marca->title}}
+                                    </span>
+                                </a> 
+                            </li>
+                        @endforeach
+                    @endif
+                </ul>
             </li>
 
             @if ($tags->count() > 0)
                 @foreach ($tags as $item)
                     <li>
-                        <a href="/catalogo?tag={{ $item->id }}"
-                            class="text-[#272727] font-medium font-poppins text-sm py-2 px-3 block hover:opacity-75 transition-opacity duration-300 {{ $pagina == 'contacto' ? 'text-[#FF5E14]' : '' }}">
-                            <span class="underline-this  ">
-                                {{ $item->name }} </span>
-                        </a>
-
+                        <span class="py-2 px-3">
+                            <svg class="inline-block w-3 h-3 mb-0.5 me-2 text-gray-400 dark:text-gray-500 group-hover:text-blue-600 dark:group-hover:text-blue-500"
+                                aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                viewBox="0 0 20 20">
+                                <path
+                                    d="M19 4h-1a1 1 0 1 0 0 2v11a1 1 0 0 1-2 0V2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v15a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V5a1 1 0 0 0-1-1ZM3 4a1 1 0 0 1 1-1h3a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4Zm9 13H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-3H4a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Zm0-3h-2a1 1 0 0 1 0-2h2a1 1 0 1 1 0 2Z" />
+                                <path d="M6 5H5v1h1V5Z" />
+                            </svg>
+                            <a href="/catalogo?tag={{ $item->id }}"
+                                class="font-medium text-black font-Urbanist_Semibold other-class other-class2">
+                                <span class="underline-this">
+                                    {{ $item->name }} </span>
+                            </a>
+                        </span>
                     </li>
                 @endforeach
             @endif
+
         </ul>
     </nav>
 </div>
@@ -231,7 +227,7 @@
 <header>
     @foreach ($datosgenerales as $item)
         <div
-            class="bg-[#4598d3] h-[50px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center ">
+            class="bg-[#4598d3] h-[30px] flex justify-center w-full px-[5%] xl:px-[8%] py-3 tracking-wider items-center ">
             <h3 class="text-white font-Urbanist_Semibold text-sm sm:text-base tracking-wider text-center flex ">
                 <marquee class="w-[400px] sm:w-[800px]">{{$item->htop ?? "Ingrese un texto"}}</marquee>
             </h3>
@@ -239,11 +235,11 @@
     @endforeach
 
     <div>
-        <div id="header-menu" class="flex w-full px-[5%] py-2 flex-row text-[17px] relative bg-black">
+        <div id="header-menu" class="flex w-full px-[5%] py-2 flex-row text-[17px] relative bg-black h-[60px]">
 
             {{-- Menu hamburguesa --}}
             <div id="menu-burguer" class="flex w-3/12 lg:hidden z-10 justify-start items-center">
-                <img class="h-9 w-9 cursor-pointer" src="{{ asset('images/svg/menubar.svg') }}" alt="menu hamburguesa"
+                <img class="h-10 w-10 cursor-pointer" src="{{ asset('images/svg/menubar.svg') }}" alt="menu hamburguesa"
                     onclick="show()" />
             </div>
 
@@ -287,7 +283,7 @@
                         </a>
                     @else
                         <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
-                            <button class="px-3 py-5 inline-flex justify-center items-center group"
+                            <button class="px-3 py-0 inline-flex justify-center items-center group"
                                 aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
                                 <div class="flex items-center truncate">
                                     <span id="username"
@@ -351,10 +347,10 @@
 
 
     <div>
-        <div class="hidden lg:flex items-center justify-center ">
+        <div class="hidden lg:flex items-center justify-center h-[40px]">
             <div>
                 <nav id="menu-items"
-                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-16 items-center justify-center py-8">
+                    class=" text-[#333] text-base font-Urbanist_Semibold tracking-wider flex gap-5 xl:gap-16 items-center justify-center py-2">
 
 
                     {{-- <a id="productos-link" href="{{ route('Catalogo.jsx') }}" class="font-medium other-class other-class2">
@@ -882,7 +878,7 @@ categorias.forEach(categoria => {
             let divcontainer = document.createElement('div');
             divcontainer.id = `productos-link-container-${categoria.id}`;
             divcontainer.className =
-                'absolute top-[191px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+                'absolute top-[130px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
             let titulo = document.createElement('h3');
             titulo.className = 'text-lg font-font-Urbanist_Bold font-bold text-left mb-4 uppercase';
@@ -952,7 +948,7 @@ categorias.forEach(categoria => {
             let divcontainer = document.createElement('div');
             divcontainer.id = 'productos-link-m-container';
             divcontainer.className =
-                'absolute top-[191px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+                'absolute top-[130px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
             // Definimos el grid para las columnas
             let gridContainer = document.createElement('div');

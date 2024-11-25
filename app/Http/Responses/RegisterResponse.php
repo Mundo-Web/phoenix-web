@@ -20,6 +20,8 @@ class RegisterResponse implements RegisterResponseContract
             return response()->json(['two_factor' => false]);
         }
 
+        Session::flash('welcome_message', "¡Bienvenido, {$usuario->name}!");
+        
         switch ($role[0]) {
             case 'Admin':
                 return redirect()->intended(config('fortify.home'));

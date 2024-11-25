@@ -398,18 +398,22 @@
           <div class="p-4 pb-0">
             <hr>
           </div>
-          <div class="p-4">
+          <div class="px-4 pt-4">
             <label for="tipo-comprobante" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de
               comprobante</label>
             <select id="tipo-comprobante" name="comprobante"
               class="selectpicker bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-              <option value="nota_venta">Nota de venta</option>
+              {{-- <option value="">Seleccione tipo de comprobante</option> --}}
               <option value="boleta">Boleta</option>
               <option value="factura">Factura</option>
             </select>
           </div>
           <div class="p-4 grid grid-cols-4" id="ElementosFacturacion">
-
+            
+            <div class="col-span-4 mb-2">
+              <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">DNI o C.E/RUC<span class="text-[#c1272d]">*</span></label>
+              <input maxlength="20" id="DNI" type="text"  placeholder="Ingrese nro. documento" name="DNI" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
+            </div>
 
           </div>
           <div class="p-4 py-0">
@@ -550,43 +554,27 @@
       if (tipoComrobante == 'boleta') {
         $("#ElementosFacturacion").html('')
         $('#ElementosFacturacion').html(`
-          <div class="col-span-2 mb-2">
-            <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">DNI<span class="text-[#c1272d]">*</span></label>
-            <input maxlength="8" id="DNI" type="number"  placeholder="DNI" name="DNI" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
-
-            
-          </div>
           <div class="col-span-4 mb-2">
-            <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">Razon Social<span class="text-[#c1272d]">*</span></label>
-            <input  id="razonFact" type="text"  placeholder="Razon Social" name="razon_fact" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
-
-            
-          </div>
-          <div class="col-span-4 mb-2">
-            <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">Direccion Facturacion<span class="text-[#c1272d]">*</span></label>
-            <input  id="direccionFact" type="text"  placeholder="Direccion Boleta" name="direccion_fact" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
-
-            
+            <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">DNI o C.E/RUC<span class="text-[#c1272d]">*</span></label>
+            <input maxlength="20" id="DNI" type="text"  placeholder="Ingrese nro. documento" name="DNI" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
           </div>
         `)
       } else if (tipoComrobante == 'factura') {
         $("#ElementosFacturacion").html('')
         $('#ElementosFacturacion').html(`
-          <div class="col-span-2 mb-2">
-            <label for="ruc" class="font-medium text-[12px] text-[#6C7275]">RUC <span class="text-[#c1272d]">*</span></label>
-            <input maxlength="11" id="RUC" type="number" placeholder="RUC" name="RUC" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
+          <div class="col-span-4 mb-2">
+            <label for="ruc" class="font-medium text-[12px] text-[#6C7275]">DNI o C.E/RUC<span class="text-[#c1272d]">*</span></label>
+            <input maxlength="20" id="RUC" type="text" placeholder="Ingrese nro. documento" name="RUC" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
           </div>
+
           <div class="col-span-4 mb-2">
             <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">Razon Social<span class="text-[#c1272d]">*</span></label>
             <input  id="razonFact" type="text"  placeholder="Ingrese Razon Social" name="razon_fact" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
-
-            
           </div>
+
           <div class="col-span-4 mb-2">
             <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">Direccion Facturacion<span class="text-[#c1272d]">*</span></label>
             <input  id="direccionFact" type="text"  placeholder="Direccion Facturacion" name="direccion_fact" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
-
-            
           </div>
           
         `)
@@ -634,27 +622,48 @@
       let razonFact = $('#razonFact').length == '' ? false : true
       let direccionFact = $('#direccionFact').length == '' ? false : true
 
+      // if (ExisteDni) {
+      //   if ($('#tipo-comprobante').val() == 'boleta' && ($('#DNI').val() == '' || $('#DNI').val().length !== 20)) {
+      //     Swal.fire({
+      //       title: `Error!!`,
+      //       text: 'Ingrese su Documento Completo',
+      //       icon: "error",
+      //     });
+      //     return
+      //   }
+      // }
+
       if (ExisteDni) {
-        if ($('#tipo-comprobante').val() == 'boleta' && ($('#DNI').val() == '' || $('#DNI').val().length !== 8)) {
+        if ($('#tipo-comprobante').val() == 'boleta' && ($('#DNI').val() == '' || $('#DNI').val().length < 8 || $('#DNI').val().length > 20)) {
           Swal.fire({
             title: `Error!!`,
-            text: 'Ingrese su DNI Completo',
+            text: 'El documento debe tener entre 8 y 20 dígitos',
             icon: "error",
           });
-          return
+          return;
         }
-
       }
+
+      // if (existeRuc) {
+      //   if ($('#tipo-comprobante').val() == 'factura' && ($('#RUC').val() == '' || $('#RUC').val().length !== 20)) {
+      //     Swal.fire({
+      //       title: `Error!!`,
+      //       text: 'Ingrese su Ruc Completo',
+      //       icon: "error",
+      //     });
+      //     return
+      //   }
+      // }
+
       if (existeRuc) {
-        if ($('#tipo-comprobante').val() == 'factura' && ($('#RUC').val() == '' || $('#RUC').val().length !== 11)) {
+        if ($('#tipo-comprobante').val() == 'factura' && ($('#RUC').val() == '' || $('#RUC').val().length < 8 || $('#RUC').val().length > 20)) {
           Swal.fire({
             title: `Error!!`,
-            text: 'Ingrese su Ruc Completo',
+            text: 'El documento debe tener entre 8 y 20 dígitos',
             icon: "error",
           });
-          return
+          return;
         }
-
       }
 
       if (razonFact) {
