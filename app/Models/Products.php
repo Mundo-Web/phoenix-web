@@ -74,6 +74,7 @@ class Products extends Model
           ->whereNotNull('color')
           ->select('color','producto','imagen') 
           ->groupBy('color')
+          ->where('visible', 1)
           ->distinct(); 
   }
 
