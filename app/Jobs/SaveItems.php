@@ -132,7 +132,8 @@ class SaveItems implements ShouldQueue
           'color' => $item[10],
           'peso' => $item[12],
           'stock' => $item[13],
-          'discount_id' => $discountJpa?->id
+          'discount_id' => $discountJpa?->id,
+          'visible' => 1
         ]);
 
         $i = 0;
