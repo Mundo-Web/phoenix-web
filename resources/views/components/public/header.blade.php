@@ -283,7 +283,7 @@
                         </a>
                     @else
                         <div class="relative  hidden md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
-                            <button class="px-3 py-5 inline-flex justify-center items-center group"
+                            <button class="px-3 py-0 inline-flex justify-center items-center group"
                                 aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
                                 <div class="flex items-center truncate">
                                     <span id="username"
