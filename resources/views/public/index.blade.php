@@ -20,6 +20,10 @@
         }
     }
 
+    .claseocultar {
+        display: none;
+    }
+
     .swiper-pagination-slider .swiper-pagination-bullet {
         width: 15px;
         height: 15px;
@@ -708,8 +712,31 @@
         </div>
     </div>
 
+    @if(Session::has('welcome_message'))
+    <div id="welcome-popup" class="claseocultar fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+            <div class="bg-white p-6 rounded shadow-lg text-center">
+                <h2 class="text-lg font-bold mb-4">{{ Session::get('welcome_message') }}</h2>
+                <button id="close-popup" class="bg-blue-500 text-white px-4 py-2 rounded">Cerrar</button>
+            </div>
+        </div>
+    @endif
+
 
 @section('scripts_importados')
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const popup = document.getElementById('welcome-popup');
+            const closeButton = document.getElementById('close-popup');
+
+            if (popup) {
+                popup.classList.remove('hidden'); // Mostrar el popup
+
+                closeButton.addEventListener('click', () => {
+                    popup.classList.add('hidden'); // Ocultar el popup
+                });
+            }
+        });
+    </script>  
 
     <script>
         let pops = @json($popups);
