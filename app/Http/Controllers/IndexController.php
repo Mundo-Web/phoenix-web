@@ -24,6 +24,7 @@ use App\Models\Category;
 use App\Models\ClientLogos;
 use App\Models\Department;
 use App\Models\Galerie;
+use App\Models\HistoricoCupon;
 use App\Models\Offer;
 use App\Models\PolyticsCondition;
 use App\Models\Popup;
@@ -327,8 +328,12 @@ class IndexController extends Controller
       ->get();
 
     $addresses = [];
+    $historicoCupones = [];
     $hasDefaultAddress = false;
+    
     if (Auth::check()) {
+
+      $usuario = Auth::user()->id;
       $addresses = Address::with([
         'price',
         'price.district',
@@ -340,13 +345,16 @@ class IndexController extends Controller
       $hasDefaultAddress = Address::where('email', $user->email)
         ->where('isDefault', true)
         ->exists();
+
+      $historicoCupones = HistoricoCupon::with('cupon')->where('user_id', $usuario)->where('usado', false)->get();
     }
 
+    
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
     $categorias = Category::all();
     $url_env = env('APP_URL');
-    return view('public.checkout_carrito', compact('url_env', 'categorias', 'destacados', 'districts', 'provinces', 'departments', 'addresses', 'hasDefaultAddress'));
+    return view('public.checkout_carrito', compact('user','historicoCupones','url_env', 'categorias', 'destacados', 'districts', 'provinces', 'departments', 'addresses', 'hasDefaultAddress'));
   }
 
   public function pago(Request $request, string $code)
@@ -360,6 +368,13 @@ class IndexController extends Controller
 
     if (!is_null($user)) {
       $detalleUsuario = UserDetails::where('email', $user->email)->get();
+    }
+
+    $historicoCupones = [];
+
+    if (Auth::check()) {
+      $usuario = Auth::user()->id;
+      $historicoCupones = HistoricoCupon::with('cupon')->where('user_id', $usuario)->where('usado', false)->get();
     }
 
     // $departamento = DB::select('select * from departments where active = ? order by 2', [1]);
@@ -428,7 +443,7 @@ class IndexController extends Controller
 
     $formToken = IzipayController::token($sale);
 
-    return view('public.checkout_pago', compact('sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress', 'formToken'));
+    return view('public.checkout_pago', compact('historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress', 'formToken'));
   }
 
   public function procesarPago(Request $request)
@@ -655,7 +670,8 @@ class IndexController extends Controller
   {
     $user = Auth::user();
     $categorias = Category::all();
-    return view('public.dashboard', compact('user', 'categorias'));
+    $cuponesUsados = HistoricoCupon::where('user_id', $user->id)->where('usado', 1)->pluck('cupones_id');
+    return view('public.dashboard', compact('cuponesUsados','user', 'categorias'));
   }
 
 
@@ -696,6 +712,7 @@ class IndexController extends Controller
       ->whereIn('products.id', function($subquery) {
         $subquery->select(DB::raw('MIN(id)'))
                  ->from('products')
+                 ->where('products.visible', 1)
                  ->groupBy('producto');
       })
       ->join('categories', 'categories.id', 'products.categoria_id')

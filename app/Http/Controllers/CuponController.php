@@ -96,18 +96,20 @@ class CuponController extends Controller
   public function addHistorico(Request $request)
   {
 
-
+    
     // buscamos el usuario logueado 
     $usuario = null;
+    $total = 0;
+
     if (Auth::check()) {
-      
       $usuario = Auth::user()->id;
     }
 
     try {
       //code...
       $user = User::find(Auth::user())->toArray();
-
+      $cart = ProductsController::process($request->cart);
+      $total = array_sum(array_map(fn($item) => $item['totalPrice'], $cart));
 
 
       //consultamos en el historico de cupones si la persona tiene un cupon sin usar 
@@ -128,7 +130,7 @@ class CuponController extends Controller
         ]);
       }
       $cupon = HistoricoCupon::with('cupon')->where('user_id', $usuario)->where('usado', false)->first();
-      return response()->json(['message' => 'Cupon asignado.', 'cupon' => $cupon], 200);
+      return response()->json(['message' => 'Cupon asignado.', 'cupon' => $cupon , 'total' => $total], 200);
     } catch (\Throwable $th) {
       //throw $th;
 
@@ -144,17 +146,17 @@ class CuponController extends Controller
     
     try {
       //code...
-      $cupon = Cupon::where('codigo', '=', $request->cupon)->where('status', 1)->where('fecha_caducidad', '>', $hoyFecha)->firstOrFail();
+      $cupon = Cupon::where('codigo', '=', $request->cupon)->where('status', 1)->where('fecha_caducidad', '>=', $hoyFecha)->firstOrFail();
 
       $Usoesecupon =  HistoricoCupon::where('cupones_id', $cupon->id)->where('usado', true)->first();
       if (isset($Usoesecupon)) {
         $valido = false;
-        return response()->json(['message' => 'Este cupon ya ha sido usado', 'valido' => $valido], 400);
+        return response()->json(['message' => 'Este cupón ya ha sido usado', 'valido' => $valido], 400);
       }
       
 
 
-      return response()->json(['message' => 'Cupon validado.', 'valido' => $valido, 'cupon' => $cupon], 200);
+      return response()->json(['message' => 'Cupón validado.', 'valido' => $valido, 'cupon' => $cupon], 200);
     } catch (\Throwable $th) {
       //throw $th;
       $valido = false;

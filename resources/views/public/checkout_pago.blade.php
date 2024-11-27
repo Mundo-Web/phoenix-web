@@ -918,6 +918,7 @@
       $('#iconoTarjeta').html(svg)
     })
   </script>
+
   <script>
     $('#pagarProductos').on('click', function(e) {
       console.log('pagando servicio');
@@ -957,10 +958,10 @@
       });
     })
   </script>
+  
   <script>
     // let articulosCarrito = [];
     let checkedRadio = false
-
 
     function deleteOnCarBtn(id, operacion) {
       console.log('Elimino un elemento del cvarrio');
