@@ -138,6 +138,7 @@
       z-index: 9999999999999;
     }
   </style>
+
   <main>
     <form id="paymentForm" class="font-poppins w-11/12 mx-auto my-12 flex flex-col gap-10">
       @csrf
@@ -414,7 +415,7 @@
               <label for="nombre" class="font-medium text-[12px] text-[#6C7275]">DNI o C.E/RUC<span class="text-[#c1272d]">*</span></label>
               <input maxlength="20" id="DNI" type="text"  placeholder="Ingrese nro. documento" name="DNI" value="" class="w-full py-2 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" >
             </div>
-
+            <meta name="csrf-token" content="{{ csrf_token() }}">
           </div>
           <div class="p-4 py-0">
             <hr>
@@ -424,6 +425,10 @@
               <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p class="font-normal text-[16px]">Envío</p>
                 <p id="precioEnvio" class="font-semibold text-[16px]">S/. {{ $sale->address_price }}</p>
+              </div>
+
+              <div id="descuentocupon">
+                
               </div>
 
               <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
@@ -543,7 +548,141 @@
     //     });
     //   }
     // }
+  const isAuthenticated = @json($user);
+ 
+  if (isAuthenticated) {
+     autenticado = true;
+  }else{
+     autenticado = false;
+  }
 
+  const logueado = Local.get('autenticado') ?? {};
+      Local.set('autenticado', {
+          ...logueado,
+          autenticado: autenticado
+  });
+
+  $(document).on("click", "#eliminarCupon", function () {
+    // Elimina el cupón del localStorage
+    Local.delete('cupon');
+
+    // Limpia el HTML del descuento
+    $("#descuentocupon").html("");
+
+    // Vuelve a renderizar el carrito
+    PintarCarrito();
+
+    Swal.fire({
+        title: 'Cupón eliminado',
+        text: 'El cupón ha sido eliminado exitosamente.',
+        icon: 'success'
+    });
+  });
+
+  function agregarCuponADb(cuponId) {
+
+    const carrito = Local.get('carrito') ?? []
+
+    $.ajax({
+        url: "{{ route('agregarcupon') }}", 
+        method: "POST",
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        data: {
+            id: cuponId,
+            cart: carrito
+        },
+        success: function (response) {
+          
+          if (response.cupon && response.cupon.cupon) {
+            
+              const { monto, porcentaje } = response.cupon.cupon;
+
+              // Calcula el descuento basado en porcentaje o monto fijo
+              let descuento = 0;
+              //const total = parseFloat($("#total").text().replace("S/.", "").trim()); // Obtén el total actual
+
+              if (porcentaje === 1) {
+                  descuento = (response.total * parseFloat(monto)) / 100; // Si el cupón es porcentual
+              } else {
+                  descuento = parseFloat(monto); // Si el cupón es un monto fijo
+              }
+
+              const cupon = Local.get('cupon') ?? {};
+              Local.set('cupon', {
+                  ...cupon,
+                  idcupon: cuponId,
+                  montof: monto,
+                  porcentaje: porcentaje
+              });
+                
+            
+              // Maqueta el HTML del descuento dinámicamente
+              if (descuento > 0) {
+                  const descuentoHtml = `
+                      <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
+                          <div>
+                            <p class="font-normal text-[16px]">Descuento</p>
+                          </div>
+                          <div class="flex flex-row gap-2">
+                           
+                            <p id="precioEnvio" class="font-semibold text-[16px]">- S/. ${descuento.toFixed(2)}</p>
+                          </div>
+                          
+                      </div>
+                  `;
+                  console.log(descuentoHtml);  
+                  // Inserta el HTML en el resumen del carrito
+                  $("#descuentocupon").html(descuentoHtml); // Asegúrate de que `#resumenCarrito` sea el contenedor adecuado
+
+                  // $("#eliminarCupon").on("click", function () {
+                  //     eliminarCupon();
+                  // });
+              }
+
+              PintarCarrito();
+          }
+        },
+        error: function (xhr) {
+            Swal.fire({
+                title: 'Error',
+                text: xhr.responseJSON?.message || 'Hubo un problema al agregar el cupón.',
+                icon: 'error'
+            });
+        }
+    });
+    }
+
+    // $(document).ready(function() {
+    //   if (isAuthenticated) {
+    //         const cupon = Local.get('cupon') ?? {};
+    //         const cuponid = cupon.idcupon;
+
+    //         if (cuponid) {
+    //             agregarCuponADb(cuponid);
+    //             PintarCarrito();
+    //         }
+    //   } else {
+    //         console.log("Usuario no autenticado. No se ejecutará la función agregarCuponADb.");
+    //   }
+    // });
+
+    $(document).ready(function () {
+        const cupon = Local.get('cupon') ?? {};
+        const cuponid = cupon.idcupon;
+        if (isAuthenticated) {
+            if (cuponid) {
+                agregarCuponADb(cuponid);
+                PintarCarrito();
+            } 
+        } else {
+          if (cuponid) {
+            location.href = `/carrito`;
+            Local.delete('cupon');
+          } 
+        }
+    });
 
     $(document).on('change', '#tipo-comprobante', function() {
       console.log('cambio', $(this).val())
@@ -595,9 +734,9 @@
         e.preventDefault();
       }
       console.log($(this.id))
-      if (this.id == 'DNI' && $(this).val().length > 7) {
+      if (this.id == 'DNI' && $(this).val().length > 20) {
         e.preventDefault();
-      } else if (this.id == 'RUC' && $(this).val().length > 10) {
+      } else if (this.id == 'RUC' && $(this).val().length > 20) {
         e.preventDefault();
       }
 
@@ -609,6 +748,7 @@
         $('#email').val(datos.email || ''); 
       }
     });
+
 
     $('#paymentForm').on('submit', async function(e) {
       e.preventDefault();
@@ -634,7 +774,7 @@
       // }
 
       if (ExisteDni) {
-        if ($('#tipo-comprobante').val() == 'boleta' && ($('#DNI').val() == '' || $('#DNI').val().length < 8 || $('#DNI').val().length > 20)) {
+        if ($('#tipo-comprobante').val() == 'boleta' && ($('#DNI').val() == '' || $('#DNI').val().length < 7 || $('#DNI').val().length > 20)) {
           Swal.fire({
             title: `Error!!`,
             text: 'El documento debe tener entre 8 y 20 dígitos',
@@ -656,7 +796,7 @@
       // }
 
       if (existeRuc) {
-        if ($('#tipo-comprobante').val() == 'factura' && ($('#RUC').val() == '' || $('#RUC').val().length < 8 || $('#RUC').val().length > 20)) {
+        if ($('#tipo-comprobante').val() == 'factura' && ($('#RUC').val() == '' || $('#RUC').val().length < 7 || $('#RUC').val().length > 20)) {
           Swal.fire({
             title: `Error!!`,
             text: 'El documento debe tener entre 8 y 20 dígitos',
@@ -677,6 +817,7 @@
         }
 
       }
+
       if (direccionFact) {
         if ($('#direccionFact').val() == '') {
           Swal.fire({
@@ -687,6 +828,9 @@
           return
         }
       }
+
+      const cupon = Local.get('cupon') ?? {};
+      const cuponid = cupon.idcupon ?? 0;
 
       const resSale = await fetch("{{route('sales.update')}}", {
         method: 'PATCH',
@@ -704,7 +848,8 @@
           'billing_type': $('#tipo-comprobante option:selected').text(),
           'billing_number': (ExisteDni ? $('#DNI').val(): $('#RUC').val()) || null,
           'billing_name': $('#razonFact').val(),
-          'billing_address': $('#direccionFact').val()
+          'billing_address': $('#direccionFact').val(),
+          'idcupon': cuponid
         })
       })
       
@@ -958,7 +1103,7 @@
       });
     })
   </script>
-  
+
   <script>
     // let articulosCarrito = [];
     let checkedRadio = false

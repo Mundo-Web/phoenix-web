@@ -359,7 +359,7 @@ class IndexController extends Controller
 
   public function pago(Request $request, string $code)
   {
-
+    
     $sale = Sale::where('code', $code)->first();
     if (!$sale) return \redirect()->route('index');
 
@@ -442,8 +442,8 @@ class IndexController extends Controller
     }
 
     $formToken = IzipayController::token($sale);
-
-    return view('public.checkout_pago', compact('historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress', 'formToken'));
+ 
+    return view('public.checkout_pago', compact('user', 'historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress', 'formToken'));
   }
 
   public function procesarPago(Request $request)
@@ -578,6 +578,14 @@ class IndexController extends Controller
 
     $body = $request->all();
     $answer = JSON::parse($body['kr-answer']);
+   
+    $user = Auth::user();
+
+    $usuario = null;
+    if (Auth::check()) {
+      $usuario = Auth::user()->id;
+    }
+    
 
     $saleJpa = Sale::where('code', $answer['orderDetails']['orderId'])->first();
 
@@ -590,6 +598,13 @@ class IndexController extends Controller
       return \redirect()->route('index');
     }
 
+    if ($usuario && $saleJpa->idcupon && $saleJpa->idcupon != 0 && $saleJpa->idcupon !== null) {
+      $updated = DB::table('historico_cupones')
+          ->where('cupones_id', $saleJpa->idcupon)
+          ->where('user_id', $usuario)
+          ->update(['usado' => true]);
+    }  
+
     $saleJpa->status_id = 3;
     $saleJpa->status_message = 'Pagado correctamente';
     $saleJpa->save();
@@ -597,6 +612,7 @@ class IndexController extends Controller
     $categorias = Category::all();
     return view('public.checkout_agradecimiento')
       ->with('categorias', $categorias)
+      ->with('user', $user)
       ->with('code', $request->codigoCompra);
   }
 

@@ -83,13 +83,28 @@ class CuponController extends Controller
     return redirect()->route('cupones.index');
   }
 
-  public function deletecupon($id)
+  public function deletecupon(Request $request)
   {
+    $usuario = null;
+  
     try {
-      DB::table('historico_cupones')->where('id', $id)->delete();
-      // Cupon::destroy($id);
+      if (Auth::check()) {
+        $usuario = Auth::user()->id;
+      }
+
+      $updated = DB::table('historico_cupones')
+            ->where('cupones_id', $request->id)
+            ->where('user_id', $usuario)
+            ->update(['usado' => true]);
+      
+        if ($updated) {
+            return response()->json(['message' => 'El cupón ha sido marcado como usado.', 'status' => true], 200);
+        } else {
+            return response()->json(['message' => 'El cupón no fue encontrado o ya estaba usado.', 'status' => false], 200);
+        }
+
     } catch (\Throwable $th) {
-      //throw $th;
+        return response()->json(['error' => 'Ocurrió un error al actualizar el cupón.', 'details' => $th->getMessage()], 500);
     }
   }
 
@@ -124,7 +139,6 @@ class CuponController extends Controller
         $cupon = HistoricoCupon::create([
           'cupones_id' => $request->id,
           'user_id' => $usuario,
-
           'usado' => false,
 
         ]);

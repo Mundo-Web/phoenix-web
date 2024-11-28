@@ -287,6 +287,9 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
   const categoryDetails = categories.find(category => category.id === Number(selected_category));
   const imginstagram = 'images/img/banner_AB.png';
   
+  const filteredMedia = media.filter(
+    (item) => item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM"
+  );
 
   return (<>
    <div>
@@ -353,6 +356,55 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
           spaceBetween={0}
           slidesPerView={5}
           loop={true}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            600: {
+              slidesPerView: 2,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 0,
+            },
+            1350: {
+              slidesPerView: 5,
+              spaceBetween: 0,
+            },
+          }}
+          className="instagram h-max"
+        >
+          {filteredMedia.slice(0, 12).map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative group aspect-square h-full">
+                <img
+                  src={item.media_url}
+                  alt="Image"
+                  className="object-cover h-full w-full"
+                />
+                <a
+                  href={item.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70"
+                ></a>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+      
+      {/* <section className="w-full relative mx-auto pt-12 lg:pt-16">
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={5}
+          loop={true}
           className="instagram h-max"
         >
           {media.slice(0, 6).map((item, index) => (
@@ -390,7 +442,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
             </SwiperSlide>
           ))}
         </Swiper>
-      </section>
+      </section> */}
         
     </div>
   </>)

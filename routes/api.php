@@ -64,6 +64,6 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
     Route::post('/upload/images', [ExcelController::class, 'items'])->name('upload.images');
 
     Route::post('/cupon', [CuponController::class, 'addHistorico'] )->name('agregarcupon');
-    Route::delete('/cupon/{id}', [CuponController::class, 'deletecupon'] );
+    Route::post('/cupon/usado', [CuponController::class, 'deletecupon'] )->name('deletecupon');
     Route::post('/cupones/validar', [CuponController::class, 'validar'] )->name('validarcupon');
 });

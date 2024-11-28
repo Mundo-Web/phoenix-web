@@ -20,7 +20,7 @@ class IzipayController extends Controller
         $url = env('IZIPAY_URL');
 
         $totalAmount = $sale->total + $sale->address_price;
-        
+       
         $res = new Fetch($url, [
             'method' => 'POST',
             'headers' => [
@@ -38,6 +38,7 @@ class IzipayController extends Controller
         ]);
 
         $data = $res->json();
+       
         return $data['answer']['formToken'];
     }
 }

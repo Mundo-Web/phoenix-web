@@ -83,7 +83,26 @@
         </svg>
     </button>
 
-    <nav class="w-full h-full overflow-y-auto p-5" x-data="{ openCatalogo: true, openSubMenu: null, openMarcas:false }">
+    <div class="relative flex w-full mt-5 lg:py-0  items-center justify-center">
+        <div class="w-full">
+            <input id="buscarproducto" type="text" placeholder="Buscar productos"
+                class="font-Urbanist_Light w-full text-sm pl-8 bg-black pr-10 py-2 border border-t-0 border-x-0 border-b-[1px] border-b-white focus:border-b-white focus:outline-none focus:ring-0 text-white placeholder:text-white lg:placeholder:text-white">
+
+            <span class="absolute inset-y-0 left-0 flex items-start lg:items-center px-2 pb-2 pt-[9px] lg:p-2">
+                <svg width="17" height="17" viewBox="0 0 20 20" fill="none"
+                    xmlns="http://www.w3.org/2000/svg" class="rotate-90">
+                    <path
+                        d="M14.6851 13.6011C14.3544 13.2811 13.8268 13.2898 13.5068 13.6206C13.1868 13.9514 13.1955 14.4789 13.5263 14.7989L14.6851 13.6011ZM16.4206 17.5989C16.7514 17.9189 17.2789 17.9102 17.5989 17.5794C17.9189 17.2486 17.9102 16.7211 17.5794 16.4011L16.4206 17.5989ZM15.2333 9.53333C15.2333 12.6814 12.6814 15.2333 9.53333 15.2333V16.9C13.6018 16.9 16.9 13.6018 16.9 9.53333H15.2333ZM9.53333 15.2333C6.38531 15.2333 3.83333 12.6814 3.83333 9.53333H2.16667C2.16667 13.6018 5.46484 16.9 9.53333 16.9V15.2333ZM3.83333 9.53333C3.83333 6.38531 6.38531 3.83333 9.53333 3.83333V2.16667C5.46484 2.16667 2.16667 5.46484 2.16667 9.53333H3.83333ZM9.53333 3.83333C12.6814 3.83333 15.2333 6.38531 15.2333 9.53333H16.9C16.9 5.46484 13.6018 2.16667 9.53333 2.16667V3.83333ZM13.5263 14.7989L16.4206 17.5989L17.5794 16.4011L14.6851 13.6011L13.5263 14.7989Z"
+                        fill="#E6E4E5" class="fill-fillAzulPetroleo lg:fill-fillPink" />
+                </svg>
+            </span>
+
+            <div class="bg-white z-50 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]"
+                id="resultados"></div>
+        </div>
+    </div>
+
+    <nav class="w-full h-full overflow-y-auto py-5" x-data="{ openCatalogo: true, openSubMenu: null, openMarcas:false }">
         <ul class="space-y-1">
             <li>
                 <a href="/"
@@ -131,16 +150,18 @@
 
                             <div x-data="{ openCategories: {} }">
                                 @foreach ($categorias as $item)
-                                    <div class="text-black flex items-center font-Urbanist_Semibold py-2 px-3 hover:opacity-75 transition-opacity duration-300"
+                                    <div class="text-black flex items-center font-Urbanist_Semibold py-2 px-3 hover:opacity-75 transition-opacity duration-300 justify-between"
                                         @click="openCategories[{{ $item->id }}] = !openCategories[{{ $item->id }}]">
                                         <span>{{ $item->name }}</span>
-                                        <svg class="w-5 h-5 transform transition-transform"
+                                        {{-- <svg class="w-5 h-5 transform transition-transform"
                                             :class="{ 'rotate-180': openCategories[{{ $item->id }}] }"
                                             fill="none" stroke="currentColor" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M19 9l-7 7-7-7"></path>
-                                        </svg>
+                                        </svg> --}}
+                                        <span :class="{ 'rotate-180': openCategories[{{ $item->id }}] }"
+                                            class="ms-1 inline-block transform transition-transform duration-300 cursor-pointer">↓</span>
                                     </div>
 
                                     <div x-show="openCategories[{{ $item->id }}]"
@@ -221,6 +242,9 @@
 
         </ul>
     </nav>
+
+    
+
 </div>
 
 

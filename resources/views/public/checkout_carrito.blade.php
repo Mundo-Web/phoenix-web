@@ -521,7 +521,7 @@
         if (isAuthenticated) {
             const cupon = Local.get('cupon') ?? {};
             const cuponid = cupon.idcupon;
-
+           
             if (cuponid) {
                 agregarCuponADb(cuponid);
                 PintarCarrito();
