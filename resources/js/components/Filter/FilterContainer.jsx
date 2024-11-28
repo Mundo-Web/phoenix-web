@@ -214,7 +214,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
 
 
     {
-      tags.length > 0 && <div className="flex-col gap-4 w-full hidden">
+      tags.length > 0 && <div className="flex-col gap-4 w-full flex">
         <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Etiquetas</h2>
         <div className='bg-[#808080] pb-[1px] -mt-2'></div>
         <div className='flex flex-col gap-2 w-full flex-wrap font-Urbanist_Light'>
@@ -224,7 +224,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
 
             return (<label key={`item-tag-${item.id}`} htmlFor={`item-tag-${item.id}`} className="font-Urbanist_Light tracking-wider font-light text-custom-border flex flex-row gap-2 items-center cursor-pointer">
               <input id={`item-tag-${item.id}`} name='tag' type="checkbox" className="bg-[#DEE2E6] text-black rounded-sm focus:ring-0 border-none font-Urbanist_Light" value={item.id} onClick={(e) => onClick(`txp.tag_id`, e.target.value, e.target.checked)}
-                defaultChecked={isChecked} />
+                checked={isChecked} />
               {item.name}
             </label>)
           })}
