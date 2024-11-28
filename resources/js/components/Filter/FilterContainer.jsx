@@ -213,8 +213,8 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
     </FilterItem>
 
 
-    {/* {
-      tags.length > 0 && <div className="flex flex-col gap-4 w-full">
+    {
+      tags.length > 0 && <div className="flex-col gap-4 w-full hidden">
         <h2 className="font-Urbanist_Semibold tracking-wide font-semibold text-base">Etiquetas</h2>
         <div className='bg-[#808080] pb-[1px] -mt-2'></div>
         <div className='flex flex-col gap-2 w-full flex-wrap font-Urbanist_Light'>
@@ -231,7 +231,7 @@ const FilterContainer = ({ minPrice, setFilter, filter, maxPrice, categories = [
 
         </div>
       </div>
-    } */}
+    }
 
       
     {/* {
