@@ -85,7 +85,7 @@
 
     <div class="relative flex w-full mt-5 lg:py-0  items-center justify-center">
         <div class="w-full">
-            <input id="buscarproducto" type="text" placeholder="Buscar productos"
+            <input id="buscarproductosecond" type="text" placeholder="Buscar productos"
                 class="font-Urbanist_Light w-full text-sm pl-8 bg-black pr-10 py-2 border border-t-0 border-x-0 border-b-[1px] border-b-white focus:border-b-white focus:outline-none focus:ring-0 text-white placeholder:text-white lg:placeholder:text-white">
 
             <span class="absolute inset-y-0 left-0 flex items-start lg:items-center px-2 pb-2 pt-[9px] lg:p-2">
@@ -98,7 +98,7 @@
             </span>
 
             <div class="bg-white z-50 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]"
-                id="resultados"></div>
+                id="resultadossecond"></div>
         </div>
     </div>
 
@@ -539,19 +539,19 @@
                             const price = Number(result.precio) || 0
                             const discount = Number(result.descuento) || 0
                             resultsHtml += `<a href="/producto/${result.id}">
-              <div class="w-full flex flex-row py-3 px-3 hover:bg-slate-200">
-                <div class="w-[15%]">
-                  <img class="w-20 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
-                </div>
-                <div class="flex flex-col justify-center w-[60%] px-2 line-clamp-2">
-                  <h2 class="text-left text-[12px] font-Urbanist_Regular line-clamp-2">${result.producto}</h2>
-                </div>
-                <div class="flex flex-col justify-center w-[15%] font-Urbanist_Regular">
-                  <p class="text-right w-max text-[14px] ">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
-                  ${discount > 0 ? `<p class="text-[12px] text-right line-through text-slate-500 w-max">S/ ${price.toFixed(2)}</p>` : ''}
-                </div>
-              </div>
-            </a>`;
+                            <div class="w-full flex flex-row py-3 px-3 hover:bg-slate-200">
+                                <div class="w-[15%]">
+                                <img class="w-20 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
+                                </div>
+                                <div class="flex flex-col justify-center w-[60%] px-2 line-clamp-2">
+                                <h2 class="text-left text-[12px] font-Urbanist_Regular line-clamp-2">${result.producto}</h2>
+                                </div>
+                                <div class="flex flex-col justify-center w-[15%] font-Urbanist_Regular">
+                                <p class="text-right w-max text-[14px] ">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
+                                ${discount > 0 ? `<p class="text-[12px] text-right line-through text-slate-500 w-max">S/ ${price.toFixed(2)}</p>` : ''}
+                                </div>
+                            </div>
+                            </a>`;
                         });
 
                         $('#resultados').html(resultsHtml);
@@ -562,6 +562,53 @@
 
         } else {
             $('#resultados').empty();
+        }
+    });
+
+
+    $('#buscarproductosecond').keyup(function() {
+
+    clearTimeout(clockSearch);
+    var query = $(this).val().trim();
+
+        if (query !== '') {
+            clockSearch = setTimeout(() => {
+                $.ajax({
+                    url: '{{ route('buscar') }}',
+                    method: 'GET',
+                    data: {
+                        query: query
+                    },
+                    success: function(data) {
+                        var resultsHtml = '';
+                        var url = '{{ asset('') }}';
+                        data.forEach(function(result) {
+                            const price = Number(result.precio) || 0
+                            const discount = Number(result.descuento) || 0
+                            resultsHtml += `<a href="/producto/${result.id}">
+                                <div class="w-full flex flex-row py-3 px-3 hover:bg-slate-200">
+                                    <div class="w-[15%]">
+                                    <img class="w-20 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
+                                    </div>
+                                    <div class="flex flex-col justify-center w-[60%] px-2 line-clamp-2">
+                                    <h2 class="text-left text-[12px] font-Urbanist_Regular line-clamp-2">${result.producto}</h2>
+                                    </div>
+                                    <div class="flex flex-col justify-center w-[15%] font-Urbanist_Regular">
+                                    <p class="text-right w-max text-[14px] ">S/ ${discount > 0 ? discount.toFixed(2) : price.toFixed(2)}</p>
+                                    ${discount > 0 ? `<p class="text-[12px] text-right line-through text-slate-500 w-max">S/ ${price.toFixed(2)}</p>` : ''}
+                                    </div>
+                                </div>
+                                </a>`;
+                        });
+
+                        $('#resultadossecond').html(resultsHtml);
+                    }
+                });
+
+            }, 300);
+
+        } else {
+            $('#resultadossecond').empty();
         }
     });
 </script>
@@ -755,6 +802,18 @@
             if (!isClickInsideInput && !isClickInsideResultados) {
                 input.value = '';
                 $('#resultados').empty();
+            }
+        });
+
+        document.addEventListener('click', function(event) {
+            var input = document.getElementById('buscarproductosecond');
+            var resultados = document.getElementById('resultadossecond');
+            var isClickInsideInput = input.contains(event.target);
+            var isClickInsideResultados = resultados.contains(event.target);
+
+            if (!isClickInsideInput && !isClickInsideResultados) {
+                input.value = '';
+                $('#resultadossecond').empty();
             }
         });
     });
@@ -1290,6 +1349,18 @@ categorias.forEach(categoria => {
       if (!isClickInsideInput && !isClickInsideResultados) {
           input.value = '';
           $('#resultados').empty();
+      }
+  });
+
+  document.addEventListener('click', function(event) {
+      var input = document.getElementById('buscarproductosecond');
+      var resultados = document.getElementById('resultadossecond');
+      var isClickInsideInput = input.contains(event.target);
+      var isClickInsideResultados = resultados.contains(event.target);
+
+      if (!isClickInsideInput && !isClickInsideResultados) {
+          input.value = '';
+          $('#resultadossecond').empty();
       }
   });
 </script>
