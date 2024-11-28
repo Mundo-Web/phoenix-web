@@ -541,7 +541,7 @@
                             resultsHtml += `<a href="/producto/${result.id}">
                             <div class="w-full flex flex-row py-3 px-3 hover:bg-slate-200">
                                 <div class="w-[15%]">
-                                <img class="w-20 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
+                                <img class="w-20 rounded-0 object-center" src="${url}${result.imagen}" onerror="imagenError(this)" />
                                 </div>
                                 <div class="flex flex-col justify-center w-[60%] px-2 line-clamp-2">
                                 <h2 class="text-left text-[12px] font-Urbanist_Regular line-clamp-2">${result.producto}</h2>
