@@ -405,12 +405,12 @@
         </div>
     </div>
 
-    <div class="relative flex w-full lg:py-0  items-center justify-center bg-black">
+    <div class="relative flex lg:hidden w-full h-[40px]  items-center justify-center bg-black">
         <div class="w-full text-center px-5">
             <input id="buscarproductosecond" type="text" placeholder="Buscar productos"
                 class="font-Urbanist_Light w-full text-sm pl-8 bg-black pr-10 py-2 border border-t-0 border-x-0 border-b-[1px] border-b-white focus:border-b-white focus:outline-none focus:ring-0 text-white placeholder:text-white lg:placeholder:text-white">
 
-            <span class="absolute inset-y-0 left-0 flex items-start lg:items-center px-2 pb-2 pt-[9px] lg:p-2">
+            <span class="absolute inset-y-0 left-5 flex items-start lg:items-center px-2 pb-2 pt-[9px] lg:p-2">
                 <svg width="17" height="17" viewBox="0 0 20 20" fill="none"
                     xmlns="http://www.w3.org/2000/svg" class="rotate-90">
                     <path
@@ -419,9 +419,12 @@
                 </svg>
             </span>
 
-            <div class="bg-white z-50 shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[200px]"
-                id="resultadossecond"></div>
+           
         </div>
+    </div>
+    <div class="relative">
+        <div class="bg-white z-50  shadow-2xl w-full absolute overflow-y-auto max-h-[200px]"
+        id="resultadossecond"></div>
     </div>
 
     <div class="flex justify-end relative">
@@ -586,7 +589,7 @@
                         data.forEach(function(result) {
                             const price = Number(result.precio) || 0
                             const discount = Number(result.descuento) || 0
-                            resultsHtml += `<a href="/producto/${result.id}">
+                            resultsHtml += `<a class="" href="/producto/${result.id}">
                                 <div class="w-full flex flex-row py-3 px-3 hover:bg-slate-200">
                                     <div class="w-[15%]">
                                     <img class="w-20 rounded-md" src="${url}${result.imagen}" onerror="imagenError(this)" />
