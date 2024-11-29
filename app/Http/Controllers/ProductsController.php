@@ -75,7 +75,7 @@ class ProductsController extends Controller
           $instance->whereIn('products.id', function($query) {
             $query->select(DB::raw('MIN(id)'))
                   ->from('products')
-                  // ->where('products.visible', 1)
+                  ->where('products.visible', 1)
                   ->groupBy('producto');
           })
           ->where('products.visible', 1)
