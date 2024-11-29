@@ -92,9 +92,7 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
                       </div>
                     </a>
                     </Tippy>
-                  {item.colors
-                    .filter(color => color.color !== item.color)
-                    .map(color => (
+                  {item.colors?.filter(color => color.color !== item.color).map(color => (
                     <Tippy content={color.color}>
                     <a 
                       key={color.color} 
