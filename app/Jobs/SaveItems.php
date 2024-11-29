@@ -175,6 +175,11 @@ class SaveItems implements ShouldQueue
             ]);
           }
 
+          $tagJpa->update([
+            'status' => true,
+            'visible' => true
+          ]);
+
           ProductTag::create([
             'producto_id' => $productJpa->id,
             'tag_id' => $tagJpa->id
