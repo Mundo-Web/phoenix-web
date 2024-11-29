@@ -71,11 +71,10 @@ class Products extends Model
   public function colors()
   {
       return $this->hasMany(Products::class, 'producto', 'producto')
-          ->whereNotNull('color')
-          ->select('color','producto','imagen') 
-          ->groupBy('color')
-          ->where('visible', 1)
-          ->distinct(); 
+          ->whereNotNull('color') // Asegura que el color no sea nulo
+          ->where('visible', 1) // Solo colores visibles
+          ->select('color', 'producto', 'imagen') // Selección de columnas específicas
+          ->distinct('color'); // Evitar duplicados en base al color
   }
 
 
