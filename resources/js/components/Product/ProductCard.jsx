@@ -77,8 +77,24 @@ const ProductCard = ({ item, width, bgcolor, is_reseller }) => {
         {item.colors && item.colors.length > 0 && ( 
           
             <div className="flex justify-start items-center mt-2 gap-1">
-                  
-                  {item.colors?.map(color => (
+                    <Tippy content={item.color}>
+                    <a 
+                      key={item.color} 
+                      id={`producto-${item.id}-${item.imagen}`}
+                      className="ring-1 rounded-full p-[2px] ring-transparent hover:ring-[#808080]"
+                      onClick={() => handleColorClick(item.imagen)}
+                    >
+                      <div
+                        className="w-4 md:w-[30px] h-4 md:h-[30px] rounded-full overflow-hidden" 
+                        //style={{ backgroundColor: color.color }}
+                      >
+                        <img className='object-contain object-center' src={item.imagen ? `/${item.imagen}` : '/images/img/noimagen.jpg'} />
+                      </div>
+                    </a>
+                    </Tippy>
+                  {item.colors
+                    .filter(color => color.color !== item.color)
+                    .map(color => (
                     <Tippy content={color.color}>
                     <a 
                       key={color.color} 
