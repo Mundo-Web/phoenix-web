@@ -69,11 +69,11 @@
                   </td> --}}
                   <td class="flex flex-row justify-end items-center gap-5">
 
-                    @if ($item->type_id == 2)
-                      <a href="{{ route('reglasDescuentos.edit', $item->id) }}"
+                    
+                    <a href="{{ route('reglasDescuentos.edit', $item->id) }}"
                         class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
                           class="fa-regular fa-pen-to-square"></i></a>
-                    @endif
+                    
 
                     <form action="" method="POST">
                       @csrf

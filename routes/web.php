@@ -255,7 +255,7 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::post('/products', [ProductsController::class, 'store'])->name('products.store');
         Route::post('/products/updateVisible', [ProductsController::class, 'updateVisible'])->name('products.updateVisible');
         Route::post('/products/borrar', [ProductsController::class, 'borrar'])->name('products.borrar');
-
+        Route::post('/products/borrarficha', [ProductsController::class, 'borrarFichaTecnica'])->name('activity.borrarficha');
         //Preguntas frecuentes
         Route::resource('/faqs', FaqsController::class);
         Route::post('/faqs/updateVisible', [FaqsController::class, 'updateVisible'])->name('faqs.updateVisible');

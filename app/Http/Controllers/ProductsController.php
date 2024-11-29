@@ -75,7 +75,7 @@ class ProductsController extends Controller
           $instance->whereIn('products.id', function($query) {
             $query->select(DB::raw('MIN(id)'))
                   ->from('products')
-                  ->where('products.visible', 1)
+                  // ->where('products.visible', 1)
                   ->groupBy('producto');
           })
           ->where('products.visible', 1)
@@ -268,7 +268,7 @@ class ProductsController extends Controller
     if ($especificacion->count() == 0) $especificacion = [json_decode('{"tittle":"", "specifications":""}', false)];
     $tags = Tag::where('status', 1)->get();
     $marcas = ClientLogos::where("status", "=", true)->get();
-    $categoria = Category::all();
+    $categoria = Category::where("status", "=", true)->get();
     $descuentos = Discount::where("status", "=", true)->get();
     $subcategories = SubCategory::all();
     $valoresdeatributo = AttributeProductValues::where("product_id", "=", $id)->get();
@@ -512,6 +512,41 @@ class ProductsController extends Controller
   {
     //
   }
+
+
+  public function borrarFichaTecnica(Request $request){
+    try {
+       
+        $obtenerproducto = Products::find($request->id);
+
+        if (!$obtenerproducto) {
+            return response()->json(['message' => 'Producto no encontrado'], 404);
+        }
+
+      
+        $rutaCompleta = $obtenerproducto->imagen_ambiente;
+
+      
+        if (file_exists($rutaCompleta)) {
+            
+            if (unlink($rutaCompleta)) {
+               
+                $obtenerproducto->imagen_ambiente = "";
+                $obtenerproducto->update();
+                
+                return response()->json(['message' => 'Ficha Técnica eliminada con éxito']);
+            } else {
+                return response()->json(['message' => 'No se pudo eliminar el archivo físico'], 500);
+            }
+        } else {
+            return response()->json(['message' => 'El archivo no existe'], 404);
+        }
+
+    } catch (\Throwable $th) {
+        return response()->json(['message' => 'No se ha podido eliminar la Ficha Técnica', 'error' => $th->getMessage()], 400);
+    }
+  }
+
 
   /**
    * Update the specified resource in storage.
