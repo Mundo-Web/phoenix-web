@@ -334,7 +334,7 @@
                                         <div class="flex justify-center items-center">34</div>
                                     </div>
                               </div> --}}
-                            @if ($product->category->img_talla)
+                            @if ($product->imagen_ambiente)
                                 <div class="flex flex-row">
                                     <div id="linkmodal" class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
                                         <img class="h-4 object-contain" src="{{ asset('images/img/ruler.png') }}" />
@@ -498,7 +498,7 @@
     <div id="modaltallas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
         <!-- Modal body -->
         <div  class="p-1 flex flex-col overflow-hidden">
-            <img id="zoomImage" class="object-contain w-full h-full" src="{{asset($product->category->img_talla)}}" />
+            <img id="zoomImage" class="object-contain w-full h-full" src="{{asset($product->imagen_ambiente)}}" />
         </div>
     </div>
 

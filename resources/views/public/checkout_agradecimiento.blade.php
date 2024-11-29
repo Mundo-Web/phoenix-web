@@ -42,7 +42,7 @@
                         <div class="w-full basis-5/12" id="itemsCarritoAgradecimientos">
 
                         </div>
-
+                        <meta name="csrf-token" content="{{ csrf_token() }}">
 
 
                       </div>
@@ -73,8 +73,57 @@
   </main>
 
   <script>
-    Local.delete('carrito')
-    Local.delete('address')
+
+    // const isAuthenticated = @json($user);
+
+    // $(document).ready(function () {
+
+    //     if (isAuthenticated) {
+            
+    //       const cupon = Local.get('cupon') ?? {};
+    //       const cuponid = cupon?.idcupon;
+
+    //         if (cuponid) {
+    //             $.ajax({
+    //                 url: "{{ route('deletecupon') }}", 
+    //                 method: "POST",
+    //                 headers: {
+    //                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //                 },
+    //                 data: {
+    //                     id: cuponid,
+    //                 },
+    //                 success: function (response) {
+    //                     if (response.status == true) {
+    //                       Local.delete('carrito');
+    //                       Local.delete('address');
+    //                       Local.delete('cupon');
+    //                       Local.delete('autenticado');
+    //                     }
+    //                 },
+    //                 error: function (xhr) {
+    //                     Swal.fire({
+    //                         title: 'Error',
+    //                         text: xhr.responseJSON?.message || 'Hubo un problema al eliminar el cupón.',
+    //                         icon: 'error'
+    //                     });
+    //                 }
+    //             });
+    //         }
+
+    //     } else {
+    //                       // Local.delete('carrito');
+    //                       // Local.delete('address');
+    //                       // Local.delete('cupon');
+    //                       // Local.delete('autenticado');
+    //     }
+    // });
+
+        Local.delete('carrito');
+        Local.delete('address');
+        Local.delete('cupon');
+        Local.delete('autenticado');
+
   </script>
 
 @stop

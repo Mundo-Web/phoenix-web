@@ -32,8 +32,8 @@
         <input id="email" type="email" placeholder="Correo electrónico" required name="email" value=""
           class=" py-3 px-4 focus:outline-none placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]" />
       </div> --}}
-      <div class="flex md:gap-20 flex-col  md:flex-row">
-        <div class="flex flex-col justify-between items-center md:basis-8/12 w-full md:w-auto">
+      <div class="flex md:gap-20 flex-col  lg:flex-row">
+        <div class="flex flex-col justify-between items-center lg:basis-8/12 w-full lg:w-auto">
           <x-ecommerce.gateway.container>
             <div class="flex flex-col 2lg:flex-row pb-5  border-[#E8ECEF] gap-5">
               <table>
@@ -225,20 +225,47 @@
             </div>
           </div>
         </div>
-        <div class="basis-4/12 flex flex-col justify-start gap-5">
+        <div class="lg:basis-4/12 flex flex-col justify-start gap-5">
           <h2 class="font-semibold text-2xl tracking-tight text-[#151515] font-Urbanist_Bold">
             Resumen de la compra
           </h2>
           <div>
-            <div class="flex flex-col gap-5 font-Urbanist_Bold">
-              <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
+            <div class="flex flex-col gap-3 font-Urbanist_Bold">
+              @auth
+                <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
+                  <h2 class="font-bold text-[16px] text-[#151515]">
+                    Código de cupon
+                  </h2>
+                  <div class="flex gap-0 relative">
+                    <input
+                      type="text"
+                      id="txtCodigoPromocion"
+                      name="txtCodigoPromocion"
+                      class="w-full border-[#151515] rounded-0 py-[7px] px-3 focus:outline-none focus:ring-0 focus:border-[#151515]"
+                      
+                    />
+                    <meta name="csrf-token" content="{{ csrf_token() }}">
+                    <button id="btnAplicarCupon"
+                      class="absolute rounded-0 border right-0 p-2 px-4 text-white bg-[#151515] w-auto top-1/2 transform -translate-y-1/2"
+                    >
+                      Aplicar
+                    </button>
+                  </div>
+                </div>
+              @endauth
+
+              <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Envío</p>
                 <p id="precioEnvio" class="font-semibold text-[16px]">Gratis</p>
               </div>
 
-              <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
+              <div id="descuentocupon">
+                
+              </div>
+
+              <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Subtotal</p>
-                <p id="itemSubtotal" class="font-semibold text-[16px]">S/. 0.00 </p>
+                <p id="itemSubtotal" class="font-semibold text-[16px]">S/. 0.00</p>
               </div>
 
               <div
@@ -300,6 +327,214 @@
       /* Cambia el color de los bullets si es necesario */
     }
   </style>
+
+<script>
+  const isAuthenticated = @json($user);
+ 
+  if (isAuthenticated) {
+     autenticado = true;
+  }else{
+     autenticado = false;
+  }
+
+  const logueado = Local.get('autenticado') ?? {};
+      Local.set('autenticado', {
+          ...logueado,
+          autenticado: autenticado
+  });
+
+  $(document).on("click", "#eliminarCupon", function () {
+    // Elimina el cupón del localStorage
+    Local.delete('cupon');
+
+    // Limpia el HTML del descuento
+    $("#descuentocupon").html("");
+
+    // Vuelve a renderizar el carrito
+    PintarCarrito();
+
+    Swal.fire({
+        title: 'Cupón eliminado',
+        text: 'El cupón ha sido eliminado exitosamente.',
+        icon: 'success'
+    });
+  });
+
+  function agregarCuponADb(cuponId) {
+
+        const carrito = Local.get('carrito') ?? []
+
+        $.ajax({
+            url: "{{ route('agregarcupon') }}", 
+            method: "POST",
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                id: cuponId,
+                cart: carrito
+            },
+            success: function (response) {
+              
+              if (response.cupon && response.cupon.cupon) {
+                 
+                  const { monto, porcentaje } = response.cupon.cupon;
+
+                  // Calcula el descuento basado en porcentaje o monto fijo
+                  let descuento = 0;
+                  //const total = parseFloat($("#total").text().replace("S/.", "").trim()); // Obtén el total actual
+
+                  if (porcentaje === 1) {
+                      descuento = (response.total * parseFloat(monto)) / 100; // Si el cupón es porcentual
+                  } else {
+                      descuento = parseFloat(monto); // Si el cupón es un monto fijo
+                  }
+ 
+                  const cupon = Local.get('cupon') ?? {};
+                  Local.set('cupon', {
+                      ...cupon,
+                      idcupon: cuponId,
+                      montof: monto,
+                      porcentaje: porcentaje
+                  });
+                    
+                
+                  // Maqueta el HTML del descuento dinámicamente
+                  if (descuento > 0) {
+                      const descuentoHtml = `
+                          <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
+                              <div>
+                                <p class="font-normal text-[16px]">Descuento</p>
+                              </div>
+                              <div class="flex flex-row gap-2">
+                                <button id="eliminarCupon" class="text-red-500 font-bold text-[16px] ml-2"><i class="fa-regular fa-circle-xmark"></i></button>
+                                <p id="precioEnvio" class="font-semibold text-[16px]">- S/. ${descuento.toFixed(2)}</p>
+                              </div>
+                              
+                          </div>
+                      `;
+                      console.log(descuentoHtml);  
+                      // Inserta el HTML en el resumen del carrito
+                      $("#descuentocupon").html(descuentoHtml); // Asegúrate de que `#resumenCarrito` sea el contenedor adecuado
+
+                      // $("#eliminarCupon").on("click", function () {
+                      //     eliminarCupon();
+                      // });
+                  }
+
+                  PintarCarrito();
+              }
+            },
+            error: function (xhr) {
+                Swal.fire({
+                    title: 'Error',
+                    text: xhr.responseJSON?.message || 'Hubo un problema al agregar el cupón.',
+                    icon: 'error'
+                });
+            }
+        });
+  }
+
+
+  $(document).ready(function () {
+      $('#btnAplicarCupon').on('click', function () {
+          const codigo = $('#txtCodigoPromocion').val();
+          
+          if (!codigo) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Por favor ingresa un código de cupón.',
+                icon: 'warning'
+            });
+            return;
+        }
+
+          $.ajax({
+            url: "{{ route('validarcupon') }}", // Ruta definida en Laravel
+            method: "POST", // Método HTTP
+            headers: {
+              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF desde el meta
+            },
+            data: {
+              cupon: codigo // Variable `codigo` que contiene el cupón
+            },
+            success: function(response) {
+              console.log(response)
+              Swal.fire({
+                title: response.message,
+                text: 'Cupón agregado correctamente',
+                icon: 'success',
+              });
+
+              agregarCuponADb(response.cupon.id);
+              
+              
+            },
+            error: function(xhr, status, error) {
+              Swal.fire({
+                title: 'Cupón inválido',
+                text: xhr.responseJSON.message || 'Hubo un problema al validar el cupón.',
+                icon: 'error'
+              });
+            }
+          });
+
+
+          // $.post('api/cupones/validar', { 
+          //   cupon: codigo,
+          //  })
+          //     .done(function (response) {
+          //         Swal.fire({
+          //             title: 'Cupón válido',
+          //             text: '¿Deseas aplicar este cupón?',
+          //             icon: 'success',
+          //             showCancelButton: true,
+          //             confirmButtonText: 'Aplicar',
+          //             cancelButtonText: 'Cancelar'
+          //         }).then((result) => {
+          //             if (result.isConfirmed) {
+          //                 $.post('/carrito/aplicar-cupon', { id: response.cupon.id })
+          //                     .done(function (applyResponse) {
+          //                         $('#cuponResumen').html(`
+          //                             <div>
+          //                                 <span class="opacity-80">${response.cupon.porcentaje == 1 ? response.cupon.monto + ' %' : 'S/ ' + response.cupon.monto}</span>
+          //                                 <span class="text-[#112212] font-bold text-nowrap">
+          //                                     Total: S/ ${(montoTotal - (response.cupon.porcentaje == 1 ? (montoTotal * response.cupon.monto / 100) : response.cupon.monto)).toFixed(2)}
+          //                                 </span>
+          //                             </div>
+          //                         `);
+          //                     });
+          //             }
+          //         });
+          //     })
+          //     .fail(function (error) {
+          //         Swal.fire({
+          //             title: 'Cupón inválido',
+          //             text: error.responseJSON.message,
+          //             icon: 'error'
+          //         });
+          // });
+      });
+
+      
+      
+        if (isAuthenticated) {
+            const cupon = Local.get('cupon') ?? {};
+            const cuponid = cupon.idcupon;
+           
+            if (cuponid) {
+                agregarCuponADb(cuponid);
+                PintarCarrito();
+            }
+        } else {
+            console.log("Usuario no autenticado. No se ejecutará la función agregarCuponADb.");
+        }
+
+  });
+
+
+
+</script>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
@@ -734,6 +969,8 @@
     $('#btnSiguiente').on('click', async function(e) {
       const datos = Local.get('datospersonales') ?? [];
       const cart = Local.get('carrito') ?? []
+      const cupon = Local.get('cupon') ?? []
+      const autenticado = Local.get('autenticado') ?? []
       const address = Local.get('address') ?? {envio: 'recoger'}
       
       if (cart.length == 0) {
@@ -796,7 +1033,7 @@
           'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
         },
         body: JSON.stringify({
-          cart, address, datos
+          cart, address, datos, cupon, autenticado
         })
       })
 

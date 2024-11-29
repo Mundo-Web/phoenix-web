@@ -78,6 +78,7 @@
         <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item>
         
         <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">Reglas de descuento</x-menu.item>
+        <x-menu.item id="cupones" href="{{ route('cupones.index') }}" icon="fa-solid fa-ticket">Cupones</x-menu.item>
         <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">Costos de Envio </x-menu.item>
         <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">Estados de pedidos</x-menu.item>
         

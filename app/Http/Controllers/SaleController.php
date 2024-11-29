@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Http\Classes\dxResponse;
+use App\Models\Cupon;
 use App\Models\dxDataGrid;
+use App\Models\HistoricoCupon;
 use App\Models\Price;
 use App\Models\Products;
 use App\Models\SaleDetail;
@@ -32,12 +34,14 @@ class SaleController extends Controller
     }
 
     public function save(Request $request)
-    {
+    {   
         $response = Response::simpleTryCatch(function () use ($request) {
            
             $cart = ProductsController::process($request->cart);
             $address = $request->address;
             $invited = $request->datos;
+            $cupon = $request->cupon;
+            $Islogueado = $request->autenticado;
             
 
             $priceJpa = Price::find($address['price_id'] ?? null);
@@ -96,13 +100,33 @@ class SaleController extends Controller
 
             }
 
+            $descuento = 0;
+            $idcupon = $cupon['idcupon'] ?? 0 ;
+            $hoyFecha = date('Y-m-d');
+            $totalparcial = array_sum(array_map(fn($item) => $item['totalPrice'], $cart));
 
+            $cupon = Cupon::where('id', '=', $idcupon)->where('fecha_caducidad', '>=', $hoyFecha)->where('status', 1)->where('visible', 1)->first();
+            // $Usoesecupon =  HistoricoCupon::where('cupones_id', $cupon->id)->where('usado', true)->first();
+            
+            if ($cupon) {
+                
+                if ($cupon->porcentaje === 1) {
+                    $descuento = ($totalparcial * (float) $cupon->monto) / 100; // Si el cupón es porcentual
+                } else {
+                    $descuento = (float) $cupon->monto; // Si el cupón es un monto fijo
+                }
+            }
+
+            $totalfinal = $totalparcial - $descuento;
             $saleJpa = new Sale();
             $saleJpa->code = $orderId;
             $saleJpa->name = $user->name ?? '-';
             $saleJpa->lastname = $user->lastname ?? '-';
             $saleJpa->email = $user->email ?? $invited['email'];
             $saleJpa->phone = $user->phone ?? '-';
+            $saleJpa->idcupon = $idcupon ?? 0;
+            $saleJpa->cupon_monto = $descuento ?? 0;
+            $saleJpa->subtotal = $totalparcial ?? 0;
             $saleJpa->address_department = $address['department'] ?? '-';
             $saleJpa->address_province = $address['province'] ?? '-';
             $saleJpa->address_district = $address['district'] ?? '-';
@@ -110,7 +134,7 @@ class SaleController extends Controller
             $saleJpa->address_street = $address['street'] ?? '-';
             $saleJpa->address_number = $address['number'] ?? '-';
             $saleJpa->address_description = $address['description'] ?? '-';
-            $saleJpa->total = array_sum(array_map(fn($item) => $item['totalPrice'], $cart));
+            $saleJpa->total = $totalfinal;
             $saleJpa->status_id = 1;
             $saleJpa->status_message = 'La orden ha sido creada - Aún no se ha realizado un pago';
             $saleJpa->save();
@@ -134,14 +158,17 @@ class SaleController extends Controller
     }
 
     public function updateBilling(Request $request) {
+        
         $response = Response::simpleTryCatch(function () use ($request) {
             $userdetailU = UserDetails::where('email', $request->email)->first();
-           
-            $userdetailU->update([
-                'nombre' => $request->name ?? '-',
-                'apellidos' => $request->lastname ?? '-',
-                'phone' => $request->phone ?? '-',
-            ]);
+            
+            if ($userdetailU) {
+                $userdetailU->update([
+                    'nombre' => $request->name ?? '-',
+                    'apellidos' => $request->lastname ?? '-',
+                    'phone' => $request->phone ?? '-',
+                ]);
+            }
             
             $saleJpa = Sale::where('code', $request->ordenId)->first();
             $saleJpa->name = $request->name;

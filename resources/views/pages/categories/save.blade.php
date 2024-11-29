@@ -38,7 +38,7 @@
                 </div>
               </div>
 
-              <div class="md:col-span-5">
+              {{-- <div class="md:col-span-5">
                 <label for="img_talla">Subir Guia de Tallas</label>
                 <div class="relative mb-2  mt-2 flex flex-wrap items-center gap-2">
                   <img class="block w-40 h-40 mb-2 object-contain" src="{{$category->img_talla ? asset($category->img_talla) : asset('images/img/image-plus.jpg')}}" alt="">
@@ -46,7 +46,7 @@
                     class="p-2.5 block w-max text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     aria-describedby="user_avatar_help" id="user_avatar" type="file">
                 </div>
-              </div>
+              </div> --}}
 
               {{-- <div class="md:col-span-5">
                 <label for="imagen">Subir una Foto</label>

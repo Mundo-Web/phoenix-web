@@ -468,6 +468,8 @@ function PintarCarrito() {
   itemsCarritoCheck.empty()
 
   const carrito = Local.get('carrito') ?? []
+  const cupon = Local.get('cupon') ?? []
+  const login = Local.get('autenticado') ?? []
   const carritoDescuentoMismoProducto = []
   const carritoDescuentoDistintoProducto = []
   const carritoSinDescuento = [];
@@ -579,8 +581,26 @@ function PintarCarrito() {
       }
     }
   }
-
+ 
+  let descuento = 0;
+  let isPorcentaje = 0;  
+  let descuentofinal = 0;
+  let logueado = false;
   let total = 0;
+
+
+  if (cupon && typeof cupon === 'object') { 
+      descuento = cupon.montof ?? 0; 
+      isPorcentaje = cupon.porcentaje ?? 0; 
+      logueado = login.autenticado;
+      console.log(logueado);
+      if (isPorcentaje) {
+        descuentofinal = descuento/100;
+      }else{
+        descuentofinal = descuento;
+      }
+
+  }
 
   carritoParaPintar.forEach(item => {
     total += item.totalPrice
@@ -635,7 +655,17 @@ function PintarCarrito() {
   const costoEnvio = getCostoEnvio()
 
   $('#itemSubtotal').text(`S/. ${Number2Currency(total)}`)
-  $('#itemTotal').text(`S/. ${Number2Currency(total + costoEnvio)} `)
+
+  if (descuentofinal > 0 && logueado) {  
+    if (isPorcentaje) {
+      $('#itemTotal').text(`S/. ${Number2Currency(total + costoEnvio - descuentofinal*total)} `)
+    } else {
+      $('#itemTotal').text(`S/. ${Number2Currency(total + costoEnvio - descuentofinal)} `)
+    }
+  }else{
+    $('#itemTotal').text(`S/. ${Number2Currency(total + costoEnvio)} `)
+  }
+  
   $('#itemsTotal').text(`S/. ${Number2Currency(total + costoEnvio)} `)
 
   mostrarTotalItems()

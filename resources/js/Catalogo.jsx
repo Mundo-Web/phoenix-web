@@ -287,23 +287,13 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
   const categoryDetails = categories.find(category => category.id === Number(selected_category));
   const imginstagram = 'images/img/banner_AB.png';
   
+  const filteredMedia = media.filter(
+    (item) => item.media_type === "IMAGE" || item.media_type === "CAROUSEL_ALBUM"
+  );
 
   return (<>
    <div>
-      {/* <section
-            class="flex relative flex-col justify-center items-center px-[5%] py-28 text-base font-medium min-h-[345px] text-neutral-900 max-md:py-24">
-            <img loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/1f15375dac970433a2abe3921fa2c31e35c32f7b26a37b841431aaba1861d380?placeholderIfAbsent=true&apiKey=72fae0f4c808496790606e16dad566da"
-                alt="" class="object-cover absolute inset-0 size-full opacity-15" />
-            <div class="flex relative flex-col max-w-full w-[499px]">
-                <h2 class="self-center text-[#FD1F4A] font-Helvetica_Medium">Catálogo</h2>
-                <h3 class="mt-3 text-5xl text-center max-md:max-w-full font-Helvetica_Medium">{categoryDetails?.name ?? "Todas las categorías"}</h3>
-                <p class="mt-3 text-lg font-light text-center max-md:max-w-full ">
-                 {categoryDetails?.description ?? "Explora nuestro catálogo completo de productos cuidadosamente seleccionados para ofrecerte la mejor calidad y variedad."} 
-                </p>
-            </div>
-      </section> */}
-      
+  
     <form className="flex flex-col lg:flex-row gap-6  mx-auto font-Helvetica_Light font-bold w-full p-5 lg:p-10">
       {/* sticky */}
       <section className="hidden lg:flex md:flex-col gap-4 md:basis-3/12 bg-white p-6 rounded-lg h-max top-2">
@@ -353,6 +343,55 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
           spaceBetween={0}
           slidesPerView={5}
           loop={true}
+          breakpoints={{
+            0: {
+              slidesPerView: 1,
+              spaceBetween: 0,
+            },
+            600: {
+              slidesPerView: 2,
+              spaceBetween: 0,
+            },
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 0,
+            },
+            1350: {
+              slidesPerView: 5,
+              spaceBetween: 0,
+            },
+          }}
+          className="instagram h-max"
+        >
+          {filteredMedia.slice(0, 12).map((item, index) => (
+            <SwiperSlide key={index}>
+              <div className="relative group aspect-square h-full">
+                <img
+                  src={item.media_url}
+                  alt="Image"
+                  className="object-cover h-full w-full"
+                />
+                <a
+                  href={item.permalink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70"
+                ></a>
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </section>
+      
+      {/* <section className="w-full relative mx-auto pt-12 lg:pt-16">
+        <Swiper
+          spaceBetween={0}
+          slidesPerView={5}
+          loop={true}
           className="instagram h-max"
         >
           {media.slice(0, 6).map((item, index) => (
@@ -390,7 +429,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
             </SwiperSlide>
           ))}
         </Swiper>
-      </section>
+      </section> */}
         
     </div>
   </>)
