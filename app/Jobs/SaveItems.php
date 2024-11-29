@@ -56,6 +56,9 @@ class SaveItems implements ShouldQueue
       dump($th->getMessage());
     }
 
+    Galerie::where('id', '!=', null)->delete();
+    Products::where('id', '!=', null)->delete();
+
     foreach ($this->items as $item) {
       try {
         $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
