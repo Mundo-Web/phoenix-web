@@ -15,6 +15,8 @@ class Province extends Model
         'active',
     ];
 
+    protected $keyType = 'string';
+
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');

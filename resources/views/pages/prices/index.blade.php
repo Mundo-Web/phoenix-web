@@ -75,8 +75,8 @@
                                             dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-600 before:inline-block before:size-6
                                             before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
                                             before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
-                        id='{{ 'v_' . $item->id }}' data-field='visible' data-idService='{{ $item->id }}'
-                        data-titleService='{{ $item->name }}' {{ $item->visible == 1 ? 'checked' : '' }}>
+                        id='{{ 'v_' . $item->id }}' data-field='visble' data-idService='{{ $item->id }}'
+                        data-titleService='{{ $item->name }}' {{ $item->visble == 1 ? 'checked' : '' }}>
                       <label for="{{ 'v_' . $item->id }}"></label>
                     </form>
                   </td>
@@ -121,7 +121,6 @@
 
         Swal.fire({
           title: "Seguro que deseas eliminar?",
-          text: "Si eliminas, se perderán todas las relaciones con los productos",
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",
@@ -157,6 +156,45 @@
         });
 
       });
+
+
+      $( ".btn_swithc" ).on( "change", function() {
+                
+                var status = 0;
+                var id = $(this).attr('data-idService');
+                var titleService = $(this).attr('data-titleService');
+                var field = $(this).attr('data-field');
+               
+                if( $(this).is(':checked') ){
+                    status = 1;
+                }else{
+                    status = 0;
+                 }
+
+
+
+                $.ajax({
+                    url: "{{ route('prices.updateVisible') }}",
+                    method: 'POST',
+                    data:{
+                        _token: $('input[name="_token"]').val(),
+                        status: status,
+                        id: id,
+                        field: field,
+                    }
+                }).done(function(res){
+                   
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Costo de envío modificado",
+                        showConfirmButton: false,
+                        timer: 1500
+
+                    }); 
+
+                })     
+            });
 
     })
   </script>
