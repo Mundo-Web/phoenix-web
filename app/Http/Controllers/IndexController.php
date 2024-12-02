@@ -322,6 +322,7 @@ class IndexController extends Controller
       'prices.id AS price_id',
       'prices.price AS price'
     ])
+      ->where('prices.visble', 1)
       ->join('districts', 'districts.id', 'prices.distrito_id')
       ->where('districts.active', 1)
       ->groupBy('id', 'description', 'province_id', 'price', 'price_id')
