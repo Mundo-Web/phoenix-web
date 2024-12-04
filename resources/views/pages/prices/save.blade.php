@@ -11,11 +11,11 @@
             @if ($price->id != 0)
               Actualizar costo de envio
               <span class="text-slate-500">para</span>
-              {{ $price->district->province->department->description }}
+              {{ $price->district->province->department->description ?? 'Sin departamento' }}
               -
-              {{ $price->district->province->description }}
+              {{ $price->district->province->description ?? 'Sin provincia' }}
               -
-              {{ $price->district->description }}
+              {{ $price->district->description ?? 'Sin distrito' }}
             @else
               Agregar costo de envio
             @endif
@@ -33,9 +33,9 @@
                   <select name="departamento_id" id="departamento_id" required
                     class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="">Seleccionar Departamento </option>
-                    @foreach ($departments as $item)
-                      <option value="{{ $item->id }}" @if ($price->district->province->department->id == $item->id) selected @endif>
-                        {{ $item->description }}</option>
+                    @foreach ($departments as $department)
+                      <option value="{{ $department->id }}" @if ($price->district->province->department->id == $department->id) selected @endif>
+                        {{ $department->description }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -47,9 +47,9 @@
                   <select name="provincia_id" id="provincia_id" required
                     class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="">Seleccionar Provincia </option>
-                    @foreach ($provinces as $item)
-                      <option value="{{ $item->id }}" @if ($price->district->province->id == $item->id) selected @endif>
-                        {{ $item->description }}</option>
+                    @foreach ($provinces as $province)
+                      <option value="{{ $province->id }}" @if ($price->district->province->id == $province->id) selected @endif>
+                        {{ $province->description }}</option>
                     @endforeach
                   </select>
                 </div>
@@ -61,9 +61,9 @@
                   <select name="distrito_id" id="distrito_id" required
                     class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value="">Seleccionar Distrito </option>
-                    @foreach ($districts as $item)
-                      <option value="{{ $item->id }}" @if ($price->district->id == $item->id) selected @endif>
-                        {{ $item->description }}</option>
+                    @foreach ($districts as $district)
+                      <option value="{{ $district->id }}" @if ($price->district->id == $district->id) selected @endif>
+                        {{ $district->description }}</option>
                     @endforeach
                   </select>
                 </div>

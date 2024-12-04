@@ -34,6 +34,10 @@ class PriceController extends Controller
     public function save(Request $request, $priceId = 0)
     {
         $price = Price::with(['district', 'district.province', 'district.province.department'])->find($priceId);
+        // $distrito = District::find($price->distrito_id);
+        // $provincia = Province::find($distrito->province_id);
+        // $departmento = Department::find($provincia->department_id);
+        // dd($price->district);
         if (!$price) {
             $price = new Price();
             $price->district = new District();
@@ -42,15 +46,15 @@ class PriceController extends Controller
         }
 
         $departments = Department::all();
+        
         if ($price) {
-            $provinces = Province::where('department_id', $price->district->province->department->id)->get();
-            $districts = District::where('province_id', $price->district->province->id)->get();
+            $provinces = Province::where('department_id', (string) $price->district->province->department->id)->get();
+
+            $districts = District::where('province_id', (string) $price->district->province->id)->get();
         }
-        return view('pages.prices.save')
-            ->with('departments', $departments)
-            ->with('provinces', $provinces ?? [])
-            ->with('districts', $districts ?? [])
-            ->with('price', $price);
+
+       
+         return view('pages.prices.save', compact('departments', 'provinces', 'districts', 'price'));
     }
 
     public function getProvincias(Request $request)
@@ -147,6 +151,25 @@ class PriceController extends Controller
         $price = Price::find($request->id);
         $price->status = 0;
         $price->save();
-        return response()->json(['message' => 'Precio eliminado correctamente']);
+        return response()->json(['message' => 'Costo de envio eliminado correctamente']);
      }
+
+     public function updateVisible(Request $request)
+    {
+        // Lógica para manejar la solicitud AJAX
+        //return response()->json(['mensaje' => 'Solicitud AJAX manejada con éxito']);
+        $id = $request->id;
+
+        $field = $request->field;
+
+        $status = $request->status;
+
+        $service = Price::findOrFail($id);
+
+        $service->$field = $status;
+
+        $service->save();
+
+        return response()->json(['message' => 'Costo de envio modificado.']);
+    }
 }
