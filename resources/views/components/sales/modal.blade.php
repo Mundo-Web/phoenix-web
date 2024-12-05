@@ -195,21 +195,21 @@
 
           $('#invoice-products').append(`
                 <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         ${item.product_name} <br>
-                        <span class="text-xs">Color: <span class="text-xs">${item.product_color}</span> - Talla: <span class="text-xs">${item.talla}</span></span>
+                        <span class="text-xs font-bold">COLOR: <span class="text-xs font-normal">${item.product_color}</span> <br> TALLA: <span class="text-xs font-normal">${item.talla}</span></span>
                     </th>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-2">
                         ${shouldStrikePrice
-                            ? `<s>S/. ${Number(item.price).toFixed(2)}</s> S/. ${unitPrice} 
+                            ? `<s class="text-xs">S/. ${Number(item.price).toFixed(2)}</s><br>S/. ${unitPrice}<br> 
                               <span class="text-green-500 text-xs text-red-500">(${discountPercentage}% dcto)</span>`
                             : `S/. ${Number(item.price).toFixed(2)}`
                         }
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-2">
                         ${item.quantity}
                     </td>
-                    <td class="px-6 py-4">
+                    <td class="px-6 py-2">
                         S/. ${Number(item.final_price).toFixed(2)}
                     </td>
                 </tr>
