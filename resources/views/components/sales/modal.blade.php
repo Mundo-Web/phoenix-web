@@ -3,7 +3,7 @@
   $statuses = isset($statuses) ? $statuses : [];
 @endphp
 
-<div id="invoice-modal" class="modal !max-w-[720px] relative">
+<div id="invoice-modal" class="modal !max-w-[820px] relative">
   @csrf
   <input type="hidden" id="invoice-id" value="">
   <div class="relative md:absolute border rounded-lg right-8 top-6 py-2 px-3 mb-2 text-center">
@@ -187,22 +187,35 @@
           return
         }
         data.forEach(item => {
-          $('#invoice-products').append(`<tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              ${item.product_name} <br>
-              ${item.product_color} - ${item.talla} 
-            </th>
-            <td class="px-6 py-4">
-              S/. ${Number(item.price).toFixed(2)}
-            </td>
-            <td class="px-6 py-4">
-              ${item.quantity}
-            </td>
-            <td class="px-6 py-4">
-              S/. ${(item.price * item.quantity).toFixed(2)}
-            </td>
-          </tr>`)
-        })
+          const shouldStrikePrice = (item.price * item.quantity) > item.final_price;
+          const unitPrice = Number(item.final_price / item.quantity).toFixed(2);
+          const discountPercentage = shouldStrikePrice
+          ? ((1 - (item.final_price / (item.price * item.quantity))) * 100).toFixed(2)
+          : null;
+
+          $('#invoice-products').append(`
+                <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        ${item.product_name} <br>
+                        <span class="text-xs">Color: <span class="text-xs">${item.product_color}</span> - Talla: <span class="text-xs">${item.talla}</span></span>
+                    </th>
+                    <td class="px-6 py-4">
+                        ${shouldStrikePrice
+                            ? `<s>S/. ${Number(item.price).toFixed(2)}</s> S/. ${unitPrice} 
+                              <span class="text-green-500 text-xs text-red-500">(${discountPercentage}% dcto)</span>`
+                            : `S/. ${Number(item.price).toFixed(2)}`
+                        }
+                    </td>
+                    <td class="px-6 py-4">
+                        ${item.quantity}
+                    </td>
+                    <td class="px-6 py-4">
+                        S/. ${Number(item.final_price).toFixed(2)}
+                    </td>
+                </tr>
+            `)
+        });
+
         $('#invoice-products').append(`<tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               Envio 
