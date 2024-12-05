@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Sale;
 use App\Http\Classes\dxResponse;
+use App\Models\ClientLogos;
 use App\Models\Cupon;
 use App\Models\dxDataGrid;
 use App\Models\HistoricoCupon;
@@ -38,6 +39,7 @@ class SaleController extends Controller
         $response = Response::simpleTryCatch(function () use ($request) {
            
             $cart = ProductsController::process($request->cart);
+            
             $address = $request->address;
             $invited = $request->datos;
             $cupon = $request->cupon;
@@ -140,6 +142,9 @@ class SaleController extends Controller
             $saleJpa->save();
 
             foreach ($cart as $item) {
+
+
+
                 $detailJpa = new SaleDetail();
                 $detailJpa->sale_id = $saleJpa->id;
                 $detailJpa->product_image = $item['imagen'];
@@ -149,6 +154,19 @@ class SaleController extends Controller
                 $detailJpa->final_price = $item['totalPrice'];
                 $detailJpa->product_color = $item['color'];
                 $detailJpa->talla = $item['peso'];
+                
+
+                if (!empty($item['marca_id'])) {
+                    $clientLogo = ClientLogos::find($item['marca_id']);
+                    if ($clientLogo) {
+                        $detailJpa->marca = $clientLogo->title;
+                    } else {
+                        $detailJpa->marca = null;
+                    }
+                } else {
+                    $detailJpa->marca = null;
+                }
+
                 $detailJpa->save();
             }
             return $saleJpa;

@@ -197,7 +197,11 @@
                 <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
                     <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         ${item.product_name} <br>
-                        <span class="text-xs font-bold">COLOR: <span class="text-xs font-normal">${item.product_color}</span> <br> TALLA: <span class="text-xs font-normal">${item.talla}</span></span>
+                        <span class="text-xs font-bold">
+                          COLOR: <span class="text-xs font-normal">${item.product_color}</span><br> 
+                          TALLA: <span class="text-xs font-normal">${item.talla}</span><br>
+                          MARCA: <span class="text-xs font-normal">${item.marca ? item.marca : "Sin Marca"}</span>
+                        </span>
                     </th>
                     <td class="px-6 py-2">
                         ${shouldStrikePrice

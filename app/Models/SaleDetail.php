@@ -16,5 +16,8 @@ class SaleDetail extends Model
         'product_color',
         'quantity',
         'price',
+        'talla',
+        'final_price',
+        'marca'
     ];
 }
