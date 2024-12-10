@@ -523,7 +523,8 @@
       {
         dataField: 'updated_at',
         caption: 'Última actualización',
-        format: 'datetime'
+        dataType: 'datetime',
+        format: 'y-M-d H:m:s'
       },
       {
         caption: 'ACCIONES',
