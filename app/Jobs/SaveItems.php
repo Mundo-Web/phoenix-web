@@ -56,8 +56,12 @@ class SaveItems implements ShouldQueue
       dump($th->getMessage());
     }
 
-    Galerie::where('id', '!=', null)->delete();
-    Products::where('id', '!=', null)->delete();
+    try {
+      Galerie::where('id', '!=', null)->delete();
+      Products::where('id', '!=', null)->delete();
+    } catch (\Throwable $th) {
+      dump('Error: '. $th->getMessage());
+    }
 
     dump('Inició la carga masiva: ' . count($this->items) . ' items');
 
