@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cupon;
 use App\Models\HistoricoCupon;
+use App\Models\ProductTag;
+use App\Models\Tag;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,22 +24,23 @@ class CuponController extends Controller
   {
     $clientes = User::all();
     $cupon = new Cupon();
-    return view('pages.cupones.create', compact('clientes', 'cupon'));
+    $tags = Tag::where('status','=', 1)->where('visible','=', 1)->get();
+    return view('pages.cupones.create', compact('clientes', 'cupon', 'tags'));
   }
 
   public function store(Request $request)
   {
+    
     $request->validate([
       'codigo' => 'required|unique:cupons',
       'fecha_caducidad' => 'required',
       'monto' => 'required',
     ]);
+
     $data = $request->all();
     $data['codigo'] = strtoupper($data['codigo']);
     $data['porcentaje'] = $request->has('porcentaje') ? true : false;
-
-
-
+    
 
     Cupon::create($data);
     return redirect()->route('cupones.index');
@@ -46,9 +49,9 @@ class CuponController extends Controller
   public function edit(Cupon $cupon, string $id)
   {
     $clientes = User::all();
-
+    $tags = Tag::where('status','=', 1)->where('visible','=', 1)->get();
     $cupon = Cupon::find($id);
-    return view('pages.cupones.edit', compact('cupon', 'clientes'));
+    return view('pages.cupones.edit', compact('cupon', 'clientes', 'tags'));
   }
 
   public function update(Request $request, string $id, Cupon $cupon)
@@ -125,8 +128,8 @@ class CuponController extends Controller
       $user = User::find(Auth::user())->toArray();
       $cart = ProductsController::process($request->cart);
       $total = array_sum(array_map(fn($item) => $item['totalPrice'], $cart));
-
-
+      
+      
       //consultamos en el historico de cupones si la persona tiene un cupon sin usar 
       $cupon = HistoricoCupon::where('user_id', $usuario)->where('usado', false)->first();
 
@@ -154,20 +157,58 @@ class CuponController extends Controller
 
   public function validar(Request $request)
   {
-
+    
     $valido = true;
     $hoyFecha = date('Y-m-d');
+    $cart = ProductsController::process($request->cart);
+    $total = array_sum(array_map(fn($item) => $item['totalPrice'], $cart));
     
     try {
       //code...
-      $cupon = Cupon::where('codigo', '=', $request->cupon)->where('status', 1)->where('fecha_caducidad', '>=', $hoyFecha)->firstOrFail();
+      $cupon = Cupon::where('codigo', '=', $request->cupon)->where('status', 1)->where('visible', 1)->where('fecha_caducidad', '>=', $hoyFecha)->firstOrFail();
 
       $Usoesecupon =  HistoricoCupon::where('cupones_id', $cupon->id)->where('usado', true)->first();
+      
       if (isset($Usoesecupon)) {
         $valido = false;
         return response()->json(['message' => 'Este cupón ya ha sido usado', 'valido' => $valido], 400);
       }
+
+      if ($total > 0) {
       
+        if ($cupon->porcentaje == 1) {
+            $descuento = ($total * $cupon->monto) / 100; 
+        } else {
+            $descuento = $cupon->monto; 
+        }
+        // Verificar que el total después del descuento no sea menor a 2
+        $totalDespuesDescuento = $total - $descuento;
+
+        if ($totalDespuesDescuento < 7.8) {
+            return response()->json([
+                'message' => 'El cupón no puede aplicarse. Agregue mas productos',
+                'valido' => false
+            ], 400);
+        }
+      }
+      
+      if (!is_null($cupon->tag_id)) {
+        $nombrecupon = Tag::where('id','=', $cupon->tag_id)->first();
+        
+        foreach ($cart as $product) {
+            
+            $hasTag = ProductTag::where('producto_id', $product['id'])
+                ->where('tag_id', $cupon->tag_id)
+                ->exists();
+
+            if (!$hasTag) {
+                return response()->json([
+                    'message' => 'Todos los productos en el carrito deben tener la etiqueta '. $nombrecupon->name,
+                    'valido' => false
+                ], 400);
+            }
+        }
+      }
 
 
       return response()->json(['message' => 'Cupón validado.', 'valido' => $valido, 'cupon' => $cupon], 200);

@@ -3,7 +3,7 @@
   $statuses = isset($statuses) ? $statuses : [];
 @endphp
 
-<div id="invoice-modal" class="modal !max-w-[720px] relative">
+<div id="invoice-modal" class="modal !max-w-[820px] relative">
   @csrf
   <input type="hidden" id="invoice-id" value="">
   <div class="relative md:absolute border rounded-lg right-8 top-6 py-2 px-3 mb-2 text-center">
@@ -14,19 +14,24 @@
       class="w-max block mx-auto text-xs font-medium px-2.5 py-0.5 mb-1 rounded-full"></span> --}}
   </div>
   <h4 class="h4 mb-2 mt-2">Orden #<span id="invoice-code"></span></h4>
-  <p id="invoice-client" class="font-bold mb-2"></p>
-  <span>Direccion Envio:</span>
-  <p id="invoice-address" class="text-gray-700 mb-2"></p>
+  <p id="invoice-client" class="mb-2 font-bold"></p>
+  <div class="flex flex-row gap-2"><span>Email: </span><p id="email-client"></p></div>
+  <div class="flex flex-row gap-2"><span>Dni/Ruc: </span><p id="dni-client" class=""></p></div>
+  <div class="flex flex-row gap-2"><span>Telefono: </span><p id="phone-client" class=""></p></div>
+  <div class="flex flex-row gap-2"><span>Direccion Envio:</span>
+  <p id="invoice-address" class="text-gray-700 mb-2"></p></div>
 
-  <p class="font-bold"> Datos Facturacion: </p>
-  <p class=" ">
-    <span>Nombre / Razon Social: </span>
-    <span id="razonS"></span>
-  </p>
-  <p class=" mb-2">
-    <span> Direccion Fiscal:</span>
-    <span id="dirFact"></span>
-  </p>
+  <div id="seccioncomprobante" class="flex flex-col gap-2">
+    <p class="font-bold"> Datos Facturacion: </p>
+    <p id="razonsocial">
+      <span>Nombre / Razon Social: </span>
+      <span id="razonS"></span>
+    </p>
+    <p id="direccion" class="mb-2">
+      <span> Direccion Fiscal:</span>
+      <span id="dirFact"></span>
+    </p>
+  </div>
 
   @if ($isAdmin)
     <div class="mb-2 flex gap-2 items-center">
@@ -108,8 +113,29 @@
     $('#invoice-id').val(data.id)
     $('#address-tipo-comprobante').text(data.tipo_comprobante.toUpperCase())
     $('#n_document').text(data.doc_number)
-    $('#razonS').text(data.razon_fact)
-    $('#dirFact').text(data.direccion_fact)
+
+
+      if (!data.razon_fact && !data.direccion_fact) {
+          $('#seccioncomprobante').hide();
+      } else { 
+          $('#seccioncomprobante').show();
+
+      if (data.razon_fact) {
+          $('#razonS').text(data.razon_fact);
+          $('#razonsocial').show(); 
+      } else {
+          $('#razonsocial').hide(); 
+      }
+
+      if (data.direccion_fact) {
+          $('#dirFact').text(data.direccion_fact);
+          $('#direccion').show(); 
+      } else {
+          $('#direccion').hide(); 
+      }
+}
+
+
     let totalInvoice = Number(data.total) + Number(envio)
     $('#invoice-price').text(totalInvoice)
     /* $('#invoice-address-price').text(isFree ? 'Envio gratis' :
@@ -122,6 +148,9 @@
       .removeClass('bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300')
     $('#invoice-code').text(data.code)
     $('#invoice-client').text(`${data.name} ${data.lastname}`)
+    $('#email-client').text(`${data.email}`)
+    $('#dni-client').text(`${data.doc_number}`)
+    $('#phone-client').text(`${data.phone}`)
     $('#invoice-address').text(data.address_description ?
       `${data.address_department}, ${data.address_province}, ${data.address_district} - ${data.address_street} #${data.address_number}` :
       'Recojo en tienda')
@@ -158,21 +187,39 @@
           return
         }
         data.forEach(item => {
-          $('#invoice-products').append(`<tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              ${item.product_name}
-            </th>
-            <td class="px-6 py-4">
-              S/. ${Number(item.price).toFixed(2)}
-            </td>
-            <td class="px-6 py-4">
-              ${item.quantity}
-            </td>
-            <td class="px-6 py-4">
-              S/. ${(item.price * item.quantity).toFixed(2)}
-            </td>
-          </tr>`)
-        })
+          const shouldStrikePrice = (item.price * item.quantity) > item.final_price;
+          const unitPrice = Number(item.final_price / item.quantity).toFixed(2);
+          const discountPercentage = shouldStrikePrice
+          ? ((1 - (item.final_price / (item.price * item.quantity))) * 100).toFixed(2)
+          : null;
+
+          $('#invoice-products').append(`
+                <tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+                    <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        ${item.product_name} <br>
+                        <span class="text-xs font-bold">
+                          COLOR: <span class="text-xs font-normal">${item.product_color}</span><br> 
+                          TALLA: <span class="text-xs font-normal">${item.talla}</span><br>
+                          MARCA: <span class="text-xs font-normal">${item.marca ? item.marca : "Sin Marca"}</span>
+                        </span>
+                    </th>
+                    <td class="px-6 py-2">
+                        ${shouldStrikePrice
+                            ? `<s class="text-xs">S/. ${Number(item.price).toFixed(2)}</s><br>S/. ${unitPrice}<br> 
+                              <span class="text-green-500 text-xs text-red-500">(${discountPercentage}% dcto)</span>`
+                            : `S/. ${Number(item.price).toFixed(2)}`
+                        }
+                    </td>
+                    <td class="px-6 py-2">
+                        ${item.quantity}
+                    </td>
+                    <td class="px-6 py-2">
+                        S/. ${Number(item.final_price).toFixed(2)}
+                    </td>
+                </tr>
+            `)
+        });
+
         $('#invoice-products').append(`<tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
             <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               Envio 

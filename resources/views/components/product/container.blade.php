@@ -48,6 +48,7 @@
         @endif
       </div>     
     </div>
+
     <a href="{{ route('producto', $item->id) }}">
       <div>
         <div class="relative flex justify-center items-center aspect-square">
@@ -75,6 +76,7 @@
         </div>
       </div>
     </a>
+    
   </div>
 
   <div>

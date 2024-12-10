@@ -17,7 +17,7 @@ class District extends Model
     ];
 
     protected $keyType = 'string';
-    
+    public $incrementing = false;
     public function province()
     {
         return $this->belongsTo(Province::class, 'province_id');

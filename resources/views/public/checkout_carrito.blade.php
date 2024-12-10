@@ -439,7 +439,8 @@
   $(document).ready(function () {
       $('#btnAplicarCupon').on('click', function () {
           const codigo = $('#txtCodigoPromocion').val();
-          
+          const carrito = Local.get('carrito') ?? [];
+
           if (!codigo) {
             Swal.fire({
                 title: 'Error',
@@ -450,13 +451,14 @@
         }
 
           $.ajax({
-            url: "{{ route('validarcupon') }}", // Ruta definida en Laravel
+            url: "{{ route('validarcupon') }}", 
             method: "POST", // Método HTTP
             headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Token CSRF desde el meta
             },
             data: {
-              cupon: codigo // Variable `codigo` que contiene el cupón
+              cupon: codigo,
+              cart: carrito
             },
             success: function(response) {
               console.log(response)
@@ -479,41 +481,6 @@
             }
           });
 
-
-          // $.post('api/cupones/validar', { 
-          //   cupon: codigo,
-          //  })
-          //     .done(function (response) {
-          //         Swal.fire({
-          //             title: 'Cupón válido',
-          //             text: '¿Deseas aplicar este cupón?',
-          //             icon: 'success',
-          //             showCancelButton: true,
-          //             confirmButtonText: 'Aplicar',
-          //             cancelButtonText: 'Cancelar'
-          //         }).then((result) => {
-          //             if (result.isConfirmed) {
-          //                 $.post('/carrito/aplicar-cupon', { id: response.cupon.id })
-          //                     .done(function (applyResponse) {
-          //                         $('#cuponResumen').html(`
-          //                             <div>
-          //                                 <span class="opacity-80">${response.cupon.porcentaje == 1 ? response.cupon.monto + ' %' : 'S/ ' + response.cupon.monto}</span>
-          //                                 <span class="text-[#112212] font-bold text-nowrap">
-          //                                     Total: S/ ${(montoTotal - (response.cupon.porcentaje == 1 ? (montoTotal * response.cupon.monto / 100) : response.cupon.monto)).toFixed(2)}
-          //                                 </span>
-          //                             </div>
-          //                         `);
-          //                     });
-          //             }
-          //         });
-          //     })
-          //     .fail(function (error) {
-          //         Swal.fire({
-          //             title: 'Cupón inválido',
-          //             text: error.responseJSON.message,
-          //             icon: 'error'
-          //         });
-          // });
       });
 
       
@@ -708,12 +675,12 @@
     })
 
     $('#addresses').val(addressStrg.address_id).trigger('change');
-
+    
     $('#departamento_id').on('change', function() {
       $('#provincia_id').html('<option value>Seleccione una provincia</option>')
       $('#distrito_id').html('<option value>Seleccione un distrito</option>')
       $('#precioEnvio').text(`Evaluando`)
-      provinces.filter(x => x.department_id == this.value).forEach((province) => {
+      provinces.filter(x => Number(x.department_id) == Number(this.value)).forEach((province) => {
         const option = $('<option>', {
           value: province.id,
           text: province.description
@@ -739,7 +706,7 @@
     $('#provincia_id').on('change', function() {
       $('#distrito_id').html('<option value>Seleccione un distrito</option>')
       $('#precioEnvio').text(`Evaluando`)
-      districts.filter(x => x.province_id == this.value).forEach((district) => {
+      districts.filter(x => Number(x.province_id) == Number(this.value)).forEach((district) => {
         const option = $('<option>', {
           value: district.id,
           text: district.description,
@@ -973,14 +940,6 @@
       const autenticado = Local.get('autenticado') ?? []
       const address = Local.get('address') ?? {envio: 'recoger'}
       
-      if (cart.length == 0) {
-        Swal.fire({
-          title: `Ups!!`,
-          text: `Debes agregar al menos un producto al carrito`,
-          icon: "error"
-        });
-        return
-      }
 
       if (address.district_id == '') {
         Swal.fire({

@@ -117,7 +117,7 @@
           container.addClass('!px-3 !py-2')
           const div = $('<div>')
           const orderContainer = $('<a>', {
-            class: 'block text-sm font-Urbanist_Regular truncate dark:text-white text-blue-500 cursor-pointer max-w-max',
+            class: 'block text-sm font-proppins truncate dark:text-white text-blue-500 cursor-pointer max-w-max',
             text: `#${data.code}`
           })
           if (data.confirmation_client) {
@@ -160,7 +160,7 @@
           container.addClass('!px-3 !py-2 !text-center')
           container.css('vertical-align', 'middle')
           container.html(
-            `<span class="inline-flex items-center bg-[${data.status?.color ?? '#000000'}77] text-[${data.status?.color ?? '#000000'}30] text-xs font-Urbanist_Regular px-2.5 py-0.5 rounded-full dark:bg-[${data.status?.color ?? '#000000'}22] dark:text-[${data.status?.color ?? '#000000'}bb] w-max">${data.status?.name ?? 'Sin estado'}</span>`
+            `<span class="inline-flex items-center bg-[${data.status?.color ?? '#000000'}77] text-white text-sm font-poppins px-2.5 py-0.5 rounded-full dark:bg-[${data.status?.color ?? '#000000'}22] dark:text-[${data.status?.color ?? '#000000'}bb] w-max">${data.status?.name ?? 'Sin estado'}</span>`
           )
         }
       },
@@ -203,3 +203,4 @@
     }
   }).dxDataGrid('instance')
 </script>
+{{-- [${data.status?.color ?? '#000000'}30] --}}

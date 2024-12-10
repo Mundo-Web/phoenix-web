@@ -23,8 +23,8 @@
             <thead>
               <tr>
                 <th>Codigo </th>
-
                 <th>Fecha de canje</th>
+                <th>Etiqueta</th>
                 <th>Monto</th>
                 <th>Visible</th>
                 <th>Acciones</th>
@@ -37,6 +37,9 @@
                   <td>{{ $item->codigo }}</td>
 
                   <td>{{ $item->fecha_caducidad }}</td>
+
+                  <td class="text-center"><span class="px-3 py-2 {{ $item->tag ? 'text-white bg-[' . $item->tag->color . ']' : 'text-black bg-none' }}">
+                    {{ $item->tag->name ?? "Sin etiqueta" }}</span></td>
                   <td>
                     @if ($item->porcentaje == 1)
                       %
@@ -84,8 +87,8 @@
             <tfoot>
               <tr>
                 <th>Codigo </th>
-
                 <th>Fecha de canje</th>
+                <th>Etiqueta</th>
                 <th>Monto</th>
                 <th>Usado</th>
                 <th>Acciones</th>
