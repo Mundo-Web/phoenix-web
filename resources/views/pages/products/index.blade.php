@@ -524,7 +524,7 @@
         dataField: 'updated_at',
         caption: 'ÚLTIMA ACTUALIZACIÓN',
         dataType: 'datetime',
-        format: 'y-M-d H:m:s'
+        format: 'yyyy-MM-dd HH:mm:ss'
       },
       {
         caption: 'ACCIONES',
