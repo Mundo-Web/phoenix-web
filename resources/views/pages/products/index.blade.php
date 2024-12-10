@@ -522,7 +522,7 @@
       },
       {
         dataField: 'updated_at',
-        caption: 'Última actualización',
+        caption: 'ÚLTIMA ACTUALIZACIÓN',
         dataType: 'datetime',
         format: 'y-M-d H:m:s'
       },
