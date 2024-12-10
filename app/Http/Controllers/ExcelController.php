@@ -31,6 +31,8 @@ class ExcelController extends Controller
             $array = Excel::toArray([], $file)[0];
             array_shift($array);
 
+            if (\count($array) == 0) throw new Exception('No hay items a procesar');
+
             if ($request->hasFile('zip')) {
                 $file = $request->file('zip');
                 $destinationPath = public_path('storage/images/products');
