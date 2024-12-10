@@ -49,6 +49,7 @@ class ExcelController extends Controller
             }
 
             SaveItems::dispatchAfterResponse($array, $request->image_route_pattern);
+            return $array;
         });
         return \response($response->toArray(), $response->status);
     }
