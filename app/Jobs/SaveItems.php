@@ -59,6 +59,8 @@ class SaveItems implements ShouldQueue
     Galerie::where('id', '!=', null)->delete();
     Products::where('id', '!=', null)->delete();
 
+    dump('Inició la carga masiva: ' . count($this->items) . ' items');
+
     foreach ($this->items as $item) {
       try {
         $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
