@@ -675,12 +675,12 @@
     })
 
     $('#addresses').val(addressStrg.address_id).trigger('change');
-
+    
     $('#departamento_id').on('change', function() {
       $('#provincia_id').html('<option value>Seleccione una provincia</option>')
       $('#distrito_id').html('<option value>Seleccione un distrito</option>')
       $('#precioEnvio').text(`Evaluando`)
-      provinces.filter(x => x.department_id == this.value).forEach((province) => {
+      provinces.filter(x => Number(x.department_id) == Number(this.value)).forEach((province) => {
         const option = $('<option>', {
           value: province.id,
           text: province.description
@@ -706,7 +706,7 @@
     $('#provincia_id').on('change', function() {
       $('#distrito_id').html('<option value>Seleccione un distrito</option>')
       $('#precioEnvio').text(`Evaluando`)
-      districts.filter(x => x.province_id == this.value).forEach((district) => {
+      districts.filter(x => Number(x.province_id) == Number(this.value)).forEach((district) => {
         const option = $('<option>', {
           value: district.id,
           text: district.description,
