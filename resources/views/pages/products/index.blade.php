@@ -521,6 +521,11 @@
         }
       },
       {
+        dataField: 'updated_at',
+        caption: 'Última actualización',
+        format: 'datetime'
+      },
+      {
         caption: 'ACCIONES',
         cellTemplate: (container, {
           data
