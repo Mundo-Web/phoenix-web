@@ -17,6 +17,8 @@ class Province extends Model
 
     protected $keyType = 'string';
 
+    public $incrementing = false;
+    
     public function department()
     {
         return $this->belongsTo(Department::class, 'department_id');
