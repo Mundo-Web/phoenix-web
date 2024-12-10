@@ -68,7 +68,6 @@ class PriceController extends Controller
 
         return response()->json($provincias);
     }
-
     public function getDistrito(Request $request)
     {
         //
@@ -98,23 +97,32 @@ class PriceController extends Controller
         $request->validate([
             'price' => 'required'
         ]);
-        $price = new Price();
 
-        $price->distrito_id = $request->distrito_id;
-        $price->price = $request->price;
-        $price->status = 1;
-        $price->visble = 1;
+         // Determinar si es local o no
+        $isLocal = ($request->departamento_id == 15 && $request->provincia_id == 1501) ? 1 : 0;
 
-        //preguntamos si es lima o no ID=15
-        if ($request->departamento_id == 15) {
-            if ($request->provincia_id == 1501) {
-                $price->local = 1;
-            } else {
-                $price->local = 0;
-            }
+        // Crear los datos que se usarán para crear o actualizar
+        $data = [
+            'price' => $request->price,
+            'status' => 1,
+            'visble' => 1,
+            'local' => $isLocal,
+        ];
+
+        // Buscar el registro por distrito_id
+        $jpa = Price::where('distrito_id', $request->distrito_id)->first();
+
+        if (!$jpa) {
+            // Crear nuevo registro si no existe
+            $data['distrito_id'] = $request->distrito_id;
+            Price::create($data);
+        } else {
+            // Actualizar registro existente
+            $jpa->update($data);
         }
 
-        $price->save();
+        
+        // $price->save();
 
         return redirect()->route('prices.index')->with('success', 'Servicio creado exitosamente.');
     }
@@ -149,8 +157,8 @@ class PriceController extends Controller
     
      public function deletePrice(Request $request){
         $price = Price::find($request->id);
-        $price->status = 0;
-        $price->save();
+        // $price->status = 0;
+        $price->delete();
         return response()->json(['message' => 'Costo de envio eliminado correctamente']);
      }
 
