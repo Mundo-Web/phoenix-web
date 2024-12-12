@@ -59,7 +59,7 @@ class SaveItems implements ShouldQueue
     try {
       Specifications::whereNotNull('id')->delete();
       Galerie::whereNotNull('id')->delete();
-      Products::whereNotNull('id')->delete();
+      Products::truncate();
     } catch (\Throwable $th) {
       dump('Error: ' . $th->getMessage());
     }
