@@ -120,7 +120,7 @@ class ProductsController extends Controller
         }
       } else {
         $instance->orderBy('products.id', 'DESC');
-        $instance->orderBy('products.percent_discount', 'DESC');
+        $instance->orderBy('products.percent_discount', 'ASC');
       }
 
 
