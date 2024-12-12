@@ -58,7 +58,7 @@ class ProductsController extends Controller
     $user = false;
     $admin = $request->is_admin ? true : false;
     $outlet = $request->hasTag51;
-    dd($outlet);
+    
     $response =  new dxResponse();
     try {
       $instance = Products::select([
