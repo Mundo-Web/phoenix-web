@@ -203,24 +203,31 @@ class SaleController extends Controller
     }
 
     public function paginate(Request $request): HttpResponse|ResponseFactory
-    {
+    {   
+        $estado = $request->estado ?? 0;
         $response =  new dxResponse();
         try {
             $instance = Sale::select()->with('status');
+            
+            if ($estado !== null && $estado != 0) {
+                $instance->where('status_id', $estado);
+            }
 
             if ($request->group != null) {
                 [$grouping] = $request->group;
-                $selector = \str_replace('.', '__', $grouping['selector']);
+                
+                $selector = \str_replace('.', '_', $grouping['selector']);
                 $instance = Sale::select([
                     "{$selector} AS key"
                 ])->with('status')
                     ->groupBy($selector);
-            }
 
+            }
+            
             if (!Auth::user()->hasRole('Admin') || $request->data == 'mine') {
                 $instance->where('email', Auth::user()->email);
             }
-
+            
             if ($request->filter) {
                 $instance->where(function ($query) use ($request) {
                     dxDataGrid::filter($query, $request->filter ?? []);

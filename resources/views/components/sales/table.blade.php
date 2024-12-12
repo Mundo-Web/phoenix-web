@@ -13,10 +13,13 @@
 <div id="gridContainer"></div>
 
 <script>
+  
+ 
   const salesDataGrid = $('#gridContainer').dxDataGrid({
     language: "es",
     dataSource: {
       load: async (params) => {
+        const estado = document.getElementById("estado").value;
         const res = await fetch("{{ route('sales.paginate') }}{{ !$isAdmin ? '?data=mine' : '' }}", {
           method: 'POST',
           headers: {
@@ -26,6 +29,7 @@
           },
           body: JSON.stringify({
             _token: $('[name="_token"]').val(),
+            estado: estado,
             ...params
           })
         })
@@ -84,7 +88,7 @@
     //   },
     // },
     paging: {
-      pageSize: 5,
+      pageSize: 10,
     },
     pager: {
       visible: true,

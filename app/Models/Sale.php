@@ -27,6 +27,7 @@ class Sale extends Model
         'status_message',
         'doc_number',
         'razon_fact',
+        'status_id',
         'direccion_fact'
     ];
 
