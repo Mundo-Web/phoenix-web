@@ -430,7 +430,9 @@
         cellTemplate: (container, {
           data
         }) => {
-          container.html(`<b class="block text-[12px]">${data.producto}</b><span class="block text-[10px]">${data.color} - ${data.peso}</span><small class="text-[10px] text-[#c1272d]">${data.discount?.name ?? ''}</small>`)
+          container.html(
+            `<b class="block text-[12px]">${data.producto}</b><span class="block text-[10px]">${data.color} - ${data.peso}</span><small class="text-[10px] text-[#c1272d]">${data.discount?.name ?? ''}</small>`
+            )
         }
       },
       {
@@ -519,6 +521,12 @@
             <label for="v_${data.id}"></label>
           </form>`)
         }
+      },
+      {
+        dataField: 'updated_at',
+        caption: 'ÚLTIMA ACTUALIZACIÓN',
+        dataType: 'datetime',
+        format: 'yyyy-MM-dd HH:mm:ss'
       },
       {
         caption: 'ACCIONES',

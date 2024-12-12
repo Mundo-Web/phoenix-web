@@ -340,6 +340,13 @@ class ProductsController extends Controller
 
       // Imagenes
       $data['descuento'] = $data['descuento'] ?? 0;
+
+      if ($data['descuento'] > 0) {
+        $data['percent_discount'] = (1 - ($data['descuento'] / $data['precio'])) * 100;
+      } else {
+        $data['percent_discount'] = 0;
+      }
+
       if ($request->hasFile('imagen')) {
         $data['imagen'] = $this->saveImg($request, 'imagen');
       }

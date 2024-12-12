@@ -56,8 +56,15 @@ class SaveItems implements ShouldQueue
       dump($th->getMessage());
     }
 
-    Galerie::where('id', '!=', null)->delete();
-    Products::where('id', '!=', null)->delete();
+    try {
+      Specifications::whereNotNull('id')->delete();
+      Galerie::whereNotNull('id')->delete();
+      Products::whereNotNull('id')->delete();
+    } catch (\Throwable $th) {
+      dump('Error: ' . $th->getMessage());
+    }
+
+    dump('Inició la carga masiva: ' . count($this->items) . ' items');
 
     foreach ($this->items as $item) {
       try {
@@ -120,6 +127,15 @@ class SaveItems implements ShouldQueue
 
         $discountJpa = Discount::where('name', '=', $item[15])->where('status', true)->first();
 
+        $price = $item[8];
+        $discount = $item[9] ?? 0;
+
+        if ($discount > 0) {
+          $percent = (1 - ($discount / $price)) * 10;
+        } else {
+          $percent = 0;
+        }
+
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
         ], [
@@ -136,7 +152,8 @@ class SaveItems implements ShouldQueue
           'peso' => $item[12],
           'stock' => $item[13],
           'discount_id' => $discountJpa?->id,
-          'visible' => 1
+          'visible' => 1,
+          'percent_discount' => $percent
         ]);
 
         $i = 0;
@@ -198,10 +215,8 @@ class SaveItems implements ShouldQueue
           ]);
         }
 
-        if ($productJpa->codigo == '038007802') {
-          dump($productImages);
-          dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
-        }
+        dump($productImages);
+        dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
       } catch (\Throwable $th) {
         dump($th->getMessage());
       }

@@ -44,8 +44,7 @@ class Products extends Model
     'meta_title',
     'meta_description',
     'meta_keywords',
-    'percent_discount'
-
+    'percent_discount',
   ];
 
   public function categoria()
