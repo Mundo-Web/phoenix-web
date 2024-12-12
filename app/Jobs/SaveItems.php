@@ -61,7 +61,7 @@ class SaveItems implements ShouldQueue
       Galerie::whereNotNull('id')->delete();
       Products::whereNotNull('id')->delete();
     } catch (\Throwable $th) {
-      dump('Error: '. $th->getMessage());
+      dump('Error: ' . $th->getMessage());
     }
 
     dump('Inició la carga masiva: ' . count($this->items) . ' items');
@@ -130,7 +130,11 @@ class SaveItems implements ShouldQueue
         $price = $item[8];
         $discount = $item[9] ?? 0;
 
-        $percent = (1 - ($discount / $price)) * 10;
+        if ($discount > 0) {
+          $percent = (1 - ($discount / $price)) * 10;
+        } else {
+          $percent = 0;
+        }
 
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
