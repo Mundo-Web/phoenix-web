@@ -80,7 +80,8 @@ class ProductsController extends Controller
                   ->groupBy('producto');
           })
           ->where('products.visible', 1)
-          ->where('categories.visible', 1);
+          ->where('categories.visible', 1)
+          ->orderBy('products.percent_discount', 'ASC');
         }   
         
 
@@ -120,7 +121,7 @@ class ProductsController extends Controller
           );
         }
       } else {
-        $instance->orderBy('products.percent_discount', 'ASC');
+        $instance->orderBy('products.id', 'DESC');
       }
 
 
