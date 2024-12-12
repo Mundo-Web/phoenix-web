@@ -81,10 +81,10 @@ class ProductsController extends Controller
           })
           ->where('products.visible', 1)
           ->where('categories.visible', 1);
-          if($outlet) {
-            $instance->orderBy('products.percent_discount', 'DESC');
+          if(!$outlet) {
+            $instance->orderBy('products.percent_discount', 'ASC');
           } else {
-              $instance->orderBy('products.percent_discount', 'ASC');
+            $instance->orderBy('products.percent_discount', 'DESC');
           }
         }   
         
