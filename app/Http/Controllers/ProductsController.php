@@ -80,8 +80,12 @@ class ProductsController extends Controller
                   ->groupBy('producto');
           })
           ->where('products.visible', 1)
-          ->where('categories.visible', 1)
-          ->orderBy('products.percent_discount', 'ASC');
+          ->where('categories.visible', 1);
+          if($outlet) {
+            $instance->orderBy('products.percent_discount', 'DESC');
+          } else {
+              $instance->orderBy('products.percent_discount', 'ASC');
+          }
         }   
         
 
