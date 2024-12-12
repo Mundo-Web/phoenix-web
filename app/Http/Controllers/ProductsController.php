@@ -109,9 +109,8 @@ class ProductsController extends Controller
         });
       }
       
-      if ($outlet) {
-        $instance->orderBy('products.percent_discount', 'ASC');
-      } else if ($request->sort != null) {
+
+      if ($request->sort != null) {
         foreach ($request->sort as $sorting) {
           // $selector = \str_replace('.', '__', $sorting['selector']);
           $selector = $sorting['selector'];
