@@ -23,7 +23,8 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
   const [showModal, setShowModal] = useState(false);
   const is_proveedor = useRef(false);
   const cancelTokenSource = useRef(null);
-  
+  const [hasTag51, setHasTag51] = useState(false);
+
   useEffect(() => {
     const script = document.createElement('script');
     script.src = "js/notify.extend.min.js";
@@ -48,6 +49,10 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
         ...prevFilter,
         'txp.tag_id': [tag]
       }));
+
+      if (tag === '51') {
+        setHasTag51(true);
+      }    
     }
 
     // Actualizar el filtro con el 'marcas_id' si existe
@@ -252,6 +257,7 @@ const Catalogo = ({ minPrice, maxPrice, categories, tags, attribute_values, id_c
         requireTotalCount: true,
         filter: arrayJoin([...filterBody, ['products.visible', '=', true]], 'and'),
         take,
+        hasTag51,
         skip: take * (currentPage - 1)
       }, {
         headers: {
