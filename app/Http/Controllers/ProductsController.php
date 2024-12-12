@@ -57,8 +57,8 @@ class ProductsController extends Controller
     
     $user = false;
     $admin = $request->is_admin ? true : false;
-    $outlet = $request->hasTag51 ?? false ;
-   
+    $outlet = $request->hasTag51;
+    dd($outlet);
     $response =  new dxResponse();
     try {
       $instance = Products::select([
@@ -82,14 +82,13 @@ class ProductsController extends Controller
           ->where('products.visible', 1)
           ->where('categories.visible', 1);
 
-         
+          if($outlet) {
+            $instance->orderBy('products.percent_discount', 'DESC');
+          } else {
+            $instance->orderBy('products.percent_discount', 'ASC');
+          }
         }   
         
-        if($outlet) {
-          $instance->orderBy('products.percent_discount', 'DESC');
-        } else {
-          $instance->orderBy('products.percent_discount', 'ASC');
-        }
 
       if (Auth::check()) {
         $user = Auth::user();
