@@ -127,6 +127,11 @@ class SaveItems implements ShouldQueue
 
         $discountJpa = Discount::where('name', '=', $item[15])->where('status', true)->first();
 
+        $price = $item[8];
+        $discount = $item[9] ?? 0;
+
+        $percent = (1 - ($discount / $price)) * 10;
+
         $productJpa = Products::updateOrCreate([
           'sku' => $item[0],
         ], [
@@ -143,7 +148,8 @@ class SaveItems implements ShouldQueue
           'peso' => $item[12],
           'stock' => $item[13],
           'discount_id' => $discountJpa?->id,
-          'visible' => 1
+          'visible' => 1,
+          'percent_discount' => $percent
         ]);
 
         $i = 0;
