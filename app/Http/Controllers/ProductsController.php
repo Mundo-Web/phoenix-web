@@ -58,7 +58,7 @@ class ProductsController extends Controller
     $user = false;
     $admin = $request->is_admin ? true : false;
     $outlet = $request->hasTag51;
-
+    
     $response =  new dxResponse();
     try {
       $instance = Products::select([
@@ -109,8 +109,9 @@ class ProductsController extends Controller
         });
       }
       
-
-      if ($request->sort != null) {
+      if ($outlet) {
+        $instance->orderBy('products.percent_discount', 'ASC');
+      } else if ($request->sort != null) {
         foreach ($request->sort as $sorting) {
           // $selector = \str_replace('.', '__', $sorting['selector']);
           $selector = $sorting['selector'];
@@ -120,11 +121,8 @@ class ProductsController extends Controller
           );
         }
       } else {
-        if ($outlet) {
-          $instance->orderBy('products.percent_discount', 'ASC');
-        }else{
-          $instance->orderBy('products.percent_discount', 'DESC');
-        }
+        $instance->orderBy('products.percent_discount', 'DESC');
+        
       }
 
 
