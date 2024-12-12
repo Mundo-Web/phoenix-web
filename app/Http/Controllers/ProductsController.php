@@ -57,7 +57,8 @@ class ProductsController extends Controller
     
     $user = false;
     $admin = $request->is_admin ? true : false;
-
+    $outlet = $request->hasTag51;
+    
     $response =  new dxResponse();
     try {
       $instance = Products::select([
@@ -119,7 +120,8 @@ class ProductsController extends Controller
           );
         }
       } else {
-        $instance->orderBy('products.id', 'DESC');
+        $instance->orderBy('products.percent_discount', 'DESC');
+        
       }
 
 
