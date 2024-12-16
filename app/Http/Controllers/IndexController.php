@@ -215,6 +215,7 @@ class IndexController extends Controller
   {
     $nosotros = AboutUs::all();
     $benefit = Strength::where('status', '=', 1)->take(3)->get();
+   
     return view('public.nosotros', compact('nosotros', 'benefit'));
   }
 
@@ -278,7 +279,7 @@ class IndexController extends Controller
 
   public function contacto()
   {
-    $general = General::first();
+    $general = General::all();
     $categorias = Category::all();
     $url_env = env('APP_URL');
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
@@ -978,22 +979,22 @@ class IndexController extends Controller
   {
 
     $data = $request->all();
-    $data['full_name'] = $request->name . ' ' . $request->last_name;
+    $data['full_name'] = $request->full_name;
 
     try {
       $reglasValidacion = [
-        'name' => 'required|string|max:255',
+        'full_name' => 'required|string|max:255',
         'email' => 'required|email|max:255',
       ];
       $mensajes = [
-        'name.required' => 'El campo nombre es obligatorio.',
+        'full_name.required' => 'El campo nombre es obligatorio.',
         'email.required' => 'El campo correo electrónico es obligatorio.',
         'email.email' => 'El formato del correo electrónico no es válido.',
         'email.max' => 'El campo correo electrónico no puede tener más de :max caracteres.',
       ];
       $request->validate($reglasValidacion, $mensajes);
       $formlanding = Message::create($data);
-      $this->envioCorreo($formlanding);
+      //$this->envioCorreo($formlanding);
 
       return response()->json(['message' => 'Mensaje enviado con exito']);
     } catch (ValidationException $e) {
@@ -1359,8 +1360,8 @@ class IndexController extends Controller
         </body>
       </html>
       ';
-      $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente',);
-      $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial',);
+      // $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente',);
+      // $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial',);
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
@@ -1405,20 +1406,49 @@ class IndexController extends Controller
       $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
       if ($filtro == 0) {
-        $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->get();
+      
+          $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-        $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+          $lastposts = Blog::where('status', '=', 1)
+              ->where('visible', '=', 1)
+              ->orderBy('created_at', 'desc')
+              ->take(2)
+              ->get();
 
-        $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->first();
+              
+
+          $posts = Blog::where('status', '=', 1)
+              ->where('visible', '=', 1)
+              ->orderBy('created_at', 'desc')
+              ->skip(2) 
+              ->limit(500)
+              ->get();
+          
       } else {
-        $posts = Blog::where('status', '=', 1)->where('visible', '=', 1)->where('category_id', '=', $filtro)->get();
 
-        $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $filtro)->get();
+          $categoria = Category::where('status', '=', 1)
+              ->where('visible', '=', 1)
+              ->where('id', '=', $filtro)
+              ->orderBy('created_at', 'desc')
+              ->get();
 
-        $lastpost = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->where('category_id', '=', $filtro)->first();
+          $lastposts = Blog::where('status', '=', 1)
+              ->where('visible', '=', 1)
+              ->where('category_id', '=', $filtro)
+              ->orderBy('created_at', 'desc')
+              ->take(2)
+              ->get();
+
+          $posts = Blog::where('status', '=', 1)
+              ->where('visible', '=', 1)
+              ->where('category_id', '=', $filtro)
+              ->orderBy('created_at', 'desc')
+              ->skip(2) 
+              ->limit(500)
+              ->get();    
       }
 
-      return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastpost'));
+      return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastposts'));
     } catch (\Throwable $th) {
     }
   }

@@ -15,7 +15,8 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Correo</th>
-                                {{-- <th>Teléfono</th> --}}
+                                <th>Teléfono</th>
+                                <th>Registrado</th>
                                 <th class="w-32">Acciones</th>
                             </tr>
                         </thead>
@@ -32,7 +33,8 @@
                                         
                                     </td>
                                     <td class="dark:bg-slate-800">{{$item->email}}</td>
-                                    {{-- <td>{{$item->phone}}</td> --}}
+                                    <td>{{$item->phone}}</td>
+                                    <td>{{ \Carbon\Carbon::parse($item->created_at)->format('d/m/Y') }}</td>
                                     <td class="flex flex-row items-center justify-center dark:bg-slate-800">
                                         <button method="POST" onclick="borrarmensaje({{ $item->id }})"
                                           class="bg-red-600 p-2 rounded text-white"><i class="fa-regular fa-trash-can"></i></button>
@@ -46,7 +48,8 @@
                             <tr>
                                 <th>Nombre</th>
                                 <th>Correo</th>
-                                {{-- <th>Teléfono</th> --}}
+                                <th>Teléfono</th>
+                                <th>Registrado</th>
                                 <th>Acciones</th>
                             </tr>
                         </tfoot>

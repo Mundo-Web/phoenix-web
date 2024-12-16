@@ -271,16 +271,8 @@
                 </div>
 
                 <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-10">
-                    @foreach ($blogs as $blog)
-                        <div class="flex flex-col gap-1">
-                            <img class="w-full h-[250px] lg:h-[300px] object-cover" src="{{ asset($blog->url_image.$blog->name_image)}}" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
-                            <h2 class="text-[#052F4E] text-base font-galano_regular font-semibold mt-3">{{$blog->categories->name ?? "S/C"}}</h2>
-                            <h2 class="text-[#052F4E] text-2xl font-galano_bold line-clamp-1">{{$blog->title}}</h2>
-                            <div class="text-[#052F4E] text-lg font-galano_regular line-clamp-3 extractoblog">
-                                {!! Str::limit($blog->extract, 250) !!}
-                            </div>
-                            <h2 class="text-[#052F4E] text-base font-galano_regular font-semibold mt-1">Publicado {{ \Carbon\Carbon::parse($blog->created_at)->diffForHumans() }}</h2>
-                        </div>
+                    @foreach ($blogs as $post)
+                        <x-blog.container-post :post="$post" />
                     @endforeach
                 </div>
             </div>

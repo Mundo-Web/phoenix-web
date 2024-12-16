@@ -10,28 +10,164 @@
 
     <main>
 
-        <section
-            class="flex relative flex-col justify-center items-center px-[5%] py-32 text-base font-medium min-h-[345px] text-neutral-900 max-md:py-32">
-            <img loading="lazy"
-                src="{{asset('images/img/contactanosf.jpg')}}"
-                alt="" class="object-cover absolute inset-0 size-full object-top hidden md:flex" />
-            <img loading="lazy"
-                src="{{asset('images/img/contactanosmovil.jpg')}}"
-                alt="" class="object-cover absolute inset-0 size-full object-top flex md:hidden" />
-            <div class="absolute inset-0 bg-black bg-opacity-50 "></div>
-            <div class="flex relative flex-col max-w-full w-[550px]">
-                {{-- <h2 class="self-center text-[#FD1F4A] font-Helvetica_Medium">Contacto</h2> --}}
-                <h3 class="mt-3 text-5xl text-white text-center max-md:max-w-full font-Urbanist_Bold">Contáctanos</h3>
-                {{-- <p class="mt-3 text-lg font-light text-center max-md:max-w-full ">
-                    Donec vehicula, lectus vel pharetra semper, justo massa pharetra nunc, non venenatis ante augue quis
-                    est.
-                </p> --}}
+        <section class="px-[5%] pt-12 xl:pt-16">
+            <div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
+                <div class="lg:col-span-4 flex flex-col gap-2 max-w-3xl">
+                    <h2 class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left ">
+                        Ponte en contacto con nosotros. Estamos aquí para ayudarte.
+                    </h2>
+                    <p class="text-[#052F4E] font-galano_regular text-lg text-left ">
+                        Si tienes alguna duda o necesitas más información sobre nuestros productos, no dudes en contactarnos.
+                        Nuestro equipo está listo para brindarte la atención que necesitas y ayudarte a llevar tu heladería al siguiente nivel.
+                    </p>
+                </div>
+                <div class="lg:col-span-1 flex flex-row lg:flex-col gap-4 lg:gap-2 max-w-3xl justify-center items-end">
+                   <div class="flex">
+                        @if ($general[0]->facebook)
+                            <div class=" p-2 rounded-full border border-[#052F4E] w-auto">
+                                <a href="{{ $general[0]->facebook }}" target="_blank"
+                                    class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                                    <img class="w-5 h-5 rounded-full object-cover aspect-square" src="{{ asset('images/imagen/facecremoso.png') }}"/>
+                                </a>
+                            </div>
+                        @endif   
+                   </div>
+
+                   <div class="flex">
+                        @if ($general[0]->instagram)
+                            <div class=" p-2 rounded-full border border-[#052F4E] w-auto">
+                                <a href="{{ $general[0]->instagram }}" target="_blank"
+                                    class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                                    <img class="w-5 h-5 rounded-full object-cover aspect-square" src="{{ asset('images/imagen/instacremoso.png') }}"/>
+                                </a>
+                            </div>
+                        @endif   
+                   </div>
+
+                   <div class="flex">
+                        @if ($general[0]->linkedin)
+                            <div class=" p-2 rounded-full border border-[#052F4E] w-auto">
+                                <a href="{{ $general[0]->linkedin }}" target="_blank"
+                                    class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                                    <img class="w-5 h-5 rounded-full object-cover aspect-square" src="{{ asset('images/imagen/linkedcremoso.png') }}"/>
+                                </a>
+                            </div>
+                        @endif   
+                    </div>
+
+                    <div class="flex">
+                        @if ($general[0]->twitter)
+                            <div class=" p-2 rounded-full border border-[#052F4E] w-auto">
+                                <a href="{{ $general[0]->twitter }}" target="_blank"
+                                    class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                                    <img class="w-5 h-5 rounded-full object-cover aspect-square" src="{{ asset('images/imagen/twicremoso.png') }}"/>
+                                </a>
+                            </div>
+                        @endif   
+                    </div>
+
+                </div>
+
             </div>
-            
         </section>
 
 
-        <section class="flex flex-col my-8 lg:my-16 font-Urbanist_Regular">
+        <section class="px-[5%] pt-12 xl:pt-16">
+            <form id="formContactos">
+                @csrf
+                   <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                       <div>
+                           <input name="full_name" id="fullNameContacto" type="text" class="text-[#052F4E] font-galano_regular font-semibold text-base focus:ring-0 focus:border-b 
+                           border-x-0 border-t-0 border-b border-[#052F4E] w-full" placeholder="Nombre completo"/>
+                       </div>
+   
+                       <div>
+                           <input name="email" id="emailContacto" type="text" class="text-[#052F4E] font-galano_regular font-semibold text-base focus:ring-0 focus:border-b 
+                           border-x-0 border-t-0 border-b border-[#052F4E] w-full" placeholder="Correo electrónico"/>
+                       </div>
+   
+                       <div>
+                           <input type="tel" name="phone" id="telefonoContacto" maxlength="12" class="text-[#052F4E] font-galano_regular font-semibold text-base focus:ring-0 focus:border-b 
+                           border-x-0 border-t-0 border-b border-[#052F4E] w-full" placeholder="Número de teléfono (opcional)"/>
+                       </div>
+   
+                       <div class="md:col-span-3">
+                           <textarea name="message" id="message" cols="30" rows="3" placeholder="Ingresa el mensaje"
+                            class=" text-[#052F4E] font-galano_regular font-semibold text-base focus:ring-0 focus:border-b border-x-0 border-t-0 border-b border-[#052F4E] w-full"></textarea>
+                       </div>
+   
+                       <div class="flex flex-row justify-start items-start">
+                            <button type="submit"
+                                class="text-white py-3 px-6 bg-[#052F4E] rounded-xl text-base font-galano_light font-semibold text-left">
+                                Déjanos un mensaje
+                            </button>
+                       </div>
+                   </div>
+               </form>
+        </section>
+
+
+        <section>
+            <div class="flex flex-col gap-10 w-full px-[5%] py-10 md:py-20 bg-[#EBEDEF] mt-10 md:mt-20">
+                
+                <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-0">
+                    
+                    <div class="lg:col-span-2 flex flex-col justify-center">
+
+                        <div class="flex flex-col p-2 justify-center items-start gap-8">
+                            <h2 class="text-[#052F4E] text-lg font-galano_regular">
+                                Información de contacto
+                            </h2>
+                            <h2 class="text-[#052F4E] text-4xl md:text-5xl font-maille leading-none">Siempre estaremos
+                                encantados de ayudarle.</h2>
+                        </div>
+
+                    </div>
+
+                    <div class="lg:col-span-1 flex flex-col gap-10 justify-center items-start">
+                        <div class="flex flex-col">
+                            @if(!empty($general[0]->email))
+                                <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">Correo electrónico</h2>
+                                <div class="h-[2px] w-20 bg-[#C69671] my-2"></div>
+                                <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">{{ $general[0]->email }}</h2>
+                            @endif
+                        
+                            @if(!empty($general[0]->schedule))
+                                <p class="text-[#052F4E] text-sm font-galano_regular mt-1">{{ $general[0]->schedule }}</p>
+                            @endif
+                        </div>
+                        <div class="flex flex-col gap-1.5">
+                            @if(!empty($general[0]->cellphone) && !empty($general[0]->office_phone))
+                                <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">Teléfonos</h2>
+                                <div class="h-[2px] w-20 bg-[#C69671] my-2"></div>
+                            @endif
+
+                            @if(!empty($general[0]->cellphone))
+                                <div class="flex text-[#052F4E] text-sm font-galano_regular flex-row gap-2">
+                                    <span>Teléfono móvil:</span>
+                                    <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">{{ $general[0]->cellphone }}</h2>
+                                </div>
+                            @endif
+                        
+                            @if(!empty($general[0]->office_phone))
+                                <div class="flex text-[#052F4E] text-sm font-galano_regular flex-row gap-2">
+                                    <span>Teléfono fijo:</span>
+                                    <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">{{ $general[0]->office_phone }}</h2>
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-2 flex flex-col sm:flex-row gap-5 sm:gap-10 lg:flex-col justify-around items-start lg:items-end">
+                        <img class="h-96 md:h-[350px] w-auto object-contain object-center" src="{{asset('images/imagen/imagenmapa.png')}}" />
+                    </div>
+                    
+                </div>
+
+            </div>
+        </section>
+
+        {{-- <section class="flex flex-col my-8 lg:my-16 font-Urbanist_Regular">
             <div class="flex flex-wrap gap-10 items-start px-[5%] lg:px-[8%] w-full">
                 <div class="flex flex-col grow shrink min-w-[240px] w-[390px] max-md:max-w-full">
                     <header class="flex flex-col max-w-full text-neutral-900 w-[488px]">
@@ -142,7 +278,7 @@
                     </form>
                 </div>
             </div>
-        </section>
+        </section> --}}
 
     </main>
 
@@ -179,7 +315,7 @@
             event.preventDefault();
             let formDataArray = $(this).serializeArray();
 
-            if (!validarEmail($('#email').val())) {
+            if (!validarEmail($('#emailContacto').val())) {
                 btnEnviar.prop('disabled', false);
                 btnEnviar.text('Enviar Mensaje');
                 btnEnviar.css('cursor', 'pointer');

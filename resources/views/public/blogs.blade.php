@@ -8,75 +8,130 @@
 
 @section('content')
 
-  @php
+    {{-- @php
     $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Blogs', 'url' => '']];
-  @endphp
+  @endphp --}}
 
-  @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-  @endcomponent
+    {{-- @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+  @endcomponent --}}
 
-  <section class="flex flex-col md:flex-row md:gap-10 w-full px-[5%] font- py-16">
-
-    <div class="w-full md:w-3/12 gap-5  grid grid-cols-1">
-      <h3 class="font-Inter_Medium text-base text-[#333]">Buscar post</h3>
-      <div class="relative w-full lg:w-[100%] pb-8 lg:py-0 border-b lg:border-0">
-        <input id="buscarblog" type="text" placeholder="Buscar..."
-          class="w-full pl-8 pr-10 py-2 bg-[#F1F1F1] border border-[#F1F1F1] lg:border-[#F1F1F1] rounded-lg focus:border-[#F1F1F1] focus:ring-0 text-[#666666] placeholder:text-[#666666]">
-
-        <span class="absolute top-0 left-0 flex items-start lg:items-center p-2">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M14.6851 13.6011C14.3544 13.2811 13.8268 13.2898 13.5068 13.6206C13.1868 13.9514 13.1955 14.4789 13.5263 14.7989L14.6851 13.6011ZM16.4206 17.5989C16.7514 17.9189 17.2789 17.9102 17.5989 17.5794C17.9189 17.2486 17.9102 16.7211 17.5794 16.4011L16.4206 17.5989ZM15.2333 9.53333C15.2333 12.6814 12.6814 15.2333 9.53333 15.2333V16.9C13.6018 16.9 16.9 13.6018 16.9 9.53333H15.2333ZM9.53333 15.2333C6.38531 15.2333 3.83333 12.6814 3.83333 9.53333H2.16667C2.16667 13.6018 5.46484 16.9 9.53333 16.9V15.2333ZM3.83333 9.53333C3.83333 6.38531 6.38531 3.83333 9.53333 3.83333V2.16667C5.46484 2.16667 2.16667 5.46484 2.16667 9.53333H3.83333ZM9.53333 3.83333C12.6814 3.83333 15.2333 6.38531 15.2333 9.53333H16.9C16.9 5.46484 13.6018 2.16667 9.53333 2.16667V3.83333ZM13.5263 14.7989L16.4206 17.5989L17.5794 16.4011L14.6851 13.6011L13.5263 14.7989Z"
-              fill="#666666" class="fill-fillAzulPetroleo lg:fill-fillPink" />
-          </svg>
-        </span>
-
-        <div class="bg-white shadow-2xl top-12 w-full absolute overflow-y-auto max-h-[300px]" id="resultadosblog">
+    <section class="px-[5%] pt-12 xl:pt-16 w-full">
+        <div class="flex flex-col gap-2 max-w-3xl mx-auto">
+            <h2
+                class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left lg:text-center max-w-2xl mx-auto">
+                Describe de qué trata tu blog
+            </h2>
+            <p class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
+                Mauris euismod vehicula eros egestas venenatis. Vestibulum non pulvinar risus.
+                Praesent hendrerit lectus ultrices purus consectetur, eu sollicitudin libero pretium.
+            </p>
         </div>
-      </div>
+    </section>
 
-      <div class="md:basis-1/6 flex flex-col gap-5">
-        <h3 class="font-Inter_Medium text-base text-[#333]">Blog categorias</h3>
-        <div class="flex flex-col gap-3">
-          <a href="{{ route('blog', 0) }}"
-            class="text-text18 py-3 px-4 rounded-lg font-semibold  {{ $filtro == 0 ? 'bg-[#FF5E14] text-white' : 'text-[#333] bg-[#E6E4E5] bg-opacity-40 ' }} ">Todas</a>
-          @foreach ($categorias as $item)
-            <a href="{{ route('blog', $item->id) }}"
-              class="text-text16 py-3 px-4 rounded-lg font-normal
-                                {{ $item->id == $filtro ? 'bg-[#FF5E14] font-semibold text-white' : 'text-[#333] bg-[#E6E4E5] bg-opacity-40' }}">
-              {{ $item->name }}
-            </a>
-          @endforeach
+    <section class="px-[5%] pt-12 xl:pt-16 w-full">
+        <div class="flex flex-col justify-start gap-12">
+
+            <div class="flex flex-wrap gap-3 lg:gap-5 justify-center" data-aos="fade-up" data-aos-duration="150">
+                <div class="flex flex-col gap-3">
+                    <a href="{{ route('blog', 0) }}"
+                        class="text-[15px] py-2.5 px-4 rounded-xl font-galano_medium text-center
+                      {{ $filtro == 0 ? 'text-white bg-[#052F4E]' : 'text-[#052F4E] bg-[#EBEDEF]' }}">
+                        Ver todas
+                    </a>
+                </div>
+                @foreach ($categorias as $item)
+                    <div class="flex flex-col gap-3">
+                        <a href="{{ route('blog', $item->id) }}"
+                            class="text-[15px] py-2.5 px-4 rounded-lg font-galano_medium text-center
+                          {{ $item->id == $filtro ? 'text-white bg-[#052F4E]' : 'text-[#052F4E] bg-[#EBEDEF]' }}">
+                            {{ $item->name }}
+                        </a>
+                    </div>
+                @endforeach
+            </div>
+
+            <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-10">
+
+                @foreach ($lastposts as $post)
+                    <div class="flex flex-col gap-1">
+                      <a href="{{ route('detalleBlog', $post->id) }}" class="w-full">
+                        <img class="w-full h-[250px] lg:h-[300px] object-cover"
+                            src="{{ asset($post->url_image . $post->name_image) }}"
+                            onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" alt="{{ $post->title }}" />
+
+                        <h2 class="text-[#052F4E] text-base font-galano_regular font-semibold mt-3">
+                            {{ $post->categories->name ?? 'Sin categoría' }}
+                        </h2>
+
+                        <h2 class="text-[#052F4E] text-2xl font-galano_bold line-clamp-2 md:line-clamp-1">
+                            {{ $post->title }}
+                        </h2>
+
+                        <p class="text-[#052F4E] text-lg font-galano_regular line-clamp-3">
+                            {{ $post->extract ?? 'No hay descripción disponible.' }}
+                        </p>
+
+                        <h2 class="text-[#052F4E] text-base font-galano_regular font-semibold mt-1">
+                            Publicado {{ \Carbon\Carbon::parse($post->created_at)->diffForHumans() }}
+                        </h2>
+                      </a>
+                    </div>
+                @endforeach
+
+            </div>
+
+            @if ($posts->isEmpty())
+            @else
+              <div class="w-full grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
+                  @foreach ($posts as $post)
+                      <x-blog.container-post :post="$post" />
+                  @endforeach
+              </div>
+            @endif
+
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="w-full md:basis-9/12">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-        @foreach ($posts as $post)
-          <x-blog.container-post :post="$post" />
-        @endforeach
-      </div>
-      {{-- <div class="col-span-2">
-            <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
-            <div class="flex flex-col h-10 w-full bg-gray-500">HERE</div>
-          </div> --}}
-    </div>
+    <section>
+        <div class="flex flex-col gap-10 lg:gap-14 w-full px-0 md:pl-[5%]  bg-[#EBEDEF] mt-10 md:mt-20">
 
-  </section>
+            <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-10">
+                <div class="flex flex-col gap-1 md:col-span-2 pt-10  md:py-16 px-[5%] md:px-0">
 
+                    <h2 class="text-[#052F4E] text-4xl md:text-5xl font-galano_bold leading-none">Suscríbete a nuestra
+                        newsletter</h2>
+                    <p class="text-[#052F4E] text-lg font-galano_regular line-clamp-3">
+                        Mauris euismod vehicula eros egestas venenatis. Vestibulum non pulvinar risus.
+                        Praesent hendrerit lectus ultrices purus consectetur, eu sollicitudin libero pretium.
+                    </p>
+                    <div class="flex flex-col md:flex-row gap-3 mt-10">
+                        <form id="subsEmail">
+                            <input id="emailFooter" type="email" name="email"
+                                class="rounded-xl text-base font-galano_regular w-[250px]"
+                                placeholder="Ingresa tu correo electronico" />
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                            <button type="submit"
+                                class="bg-[#052F4E] text-white px-6 py-2 rounded-xl font-galano_regular w-32"> Inscribirse
+                            </button>
+                        </form>
+                    </div>
+                    <h2 class="text-[#052F4E] text-sm font-galano_regular mt-1">Al hacer clic en Inscribirse, confirma que
+                        acepta nuestros Términos y condiciones.</h2>
+                </div>
 
+                <div class="flex flex-col gap-1 md:col-span-1">
+                    <img class="w-full min-h-[320px] h-full object-center object-cover"
+                        src="{{ asset('images/imagen/heladosubscription.png') }}" />
+                </div>
+            </div>
 
-
-
-
-
-
+        </div>
+    </section>
 
 @section('scripts_importados')
 
 
-  <script src="{{ asset('js/storage.extend.js') }}"></script>
+    <script src="{{ asset('js/storage.extend.js') }}"></script>
 
 
 @stop
