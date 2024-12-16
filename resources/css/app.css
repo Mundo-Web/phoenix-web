@@ -9,20 +9,6 @@
 @import 'tailwindcss/utilities';
 
 
-@layer components{
-
-    #tabladatos_wrapper .dt-length select{
-        @apply px-5;
-    }
-
-    .select2-dropdown {
-        @apply rounded-b-lg shadow-md;
-    }
-  
-}
-
-
-
 .fixedWhastapp {
   right: 2vw ;
   /* position: fixed; Asegúrate de que el elemento tenga una posición fija */
@@ -400,4 +386,61 @@
     /* Have no idea what this is for */
     @apply cursor-default block;
     padding: 6px;
+}
+
+
+@layer components {
+    #tabladatos_wrapper .dt-length select {
+        @apply px-5;
+    }
+
+    /* ----- testimonios ----- */
+    .custom-swiper-buttons .swiper-button-prev,
+    .custom-swiper-buttons .swiper-button-next {
+        @apply !w-[50px] !h-[50px];
+    }
+    .custom-swiper-buttons .swiper-button-prev:after,
+    .custom-swiper-buttons .swiper-button-next:after {
+        @apply content-[''] block w-[50px] h-[50px] bg-center bg-no-repeat bg-cover;
+    }
+
+    .custom-swiper-buttons {
+        @apply relative hidden left-0 top-[50%] w-44 lg:w-full justify-center lg:justify-between w-auto;
+    }
+
+    .custom-swiper-buttons .swiper-button-prev {
+        @apply absolute top-[50px] lg:top-0 left-[33%] md:left-[40%] lg:-left-[100px] z-[1000];
+    }
+
+    .custom-swiper-buttons .swiper-button-next {
+        @apply absolute top-[50px] lg:top-0 right-[33%] md:right-[40%]  lg:-right-[100px] z-[1000];
+    }
+}
+
+.hamburguesa {
+    @apply w-10 h-10 rounded-lg cursor-pointer;
+}
+
+.menu:checked ~ label p:nth-child(2) {
+    @apply hidden;
+}
+
+.menu:checked ~ label p:nth-child(1) {
+    @apply -rotate-45 translate-y-[3px];
+}
+
+.menu:checked ~ label p:nth-child(3) {
+    @apply rotate-45 -translate-y-[5px];
+}
+
+/*  */
+
+@layer utilities {
+    .clip-circle-0 {
+        clip-path: circle(0% at top right);
+    }
+
+    .clip-circle-full {
+        clip-path: circle(150% at top right);
+    }
 }

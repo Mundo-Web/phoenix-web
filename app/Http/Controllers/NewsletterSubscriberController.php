@@ -77,8 +77,8 @@ class NewsletterSubscriberController extends Controller
     NewsletterSubscriber::create($request->all());
     $data = $request->all();
     $data['nombre'] = '';
-    $this->envioCorreo($data);
-    $this->envioCorreoInterno($data);
+    // $this->envioCorreo($data);
+    // $this->envioCorreoInterno($data);
     return response()->json(['message' => 'Usuario suscrito']);
   }
 

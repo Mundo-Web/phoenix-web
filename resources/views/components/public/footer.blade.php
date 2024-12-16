@@ -1,5 +1,5 @@
-<footer class="bg-black">
-    <style>
+<footer class="bg-[#052F4E]">
+    {{-- <style>
         #modalPoliticasDev 
         #modalTerminosCondiciones 
         #modallinkPoliticasDatos
@@ -38,9 +38,115 @@
             margin-bottom: 0% !important;
             margin-top: 0% !important;
         }
-    </style>
+    </style> --}}
     
-    <div class="w-full">
+    <div class="grid grid-cols-1 md:grid-cols-3 w-11/12 mx-auto py-10 gap-10 md:gap-5">
+        <div class="md:col-span-1 w-full md:max-w-[500px] flex flex-col gap-5" data-aos="fade-up" data-aos-offset="150">
+            <a href="{{ route('index') }}">
+                <img src="{{ asset('images/svg/cremosofooter.svg') }}" alt="MrCremoso" class="w-[180px]" />
+            </a>
+        </div>
+
+        <div class="md:col-span-2 grid grid-cols-1 lg:grid-cols-7 gap-10 md:gap-5 justify-start items-start">
+
+            <div class="flex flex-col gap-5 col-span-2">
+                <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
+                   ENLACES
+                </p>
+                <div class="flex flex-col gap-3 text-[#FFF9F1] font-galano_regular text-sm">
+                    <a href="{{ route('index', 0) }}">Inicio</a>
+                    <a href="{{route('index').'#servicios'}}">Servicios</a>
+                    <a href="{{route('index').'#about'}}">Nosotros</a>
+                    <a href="{{route('index').'#contacto'}}">Contacto</a>
+                </div>
+            </div>
+
+
+            <div class="flex flex-col gap-5 col-span-3">
+                <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
+                   DATOS DE CONTACTO
+                </p>
+                <div class="flex flex-col gap-3 text-[#FFF9F1] font-galano_regular text-sm">
+                    <a>{{ $general[0]->address }}, {{ $general[0]->inside }},
+                                        {{ $general[0]->district }} - {{ $general[0]->city }}</a>
+                    <a>Correo Electrónico: <br> {{ $general[0]->email }}</a> 
+                    <a>Teléfono:<br> {{ $general[0]->cellphone }}</a>
+                </div>
+            </div>
+
+
+            <div class="flex flex-col gap-5 col-span-2">
+                <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
+                   AVISO LEGAL
+                </p>
+                <div class="flex flex-col gap-3 text-[#FFF9F1] font-galano_regular text-sm">
+                    <a class="cursor-pointer" id="linkPoliticas">Política de Privacidad</a>
+                    <a class="cursor-pointer" id="linkTerminos">Términos y Condiciones</a>
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+
+    <div
+        class="flex flex-col items-start gap-3 md:flex-row md:justify-between md:items-center w-11/12 mx-auto py-10 border-t border-white">
+        <a href="#" target="_blank" class="text-[#FFF9F1] font-galano_regular font-normal text-text14">&copy; 2024 Cremoso.
+            Reservados todos los derechos</a>
+        <div class="flex justify-start items-center gap-5">
+        <div class="flex flex-row gap-2">
+                    @if ($general[0]->facebook)
+                        <a href="{{ $general[0]->facebook }}" target="_blank"
+                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                            <img class="w-5 h-5" src="{{ asset('images/imagen/facebookcremoso.png') }}" alt="facebook" />
+                        </a>
+                    @endif
+                    @if ($general[0]->instagram)
+                        <a href="{{ $general[0]->instagram }}" target="_blank"
+                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                            <img class="w-5 h-5" src="{{ asset('images/imagen/instagramcremoso.png') }}" alt="instagram" /> 
+                        </a>
+                    @endif
+                    @if ($general[0]->linkedin)
+                        <a href="{{ $general[0]->linkedin }}" target="_blank"
+                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                            <img class="w-5 h-5" src="{{ asset('images/imagen/linkedincremoso.png') }}" alt="linkedin" />
+                        </a>
+                    @endif
+                    {{-- @if ($general[0]->youtube)
+                        <a href="{{ $general[0]->youtube }}" target="_blank"
+                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                            <img class="w-10 h-10" src="{{ asset('images/svg/whatsapp.svg') }}" alt="youtube" />
+                        </a>
+                    @endif --}}
+                    @if ($general[0]->tiktok)
+                        <a href="{{ $general[0]->tiktok }}" target="_blank"
+                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                            <img class="w-5 h-5" src="{{ asset('images/imagen/twittercremoso.png') }}" alt="twitter" />
+                        </a>
+                    @endif
+            </div>
+        </div>
+    </div>
+
+    <div id="modalTerminosCondiciones" class="modal !px-0" style="max-width: 900px !important; width: 100% !important;">
+        <!-- Modal body -->
+        <div class="p-4">
+            <h1 class="font-PreloBold text-center text-4xl">Términos y condiciones</h1>
+            <div class="font-PreloMedium p-2">{!! $termsAndCondicitions->content ?? '' !!}</div>
+        </div>
+    </div>
+
+    <div id="modalPoliticasDev" class="modal !px-0" style="max-width: 900px !important; width: 100% !important;">
+        <!-- Modal body -->
+        <div class="p-4">
+            <h1 class="font-PreloBold text-center text-4xl">Políticas de privacidad</h1>
+            <div class="font-PreloMedium p-2">{!! $politicDev->content ?? '' !!}</div>
+        </div>
+    </div>
+
+
+    
+    {{-- <div class="w-full">
         <div class="grid grid-cols-3 lg:grid-cols-6 gap-5 lg:gap-10 md:justify-center w-full px-[7%] pt-16 md:pt-20 bg-black text-white font-Urbanist_Light tracking-wider">
                 @foreach ($logosfooter as $logofoot)
                     <div class="flex flex-row justify-center items-center">
@@ -49,11 +155,11 @@
                 @endforeach
         </div>
         <div class="w-11/12 h-1 border-b border-white pb-5 lg:pb-10 bg-black mx-auto"></div>
-    </div>
+    </div> --}}
     
     
     
-    <div
+    {{-- <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-10 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
 
         <div class="flex flex-col  text-base gap-2">
@@ -66,16 +172,16 @@
         <div class="flex flex-col text-base gap-2">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">AYUDA & APOYO</h3>
             <a id="linkTerminos">Términos y condiciones</a>
-            {{-- <a id="linkTratamientoDatos">Tratamiento adicional de datos</a>
+            <a id="linkTratamientoDatos">Tratamiento adicional de datos</a>
             <a id="linkPoliticasCookies">Política de Cookies</a>
-            <a id="linkCampanasPublicitarias">Campañas publicitarias</a> --}}
+            <a id="linkCampanasPublicitarias">Campañas publicitarias</a>
             <a id="linkBeneficios">Beneficios 0% intereses</a>
         </div>
 
         <div class="flex flex-col text-base gap-2">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">SERVICIO AL CLIENTE</h3>
             <a href="{{route('contacto')}}">Contáctanos</a>
-            {{-- <a id="linkSeguimientoPedido">Seguimiento de Pedido</a> --}}
+            <a id="linkSeguimientoPedido">Seguimiento de Pedido</a>
             <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">Nuestras Tiendas</a>
             <a id="linkPoliticasDatos">Politica de Datos</a>
             <div class="flex flex-row">
@@ -90,51 +196,53 @@
 
         </div>
 
-    </div>
+    </div> --}}
 
-    <div class="bg-black text-white pt-5 pb-16 lg:pb-20 flex items-center justify-center">
+    {{-- <div class="bg-black text-white pt-5 pb-16 lg:pb-20 flex items-center justify-center">
         <div class="flex flex-col justify-center items-center gap-5 w-full px-[5%]">
 
             <div class="flex flex-row gap-5 text-white mb-5">
                  @if ($datosgenerales->instagram)
                     <a href="{{ $datosgenerales->instagram }}" target="_blank">
-                        {{-- <i class="fa-brands fa-instagram fa-xl"></i> --}}
+                        <i class="fa-brands fa-instagram fa-xl"></i>
                         <img class="w-5" src="{{asset('images/svg/instagramwhite.svg')}}" />
                     </a>
                 @endif
 
                 @if ($datosgenerales->tiktok)
                     <a href="{{ $datosgenerales->tiktok }}" target="_blank">
-                        {{-- <i class="fa-brands fa-tiktok fa-xl"></i> --}}
+                        <i class="fa-brands fa-tiktok fa-xl"></i>
                         <img class="w-5" src="{{asset('images/svg/tiktok.svg')}}" />
                     </a>
                 @endif
 
                 @if ($datosgenerales->facebook)
                     <a href="{{ $datosgenerales->facebook }}" target="_blank">
-                        {{-- <i class="fa-brands fa-facebook fa-xl"></i> --}}
+                        <i class="fa-brands fa-facebook fa-xl"></i>
                         <img class="w-5" src="{{asset('images/svg/facebook.svg')}}" />
                     </a>
                 @endif
                 
-                {{-- @if ($datosgenerales->linkedin)
+                @if ($datosgenerales->linkedin)
                     <a href="{{ $datosgenerales->linkedin }}" target="_blank">
                         <i class="fa-brands fa-linkedin fa-xl"></i>
                         <img class="w-5" src="{{asset('images/svg/FACEBOOK.svg')}}" />
                     </a>
-                @endif --}}
+                @endif
                 
-                {{-- @if ($datosgenerales->twitter)
+                @if ($datosgenerales->twitter)
                     <a href="{{ $datosgenerales->twitter }}" target="_blank">
                         <i class="fa-brands fa-twitter fa-xl"></i>
                         <img class="w-5" src="{{asset('images/svg/FACEBOOK.svg')}}" />
                     </a>
-                @endif --}}
-                {{-- @if ($datosgenerales->youtube)
+                @endif
+
+                @if ($datosgenerales->youtube)
                     <a href="{{ $datosgenerales->youtube }}" target="_blank">
                         <i class="fa-brands fa-youtube fa-2xl"></i>
                     </a>
-                @endif --}}
+                @endif
+
                  @if ($datosgenerales->whatsapp)
                     <a href="https://api.whatsapp.com/send?phone={{ $datosgenerales->whatsapp }}&text={{ $datosgenerales->mensaje_whatsapp }}" target="_blank">
                         <img class="w-5" src="{{asset('images/svg/whatsapp.svg')}}" /> 
@@ -153,16 +261,16 @@
 
             <div>
                 <a href="{{route('index')}}">
-                    {{-- <h2 class="text-xl font-bold text-white tracking-widest font-Urbanist_Semibold">AMERICAN BRANDS</h2> --}}
+                    <h2 class="text-xl font-bold text-white tracking-widest font-Urbanist_Semibold">AMERICAN BRANDS</h2>
                     <img id="logo-boostperu" class="min-w-56 w-60" src="{{ asset('images/svg/logoab.svg') }}" alt="american brands" />
                 </a>
             </div>
 
         </div>
-    </div>
+    </div> --}}
 
-    <div id="modalTerminosCondiciones" class="modal" style="max-width: 900px !important;width: 100% !important;  ">
-        <!-- Modal body -->
+    {{-- <div id="modalTerminosCondiciones" class="modal" style="max-width: 900px !important;width: 100% !important;  ">
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Términos y Condiciones</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $terminos->content ?? '' !!}</div>
@@ -170,7 +278,7 @@
     </div>
 
     <div id="modalPoliticasDev" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Políticas de Cambio de Devolución</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $politicas->content ?? '' !!}</div>
@@ -178,15 +286,15 @@
     </div>
 
     <div id="modallinkPoliticasDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Políticas de Datos</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $politicaDatos->content ?? '' !!}</div>
         </div>
     </div>
-        <!-- ------------------------------------------------ -->
+        
     <div id="modallinkTiempoEnvios" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Tiempo y Costos de Envío</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $TimeAndPriceDelivery->content ?? '' !!}</div>
@@ -194,7 +302,7 @@
     </div>
 
     <div id="modallinkPlazoReembolso" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Plazos de Reembolso</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $PlazosDeReembolso->content ?? '' !!}</div>
@@ -202,7 +310,7 @@
     </div>
 
     <div id="modallinkTratamientoDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+      
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Tratamiento de Datos Adicional</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $TratamientoAdicionalDatos->content ?? '' !!}</div>
@@ -210,7 +318,7 @@
     </div>
 
     <div id="modallinkPoliticasCookies" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Políticas de Cookies</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $PoliticasCookies->content ?? '' !!}</div>
@@ -218,7 +326,7 @@
     </div>
 
     <div id="modallinkCampanasPublicitarias" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Campanas Publicitarias</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $CampanasPublicitarias->content ?? '' !!}</div>
@@ -226,7 +334,7 @@
     </div>
 
     <div id="modallinkBeneficios" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Beneficios 0% Intereses</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $BeneficiosSinIntereses->content ?? '' !!}</div>
@@ -234,7 +342,7 @@
     </div>
 
     <div id="modallinkSeguimientoPedido" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Seguimiento de Pedido</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $SeguimientoPedido->content ?? '' !!}</div>
@@ -242,12 +350,12 @@
     </div>
 
     <div id="modallinkNuestrasTiendas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        <!-- Modal body -->
+       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Nuestras Tiendas</h1>
             <div class="font-Urbanist_Regular prose p-2">{!! $NuestrasTiendas->content ?? '' !!}</div>
         </div>
-    </div>
+    </div> --}}
 
 </footer>
 

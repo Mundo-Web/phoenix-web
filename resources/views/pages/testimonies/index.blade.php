@@ -21,7 +21,7 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Ocupación</th>
+                                {{-- <th>Ocupación</th> --}}
                                 <th>Testimonio</th>
                                 <th class="w-32">Visible</th>
                                 <th class="w-32">Acciones</th>
@@ -32,8 +32,8 @@
                             @foreach($testimony as $item)
                                 <tr>
                                     <td class="dark:bg-slate-800">{{$item->name}}</td>
-                                    <td class="dark:bg-slate-800">{{$item->ocupation}}</td>
-                                    <td class="dark:bg-slate-800">{{ Str::limit($item->testimonie, 30) }}</td>
+                                    {{-- <td class="dark:bg-slate-800">{{$item->ocupation}}</td> --}}
+                                    <td class="dark:bg-slate-800">{{ Str::limit($item->testimonie, 100) }}</td>
                                     <td class="dark:bg-slate-800">
                                         <form method="POST" action="">
                                           @csrf
@@ -68,7 +68,7 @@
                         <tfoot>
                             <tr>
                                 <th>Nombre</th>
-                                <th>Ocupación</th>
+                                {{-- <th>Ocupación</th> --}}
                                 <th>Testimonio</th>
                                 <th>Visible</th>
                                 <th>Acciones</th>

@@ -54,7 +54,8 @@
             </x-slot>
           @endif
         </x-menu.item>
-        {{-- <x-menu.item id="testimonios" href="{{ route('testimonios.index') }}" icon="fas fa-star">Testimonios </x-menu.item> --}}
+        <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item>
+        <x-menu.item id="testimonios" href="{{ route('testimonios.index') }}" icon="fas fa-star">Testimonios </x-menu.item>
       </x-menu.group>
 
       <x-menu.group title="Productos">
@@ -64,6 +65,7 @@
         <x-menu.item id="products" href="{{ route('products.index') }}" icon="fas fa-box">Productos</x-menu.item>
         <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Marcas</x-menu.item>
         <x-menu.item id="strength" href="{{ route('strength.index') }}">Fits</x-menu.item>
+        <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item>
         {{-- <x-menu.item id="offers" href="{{ route('Admin/Offers.jsx') }}" icon="fas fa-boxes">Combos</x-menu.item> --}}
       </x-menu.group>
 
@@ -99,13 +101,13 @@
         {{-- <x-menu.item id="faqs" href="{{ route('faqs.index') }}" icon="fas fa-address-card"> Preguntas Frecuentes</x-menu.item> --}}
         {{-- <x-menu.item id="staff" href="{{ route('staff.index') }}" icon="fas fa-users">Personal</x-menu.item> --}}
         
-        {{-- <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item> --}}
+        
         {{-- <x-menu.item id="aboutus" href="{{ route('aboutus.index') }}">Nosotros</x-menu.item> --}}
         {{-- <x-menu.item id="attributes" href="{{ route('attributes.index') }}">Atributos</x-menu.item> --}}
         {{-- <x-menu.item id="valoresattributes" href="{{ route('valoresattributes.index') }}">Valor de atributo</x-menu.item> --}}
         {{-- <x-menu.item id="faqs" href="{{ route('faqs.index') }}" icon="fas fa-question-circle">FAQs</x-menu.item> --}}
         {{-- <x-menu.item id="galerie" href="{{ route('galerie.index') }}" icon="fas fa-images">Galerias</x-menu.item> --}}
-        {{-- <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item> --}}
+       
       </x-menu.group>
     </div>
     <!-- Expand / collapse button -->

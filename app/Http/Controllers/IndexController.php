@@ -87,7 +87,7 @@ class IndexController extends Controller
       ->orderBy('products.id', 'desc')
       ->take(8)
       ->get();
-    $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('id', 'desc')->take(3)->get();
+    $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->take(2)->get();
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
     $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();

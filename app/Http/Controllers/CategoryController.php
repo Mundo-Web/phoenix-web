@@ -51,28 +51,34 @@ class CategoryController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+      
         $body = $request->all();
 
         if ($request->hasFile("imagen")) {
 
-            $manager = new ImageManager(Driver::class);
-
-            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-
-            $img =  $manager->read($request->file('imagen'));
-
-            // Obtener las dimensiones de la imagen que se esta subiendo
-            // $img->coverDown(640, 640, 'center');
-
+            $file = $request->file('imagen');
+            $extension = $file->getClientOriginalExtension();
+        
+            // Generar un nombre único para el archivo
+            $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
             $ruta = 'storage/images/categories/';
-
+        
             if (!file_exists($ruta)) {
-                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+                mkdir($ruta, 0777, true); // Crear con permisos de lectura, escritura y ejecución
             }
-
-            $img->save($ruta . $nombreImagen);
-
+        
+            // Verificar la extensión del archivo
+            if ($extension === 'svg') {
+                $file->move($ruta, $nombreImagen);
+            } else {
+                // Manejar las imágenes rasterizadas (JPEG, PNG, etc.)
+                $manager = new ImageManager(Driver::class);
+                $img = $manager->read($file);
+                $img->save($ruta . $nombreImagen);
+            }
+        
+            // Guardar información del archivo en el cuerpo de la solicitud
             $body['url_image'] = $ruta;
             $body['name_image'] = $nombreImagen;
         }
@@ -134,31 +140,36 @@ class CategoryController extends Controller
         $category = Category::findOrfail($id);
 
         if ($request->hasFile("imagen")) {
-
-            $manager = new ImageManager(new Driver());
-
-
-            $ruta = storage_path() . '/app/public/images/categories/' . $category->name_image;
-
-            // dd($ruta);
-            if (File::exists($ruta)) {
-                File::delete($ruta);
-            }
-
+            $file = $request->file('imagen');
+            $mimeType = $file->getMimeType();
             $rutanueva = 'storage/images/categories/';
-            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-
-            $img =  $manager->read($request->file('imagen'));
-
-            // $img->coverDown(640, 640, 'center');
-
+            $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+        
+            // Crear el directorio si no existe
             if (!file_exists($rutanueva)) {
-                mkdir($rutanueva, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+                mkdir($rutanueva, 0777, true);
             }
-
-            $img->save($rutanueva . $nombreImagen);
-
-
+        
+            // Verificar si es SVG
+            if ($mimeType === 'image/svg+xml') {
+                // Si es SVG, copiar directamente
+                $file->move($rutanueva, $nombreImagen);
+            } else {
+                // Si no es SVG, procesar con ImageManager
+                $manager = new ImageManager(new Driver());
+        
+                // Eliminar la imagen antigua si existe
+                $rutaAntigua = storage_path() . '/app/public/images/categories/' . $category->name_image;
+                if (File::exists($rutaAntigua)) {
+                    File::delete($rutaAntigua);
+                }
+        
+                // Leer y guardar la nueva imagen
+                $img = $manager->read($file);
+                $img->save($rutanueva . $nombreImagen);
+            }
+        
+            // Actualizar los campos en el modelo
             $category->url_image = $rutanueva;
             $category->name_image = $nombreImagen;
         }

@@ -22,22 +22,23 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
+                <th class="w-20">Icono</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
-                {{-- <th class="w-32">Destacar</th> --}}
-                <th class="w-32">Menu</th>
-                <th class="w-32">Visible</th>
-                <th class="w-32">Acciones</th>
+                <th class="w-20">Destacar</th>
+                {{-- <th class="w-32">Menu</th> --}}
+                <th class="w-20">Visible</th>
+                <th class="w-20">Acciones</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($category as $item)
                 <tr>
+                  <td class=""><img class="block w-full" src="{{$item->name_image ? asset($item->url_image . $item->name_image) : asset('images/imagen/image-plus.jpg')}}" alt=""></td>
                   <td class="">{{ $item->name }}</td>
-                  <td class="">{{ $item->description }}</td>
+                  {{-- <td class="">{{ $item->description }}</td> --}}
                   
-                  {{-- <td class="">
+                  <td class="">
                     <form method="POST" action="">
                       @csrf
                       <input type="checkbox" id="hs-basic-usage"
@@ -51,9 +52,9 @@
                         data-titleService='{{ $item->name }}' {{ $item->destacar == 1 ? 'checked' : '' }}>
                       <label for="{{ 'v_' . $item->id }}"></label>
                     </form>
-                  </td> --}}
+                  </td>
 
-                  <td class="">
+                  {{-- <td class="">
                     <form method="POST" action="">
                       @csrf
                       <input type="checkbox" id="hs-basic-usage"
@@ -67,7 +68,7 @@
                         data-titleService='{{ $item->name }}' {{ $item->is_menu == 1 ? 'checked' : '' }}>
                       <label for="{{ 'v_' . $item->id }}"></label>
                     </form>
-                  </td>
+                  </td> --}}
 
                   <td class="">
                     <form method="POST" action="">
@@ -106,10 +107,10 @@
             </tbody>
             <tfoot>
               <tr>
+                <th >Icono</th>
                 <th>Nombre</th>
-                <th>Descripción</th>
-                {{-- <th>Destacar</th> --}}
-                <th>Menu</th>
+                <th >Destacar</th>
+                {{-- <th class="w-32">Menu</th> --}}
                 <th>Visible</th>
                 <th>Acciones</th>
               </tr>

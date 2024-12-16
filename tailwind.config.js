@@ -7,65 +7,164 @@ const flowbite = require('flowbite/plugin');
 /** @type {import('tailwindcss').Config} */
 export default {
     content: [
-        './node_modules/preline/dist/*.js',
         './vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php',
         './vendor/laravel/jetstream/**/*.blade.php',
         './storage/framework/views/*.php',
         './resources/views/**/*.blade.php',
         './resources/js/**/*.js',
         './resources/js/**/*.jsx',
-        './node_modules/flowbite/**/*.js'
+        "./node_modules/flowbite/**/*.js"
     ],
     darkMode: 'class',
     theme: {
         extend: {
-            colors: {
-                'custom-gray': '#F8F8F8',
-                'custom-white': '#FFFFFF',
-                'custom-border': 'rgba(21, 41, 76, 0.4)', // Defin
+            stroke: (theme) => ({
+                custom: theme("colors.black"),
+                strokeWithe: "#ffffff",
+            }),
+            fill: (theme) => ({
+                bgAzul: "#254F9A",
+                bgAzul: "#0071BE",
+                bgWhite: "#ffffff",
+                bgBlack: "#000000",
+            }),
+            fontWeight: {
+                medium: "500",
+                regular: "400",
+                semibold: "600",
             },
-            // Añadir el gradiente personalizado
-            backgroundImage: {
-                'custom-gradient': 'linear-gradient(to bottom, #F8F8F8 100%, #FFFFFF 100%)',
+            boxShadow: {
+                DEFAULT: '0 1px 3px 0 rgba(0, 0, 0, 0.08), 0 1px 2px 0 rgba(0, 0, 0, 0.02)',
+                md: '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.02)',
+                lg: '0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.01)',
+                xl: '0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 10px 10px -5px rgba(0, 0, 0, 0.01)',
             },
-
+            outline: {
+                blue: '2px solid rgba(0, 112, 244, 0.5)',
+            },
             fontFamily: {
-                Helvetica_Bold: ["Helvetica_Bold"],
-                Helvetica_Heavy: ["Helvetica_Heavy"],
-                Helvetica_Black: ["Helvetica_Black"],
-                Helvetica_Light: ["Helvetica_Light"],
-                Helvetica_Medium: ["Helvetica_Medium"],
+                galano_bold: ["galano_bold"],
+                galano_semibold: ["galano_semibold"],
+                galano_medium: ["galano_medium"],
+                galano_regular: ["galano_regular"],
+                galano_light: ["galano_light"],
+                maille: ["maille"],
+            },
+            aspectRatio: {
+                '4/3': '4 / 2',
+              },
+            fontSize: {
+                xs: ['0.75rem', { lineHeight: '1.5' }],
+                sm: ['0.875rem', { lineHeight: '1.5715' }],
+                base: ['1rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+                lg: ['1.125rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+                xl: ['1.25rem', { lineHeight: '1.5', letterSpacing: '-0.01em' }],
+                '2xl': ['1.5rem', { lineHeight: '1.33', letterSpacing: '-0.01em' }],
+                '3xl': ['1.88rem', { lineHeight: '1.33', letterSpacing: '-0.01em' }],
+                '4xl': ['2.25rem', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
+                '5xl': ['3rem', { lineHeight: '1.25', letterSpacing: '-0.02em' }],
+                '6xl': ['3.75rem', { lineHeight: '1.2', letterSpacing: '-0.02em' }],
+                mediumSize: "56px",
+                regularSize: "18px",
+                basicSize: "16px",
+                basic: "14px",
+                basicLittle: "12px",
+                subtitle: "48px",
+                littleTitle: "24px",
+                middleTitle: "40px",
+                middle: "32px",
+                text10: "10px",
+                text12: "12px",
+                text14: "14px",
+                text16: "16px",
+                text18: "18px",
+                text20: "20px",
+                text22: "22px",
+                text24: "24px",
+                text28: "28px",
+                text32: "32px",
+                text36: "36px",
+                text40: "40px",
+                text44: "44px",
+                text48: "48px",
+                text52: "52px",
+                text56: "56px",
+                text60: "60px",
+                text64: "64px",
+                text68: "68px",
+                text72: "72px",
+                text74: "74px",
+                text80: "80px",
+                text90: "90px",
+                text100: "100px",
+                text135: "135px",
+                text145: "145px",
+                text160: "160px",
+            },
 
-                Urbanist_Black: ["Urbanist_Black"],
-                Urbanist_Bold: ["Urbanist_Bold"],
-                Urbanist_Light: ["Urbanist_Light"],
-                Urbanist_Medium: ["Urbanist_Medium"],
-                Urbanist_Regular: ["Urbanist_Regular"],
-                Urbanist_Semibold: ["Urbanist_Semibold"],
+            backgroundColor: {
+                colorBackgroundHeader: "#21201E",
+                colorBackgroundMainTop: "#21201E",
+                colorBackgroundProducts: "#F8F6F2",
+                colorBackgroundNewProduct: "#38CB89",
+                bgBlack: "#000000",
+                bgWhite: "#FFFFFF",
+                bgButtonBaseGreen: "#BFDE8E",
+                bgRosa: "#F5F5F5",
+            },
+            textColor: {
+                colorSubtitle: "#113E55",
+                colorSubtitleLittle: "#173525",
+                colorAdd: "#2D694B",
+                colorTextBlack: "#151515",
+                textWhite: "#FFFFFF",
+                textWhiteWeak: "#FCFBFA",
+                textAzul: "#00395F",
+                textBlack: "#111111",
+                textGray: "#A6A6A6",
+            },
+            borderColor: {
+                selectCheck: "#173525",
+                colorBorder: "#151515",
+            },
+
+            backgroundImage: {
+                "close-menu": "url(../images/prueba/icon-close.svg)",
+                "open-menu": "url(../images/prueba/icon-hamburger.svg)",
             },
 
             screens: {
                 xs: '320px',
-                "2xs": "420px",
+                "2xs": "370px",
                 sm: "640px",
                 md: "768px",
-                "2md": "850px",
+                "2md": "900px",
                 lg: "1024px",
+                "2lg": "1100px",
                 xl: "1280px",
                 "2xl": "1536px",
             },
-            colors: {
-                azulboost: '#006BF6',
-            }
-
-
+            borderWidth: {
+                3: '3px',
+            },
+            minWidth: {
+                36: '9rem',
+                44: '11rem',
+                56: '14rem',
+                60: '15rem',
+                72: '18rem',
+                80: '20rem',
+            },
+            maxWidth: {
+                '8xl': '88rem',
+                '9xl': '96rem',
+            },
+            zIndex: {
+                60: '60',
+            },
         },
     },
-    variants: {
-        extend: {
-            opacity: ['focus-within'],
-        },
-    },
+    
     plugins: [
         forms,
         typography,
