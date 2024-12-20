@@ -1,13 +1,13 @@
 <div class="flex flex-col group relative">
   <a href="{{ route('producto', $item->id) }}">
       <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
-          <div class="max-w-[340px] rounded-full flex flex-col items-center justify-center p-5 ">
-              <img class="w-full h-full object-contain object-bottom rounded-full" alt="{{ $item->name }}" src="{{ asset($item->imagen)}}" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+          <div class="max-w-full flex flex-col items-center justify-center p-5 ">
+              <img class="w-full h-full object-contain object-bottom" alt="{{ $item->name }}" src="{{ asset($item->imagen)}}" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
           </div>
       </div>
   </a>
   <div class="flex flex-col justify-center items-center gap-1 mt-3">
-      <div class="flex flex-col md:flex-row">
+      <div class="flex flex-col md:flex-row w-full">
           <div class="flex flex-col w-full lg:w-2/3 gap-1">
               <a class="" href="#">  
                   <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">{{ $item->producto }}</h2>

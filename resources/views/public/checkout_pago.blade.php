@@ -1,11 +1,11 @@
 @extends('components.public.matrix', ['pagina' => ''])
 
-<script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
+{{-- <script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/stable/kr-payment-form.min.js"
   kr-public-key="{{ env('IZIPAY_PUBLIC_KEY') }}"
-  kr-post-url-success="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}"></script>
+  kr-post-url-success="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}"></script> --}}
 
-<link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic-reset.min.css">
-<script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script>
+{{-- <link rel="stylesheet" href="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic-reset.min.css">
+<script src="https://static.micuentaweb.pe/static/js/krypton-client/V4.0/ext/classic.js"></script> --}}
 
 <style type="text/css">
   /* to choice the embedded size */
@@ -111,7 +111,10 @@
     color: #fff !important;
   }
 
-  
+  #pagocontransferencia  .prose{
+    max-width: 100%;
+    text-align: justify;
+  }
 </style>
 
 @section('css_importados')
@@ -151,14 +154,14 @@
       <div class="flex md:gap-20 flex-col md:flex-row">
         <div class="flex justify-between items-start md:basis-8/12 w-full md:w-auto">
           <x-ecommerce.gateway.container completed="{{ 2 }}">
-            <div class="flex flex-col gap-5 mt-4 font-Urbanist_Regular">
+            <div class="flex flex-col gap-5 mt-4 font-galano_regular">
               <div>
                 <div class="flex flex-col gap-8">
 
                   <input type="hidden" name="_token" value="KetUXGJHlBNXwBFdNlcg8R9ueYHpfGMUECXmlNyQ"
                     autocomplete="off">
                   <div class="flex flex-col gap-5 pb-10 border-b-2 border-gray-200 dark:border-gray-700">
-                    <h2 class="font-semibold text-xl tracking-wide text-[#151515]">
+                    <h2 class="font-semibold text-xl tracking-normal text-[#052F4E]">
                       Información del contacto
                     </h2>
                     <div class="flex flex-col gap-5">
@@ -169,16 +172,16 @@
                               class="text-[#c1272d]">*</span></label>
                           <input id="nombre" type="text" placeholder="Nombre" name="nombre"
                             value="{{ auth()->check() ? auth()->user()->name : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
-                            required>
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            required />
                         </div>
                         <div class="basis-1/2 flex flex-col gap-2">
                           <label for="apellidos" class="font-medium text-[13px] text-[#6C7275]">Apellido <span
                               class="text-[#c1272d]">*</span></label>
                           <input id="apellidos" type="text" placeholder="Apellido" name="apellidos"
                             value="{{ auth()->check() ? auth()->user()->lastname : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
-                            required>
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            required />
                         </div>
                       </div>
                       <div class="flex flex-col md:flex-row gap-5 ">
@@ -187,22 +190,22 @@
                               class="text-[#c1272d]">*</span></label>
                           <input id="email" type="email" placeholder="Correo electrónico" required=""
                             name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
-                            required>
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            required />
                         </div>
                         <div class="basis-full flex flex-col gap-2">
                           <label for="celular" class="font-medium text-[13px] text-[#6C7275]">Celular <span
                               class="text-[#c1272d]">*</span></label>
                           <input id="celular" type="text" placeholder="(+51) 000 000 000" name="phone"
                             value="{{ auth()->check() ? auth()->user()->phone : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl"
-                            required>
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            required />
                         </div>
                       </div>
 
                       <div class="basis-2/3 flex flex-row gap-2 ">
-                        <input id="termsandconditions" type="checkbox" required
-                          class="border-2 rounded-sm w-5 h-5 text-[#c1272d] ring-0 focus:ring-0" />
+                        <input id="termsandconditions" type="checkbox" required checked
+                          class="border-2 rounded-sm w-5 h-5 text-[#052F4E] ring-0 focus:ring-0" />
                         <label for="termsandconditions" class="font-medium text-sm text-[#6C7275]">Estoy de acuerdo con
                           los <a class="font-bold" id="terminoslibro" target="_blanck">terminos y
                             condiciones</a></label>
@@ -392,18 +395,18 @@
           </x-ecommerce.gateway.container>
         </div>
         <div
-          class="basis-4/12 flex flex-col justify-start gap-0 py-4 order-1 2md:order-2 2md:sticky font-Urbanist_Bold top-4 h-min border rounded-md">
-          <h2 class="font-semibold text-[20px] text-[#151515] px-4">
+          class="basis-4/12 flex flex-col justify-start gap-0 py-4 order-1 2md:order-2 2md:sticky font-galano_regular top-4 h-min border rounded-md">
+          <h2 class="font-galano_bold text-2xl text-[#052F4E] px-4">
             Resumen del pedido
           </h2>
           <div class="p-4 pb-0">
             <hr>
           </div>
           <div class="px-4 pt-4">
-            <label for="tipo-comprobante" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de
+            <label for="tipo-comprobante" class="block mb-2 text-sm font-medium text-[#052F4E] dark:text-white">Tipo de
               comprobante</label>
             <select id="tipo-comprobante" name="comprobante"
-              class="selectpicker bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              class="selectpicker bg-gray-50 border border-gray-300 text-[#052F4E] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               {{-- <option value="">Seleccione tipo de comprobante</option> --}}
               <option value="boleta">Boleta</option>
               <option value="factura">Factura</option>
@@ -422,7 +425,7 @@
           </div>
           <div class="p-4">
             <div class="font-poppins flex flex-col gap-5">
-              <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
+              <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p class="font-normal text-[16px]">Envío</p>
                 <p id="precioEnvio" class="font-semibold text-[16px]">S/. {{ $sale->address_price }}</p>
               </div>
@@ -431,21 +434,21 @@
                 
               </div>
 
-              <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
+              <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p class="font-normal text-[16px]">Subtotal</p>
                 <p id="itemSubtotal" class="font-semibold text-[16px]">S/. 0.00 </p>
               </div>
 
               <div
-                class="text-[#141718] text-[20px] flex justify-between font-semibold items-center border-b-[1px] border-[#E8ECEF] pb-5">
+                class="text-[#052F4E] text-[20px] flex justify-between font-semibold items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p>Total</p>
                 <p id="itemTotal">S/. 0.00 </p>
               </div>
 
               <button id="btnPagar"
-                class="text-white bg-black tracking-wider w-full py-3 rounded-none cursor-pointer font-semibold text-lg inline-block text-center">Validar datos</button>
+                class="text-white bg-[#052F4E] tracking-wider w-full py-3 rounded-xl cursor-pointer font-semibold text-lg inline-block text-center">Realizar pedido</button>
 
-              <div id="contenedorIzypay" hidden>
+              {{-- <div id="contenedorIzypay" hidden>
                 <div class="flex justify-center content-center ">
                   <div
                     class="kr-embedded text-white w-full py-3 rounded-none cursor-pointer border-2 font-Urbanist_Regular font-semibold text-lg inline-block text-center border-none"
@@ -458,7 +461,7 @@
                     <button class="kr-payment-button"></button>
                   </div>
                 </div>
-              </div>
+              </div> --}}
 
             </div>
           </div>
@@ -466,6 +469,69 @@
       </div>
     </form>
   </main>
+
+  <div id="pagocontransferencia" class="modal overflow-y-auto overflow-x-hidden !px-2 !md:px-4" style="max-width: 500px !important; width: 100% !important;  ">
+      <div class="p-1 flex flex-col gap-2 text-[#052F4E]">
+
+          <div class="text-center flex flex-col justify-center content-center items-center">
+            <img src="{{asset('images/svg/logomrcremoso.svg')}}" alt="" class='h-auto w-48 text-center' />
+          </div>
+
+          <div class="font-galano_regular p-2">
+            
+            
+
+            <ul class="text-left">
+              <li class="mb-2">¡Estás a un paso de completar tu compra! Realiza la transferencia/depósito a nuestras cuentas, o paga a través de YAPE o PLIN. </p>
+              {{-- <li class="mb-2">Luego, simplemente carga la imagen y envíanos la confirmación de pago. ¡Y listo 💫!</p> --}}
+              <li class="mb-2">Puedes enviarnos tu confirmación de pago a través de WhatsApp.</p>
+            </ul>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
+              <div class="flex items-center w-full">
+                <img src="{{asset('images/bancos/bcp2.jpg')}}" alt="BCP" class="w-10 rounded-lg object-cover object-center" />
+                <span class="ml-2 font-galano_semibold">191-99999999</span>
+              </div>
+      
+              <div class="flex items-center">
+                <img src="{{asset('images/bancos/scotia2.png')}}" alt="Scotiabank" class="w-10 object-cover object-center rounded-lg" />
+                <span class="ml-2 font-galano_semibold">151-999999</span>
+              </div>
+      
+              <div class="flex items-center">
+                <img src="{{asset('images/bancos/bbvau.png')}}" alt="BBVA" class="w-10 object-cover object-center rounded-lg" />
+                <span class="ml-2 font-galano_semibold leading-none">0011-9999-999999</span>
+              </div>
+      
+              <div class="flex items-center">
+                <img src="{{asset('images/bancos/interb.png')}}" alt="Interbank" class="w-10 object-cover object-center rounded-lg" />
+                <span class="ml-2 font-galano_semibold">200-99999999</span>
+              </div>
+            </div>
+            
+            <div class="flex items-center justify-start md:justify-center mt-4">
+              <img src="{{asset('images/bancos/yapePlin.png')}}" alt="Yape Plin" class="w-16 h-auto" />
+              <div class="ml-2 font-galano_semibold leading-none">
+                <p>123456789</p>
+                <p>Mr Cremoso</p>
+              </div>
+            </div>
+            
+          </div>
+
+          <div class="mt-4">
+            <a
+              data-type="whatsapp"
+              href="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}"
+              type="submit"
+              id="hacerpedido"
+              class="w-full py-2 px-4 border  block text-center bg-white border-[#052F4E] font-galano_bold  rounded-xl hover:text-white  
+            hover:bg-[#052F4E] transition-colors duration-300">
+              Enviar Pago por WhatsApp
+            </a>
+          </div> 
+      </div>
+  </div>
 
   <script>
     $('#direccionContainer').fadeOut(0)
@@ -749,6 +815,9 @@
       }
     });
 
+    
+            
+   
 
     $('#paymentForm').on('submit', async function(e) {
       e.preventDefault();
@@ -853,7 +922,12 @@
         })
       })
       
-      $('#contenedorIzypay').fadeIn()
+      // $('#contenedorIzypay').fadeIn()
+        $('#pagocontransferencia').modal({
+            show: true,
+            fadeDuration: 400,
+        })
+
     })
 
     $('[name="envio"]').on('click', () => {

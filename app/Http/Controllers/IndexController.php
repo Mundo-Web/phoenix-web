@@ -81,6 +81,7 @@ class IndexController extends Controller
     $productosPupulares = Products::select('products.*')
       ->join('categories', 'products.categoria_id', '=', 'categories.id')
       ->where('categories.visible', 1)
+      ->where('categories.status', 1)
       ->where('products.status', '=', 1)
       ->where('products.visible', '=', 1)
       ->where('products.destacar', '=', 1)
@@ -112,12 +113,13 @@ class IndexController extends Controller
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
     $media = $this->instagramService->getUserMedia();
 
-    return view('public.index', compact('media','subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
+    return view('public.index', compact('media', 'subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)
   {
     $tag_id = null;
+    $productos = null;
     $tag_id = $request->input('tag');
 
     $catId = $request->input('category');
@@ -132,11 +134,13 @@ class IndexController extends Controller
 
     $tags = Tag::where('visible', true)->where('status', true)->get();
 
+    $categoria = Category::where('id', '=', $id_cat)->where('visible', true)->where('status', true)->first();
+
     $marcas = ClientLogos::where('status', true)->where('visible', true)->get();
 
     $colores = Products::select('color')->distinct()->pluck('color');
 
-    $sizes = Products::select('peso')->distinct()->orderBy('peso','asc')->pluck('peso');
+    $sizes = Products::select('peso')->distinct()->orderBy('peso', 'asc')->pluck('peso');
 
     $media = $this->instagramService->getUserMedia();
 
@@ -157,22 +161,42 @@ class IndexController extends Controller
       ->where('attributes.status', true)
       ->get();
 
-    return Inertia::render('Catalogo', [
-      'component' => 'Catalogo',
-      'marcas' => $marcas,
-      'marcas_id' => $marcas_id,
-      'minPrice' => $minPrice,
-      'maxPrice' => $maxPrice,
-      'categories' => $categories,
-      'tags' => $tags,
-      'attribute_values' => $attribute_values,
-      'id_cat' => $id_cat,
-      'tag_id' => $tag_id,
-      'colores' => $colores,
-      'sizes' => $sizes,
-      'media' => $media,
-      'subCatId' => $subCatId
-    ])->rootView('app');
+
+    if ($id_cat == 0) {
+      $productos = Products::select('products.*')
+        ->join('categories', 'products.categoria_id', '=', 'categories.id')
+        ->where('categories.visible', 1)
+        ->where('categories.status', 1)
+        ->where('products.status', '=', 1)
+        ->where('products.visible', '=', 1)
+        ->orderBy('products.id', 'desc')
+        ->paginate(12);
+      // $productos = Products::obtenerProductos();
+    } else {
+      $productos = Products::select('products.*')
+        ->join('categories', 'products.categoria_id', '=', 'categories.id')
+        ->where('categories.visible', 1)
+        ->where('categories.status', 1)
+        ->where('categories.id', $id_cat)
+        ->where('products.status', '=', 1)
+        ->where('products.visible', '=', 1)
+        ->orderBy('products.id', 'desc')
+        ->paginate(12);
+      // $productos = Products::obtenerProductos($id_cat);
+    }
+
+    $page = 0;
+
+    if (!empty($productos->nextPageUrl())) {
+      $parse_url = parse_url($productos->nextPageUrl());
+
+      if (!empty($parse_url['query'])) {
+        parse_str($parse_url['query'], $get_array);
+        $page = !empty($get_array['page']) ? $get_array['page'] : 0;
+      }
+    }
+
+    return view('public.catalogo', compact('page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
   }
 
   public function ofertas(Request $request, string $id_cat = null)
@@ -215,7 +239,7 @@ class IndexController extends Controller
   {
     $nosotros = AboutUs::all();
     $benefit = Strength::where('status', '=', 1)->take(3)->get();
-   
+
     return view('public.nosotros', compact('nosotros', 'benefit'));
   }
 
@@ -332,7 +356,7 @@ class IndexController extends Controller
     $addresses = [];
     $historicoCupones = [];
     $hasDefaultAddress = false;
-    
+
     if (Auth::check()) {
 
       $usuario = Auth::user()->id;
@@ -351,17 +375,17 @@ class IndexController extends Controller
       $historicoCupones = HistoricoCupon::with('cupon')->where('user_id', $usuario)->where('usado', false)->get();
     }
 
-    
+
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
     $categorias = Category::all();
     $url_env = env('APP_URL');
-    return view('public.checkout_carrito', compact('user','historicoCupones','url_env', 'categorias', 'destacados', 'districts', 'provinces', 'departments', 'addresses', 'hasDefaultAddress'));
+    return view('public.checkout_carrito', compact('user', 'historicoCupones', 'url_env', 'categorias', 'destacados', 'districts', 'provinces', 'departments', 'addresses', 'hasDefaultAddress'));
   }
 
   public function pago(Request $request, string $code)
   {
-    
+
     $sale = Sale::where('code', $code)->first();
     if (!$sale) return \redirect()->route('index');
 
@@ -443,9 +467,9 @@ class IndexController extends Controller
         ->exists();
     }
 
-    $formToken = IzipayController::token($sale);
- 
-    return view('public.checkout_pago', compact('user', 'historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress', 'formToken'));
+    //$formToken = IzipayController::token($sale);
+
+    return view('public.checkout_pago', compact('user', 'historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress'));
   }
 
   public function procesarPago(Request $request)
@@ -579,36 +603,37 @@ class IndexController extends Controller
   {
 
     $body = $request->all();
-    $answer = JSON::parse($body['kr-answer']);
-   
+    // $answer = JSON::parse($body['kr-answer']);
+    $answer = $body['codigoCompra'];
+    
     $user = Auth::user();
 
     $usuario = null;
     if (Auth::check()) {
       $usuario = Auth::user()->id;
     }
+
+
+    $saleJpa = Sale::where('code', $answer)->first();
     
-
-    $saleJpa = Sale::where('code', $answer['orderDetails']['orderId'])->first();
-
     if (!$saleJpa) return \redirect()->route('index');
 
-    if ($answer['orderStatus'] != 'PAID') {
-      $saleJpa->status_id = 2;
-      $saleJpa->status_message = 'Se ha rechazado la orden';
-      $saleJpa->save();
-      return \redirect()->route('index');
-    }
+    // if ($answer['orderStatus'] != 'PAID') {
+    //   $saleJpa->status_id = 2;
+    //   $saleJpa->status_message = 'Se ha rechazado la orden';
+    //   $saleJpa->save();
+    //   return \redirect()->route('index');
+    // }
 
     if ($usuario && $saleJpa->idcupon && $saleJpa->idcupon != 0 && $saleJpa->idcupon !== null) {
       $updated = DB::table('historico_cupones')
-          ->where('cupones_id', $saleJpa->idcupon)
-          ->where('user_id', $usuario)
-          ->update(['usado' => true]);
-    }  
+        ->where('cupones_id', $saleJpa->idcupon)
+        ->where('user_id', $usuario)
+        ->update(['usado' => true]);
+    }
 
-    $saleJpa->status_id = 3;
-    $saleJpa->status_message = 'Pagado correctamente';
+    // $saleJpa->status_id = 3;
+    // $saleJpa->status_message = 'Pagado correctamente';
     $saleJpa->save();
 
     $categorias = Category::all();
@@ -654,7 +679,7 @@ class IndexController extends Controller
     $phone = $request->phone;
     $user = User::findOrFail($request->id);
 
-    
+
 
     if ($request->password !== null || $request->newpassword !== null || $request->confirmnewpassword !== null) {
       if (!Hash::check($request->password, $user->password)) {
@@ -689,7 +714,7 @@ class IndexController extends Controller
     $user = Auth::user();
     $categorias = Category::all();
     $cuponesUsados = HistoricoCupon::where('user_id', $user->id)->where('usado', 1)->pluck('cupones_id');
-    return view('public.dashboard', compact('cuponesUsados','user', 'categorias'));
+    return view('public.dashboard', compact('cuponesUsados', 'user', 'categorias'));
   }
 
 
@@ -727,16 +752,16 @@ class IndexController extends Controller
     $resultados = Products::select('products.*')
       ->where('products.visible', 1)
       ->where('producto', 'like', "%$query%")
-      ->whereIn('products.id', function($subquery) {
+      ->whereIn('products.id', function ($subquery) {
         $subquery->select(DB::raw('MIN(id)'))
-                 ->from('products')
-                 ->where('products.visible', 1)
-                 ->groupBy('producto');
+          ->from('products')
+          ->where('products.visible', 1)
+          ->groupBy('producto');
       })
       ->join('categories', 'categories.id', 'products.categoria_id')
       ->where('categories.visible', 1)
       ->get();
-      
+
     return response()->json($resultados);
   }
 
@@ -830,15 +855,16 @@ class IndexController extends Controller
       ->with('colors')
       ->with('marcas')
       ->where('id', '<>', $id)
-      ->whereIn('products.id', function($subquery) {
-        $subquery->select(DB::raw('MIN(id)'))
-                 ->from('products')
-                 ->groupBy('producto');
-      })
+      // ->whereIn('products.id', function ($subquery) {
+      //   $subquery->select(DB::raw('MIN(id)'))
+      //     ->from('products')
+      //     ->groupBy('producto');
+      // })
       ->where('categoria_id', '=', $product->categoria_id)
       ->where('status', '=', true)
       ->where('visible', '=', true)
       ->inRandomOrder()
+      ->take(10)
       ->get();
 
     $atributos = Attributes::where("status", "=", true)->get();
@@ -1406,46 +1432,45 @@ class IndexController extends Controller
       $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
       if ($filtro == 0) {
-      
-          $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-          $lastposts = Blog::where('status', '=', 1)
-              ->where('visible', '=', 1)
-              ->orderBy('created_at', 'desc')
-              ->take(2)
-              ->get();
+        $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
 
-              
+        $lastposts = Blog::where('status', '=', 1)
+          ->where('visible', '=', 1)
+          ->orderBy('created_at', 'desc')
+          ->take(2)
+          ->get();
 
-          $posts = Blog::where('status', '=', 1)
-              ->where('visible', '=', 1)
-              ->orderBy('created_at', 'desc')
-              ->skip(2) 
-              ->limit(500)
-              ->get();
-          
+
+
+        $posts = Blog::where('status', '=', 1)
+          ->where('visible', '=', 1)
+          ->orderBy('created_at', 'desc')
+          ->skip(2)
+          ->limit(500)
+          ->get();
       } else {
 
-          $categoria = Category::where('status', '=', 1)
-              ->where('visible', '=', 1)
-              ->where('id', '=', $filtro)
-              ->orderBy('created_at', 'desc')
-              ->get();
+        $categoria = Category::where('status', '=', 1)
+          ->where('visible', '=', 1)
+          ->where('id', '=', $filtro)
+          ->orderBy('created_at', 'desc')
+          ->get();
 
-          $lastposts = Blog::where('status', '=', 1)
-              ->where('visible', '=', 1)
-              ->where('category_id', '=', $filtro)
-              ->orderBy('created_at', 'desc')
-              ->take(2)
-              ->get();
+        $lastposts = Blog::where('status', '=', 1)
+          ->where('visible', '=', 1)
+          ->where('category_id', '=', $filtro)
+          ->orderBy('created_at', 'desc')
+          ->take(2)
+          ->get();
 
-          $posts = Blog::where('status', '=', 1)
-              ->where('visible', '=', 1)
-              ->where('category_id', '=', $filtro)
-              ->orderBy('created_at', 'desc')
-              ->skip(2) 
-              ->limit(500)
-              ->get();    
+        $posts = Blog::where('status', '=', 1)
+          ->where('visible', '=', 1)
+          ->where('category_id', '=', $filtro)
+          ->orderBy('created_at', 'desc')
+          ->skip(2)
+          ->limit(500)
+          ->get();
       }
 
       return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastposts'));
@@ -1480,5 +1505,75 @@ class IndexController extends Controller
     $faqs = Faqs::where('status', '=', 1)->where('visible', '=', 1)->get();
     $url_env = env('APP_URL');
     return view('public.help', compact('url_env', 'faqs'));
+  }
+
+  public function getSubcategoria(Request $request)
+  {
+    $page = 0;
+    // $subcategorias = Subcategory::where('category_id', '=', $request->id)->get();
+    $productos = DB::table('products')
+      ->join('categories', 'products.categoria_id', '=', 'categories.id')
+      ->where('products.status', '=', 1)
+      ->where('products.visible', '=', 1)
+      ->where('products.categoria_id', '=', $request->id) 
+      ->select('products.*')
+      ->orderBy('products.id', 'desc')
+      ->paginate(12);
+    
+    // if (!empty($productos->nextPageUrl())) {
+    //     $parse_url = parse_url($productos->nextPageUrl());
+
+    //     if (!empty($parse_url['query'])) {
+    //         parse_str($parse_url['query'], $get_array);
+    //         $page = !empty($get_array['page']) ? $get_array['page'] : 0;
+    //     }
+    // }
+    $nextPage = $productos->hasMorePages() ? $productos->currentPage() + 1 : 0;
+
+    $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->where('id', '=', $request->id)->get();
+
+    return response()->json(['message' => 'Subcategorias', 'productos' => $productos, 'categorias' => $categorias, 'page' => $nextPage]);
+  }
+
+
+  public function getTotalProductos(Request $request)
+  {
+    
+    $id = $request->id ?? 0;
+    $page = 0;
+    
+    $productos = DB::table('products')
+        ->join('categories', 'products.categoria_id', '=', 'categories.id')
+        ->where('products.status', '=', 1)
+        ->where('products.visible', '=', 1);
+    
+    if ($id != 0) {
+        $productos = $productos->where('products.categoria_id', '=', $id);
+    }
+    
+    $productos = $productos->select('products.*')
+        ->orderBy('products.id', 'desc')
+        ->paginate(12);
+    // if (!empty($productos->nextPageUrl())) {
+    //     $parse_url = parse_url($productos->nextPageUrl());
+
+    //     if (!empty($parse_url['query'])) {
+    //         parse_str($parse_url['query'], $get_array);
+    //         $page = !empty($get_array['page']) ? $get_array['page'] : 0;
+
+    //     }
+    // }
+
+    $nextPage = $productos->hasMorePages() ? $productos->currentPage() + 1 : 0;
+    // $productos = Products::where('categoria_id', $id)
+    // ->orWhere('subcategoria_id', $id)
+    // ->orWhere('microcategoria_id', $id)
+    // ->paginate(3);
+
+    // dd($productos->currentPage());
+    // dd($nextPage);
+    // dd($productos->hasMorePages());
+
+    return response()->json(['message' => 'productosPaginados', 'productos' => $productos, 'page' => $nextPage]);
   }
 }

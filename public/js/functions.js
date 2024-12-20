@@ -604,7 +604,7 @@ function PintarCarrito() {
 
   carritoParaPintar.forEach(item => {
     total += item.totalPrice
-    let plantilla = `<tr class="font-Urbanist_Regular border-b">
+    let plantilla = `<tr class="font-galano_regular border-b">
           <td class="p-2 w-24">
             <img src="${appUrl}/${item.imagen}" class="block bg-[#F3F5F7] rounded-md p-0 w-24 object-contain" alt="producto" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';"  style="width: 100px; height: 75px; object-fit: contain; object-position: center;" />
           </td>
@@ -614,7 +614,6 @@ function PintarCarrito() {
               <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
                 ${item.producto}
               </p>
-              <span class="font-light text-[12px] text-[#151515]">${item.color} - ${item.peso}</span>
             </div>
             <div class="flex gap-2 items-center">
               <div class="flex w-15 justify-center text-[#151515] border-[1px] border-[#6C7275] rounded-md">

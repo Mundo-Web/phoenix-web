@@ -30,7 +30,7 @@
 
                 <div id='general' class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
 
-                  <div class="col-span-5 md:col-span-3">
+                  <div class="md:col-span-5">
 
                     <label for="producto">Producto <span class="text-red-500 font-bold">*</span></label>
 
@@ -45,7 +45,7 @@
 
                     </div>
                   </div>
-                  <div class="col-span-5 md:col-span-2">
+                  {{-- <div class="col-span-5 md:col-span-2">
 
                     <label for="color">Color <span class="text-red-500 font-bold">*</span></label>
 
@@ -59,9 +59,9 @@
 
 
                     </div>
-                  </div>
+                  </div> --}}
 
-                  {{-- <div class="col-span-5 md:col-span-5 mt-2">
+                  <div class="col-span-5 md:col-span-5 mt-2">
                     <label for="extract">Extracto</label>
 
                     <div class="relative mb-2  mt-2">
@@ -72,15 +72,33 @@
                         class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="Extracto">
                     </div>
-                  </div> --}}
+                  </div>
 
                   <div class="col-span-5 md:col-span-5">
                     <label for="description">Descripcion</label>
                     <div class="relative mb-2 mt-2">
-                      {{-- <textarea type="text" rows="2" id="description" name="description" value=""
-                        class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Descripción">{{ $product->description }}</textarea> --}}
                       <x-form.quill id="description" :value="$product->description" />
+                    </div>
+                  </div>
+
+                  <div class="col-span-5 md:col-span-5">
+                    <label for="peso">Peso</label>
+                    <div class="relative mb-2 mt-2">
+                      <x-form.quill id="peso" :value="$product->peso" />
+                    </div>
+                  </div>
+                
+                  <div class="col-span-5 md:col-span-5">
+                    <label for="medidas">Medidas</label>
+                    <div class="relative mb-2 mt-2">
+                      <x-form.quill id="medidas" :value="$product->medidas" />
+                    </div>
+                  </div>
+
+                  <div class="col-span-5 md:col-span-5">
+                    <label for="usos">Opciones de uso</label>
+                    <div class="relative mb-2 mt-2">
+                      <x-form.quill id="usos" :value="$product->usos" />
                     </div>
                   </div>
 
@@ -221,14 +239,14 @@
                     </div>
                     <span class="block ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Destacar</span>
                   </label>
-                  <label class="inline-flex items-center cursor-pointer mb-2">
+                  {{-- <label class="inline-flex items-center cursor-pointer mb-2">
                     <input id="recomendar" name="recomendar" type="checkbox" class="sr-only peer"
                       {{ $product->recomendar ? 'checked' : '' }}>
                     <div
                       class="relative w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
                     </div>
                     <span class="block ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Recomendar</span>
-                  </label>
+                  </label> --}}
                 </div>
                 <div class="md:col-span-5 flex justify-between gap-4">
                   <div class="w-full">
@@ -286,7 +304,7 @@
                   </div>
                 </div> --}}
 
-                <div class="md:col-span-3">
+                <div class="md:col-span-5">
                   <label for="sku">Sku</label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -317,7 +335,7 @@
                   </div>
                 </div>
 
-                <div class="md:col-span-5">
+                {{-- <div class="md:col-span-5">
                   <label for="marca_id">Marca</span></label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -332,7 +350,7 @@
                       @endforeach
                     </select>
                   </div>
-                </div>
+                </div> --}}
 
 
                 <div class="md:col-span-5">
@@ -352,7 +370,7 @@
                   </div>
                 </div>
 
-                <div class="md:col-span-5">
+                {{-- <div class="md:col-span-5">
                   <label for="subcategory_id">Subcategoria</label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -368,7 +386,7 @@
                       @endforeach
                     </select>
                   </div>
-                </div>
+                </div> --}}
 
                 <div class="md:col-span-5">
                   {{-- <label class="block mb-1" for="imagen">Imagen del producto</label>
@@ -486,7 +504,8 @@
                 </div> --}}
 
               </div>
-              <div
+              
+              {{-- <div
                 class=" grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 rounded shadow-lg p-4 px-4 border mb-2">
                 <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-xl tracking-tight">
                   Inventario</h4>
@@ -508,6 +527,7 @@
 
                     </div>
                   </div>
+                  
                   <div class="w-full">
                     <label for="peso">Talla
 
@@ -528,10 +548,10 @@
 
 
                 </div>
-              </div>
+              </div> --}}
 
               <div class=" grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 rounded shadow-lg p-4 px-4 border">
-                <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-xl tracking-tight">
+                {{-- <h4 class="font-semibold text-slate-800 dark:text-slate-100 text-xl tracking-tight">
                   Tags</h4>
                 <div class="md:col-span-5 flex justify-between gap-4">
                   <ul class="flex flex-wrap w-full gap-2">
@@ -549,7 +569,7 @@
                       </li>
                     @endforeach
 
-                  </ul>
+                  </ul> --}}
                   {{-- <div>
                     <div class="relative mb-2  mt-2">
                       <select id="tags_id" name="tags_id[]" multiple class="mt-1 w-full">

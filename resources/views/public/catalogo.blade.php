@@ -3,7 +3,28 @@
 
 @section('css_importados')
 
+  <style>
+    .swiper-pagination-categorias .swiper-pagination-bullet {
+            width: 14px;
+            height: 8px;
+            border-radius: 6px;
+            background-color: #052F4E !important; 
+    }
 
+    .swiper-pagination-categorias .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+            background-color: #05304e56!important;
+            opacity: 1;
+    }
+    
+    .selected {
+        background-color: #052F4E !important;
+    }
+   
+    .iconwhite{
+        stroke: white;
+        filter: brightness(0) invert(1);
+    }
+  </style>
 @stop
 
 
@@ -13,317 +34,335 @@
     $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Catálogo', 'url' => '']];
   @endphp
 
-  @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-  @endcomponent
+  {{-- @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+  @endcomponent --}}
 
-  <div class="flex flex-col md:flex-row md:gap-10 w-11/12 mx-auto font-poppins mt-16">
-    <section class="flex flex-col gap-10 md:basis-3/12   ">
-      <button class="w-full h-12 bg-[#F1F1F1] text-[15px] text-center font-medium rounded-lg" type="button"> Limpiar
-        Todo</button>
+  <section>
+      <div class="flex flex-col gap-10 w-full px-[5%] pt-10 md:pt-20">
+          <div class="flex flex-col xl:flex-row xl:justify-between items-start xl:items-center gap-5">
+              <div class="flex flex-col gap-2 max-w-4xl">
+                  <h4 class="font-galano_bold text-text32 md:text-text40 text-[#082252] leading-none">Descubre Nuestras Categorías de Productos</h4>
+                  <h3 class="text-[#082252] font-galano_regular font-normal text-lg">
+                      Explora nuestra amplia variedad de suplementos para heladerías. Cada categoría está diseñada para ayudarte a crear helados únicos y deliciosos que sorprenderán a tus clientes.
+                  </h3>
+              </div>
+          </div>    
+          <div class="w-full">  
+              <div class="swiper categorias h-max">
+                  <div class="swiper-wrapper">
+                      @foreach ($categories as $categorie)  
+                          <div class="swiper-slide group">
+                            <a id="{{ $categorie->id }}" class="categoryselect">
+                              <div id="{{ $categorie->id }}" class="{{ $id_cat == $categorie->id ? 'selected' : '' }} select flex flex-col justify-center px-10 py-8 relative bg-[#EBEDEF] rounded-xl min-h-[210px] max-w-[300px] mx-auto transition-all duration-300 ease-in-out group-hover:bg-[#052F4E]">  
+                                  <div class="flex flex-row w-full bottom-5">
+                                      <div class="flex flex-col gap-4 justify-center items-center w-full">
+                                          <img class="group-hover:stroke-white group-hover:brightness-0 group-hover:invert {{ $id_cat == $categorie->id ? 'stroke-white invert brightness-0' : '' }}" src="{{ asset($categorie->url_image . $categorie->name_image) }}"
+                                             class="w-full h-full object-contain md:object-cover object-right md:object-center">
 
-      <div class="relative mb-6">
-        <label for="labels-range-input" class="sr-only">Labels range</label>
-        <input id="labels-range-input" type="range" value="1000" min="100" max="1500"
-          class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-gray-700">
-        <span class="text-sm text-gray-500 dark:text-gray-400 absolute start-0 -bottom-6">Min ($100)</span>
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 absolute start-1/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$500</span>
-        <span
-          class="text-sm text-gray-500 dark:text-gray-400 absolute start-2/3 -translate-x-1/2 rtl:translate-x-1/2 -bottom-6">$1000</span>
-        <span class="text-sm text-gray-500 dark:text-gray-400 absolute end-0 -bottom-6">Max ($1500)</span>
+                                          <h2 class="{{ $id_cat == $categorie->id ? 'text-white' : '' }} text-[#052F4E] font-galano_semibold text-2xl text-center max-w-[200px] mx-auto line-clamp-2 transition-all duration-300 ease-in-out group-hover:text-white">
+                                              {{$categorie->name ?? "Nombre de categoria"}}
+                                          </h2>
+                                      </div>
+                                  </div>
+                              </div>
+                            </a>
+                          </div>
+                      @endforeach 
+                  </div>
+                  <div class="swiper-pagination-categorias !flex justify-center py-3 mt-3"></div>
+              </div>
+          </div>
       </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Precio </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-row gap-4">
-          <input type="text" class="w-24 rounded-xl custom-border" placeholder="S/ 00.00">
-          <input type="text" class="w-24 rounded-xl custom-border" placeholder="S/ 00.00">
-        </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
-
-      </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Marca </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-col gap-4 ">
-          <div class="flex flex-row gap-2  items-center">
-            <input type="checkbox" class="bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border "> Marca
-              Uno (1)
-            </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border"> Marca
-              Dos
-              (4) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none "> <span class="text-custom-border"> Marca
-              Tres
-              (3) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none"> <span class="text-custom-border"> Marca
-              Cuatro
-              (2)
-            </span>
-
-          </div>
-
-
-        </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
-
-      </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Tamaño </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-col gap-4 ">
-          <div class="flex flex-row gap-2  items-center">
-            <input type="checkbox" class="bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border "> Marca
-              Uno (1)
-            </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border"> Marca
-              Dos
-              (4) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none "> <span class="text-custom-border"> Marca
-              Tres
-              (3) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none"> <span class="text-custom-border"> Marca
-              Cuatro
-              (2)
-            </span>
-
-          </div>
-
-
-        </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
-
-      </div>
-      <div class="flex flex-col gap-4">
-        <h2 class="font-semibold">Color </h2>
-        <p class="font-normal text-[12px] text-[#666666]"> 0 Seleccionados </p>
-        <div class="flex flex-col gap-4 ">
-          <div class="flex flex-row gap-2  items-center">
-            <input type="checkbox" class="bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border "> Marca
-              Uno (1)
-            </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm  border-none"> <span class="text-custom-border"> Marca
-              Dos
-              (4) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none "> <span class="text-custom-border"> Marca
-              Tres
-              (3) </span>
-
-          </div>
-          <div class="flex flex-row gap-2 items-center">
-            <input type="checkbox" class=" bg-[#DEE2E6] rounded-sm border-none"> <span class="text-custom-border"> Marca
-              Cuatro
-              (2)
-            </span>
-
-          </div>
-
-
-        </div>
-        <button class="text-white bg-[#0168EE] rounded-md font-bold h-10 w-24"> Filtrar</button>
-
-      </div>
-    </section>
-    <section class="flex flex-col gap-10 md:basis-9/12   ">
-      <div class="w-full h-12 bg-[#F8F8F8]     font-medium flex flex-row justify-between items-center">
-        <div><span class="font-normal text-[17px] text-[#666666] ml-3">Mostrando 1 - 9 de 11 resultados</span></div>
-        <div class="flex flex-row gap-3 items-center">
-          <span class="font-normal text-[17px]">Ordenar Por</span>
-          <x-dropdown-flowbite
-            class="bg-[#EDEDED] text-[#666666] hover:bg-gray-500 hover:text-black focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            id="dropdownDefaultButton" />
-        </div>
-      </div>
-      <div class="grid grid-cols-3 gap-6 gap-y-10">
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-        <div class="flex flex-col justify-center  gap-6">
-          <div class="h-[295px] w-full bg-slate-400 "></div>
-          <div class="flex flex-col justify-center items-center">
-            <h2 class="font-normal text-[18px] text-[#333333]">Nombre del Producto</h2>
-            <div class="flex flex-row gap-4 justify-center items-baseline ">
-              <p class="font-bold text-[24px] text-[#006BF6]">S/ 39.00</p>
-              <p class="font-normal   text-[18px] text-custom-border line-through">S/ 00.00</p>
-            </div>
-
-
-
-          </div>
-
-        </div>
-
-
-      </div>
-      <div class="w-full h-12     font-medium flex flex-row justify-center items-center">
-        <div><span class="font-normal text-[17px] text-[#666666] ml-3">Paginacion Laravel </span></div>
-
-      </div>
-    </section>
-  </div>
-
-
-
-
-  {{-- <div class="w-full md:w-11/12 md:mx-auto">
-    <div style="background-image: url('{{ asset('images/img/header_catalogo.png') }}')"
-      class="bg-cover bg-center bg-no-repeat min-h-[600px] flex flex-col justify-center items-center">
-      <div class="flex justify-start py-10 md:py-16 w-11/12 mx-auto">
-        <div class="text-white font-poppins flex flex-col gap-10 text-center">
-          <h1 class="font-semibold text-[32px] md:text-[48px] leading-none md:leading-tight">
-            Armo Tu Proyecto Con Deco Tab
-          </h1>
-          <p class="font-normal text-[16px] md:text-[18px]">
-            Descubre la variedad de productos que tenemos para ti. Contamos con la mejor calidad en Wall Panel, Paneles de
-            Piedra Cincelada, UV Mármol y más. ¡Te ayudaremos a crear un entorno más acogedor y confortable!
-          </p>
-        </div>
-      </div>
+  </section>
+
+  <section class="flex flex-col gap-10 w-full px-[5%] pt-10 md:pt-16">
+    <div class="flex flex-col gap-2">
+        <h2 class="font-galano_bold text-text32 md:text-text40 text-[#082252] leading-none subtitle">
+          @if($id_cat != 0 )
+            {{$categoria->name}}
+          @else
+            Todas las categorias 
+          @endif
+        </h2>
+        <p class="text-[#082252] font-roboto font-normal text-text18 description">
+          @if($id_cat != 0 )
+            {{$categoria->description}}
+          @endif    
+        </p>
+        <input type="hidden" id="valorcategoria" />
     </div>
-  </div> --}}
+  </section>
 
+  <section>
+      <div class="flex flex-col gap-10 w-full px-[5%] py-10 ">
+          <div class="w-full">  
+              <div id="getProductAjax" class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-5 gap-x-8">
+                    @foreach ($productos as $item)
+                        <x-product.card_product_cremoso :item="$item" />
+                    @endforeach
+              </div>
+          </div>
+      </div>
 
+      <div class="flex justify-center items-center mb-10">
+            <a href="javascript:;" @if (empty($page) || $page == 0) style="display:none;" @endif
+                data-page={{ $page }}
+                class="text-white py-3 px-5 border-2 bg-[#052F4E] rounded-xl font-galano_regular font-semibold  w-60 text-center  text-sm md:text-base  px-6 cargarMas">
+                Cargar más modelos
+            </a>
+      </div>
+  </section>
 
+  
 
 @section('scripts_importados')
 
 
   <script src="{{ asset('js/storage.extend.js') }}"></script>
 
+  <script>
+     var swiper = new Swiper(".categorias", {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination-categorias",
+                clickable: true,
+            },
 
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                650: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1350: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+            },
+        });
+  </script>
+  <script>
+    $('document').ready(function() {
+
+        $('.categoryselect').click(function() {
+
+            var id = $(this).attr('id'); 
+
+            $('.categoryselect .select').removeClass('selected');
+            $('.categoryselect img').removeClass('stroke-white');
+            $('.categoryselect img').removeClass('brightness-0');
+            $('.categoryselect img').removeClass('invert');
+            $('.categoryselect h2').removeClass('text-white');
+            $(this).find('.select').addClass('selected');
+            $(this).find('img').addClass('stroke-white');
+            $(this).find('img').addClass('brightness-0');
+            $(this).find('img').addClass('invert');
+            $(this).find('h2').addClass('text-white');
+
+
+            $.ajax({
+                
+                url: '{{ route('getSubcategoria') }}',
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                    id: id
+                },
+                dataType: "json",
+                success: function(response) {
+                    console.log(response.productos);
+  
+                    $('.subtitle').empty();
+                    $('.subtitle').text(response.categorias[0].extract);
+
+                    $('.description').empty();
+                    $('.description').text(response.categorias[0].description);
+
+                    $('.cargarMas').attr('data-page', response.page);
+
+                    if (response.page == 0) {
+                        $('.cargarMas').hide();
+                    } else {
+                        $('.cargarMas').show();
+                    }
+
+                    $('#getProductAjax').empty();
+                    $.each(response.productos.data, function(key, value) {
+                        console.log(response.productos.data);
+                        var productoUrl = `{{ route('producto', ':id') }}`.replace(
+                            ':id', value.id);
+                        var imagenSrc = `{{ asset(':imagen') }}`.replace(':imagen', value.imagen);
+
+                        $('#getProductAjax').append(
+                            `<div class="flex flex-col group relative">
+                                <a href="${productoUrl}">
+                                    <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
+                                        <div class="max-w-[340px]  flex flex-col items-center justify-center p-5">
+                                            <img class="w-full h-full object-contain object-bottom "
+                                                alt="${value.producto}"
+                                                src="${imagenSrc}"
+                                                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                                    <div class="flex flex-col md:flex-row w-full">
+                                        <div class="flex flex-col w-full lg:w-2/3 gap-1">
+                                            <a class="" href="${productoUrl}">  
+                                                <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">${value.producto}</h2>
+                                            </a>
+                                            <div class="font-galano_regular text-[#052F4E] text-xs line-clamp-2 leading-3">
+                                                ${value.description}
+                                            </div>  
+                                        </div>
+                                        <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
+                                            ${value.descuento == 0 ? `
+                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                            ` : `
+                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                            `}
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="flex flex-row gap-1 mt-2 inset-0 items-end justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                    <a href="${productoUrl}"
+                                        class="text-white text-sm md:text-base py-2 px-6 w-full bg-[#052F4E] rounded-xl font-galano_regular font-semibold text-center">
+                                        Ver producto
+                                    </a>
+                                </div>
+                            </div>`
+                        );
+                    });
+
+
+                },
+                error: function(error) {
+
+                }
+            });
+
+        });
+
+
+        $('body').delegate('.cargarMas', 'click', function() {
+            
+            var page = $(this).attr('data-page');
+            $('.cargarMas').html('Cargando...');
+
+            var id = $('#valorcategoria').val();
+ 
+            $.ajax({
+                    url: "{{ route('getTotalProductos') }}?page=" + page,
+                    method: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: id
+                    },
+                    dataType: "json",
+                    cache: false,
+                    success: function(response) {
+                        console.log(response.page);
+                      
+                        $.each(response.productos.data, function(key, value) {
+
+                            var productoUrl = `{{ route('producto', ':id') }}`.replace(
+                                ':id', value.id);
+                            var imagenSrc = `{{ asset(':imagen') }}`.replace(':imagen', value.imagen);
+
+                            $('#getProductAjax').append(
+                                `<div class="flex flex-col group relative">
+                                <a href="${productoUrl}">
+                                    <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
+                                        <div class="max-w-[340px] flex flex-col items-center justify-center p-5">
+                                            <img class="w-full h-full object-contain object-bottom"
+                                                alt="${value.producto}"
+                                                src="${imagenSrc}"
+                                                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+                                        </div>
+                                    </div>
+                                </a>
+                                <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                                    <div class="flex flex-col md:flex-row w-full">
+                                        <div class="flex flex-col w-full lg:w-2/3 gap-1">
+                                            <a class="" href="${productoUrl}">  
+                                                <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">${value.producto}</h2>
+                                            </a>
+                                            <div class="font-galano_regular text-[#052F4E] text-xs line-clamp-2 leading-3">
+                                                ${value.description}
+                                            </div>  
+                                        </div>
+                                        <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
+                                            ${value.descuento == 0 ? `
+                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                            ` : `
+                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                            `}
+                                        </div> 
+                                    </div>
+                                </div>
+                                <div class="flex flex-row gap-1 mt-2 inset-0 items-end justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                    <a href="${productoUrl}"
+                                        class="text-white text-sm md:text-base py-2 px-6 w-full bg-[#052F4E] rounded-xl font-galano_regular font-semibold text-center">
+                                        Ver producto
+                                    </a>
+                                </div>
+                            </div>`
+                            );
+                        });
+
+
+                        $('.cargarMas').attr('data-page', response.page);
+                        $('.cargarMas').html('Cargar más modelos');
+                        
+                        if (response.page == 0) {
+                            $('.cargarMas').hide();
+                        } else {
+                            $('.cargarMas').show();
+                        }
+                       
+                    },
+                    error: function(error) {}
+            });
+
+        })
+
+    });
+    </script>
+    <script>
+       $(document).ready(function() {
+            var selectedElement = $('.selected');
+
+            if (selectedElement.length > 0) {
+                var id = selectedElement.attr('id');
+                console.log('ID from selected div on page load:', id);
+                $('#valorcategoria').val(id);
+            }
+
+            $(document).on('click', '.selected', function() {
+                var id = $(this).attr('id');
+                console.log('ID from selected div:', id);
+                $('#valorcategoria').val(id);
+            });
+        });
+    </script>
 @stop
 
 @stop

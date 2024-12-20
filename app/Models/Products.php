@@ -28,6 +28,8 @@ class Products extends Model
     'description',
     'costo_x_art',
     'peso',
+    'medidas',
+    'usos',
     'categoria_id',
     'subcategory_id',
     'color',
@@ -117,4 +119,26 @@ class Products extends Model
   {
         return $this->belongsTo(Discount::class, 'discount_id');
   }
+
+
+  public static function obtenerProductos($categoria_id = '')
+{
+    $query = Products::select('products.*', 'categories.name as category_name')
+        ->join('categories', 'categories.id', '=', 'products.categoria_id')
+        ->where('products.status', '=', 1)
+        ->where('products.visible', '=', 1);
+
+    if (!empty($categoria_id)) {
+        $query->where('products.categoria_id', '=', $categoria_id);
+    }
+
+    $productos = $query->groupBy('products.id')
+        ->orderByRaw('CASE WHEN products.order IS NULL THEN 1 ELSE 0 END')
+        ->orderBy('products.order', 'asc')
+        ->orderBy('products.id', 'asc')
+        ->orderByRaw('CASE WHEN products.destacar = 1 THEN 0 ELSE 1 END')
+        ->paginate(9);
+
+    return $productos;
+}
 }

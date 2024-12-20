@@ -88,7 +88,7 @@
                     <div class="swiper-wrapper">
                         @foreach ($slider as $slide)
                             <div class="swiper-slide">
-                                <div class="flex flex-col justify-center items-center max-w-[1000px]">
+                                <div class="flex flex-col justify-center items-center ">
                                     <div class="bg-[#E6E4E5] h-[580px] md:h-[420px] gap-7 sm:gap-0 flex flex-col md:flex-row rounded-xl overflow-hidden">
                                         <div class="flex flex-col h-[300px] sm:h-[350px] md:h-full justify-start md:justify-center gap-6 w-full lg:w-1/2 text-left pt-6 md:pt-0 px-[5%] lg:pl-[5%] lg:pr-0">
                                             <h2 class="text-[#052F4E] font-maille text-text28 sm:text-4xl md:text-text44 leading-none line-clamp-3">

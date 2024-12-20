@@ -58,7 +58,7 @@
 </style>
 
 
-<header class="sticky top-0 z-[200]">
+<header class="sticky top-0 z-[25]">
     <div class="left-0 right-0">
     
         <div class=" bg-[#052F4E] z-[1000] relative font-galano_medium text-sm">
@@ -94,6 +94,9 @@
                 <img src="{{ asset('images/svg/logomrcremoso.svg') }}" alt="Cremoso" class="w-[170px]">
               </a>
             </div>
+
+            
+            
     
             <ul
               class="font-galano_medium text-lg text-[#052F4E] pt-40 fixed inset-0 bg-[#f2f5f7] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 gap-5 lg:gap-10 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
@@ -111,7 +114,7 @@
                 </li>
     
                 <li class="flex flex-col">
-                  <a href="{{ route('Catalogo.jsx') }}"
+                  <a href="{{ route('catalogo.all') }}"
                     class="{{ isset($pagina) && $pagina == 'catalogo' ? 'font-semibold' : '' }}">Productos</a>
                   @if (isset($pagina) && $pagina == 'catalogo')
                     <p
@@ -162,11 +165,25 @@
               </div>
     
               <div
-                class="relative w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
-                  <div class="flex flex-row items-center justify-center">
+                class="relative flex flex-row gap-5 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
+                  
+                <div class="flex flex-row items-center justify-center">
                     <div class="text-white font-galano_semibold bg-[#052f4e] rounded-xl text-center w-auto py-2 px-6">Soporte</div>
-                  </div>
+                </div>
+
+                    
+                <div class="flex justify-center items-center min-w-[38px]">
+                    <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
+                     <span id="itemsCount"
+                         class="bg-[#052f4e] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
+                        <a><i class="fa-solid fa-cart-shopping text-[#052f4e] w-7"></i></a>
+                     </div>
+                </div>
+                    
+
               </div>
+
+              
               
             </ul>
           </nav>
@@ -182,7 +199,7 @@
     <div class="p-4 flex flex-col h-[calc(100vh-2px)] justify-between gap-2">
         <div class="flex flex-col">
             <div class="flex justify-between ">
-                <h2 class="font-semibold font-Urbanist_Bold text-[28px] text-[#151515] tracking-tight pb-5">Carrito de
+                <h2 class="font-semibold font-galano_bold text-[28px] text-[#052F4E] tracking-tight pb-5">Carrito de
                     compras</h2>
                 <div id="close-cart" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -200,13 +217,13 @@
             </div>
         </div>
         <div class="flex flex-col gap-2 pt-2">
-            <div class="text-[#111111]  text-xl flex justify-between items-center ">
-                <p class="font-Urbanist_Bold font-semibold">Total</p>
-                <p class="font-Urbanist_Bold font-semibold" id="itemsTotal">S/ 0.00</p>
+            <div class="text-[#052F4E]  text-xl flex justify-between items-center ">
+                <p class="font-galano_bold font-semibold">Total</p>
+                <p class="font-galano_bold font-semibold" id="itemsTotal">S/ 0.00</p>
             </div>
             <div>
                 <a href="/carrito"
-                    class="font-normal font-Urbanist_Bold text-lg bg-black  py-3 px-5 rounded-none text-white cursor-pointer w-full inline-block text-center">Ir
+                    class="font-normal font-galano_semibold rounded-xl text-lg bg-[#052F4E]  py-3 px-5 text-white cursor-pointer w-full inline-block text-center">Ir
                     al
                     carrito</a>
             </div>
@@ -969,12 +986,6 @@ categorias.forEach(categoria => {
                     status = null;
                 }
 
-                /*let have_discount = success.discount_id
-                if (!have_discount) {
-                    take_product = null;
-                    payment_product = 
-                }*/
-
                 let cantidad = Number(success.cantidad)
 
                 let detalleProducto = {
@@ -1017,7 +1028,7 @@ categorias.forEach(categoria => {
                 }
 
                 articulosCarrito = aplicarDescuentosEnCarrito(articulosCarrito);
-
+                
                 Local.set('carrito', articulosCarrito)
                 let itemsCarrito = $('#itemsCarrito')
                 let ItemssubTotal = $('#ItemssubTotal')
@@ -1048,8 +1059,8 @@ categorias.forEach(categoria => {
         let item
         let cantidad
 
-        let tallaSelected = $('.tallaSelected');
-        let productId = tallaSelected.data('productid');
+        let product = $('#btnAgregarCarritoPr');
+        let productId = product.data('id');
 
         //item = partesURL[partesURL.length - 1]
         cantidad = Number($('#cantidadSpan span').text());
@@ -1077,7 +1088,7 @@ categorias.forEach(categoria => {
     })
 </script>
 
-<script>
+{{-- <script>
      document.addEventListener('click', function(event) {
       var input = document.getElementById('buscarproducto');
       var resultados = document.getElementById('resultados');
@@ -1101,7 +1112,9 @@ categorias.forEach(categoria => {
           $('#resultadossecond').empty();
       }
   });
-</script>
+</script> --}}
+
+
 
 {{-- <script>
     document.getElementById('productos-link2').addEventListener('mouseenter', function(event) { 

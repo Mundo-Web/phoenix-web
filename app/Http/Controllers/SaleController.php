@@ -45,7 +45,7 @@ class SaleController extends Controller
             $cupon = $request->cupon;
             $Islogueado = $request->autenticado;
             
-
+           
             $priceJpa = Price::find($address['price_id'] ?? null);
 
             $microtime = microtime(true);

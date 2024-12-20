@@ -96,15 +96,16 @@
 
     @endphp
 
-    @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
-    @endcomponent
+    {{-- @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
+    @endcomponent --}}
 
-    <main class="font-Inter_Regular" id="mainSection">
+    <main  id="mainSection">
         @csrf
-        <section class="w-full px-[5%] pb-10 lg:pb-20">
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-10  pt-8 lg:pt-16">
-
-                <div class="flex flex-row lg:col-span-3  justify-start items-center lg:items-start gap-2">
+        <section class="w-full px-[5%] pt-10 lg:pt-20">
+            {{-- <div class="grid grid-cols-1 lg:grid-cols-5 gap-10  pt-8 lg:pt-16"> --}}
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">    
+               
+                {{-- <div class="flex flex-row lg:col-span-3  justify-start items-center lg:items-start gap-2">
 
                     <div class="w-1/5">
                         <x-product-slider :product="$product" />
@@ -125,318 +126,67 @@
                     </div>
                     
 
-                </div>
+                </div> --}}
 
-                <div class="flex flex-col lg:col-span-2 gap-3">
+                <div class="flex flex-col justify-start items-center gap-5">
+                    <div id="containerProductosdetail"
+                        class="w-full flex justify-center items-center aspect-square overflow-hidden">
+                        <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain"
+                            data-aos="fade-up" data-aos-offset="150"
+                            onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
+                    </div>
+                    <x-product-slider-horizontal :product="$product" />
+                </div>   
 
-                    @if ($product->marcas)
-                        <img src="{{ asset($product->marcas->url_image) }}" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" class="w-28 h-auto object-contain" />
-                    @endif
+                <div class="flex flex-col gap-2">
+                    <h3 class="font-galano_medium text-base text-[#052F4E]">
+                        <a href="{{route('catalogo.all')}}">Productos</a> | <a href="{{route('catalogo', $product->category->id ) ?? route('catalogo.all') }}">{{$product->category->name ?? "Otros"}}</a> | {{$product->producto ?? "Producto sin nombre"}}</h3>
 
-                    {{-- @foreach ($atributos as $item)
-                     @foreach ($valorAtributo as $value)
-                            @if ($value->attribute_id == 1)
-                                  @isset($valoresdeatributo)
-                                      @foreach ($valoresdeatributo as $valorat)
-                                        @if ($valorat->attribute_value_id == $value->id)
-                                          <img src="{{asset($value->imagen)}}" class="w-28 h-auto object-contain"/>
-                                        @endif
-                                      @endforeach
-                                  @endisset
-                            @endif
-                      @endforeach
-                    @endforeach --}}
-                    <div class="flex flex-col">
-                        <h3 class="font-Urbanist_Black text-3xl text-[#cccccc]">
-                            {{ $product->producto }}: <span class="text-xl"> {{ $product->color }} - {{ $product->peso }}</span></h3>
-                        {{-- <p class="font-Inter_Regular text-base gap-2">Disponibilidad:
-                            @if ($product->stock == 0)
-                                <span class="text-[#f6000c]">No hay Stock disponible</span>
-                            @else
-                                <span class="text-[#006BF6]">Quedan {{ round((float) $product->stock) }} en stock</span>
-                            @endif
-                        </p> --}}
-
-                        {{-- <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
-                            <div class="bg-blue-600 h-1.5 rounded-full" style="width: {{ $stock }}%"></div>
-                        </div> --}}
+                    <h2 id="nombreproducto" class="font-galano_semibold text-4xl lg:text-5xl text-[#052F4E]">
+                            {{$product->producto}}</h2>
+                    
+                   
+                    <div class="text-[#052F4E] text-lg font-normal font-galano_regular flex flex-col gap-3">
+                       {!!$product->description!!}
                     </div>
 
-                    <div class="flex flex-col gap-3">
+                    {{-- <span id="stock" class="font-galano_semibold text-base text-[#052F4E] mt-2">
+                        420 Unidades/Caja</span> --}}
 
-                        <div class="flex flex-row gap-3 content-center items-center" id="seccionprecio">
-                            @if ($product->descuento == 0)
-                                <div class="content-center flex flex-row gap-2 items-center">
-                                    <div class="font-Urbanist_Bold text-2xl gap-2 text-[#c1272d]">S/
-                                        <span class="precionormal">{{ $product->precio }}</span></div>
-                                </div>
-                            @else
-                                <div class="content-center flex flex-row gap-2 items-center">
-                                    <div class="font-Urbanist_Bold text-2xl gap-2 text-[#c1272d]">S/
-                                        <span class="preciodescuento">{{ $product->descuento }}</span></div>
-                                    <div class="text-[#acacac] font-Urbanist_Regular line-through text-lg">S/
-                                        <span class="precionormal">{{ $product->precio }}</span></div>
-                                </div>
-                                @php
-                                    $descuento = round(
-                                        (($product->precio - $product->descuento) * 100) / $product->precio,
-                                    );
-                                @endphp
-                                <div
-                                    class="ml-2 font-Urbanist_Regular text-center content-center text-base gap-2 font-bold bg-[#c1272d] text-white px-4 py-1">
-                                    -<span id="porcentajedescuento">{{ $descuento }}</span> % </div>
-                            @endif
-                        </div>
-
-                        @isset ($product->discount)
-                            <span class="text-[#c1272d] ">👀 {{$product->discount->name}}</span>
-                        @endisset
-
-                        <div class="h-1 border-b-[2px] border-b-[#cccccc] my-4"></div>
-
-                        <div class="flex flex-col gap-5">
-                            <div class="flex flex-row gap-3">
-                                {{-- <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
-                                          <h2>Colores</h2>
-                                    </div>
-
-                                    <div class="flex flex-wrap w-4/5 gap-4">
-                                        <div class="flex justify-center items-center"> 
-                                            <label class="cursor-pointer">
-                                                <input class="hidden" name="color" type="radio" value="red" />
-                                                <div class="bg-red-600 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
-                                            </label>
-                                        </div>
-                                       <div class="flex justify-center items-center"> 
-                                            <label class="cursor-pointer">
-                                                <input class="hidden" name="color" type="radio" value="red" />
-                                                <div class="bg-black w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
-                                            </label>
-                                        </div>
-                                        <div class="flex justify-center items-center"> 
-                                            <label class="cursor-pointer">
-                                                <input class="hidden" name="color" type="radio" value="red" />
-                                                <div class="bg-blue-800 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
-                                            </label>
-                                        </div>
-                                        <div class="flex justify-center items-center"> 
-                                            <label class="cursor-pointer">
-                                                <input class="hidden" name="color" type="radio" value="red" />
-                                                <div class="bg-slate-700 w-7 h-7 rounded-full border-2 border-transparent hover:border-gray-400"></div>
-                                            </label>
-                                        </div>
-                                    </div> --}}
-                                @if ($otherProducts->isNotEmpty())
-                                    <div
-                                        class="flex flex-col w-1/5 justify-center items-start uppercase font-Urbanist_Black">
-                                        <h2>Colores:</h2>
-                                    </div>
-
-                                    {{-- <span class="block bg-[#F5F5F7] p-3 mt-2" tippy> {{ $product->color }}</span> --}}
-                                    <div class="flex flex-wrap w-4/5 gap-2 lg:gap-4 justify-start items-center font-Urbanist_Medium">
-                                        <a class="ring-1 rounded-full p-[3px] ring-[#3f3f3f]" tippy
-                                            data-tippy-content="Seleccionado">
-                                            <div class="flex justify-center items-center">
-                                                <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
-                                                    <img class="object-contain object-center"
-                                                        src="{{ asset($product->imagen) }}" />
-                                                </div>
-                                            </div>
-                                        </a>
-                                       
-                                        @foreach ($otherProducts as $x)
-                                            @if (!empty($x->imagen))
-                                                <a class="ring-1 rounded-full p-[3px] ring-transparent hover:ring-[#3f3f3f]"
-                                                    href="{{ route('producto', $x->id) }}">
-                                                    <div class="flex justify-center items-center">
-                                                        <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
-                                                            <img class="object-contain object-center"
-                                                                src="{{ asset($x->imagen) }}" />
-                                                        </div>
-                                                    </div>
-                                                </a> 
-                                            @endif
-                                        @endforeach
-                                    </div>
-                                @endif
-                            </div>
-
-
-                            <div class="flex flex-row gap-3">
-                                <div class="flex flex-col w-1/5 justify-center items-start uppercase font-Urbanist_Black">
-                                    <span>Tallas:</span>
-                                </div>
-                                <div class="flex flex-wrap w-4/5 gap-2 lg:gap-4 justify-start items-center font-Urbanist_Medium">
-                                    <div id="talla-{{$product->id}}" data-productid="{{$product->id}}" class="tallaSelected tallas ring-1 p-[3px] flex items-center justify-center cursor-pointer  rounded-full hover:ring-1  ring-[#3f3f3f]">
-                                        {{-- <input id="talla-{{$product->id}}" type="radio" name="talla" value="{{ $product->peso }}"
-                                            data-product="{{ $product->id }}" class="hidden talla-radio"> --}}
-                                        <div
-                                            class="flex justify-center items-center w-7 lg:w-8 h-7 lg:h-8 text-base transition talla-span">
-                                            {{ $product->peso }}
-                                        </div>
-                                    </div>
-                                    @foreach ($tallasdeProductos as $t)
-                                        <div id="talla-{{$t->id}}" data-productid="{{$t->id}}" class="tallas flex items-center justify-center p-[3px] cursor-pointer  rounded-full hover:ring-1  ring-[#3f3f3f]">
-                                            {{-- <input id="talla-{{$t->id}}" type="radio" name="talla" value="{{ $t->peso }}"
-                                                data-product="{{ $t->id }}" class="hidden talla-radio"> --}}
-                                            <div
-                                                class="flex justify-center items-center text-base w-7 lg:w-8 h-7 lg:h-8 transition talla-span">
-                                                {{ $t->peso }}
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
-                            </div>
-
-                            {{-- @if (!$product->attributes->isEmpty())
-                                <div class="flex flex-row gap-3">
-                                  @php
-                                    $groupedAttributes = $product->attributes->groupBy('titulo');
-                                  @endphp
-                      
-                                  @foreach ($groupedAttributes as $titulo => $items)
-                                    @php
-                                      $filteredItems = $items->filter(function($item) {
-                                        return in_array($item->pivot->attribute_id, [3]);
-                                      });
-                                    @endphp
-                                    @if ($filteredItems->isNotEmpty())
-                                        <div class="flex flex-col w-1/5 justify-center items-start uppercase font-Urbanist_Black">
-                                          <span>{{ $titulo }}:</span>
-                                        </div>
-                                        <div class="flex flex-wrap w-4/5 gap-5 justify-start items-center font-Urbanist_Medium">
-                                          @foreach ($items as $item)
-                                            
-                                              @php
-                                                $atributo = $valorAtributo->firstWhere('id', $item->pivot->attribute_value_id);
-                                              @endphp
-
-                                              @if ($atributo)
-                                                <span class="flex justify-center items-center">{{ $atributo->valor }}</span>
-                                              @endif
-                                            
-                                          @endforeach
-                                        </div>
-                                    @endif
-                                  @endforeach
-                                </div>
-                              @endif --}}
-
-                            {{-- <div class="flex flex-row gap-3">
-                                     <div class="flex flex-col w-1/5 justify-start items-start uppercase font-Urbanist_Black">
-                                          <h2>Tallas</h2>
-                                    </div>
-
-                                    <div class="flex flex-wrap w-4/5 gap-5 justify-start items-center font-Urbanist_Medium">
-                                        <div class="flex justify-center items-center">28</div>
-                                        <div class="flex justify-center items-center">30</div>
-                                        <div class="flex justify-center items-center">32</div>
-                                        <div class="flex justify-center items-center">34</div>
-                                    </div>
-                              </div> --}}
-                            @if ($product->imagen_ambiente)
-                                <div class="flex flex-row">
-                                    <div id="linkmodal" class="flex flex-row gap-2 border w-auto px-3 py-1 border-black cursor-pointer">
-                                        <img class="h-4 object-contain" src="{{ asset('images/img/ruler.png') }}" />
-                                        <p class="font-Urbanist_Bold text-sm">GUÍA DE TALLAS</p>
-                                    </div>
-                                </div>
-                            @endif    
-                            
-                        </div>
-
-
-                        <div class="h-1 border-b-[2px] border-b-[#cccccc] my-4"></div>
-
-                    </div>
-
-                    {{-- @if ($otherProducts->isNotEmpty())
-                        <p class="mb-2 "><b>Característica</b>:
-                        <span class="block bg-[#F5F5F7] p-3 mt-2" tippy> {{ $product->color }}</span>
+                    <div class="flex flex-row items-center justify-start gap-2 w-full">
+                        @if ($product->descuento == 0)
+                            <h2 class="font-galano_semibold text-4xl lg:text-5xl text-[#052F4E]"> S/ {{ $product->precio }}</h2>
+                        @else
+                            <h2 class="font-galano_semibold text-4xl lg:text-5xl text-[#052F4E]"> S/ {{ $product->descuento }}</h2>
+                            <h2 class="font-galano_regular text-2xl line-through text-[#052F4E] text-start lg:text-end"> S/ {{ $product->precio }}</h2>
                         
-                        <p class="-mb-4 "><b>Otras opciones</b>:</p>
-                                
-                            <div class="flex flex-wrap gap-2">
-                                @foreach ($otherProducts as $x)
-                                <a class="block bg-[#F5F5F7] hover:bg-[#ebebf2] p-3" href="/producto/{{ $x->id }}" tippy> {{ $x->color }}</a>
-                                @endforeach
-                            </div>
-
-                    @endif --}}
-
-                    {{-- @if (!$product->attributes->isEmpty())
-                        <div class="flex flex-col gap-8 mt-4 font-Inter_Regular text-lg">
-                            @php
-                                $groupedAttributes = $product->attributes->groupBy('titulo');
-                            @endphp
-
-                            @foreach ($groupedAttributes as $titulo => $items)
-                                <div class="flex flex-row gap-3 text-center text-base font-Inter_Medium">
-                                    <span>{{ $titulo }}:</span>
-                                    @foreach ($items as $item)
-                                        @php
-                                            // Encuentra el objeto en $valorAtributo que tiene el id igual a $item->pivot->attribute_value_id
-                                            $atributo = $valorAtributo->firstWhere(
-                                                'id',
-                                                $item->pivot->attribute_value_id,
-                                            );
-                                        @endphp
-                                        @if ($atributo)
-                                            <!-- Muestra el valor del atributo encontrado -->
-                                            <span
-                                                class="bg-[#006BF6] text-white rounded-md px-5 text-base">{{ $atributo->valor }}</span>
-                                        @endif
-                                    @endforeach
-                                </div>
-                            @endforeach
-                        </div>
-                    @endif --}}
-
-                    {{-- @if (!$especificaciones->isEmpty())
-                        <p class="font-Inter_Medium text-base gap-2 ">Especificaciones: </p>
-                        <div class="min-w-full divide-y divide-gray-200">
-                            <table class=" divide-y divide-gray-200 ">
-                                <tbody>
-                                    @foreach ($especificaciones as $item)
-                                        <tr>
-                                            <td class="px-4 py-1 border border-gray-200">
-                                                {{ $item->tittle }}
-                                            </td>
-                                            <td class="px-4 py-1 border border-gray-200">
-                                                {{ $item->specifications }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    @endif --}}
+                        @endif  
+                    </div>
 
                     @if ($product->status == 1 && $product->visible == 1)
-                      <div class="flex flex-col gap-4">
+                      <div class="flex flex-col gap-4 mt-3">
                           <div class="flex flex-col md:flex-row gap-1 md:gap-5 items-start">
                               <div class="flex flex-row gap-5 justify-start items-center w-auto order-2 md:order-1">
                                 
-                                      <button id="btnAgregarCarritoPr" data-id="{{ $product->id }}"
-                                          class="bg-black w-full py-3 px-5 xl:px-8  text-white text-center uppercase font-Urbanist_Medium tracking-wide text-base">
-                                          Agregar
-                                          a la bolsa
-                                      </button>
+                                <button id="btnAgregarCarritoPr" data-id="{{ $product->id }}"
+                                   class="bg-[#052F4E] w-full py-3 px-5 xl:px-8  text-white text-center rounded-xl font-galano_semibold tracking-wide text-base">
+                                    Agregar a la bolsa
+                                </button>
                                   
                               </div>
                               <div class="flex order-1 md:order-2">
                                   <div class="flex justify-center items-center cursor-pointer rounded-l-3xl">
                                       <button
-                                          class="py-2.5 px-5 text-lg font-Helvetica_Bold rounded-full bg-transparent m-1 text-black"
+                                          class="py-2.5 px-5 text-lg font-galano_semibold rounded-full bg-[#052F4E] m-1 text-white"
                                           id=disminuir type="button">-</button>
                                   </div>
                                   <div id=cantidadSpan
-                                      class="py-2.5 px-5 flex justify-center items-center bg-transparent text-lg font-Urbanist_Bold">
+                                      class="py-2.5 px-5 flex justify-center items-center bg-transparent text-lg font-galano_semibold">
                                       <span>1</span>
                                   </div>
                                   <div class="flex justify-center items-center cursor-pointer rounded-r-3xl">
                                       <button
-                                          class="py-2.5 px-5 text-lg font-Helvetica_Bold rounded-full bg-transparent m-1 text-black"
+                                          class="py-2.5 px-5 text-lg font-galano_semibold rounded-full bg-[#052F4E] m-1 text-white"
                                           id=aumentar type="button">+</button>
                                   </div>
                               </div>
@@ -444,32 +194,107 @@
                           </div>
                       </div>
                     @endif
-
-
-                    <div class="flex flex-col justify-center items-start">
-                      @if ($product->sku)
-                          <p class="font-Urbanist_Regular text-base text-[#444]">SKU: <span id="num_sku">{{ $product->sku }}</span>
-                          </p>
-                      @endif
-                      
-                      @if ($product->sku)
-                          <p class="font-Urbanist_Regular text-base text-[#444]">Stock: <span id="num_stock">{{ number_format($product->stock, 0) }}</span>
-                          </p>
-                      @endif
-                    </div>
-
-                    <div class="!text-lg !font-Urbanist_Regular w-full mt-2 text-[#444]">
-                        {!! $product->description !!}
-                    </div>
-
-
-
                 </div>
             </div>
         </section>
         
 
-    @if (count($ProdComplementarios) > 0)
+        <section class="w-full px-[5%] pt-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 md:gap-16">
+
+                <div class="flex flex-col justify-center items-start gap-5">
+                    <h2 id="nombreproducto" class="font-galano_semibold text-3xl lg:text-4xl text-[#052F4E]">
+                        Información adicional</h2>
+
+                    <div class="text-[#052F4E] text-lg font-normal font-galano_regular flex flex-col gap-3">
+                        <p>
+                            Suspendisse id pulvinar mi. Curabitur commodo neque eget felis mollis, ac sagittis quam pulvinar.
+                        </p>
+                    </div>
+
+                    @php
+                        $pesoLimpio = trim(strip_tags($product->peso));
+                    @endphp
+                    @if (!empty($pesoLimpio))
+                        <div class="text-[#052F4E] flex flex-col gap-1">
+                            <h2 class="text-2xl font-galano_medium font-medium">Peso</h2>
+                            
+                            <div class="text-base font-normal font-galano_regular">
+                                {!! $product->peso !!}
+                            </div>
+                        </div>
+                    @endif
+                    
+                    @php
+                        $medidasLimpio = trim(strip_tags($product->medidas));
+                    @endphp
+                    @if (!empty($medidasLimpio))
+                        <div class="text-[#052F4E] flex flex-col gap-1">
+                            <h2 class="text-2xl font-galano_medium font-medium">Medidas</h2>
+
+                            <div class="text-base font-normal font-galano_regular">
+                                {!!$product->medidas!!}
+                            </div>
+                        
+                        </div>
+                    @endif
+
+                    @php
+                        $usosLimpio = trim(strip_tags($product->usos));
+                    @endphp
+                    @if (!empty($usosLimpio))
+                        <div class="text-[#052F4E] flex flex-col gap-1">
+                            <h2 class="text-2xl font-galano_medium font-medium">Opciones de uso</h2>
+                            
+                            <div class="text-base font-normal font-galano_regular">
+                                {!!$product->usos!!}
+                            </div>
+                        </div>
+                    @endif
+                </div>   
+                
+                <div class="flex flex-col gap-2">
+                    <img class="w-full aspect-square object-contain" src="{{asset($product->imagen_ambiente)}}" onerror="this.onerror=null;this.src='images/imagen/medidascremoso.png';"/>  
+                </div>
+
+            </div>
+        </section>
+
+
+        @if ($ProdComplementarios->isEmpty())
+        @else
+            <section>
+                <div class="flex flex-col gap-10 w-full px-[5%] mt-10 lg:mt-20 py-10 lg:py-16 bg-[#EBEDEF]">
+                    <div class="flex flex-col xl:flex-row xl:justify-between items-start xl:items-center gap-5">
+                        <div class="flex flex-col gap-2 max-w-4xl">
+                            <h4 class="font-galano_bold text-text32 md:text-text40 text-[#082252] leading-none">Descubre Nuestras Categorías de Productos</h4>
+                            <h3 class="text-[#082252] font-galano_regular font-normal text-lg">
+                                Explora nuestra amplia variedad de suplementos para heladerías. Cada categoría está diseñada para ayudarte a crear helados únicos y deliciosos que sorprenderán a tus clientes.
+                            </h3>
+                        </div>
+                        <div class="flex flex-row justify-start md:justify-center items-start">
+                            <a href="#"
+                                class="text-white py-3 px-6 bg-[#052F4E] rounded-xl font-galano_semibold text-center">
+                                Ver todos los productos
+                            </a>
+                        </div>
+                    </div>
+                    <div class="w-full">  
+                        <div class="swiper carruselproductos h-max">
+                            <div class="swiper-wrapper">
+                                @foreach ($ProdComplementarios as $item)
+                                    <div class="swiper-slide">
+                                        <x-product.card_product_cremoso :item="$item" />
+                                    </div>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </section>
+        @endif
+
+    {{-- @if (count($ProdComplementarios) > 0)
         <div class="px-[5%]">
             <div class="h-1 border-b-[2px] border-b-[#cccccc]"></div>
         </div>
@@ -492,7 +317,7 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
        
 
     <div id="modaltallas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
@@ -526,6 +351,43 @@
 
         zoomImage.addEventListener('mouseleave', () => {
             zoomImage.style.transform = 'scale(1)'; // Restaura el zoom al salir
+        });
+    </script>
+    <script>
+        var swiper = new Swiper(".carruselproductos", {
+            slidesPerView: 4,
+            spaceBetween: 20,
+            loop: true,
+            grabCursor: true,
+            centeredSlides: false,
+            initialSlide: 0,
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination-carruseltop",
+                clickable: true,
+            },
+
+            breakpoints: {
+                0: {
+                    slidesPerView: 1,
+                    spaceBetween: 20,
+                },
+                650: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
+                1024: {
+                    slidesPerView: 3,
+                    spaceBetween: 20,
+                },
+                1350: {
+                    slidesPerView: 4,
+                    spaceBetween: 20,
+                },
+            },
         });
     </script>
     <script>
@@ -610,7 +472,7 @@
         })
     </script>
 
-    <script>
+    {{-- <script>
       $(document).ready(function() {
 
         function buscarTallaProducto() {
@@ -711,14 +573,13 @@
         
           buscarTallaProducto();
       });
-    </script>
+    </script> --}}
 
     <script>
-         var appUrl = <?php echo json_encode($url_env); ?>;
+        var appUrl = <?php echo json_encode($url_env); ?>;
+        
         $(document).ready(function() {
             articulosCarrito = Local.get('carrito') || [];
-
-            // PintarCarrito();
         });
     </script>
       

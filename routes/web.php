@@ -90,15 +90,19 @@ Route::get('/post/{id}', [IndexController::class, 'detalleBlog'])->name('detalle
 /* Proceso de pago */
 Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');
 Route::get('/pago/{code}', [IndexController::class, 'pago'])->name('pago');
-Route::post('/agradecimiento', [IndexController::class, 'agradecimiento'])->name('agradecimiento');
+Route::get('/agradecimiento', [IndexController::class, 'agradecimiento'])->name('agradecimiento');
 
 
 Route::post('/procesar/pago', [IndexController::class, 'procesarPago'])->name('procesar.pago');
 /* Catálogo y producto */
 Route::get('/producto/{id}', [IndexController::class, 'producto'])->name('producto');
-// Route::get('/catalogo', [IndexController::class, 'catalogo'])->name('catalogo.all');
-// Route::get('/catalogo/{category}', [IndexController::class, 'catalogo'])->name('catalogo');
-// Route::get('/catalogo/{category}/{subcategory}', [IndexController::class, 'catalogo'])->name('catalogo.sub');
+Route::get('/catalogo', [IndexController::class, 'catalogo'])->name('catalogo.all');
+Route::get('/catalogo/{category}', [IndexController::class, 'catalogo'])->name('catalogo');
+Route::get('/catalogo/{category}/{subcategory}', [IndexController::class, 'catalogo'])->name('catalogo.sub');
+
+Route::post('/getSubcategoria', [IndexController::class, 'getSubcategoria'])->name('getSubcategoria');
+Route::post('/getTotalProductos', [IndexController::class, 'getTotalProductos'])->name('getTotalProductos');
+
 Route::post('carrito/buscarProducto', [CarritoController::class, 'buscarProducto'])->name('carrito.buscarProducto');
 Route::get('/buscar', [IndexController::class, 'searchProduct'])->name('buscar');
 Route::get('/ayuda', [IndexController::class, 'help'])->name('help');
