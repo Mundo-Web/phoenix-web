@@ -1094,6 +1094,7 @@ class IndexController extends Controller
                 <tr 
                   style="
                     height: 50px;
+                    display: grid;
                   "
                   >
                   <th
@@ -1115,8 +1116,8 @@ class IndexController extends Controller
                 </tr>
                 
 
-                <tr>
-                  <td style="padding-bottom:15px">
+                <tr style="display: grid;">
+                  <td style="padding-bottom:15px; display: grid;">
                     <p
                       style="
                         font-weight: 600;
@@ -1131,7 +1132,7 @@ class IndexController extends Controller
                   </td>
                 </tr>
 
-                <tr>
+                <tr style="display: grid;">
                   <td style="">
                     <p
                       style="
@@ -1147,7 +1148,7 @@ class IndexController extends Controller
                   </td>
                 </tr>
                 
-                <tr>
+                <tr style="display: grid;">
                   <td style="text-align: center;">
                       <p
                         style=" 
@@ -1163,7 +1164,7 @@ class IndexController extends Controller
                   </td>
                 </tr>
 
-                <tr>
+                <tr style="display: grid;">
                   <td
                     style="
                     text-align: center;
