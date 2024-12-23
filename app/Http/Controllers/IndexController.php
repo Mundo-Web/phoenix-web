@@ -1116,7 +1116,7 @@ class IndexController extends Controller
                 </tr>
                 
 
-                <tr style="display: grid;">
+                <tr>
                   <td style="padding-bottom:15px;">
                     <p
                       style="
