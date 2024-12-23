@@ -1093,7 +1093,7 @@ class IndexController extends Controller
               <tbody>
                 <tr 
                   style="
-                    margin-bottom: -50px;
+                    height: 50px;
                   "
                   >
                   <th
@@ -1102,12 +1102,12 @@ class IndexController extends Controller
                       flex-direction: row;
                       justify-content: center;
                       align-items: center;
-                      margin: 40px;
+                      margin: 40px 40px 0px 40px;
                     "
                   >
                     <img src="' . $appUrl . '/mail/logocontacto.png" alt="americanbrands"  style="
                     margin: auto;
-                    width: 150px;
+                    width: 200px;
                     height: auto;
                     "
                     />
@@ -1120,7 +1120,7 @@ class IndexController extends Controller
                     <p
                       style="
                         font-weight: 600;
-                        font-size: 21px;
+                        font-size: 40px;
                         text-align: center;
                         color: #052F4E;
                         font-family: Montserrat, sans-serif;
@@ -1192,20 +1192,6 @@ class IndexController extends Controller
                   </td>
                 </tr>
 
-                <tr>
-                  <th>
-                    <div
-                      style="
-                        background-color: black;
-                        opacity: 0.5;
-                        height: 100px;
-                        width:100%;
-                      "
-                    >
-                    </div>
-                  </th>
-                </tr>
-                
               </tbody>
             </table>
           </main>
