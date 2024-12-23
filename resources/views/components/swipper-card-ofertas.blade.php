@@ -77,7 +77,7 @@
         ">
         <div class="absolute bottom-10 right-0 left-0  flex content-center justify-center items-center z-10">
           <a href="{{ $item->button_link }}"
-            class="font-semibold text-[16px] bg-[#006BF6] py-2 px-4 text-center text-white rounded-3xl  absolute ">
+            class="font-semibold font-galano_regular text-[16px] bg-[#082252] py-2 px-4 text-center text-white rounded-xl  absolute ">
             {{ $item->button_text }}
           </a>
 

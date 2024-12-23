@@ -29,6 +29,7 @@ use App\Models\Offer;
 use App\Models\PolyticsCondition;
 use App\Models\Popup;
 use App\Models\Price;
+use App\Models\Project;
 use App\Models\Sale;
 use App\Models\Service;
 use App\Models\Specifications;
@@ -1048,7 +1049,7 @@ class IndexController extends Controller
   {
     $appUrl = env('APP_URL');
     $name = $data['full_name'];
-    $mensaje = "Gracias por comunicarte con American Brands";
+    $mensaje = "Gracias por comunicarte con MrCremoso";
     $mail = EmailConfig::config($name, $mensaje);
     try {
       $mail->addAddress($data['email']);
@@ -1079,7 +1080,7 @@ class IndexController extends Controller
                 height: 600px;
                 margin: 0 auto;
                 text-align: center;
-                background-image:url(' . $appUrl . '/mail/fondocontacto.jpg);
+                background-image:url(' . $appUrl . '/mail/fondocontacto.png);
                 background-repeat: no-repeat, no-repeat;
                 background-position: center bottom , center bottom;;
                 background-size: fit , fit;
@@ -1104,7 +1105,7 @@ class IndexController extends Controller
                       margin: 40px;
                     "
                   >
-                    <img src="' . $appUrl . '/mail/logocontacto.jpg" alt="americanbrands"  style="
+                    <img src="' . $appUrl . '/mail/logocontacto.png" alt="americanbrands"  style="
                     margin: auto;
                     width: 150px;
                     height: auto;
@@ -1112,31 +1113,20 @@ class IndexController extends Controller
                     />
                   </th>
                 </tr>
-                <tr>
-                  <th>
-                    <div
-                      style="
-                        background-color: black;
-                        opacity: 0.5;
-                        height: 100px;
-                        width:100%;
-                      "
-                    >
-                    </div>
-                  </th>
-                </tr>
+                
 
                 <tr>
                   <td style="padding-bottom:15px">
                     <p
                       style="
-                        font-weight: 500;
+                        font-weight: 600;
                         font-size: 21px;
                         text-align: center;
+                        color: #052F4E;
                         font-family: Montserrat, sans-serif;
                       "
                     >
-                        ¡GRACIAS POR ESCRIBIRNOS! 
+                        ¡Gracias por escribirnos! 
                     </p>
                   </td>
                 </tr>
@@ -1148,6 +1138,7 @@ class IndexController extends Controller
                         font-weight: 500;
                         font-size: 16px;
                         text-align: center;
+                        color: #052F4E;
                         font-family: Montserrat, sans-serif;
                       "
                     >
@@ -1163,6 +1154,7 @@ class IndexController extends Controller
                           font-weight: 500;
                           font-size: 16px;
                           text-align: center;
+                          color: #052F4E;
                           font-family: Montserrat, sans-serif;
                         "
                       >
@@ -1182,7 +1174,7 @@ class IndexController extends Controller
                       href="' . $appUrl . '"
                       style="
                         text-decoration: none;
-                        background-color: white;
+                        background-color: #052F4E;
                         color: white;
                         padding: 8px 16px;
                         display: inline-flex;
@@ -1192,10 +1184,10 @@ class IndexController extends Controller
                         font-family: Montserrat, sans-serif;
                         font-size: 16px;
                         border-radius: 0px;
-                        border: 1px solid black;
+                        border: 1px solid #052F4E;
                       "
                     >
-                      <span>VISITA NUESTRA WEB</span>
+                      <span>Visita nuestra web</span>
                     </a>
                   </td>
                 </tr>
@@ -1232,7 +1224,7 @@ class IndexController extends Controller
 
     $appUrl = env('APP_URL');
     $name = $data['nombre'];
-    $mensaje = "Gracias por comprar en $appUrl ";
+    $mensaje = "Gracias por comprar en $appUrl";
     $mail = EmailConfig::config($name, $mensaje);
     try {
       $mail->addAddress($data['email']);
@@ -1586,6 +1578,8 @@ class IndexController extends Controller
   }
 
   public function rse(){
-    return view('public.rse');
+    $testimonie = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $rse = Project::all();
+    return view('public.rse', compact('rse','testimonie'));
   }
 }

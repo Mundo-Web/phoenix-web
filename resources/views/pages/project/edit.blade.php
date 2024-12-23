@@ -1,13 +1,13 @@
 <x-app-layout>
 
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-    <form action="{{ route('aboutus.update', $aboutUs->id) }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('project.update', $project->id) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <div
         class="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
         <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-          <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Editar sobre nosotros
+          <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Editar RSE
           </h2>
         </header>
 
@@ -29,7 +29,7 @@
                       </g>
                     </svg>
                   </div>
-                  <input type="text" id="titulo" name="titulo" value="{{ $aboutUs->titulo }}"
+                  <input type="text" id="titulo" name="titulo" value="{{ $project->titulo }}"
                     class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Titulo">
                 </div>
@@ -40,14 +40,14 @@
                   
                     <textarea type="text" rows="2" id="descripcion" name="descripcion"
                     class="ckeditor mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Descripción">{!! $aboutUs->descripcion !!}</textarea>
+                    placeholder="Descripción">{!! $project->descripcion !!}</textarea>
                 </div>
               </div>
 
               <div class="md:col-span-5">
                 <label for="imagen">Imagen principal</label>
                 <div class="relative mb-2  mt-2">
-                  <input id="imagen" name="imagen" value="{{ $aboutUs->imagen }}"
+                  <input id="imagen" name="imagen" value="{{ $project->imagen }}"
                     class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     aria-describedby="user_avatar_help" id="user_avatar" type="file">
                 </div>
@@ -61,7 +61,7 @@
 
               <div class="md:col-span-5 text-right mt-6 flex justify-between">
                 <div class="inline-flex items-end">
-                  <a href="{{ route('aboutus.index') }}"
+                  <a href="{{ route('project.index') }}"
                     class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Volver</a>
                 </div>
                 <div class="inline-flex items-end">

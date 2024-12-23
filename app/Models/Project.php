@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AboutUs extends Model
+class Project extends Model
 {
     use HasFactory;
+
     protected $filiable = [
-    'titulo',
-    'descripcion',
-    'imagen',
-    'status'];
+        'titulo',
+        'descripcion',
+        'imagen',
+        'status'];
 }

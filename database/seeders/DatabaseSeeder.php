@@ -49,6 +49,7 @@ class DatabaseSeeder extends Seeder
             PricesTableSeeder::class,
             PoliticasDatos::class,
             AboutUsSeeder::class,
+            ProjectSeeder::class,
             ShortcodeSeeder::class,
             //ServiceSeeder::class,
         ]);

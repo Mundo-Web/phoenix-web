@@ -45,6 +45,7 @@ use App\Http\Controllers\PolyticsConditionController;
 use App\Http\Controllers\PopupController;
 use App\Http\Controllers\PriceController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SeguimientoPedidoController;
 use App\Http\Controllers\ShortcodeController;
@@ -239,6 +240,11 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::resource('/aboutus', AboutUsController::class);
         Route::post('/aboutus/updateVisible', [AboutUsController::class, 'updateVisible'])->name('aboutus.updateVisible');
         Route::post('/aboutus/borrar', [AboutUsController::class, 'borrar'])->name('aboutus.borrar');
+
+        //Proyecto
+        Route::resource('/project', ProjectController::class);
+        Route::post('/project/updateVisible', [ProjectController::class, 'updateVisible'])->name('project.updateVisible');
+        Route::post('/project/borrar', [ProjectController::class, 'borrar'])->name('project.borrar');
 
         //Atributes
         Route::resource('/attributes', AttributesController::class);

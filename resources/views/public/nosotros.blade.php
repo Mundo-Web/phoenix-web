@@ -95,13 +95,13 @@
         <div class="grid grid-cols-1 xl:grid-cols-2 w-full  bg-[#EBEDEF] px-[5%] gap-0 lg:gap-16 rounded-xl">
             <div class="flex flex-col justify-center items-start gap-3 py-12 xl:py-16">
                 <h1 class="text-[#052F4E] font-galano_semibold tracking-tight text-3xl leading-none">
-                    Insumos de Calidad para Heladerías Excepcionales
+                    {{$nosotros[3]->titulo ?? "Ingrese texto" }}
                 </h1>
                 <p class="text-[#052F4E] text-lg font-galano_regular">
-                    Sed non iaculis felis, eget egestas risus. Nullam vitae hendrerit purus. Suspendisse at sodales lectus. Nunc facilisis lorem id lacinia luctus.
+                  {!! $nosotros[3]->descripcion ?? "Ingrese texto" !!}
                 </p>
                 <div class="flex flex-row justify-start items-start">
-                    <a href="#"
+                    <a href="{{route('catalogo.all')}}"
                         class="text-white py-3 px-6 bg-[#052F4E] rounded-xl text-base font-galano_light font-semibold text-left">
                         Comprar ahora
                     </a>

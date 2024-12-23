@@ -65,18 +65,17 @@
         <x-menu.item id="products" href="{{ route('products.index') }}" icon="fas fa-box">Productos</x-menu.item>
         {{-- <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Marcas</x-menu.item> --}}
         {{-- <x-menu.item id="strength" href="{{ route('strength.index') }}">Fits</x-menu.item> --}}
-        <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fas fa-pencil-alt">Blog</x-menu.item>
+        
         {{-- <x-menu.item id="offers" href="{{ route('Admin/Offers.jsx') }}" icon="fas fa-boxes">Combos</x-menu.item> --}}
       </x-menu.group>
 
-      <x-menu.group title="Datos de la empresa">
-        <x-menu.item id="datosgenerales" href="{{ route('datosgenerales.edit', 1) }}" icon="fas fa-address-card">Datos Generales</x-menu.item>
-        <x-menu.item id="shortcode" href="{{ route('shortcode.edit', 1) }}" icon="fas fa-address-card">Shortcode Head/Body</x-menu.item>
-
+      <x-menu.group title="Contenido de la web">
         
-        <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fas fa-sliders-h">Sliders</x-menu.item>
+        <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fa-solid fa-blog">Blog</x-menu.item>
+        
+        <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fa fa-solid fa-image">Sliders</x-menu.item>
         {{-- <x-menu.item id="banners" href="{{ route('banners.index') }}" icon="fa fa-solid fa-image">Banners</x-menu.item> --}}
-        <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fa fa-solid fa-image">Servicios</x-menu.item>
+        <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-sliders-h">Servicios</x-menu.item>
         <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item>
         
         <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">Reglas de descuento</x-menu.item>
@@ -84,13 +83,13 @@
         <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">Costos de Envio </x-menu.item>
         <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">Estados de pedidos</x-menu.item>
         
-        <x-menu.item id="politicas-de-devolucion" href="{{ route('politicas-de-devolucion.edit', 1) }}" icon="fas fa-undo-alt">Politicas de Devolucion</x-menu.item>
-        <x-menu.item id="terminos-y-condiciones" href="{{ route('terminos-y-condiciones.edit', 1) }}" icon="fas fa-file-contract">Terminos y Condiciones</x-menu.item>
+        
         {{-- <x-menu.item id="politica-datos" href="{{ route('politicadatos.detalle', 1) }}" icon="fas fa-file-contract">Terminos Datos</x-menu.item> --}}
 
         {{-- <x-menu.item id="tiempo-y-costos-envio" href="{{ route('tiempo-y-costos-envio.edit', 1) }}" icon="fas fa-file-contract">Tiempo y Costos de Envío</x-menu.item> --}}
         {{-- <x-menu.item id="plazos-de-reembolso" href="{{ route('plazos-de-reembolso.edit', 1) }}" icon="fas fa-file-contract">Plazos de Reembolso</x-menu.item> --}}
-        <x-menu.item id="sobrenosotros" href="{{ route('aboutus.index') }}" icon="fas fa-address-card">Sobre Nosotros</x-menu.item> 
+        <x-menu.item id="sobrenosotros" href="{{ route('aboutus.index') }}" icon="fas fa-pencil-alt">Sobre Nosotros</x-menu.item> 
+        <x-menu.item id="rse" href="{{ route('project.index') }}" icon="fas fa-pencil-alt">RSE</x-menu.item> 
         {{-- <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item> --}}
         {{-- <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item> --}}
         {{-- <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item> --}}
@@ -110,6 +109,14 @@
         {{-- <x-menu.item id="galerie" href="{{ route('galerie.index') }}" icon="fas fa-images">Galerias</x-menu.item> --}}
        
       </x-menu.group>
+
+      <x-menu.group title="Datos de la empresa">
+        <x-menu.item id="datosgenerales" href="{{ route('datosgenerales.edit', 1) }}" icon="fas fa-address-card">Datos Generales</x-menu.item>
+        <x-menu.item id="shortcode" href="{{ route('shortcode.edit', 1) }}" icon="fas fa-address-card">Shortcode Head/Body</x-menu.item>
+        <x-menu.item id="politicas-de-devolucion" href="{{ route('politicas-de-devolucion.edit', 1) }}" icon="fas fa-undo-alt">Politicas de Devolucion</x-menu.item>
+        <x-menu.item id="terminos-y-condiciones" href="{{ route('terminos-y-condiciones.edit', 1) }}" icon="fas fa-file-contract">Terminos y Condiciones</x-menu.item>
+      </x-menu.group>
+
     </div>
     <!-- Expand / collapse button -->
     <div class="pt-3 hidden lg:inline-flex 2xl:hidden justify-end mt-auto">

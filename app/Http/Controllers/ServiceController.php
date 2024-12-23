@@ -71,7 +71,7 @@ class ServiceController extends Controller
             $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
             $img =  $manager->read($request->file('imagen'));
             // $img->coverDown(968, 351, 'center');
-            $ruta = 'storage/images/logosfooter/';
+            $ruta = 'storage/images/service/';
            
             if (!file_exists($ruta)) {
                 mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución

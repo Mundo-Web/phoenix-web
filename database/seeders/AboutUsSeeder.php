@@ -56,6 +56,14 @@ class AboutUsSeeder extends Seeder
                 'created_at' => '2024-08-02 21:34:50',
                 'updated_at' => '2024-08-02 23:47:03',
             ],
+            [
+                'titulo' => 'Insumos de Calidad para Heladerías Excepcionales',
+                'descripcion' => 'Sed non iaculis felis, eget egestas risus. Nullam vitae hendrerit purus. Suspendisse at sodales lectus. Nunc facilisis lorem id lacinia luctus.',
+                'imagen' => 'storage/images/imagen/i4pfzlPd8d_Ima2.png',
+                'status' => 1,
+                'created_at' => '2024-08-02 21:33:56',
+                'updated_at' => '2024-08-03 00:22:01',
+            ],
           
         ]);
     }

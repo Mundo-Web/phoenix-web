@@ -11,7 +11,7 @@
 
 
       <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Nosotros </h2>
+        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Proyecto </h2>
       </header>
       <div class="p-3">
 
@@ -30,7 +30,7 @@
             </thead>
             <tbody>
 
-              @foreach ($aboutUs as $item)
+              @foreach ($project as $item)
                 <tr>
                   <td>{{ $item->titulo }}</td>
                   <td>{{ Str::substr($item->descripcion, 0, 50) }}</td>
@@ -51,6 +51,9 @@
                         data-titleService='{{ $item->title }}' {{ $item->status == 1 ? 'checked' : '' }}>
                       <label for="{{ 'v_' . $item->id }}"></label>
                     </form>
+
+
+
                   </td> --}}
 
                   <td class="flex flex-row justify-end items-center gap-5">

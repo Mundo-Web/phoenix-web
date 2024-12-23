@@ -55,7 +55,7 @@ class AboutUsController extends Controller
 
       if ($request->hasFile("imagen")) {
         $file = $request->file('imagen');
-        $routeImg = 'storage/images/imagen/';
+        $routeImg = 'storage/images/nosotros/';
         $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
 
         $this->saveImg($file, $routeImg, $nombreImagen);
@@ -105,7 +105,7 @@ class AboutUsController extends Controller
 			
 			if ($request->hasFile("imagen")) {
 				$file = $request->file('imagen');
-				$routeImg = 'storage/images/imagen/';
+				$routeImg = 'storage/images/nosotros/';
 				$nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
 
 				$this->saveImg($file, $routeImg, $nombreImagen);
