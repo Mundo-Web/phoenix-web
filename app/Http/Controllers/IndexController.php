@@ -1047,6 +1047,7 @@ class IndexController extends Controller
 
   private function envioCorreo($data)
   {
+    $admin = General::where('id', 1)->first();
     $appUrl = env('APP_URL');
     $name = $data['full_name'];
     $mensaje = "Gracias por comunicarte con MrCremoso";
@@ -1198,6 +1199,7 @@ class IndexController extends Controller
         </body>
       </html>
       ';
+      $mail->addBCC($admin->email, 'Nuevo mensaje',);
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {

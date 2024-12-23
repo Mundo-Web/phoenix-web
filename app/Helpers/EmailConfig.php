@@ -15,8 +15,6 @@ class EmailConfig
         $mail->SMTPAuth = true;
         $mail->Username = 'info@mrcremosobasedehelados.com.pe';
         $mail->Password = 'cremoso2024#';
-        // $mail->Username = 'boostperuatencion@gmail.com';
-        // $mail->Password = 'hlabkcttomghufms';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
         $mail->Subject = '' . $name . ', '.$mensaje. '';
