@@ -1183,7 +1183,7 @@ class IndexController extends Controller
                         font-weight: 600;
                         font-family: Montserrat, sans-serif;
                         font-size: 16px;
-                        border-radius: 0px;
+                        border-radius: 20px;
                         border: 1px solid #052F4E;
                       "
                     >
