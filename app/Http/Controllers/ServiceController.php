@@ -84,6 +84,7 @@ class ServiceController extends Controller
         }
 
         $service->link = $request->link;
+        $service->namebutton = $request->namebutton;
         $service->title = $request->title;
         $service->description = $request->description;
         $service->status = 1;
@@ -124,6 +125,7 @@ class ServiceController extends Controller
         $service->title = $request->title;
         $service->description = $request->description;
         $service->link = $request->link;
+        $service->namebutton = $request->namebutton;
        
 
         if ($request->hasFile("imagen")) {

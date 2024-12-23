@@ -60,136 +60,139 @@
 
 <header class="sticky top-0 z-[25]">
     <div class="left-0 right-0">
-    
+
         <div class=" bg-[#052F4E] z-[1000] relative font-galano_medium text-sm">
-          <div class="flex flex-row justify-between items-center py-3 w-11/12 mx-auto text-white text-sm">
-            
-            <div class="flex flex-col justify-center items-center">
-                <p>@cremosos</p>
+            <div class="flex flex-row justify-between items-center py-3 w-11/12 mx-auto text-white text-sm">
+
+                <div class="flex flex-col justify-center items-center">
+                    <p>@cremosos</p>
+                </div>
+
+                <div class="flex flex-col justify-center items-center">
+                    <p>Las mejores ofertas</p>
+                </div>
+
+                <div class="flex flex-col justify-center items-center">
+                    <p>Free delivery</p>
+                </div>
+
             </div>
-    
-            <div class="flex flex-col justify-center items-center">
-                <p>Las mejores ofertas</p>
-            </div>
-    
-            <div class="flex flex-col justify-center items-center">
-                <p>Free delivery</p>
-            </div>
-    
-          </div>
         </div>
-    
+
         <div class="flex justify-between w-full px-[5%] bg-[#f2f5f7]">
-          <nav class="flex h-[70px] items-center justify-between gap-10 w-full">
-            <input type="checkbox" id="menu" class="peer/menu menu hidden" />
-            <label for="menu"
-              class="transition-all flex flex-col gap-1 z-40 lg:hidden hamburguesa justify-center items-center order-3 lg:order-3">
-              <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
-              <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
-              <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
-            </label>
-    
-            <div class="flex justify-center items-center z-40">
-              <a href="{{ route('index') }}">
-                <img src="{{ asset('images/svg/logomrcremoso.svg') }}" alt="Cremoso" class="w-[170px]">
-              </a>
-            </div>
+            <nav class="flex h-[70px] items-center justify-between gap-10 w-full">
+                <input type="checkbox" id="menu" class="peer/menu menu hidden" />
+                <label for="menu"
+                    class="transition-all flex flex-col gap-1 z-40 lg:hidden hamburguesa justify-center items-center order-3 lg:order-3">
+                    <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
+                    <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
+                    <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
+                </label>
 
-            
-            
-    
-            <ul
-              class="font-galano_medium text-lg text-[#052F4E] pt-40 fixed inset-0 bg-[#f2f5f7] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 gap-5 lg:gap-10 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
-    
-              <div class="flex flex-col lg:flex-row order-2 lg:order-1 lg:w-[80%] lg:justify-center gap-5 lg:gap-10">
-                
-                <li class="flex flex-col">
-                  <a href="{{ route('nosotros') }}"
-                    class="{{ isset($pagina) && $pagina == 'nosotros' ? 'font-semibold' : '' }}">Nosotros</a>
-                  @if (isset($pagina) && $pagina == 'nosotros')
-                    <p
-                      class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                    </p>
-                  @endif
-                </li>
-    
-                <li class="flex flex-col">
-                  <a href="{{ route('catalogo.all') }}"
-                    class="{{ isset($pagina) && $pagina == 'catalogo' ? 'font-semibold' : '' }}">Productos</a>
-                  @if (isset($pagina) && $pagina == 'catalogo')
-                    <p
-                      class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                    </p>
-                  @endif
-                </li>
-    
-                <li class="flex flex-col">
-                  <a href="{{ route('servicios') }}"
-                    class="{{ isset($pagina) && $pagina == 'servicios' ? 'font-semibold' : '' }}">Servicios</a>
-                  @if (isset($pagina) && $pagina == 'servicios')
-                    <p
-                      class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                    </p>
-                  @endif
-                </li>
-    
-                {{-- <li class="flex flex-col">
-                  <a href="{{ route('rse') }}"
-                    class="{{ isset($pagina) && $pagina == 'rse' ? 'font-semibold' : '' }}">RSE</a>
-                  @if (isset($pagina) && $pagina == 'rse')
-                    <p
-                      class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                    </p>
-                  @endif
-                </li> --}}
-    
-                <li class="flex flex-col">
-                  <a href="{{ route('blog', 0) }}"
-                    class="{{ isset($pagina) && $pagina == 'blog' ? 'font-semibold' : '' }}">Blog</a>
-                  @if (isset($pagina) && $pagina == 'blog')
-                    <p
-                      class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                    </p>
-                  @endif
-                </li>
-                
-                <li class="flex flex-col">
-                  <a href="{{ route('contacto') }}"
-                    class="{{ isset($pagina) && $pagina == 'contacto' ? 'font-semibold' : '' }}">Contacto</a>
-                  @if (isset($pagina) && $pagina == 'contacto')
-                    <p
-                      class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                    </p>
-                  @endif
-                </li>
-              </div>
-    
-              <div
-                class="relative flex flex-row gap-5 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
-                  
-                <div class="flex flex-row items-center justify-center">
-                    <div class="text-white font-galano_semibold bg-[#052f4e] rounded-xl text-center w-auto py-2 px-6">Soporte</div>
+                <div class="flex justify-center items-center z-40">
+                    <a href="{{ route('index') }}">
+                        <img src="{{ asset('images/svg/logomrcremoso.svg') }}" alt="Cremoso" class="w-[170px]">
+                    </a>
                 </div>
 
-                    
-                <div class="flex justify-center items-center min-w-[38px]">
-                    <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
-                     <span id="itemsCount"
-                         class="bg-[#052f4e] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
-                        <a><i class="fa-solid fa-cart-shopping text-[#052f4e] w-7"></i></a>
-                     </div>
-                </div>
-                    
 
-              </div>
+                <ul
+                    class="font-galano_medium text-lg text-[#052F4E] pt-40 fixed inset-0 bg-[#f2f5f7] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 gap-5 lg:gap-10 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
 
-              
-              
-            </ul>
-          </nav>
+                    <div
+                        class="flex flex-col lg:flex-row order-2 lg:order-1 lg:w-[80%] lg:justify-center gap-5 lg:gap-10">
+
+                        <li class="flex flex-col">
+                            <a href="{{ route('nosotros') }}"
+                                class="{{ isset($pagina) && $pagina == 'nosotros' ? 'font-semibold' : '' }}">Nosotros</a>
+                            @if (isset($pagina) && $pagina == 'nosotros')
+                                <p
+                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
+                                </p>
+                            @endif
+                        </li>
+
+                        <li class="flex flex-col">
+                            <a href="{{ route('catalogo.all') }}"
+                                class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'font-semibold' : '' }}">Productos</a>
+                            @if (isset($pagina) && $pagina == 'catalogo.all')
+                                <p
+                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
+                                </p>
+                            @endif
+                        </li>
+
+
+                        @if (count($services) > 0)
+                            <li class="flex flex-col">
+                                <a href="{{ route('servicios', $services->first()->id) }}"
+                                    class="{{ isset($pagina) && $pagina == 'servicios' ? 'font-semibold' : '' }}">Servicios</a>
+                                @if (isset($pagina) && $pagina == 'servicios')
+                                    <p
+                                        class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
+                                    </p>
+                                @endif
+                            </li>
+                        @endif
+                        
+
+                        <li class="flex flex-col">
+                            <a href="{{ route('rse') }}"
+                                class="{{ isset($pagina) && $pagina == 'rse' ? 'font-semibold' : '' }}">RSE</a>
+                            @if (isset($pagina) && $pagina == 'rse')
+                                <p
+                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
+                                </p>
+                            @endif
+                        </li>
+
+                        @if (count($blog) > 0)
+                            <li class="flex flex-col">
+                                <a href="{{ route('blog', 0) }}"
+                                    class="{{ isset($pagina) && $pagina == 'blog' ? 'font-semibold' : '' }}">Blog</a>
+                                @if (isset($pagina) && $pagina == 'blog')
+                                    <p
+                                        class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
+                                    </p>
+                                @endif
+                            </li>
+                        @endif
+                        <li class="flex flex-col">
+                            <a href="{{ route('contacto') }}"
+                                class="{{ isset($pagina) && $pagina == 'contacto' ? 'font-semibold' : '' }}">Contacto</a>
+                            @if (isset($pagina) && $pagina == 'contacto')
+                                <p
+                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
+                                </p>
+                            @endif
+                        </li>
+                    </div>
+
+                    <div
+                        class="relative flex flex-row gap-5 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
+
+                        <div class="flex flex-row items-center justify-center">
+                            <div
+                                class="text-white font-galano_semibold bg-[#052f4e] rounded-xl text-center w-auto py-2 px-6">
+                                Soporte</div>
+                        </div>
+
+
+                        <div class="flex justify-center items-center min-w-[38px]">
+                            <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
+                                <span id="itemsCount"
+                                    class="bg-[#052f4e] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
+                                <a><i class="fa-solid fa-cart-shopping text-[#052f4e] w-7"></i></a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </ul>
+            </nav>
         </div>
 
-      </div>
+    </div>
 </header>
 
 
@@ -319,8 +322,8 @@
 
     $('#buscarproductosecond').keyup(function() {
 
-    clearTimeout(clockSearch);
-    var query = $(this).val().trim();
+        clearTimeout(clockSearch);
+        var query = $(this).val().trim();
 
         if (query !== '') {
             clockSearch = setTimeout(() => {
@@ -669,7 +672,7 @@
     const marcas = @json($marcas);
     let activeHover = false;
     var activeHovermarca = false;
-    
+
 
     // function cerrar() {
     //     categorias.forEach(categoria => {
@@ -702,81 +705,82 @@
     });
 
 
-    
-let insideMenu = false; // Variable auxiliar para saber si el ratón está dentro del área del menú
 
-categorias.forEach(categoria => {
-    const categoriaElement = document.getElementById(`categoria-${categoria.id}`);
-    categoriaElement.addEventListener('mouseenter', function(event) {
-        if (event.target === this && !activeHover) {
-            // Obtener el contenedor específico de la categoría
-            let padre = document.getElementById(`productos-link-${categoria.id}`);
+    let insideMenu = false; // Variable auxiliar para saber si el ratón está dentro del área del menú
 
-            // Crear contenedor del mega menú
-            let divcontainer = document.createElement('div');
-            divcontainer.id = `productos-link-container-${categoria.id}`;
-            divcontainer.className =
-                'absolute top-[130px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
+    categorias.forEach(categoria => {
+        const categoriaElement = document.getElementById(`categoria-${categoria.id}`);
+        categoriaElement.addEventListener('mouseenter', function(event) {
+            if (event.target === this && !activeHover) {
+                // Obtener el contenedor específico de la categoría
+                let padre = document.getElementById(`productos-link-${categoria.id}`);
 
-            let titulo = document.createElement('h3');
-            titulo.className = 'text-lg font-font-Urbanist_Bold font-bold text-left mb-4 uppercase';
-            titulo.innerText = `ROPA DE ${categoria.name}`; 
-            titulo.style.gridColumn = '1 / -1';
-          
-     
+                // Crear contenedor del mega menú
+                let divcontainer = document.createElement('div');
+                divcontainer.id = `productos-link-container-${categoria.id}`;
+                divcontainer.className =
+                    'absolute top-[130px] border-b-2 border-b-black z-20 left-1/2 transform -translate-x-1/2 m-0 flex justify-center w-full bg-white overflow-x-auto';
 
-            // Definimos el grid para las columnas de subcategorías
-            let gridContainer = document.createElement('div');
-            gridContainer.className = 'grid gap-2 px-4 pt-3 pb-7 list-none';
-            gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
-            gridContainer.style.gridAutoRows = 'auto';
-            gridContainer.style.maxWidth = '600px';
-            gridContainer.style.justifyItems = 'start';
-            gridContainer.style.justifyContent = 'center';
-            gridContainer.style.alignItems = 'center';
+                let titulo = document.createElement('h3');
+                titulo.className = 'text-lg font-font-Urbanist_Bold font-bold text-left mb-4 uppercase';
+                titulo.innerText = `ROPA DE ${categoria.name}`;
+                titulo.style.gridColumn = '1 / -1';
 
-            gridContainer.appendChild(titulo);
-            // Agregar cada subcategoría al grid
-            categoria.subcategories.forEach(subcategoria => {
-                let li = document.createElement('li');
-                li.className = 'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
-                li.style.maxWidth = '150px';
 
-                // Crear enlace de subcategoría
-                let a = document.createElement('a');
-                a.href = `/catalogo?subcategoria=${subcategoria.id}`;
-                a.innerHTML = subcategoria.name;
-                a.className = 'w-full h-full text-center';
 
-                li.appendChild(a);
-                gridContainer.appendChild(li);
-            });
+                // Definimos el grid para las columnas de subcategorías
+                let gridContainer = document.createElement('div');
+                gridContainer.className = 'grid gap-2 px-4 pt-3 pb-7 list-none';
+                gridContainer.style.gridTemplateColumns = 'repeat(auto-fill, 150px)';
+                gridContainer.style.gridAutoRows = 'auto';
+                gridContainer.style.maxWidth = '600px';
+                gridContainer.style.justifyItems = 'start';
+                gridContainer.style.justifyContent = 'center';
+                gridContainer.style.alignItems = 'center';
 
-            divcontainer.appendChild(gridContainer);
+                gridContainer.appendChild(titulo);
+                // Agregar cada subcategoría al grid
+                categoria.subcategories.forEach(subcategoria => {
+                    let li = document.createElement('li');
+                    li.className =
+                        'text-[#272727] cursor-pointer font-normal font-Urbanist_Regular text-[15px] py-1 w-full line-clamp-1';
+                    li.style.maxWidth = '150px';
 
-            // Limpiar el contenedor de hijos y agregar el nuevo contenedor
-            padre.innerHTML = ''; // Asegura que el contenedor esté vacío antes de agregar
-            padre.appendChild(divcontainer);
-            activeHover = true;
+                    // Crear enlace de subcategoría
+                    let a = document.createElement('a');
+                    a.href = `/catalogo?subcategoria=${subcategoria.id}`;
+                    a.innerHTML = subcategoria.name;
+                    a.className = 'w-full h-full text-center';
 
-            // Agregar evento para que el menú permanezca abierto mientras el ratón esté sobre el enlace o el menú
-            categoriaElement.addEventListener('mouseleave', checkCloseMenu);
-            divcontainer.addEventListener('mouseenter', () => insideMenu = true);
-            divcontainer.addEventListener('mouseleave', checkCloseMenu);
+                    li.appendChild(a);
+                    gridContainer.appendChild(li);
+                });
+
+                divcontainer.appendChild(gridContainer);
+
+                // Limpiar el contenedor de hijos y agregar el nuevo contenedor
+                padre.innerHTML = ''; // Asegura que el contenedor esté vacío antes de agregar
+                padre.appendChild(divcontainer);
+                activeHover = true;
+
+                // Agregar evento para que el menú permanezca abierto mientras el ratón esté sobre el enlace o el menú
+                categoriaElement.addEventListener('mouseleave', checkCloseMenu);
+                divcontainer.addEventListener('mouseenter', () => insideMenu = true);
+                divcontainer.addEventListener('mouseleave', checkCloseMenu);
+            }
+        });
+
+        function checkCloseMenu() {
+            insideMenu = false;
+            setTimeout(() => {
+                if (!insideMenu) {
+                    let padre = document.getElementById(`productos-link-${categoria.id}`);
+                    padre.innerHTML = '';
+                    activeHover = false;
+                }
+            }, 80); // Añadimos un pequeño retraso para que detecte bien la salida
         }
     });
-
-    function checkCloseMenu() {
-        insideMenu = false;
-        setTimeout(() => {
-            if (!insideMenu) {
-                let padre = document.getElementById(`productos-link-${categoria.id}`);
-                padre.innerHTML = '';
-                activeHover = false;
-            }
-        }, 80); // Añadimos un pequeño retraso para que detecte bien la salida
-    }
-});
 
 
     document.getElementById('productos-link2').addEventListener('mouseenter', function(event) {
@@ -867,7 +871,7 @@ categorias.forEach(categoria => {
                     };
                 }
                 productosDeMismoNombre[item.producto].productosf.push(
-                item); // Agregar productos al grupo por nombre
+                    item); // Agregar productos al grupo por nombre
             });
 
 
@@ -1028,7 +1032,7 @@ categorias.forEach(categoria => {
                 }
 
                 articulosCarrito = aplicarDescuentosEnCarrito(articulosCarrito);
-                
+
                 Local.set('carrito', articulosCarrito)
                 let itemsCarrito = $('#itemsCarrito')
                 let ItemssubTotal = $('#ItemssubTotal')

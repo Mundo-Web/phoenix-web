@@ -79,13 +79,14 @@ use App\Models\LibroReclamaciones;
 Route::get('/register-rev', [AuthController::class, 'registerView'])->name('Register.jsx');
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/nosotros', [IndexController::class, 'nosotros'])->name('nosotros');
-Route::get('/servicios', [IndexController::class, 'servicios'])->name('servicios');
+Route::get('/servicios/{filtro}', [IndexController::class, 'servicios'])->name('servicios');
 Route::get('/comentario', [IndexController::class, 'comentario'])->name('comentario');
 Route::post('/comentario/nuevo', [IndexController::class, 'hacerComentario'])->name('nuevocomentario');
 Route::get('/contacto', [IndexController::class, 'contacto'])->name('contacto');
 Route::get('/libro-de-reclamaciones', [IndexController::class, 'librodereclamaciones'])->name('librodereclamaciones');
 Route::get('/blog/{filtro}', [IndexController::class, 'blog'])->name('blog');
 Route::get('/post/{id}', [IndexController::class, 'detalleBlog'])->name('detalleBlog');
+Route::get('/rse', [IndexController::class, 'rse'])->name('rse');
 
 /* Proceso de pago */
 Route::get('/carrito', [IndexController::class, 'carrito'])->name('carrito');

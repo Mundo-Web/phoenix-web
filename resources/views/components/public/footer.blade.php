@@ -1,5 +1,5 @@
 <footer class="bg-[#052F4E]">
-    {{-- <style>
+    <style>
         #modalPoliticasDev 
         #modalTerminosCondiciones 
         #modallinkPoliticasDatos
@@ -38,7 +38,7 @@
             margin-bottom: 0% !important;
             margin-top: 0% !important;
         }
-    </style> --}}
+    </style>
     
     <div class="grid grid-cols-1 md:grid-cols-3 w-11/12 mx-auto py-10 gap-10 md:gap-5">
         <div class="md:col-span-1 w-full md:max-w-[500px] flex flex-col gap-5" data-aos="fade-up" data-aos-offset="150">
@@ -128,7 +128,7 @@
         </div>
     </div>
 
-    <div id="modalTerminosCondiciones" class="modal !px-0" style="max-width: 900px !important; width: 100% !important;">
+    {{-- <div id="modalTerminosCondiciones" class="modal !px-0" style="max-width: 900px !important; width: 100% !important;">
         <!-- Modal body -->
         <div class="p-4">
             <h1 class="font-PreloBold text-center text-4xl">Términos y condiciones</h1>
@@ -142,7 +142,7 @@
             <h1 class="font-PreloBold text-center text-4xl">Políticas de privacidad</h1>
             <div class="font-PreloMedium p-2">{!! $politicDev->content ?? '' !!}</div>
         </div>
-    </div>
+    </div> --}}
 
 
     
@@ -269,93 +269,93 @@
         </div>
     </div> --}}
 
-    {{-- <div id="modalTerminosCondiciones" class="modal" style="max-width: 900px !important;width: 100% !important;  ">
+    <div id="modalTerminosCondiciones" class="modal" style="max-width: 900px !important;width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Términos y Condiciones</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $terminos->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Términos y Condiciones</h1>
+            <div class="font-galano_regular prose p-2">{!! $terminos->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modalPoliticasDev" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Políticas de Cambio de Devolución</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $politicas->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Cambio de Devolución</h1>
+            <div class="font-galano_regular prose p-2">{!! $politicas->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkPoliticasDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Políticas de Datos</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $politicaDatos->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Datos</h1>
+            <div class="font-galano_regular prose p-2">{!! $politicaDatos->content ?? '' !!}</div>
         </div>
     </div>
         
     <div id="modallinkTiempoEnvios" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Tiempo y Costos de Envío</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $TimeAndPriceDelivery->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Tiempo y Costos de Envío</h1>
+            <div class="font-galano_regular prose p-2">{!! $TimeAndPriceDelivery->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkPlazoReembolso" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Plazos de Reembolso</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $PlazosDeReembolso->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Plazos de Reembolso</h1>
+            <div class="font-galano_regular prose p-2">{!! $PlazosDeReembolso->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkTratamientoDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
       
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Tratamiento de Datos Adicional</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $TratamientoAdicionalDatos->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Tratamiento de Datos Adicional</h1>
+            <div class="font-galano_regular prose p-2">{!! $TratamientoAdicionalDatos->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkPoliticasCookies" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Políticas de Cookies</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $PoliticasCookies->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Cookies</h1>
+            <div class="font-galano_regular prose p-2">{!! $PoliticasCookies->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkCampanasPublicitarias" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Campanas Publicitarias</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $CampanasPublicitarias->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Campanas Publicitarias</h1>
+            <div class="font-galano_regular prose p-2">{!! $CampanasPublicitarias->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkBeneficios" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Beneficios 0% Intereses</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $BeneficiosSinIntereses->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Beneficios 0% Intereses</h1>
+            <div class="font-galano_regular prose p-2">{!! $BeneficiosSinIntereses->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkSeguimientoPedido" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
         
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Seguimiento de Pedido</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $SeguimientoPedido->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Seguimiento de Pedido</h1>
+            <div class="font-galano_regular prose p-2">{!! $SeguimientoPedido->content ?? '' !!}</div>
         </div>
     </div>
 
     <div id="modallinkNuestrasTiendas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-Urbanist_Bold text-2xl lg:text-3xl text-center">Nuestras Tiendas</h1>
-            <div class="font-Urbanist_Regular prose p-2">{!! $NuestrasTiendas->content ?? '' !!}</div>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Nuestras Tiendas</h1>
+            <div class="font-galano_regular prose p-2">{!! $NuestrasTiendas->content ?? '' !!}</div>
         </div>
-    </div> --}}
+    </div>
 
 </footer>
 

@@ -38,13 +38,11 @@
     <section class="px-[5%] pt-12 xl:pt-16">
       <div class="flex flex-col gap-2 max-w-3xl mx-auto">
           <h2 class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left lg:text-center max-w-2xl mx-auto">
-              Creamos sabores que marcan la diferencia
+              {{$nosotros[0]->titulo ?? "Ingrese texto" }}
           </h2>
-          <p class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
-              Somos expertos en brindar suplementos de alta calidad para heladerías, transformando ingredientes 
-              comunes en experiencias irresistibles. Nos dedicamos a elevar el sabor y la innovación en cada producto, 
-              con un firme compromiso hacia el cuidado del medio ambiente y las necesidades de tus clientes.
-          </p>
+          <div class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
+              {!! $nosotros[0]->descripcion ?? "Ingrese texto" !!}
+          </div>
       </div>
    </section>
 
@@ -59,12 +57,10 @@
           <div class="flex flex-col justify-center gap-5 lg:gap-7 text-textWhite ">
               <h1
                   class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
-                  Los valores que nos impulsan a crear productos de calidad
+                  {{$nosotros[1]->titulo ?? "Ingrese texto" }}
               </h1>
               <p class="text-[#052F4E] text-lg font-galano_regular">
-                  En cada paso, nos guiamos por valores sólidos: calidad excepcional, innovación constante, sostenibilidad y un 
-                  compromiso profundo con nuestros clientes. Creemos en la creación de productos que no solo mejoren tus helados, 
-                  sino que también respeten el medio ambiente y contribuyan al éxito de tu heladería.
+                  {!! $nosotros[1]->descripcion ?? "Ingrese texto" !!}
               </p>
           </div>
 
@@ -76,46 +72,15 @@
     <section class="flex flex-col gap-5 pt-12 xl:pt-16">
         <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-10 lg:gap-24 px-[5%] pb-12 xl:pb-16">
             <div class="flex flex-col justify-start gap-5">
-                <h1
+              <h1
                     class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
-                    Nuestra misión, compromiso con la innovación y calidad
-                </h1>
+                    {{$nosotros[2]->titulo ?? "Ingrese texto" }}
+              </h1>
 
-                <p class="text-[#052F4E] text-lg font-galano_regular">
-                    Creamos suplementos que transforman tus helados, combinando calidad, innovación y 
-                    responsabilidad ambiental para impulsar el éxito de tu negocio.
-                </p>
-
-                <div class="flex flex-col gap-3 py-2">
-                    <h1 class="text-[#052F4E] font-galano_semibold tracking-tighter text-xl leading-none">
-                        Calidad Superior en Cada Producto
-                    </h1>
-                    <p class="text-[#052F4E] text-base font-galano_regular">
-                        Nos aseguramos de que cada suplemento esté fabricado con los más altos estándares para 
-                        garantizar sabores excepcionales y consistencia en cada lote.
-                    </p>
-                </div>
-
-                <div class="flex flex-col gap-3 py-2">
-                    <h1 class="text-[#052F4E] font-galano_semibold tracking-tighter text-xl leading-none">
-                        Innovación que Eleva tu Negocio
-                    </h1>
-                    <p class="text-[#052F4E] text-base font-galano_regular">
-                        Estamos en constante búsqueda de nuevas soluciones que permitan a tu heladería destacarse, 
-                        ofreciendo productos que marcan la diferencia y sorprenden a tus clientes.
-                    </p>
-                </div>
-
-                <div class="flex flex-col gap-3 py-2">
-                    <h1 class="text-[#052F4E] font-galano_semibold tracking-tighter text-xl leading-none">
-                        Sostenibilidad y Responsabilidad Ambiental
-                    </h1>
-                    <p class="text-[#052F4E] text-base font-galano_regular">
-                        Nuestra misión incluye el cuidado del planeta, por lo que nuestros productos son desarrollados con prácticas 
-                        responsables, minimizando el impacto ambiental y apoyando un futuro más verde.
-                    </p>
-                </div>
-
+              <div class="text-[#052F4E] text-lg font-galano_regular">
+                  {!! $nosotros[2]->descripcion ?? "Ingrese texto" !!}
+              </div>
+               
             </div>
 
             <div class="flex flex-col justify-center items-center">
@@ -337,6 +302,25 @@
     })
   </script>
 
+<script src="/ckeditor/ckeditor.js"></script>
+<script>
+   CKEDITOR.replace('description', {
+        toolbar: [
+            { name: 'document', items: ['Source'] }, // Código fuente
+            { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
+            { name: 'styles', items: ['Styles', 'Format', 'FontSize'] }, // Tamaño y fuente
+            { name: 'colors', items: ['TextColor', 'BGColor'] }, // Color de texto y fondo
+            { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline', 'Strike', '-', 'RemoveFormat'] },
+            { name: 'paragraph', items: ['NumberedList', 'BulletedList', '-', 'Blockquote'] },
+            { name: 'insert', items: ['Table', 'HorizontalRule'] },
+            { name: 'links', items: ['Link', 'Unlink'] },
+            { name: 'tools', items: ['Maximize'] } // Maximizar
+        ],
+        extraPlugins: 'colorbutton,font', // Activa plugins para color y fuentes
+        removePlugins: 'elementspath', // Elimina la ruta de elementos
+        resize_enabled: true // Permite redimensionar el editor
+    });
+</script>
 
 @stop
 

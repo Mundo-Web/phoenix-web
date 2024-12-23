@@ -30,6 +30,7 @@ use App\Models\PolyticsCondition;
 use App\Models\Popup;
 use App\Models\Price;
 use App\Models\Sale;
+use App\Models\Service;
 use App\Models\Specifications;
 use App\Models\Status;
 use App\Models\SubCategory;
@@ -1575,5 +1576,16 @@ class IndexController extends Controller
     // dd($productos->hasMorePages());
 
     return response()->json(['message' => 'productosPaginados', 'productos' => $productos, 'page' => $nextPage]);
+  }
+
+  public function servicios($filtro){
+
+    $servicios = Service::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $servicioselec = Service::where('id', $filtro)->where('status', '=', 1)->where('visible', '=', 1)->first();
+    return view('public.servicios', compact('servicios', 'filtro','servicioselec'));
+  }
+
+  public function rse(){
+    return view('public.rse');
   }
 }

@@ -87,7 +87,7 @@ class AppServiceProvider extends ServiceProvider
         View::composer('components.public.header', function ($view) {
 
             $datosgenerales = General::all();
-            $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->count(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
+            $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->get(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
             $categoriasMenu = Category::where('visible', '=', 1)->where('is_menu', 1)->get();
 
             $categorias = Category::where("status", "=", true)->where('is_menu', 1)->with(['subcategories' => function ($query) {
@@ -100,6 +100,10 @@ class AppServiceProvider extends ServiceProvider
                 ->where("status", "=", true)
                 ->where("visible", "=", true)
                 ->whereHas('productos')
+                ->get();
+            
+            $services = Service::where("status", "=", true)
+                ->where("visible", "=", true)
                 ->get();
 
             $offerExists = Products::where('status', true)
@@ -115,6 +119,7 @@ class AppServiceProvider extends ServiceProvider
                 'marcas' => $marcas,
                 'offerExists' => $offerExists,
                 'categorias' => $categorias,
+                'services' => $services,
             ]);
         });
 
