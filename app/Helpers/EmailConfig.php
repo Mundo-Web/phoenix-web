@@ -11,17 +11,17 @@ class EmailConfig
         $mail = new PHPMailer(true);
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
+        $mail->Host = 'server295.web-hosting.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'diegomartinez1996x@gmail.com';
-        $mail->Password = 'bvckrjgtmdlrqbby';
+        $mail->Username = 'info@mrcremosobasedehelados.com.pe';
+        $mail->Password = 'cremoso2024#';
         // $mail->Username = 'boostperuatencion@gmail.com';
         // $mail->Password = 'hlabkcttomghufms';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
         $mail->Port = 465;
         $mail->Subject = '' . $name . ', '.$mensaje. '';
         $mail->CharSet = 'UTF-8';
-        $mail->setFrom('diegomartinez1996x@gmail.com', 'American Brands');
+        $mail->setFrom('info@mrcremosobasedehelados.com.pe', 'MrCremoso');
         return $mail;
     }
 }
