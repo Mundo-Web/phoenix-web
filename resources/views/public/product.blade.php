@@ -73,15 +73,15 @@
         }
     </style>
 
-    @php
+    {{-- @php
         $images = ['', '_ambiente'];
         $x = $product->toArray();
         $i = 1;
     @endphp
     @php
         $breadcrumbs = [['title' => 'Inicio', 'url' => route('index')], ['title' => 'Producto', 'url' => '']];
-    @endphp
-    @php
+    @endphp --}}
+    {{-- @php
         $StockActual = $product->stock;
         $maxStock = 100; // maximo stock
 
@@ -94,7 +94,7 @@
             $stock = ($StockActual * 100) / $maxStock;
         }
 
-    @endphp
+    @endphp --}}
 
     {{-- @component('components.breadcrumbs', ['breadcrumbs' => $breadcrumbs])
     @endcomponent --}}

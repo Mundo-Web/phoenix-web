@@ -637,6 +637,7 @@ class IndexController extends Controller
     // $saleJpa->status_id = 3;
     // $saleJpa->status_message = 'Pagado correctamente';
     $saleJpa->save();
+    $this->envioCorreoCompra($saleJpa);
 
     $categorias = Category::all();
     return view('public.checkout_agradecimiento')
@@ -1199,7 +1200,7 @@ class IndexController extends Controller
         </body>
       </html>
       ';
-      $mail->addBCC($admin->email, 'Nuevo mensaje',);
+      $mail->addBCC($admin->email, 'Nuevo mensaje');
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
@@ -1209,166 +1210,159 @@ class IndexController extends Controller
 
   public function envioCorreoCompra($data)
   {
-
+    $admin = General::where('id', 1)->first();
     $appUrl = env('APP_URL');
-    $name = $data['nombre'];
-    $mensaje = "Gracias por comprar en $appUrl";
+    $name = $data['name'] . ' ' . $data['lastname'];
+    $mensaje = "Gracias por comprar en MrCremoso";
     $mail = EmailConfig::config($name, $mensaje);
     try {
       $mail->addAddress($data['email']);
       $mail->Body = '<html lang="es">
-        <head>
-          <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-          <title>Mundo web</title>
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-            rel="stylesheet"
-          />
-          <style>
-            * {
-              margin: 0;
-              padding: 0;
-              box-sizing: border-box;
-            }
-          </style>
-        </head>
-        <body>
-          <main>
-            <table
-              style="
-                width: 600px;
-                height: 900px;
-                margin: 0 auto;
-                text-align: center;
-                 background-image:url(' . $appUrl . '/images/Ellipse_18.png),  url(' . $appUrl . '/images/Tabpanel.png);
-                background-repeat: no-repeat, no-repeat;
-                background-position: center bottom , center bottom;;
-                background-size: fit , fit;
-                background-color: #f9f9f9;
-              "
-            >
-              <thead>
-                <tr>
-                  <th
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mundo web</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        </style>
+      </head>
+      <body>
+        <main>
+          <table
+            style="
+              width: 600px;
+              height: 600px;
+              margin: 0 auto;
+              text-align: center;
+              background-image:url(' . $appUrl . '/mail/fondocontacto.png);
+              background-repeat: no-repeat, no-repeat;
+              background-position: center bottom , center bottom;;
+              background-size: fit , fit;
+              background-color: #f9f9f9;
+            "
+          >
+            <thead>
+              
+            </thead>
+            <tbody>
+              <tr 
+                style=" 
+                  display: grid;
+                "
+                >
+                <th
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 40px 40px 0px 40px;
+                  "
+                >
+                  <img src="' . $appUrl . '/mail/logocontacto.png" alt="americanbrands"  style="
+                  margin: auto;
+                  width: 200px;
+                  height: auto;
+                  "
+                  />
+                </th>
+              </tr>
+              
+
+              <tr style="display: grid;">
+                <td style="padding-bottom:15px;">
+                  <p
                     style="
-                      display: flex;
-                      flex-direction: row;
-                      justify-content: center;
-                      align-items: center;
-                      margin: 40px;
+                      font-weight: 600;
+                      font-size: 40px;
+                      text-align: center;
+                      color: #052F4E;
+                      font-family: cursive;
                     "
                   >
-                     <img src="' . $appUrl . '/images/Group1.png" alt="Boost_Peru"  style="
-                    margin: auto;
-                  "/>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="height: 10px">
+                      ¡Gracias por tu preferencia! 
+                  </p>
+                </td>
+              </tr>
+
+              <tr style="display: grid;">
+                <td style="">
+                  <p
+                    style="
+                      font-weight: 500;
+                      font-size: 16px;
+                      text-align: center;
+                      color: #052F4E;
+                      font-family: Google Sans;
+                    "
+                  >
+                      ¡Hola! ' . $name . ' 
+                  </p>
+                </td>
+              </tr>
+              
+              <tr style="display: grid;">
+                <td style="text-align: center;">
                     <p
-                      style="
-                        color: #4d86c3;
+                      style=" 
                         font-weight: 500;
-                        font-size: 18px;
+                        font-size: 16px;
                         text-align: center;
-                        width: 500px;
-                        margin: 0 auto;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 30px;
+                        color: #052F4E;
+                        font-family: Google Sans;
                       "
                     >
-                      <span style="display: block">Hola </span>
+                      En breve estaremos procesando tu pedido.
                     </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #4d86c3;
-                        font-size: 40px;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 60px;
-                      "
-                    >
-                      <span style="display: block">' . $name . ' </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #006bf6;
-                        font-size: 40px;
-                        font-family: Montserrat, sans-serif;
-                        font-weight: bold;
-                        line-height: 60px;
-                      "
-                    >
-                      !Gracias
-                      <span style="color: #4d86c3">por tu Compra!</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #4d86c3;
-                        font-weight: 500;
-                        font-size: 18px;
-                        text-align: center;
-                        width: 250px;
-                        margin: 0 auto;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 30px;
-                      "
-                    >
-                      En breve momentos estaremos procesando tu pedido.
-                    </p>
-                  </td>
-                </tr>
-                <tr>
+                </td>
+              </tr>
+
+              <tr style="display: grid;">
                 <td
                   style="
                   text-align: center;
-                "
+                  padding-top:15px
+                  "
                 >
-                    <a
-                      href="' . $appUrl . '"
-                      style="
-                        text-decoration: none;
-                        background-color: #006bf6;
-                        color: white;
-                        padding: 10px 16px;
-                        display: inline-flex;
-                        justify-content: center;
-                        align-items: center;
-                        gap: 10px;
-                        font-weight: 600;
-                        font-family: Montserrat, sans-serif;
-                        font-size: 16px;
-                        border-radius: 30px;
-                      "
-                    >
-                      <span>Visita nuestra web</span>
-                    </a>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </main>
-        </body>
-      </html>
+                  <a
+                    href="' . $appUrl . '"
+                    style="
+                      text-decoration: none;
+                      background-color: #052F4E;
+                      color: white;
+                      padding: 8px 16px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      font-weight: 600;
+                      font-family: Google Sans;
+                      font-size: 16px;
+                      border-radius: 12px;
+                      border: 1px solid #052F4E;
+                    "
+                  >
+                    <span>Visita nuestra web</span>
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </main>
+      </body>
+    </html>
       ';
-      // $mail->addBCC('atencionalcliente@boostperu.com.pe', 'Atencion al cliente',);
-      // $mail->addBCC('jefecomercial@boostperu.com.pe', 'Jefe Comercial',);
+      $mail->addBCC($admin->email, 'Nuevo mensaje');
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
