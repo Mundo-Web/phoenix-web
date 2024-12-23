@@ -50,6 +50,7 @@ class DatabaseSeeder extends Seeder
             PoliticasDatos::class,
             AboutUsSeeder::class,
             ProjectSeeder::class,
+            HomeViewSeeder::class,
             ShortcodeSeeder::class,
             //ServiceSeeder::class,
         ]);

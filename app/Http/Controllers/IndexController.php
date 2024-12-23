@@ -25,6 +25,7 @@ use App\Models\ClientLogos;
 use App\Models\Department;
 use App\Models\Galerie;
 use App\Models\HistoricoCupon;
+use App\Models\HomeView;
 use App\Models\Offer;
 use App\Models\PolyticsCondition;
 use App\Models\Popup;
@@ -114,8 +115,9 @@ class IndexController extends Controller
     $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->orderBy('order', 'asc')->get();
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
     $media = $this->instagramService->getUserMedia();
+    $textoshome = HomeView::where('id', 1)->first();
 
-    return view('public.index', compact('media', 'subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
+    return view('public.index', compact('textoshome', 'media', 'subcategorias', 'url_env', 'popups', 'banners', 'blogs', 'categoriasAll', 'productosPupulares', 'ultimosProductos', 'productos', 'destacados', 'descuentos', 'general', 'benefit', 'faqs', 'testimonie', 'slider', 'categorias', 'categoriasindex', 'logos', 'logosdestacados'));
   }
 
   public function catalogo(Request $request, string $id_cat = null)

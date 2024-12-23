@@ -150,8 +150,7 @@
                                     <div class="swiper-testimonios !flex justify-center py-3 mt-3"></div>
                                 </div>
                             </div>
-                            <a class="bg-[#052F4E] text-white px-6 py-2.5 rounded-xl font-galano_medium mt-2"> Ver más
-                                historias </a>
+                          
                         </div>
                         <div class="md:col-span-1 space-y-3">
                             <h2 class="text-[#052F4E] text-5xl font-galano_bold max-w-xl leading-none">

@@ -31,6 +31,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FaqsController;
 use App\Http\Controllers\FooterController;
 use App\Http\Controllers\GalerieController;
+use App\Http\Controllers\HomeViewController;
 use App\Http\Controllers\LogosClientController;
 
 use App\Http\Controllers\IndexController;
@@ -170,6 +171,9 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         //Datos Generales
         Route::resource('/datosgenerales', GeneralController::class);
 
+        //Textos Home
+        Route::resource('/homeview', HomeViewController::class);
+        
         //Testimonies
         Route::resource('/testimonios', TestimonyController::class);
         Route::post('/testimonios/deleteTestimony', [TestimonyController::class, 'deleteTestimony'])->name('testimonios.deleteTestimony');
