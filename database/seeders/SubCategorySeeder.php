@@ -30,7 +30,7 @@ class SubcategorySeeder extends Seeder
                     'id' => $row[1],
                     'name' => $row[2],
                     'slug' => str_replace(' ', '-', strtolower($row[2])),
-                    'url_image' => 'images/img/',
+                    'url_image' => 'images/imagen/',
                     'name_image' => 'noimagen.jpg'
                 ]);
 

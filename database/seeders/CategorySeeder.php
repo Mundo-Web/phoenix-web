@@ -32,7 +32,7 @@ class CategorySeeder extends Seeder
                         'id' => $row[0],
                         'name' => $row[1],
                         'slug' => str_replace(' ', '-', strtolower($row[1])),
-                        'url_image' => 'images/img/',
+                        'url_image' => 'images/imagen/',
                         'name_image' => 'noimagen.jpg',
                         'destacar' => false,
                         'fit' => 'contain'

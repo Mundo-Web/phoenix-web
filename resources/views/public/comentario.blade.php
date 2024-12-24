@@ -8,7 +8,7 @@
 @section('content')
 
   <div class="w-full">
-    <div style="background-image: url('{{ asset('images/img/header_comentar.png') }}')"
+    <div style="background-image: url('{{ asset('images/imagen/header_comentar.png') }}')"
       class="bg-cover bg-center bg-no-repeat min-h-[600px]  flex flex-col justify-center items-center">
     </div>
   </div>
@@ -105,7 +105,7 @@
             @foreach ($comentarios as $item)
               <div class="flex flex-col md:flex-row gap-5 border-b-[1px] border-[#DDDDDD] pb-5">
                 <div class="">
-                  <img src="./images/img/perfil_user_2.png" alt="perfil" class="md:w-32 lg:w-20" />
+                  <img src="./images/imagen/perfil_user_2.png" alt="perfil" class="md:w-32 lg:w-20" />
                 </div>
                 <div class="flex flex-col gap-5">
                   <h2 class="font-semibold text-[20px] text-[#141718]">

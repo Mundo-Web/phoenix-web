@@ -63,14 +63,14 @@
               x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
               src="{{ asset($item->imagen) }}" alt="{{ $item->name }}"
               class="w-full object-contain md:object-cover absolute inset-0 aspect-square"
-              onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+              onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
           @else
             <img x-show="{{ isset($item->imagen_ambiente) }} || !showAmbiente"
               x-transition:enter="transition ease-out duration-300 transform"
               x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
               x-transition:leave="transition ease-in duration-300 transform"
               x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-              src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+              src="{{ asset('images/imagen/noimagen.jpg') }}" alt="imagen_alternativa"
               class="w-full object-contain md:object-cover absolute inset-0 aspect-square" />
           @endif
         </div>

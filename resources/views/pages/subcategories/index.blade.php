@@ -36,7 +36,7 @@
               @foreach ($subcategories as $item)
                 <tr>
                   <td class="px-3 py-2">{{ $item->order }}</td>
-                  <td class="px-3 py-2"><img class="w-20 object-contain" src="{{ asset($item->url_image . $item->name_image) }}" onerror="this.onerror=null; this.src='{{ asset('images/img/noimagen.jpg') }}';"  /></td>
+                  <td class="px-3 py-2"><img class="w-20 object-contain" src="{{ asset($item->url_image . $item->name_image) }}" onerror="this.onerror=null; this.src='{{ asset('images/imagen/noimagen.jpg') }}';"  /></td>
                   <td class="px-3 py-2">{{ $item->name }}</td>
                   <td class="px-3 py-2">{{ $item->category()->name }}</td>
                   <td>

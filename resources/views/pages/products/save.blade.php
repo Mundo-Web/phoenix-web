@@ -120,6 +120,7 @@
                             x-transition:leave="transition ease-in duration-300 transform"
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
                             src="{{ asset($product->imagen) }}" alt="{{ $product->name }}"
+                            onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"
                             class="bg-[#f2f2f2] w-full h-full object-contain absolute inset-0 rounded-lg" />
                         @else
                           <img id="imagen_previewer" x-show="!showAmbiente"
@@ -127,7 +128,8 @@
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
                             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-                            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+                            src="{{ asset('images/imagen/noimagen.jpg') }}" alt="imagen_alternativa"
+                            onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"
                             class="bg-[#f2f2f2] w-full h-full object-contain absolute inset-0 rounded-lg" />
                         @endif
                         {{-- @if ($product->imagen_ambiente)
@@ -145,7 +147,7 @@
                             x-transition:enter-end="opacity-100 scale-100"
                             x-transition:leave="transition ease-in duration-300 transform"
                             x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/img/noimagen.jpg') }}"
+                            x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/imagen/noimagen.jpg') }}"
                             alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
                         @endif --}}
                       </div>
@@ -157,7 +159,7 @@
                           <label class="block w-max" for="image_texture" title="Cambiar imagen de textura" tippy>
                             <img id="image_texture_previewer"
                               class="w-40 h-10 border rounded-md object-cover object-center cursor-pointer"
-                              src="{{ $product->image_texture ? asset($product->image_texture) : asset('images/img/noimagen.jpg') }}"
+                              src="{{ $product->image_texture ? asset($product->image_texture) : asset('images/imagen/noimagen.jpg') }}"
                               alt="">
                           </label>
                           <input data-id="input_img" class="hidden" id="image_texture" name="image_texture"
@@ -209,7 +211,7 @@
                               value="{{ $image->id }}|{{ $image->imagen }}|{{ $key }}">
                             <input class="hidden" type="file" id="galery_{{ $uuid }}" accept="image/*">
                             <img class="w-full h-full rounded-md object-cover"
-                              src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}">
+                              src="{{ $image->imagen ? asset($image->imagen) : asset('images/imagen/noimagen.jpg') }}">
                           </div>
                         @endforeach
                       </div>
@@ -218,7 +220,7 @@
                         title="Agregar imagen" tippy>
                         <input class="hidden" type="file" id="galery" accept="image/*" multiple>
                         <img class="w-full h-full rounded-md object-cover"
-                          src="{{ asset('images/img/image-plus.jpg') }}" alt="">
+                          src="{{ asset('images/imagen/image-plus.jpg') }}" alt="">
                       </label>
                     </div>
                   </div>
@@ -393,7 +395,7 @@
                   <input id="imagen" name="imagen"
                     class="mb-2 p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     aria-describedby="user_avatar_help" id="user_avatar" type="file"> --}}
-                  <label class="block mb-1" for="imagen_ambiente">Imagen de tallas</label>
+                  <label class="block mb-1" for="imagen_ambiente">Imagen de Medidas</label>
                   @if($product->imagen_ambiente)
                     <span><a class="font-bold"
                             href="{{ asset($product->imagen_ambiente) }}"

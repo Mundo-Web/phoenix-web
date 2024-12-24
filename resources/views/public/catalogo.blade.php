@@ -217,7 +217,7 @@
                                             <img class="w-full h-full object-contain object-bottom "
                                                 alt="${value.producto}"
                                                 src="${imagenSrc}"
-                                                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+                                                onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
                                         </div>
                                     </div>
                                 </a>
@@ -294,7 +294,7 @@
                                             <img class="w-full h-full object-contain object-bottom"
                                                 alt="${value.producto}"
                                                 src="${imagenSrc}"
-                                                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+                                                onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
                                         </div>
                                     </div>
                                 </a>

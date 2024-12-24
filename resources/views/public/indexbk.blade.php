@@ -68,7 +68,7 @@
           <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Últimos productos agregados</h1>
           <a href="/catalogo" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6] ">Ver
             todos
-            los productos <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
+            los productos <img src="{{ asset('images/imagen/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
         <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 md:flex-row gap-4 mt-14 w-full">
           @foreach ($ultimosProductos as $item)
@@ -121,7 +121,7 @@
         <div class="flex flex-col md:flex-row justify-between w-full gap-3">
           <h1 class="text-2xl md:text-3xl font-semibold font-Inter_Medium text-[#323232]">Blog & Eventos</h1>
           <a href="/blog/0" class="flex items-center text-base font-Inter_Medium font-semibold text-[#006BF6]">Ver todos
-            las Publicaciones <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
+            las Publicaciones <img src="{{ asset('images/imagen/arrowBlue.png') }}" alt="Icono" class="ml-2 "></a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mt-14 gap-10 sm:gap-5">
           @foreach ($blogs as $post)

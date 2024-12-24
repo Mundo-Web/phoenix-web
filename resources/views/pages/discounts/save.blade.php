@@ -64,7 +64,7 @@
               <div class="md:col-span-5">
                 <label for="imagen">Imagen principal</label>
                 <div class="relative flex gap-4 mb-2 mt-2 items-center">
-                  <img class="w-20 h-20 rounded" src="{{ asset($reglasDescuento->imagen ?? 'images/img/noimagen.jpg') }}"
+                  <img class="w-20 h-20 rounded" src="{{ asset($reglasDescuento->imagen ?? 'images/imagen/noimagen.jpg') }}"
                     alt="">
                   <input id="imagen" name="imagen" value="{{ $reglasDescuento->imagen }}"
                     class="p-2.5 block w-max text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

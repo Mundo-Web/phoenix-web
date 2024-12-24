@@ -36,8 +36,8 @@
               @foreach ($logos as $logo)
                 <tr>
                   <td>{{$logo->order}}</td>
-                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"/></td>
-                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"/></td>
+                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
+                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
                   <td class="dark:bg-slate-800">{{ $logo->title }}</td>
                    <td class="">
                     <form method="POST" action="">

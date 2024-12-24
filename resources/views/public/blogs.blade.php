@@ -57,7 +57,7 @@
                       <a href="{{ route('detalleBlog', $post->id) }}" class="w-full">
                         <img class="w-full h-[250px] lg:h-[300px] object-cover"
                             src="{{ asset($post->url_image . $post->name_image) }}"
-                            onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" alt="{{ $post->title }}" />
+                            onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" alt="{{ $post->title }}" />
 
                         <h2 class="text-[#052F4E] text-base font-galano_regular font-semibold mt-3">
                             {{ $post->categories->name ?? 'Sin categoría' }}

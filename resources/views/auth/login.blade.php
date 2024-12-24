@@ -69,7 +69,7 @@
 
         <!-- Segundo div -->
         {{-- <div>
-            <img src= "{{ asset('images/img/fondofwc.png') }}" class="object-contain bg-center w-full h-full">
+            <img src= "{{ asset('images/imagen/fondofwc.png') }}" class="object-contain bg-center w-full h-full">
         </div> --}}
     </div>
 

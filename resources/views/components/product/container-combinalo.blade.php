@@ -33,7 +33,7 @@
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-300 transform"
             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+            src="{{ asset('images/imagen/noimagen.jpg') }}" alt="imagen_alternativa"
             class="w-full {{ $height }} object-{{ $category->fit }} absolute inset-0" />
         @endif
         @if ($item->imagen_ambiente)
@@ -48,7 +48,7 @@
             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
             x-transition:leave="transition ease-in duration-300 transform"
             x-transition:leave-start="opacity-100 scale-100" x-transition:leave-end="opacity-0 scale-95"
-            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+            src="{{ asset('images/imagen/noimagen.jpg') }}" alt="imagen_alternativa"
             class="w-full {{ $height }} object-cover absolute inset-0" />
         @endif
       </div>

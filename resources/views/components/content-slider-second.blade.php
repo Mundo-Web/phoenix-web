@@ -13,7 +13,7 @@
         class="bg-[#FD1F4A] text-base font-Helvetica_Medium text-white text-center px-5 py-3 rounded-3xl flex items-center justify-center"
         type="button">
         {{ $item->botontext2 }}
-        <img src="{{ asset('images/img/Vector.png') }}" alt="Icono" class="ml-2">
+        <img src="{{ asset('images/imagen/Vector.png') }}" alt="Icono" class="ml-2">
       </a>
     </div>
 
@@ -21,6 +21,6 @@
  </div>
   <div class=" lg:h-[450px]  z-10 max-w-6xl mx-auto -mt-72 flex flex-col items-end justify-end">
     <img class="block h-full  mx-auto object-contain object-bottom "
-      src="{{ asset($item->url_image . $item->name_image) }}" alt=""  onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
+      src="{{ asset($item->url_image . $item->name_image) }}" alt=""  onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';">
   </div>
 </div>

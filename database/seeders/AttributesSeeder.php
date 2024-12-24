@@ -35,7 +35,7 @@ class AttributesSeeder extends Seeder
                     ], [
                         'attribute_id' => $row[1],
                         'valor' => $row[2],
-                        'imagen' => 'images/img/noimagen.jpg',
+                        'imagen' => 'images/imagen/noimagen.jpg',
                         'visible' => $row[3],
                         'status' => $row[4]
                     ]);

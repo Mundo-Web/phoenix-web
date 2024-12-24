@@ -34,8 +34,8 @@
 
               @foreach ($banners as $item)
                 <tr>
-                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"></td>
-                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->price) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"></td>
+                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td>
+                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->price) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td>
                   <td>{{ $item->title }}</td>
                   <td>{{ $item->potition }}</td>
                   <td>

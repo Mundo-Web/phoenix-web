@@ -121,7 +121,7 @@
                         <div id="imagenProducto" class="w-full h-full">
                             <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain"
                                 data-aos="fade-up" data-aos-offset="150"
-                                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
+                                onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';">
                         </div>
                     </div>
                     
@@ -133,7 +133,7 @@
                         class="w-full flex justify-center items-center aspect-square overflow-hidden">
                         <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain"
                             data-aos="fade-up" data-aos-offset="150"
-                            onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
+                            onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';">
                     </div>
                     <x-product-slider-horizontal :product="$product" />
                 </div>   

@@ -270,7 +270,7 @@
 
     function imagenError(image) {
         image.onerror = null; // Previene la posibilidad de un bucle infinito si la imagen de error también falla
-        image.src = '/images/img/noimagen.jpg'; // Establece la imagen de error
+        image.src = '/images/imagen/noimagen.jpg'; // Establece la imagen de error
     }
 
     $('#buscarproducto').keyup(function() {

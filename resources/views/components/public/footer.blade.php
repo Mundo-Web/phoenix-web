@@ -185,14 +185,14 @@
             <a target="_blank" href="https://www.instagram.com/s/aGlnaGxpZ2h0OjE4MDQ5OTQ5MDYyODM2OTM2?story_media_id=3433199994630037399&igsh=MXZoaDBlM2gxcW1wdg==">Nuestras Tiendas</a>
             <a id="linkPoliticasDatos">Politica de Datos</a>
             <div class="flex flex-row">
-                <a href="{{route('librodereclamaciones')}}"><div class="flex flex-row justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs"><img class="w-6 h-auto object-contain" src="{{asset('images/img/libro.png')}}" /> LIBRO DE
+                <a href="{{route('librodereclamaciones')}}"><div class="flex flex-row justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs"><img class="w-6 h-auto object-contain" src="{{asset('images/imagen/libro.png')}}" /> LIBRO DE
                         RECLAMACIONES</div></a>
             </div>
         </div>
 
         <div class=" flex flex-col text-base gap-2 justify-start items-start">
             <h3 class="font-Urbanist_Semibold text-xl pb-3">PAGO SEGURO</h3>
-            <img class="h-16 bg-contain object-contain" src="{{ asset('images/img/logosvisa.png') }}" />
+            <img class="h-16 bg-contain object-contain" src="{{ asset('images/imagen/logosvisa.png') }}" />
 
         </div>
 

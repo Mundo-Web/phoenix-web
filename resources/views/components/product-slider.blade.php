@@ -5,7 +5,7 @@
         <div class="flex gap-2 items-center justify-start h-full">
           <div class="flex justify-center items-center h-full">
             <img class="size-full object-cover h-full w-full shadow-xl" id="img-complementariaPROD-0"
-              src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}" />
+              src="{{ $product->imagen ? asset($product->imagen) : asset('images/imagen/noimagen.jpg') }}" />
           </div>
         </div>
       </div>
@@ -15,7 +15,7 @@
             <div class="flex justify-center items-center h-full">
               <img class="size-full object-cover h-full w-full shadow-xl"
                 id="img-complementariaPROD-{{ $index }}"
-                src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}" />
+                src="{{ $image->imagen ? asset($image->imagen) : asset('images/imagen/noimagen.jpg') }}" />
             </div>
           </div>
         </div>
@@ -31,8 +31,8 @@
           id="img-complementariaPROD-0">
           <div class="flex items-center justify-center h-full cursor-pointer">
               <img class="object-center object-contain h-full w-full shadow-xl aspect-square"
-                src="{{ $product->imagen ? asset($product->imagen) : asset('images/img/noimagen.jpg') }}"
-                onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+                src="{{ $product->imagen ? asset($product->imagen) : asset('images/imagen/noimagen.jpg') }}"
+                onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
           </div>
         </div>
 
@@ -41,8 +41,8 @@
             id="img-complementariaPROD-{{ $index }}">
             <div class="flex items-center justify-center h-full cursor-pointer">
                 <img class="object-center object-contain h-full w-full shadow-xl aspect-square"
-                  src="{{ $image->imagen ? asset($image->imagen) : asset('images/img/noimagen.jpg') }}"
-                  onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';" />
+                  src="{{ $image->imagen ? asset($image->imagen) : asset('images/imagen/noimagen.jpg') }}"
+                  onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
             </div>
           </div>
         @endforeach

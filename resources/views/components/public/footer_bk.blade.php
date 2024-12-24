@@ -20,7 +20,7 @@
     </style>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] py-8 lg:py-16 bg-cover object-cover"
-        style="background-image: url('{{ asset('images/img/fondofooter.png') }}');">
+        style="background-image: url('{{ asset('images/imagen/fondofooter.png') }}');">
 
         <div class="flex flex-col text-white text-base gap-1">
             <h3 class="font-semibold text-lg tracking-wider text-white pb-3">Contacta con Nosotros</h3>
@@ -45,7 +45,7 @@
             <a id="linkPoliticas">Politicas de devolucion </a>
 
             <a href="{{ route('librodereclamaciones') }}"><img class="w-24 mt-2"
-                    src="{{ asset('images/img/reclamaciones.png') }}" /></a>
+                    src="{{ asset('images/imagen/reclamaciones.png') }}" /></a>
         </div>
 
         <div class="flex flex-col text-white text-base gap-1">

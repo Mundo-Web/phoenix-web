@@ -74,7 +74,7 @@ class BlogController extends Controller
             $post->url_image = $routeImg;
             $post->name_image = $nombreImagen;
         } else {
-            $routeImg = 'images/img/';
+            $routeImg = 'images/imagen/';
             $nombreImagen = 'noimagenslider.jpg';
 
             $post->url_image = $routeImg;

@@ -16,7 +16,7 @@
         class="bg-[#006BF6] text-base font-Inter_Regular font-normal text-white text-center px-5 py-3 rounded-3xl flex items-center justify-center"
         type="button">
         {{ $item->botontext2 }}
-        <img src="{{ asset('images/img/Vector.png') }}" alt="Icono" class="ml-2">
+        <img src="{{ asset('images/imagen/Vector.png') }}" alt="Icono" class="ml-2">
       </a>
     </div>
 

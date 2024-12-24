@@ -17,7 +17,7 @@
             x-transition:leave="transition ease-in duration-300 transform"
             x-transition:leave-start="opacity-100 scale-105" x-transition:leave-end="opacity-100 scale-100"
             :class="{ 'scale-105': showAmbiente, 'scale-100': !showAmbiente }"
-            src="{{ asset('images/img/noimagen.jpg') }}" alt="imagen_alternativa"
+            src="{{ asset('images/imagen/noimagen.jpg') }}" alt="imagen_alternativa"
             class="w-full h-[300px] object-cover absolute inset-0 transition-transform duration-300" />
         @endif
         <span class="h4 absolute bottom-2 left-2 right-2 flex justify-start items-center text-white font-bold" style="text-shadow: 0 0 8px rgba(0, 0, 0, .25)">

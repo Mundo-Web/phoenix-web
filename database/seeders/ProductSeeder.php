@@ -34,7 +34,7 @@ class ProductSeeder extends Seeder
                     'id' => $row[1],
                     'name' => $row[2],
                     'slug' => str_replace(' ', '-', strtolower($row[2])),
-                    'url_image' => 'images/img/',
+                    'url_image' => 'images/imagen/',
                     'name_image' => 'noimagen.jpg'
                 ]);
 
@@ -64,8 +64,8 @@ class ProductSeeder extends Seeder
                     'precio' => $price ? $price : 0,
                     'costo_x_art' => $cost ? $cost : 0,
                     'stock' => is_numeric($row[13]) ? $row[13] : 0,
-                    'imagen' => 'images/img/noimagen.jpg',
-                    'imagen_ambiente' => 'images/img/noimagen.jpg',
+                    'imagen' => 'images/imagen/noimagen.jpg',
+                    'imagen_ambiente' => 'images/imagen/noimagen.jpg',
                     'status' => true,
                     'visible' => true
                 ]);

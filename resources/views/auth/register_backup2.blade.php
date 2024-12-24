@@ -3,7 +3,7 @@
         <div class="flex flex-row md:h-screen justify-center">
             <div class="bg-blue-500 basis-1/2 hidden md:block font-poppins">
                 <!-- Imagen ocupando toda la altura y sin desbordar -->
-                <div style="background-image: url('{{ asset('images/img/create_decotab.png') }}')" class=" bg-cover bg-center bg-no-repeat w-full h-full">
+                <div style="background-image: url('{{ asset('images/imagen/create_decotab.png') }}')" class=" bg-cover bg-center bg-no-repeat w-full h-full">
                     <h1 class="font-medium text-[24px] py-10 bg-black bg-opacity-25 text-center text-white">
                         Deco Tab
                     </h1>

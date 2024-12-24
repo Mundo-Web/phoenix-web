@@ -111,7 +111,7 @@
           <div id="containerProductosdetail"
             class="w-full flex justify-center items-center h-[330px] 2xs:h-[400px] sm:h-[450px] xl:h-[550px] rounded-3xl overflow-hidden">
             <img src="{{ asset($product->imagen) }}" alt="computer" class="w-full h-full object-contain" data-aos="fade-up"
-              data-aos-offset="150" onerror="this.onerror=null;this.src='/images/img/noimagen.jpg';">
+              data-aos-offset="150" onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';">
           </div>
           <x-product-slider :product="$product" />
         </div>
@@ -237,11 +237,11 @@
           <div class="flex flex-col xl:flex-row gap-6 font-Inter_Regular text-base">
             <div class="flex flex-row gap-2 items-center">
               <i class="h-5 w-5 inline-block"
-                style="background-image: url('{{ asset('images/img/carrito.png') }}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></i>
+                style="background-image: url('{{ asset('images/imagen/carrito.png') }}'); background-size: contain; background-position: center; background-repeat: no-repeat;"></i>
               <span class=""> Envio a Domicilio</span>
             </div>
             <div class="flex flex-row gap-2 items-center">
-              <img src="{{ asset('images/img/WhatsApp.png') }}" alt="whatsapp" class="w-8" />
+              <img src="{{ asset('images/imagen/WhatsApp.png') }}" alt="whatsapp" class="w-8" />
               <a href="https://api.whatsapp.com/send?phone={{ $general->whatsapp }}&text=Hola! Quería solicitar informacion para el producto  {{ $product->producto }}. 
                 "
                 target="_blank" class="">Preguntar sobre este producto</a>
@@ -275,7 +275,7 @@
                   <button
                     class=" @if ($isWhishList) bg-[#0D2E5E]  @else bg-[#99b9eb] @endif w-12 h-12 rounded-full text-white flex justify-center items-center hover:bg-[#1E8E9E]"
                     type="button" id="addWishlist">
-                    <img src="{{ asset('images/img/blanco.png') }}" alt="" class="w-8 h-8">
+                    <img src="{{ asset('images/imagen/blanco.png') }}" alt="" class="w-8 h-8">
                   </button>
                 @endif
 
@@ -376,7 +376,7 @@
             }
           @endphp
           <a href="{{ $url }}" class="flex items-center text-base font-Inter_SemiBold text-[#006BF6] ">Ver
-            todos los productos <img src="{{ asset('images/img/arrowBlue.png') }}" alt="Icono" class="ml-5 "></a>
+            todos los productos <img src="{{ asset('images/imagen/arrowBlue.png') }}" alt="Icono" class="ml-5 "></a>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-14 w-full">
           @foreach ($ProdComplementarios->take(4) as $item)
@@ -604,7 +604,7 @@
           "producto": nombre,
           "descuento": data.descuento,
           "precio": data.precio,
-          "imagen": data.imagen ? `${appUrl}${data.imagen}` : `${appUrl}/images/img/noimagen.jpg`,
+          "imagen": data.imagen ? `${appUrl}${data.imagen}` : `${appUrl}/images/imagen/noimagen.jpg`,
           "cantidad": 1,
           "color": null
         }]

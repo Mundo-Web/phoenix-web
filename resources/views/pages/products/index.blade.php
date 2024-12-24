@@ -431,7 +431,7 @@
           data
         }) => {
           container.html(
-            `<b class="block text-[12px]">${data.producto}</b><span class="block text-[10px]">${data.color} - ${data.peso}</span><small class="text-[10px] text-[#c1272d]">${data.discount?.name ?? ''}</small>`
+            `<b class="block text-[12px]">${data.producto}</b><small class="text-[10px] text-[#c1272d]">${data.discount?.name ?? ''}</small>`
             )
         }
       },
