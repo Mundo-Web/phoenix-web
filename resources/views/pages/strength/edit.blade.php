@@ -7,7 +7,7 @@
       <div
         class="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
         <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-          <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Editar promoción
+          <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Editar
           </h2>
         </header>
         
@@ -15,7 +15,7 @@
           <div class="rounded shadow-lg p-4 px-4 ">
             <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
 
-              <div class="md:col-span-5">
+              {{-- <div class="md:col-span-5">
                 <label for="order">Orden (Considera que el número más bajo será el primero)</label>
                 <div class="relative mb-2  mt-2">
                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -34,11 +34,11 @@
                     class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Ingresa el numero de orden">
                 </div>
-              </div>
+              </div> --}}
 
               
               <div class="md:col-span-5">
-                <label for="descripcionshort">Subtítulo</label>
+                <label for="descripcionshort">Cifra</label>
                 <div class="relative mb-2  mt-2">
                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                     <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg"
@@ -102,7 +102,7 @@
                 </div>
               </div>
 
-              <div class="md:col-span-5">
+              {{-- <div class="md:col-span-5">
                 <label for="link1">Url botón</label>
                 <div class="relative mb-2  mt-2">
                   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -121,7 +121,8 @@
                     class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Url botón">
                 </div>
-              </div>
+              </div> --}}
+
               {{-- <div class="md:col-span-5">
                 <label for="icono">Icono principal</label>
                 <div class="relative mb-2  mt-2">
@@ -130,22 +131,23 @@
                     aria-describedby="user_avatar_help" id="user_avatar" type="file">
                 </div>
               </div> --}}
-              <div class="md:col-span-5">
+
+              {{-- <div class="md:col-span-5">
                 <label for="categoria">Imagen</label>
                 <div class="relative mb-2 mt-2">
                   <img src="{{ asset($strength->imagen) }}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';"
                     class="max-w-xs max-h-48 object-cover object-top  bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                 </div>
-              </div>
+              </div> --}}
 
-              <div class="md:col-span-5">
+              {{-- <div class="md:col-span-5">
                 <label for="imagen">Imagen principal</label>
                 <div class="relative mb-2  mt-2">
                   <input id="imagen" name="imagen" value="{{ $strength->imagen }}"
                     class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     aria-describedby="user_avatar_help" id="user_avatar" type="file">
                 </div>
-              </div>
+              </div> --}}
 
 
               <div class="md:col-span-5 text-right mt-6 flex justify-between">

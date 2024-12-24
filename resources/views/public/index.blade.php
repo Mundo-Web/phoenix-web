@@ -341,21 +341,21 @@
 
                 <div class="lg:col-span-1 flex flex-col sm:flex-row gap-5 sm:gap-10 lg:flex-col justify-around items-start lg:items-end">
                     <div class="flex flex-col pl-2 max-w-xs text-left md:text-right">
-                        <h3 class="text-[#052F4E] text-6xl font-galano_bold">15+</h3>
-                        <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">Años de Experiencia</h2>
-                        <p class="text-[#052F4E] text-sm font-galano_regular">Proveemos a heladerías profesionales en todo el país.</p>
+                        <h3 class="text-[#052F4E] text-6xl font-galano_bold">{{$benefit[0]->descripcionshort ?? "Ingrese texto"}}</h3>
+                        <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">{{$benefit[0]->titulo ?? "Ingrese texto"}}</h2>
+                        <p class="text-[#052F4E] text-sm font-galano_regular">{{$benefit[0]->descripcion ?? "Ingrese texto"}}</p>
                     </div>
 
                     <div class="flex flex-col pl-2 max-w-xs text-left md:text-right">
-                        <h3 class="text-[#052F4E] text-6xl font-galano_bold">80+</h3>
-                        <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">Productos en Nuestro Catálogo</h2>
-                        <p class="text-[#052F4E] text-sm font-galano_regular">Ofrecemos una amplia gama de suplementos para cubrir todas tus necesidades.</p>
+                        <h3 class="text-[#052F4E] text-6xl font-galano_bold">{{$benefit[1]->descripcionshort ?? "Ingrese texto"}}</h3>
+                        <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">{{$benefit[1]->titulo ?? "Ingrese texto"}}</h2>
+                        <p class="text-[#052F4E] text-sm font-galano_regular">{{$benefit[1]->descripcion ?? "Ingrese texto"}}</p>
                     </div>
 
                     <div class="flex flex-col pl-2 max-w-xs text-left md:text-right">
-                        <h3 class="text-[#052F4E] text-6xl font-galano_bold">99%</h3>
-                        <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">Clientes Satisfechos</h2>
-                        <p class="text-[#052F4E] text-sm font-galano_regular">La mayoría de nuestros clientes recomiendan nuestros productos por su calidad y efectividad.</p>
+                        <h3 class="text-[#052F4E] text-6xl font-galano_bold">{{$benefit[2]->descripcionshort ?? "Ingrese texto"}}</h3>
+                        <h2 class="text-[#052F4E] text-xl font-galano_medium leading-none">{{$benefit[2]->titulo ?? "Ingrese texto"}}</h2>
+                        <p class="text-[#052F4E] text-sm font-galano_regular">{{$benefit[2]->descripcion ?? "Ingrese texto"}}</p>
                     </div>
                 </div>
                 

@@ -51,7 +51,9 @@ class DatabaseSeeder extends Seeder
             AboutUsSeeder::class,
             ProjectSeeder::class,
             HomeViewSeeder::class,
+            StrengthSeeder::class,
             ShortcodeSeeder::class,
+            
             //ServiceSeeder::class,
         ]);
         
