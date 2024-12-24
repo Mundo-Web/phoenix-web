@@ -254,7 +254,7 @@
                 </div>   
                 
                 <div class="flex flex-col gap-2">
-                    <img class="w-full aspect-square object-contain" src="{{asset($product->imagen_ambiente)}}" onerror="this.onerror=null;this.src='images/imagen/medidascremoso.png';"/>  
+                    <img class="w-full aspect-square object-contain" src="{{asset($product->imagen_ambiente)}}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/medidascremoso.png') }}';" />  
                 </div>
 
             </div>
