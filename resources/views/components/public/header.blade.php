@@ -169,7 +169,7 @@
                     </div>
 
                     <div
-                        class="relative flex flex-row gap-5 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
+                        class="relative flex flex-row gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
 
                         <div class="flex flex-row items-center justify-center">
                             <div
@@ -177,6 +177,51 @@
                                 Soporte</div>
                         </div>
 
+                        <div class="flex flex-row justify-center items-center">
+                            @if (Auth::user() == null)
+                                <a class="md:flex" href="{{ route('login') }}">
+                                    <i class="fa-solid fa-user-large fa-lg text-[#052f4e] !leading-none"></i>
+                                    {{-- <img src="{{ asset('images/svg/user.svg') }}" class="text-white w-7" /> --}}
+                                </a>
+                            @else
+                                <div class="relative md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
+                                    <button class="px-3 py-0 inline-flex justify-center items-center group"
+                                        aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
+                                        <div class="flex items-center">
+                                            {{-- <span id="username"
+                                                class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-white ">
+                                                {{ explode(' ', Auth::user()->name)[0] }}</span> --}}
+                                            <i class="fa-solid fa-user-large fa-lg text-[#052f4e] !leading-none"></i>
+                                            <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
+                                                viewBox="0 0 12 12">
+                                                <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
+                                            </svg>
+                                        </div>
+                                    </button>
+                                    <div class="bg-white origin-top-right z-10 absolute top-full min-w-44 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 py-1.5 rounded shadow-lg overflow-hidden mt-1"
+                                        @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
+                                        <ul>
+                                            <li class="hover:bg-gray-100">
+                                                <a class="font-medium text-sm text-black flex items-center py-1 px-3"
+                                                    href="{{ route('micuenta') }}" @click="open = false"
+                                                    @focus="open = true" @focusout="open = false">Mi Cuenta</a>
+                                            </li>
+
+                                            <li class="hover:bg-gray-100">
+                                                <form class="mb-0" method="POST" action="{{ route('logout') }}" x-data>
+                                                    @csrf
+                                                    <button type="submit"
+                                                        class="font-medium text-sm text-black flex items-center py-1 px-3"
+                                                        @click.prevent="$root.submit(); open = false">
+                                                        {{ __('Cerrar sesión') }}
+                                                    </button>
+                                                </form>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
 
                         <div class="flex justify-center items-center min-w-[38px]">
                             <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
