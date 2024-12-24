@@ -115,6 +115,7 @@
     columns: [{
         dataField: 'code',
         caption: 'ORDEN',
+        width: '400px',
         cellTemplate: (container, {
           data
         }) => {
@@ -158,6 +159,7 @@
       {
         dataField: 'created_at',
         caption: 'Fecha',
+        allowFiltering: false,
         cellTemplate: (container, {
           data
         }) => {
@@ -174,6 +176,7 @@
       {
         dataField: 'status.name',
         caption: 'ESTADO',
+        allowFiltering: false,
         cellTemplate: (container, {
           data
         }) => {
@@ -187,6 +190,7 @@
       {
         dataField: 'total',
         caption: 'MONTO',
+        allowFiltering: false,
         cellTemplate: (container, {
           data
         }) => {

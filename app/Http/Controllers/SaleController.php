@@ -207,7 +207,7 @@ class SaleController extends Controller
         $estado = $request->estado ?? 0;
         $response =  new dxResponse();
         try {
-            $instance = Sale::select()->with('status');
+            $instance = Sale::select()->with(['status','cupon']);
             
             if ($estado !== null && $estado != 0) {
                 $instance->where('status_id', $estado);
