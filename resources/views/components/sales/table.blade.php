@@ -10,7 +10,7 @@
 {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css" /> --}}
 
-<div id="gridContainer"></div>
+<div id="gridContainer" class="w-full"></div>
 
 <script>
   
@@ -19,7 +19,7 @@
     language: "es",
     dataSource: {
       load: async (params) => {
-        const estado = document.getElementById("estado").value;
+        const estado = document.getElementById("estado")?.value;
         const res = await fetch("{{ route('sales.paginate') }}{{ !$isAdmin ? '?data=mine' : '' }}", {
           method: 'POST',
           headers: {
@@ -164,7 +164,7 @@
           container.addClass('!px-3 !py-2 !text-center')
           container.css('vertical-align', 'middle')
           container.html(
-            `<span class="inline-flex items-center bg-[${data.status?.color ?? '#000000'}77] text-white text-sm font-poppins px-2.5 py-0.5 rounded-full dark:bg-[${data.status?.color ?? '#000000'}22] dark:text-[${data.status?.color ?? '#000000'}bb] w-max">${data.status?.name ?? 'Sin estado'}</span>`
+            `<span class="inline-flex items-center bg-[${data.status?.color ?? '#000000'}77] text-white text-sm font-poppins px-2.5 py-0.5 rounded-full dark:bg-[${data.status?.color ?? '#000000'}22] dark:text-[${data.status?.color ?? '#000000'}bb] w-max" style="background-color: ${data.status?.color ?? '#000000'}77; color: white">${data.status?.name ?? 'Sin estado'}</span>`
           )
         }
       },
