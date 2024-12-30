@@ -64,15 +64,15 @@
         <div class=" bg-[#052F4E] z-[1000] relative font-galano_medium text-sm">
             <div class="flex flex-row justify-between items-center py-3 w-11/12 mx-auto text-white text-sm">
 
-                <div class="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center">
                     <p>@cremosos</p>
                 </div>
 
-                <div class="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center">
                     <p>Las mejores ofertas</p>
                 </div>
 
-                <div class="flex flex-col justify-center items-center">
+                <div className="flex flex-col justify-center items-center">
                     <p>Free delivery</p>
                 </div>
 
@@ -1162,8 +1162,6 @@
       }
   });
 </script> --}}
-
-
 
 {{-- <script>
     document.getElementById('productos-link2').addEventListener('mouseenter', function(event) { 
