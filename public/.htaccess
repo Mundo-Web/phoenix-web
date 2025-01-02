@@ -3,7 +3,7 @@
         Options -MultiViews -Indexes
     </IfModule>
     <IfModule mod_headers.c>
-        Header set Access-Control-Allow-Origin "https://mrcremosobasedehelados.com.pe"
+        Header set Access-Control-Allow-Origin "https://www.mrcremosobasedehelados.com.pe"
     </IfModule>
 
     RewriteEngine On
