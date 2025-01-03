@@ -206,11 +206,11 @@
                     <h2 id="nombreproducto" class="font-galano_semibold text-3xl lg:text-4xl text-[#052F4E]">
                         Información adicional</h2>
 
-                    <div class="text-[#052F4E] text-lg font-normal font-galano_regular flex flex-col gap-3">
+                    {{-- <div class="text-[#052F4E] text-lg font-normal font-galano_regular flex flex-col gap-3">
                         <p>
                             Suspendisse id pulvinar mi. Curabitur commodo neque eget felis mollis, ac sagittis quam pulvinar.
                         </p>
-                    </div>
+                    </div> --}}
 
                     @php
                         $pesoLimpio = trim(strip_tags($product->peso));
