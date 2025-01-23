@@ -69,7 +69,7 @@ class SaveItems implements ShouldQueue
     foreach ($this->items as $item) {
       try {
         $imageRoute = \str_replace('{1}', $item[1], $this->image_route_pattern);
-        $imageRoute = \str_replace('{10}', $item[10], $imageRoute);
+        $imageRoute = \str_replace('{8}', $item[8], $imageRoute);
 
         $productImages = \array_filter($images, fn($image) => Text::startsWith($image, $imageRoute));
 
@@ -95,15 +95,16 @@ class SaveItems implements ShouldQueue
         //   ->where('name', $item[6])
         //   ->first();
 
-        $subcategoryJpa = SubCategory::updateOrCreate([
-          'category_id' => $categoryJpa->id,
-          'name' => $item[6]
-        ], [
-          'category_id' => $categoryJpa->id,
-          'name' => $item[6],
-          'slug' => Str::slug($item[6]),
-          'visible' => 1
-        ]);
+        // $subcategoryJpa = SubCategory::updateOrCreate([
+        //   'category_id' => $categoryJpa->id,
+        //   'name' => $item[6]
+        // ], [
+        //   'category_id' => $categoryJpa->id,
+        //   'name' => $item[6],
+        //   'slug' => Str::slug($item[6]),
+        //   'visible' => 1
+        // ]);
+
         // if (!$subcategoryJpa) {
         //   $subcategoryJpa = SubCategory::create([
         //     'category_id' => $categoryJpa->id,
@@ -125,10 +126,10 @@ class SaveItems implements ShouldQueue
         //   'visible' => 1
         // ]);
 
-        $discountJpa = Discount::where('name', '=', $item[15])->where('status', true)->first();
+        $discountJpa = Discount::where('name', '=', $item[11])->where('status', true)->first();
 
-        $price = $item[8];
-        $discount = $item[9] ?? 0;
+        $price = $item[6];
+        $discount = $item[7] ?? 0;
 
         if ($discount > 0) {
           $percent = (1 - ($discount / $price)) * 10;
@@ -140,19 +141,19 @@ class SaveItems implements ShouldQueue
           'sku' => $item[0],
         ], [
           'codigo' => $item[1],
-          'producto' => $item[2],
+          'producto' => isset($item[8]) ? $item[2] . " - " . $item[8] : $item[2],
           'extract' => $item[3],
           'description' => $item[4],
           'categoria_id' => $categoryJpa->id,
-          'subcategory_id' => $subcategoryJpa->id,
+          // 'subcategory_id' => $subcategoryJpa->id,
           // 'marca_id' => $brandJpa->id,
-          'precio' => $item[8],
-          'descuento' => $item[9] ?? 0,
-          'color' => $item[10],
-          'peso' => $item[12],
-          'stock' => $item[13],
-          'medidas' => $item[16],
-          'usos' => $item[17],
+          'precio' => $item[6],
+          'descuento' => $item[7] ?? 0,
+          'color' => $item[8],
+          'peso' => $item[9],
+          'stock' => $item[10],
+          'medidas' => $item[12],
+          'usos' => $item[13],
           'discount_id' => $discountJpa?->id,
           'visible' => 1,
           'percent_discount' => $percent
@@ -208,14 +209,14 @@ class SaveItems implements ShouldQueue
           ]);
         }
 
-        if (!Text::nullOrEmpty($item[11])) {
-          Specifications::updateOrCreate([
-            'product_id' => $productJpa->id,
-            'tittle' => 'Color (HEX)'
-          ], [
-            'specifications' => $item[11]
-          ]);
-        }
+        // if (!Text::nullOrEmpty($item[11])) {
+        //   Specifications::updateOrCreate([
+        //     'product_id' => $productJpa->id,
+        //     'tittle' => 'Color (HEX)'
+        //   ], [
+        //     'specifications' => $item[11]
+        //   ]);
+        // }
 
         dump($productImages);
         dump("{$productJpa->producto}\n{$productJpa->color} - {$productJpa->peso}\n{$discountJpa?->name}");
