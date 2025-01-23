@@ -30,7 +30,7 @@
 
                 <div id='general' class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
 
-                  <div class="md:col-span-5">
+                  <div class="md:col-span-3">
 
                     <label for="producto">Producto <span class="text-red-500 font-bold">*</span></label>
 
@@ -45,9 +45,9 @@
 
                     </div>
                   </div>
-                  {{-- <div class="col-span-5 md:col-span-2">
+                  <div class="col-span-5 md:col-span-2">
 
-                    <label for="color">Color <span class="text-red-500 font-bold">*</span></label>
+                    <label for="color">Sabor <span class="text-red-500 font-bold">*</span></label>
 
                     <div class="relative mb-2  mt-2">
                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -59,7 +59,7 @@
 
 
                     </div>
-                  </div> --}}
+                  </div>
 
                   <div class="col-span-5 md:col-span-5 mt-2">
                     <label for="extract">Extracto</label>

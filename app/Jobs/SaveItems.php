@@ -118,12 +118,12 @@ class SaveItems implements ShouldQueue
         //   $brandJpa = ClientLogos::create(['title' => $item[7]]);
         // }
 
-        $brandJpa = ClientLogos::updateOrCreate([
-          'title' => $item[7]
-        ], [
-          'title' => $item[7],
-          'visible' => 1
-        ]);
+        // $brandJpa = ClientLogos::updateOrCreate([
+        //   'title' => $item[7]
+        // ], [
+        //   'title' => $item[7],
+        //   'visible' => 1
+        // ]);
 
         $discountJpa = Discount::where('name', '=', $item[15])->where('status', true)->first();
 
@@ -145,12 +145,14 @@ class SaveItems implements ShouldQueue
           'description' => $item[4],
           'categoria_id' => $categoryJpa->id,
           'subcategory_id' => $subcategoryJpa->id,
-          'marca_id' => $brandJpa->id,
+          // 'marca_id' => $brandJpa->id,
           'precio' => $item[8],
           'descuento' => $item[9] ?? 0,
           'color' => $item[10],
           'peso' => $item[12],
           'stock' => $item[13],
+          'medidas' => $item[16],
+          'usos' => $item[17],
           'discount_id' => $discountJpa?->id,
           'visible' => 1,
           'percent_discount' => $percent

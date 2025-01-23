@@ -178,7 +178,7 @@
     <p class="mt-1 text-sm text-gray-500 dark:text-gray-300 mb-4" id="images_input_help">
       Los nombres deben ir en formato: <br>
       <code>
-        <span class="mention">Código Interno</span>_<span class="mention">{Color}</span>*.jpg
+        <span class="mention">Código Interno</span><span class="mention"></span>*.jpg/wepb
       </code>
     </p>
 
@@ -300,7 +300,7 @@
     // })
 
     // formData.append('image_route_pattern', element.text().trim());
-    formData.append('image_route_pattern', '{1}_{10}');
+    formData.append('image_route_pattern', '{1}');
 
     $.ajax({
       url: "/api/upload/items",
