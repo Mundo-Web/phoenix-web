@@ -188,6 +188,27 @@
         }
       },
       {
+        dataField: 'status.voucher',
+        caption: 'Voucher',
+        allowFiltering: false,
+        cellTemplate: (container, { data }) => {
+          
+          let voucherUrl = data.voucher; // Obtén el link del voucher
+
+          if (voucherUrl && voucherUrl.includes('storage')) {
+            voucherUrl = '/storage/' + voucherUrl.split('storage/')[1]; // Mantener 'storage' en la URL
+          }
+
+          container.addClass('!px-3 !py-2 !text-center !flex !flex-row !justify-center')
+          container.css('vertical-align', 'middle')
+          container.html(
+            voucherUrl
+              ? `<a href="${voucherUrl}" download class="flex flex-row items-center justify-center w-10 gap-2 h-10 rounded-xl bg-yellow-400" style="color: white"><i class="fa-solid fa-download"></i></a>`
+              : `<span class="text-gray-400">Sin voucher</span>`
+          );
+        }
+      },
+      {
         dataField: 'total',
         caption: 'MONTO',
         allowFiltering: false,

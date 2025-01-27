@@ -172,9 +172,9 @@
                         class="relative flex flex-row gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
 
                         <div class="flex flex-row items-center justify-center">
-                            <div
+                            <a href="{{route('contacto')}}"><div
                                 class="text-white font-galano_semibold bg-[#052f4e] rounded-xl text-center w-auto py-2 px-6">
-                                Soporte</div>
+                                Soporte</div></a>
                         </div>
 
                         <div class="flex flex-row justify-center items-center">

@@ -60,7 +60,7 @@
             </h2>
             <ul class="grid w-full gap-6 md:grid-cols-3 font-galano_regular">
               <li>
-                <input type="radio" name="envio" id="recoger-option" value="recoger" class="hidden peer" required checked
+                <input type="radio" name="envio" id="recoger-option" value="recoger" class="hidden peer" required 
                   {{-- @if (!$hasDefaultAddress) checked @endif --}}
                   >
                 <label for="recoger-option"
@@ -79,7 +79,7 @@
                 </label>
               </li>
               <li>
-                <input type="radio" name="envio" id="express-option" value="express" class="hidden peer"
+                <input type="radio" name="envio" id="express-option" value="express" class="hidden peer" checked
                   {{-- @if ($hasDefaultAddress) checked @endif --}}
                   >
                 <label for="express-option"

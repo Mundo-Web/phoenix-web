@@ -36,13 +36,10 @@
                     <p id="codigoPedido" class="font-semibold text-[16px] text-[#141718]">#{{ $code }}</p>
                   </div>
 
-                  <div class="font-galano_regular p-2">
-            
-            
+                  {{-- <div class="font-galano_regular p-2">
 
                     <ul class="text-center">
                       <li class="mb-2">Realiza la transferencia/depósito a nuestras cuentas, o paga a través de YAPE o PLIN. </p>
-                      {{-- <li class="mb-2">Luego, simplemente carga la imagen y envíanos la confirmación de pago. ¡Y listo 💫!</p> --}}
                       <li class="mb-2">Puedes enviarnos tu confirmación de pago a través de WhatsApp.</p>
                     </ul>
         
@@ -75,8 +72,7 @@
                         <p>Mr Cremoso</p>
                       </div>
                     </div>
-                    
-                  </div>
+                  </div> --}}
 
                   <div class="font-poppins">
                     <div>
@@ -95,11 +91,11 @@
 
                 <div class="flex flex-col gap-5 items-center justify-center">
 
-                  <div>
+                  {{-- <div>
                     <a href=""
                       class="text-white bg-[#052F4E] w-80 py-3 rounded-xl cursor-pointer font-semibold text-[16px] inline-block text-center">
                       Enviar voucher a whatsapp</a>
-                  </div>
+                  </div> --}}
                   
                   <div>
                     <a href="{{ route('catalogo.all') }}"

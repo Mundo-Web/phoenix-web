@@ -6,13 +6,12 @@ import { Chart } from 'chart.js';
 // Import flatpickr
 import flatpickr from 'flatpickr';
 
-// Import Sweetaler2
+
 
 // Import AOS
 import 'aos/dist/aos.css'
 import Aos from 'aos';
 Aos.init();
-
 
 
 

@@ -58,6 +58,7 @@ use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ValoresAtributosController;
 
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\TemporalyImageController;
 use App\Http\Controllers\TermsAndConditionController;
 use App\Http\Controllers\TimeAndPriceDeliveryController;
 use App\Http\Controllers\TratamientoAdicionalDatosController;
@@ -131,6 +132,10 @@ Route::get('/confirm-email/{token}', [AuthController::class, 'confirmEmailView']
 Route::get('/confirmation/{token}', [AuthController::class, 'loginView']);
 
 Route::post('buscarTalla', [IndexController::class, 'buscarTalla'])->name('buscarTalla');
+
+Route::post('/uploadvoucher', [TemporalyImageController::class, 'uploadvoucher'])->name('uploadvoucher');
+Route::delete('/deletevoucher', [TemporalyImageController::class, 'deletevoucher'])->name('deletevoucher');
+Route::post('/guardarvoucher', [SaleController::class, 'guardarvoucher'])->name('guardarvoucher');
 
 
 Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {

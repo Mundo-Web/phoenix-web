@@ -31,7 +31,8 @@ class Sale extends Model
         'direccion_fact',
         'idcupon',
         'cupon_monto',
-        'subtotal'
+        'subtotal',
+        'voucher'
     ];
 
     public function status()

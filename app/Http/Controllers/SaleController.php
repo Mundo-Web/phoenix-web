@@ -12,14 +12,17 @@ use App\Models\Price;
 use App\Models\Products;
 use App\Models\SaleDetail;
 use App\Models\Status;
+use App\Models\TemporalyImage;
 use App\Models\User;
 use App\Models\UserDetails;
+use DragonCode\Support\Facades\Filesystem\File;
 use Exception;
 use SoDe\Extend\JSON;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use SoDe\Extend\Response;
 use Throwable;
@@ -333,6 +336,57 @@ class SaleController extends Controller
                 $response->toArray(),
                 $response->status
             );
+        }
+    }
+
+
+    public function guardarvoucher(Request $request)
+    {
+        // Obtener el archivo temporal basado en el nombre de archivo pasado en la solicitud
+        $filename = $request->voucher;
+    
+        // Buscar la imagen temporal que tiene el nombre de archivo especificado
+        $temporalyImage = TemporalyImage::where('filename', $filename)->first();
+    
+        if ($temporalyImage) {
+            $order_id = $request->order_id ?? '';  // Obtener el ID de la orden (si está presente)
+    
+            // Obtener las rutas de los archivos
+            $oldPath = public_path($temporalyImage->folder . $temporalyImage->filename);
+            $newroute = public_path('storage/images/voucher/');
+            $newPath = $newroute . $temporalyImage->filename;
+    
+            // Crear el directorio de destino si no existe
+            if (!file_exists($newroute)) {
+                mkdir($newroute, 0777, true);
+            }
+    
+            // Copiar el archivo al nuevo directorio
+            if (File::exists($oldPath)) {
+                File::copy($oldPath, $newPath);
+    
+                // Actualizar la venta con la nueva ruta del archivo
+                $sale = Sale::where('code', $order_id)->first();
+    
+                if ($sale) {
+                    $sale->update([
+                        'voucher' => $newPath ?? '-',
+                    ]);
+                }
+    
+                // Eliminar el archivo temporal original
+                File::delete($oldPath);
+    
+                // Eliminar el registro temporal
+                $temporalyImage->delete();
+
+                return response()->json(['success' => true, 'message' => 'Voucher cargado correctamente']);
+            } else {
+                // Si no se encuentra el archivo
+                return response()->json(['message' => 'No se cargó el Voucher'], 404);
+            }
+        } else {
+            return response()->json(['message' => 'No se cargó el Voucher'], 404);
         }
     }
 }

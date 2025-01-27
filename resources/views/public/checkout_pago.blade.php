@@ -518,20 +518,112 @@
             </div>
             
           </div>
-
-          <div class="mt-4">
-            <a
-              data-type="whatsapp"
-              href="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}"
-              type="submit"
-              id="hacerpedido"
-              class="w-full py-2 px-4 border  block text-center bg-white border-[#052F4E] font-galano_bold  rounded-xl hover:text-white  
-            hover:bg-[#052F4E] transition-colors duration-300">
-              Enviar Pago por WhatsApp
-            </a>
-          </div> 
+          <form  id="formVoucher" method="POST" enctype="multipart/form-data">
+            @csrf
+            <div class="mt-4">
+              <input type="file" class="filepond" name="voucher" id="voucher" data-max-file-size="1MB" data-max-files="2"/>
+            </div>
+              <input type="hidden" name="order_id" value="{{$sale->code}}" />
+            <div class="mt-4">
+              <button
+                data-type="whatsapp"
+                {{-- href="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}" --}}
+                type="submit"
+                id="hacerpedido"
+                class="w-full py-2 px-4 border  block text-center bg-white border-[#052F4E] font-galano_bold  rounded-xl hover:text-white  
+              hover:bg-[#052F4E] transition-colors duration-300">
+                Realizar pedido
+              </button>
+            </div> 
+          </form>
       </div>
   </div>
+  
+  <link href="https://unpkg.com/filepond@^4/dist/filepond.css" rel="stylesheet" />
+  <script src="https://unpkg.com/filepond@^4/dist/filepond.js"></script>
+  <link href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" rel="stylesheet" />
+  <script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+  
+  
+  <script>
+    FilePond.registerPlugin(FilePondPluginImagePreview);
+
+    FilePond.create(document.querySelector('.filepond'), {
+        labelIdle: 'Arrastra y suelta tus archivos o haz clic para subir',
+        acceptedFileTypes: ['image/png', 'image/jpeg', 'application/pdf'],
+        maxFileSize: '2MB',
+        allowImagePreview: true,
+        styleLoadIndicatorPosition: 'center bottom',
+        styleProgressIndicatorPosition: 'right bottom',
+        styleButtonRemoveItemPosition: 'left bottom',
+        styleButtonProcessItemPosition: 'right bottom',
+
+        server: {
+          process: {
+              url: '/uploadvoucher',
+              method: 'POST',
+              headers: {
+                  'X-CSRF-TOKEN': "{{ csrf_token() }}" 
+              }
+          },
+          revert: {
+              url: '/deletevoucher',
+              method: 'DELETE',
+              headers: {
+                  'X-CSRF-TOKEN': "{{ csrf_token() }}" 
+              }
+          },
+        },
+       
+    });
+
+    $('#formVoucher').submit(function (e) {
+        e.preventDefault(); // Evitar el envío tradicional del formulario
+
+        var formData = new FormData(this); // Crear un objeto FormData con los datos del formulario
+
+        $.ajax({
+            url: '{{ route("guardarvoucher") }}',  // Ruta a donde se enviarán los datos
+            type: 'POST',
+            data: formData,  // Datos del formulario
+            processData: false,  // No procesar los datos
+            contentType: false,  // No establecer tipo de contenido (porque es un archivo)
+            success: function (response) {
+              if (response.success) {
+                  Swal.fire({
+                      icon: 'success',
+                      title: '¡Éxito!',
+                      text: response.message || 'Voucher subido correctamente.',
+                      confirmButtonText: 'Aceptar',
+                      confirmButtonColor: '#052F4E'
+                  }).then(() => {
+                      // Redirigir a la página de agradecimiento
+                      window.location.href = '{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}';
+                  });
+              } else {
+                  Swal.fire({
+                      icon: 'warning',
+                      title: '¡Error!',
+                      text: response.message || 'Hubo un problema al subir el archivo.',
+                      confirmButtonText: 'Aceptar',
+                      confirmButtonColor: '#052F4E'
+                  });
+              }
+            },
+            error: function (xhr, status, error) {
+              Swal.fire({
+                    icon: 'warning',
+                    title: '¡Error!',
+                    text: xhr.message || 'No se cargó el Voucher.',
+                    confirmButtonText: 'Aceptar',
+                    confirmButtonColor: '#052F4E'
+              });
+            }
+        });
+    });
+  </script>
+
+  
 
   <script>
     $('#direccionContainer').fadeOut(0)
