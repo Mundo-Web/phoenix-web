@@ -53,10 +53,10 @@
                     class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left lg:text-center max-w-2xl mx-auto">
                     Nuestros Servicios
                 </h2>
-                <p class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
+                {{-- <p class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
                     Mauris euismod vehicula eros egestas venenatis. Vestibulum non pulvinar risus.
                     Praesent hendrerit lectus ultrices purus consectetur, eu sollicitudin libero pretium.
-                </p>
+                </p> --}}
             </div>
         </section>
 

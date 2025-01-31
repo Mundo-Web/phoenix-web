@@ -64,17 +64,6 @@ class HomeViewController extends Controller
     {
         $homeview = HomeView::findOrfail($id); 
 
-        if ($request->hasFile("url_image2section")) {
-            $file = $request->file('url_image2section');
-            $routeImg = 'storage/images/viewhome/';
-            $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
-      
-            $this->saveImg($file, $routeImg, $nombreImagen);
-      
-            $homeview['url_image2section'] = $routeImg . $nombreImagen;
-           
-        } 
-
         if ($request->hasFile("url_image3section")) {
             $file = $request->file('url_image3section');
             $routeImg = 'storage/images/viewhome/';
@@ -83,6 +72,17 @@ class HomeViewController extends Controller
             $this->saveImg($file, $routeImg, $nombreImagen);
       
             $homeview['url_image3section'] = $routeImg . $nombreImagen;
+           
+        } 
+
+        if ($request->hasFile("url_image8section")) {
+            $file = $request->file('url_image8section');
+            $routeImg = 'storage/images/viewhome/';
+            $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+      
+            $this->saveImg($file, $routeImg, $nombreImagen);
+      
+            $homeview['url_image8section'] = $routeImg . $nombreImagen;
            
         } 
 

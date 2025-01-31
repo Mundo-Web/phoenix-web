@@ -173,14 +173,14 @@
         @endif
 
 
-        <section class="py-12 xl:py-16 grid grid-cols-1 lg:grid-cols-2 px-[5%] gap-10">
+        {{-- <section class="py-12 xl:py-16 grid grid-cols-1 lg:grid-cols-2 px-[5%] gap-10">
             <img class="w-full object-cover object-center h-[450px] md:h-[500px] col-span-2"
                 src="{{ asset('images/imagen/cremosorsefinal.png') }}" />
             <img class="w-full object-cover object-center h-[450px] md:h-[500px]"
                 src="{{ asset('images/imagen/cremosorse.png') }}" />
             <img class="w-full object-cover object-center h-[450px] md:h-[500px]"
                 src="{{ asset('images/imagen/cremosorse3.png') }}" />
-        </section>
+        </section> --}}
 
     </main>
 

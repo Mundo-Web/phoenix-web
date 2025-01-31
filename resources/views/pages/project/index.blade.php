@@ -2,7 +2,7 @@
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
 
     <section class="py-4 border-b border-slate-100 dark:border-slate-700">
-
+      
     </section>
 
 
@@ -24,7 +24,7 @@
                 <th>Titulo </th>
                 <th>Descripcion</th>
                 <th>Imagen</th>
-                {{-- <th>Visible</th> --}}
+                <th>Visible</th>
                 <th>Acciones</th>
               </tr>
             </thead>
@@ -37,7 +37,7 @@
 
                   <td class="px-3 py-2"><img class="w-20 object-contain h-16" src="{{ asset($item->imagen) }}" alt=""></td>
 
-                  {{-- <td>
+                  <td>
                     <form method="POST" action="">
                       @csrf
                       <input type="checkbox" id="hs-basic-usage"
@@ -54,7 +54,7 @@
 
 
 
-                  </td> --}}
+                  </td>
 
                   <td class="flex flex-row justify-end items-center gap-5">
 
@@ -77,7 +77,7 @@
                 <th>Titulo </th>
                 <th>Descripcion</th>
                 <th>Imagen</th>
-                {{-- <th>Status</th> --}}
+                <th>Visible</th>
                 <th>Acciones</th>
               </tr>
             </tfoot>

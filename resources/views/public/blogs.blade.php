@@ -19,11 +19,10 @@
         <div class="flex flex-col gap-2 max-w-3xl mx-auto">
             <h2
                 class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left lg:text-center max-w-2xl mx-auto">
-                Describe de qué trata tu blog
+                {{$textoshome->title10section ?? "Ingrese un texto"}}
             </h2>
             <p class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
-                Mauris euismod vehicula eros egestas venenatis. Vestibulum non pulvinar risus.
-                Praesent hendrerit lectus ultrices purus consectetur, eu sollicitudin libero pretium.
+                {{$textoshome->description10section ?? "Ingrese un texto"}}
             </p>
         </div>
     </section>
@@ -98,11 +97,9 @@
             <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-10">
                 <div class="flex flex-col gap-1 md:col-span-2 pt-10  md:py-16 px-[5%] md:px-0">
 
-                    <h2 class="text-[#052F4E] text-4xl md:text-5xl font-galano_bold leading-none">Suscríbete a nuestra
-                        newsletter</h2>
+                    <h2 class="text-[#052F4E] text-4xl md:text-5xl font-galano_bold leading-none">{{$textoshome->title11section ?? "Ingrese un texto"}}</h2>
                     <p class="text-[#052F4E] text-lg font-galano_regular line-clamp-3">
-                        Mauris euismod vehicula eros egestas venenatis. Vestibulum non pulvinar risus.
-                        Praesent hendrerit lectus ultrices purus consectetur, eu sollicitudin libero pretium.
+                        {{$textoshome->description11section ?? "Ingrese un texto"}}
                     </p>
                     <div class="flex flex-col md:flex-row gap-3 mt-10">
                         <form id="subsEmail">

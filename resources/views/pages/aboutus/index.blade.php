@@ -94,6 +94,7 @@
 
     new DataTable('#tabladatos', {
       buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+      ordering: false,
       layout: {
         topStart: 'buttons'
       },

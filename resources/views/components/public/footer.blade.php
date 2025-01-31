@@ -53,11 +53,15 @@
                 <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
                    ENLACES
                 </p>
-                <div class="flex flex-col gap-3 text-[#FFF9F1] font-galano_regular text-sm">
-                    <a href="{{ route('index', 0) }}">Inicio</a>
-                    <a href="{{route('index').'#servicios'}}">Servicios</a>
-                    <a href="{{route('index').'#about'}}">Nosotros</a>
-                    <a href="{{route('index').'#contacto'}}">Contacto</a>
+                <div class="flex flex-col gap-1 text-[#FFF9F1] font-galano_regular text-sm">
+                    <a href="{{ route('index') }}">Inicio</a>
+                    @if (count($services) > 0)
+                        <a href="{{ route('servicios', $services->first()->id) }}">Servicios</a>
+                    @endif
+                    <a href="{{route('catalogo',0)}}">Productos</a>
+                    <a href="{{route('rse')}}">RSE</a>
+                    <a href="{{route('blog',0)}}">Blog</a>
+                    <a href="{{route('contacto')}}">Contacto</a>
                 </div>
             </div>
 

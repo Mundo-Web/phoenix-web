@@ -224,8 +224,8 @@
                 </div>
 
                 <div class="flex flex-col justify-end items-center">
-                    <img class="h-[550px] w-full object-contain" src="{{asset('images/imagen/heladocremoso.png')}}"
-                    onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';" alt="producto" />
+                    <img class="h-[550px] w-full object-contain" src="{{asset($textoshome->url_image3section)}}"
+                    onerror="this.onerror=null;this.src='{{ asset('images/imagen/heladocremoso.png') }}';" alt="producto" />
                     <div class="lg:hidden flex flex-row justify-start md:justify-center items-start">
                         <a href="#"
                             class="text-[#052F4E] py-3 px-6 bg-white rounded-xl text-base font-galano_regular font-semibold text-center max-w-xs mx-auto">

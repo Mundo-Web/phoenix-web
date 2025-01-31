@@ -143,14 +143,14 @@
                                         </div>
                                     </div> --}}
 
-                                    <div class="md:col-span-5">
+                                    {{-- <div class="md:col-span-5">
                                         <label for="url_image3section">Imagen principal</label>
                                         <div class="relative mb-2  mt-2">
                                             <input id="url_image3section" name="url_image3section"
                                                 class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                                                 aria-describedby="user_avatar_help" id="user_avatar" type="file">
                                         </div>
-                                    </div>
+                                    </div> --}}
 
 
                                     <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-xl tracking-tight">Beneficio 1</h2>
@@ -386,7 +386,14 @@
                                         </div>
                                     </div>
 
-                                    
+                                    {{-- <div class="md:col-span-5">
+                                        <label for="url_image8section">Imagen principal</label>
+                                        <div class="relative mb-2  mt-2">
+                                            <input id="url_image8section" name="url_image8section"
+                                                class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+                                                aria-describedby="user_avatar_help" id="user_avatar" type="file">
+                                        </div>
+                                    </div> --}}
 
                                     <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-xl tracking-tight">Sección Testimonios</h2>
 

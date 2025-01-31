@@ -51,17 +51,17 @@
       <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
           
           <div class="flex flex-col justify-center items-center">
-              <img src="{{ asset('images/imagen/cremosonosotros.png') }}" class="object-cover" />
+              <img src="{{ asset($nosotros[1]->imagen) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/cremosonosotros.png') }}';" class="object-cover" />
           </div>
         
-          <div class="flex flex-col justify-center gap-5 lg:gap-7 text-textWhite ">
+          <div class="flex flex-col justify-center gap-5 lg:gap-7">
               <h1
                   class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
                   {{$nosotros[1]->titulo ?? "Ingrese texto" }}
               </h1>
-              <p class="text-[#052F4E] text-lg font-galano_regular">
+              <div class="text-[#052F4E] text-lg font-galano_regular">
                   {!! $nosotros[1]->descripcion ?? "Ingrese texto" !!}
-              </p>
+              </div>
           </div>
 
       </div>
@@ -85,7 +85,7 @@
 
             <div class="flex flex-col justify-center items-center">
 
-                <img src="{{ asset('images/imagen/cremosonosotros2.png') }}" />
+                <img src="{{ asset($nosotros[2]->imagen) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/cremosonosotros2.png') }}';" />
             </div>
         </div>
     </section>
@@ -97,9 +97,9 @@
                 <h1 class="text-[#052F4E] font-galano_semibold tracking-tight text-3xl leading-none">
                     {{$nosotros[3]->titulo ?? "Ingrese texto" }}
                 </h1>
-                <p class="text-[#052F4E] text-lg font-galano_regular">
+                <div class="text-[#052F4E] text-lg font-galano_regular">
                   {!! $nosotros[3]->descripcion ?? "Ingrese texto" !!}
-                </p>
+                </div>
                 <div class="flex flex-row justify-start items-start">
                     <a href="{{route('catalogo.all')}}"
                         class="text-white py-3 px-6 bg-[#052F4E] rounded-xl text-base font-galano_light font-semibold text-left">
@@ -108,7 +108,7 @@
                 </div>
             </div>
             <div class="flex flex-col justify-center items-center">
-                <img src="{{ asset('images/imagen/conoscremoso.png') }}" class="object-cover" />
+                <img src="{{ asset($nosotros[3]->imagen) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/conoscremoso.png') }}';" class="object-cover" />
             </div>
         </div>
     </section>

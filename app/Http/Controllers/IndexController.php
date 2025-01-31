@@ -140,6 +140,8 @@ class IndexController extends Controller
 
     $categoria = Category::where('id', '=', $id_cat)->where('visible', true)->where('status', true)->first();
 
+    $textoshome = HomeView::where('id', 1)->first();
+
     $marcas = ClientLogos::where('status', true)->where('visible', true)->get();
 
     $colores = Products::select('color')->distinct()->pluck('color');
@@ -200,7 +202,7 @@ class IndexController extends Controller
       }
     }
 
-    return view('public.catalogo', compact('page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
+    return view('public.catalogo', compact('textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
   }
 
   public function ofertas(Request $request, string $id_cat = null)
@@ -1404,10 +1406,12 @@ class IndexController extends Controller
   }
 
   public function blog($filtro)
-  {
+  { 
+
     try {
       $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
-
+      $textoshome = HomeView::where('id', 1)->first();
+      
       if ($filtro == 0) {
 
         $categoria = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
@@ -1450,7 +1454,7 @@ class IndexController extends Controller
           ->get();
       }
 
-      return view('public.blogs', compact('posts', 'categoria', 'categorias', 'filtro', 'lastposts'));
+      return view('public.blogs', compact('textoshome', 'posts', 'categoria', 'categorias', 'filtro', 'lastposts'));
     } catch (\Throwable $th) {
     }
   }
@@ -1564,7 +1568,8 @@ class IndexController extends Controller
   public function rse(){
     $testimonie = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
     $rse = Project::all();
-    return view('public.rse', compact('rse','testimonie'));
+    $textoshome = HomeView::where('id', 1)->first();
+    return view('public.rse', compact('textoshome','rse','testimonie'));
   }
 
 

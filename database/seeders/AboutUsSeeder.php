@@ -17,18 +17,14 @@ class AboutUsSeeder extends Seeder
             [
                 'titulo' => 'Creamos sabores que marcan la diferencia',
                 'descripcion' => 'Somos expertos en brindar suplementos de alta calidad para heladerías, transformando ingredientes comunes en experiencias irresistibles. Nos dedicamos a elevar el sabor y la innovación en cada producto, con un firme compromiso hacia el cuidado del medio ambiente y las necesidades de tus clientes.',
-                'imagen' => 'storage/images/imagen/fl85XXUtND_Ima2.png',
+                'imagen' => '',
                 'status' => 1,
-                'created_at' => '2024-08-02 21:33:46',
-                'updated_at' => '2024-08-02 23:57:40',
             ],
             [
                 'titulo' => 'Los valores que nos impulsan a crear productos de calidad',
                 'descripcion' => 'En cada paso, nos guiamos por valores sólidos: calidad excepcional, innovación constante, sostenibilidad y un compromiso profundo con nuestros clientes. Creemos en la creación de productos que no solo mejoren tus helados, sino que también respeten el medio ambiente y contribuyan al éxito de tu heladería.',
-                'imagen' => 'storage/images/imagen/i4pfzlPd8d_Ima2.png',
+                'imagen' => 'images/imagen/cremosonosotros.png',
                 'status' => 1,
-                'created_at' => '2024-08-02 21:33:56',
-                'updated_at' => '2024-08-03 00:22:01',
             ],
             [
                 'titulo' => 'Nuestra misión, compromiso con la innovación y calidad',
@@ -51,18 +47,14 @@ class AboutUsSeeder extends Seeder
                 <p><strong>Sostenibilidad y Responsabilidad Ambiental</strong></p>
                 
                 <p>Nuestra misi&oacute;n incluye el cuidado del planeta, por lo que nuestros productos son desarrollados con pr&aacute;cticas responsables, minimizando el impacto ambiental y apoyando un futuro m&aacute;s verde.</p>',
-                'imagen' => 'storage/images/imagen/0B2yAS5w0E_image 15.png',
+                'imagen' => 'images/imagen/cremosonosotros2.png',
                 'status' => 1,
-                'created_at' => '2024-08-02 21:34:50',
-                'updated_at' => '2024-08-02 23:47:03',
             ],
             [
                 'titulo' => 'Insumos de Calidad para Heladerías Excepcionales',
                 'descripcion' => 'Sed non iaculis felis, eget egestas risus. Nullam vitae hendrerit purus. Suspendisse at sodales lectus. Nunc facilisis lorem id lacinia luctus.',
-                'imagen' => 'storage/images/imagen/i4pfzlPd8d_Ima2.png',
+                'imagen' => 'images/imagen/conoscremoso.png',
                 'status' => 1,
-                'created_at' => '2024-08-02 21:33:56',
-                'updated_at' => '2024-08-03 00:22:01',
             ],
           
         ]);

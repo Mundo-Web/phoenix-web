@@ -80,8 +80,11 @@ class AppServiceProvider extends ServiceProvider
             $NuestrasTiendas = NuestrasTiendas::first();
             $logosfooter = Service::where('visible', true)->get();
 
+            $services = Service::where("status", "=", true)
+                ->where("visible", "=", true)
+                ->get();
 
-            $view->with(['logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'general' => $general, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
+            $view->with(['services'=>$services, 'logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'general' => $general, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
         });
 
         View::composer('components.public.header', function ($view) {
