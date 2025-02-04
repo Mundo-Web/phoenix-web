@@ -141,7 +141,7 @@ class SaveItems implements ShouldQueue
           'sku' => $item[0],
         ], [
           'codigo' => $item[1],
-          'producto' => isset($item[8]) ? $item[2] . " - " . $item[8] : $item[2],
+          'producto' => $item[2],
           'extract' => $item[3],
           'description' => $item[4],
           'categoria_id' => $categoryJpa->id,

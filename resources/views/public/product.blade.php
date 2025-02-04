@@ -143,9 +143,9 @@
                         <a href="{{route('catalogo.all')}}">Productos</a> | <a href="{{route('catalogo', $product->category->id ) ?? route('catalogo.all') }}">{{$product->category->name ?? "Otros"}}</a> | {{$product->producto ?? "Producto sin nombre"}}</h3>
 
                     <h2 id="nombreproducto" class="font-galano_semibold text-4xl lg:text-5xl text-[#052F4E]">
-                            {{$product->producto}}</h2>
-                    
-                   
+                            {{$product->producto}} @if($product->color) - {{$product->color}}@endif
+                    </h2>           
+                             
                     <div class="text-[#052F4E] text-lg font-normal font-galano_regular flex flex-col gap-3">
                        {!!$product->description!!}
                     </div>
@@ -162,6 +162,39 @@
                         
                         @endif  
                     </div>
+                    
+                    <div class="flex flex-col gap-5">
+                        <div class="flex flex-col gap-3">
+                          @if ($otherProducts->isNotEmpty())
+                            <div class="flex flex-col w-full justify-center items-start text-xl text-[#052F4E] font-galano_semibold">
+                              <h2>Sabores:</h2>
+                            </div>
+          
+                            {{-- <span class="block bg-[#F5F5F7] p-3 mt-2" tippy> {{ $product->color }}</span> --}}
+                            <div class="flex flex-wrap w-full gap-2 lg:gap-4 justify-start items-center font-Urbanist_Medium">
+                              <a class="ring-1 rounded-full p-[3px] ring-[#3f3f3f]" tippy data-tippy-content="Seleccionado">
+                                <div class="flex justify-center items-center">
+                                  <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
+                                    <img class="object-contain object-center" src="{{ asset($product->imagen) }}" />
+                                  </div>
+                                </div>
+                              </a>
+                              
+                              @foreach ($otherProducts as $x)
+                                @if (!empty($x->imagen))
+                                  <a class="ring-1 rounded-full p-[3px] ring-transparent hover:ring-[#3f3f3f]"
+                                    href="{{ route('producto', $x->id) }}" tippy data-tippy-content="{{$x->color}}">
+                                    <div class="flex justify-center items-center">
+                                      <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
+                                        <img class="object-contain object-center" src="{{ asset($x->imagen) }}" />
+                                      </div>
+                                    </div>
+                                  </a>
+                                @endif
+                              @endforeach
+                            </div>
+                          @endif
+                        </div>
 
                     @if ($product->status == 1 && $product->visible == 1)
                       <div class="flex flex-col gap-4 mt-3">
@@ -574,6 +607,13 @@
           buscarTallaProducto();
       });
     </script> --}}
+
+
+    <script>
+        tippy('#myButton', {
+          content: 'My tooltip!',
+        });
+    </script>
 
     <script>
         var appUrl = <?php echo json_encode($url_env); ?>;

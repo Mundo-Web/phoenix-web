@@ -59,7 +59,7 @@
                         <a href="{{ route('servicios', $services->first()->id) }}">Servicios</a>
                     @endif
                     <a href="{{route('catalogo',0)}}">Productos</a>
-                    <a href="{{route('rse')}}">RSE</a>
+                    <a href="{{route('rse')}}">Recetas</a>
                     <a href="{{route('blog',0)}}">Blog</a>
                     <a href="{{route('contacto')}}">Contacto</a>
                 </div>

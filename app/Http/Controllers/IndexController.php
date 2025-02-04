@@ -895,6 +895,8 @@ class IndexController extends Controller
       ->where('id', '<>', $id)
       ->where('producto', $product->producto)
       ->where('color', '<>', $product->color)
+      ->where('visible', 1)
+      ->where('status', 1)
       ->whereNotNull('color')
       ->groupBy('color')
       ->get();

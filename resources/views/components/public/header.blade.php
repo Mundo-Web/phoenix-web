@@ -138,7 +138,7 @@
 
                         <li class="flex flex-col">
                             <a href="{{ route('rse') }}"
-                                class="{{ isset($pagina) && $pagina == 'rse' ? 'font-semibold' : '' }}">RSE</a>
+                                class="{{ isset($pagina) && $pagina == 'rse' ? 'font-semibold' : '' }}">Recetas</a>
                             @if (isset($pagina) && $pagina == 'rse')
                                 <p
                                     class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">

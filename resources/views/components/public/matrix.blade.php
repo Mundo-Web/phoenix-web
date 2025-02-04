@@ -64,6 +64,9 @@
     <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     <script src="/js/tippy.all.min.js"></script>
     <script src="/js/cookies.extend.js"></script>
+    <script src="https://unpkg.com/@popperjs/core@2"></script>
+    <script src="https://unpkg.com/tippy.js@6"></script>
+
 
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="{{ asset('js/functions.js') }}?v={{ uniqid() }}"></script>
@@ -165,11 +168,11 @@
     {{-- @vite(['resources/js/functions.js']) --}}
 
 
-    {{--   <script>
-    tippy('[tippy]', {
-      arrow: true
-    })
-  </script> --}}
+    <script>
+        tippy('[tippy]', {
+        arrow: true
+        })
+    </script>
 </body>
 
 </html>

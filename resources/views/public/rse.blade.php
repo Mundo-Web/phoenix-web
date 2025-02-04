@@ -45,7 +45,7 @@
     <main>
 
         <section>
-            <img class="w-full object-cover object-center h-[450px] md:h-[500px]"
+            <img class="w-full object-cover object-center h-[350px] "
                 src="{{ asset('images/imagen/rse.png') }}" />
         </section>
 
@@ -53,7 +53,7 @@
             <div class="flex flex-col gap-2 max-w-3xl mx-auto">
                 <h2
                     class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left lg:text-center max-w-2xl mx-auto">
-                    {{ $rse[0]->titulo ?? 'Ingrese un texto' }}
+                    Nuestras Recetas
                 </h2>
                 <div class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
                     {!! $rse[0]->descripcion ?? 'Ingrese un texto' !!}
@@ -61,72 +61,48 @@
             </div>
         </section>
 
-        <section class="pt-12 xl:pt-16 px-[5%]">
-            <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-12 xl:gap-16">
+        @foreach($rse as $index => $item)
+            <section class="py-12 xl:py-16 px-[5%]">
+                <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-12 xl:gap-16">
+                    
+                    @if($index % 2 == 0)
+                        <div class="flex flex-col justify-center gap-5 lg:gap-5 text-textWhite">
+                            <h1 class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
+                                {{ $item->titulo ?? 'Ingrese un texto' }}
+                            </h1>
+                            <div class="text-[#052F4E] text-lg font-galano_regular">
+                                {!! $item->descripcion ?? 'Ingrese un texto' !!}
+                            </div>
+                        </div>
 
-                <div class="flex flex-col justify-center gap-5 lg:gap-5 text-textWhite ">
-                    <h1 class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
-                        {{ $rse[1]->titulo ?? 'Ingrese un texto' }}
-                    </h1>
+                        <div class="flex flex-col justify-center items-center">
+                            <img src="{{ asset($item->imagen) }}"
+                                class="object-contain aspect-square max-h-[500px] min-h-96" />
+                        </div>
+                    @else
+                        <div class="flex flex-col justify-center items-center">
+                            <img src="{{ asset($item->imagen) }}"
+                                class="object-contain aspect-square max-h-[500px] min-h-96" />
+                        </div>
 
-                    <div class="text-[#052F4E] text-lg font-galano_regular">
-                        {!! $rse[0]->descripcion ?? 'Ingrese un texto' !!}
-                    </div>
+                        <div class="flex flex-col justify-center gap-5 lg:gap-5 text-textWhite">
+                            <h1 class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
+                                {{ $item->titulo ?? 'Ingrese un texto' }}
+                            </h1>
+                            <div class="text-[#052F4E] text-lg font-galano_regular">
+                                {!! $item->descripcion ?? 'Ingrese un texto' !!}
+                            </div>
+                        </div>
+                    @endif
 
                 </div>
-
-                <div class="flex flex-col justify-center items-center">
-                    <img src="{{ asset('images/imagen/cremosorse.png') }}"
-                        class="object-contain aspect-square max-h-[500px] min-h-96" />
-                </div>
-
-            </div>
-        </section>
-
-        <section class="pt-12 xl:pt-16 px-[5%]">
-            <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-12 xl:gap-16">
-
-                <div class="flex flex-col justify-center items-center">
-                    <img src="{{ asset('images/imagen/cremosorse2.png') }}"
-                        class="object-contain aspect-square max-h-[500px] min-h-96" />
-                </div>
-
-                <div class="flex flex-col justify-center gap-5 lg:gap-5 text-textWhite ">
-                    <h1 class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
-                        {{ $rse[2]->titulo ?? 'Ingrese un texto' }}
-                    </h1>
-                    <div class="text-[#052F4E] text-lg font-galano_regular">
-                        {!! $rse[2]->descripcion ?? 'Ingrese un texto' !!}
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <section class="pt-12 xl:pt-16 px-[5%]">
-            <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-12 xl:gap-16">
-
-                <div class="flex flex-col justify-center gap-5 lg:gap-5 text-textWhite ">
-                    <h1 class="text-[#052F4E] font-galano_bold tracking-tighter text-3xl md:text-5xl leading-none">
-                        {{ $rse[3]->titulo ?? 'Ingrese un texto' }}
-                    </h1>
-                    <div class="text-[#052F4E] text-lg font-galano_regular">
-                        {!! $rse[3]->descripcion ?? 'Ingrese un texto' !!}
-                    </div>
-                </div>
-
-                <div class="flex flex-col justify-center items-center">
-                    <img src="{{ asset('images/imagen/cremosorse3.png') }}"
-                        class="object-contain aspect-square max-h-[500px] min-h-96" />
-                </div>
-
-            </div>
-        </section>
+            </section>
+        @endforeach
 
         @if ($testimonie->isEmpty())
         @else
             <section>
-                <div class="flex flex-col gap-5 md:gap-10 w-full px-[5%] py-10 md:py-16 mt-10 md:mt-20 bg-[#EBEDEF]">
+                <div class="flex flex-col gap-5 md:gap-10 w-full px-[5%] py-10 md:py-16  bg-[#EBEDEF]">
                     <div class="grid grid-cols-1 xl:grid-cols-3 gap-12">
                         <div class="md:col-span-2">
                             <h2 class="text-[#052F4E] text-2xl font-galano_bold max-w-lg">

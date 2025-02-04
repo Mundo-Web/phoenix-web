@@ -257,7 +257,7 @@
 
             });
 
-            if (response.cantidad >= 4) {
+            if (response.cantidad >= 100000) {
 
 
               Swal.fire({

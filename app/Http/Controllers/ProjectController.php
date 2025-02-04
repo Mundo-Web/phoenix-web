@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Project;
+use Illuminate\Http\Client\Request as ClientRequest;
 use Illuminate\Http\Request;
 
 use Intervention\Image\ImageManager;
@@ -47,7 +48,7 @@ class ProjectController extends Controller
         $img->save($route . $nombreImagen);
     }
   
-    public function store(Project $request)
+    public function store(Request $request)
     {
         $request->validate([
             'titulo' => 'required',

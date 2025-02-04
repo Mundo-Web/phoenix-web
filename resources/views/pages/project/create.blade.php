@@ -1,7 +1,7 @@
 <x-app-layout>
 
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-    <form action="{{ route('aboutus.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ route('project.store') }}" method="POST" enctype="multipart/form-data">
       @csrf
       <div
         class="col-span-full xl:col-span-8 bg-white dark:bg-slate-800 shadow-lg rounded-sm border border-slate-200 dark:border-slate-700">
@@ -51,7 +51,7 @@
               </div>
               <div class="md:col-span-5 text-right mt-6 flex justify-between">
                 <div class="inline-flex items-end">
-                  <a href="{{ URL::previous() }}"  class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Volver</a>
+                  <a href="{{ route('project.create') }}"  class="bg-red-500 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">Volver</a>
               </div>
                 <div class="inline-flex items-end">
                   <button type="submit"
