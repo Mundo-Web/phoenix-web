@@ -175,6 +175,12 @@ class IndexController extends Controller
         ->where('categories.status', 1)
         ->where('products.status', '=', 1)
         ->where('products.visible', '=', 1)
+        ->whereIn('products.id', function($query) {
+          $query->select(DB::raw('MIN(id)'))
+                ->from('products')
+                ->where('products.visible', 1)
+                ->groupBy('producto');
+        })
         ->orderBy('products.id', 'desc')
         ->paginate(12);
       // $productos = Products::obtenerProductos();
@@ -186,6 +192,12 @@ class IndexController extends Controller
         ->where('categories.id', $id_cat)
         ->where('products.status', '=', 1)
         ->where('products.visible', '=', 1)
+        ->whereIn('products.id', function($query) {
+          $query->select(DB::raw('MIN(id)'))
+                ->from('products')
+                ->where('products.visible', 1)
+                ->groupBy('producto');
+        })
         ->orderBy('products.id', 'desc')
         ->paginate(12);
       // $productos = Products::obtenerProductos($id_cat);
@@ -1500,6 +1512,12 @@ class IndexController extends Controller
       ->where('products.visible', '=', 1)
       ->where('products.categoria_id', '=', $request->id) 
       ->select('products.*')
+      ->whereIn('products.id', function($query) {
+        $query->select(DB::raw('MIN(id)'))
+              ->from('products')
+              ->where('products.visible', 1)
+              ->groupBy('producto');
+      })
       ->orderBy('products.id', 'desc')
       ->paginate(12);
     
@@ -1535,6 +1553,12 @@ class IndexController extends Controller
     }
     
     $productos = $productos->select('products.*')
+        ->whereIn('products.id', function($query) {
+          $query->select(DB::raw('MIN(id)'))
+                ->from('products')
+                ->where('products.visible', 1)
+                ->groupBy('producto');
+        })
         ->orderBy('products.id', 'desc')
         ->paginate(12);
     // if (!empty($productos->nextPageUrl())) {
