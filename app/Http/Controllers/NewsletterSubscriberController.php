@@ -239,7 +239,6 @@ class NewsletterSubscriberController extends Controller
       </body>
     </html>
     ';
-    $mail->addBCC($admin->email, 'Nuevo mensaje');
     $mail->isHTML(true);
     $mail->send();
     } catch (\Throwable $th) {
