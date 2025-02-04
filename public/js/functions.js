@@ -612,7 +612,7 @@ function PintarCarrito() {
           <td class="p-2">
             <div class="flex flex-col mb-1">
               <p class="limited-text font-semibold text-[14px] text-[#151515] line-clamp-1">
-                ${item.producto}
+                ${item.producto} - ${item.color}
               </p>
             </div>
             <div class="flex gap-2 items-center">
