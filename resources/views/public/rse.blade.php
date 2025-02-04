@@ -59,7 +59,7 @@
         </section>
 
         @foreach($rse as $index => $item)
-            <section class="pt-12 xl:pt-16 px-[5%]">
+            <section class=" px-[5%] {{ $loop->last ? 'py-12 xl:py-16' : 'pt-12 xl:pt-16 ' }}">
                 <div class="grid grid-cols-1 lg:grid-cols-2 w-full gap-12 xl:gap-16">
                     
                     @if($index % 2 == 0)
