@@ -55,9 +55,6 @@
                     class="text-[#052F4E] font-maille text-4xl md:text-5xl leading-none text-left lg:text-center max-w-2xl mx-auto">
                     Nuestras Recetas
                 </h2>
-                <div class="text-[#052F4E] font-galano_regular text-lg text-left lg:text-center">
-                    {!! $rse[0]->descripcion ?? 'Ingrese un texto' !!}
-                </div>
             </div>
         </section>
 
@@ -106,7 +103,7 @@
                     <div class="grid grid-cols-1 xl:grid-cols-3 gap-12">
                         <div class="md:col-span-2">
                             <h2 class="text-[#052F4E] text-2xl font-galano_bold max-w-lg">
-                                ¡Déjanos tu experiencia y forma parte de nuestra historia de sabor!
+                                {{$textoshome->subtitle9section ?? "Ingrese un texto"}}
                             </h2>
                             <div class="gap-6 py-6">
                                 <div class="swiper testimonios">
@@ -130,17 +127,16 @@
                         </div>
                         <div class="md:col-span-1 space-y-3">
                             <h2 class="text-[#052F4E] text-5xl font-galano_bold max-w-xl leading-none">
-                                Lo Que Dicen Nuestros Clientes
+                                {{$textoshome->title9section ?? "Ingrese un texto"}}
                             </h2>
                             <div class="flex flex-row justify-start items-start">
                                 <a href="#"
                                     class="text-white py-3 px-6 bg-[#052F4E] rounded-xl text-base font-galano_light font-semibold text-left">
-                                    ¡Déjanos tu experiencia y forma parte de nuestra historia de sabor!
+                                    {{$textoshome->one_description9section ?? "Ingrese un texto"}}   
                                 </a>
                             </div>
                             <h2 class="text-[#052F4E] text-lg font-galano_regular">
-                                Conoce las opiniones de quienes han disfrutado de nuestros helados artesanales.
-                                ¡Descubre por qué nuestros sabores se han convertido en sus favoritos!
+                                {{$textoshome->two_description9section ?? "Ingrese un texto"}}   
                             </h2>
                         </div>
                     </div>
