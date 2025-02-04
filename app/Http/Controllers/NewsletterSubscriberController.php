@@ -77,8 +77,8 @@ class NewsletterSubscriberController extends Controller
     NewsletterSubscriber::create($request->all());
     $data = $request->all();
     $data['nombre'] = '';
-    // $this->envioCorreo($data);
-    // $this->envioCorreoInterno($data);
+    $this->envioCorreo($data);
+    $this->envioCorreoInterno($data);
     return response()->json(['message' => 'Usuario suscrito']);
   }
 
@@ -256,7 +256,7 @@ class NewsletterSubscriberController extends Controller
   {
     /* $name = $data['full_name']; */
     $name = 'Tienes un nuevo mensaje,';
-    $mensaje = 'MIC&JS';
+    $mensaje = 'MrCremoso';
     $mail = EmailConfig::config($name, $mensaje);
     $emailCliente = General::all()->first();
     $general = General::all()->first();
