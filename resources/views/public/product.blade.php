@@ -165,68 +165,97 @@
                     
                     <div class="flex flex-col gap-5">
                         <div class="flex flex-col gap-3">
-                          @if ($otherProducts->isNotEmpty())
-                            <div class="flex flex-col w-full justify-center items-start text-xl text-[#052F4E] font-galano_semibold">
-                              <h2>Sabores:</h2>
-                            </div>
-          
-                            {{-- <span class="block bg-[#F5F5F7] p-3 mt-2" tippy> {{ $product->color }}</span> --}}
-                            <div class="flex flex-wrap w-full gap-2 lg:gap-4 justify-start items-center font-Urbanist_Medium">
-                              <a class="ring-1 rounded-full p-[3px] ring-[#3f3f3f]" tippy data-tippy-content="Seleccionado">
-                                <div class="flex justify-center items-center">
-                                  <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
-                                    <img class="object-contain object-center" src="{{ asset($product->imagen) }}" />
-                                  </div>
+                            {{-- @if ($otherProducts->isNotEmpty())
+                                <div class="flex flex-col w-full justify-center items-start text-xl text-[#052F4E] font-galano_semibold">
+                                <h2>Sabores:</h2>
                                 </div>
-                              </a>
-                              
-                              @foreach ($otherProducts as $x)
-                                @if (!empty($x->imagen))
-                                  <a class="ring-1 rounded-full p-[3px] ring-transparent hover:ring-[#3f3f3f]"
-                                    href="{{ route('producto', $x->id) }}" tippy data-tippy-content="{{$x->color}}">
+            
+                            
+                                <div class="flex flex-wrap w-full gap-2 lg:gap-4 justify-start items-center font-Urbanist_Medium">
+                                <a class="ring-1 rounded-full p-[3px] ring-[#3f3f3f]" tippy data-tippy-content="Seleccionado">
                                     <div class="flex justify-center items-center">
-                                      <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
-                                        <img class="object-contain object-center" src="{{ asset($x->imagen) }}" />
-                                      </div>
+                                    <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
+                                        <img class="object-contain object-center" src="{{ asset($product->imagen) }}" />
                                     </div>
-                                  </a>
-                                @endif
-                              @endforeach
-                            </div>
-                          @endif
+                                    </div>
+                                </a>
+                                
+                                @foreach ($otherProducts as $x)
+                                    @if (!empty($x->imagen))
+                                    <a class="ring-1 rounded-full p-[3px] ring-transparent hover:ring-[#3f3f3f]"
+                                        href="{{ route('producto', $x->id) }}" tippy data-tippy-content="{{$x->color}}">
+                                        <div class="flex justify-center items-center">
+                                        <div class="w-7 lg:w-9 h-7 lg:h-9 rounded-full overflow-hidden">
+                                            <img class="object-contain object-center" src="{{ asset($x->imagen) }}" />
+                                        </div>
+                                        </div>
+                                    </a>
+                                    @endif
+                                @endforeach
+                                </div>
+                            @endif --}}
+
+                            @if ($otherProducts->isNotEmpty())
+                                <div class="flex flex-col w-full justify-center items-start text-xl text-[#052F4E] font-galano_semibold">
+                                    <h2>Sabores:</h2>
+                                </div>
+
+                                <select id="saborSelect" class="mt-2 p-2 border rounded bg-[#F5F5F7] text-[#052F4E] focus:border-0 focus:ring-[#052F4E] ring-[#052F4E]">
+                                    <option value="" disabled>Seleccione un sabor</option>
+                                    <option value="{{ route('producto', $product->id) }}" 
+                                        {{ request()->url() == route('producto', $product->id) ? 'selected' : '' }}>
+                                        {{ $product->color }}
+                                    </option>
+                                    @foreach ($otherProducts as $x)
+                                        <option value="{{ route('producto', $x->id) }}" 
+                                            {{ request()->url() == route('producto', $x->id) ? 'selected' : '' }}>
+                                            {{ $x->color }}
+                                        </option>
+                                    @endforeach
+                                </select>
+                            @endif
+
+                            <script>
+                                document.getElementById('saborSelect').addEventListener('change', function() {
+                                    if (this.value) {
+                                        window.location.href = this.value;
+                                    }
+                                });
+                            </script>
                         </div>
 
-                    @if ($product->status == 1 && $product->visible == 1)
-                      <div class="flex flex-col gap-4 mt-3">
-                          <div class="flex flex-col md:flex-row gap-1 md:gap-5 items-start">
-                              <div class="flex flex-row gap-5 justify-start items-center w-auto order-2 md:order-1">
-                                
-                                <button id="btnAgregarCarritoPr" data-id="{{ $product->id }}"
-                                   class="bg-[#052F4E] w-full py-3 px-5 xl:px-8  text-white text-center rounded-xl font-galano_semibold tracking-wide text-base">
-                                    Agregar a la bolsa
-                                </button>
-                                  
-                              </div>
-                              <div class="flex order-1 md:order-2">
-                                  <div class="flex justify-center items-center cursor-pointer rounded-l-3xl">
-                                      <button
-                                          class="py-2.5 px-5 text-lg font-galano_semibold rounded-full bg-[#052F4E] m-1 text-white"
-                                          id=disminuir type="button">-</button>
-                                  </div>
-                                  <div id=cantidadSpan
-                                      class="py-2.5 px-5 flex justify-center items-center bg-transparent text-lg font-galano_semibold">
-                                      <span>1</span>
-                                  </div>
-                                  <div class="flex justify-center items-center cursor-pointer rounded-r-3xl">
-                                      <button
-                                          class="py-2.5 px-5 text-lg font-galano_semibold rounded-full bg-[#052F4E] m-1 text-white"
-                                          id=aumentar type="button">+</button>
-                                  </div>
-                              </div>
+                        @if ($product->status == 1 && $product->visible == 1)
+                            <div class="flex flex-col gap-4 mt-3">
+                                <div class="flex flex-col md:flex-row gap-1 md:gap-5 items-start">
+                                    <div class="flex flex-row gap-5 justify-start items-center w-auto order-2 md:order-1">
+                                        
+                                        <button id="btnAgregarCarritoPr" data-id="{{ $product->id }}"
+                                        class="bg-[#052F4E] w-full py-3 px-5 xl:px-8  text-white text-center rounded-xl font-galano_semibold tracking-wide text-base">
+                                            Agregar a la bolsa
+                                        </button>
+                                        
+                                    </div>
+                                    <div class="flex order-1 md:order-2">
+                                        <div class="flex justify-center items-center cursor-pointer rounded-l-3xl">
+                                            <button
+                                                class="py-2.5 px-5 text-lg font-galano_semibold rounded-full bg-[#052F4E] m-1 text-white"
+                                                id=disminuir type="button">-</button>
+                                        </div>
+                                        <div id=cantidadSpan
+                                            class="py-2.5 px-5 flex justify-center items-center bg-transparent text-lg font-galano_semibold">
+                                            <span>1</span>
+                                        </div>
+                                        <div class="flex justify-center items-center cursor-pointer rounded-r-3xl">
+                                            <button
+                                                class="py-2.5 px-5 text-lg font-galano_semibold rounded-full bg-[#052F4E] m-1 text-white"
+                                                id=aumentar type="button">+</button>
+                                        </div>
+                                    </div>
 
-                          </div>
-                      </div>
-                    @endif
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                 </div>
             </div>
         </section>
