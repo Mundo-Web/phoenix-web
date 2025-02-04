@@ -95,6 +95,173 @@ class NewsletterSubscriberController extends Controller
     try {
       $mail->addAddress($data['email']);
       $mail->Body = '<html lang="es">
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Mundo web</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+          rel="stylesheet"
+        />
+        <style>
+          * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+        </style>
+      </head>
+      <body>
+        <main>
+          <table
+            style="
+              width: 600px;
+              height: 600px;
+              margin: 0 auto;
+              text-align: center;
+              background-image:url(' . $appUrl . '/mail/fondocontacto.png);
+              background-repeat: no-repeat, no-repeat;
+              background-position: center bottom , center bottom;;
+              background-size: fit , fit;
+              background-color: #f9f9f9;
+            "
+          >
+            <thead>
+              
+            </thead>
+            <tbody>
+              <tr 
+                style=" 
+                  display: grid;
+                "
+                >
+                <th
+                  style="
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 40px 40px 0px 40px;
+                  "
+                >
+                  <img src="' . $appUrl . '/mail/logocontacto.png" alt="americanbrands"  style="
+                  margin: auto;
+                  width: 200px;
+                  height: auto;
+                  "
+                  />
+                </th>
+              </tr>
+              
+
+              <tr style="display: grid;">
+                <td style="padding-bottom:15px;">
+                  <p
+                    style="
+                      font-weight: 600;
+                      font-size: 40px;
+                      text-align: center;
+                      color: #052F4E;
+                      font-family: cursive;
+                    "
+                  >
+                      ¡Gracias por suscribirte! 
+                  </p>
+                </td>
+              </tr>
+
+              <tr style="display: grid;">
+                <td style="">
+                  <p
+                    style="
+                      font-weight: 500;
+                      font-size: 16px;
+                      text-align: center;
+                      color: #052F4E;
+                      font-family: Google Sans;
+                    "
+                  >
+                    Pronto recibirás nuestras últimas noticias, artículos
+                  </p>
+                </td>
+              </tr>
+              
+              <tr style="display: grid;">
+                <td style="text-align: center;">
+                    <p
+                      style=" 
+                        font-weight: 500;
+                        font-size: 16px;
+                        text-align: center;
+                        color: #052F4E;
+                        font-family: Google Sans;
+                      "
+                    >
+                       y promociones directamente en tu correo.
+                    </p>
+                </td>
+              </tr>
+
+              <tr style="display: grid;">
+                <td
+                  style="
+                  text-align: center;
+                  padding-top:15px
+                  "
+                >
+                  <a
+                    href="' . $appUrl . '"
+                    style="
+                      text-decoration: none;
+                      background-color: #052F4E;
+                      color: white;
+                      padding: 8px 16px;
+                      display: inline-flex;
+                      justify-content: center;
+                      align-items: center;
+                      font-weight: 600;
+                      font-family: Google Sans;
+                      font-size: 16px;
+                      border-radius: 12px;
+                      border: 1px solid #052F4E;
+                    "
+                  >
+                    <span>Visita nuestra web</span>
+                  </a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </main>
+      </body>
+    </html>
+    ';
+    $mail->addBCC($admin->email, 'Nuevo mensaje');
+    $mail->isHTML(true);
+    $mail->send();
+    } catch (\Throwable $th) {
+      //throw $th;
+      // dump($th);
+    }
+  }
+
+  private function envioCorreoInterno($data)
+  {
+    /* $name = $data['full_name']; */
+    $name = 'MrCremoso';
+    $appUrl = env('APP_URL');
+    // $name = $data['full_name'];
+    $mensaje = "Tienes un nuevo mensaje";
+    $mail = EmailConfig::config($name, $mensaje);
+    $emailCliente = General::all()->first();
+    $general = General::all()->first();
+
+    try {
+      $mail->addAddress($emailCliente->email);
+      $mail->Body = '<html lang="es">
         <head>
           <meta charset="UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -118,10 +285,10 @@ class NewsletterSubscriberController extends Controller
             <table
               style="
                 width: 600px;
-                height: 850px;
+                height: 600px;
                 margin: 0 auto;
                 text-align: center;
-                background-image:url(' . $appUrl . '/images/Ellipse_18.png),  url(' . $appUrl . '/images/Tabpanel.png);
+                background-image:url(' . $appUrl . '/mail/fondocontacto.png);
                 background-repeat: no-repeat, no-repeat;
                 background-position: center bottom , center bottom;;
                 background-size: fit , fit;
@@ -129,305 +296,116 @@ class NewsletterSubscriberController extends Controller
               "
             >
               <thead>
-                <tr>
+                
+              </thead>
+              <tbody>
+                <tr 
+                  style=" 
+                    display: grid;
+                  "
+                  >
                   <th
                     style="
                       display: flex;
                       flex-direction: row;
                       justify-content: center;
                       align-items: center;
-                      margin: 40px;
+                      margin: 40px 40px 0px 40px;
                     "
                   >
-                    <img src="' . $appUrl . '/images/Group1.png" alt="img_logo"  style="
+                    <img src="' . $appUrl . '/mail/logocontacto.png" alt="americanbrands"  style="
                     margin: auto;
-                  "/>
+                    width: 200px;
+                    height: auto;
+                    "
+                    />
                   </th>
                 </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style="height: 10px">
+                
+
+                <tr style="display: grid;">
+                  <td style="padding-bottom:15px;">
                     <p
                       style="
-                        
-                        font-weight: 500;
-                        font-size: 18px;
-                        text-align: center;
-                        width: 500px;
-                        margin: 0 auto;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 30px;
-                      "
-                    >
-                      <span style="display: block">Hola </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        
+                        font-weight: 600;
                         font-size: 40px;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 60px;
-                      "
-                    >
-                      <span style="display: block">' . $name . ' </span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        color: #006bf6;
-                        font-size: 40px;
-                        font-family: Montserrat, sans-serif;
-                        font-weight: bold;
-                        line-height: 60px;
-                      "
-                    >
-                      Nos alegra mucho que te hayas unido a nuestra lista de suscriptores</span>
-                    </p>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="height: 10px">
-                    <p
-                      style="
-                        
-                        font-weight: 500;
-                        font-size: 18px;
                         text-align: center;
-                        width: 250px;
-                        margin: 0 auto;
-                        font-family: Montserrat, sans-serif;
-                        line-height: 30px;
+                        color: #052F4E;
+                        font-family: cursive;
                       "
                     >
-                       Pronto recibirás nuestras últimas noticias, artículos y promociones directamente en tu correo. 
+                      ¡Nuevo suscriptor!
                     </p>
                   </td>
                 </tr>
-                <tr>
+
+                <tr style="display: grid;">
+                  <td style="">
+                    <p
+                      style="
+                        font-weight: 500;
+                        font-size: 16px;
+                        text-align: center;
+                        color: #052F4E;
+                        font-family: Google Sans;
+                      "
+                    >
+                        ¡Hola!. Administrador de MrCremoso
+                    </p>
+                  </td>
+                </tr>
+                
+                <tr style="display: grid;">
+                  <td style="text-align: center;">
+                      <p
+                        style=" 
+                          font-weight: 500;
+                          font-size: 16px;
+                          text-align: center;
+                          color: #052F4E;
+                          font-family: Google Sans;
+                        "
+                      >
+                        Tienes un nuevo suscriptor en la web
+                      </p>
+                  </td>
+                </tr>
+
+                <tr style="display: grid;">
                   <td
                     style="
                     text-align: center;
-                  "
+                    padding-top:15px
+                    "
                   >
                     <a
                       href="' . $appUrl . '"
                       style="
                         text-decoration: none;
-                        background-color: #006bf6;
+                        background-color: #052F4E;
                         color: white;
-                        padding: 10px 16px;
+                        padding: 8px 16px;
                         display: inline-flex;
                         justify-content: center;
                         align-items: center;
-                        gap: 10px;
                         font-weight: 600;
-                        font-family: Montserrat, sans-serif;
+                        font-family: Google Sans;
                         font-size: 16px;
-                        border-radius: 30px;
+                        border-radius: 12px;
+                        border: 1px solid #052F4E;
                       "
                     >
                       <span>Visita nuestra web</span>
                     </a>
                   </td>
                 </tr>
+
               </tbody>
             </table>
           </main>
         </body>
       </html>
       ';
-      $mail->isHTML(true);
-      $mail->send();
-    } catch (\Throwable $th) {
-      //throw $th;
-      // dump($th);
-    }
-  }
-
-  private function envioCorreoInterno($data)
-  {
-    /* $name = $data['full_name']; */
-    $name = 'Tienes un nuevo mensaje,';
-    $mensaje = 'MrCremoso';
-    $mail = EmailConfig::config($name, $mensaje);
-    $emailCliente = General::all()->first();
-    $general = General::all()->first();
-
-    try {
-      $mail->addAddress($emailCliente->email);
-      $mail->Body =
-        '<html lang="en">
-            <head>
-              <meta charset="UTF-8" />
-              <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-              <title>Mundo web</title>
-              <link rel="preconnect" href="https://fonts.googleapis.com" />
-              <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-              <link
-                href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-                rel="stylesheet"
-              />
-              <style>
-                * {
-                  margin: 0;
-                  padding: 0;
-                  box-sizing: border-box;
-                }
-              </style>
-            </head>
-            <body>
-              <main>
-                <table
-                  style="
-                    width: 600px;
-                    margin: 0 auto;
-                    text-align: center;
-                    background-image: url(https://micjc.mundoweb.pe/mailing/ImagenFondo.png);
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    background-size: cover;
-                  "
-                >
-                  <thead>
-                    <tr>
-                      <th
-                        style="
-                          display: flex;
-                          flex-direction: row;
-                          justify-content: center;
-                          align-items: center;
-                          margin: 40px;
-                          padding:0 80px;
-                        "
-                      >
-                        <img
-                          src="https://micjc.mundoweb.pe/mailing/Logo.png"
-                          alt="dimension lider"
-                        />
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>
-                        <p
-                          style="
-                            color: #ffffff;
-                            font-weight: 500;
-                            font-size: 18px;
-                            text-align: center;
-                            width: 500px;
-                            margin: 0 auto;
-                            padding: 20px 0;
-                            font-family: Montserrat, sans-serif;
-                          "
-                        >
-                          <span style="display: block">Hola MIC&JC</span>
-                          <span style="display: block">Tienes un nuevo mensaje</span>
-                        </p>
-                      </td>
-                    </tr>
-                    
-                    <tr>
-                      <td>
-                        <a
-                          target="_blank"
-                          href="https://micjc.mundoweb.pe/"
-                          style="
-                            text-decoration: none;
-                            background-color: #fdfefd;
-                            color: #254f9a;
-                            padding: 16px 20px;
-                            display: inline-flex;
-                            justify-content: center;
-                            border-radius: 10px;
-                            align-items: center;
-                            gap: 10px;
-                            font-weight: 600;
-                            font-family: Montserrat, sans-serif;
-                            font-size: 16px;
-                            
-                          "
-                        >
-                          <span>Visita nuestra web</span>
-                        </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td style="text-align: center">
-                        <img
-                          src="https://micjc.mundoweb.pe/mailing/producto.png"
-                          alt="MICJC"
-                          style="width: 80%"
-                        />
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <a
-                          href="https://' .
-        htmlspecialchars($general->facebook, ENT_QUOTES, 'UTF-8') .
-        '"
-                          target="_blank"
-                          style="padding: 0 5px 30px 0; display: inline-block"
-                        >
-                          <img src="https://micjc.mundoweb.pe/mailing/facebook.png" alt=""
-                        /></a>
-          
-                        <a
-                          href="https://' .
-        htmlspecialchars($general->instagram, ENT_QUOTES, 'UTF-8') .
-        '"
-                          target="_blank"
-                          style="padding: 0 5px 30px 0; display: inline-block"
-                        >
-                          <img src="https://micjc.mundoweb.pe/mailing/instagram.png" alt=""
-                        /></a>
-          
-                        <a
-                          href="https://' .
-        htmlspecialchars($general->twitter, ENT_QUOTES, 'UTF-8') .
-        '"
-                          target="_blank"
-                          style="padding: 0 5px 30px 0; display: inline-block"
-                        >
-                          <img src="https://micjc.mundoweb.pe/mailing/twitter.png" alt=""
-                        /></a>
-          
-                        <a
-                          href="https://' .
-        htmlspecialchars($general->linkedin, ENT_QUOTES, 'UTF-8') .
-        '"
-                          target="_blank"
-                          style="padding: 0 5px 30px 0; display: inline-block"
-                        >
-                          <img src="https://micjc.mundoweb.pe/mailing/linkedin.png" alt=""
-                        /></a>
-          
-                        <a
-                          href="https://' .
-        htmlspecialchars($general->youtube, ENT_QUOTES, 'UTF-8') .
-        '"
-                          target="_blank"
-                          style="padding: 0 5px 30px 0; display: inline-block"
-                        >
-                          <img src="https://micjc.mundoweb.pe/mailing/youtube.png" alt=""
-                        /></a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </main>
-            </body>
-          </html>';
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
