@@ -231,7 +231,7 @@
           </h2>
           <div>
             <div class="flex flex-col gap-3 font-galano_bold">
-              {{-- @auth
+              @auth
                 <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                   <h2 class="font-bold text-[16px] text-[#052F4E]">
                     Código de cupon
@@ -252,7 +252,7 @@
                     </button>
                   </div>
                 </div>
-              @endauth --}}
+              @endauth
 
               <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Envío</p>

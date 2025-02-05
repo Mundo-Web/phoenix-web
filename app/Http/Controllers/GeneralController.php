@@ -6,7 +6,9 @@ use App\Http\Requests\StoreGeneralRequest;
 use App\Http\Requests\UpdateGeneralRequest;
 use App\Models\General;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class GeneralController extends Controller
 {
@@ -71,6 +73,14 @@ class GeneralController extends Controller
             
             $general = General::findOrfail($id); 
 
+            if ($request->hasFile("imagenmailing")) {
+                $file = $request->file('imagenmailing');
+                $routeImg = 'mail/';
+                $nombreImagen = 'fondocontacto.png';
+          
+                $this->saveImg($file, $routeImg, $nombreImagen);
+            } 
+
             // Actualizar los campos del registro con los datos del formulario
             $general->update($request->all());
 
@@ -81,6 +91,22 @@ class GeneralController extends Controller
 
     }
 
+    public function saveImg($file, $route, $nombreImagen)
+    {
+      $manager = new ImageManager(new Driver());
+      $img =  $manager->read($file);
+      // $img->coverDown(1000, 1500, 'center');
+  
+      if (!file_exists($route)) {
+        mkdir($route, 0777, true);
+      }
+
+      if (file_exists($route.$nombreImagen)) {
+        unlink($route.$nombreImagen);
+        }
+  
+      $img->save($route.$nombreImagen);
+    }
     /**
      * Remove the specified resource from storage.
      */

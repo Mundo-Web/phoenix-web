@@ -1,6 +1,6 @@
 <x-app-layout>
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
-    <form action="{{ route('datosgenerales.update', $general->id) }}" method="POST">
+    <form action="{{ route('datosgenerales.update', $general->id) }}" method="POST" enctype="multipart/form-data">
       @csrf
       @method('PUT')
       <div
@@ -341,12 +341,26 @@
                             </div>
                           </div>
 
-                         
-
-                          <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
-                            Descripción de la empresa</h2>
-
                           <div class="md:col-span-5">
+                            <label for="imagenmailing">Modificar imagen de mailing</label>
+                            <div class="relative mb-2">
+                              <input type="file" id="imagenmailing" name="imagenmailing" 
+                                class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                >
+                            </div>
+                          </div>
+                          
+                          <div class="md:col-span-5">
+                            <label for="imgactual">Imagen actual (600x710 px - Formato PNG)</label>
+                            <div class="mt-1 w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                              <img class="w-80" src="{{asset('mail/fondocontacto.png')}}" />
+                            </div>
+                          </div>
+
+                          {{-- <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
+                            Descripción de la empresa</h2> --}}
+
+                          {{-- <div class="md:col-span-5">
                             <label for="aboutus">Acerca de nosotros</label>
                             <div class="relative mb-2">
                               <div class="absolute top-3 left-0 flex items-center pl-3 pointer-events-none">
@@ -362,9 +376,9 @@
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Nosotros...">{{ $general->aboutus }}</textarea>
                             </div>
-                          </div>
+                          </div> --}}
 
-                          <div class="md:col-span-5">
+                          {{-- <div class="md:col-span-5">
                             <label for="htop">Descripción de encabezado</label>
                             <div class="relative mb-2">
                               <div class="absolute top-3 left-0 flex items-center pl-3 pointer-events-none">
@@ -380,10 +394,10 @@
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Headertop...">
                             </div>
-                          </div>
+                          </div> --}}
 
 
-                          <div class="md:col-span-5">
+                          {{-- <div class="md:col-span-5">
                             <label for="ig_token">Token Instagram </label>
                             <div class="relative mb-2 ">
                               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -399,7 +413,7 @@
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Token Instagram">
                             </div>
-                          </div>
+                          </div> --}}
 
                           
                           <!-- <div class="md:col-span-2">
