@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Support\Str;
-
+dump(env('SESSION_DOMAIN'));
 return [
-
+   
     /*
     |--------------------------------------------------------------------------
     | Default Session Driver

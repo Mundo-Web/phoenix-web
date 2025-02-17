@@ -41,11 +41,12 @@ class MessageController extends Controller
     {
         $mensaje = new Message();
 
-        $mensaje->full_name = $request-> nombre; 
-        $mensaje->email = $request-> email; 
-        $mensaje->phone = $request-> telefono; 
-        $mensaje->source = $request-> textoSeleccionado; 
-        $mensaje->service_product = $request-> textoMeet; 
+        $mensaje->full_name = $request->nombre; 
+        $mensaje->email = $request->email; 
+        $mensaje->phone = $request->telefono; 
+        $mensaje->birthay = $request->birthay; 
+        $mensaje->objective = $request->objective; 
+        $mensaje->other = $request->other; 
 
         $mensaje->save();
 

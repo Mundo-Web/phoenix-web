@@ -92,7 +92,7 @@
                             <div class="lg:col-span-2 w-full flex flex-col gap-1">
                                 <label for="custom-select"
                                     class="font-roboto_regular font-semibold text-sm text-[#010101]">Tus objetivos</label>
-                                <select name="service_product" id="custom-select" class="w-full font-roboto_regular font-semibold text-[#010101] bg-[#F7F7F7]">
+                                <select name="objective" id="custom-select" class="w-full font-roboto_regular font-semibold text-[#010101] bg-[#F7F7F7]">
                                     <option></option>
                                     <option value="sitio-web">Quiero bajar peso</option>
                                     <option value="redes-sociales">Mejorar condición física</option>
@@ -102,7 +102,7 @@
                             </div>
 
                             <div class="lg:col-span-2 relative w-full hidden" id="input-container">
-                                <input id="otro" name="otro" placeholder="Mi objetivo es..." type="text" 
+                                <input id="otro" name="other" placeholder="Mi objetivo es..." type="text" 
                                     class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
                             </div>
 

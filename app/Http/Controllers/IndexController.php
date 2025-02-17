@@ -1077,7 +1077,7 @@ class IndexController extends Controller
     $admin = General::where('id', 1)->first();
     $appUrl = env('APP_URL');
     $name = $data['full_name'];
-    $mensaje = "Gracias por comunicarte con MrCremoso";
+    $mensaje = "Gracias por comunicarte con Phoenix Fitness Center";
     $mail = EmailConfig::config($name, $mensaje);
     try {
       $mail->addAddress($data['email']);
