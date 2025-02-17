@@ -59,40 +59,34 @@
     </section>
 
 
-
-    <section class="pt-12 xl:pt-16 px-[5%] xl:px-[8%]">
-      <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
-          
-          <div class="flex flex-col justify-start gap-5 lg:gap-7">
-              <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
-                  Resalte el <span class="text-[#FB4535]">crecimiento</span> de su empresa
-              </h2>
-          </div>
-
-          <div class="flex flex-col justify-start gap-5 lg:gap-7">
-            <div class="text-[#010101] text-base font-roboto_regular">
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+    @if(count($benefit) > 0)
+      <section class="pt-12 xl:pt-16 px-[5%] xl:px-[8%]">
+        <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
+            
+            <div class="flex flex-col justify-start gap-5 lg:gap-7">
+                <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
+                    Resalte el <span class="text-[#FB4535]">crecimiento</span> de su empresa
+                </h2>
             </div>
-            <div class="grid grid-cols-1 xl:grid-cols-3">
-                <div class="flex flex-col gap-0">
-                    <h2 class="text-[#010101] font-akira_expanded text-4xl">2010</h2>
-                    <span class="text-[#FB4535] text-base font-roboto_medium">Fundada</span>
-                </div>
-                <div class="flex flex-col gap-0">
-                  <h2 class="text-[#010101] font-akira_expanded text-4xl">12+</h2>
-                  <span class="text-[#FB4535] text-base font-roboto_medium">Profesionales</span>
-                </div>
-                <div class="flex flex-col gap-0">
-                  <h2 class="text-[#010101] font-akira_expanded text-4xl">200+</h2>
-                  <span class="text-[#FB4535] text-base font-roboto_medium">Miembros activos</span>
-                </div>
+
+            <div class="flex flex-col justify-start gap-5 lg:gap-7">
+              <div class="text-[#010101] text-base font-roboto_regular">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
+                  Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+              </div>
+              <div class="grid grid-cols-1 xl:grid-cols-3">
+                @foreach ($benefit as $estadistica)
+                  <div class="flex flex-col gap-0">
+                      <h2 class="text-[#010101] font-akira_expanded text-4xl">{{$estadistica->descripcionshort}}</h2>
+                      <span class="text-[#FB4535] text-base font-roboto_medium">{{$estadistica->titulo}}</span>
+                  </div>
+                @endforeach
+              </div>
             </div>
-          </div>
 
-      </div>
-    </section>
-
+        </div>
+      </section>
+    @endif
 
     
     <section class="flex flex-row justify-center items-center px-[5%] xl:px-[8%] py-12 xl:pb-16">
@@ -100,143 +94,72 @@
     </section>
     
 
-    <section class="flex flex-col xl:flex-row justify-center items-center px-[5%] xl:pl-[8%] xl:pr-0 gap-0 xl:gap-20" style="background-image: url({{asset('images/imagen/texturanosotros.jpg')}})">
+    @if(count($valores) > 0)
+      <section class="flex flex-col xl:flex-row justify-center items-center px-[5%] xl:pl-[8%] xl:pr-0 gap-0 xl:gap-20" style="background-image: url({{asset('images/imagen/texturanosotros.jpg')}})">
+          
+          <div class="w-full xl:w-3/5 flex flex-col gap-10 py-10">
+              <div class="flex flex-col gap-2">
+                  <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101] lg:max-w-sm">
+                    Presenta a tu <span class="text-[#FB4535]">equipo</span>
+                  </h2>  
+                  <p class="text-[#010101] text-base font-roboto_regular lg:max-w-xl">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
+                  </p>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-5 xl:gap-x-10">
+                @foreach ($valores as $valor)
+                  <div class="flex flex-col gap-5">
+                    <img src="{{asset($valor->url_image . $valor->name_image)}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
+                    <div class="flex flex-col gap-1">
+                      <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
+                        {{$valor->title}}
+                      </h2> 
+                      <div class="text-[#010101] text-base font-roboto_regular">
+                        {!!$valor->description!!}
+                      </div> 
+                    </div>
+                  </div>
+                @endforeach                  
+              </div>
+          </div>
+
+          <div class="w-full xl:w-2/5">
+            <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="h-[450px] sm:h-full sm:max-w-md xl:max-w-2xl mx-auto object-cover w-full" />
+          </div>
+
+      </section>
+    @endif
+
+
+    
+    @if(count($personal) > 0)
+      <section class="flex flex-col justify-start items-start px-[5%] xl:px-[8%] gap-10 py-10">
         
-        <div class="w-full xl:w-3/5 flex flex-col gap-10 py-10">
             <div class="flex flex-col gap-2">
-                <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101] lg:max-w-sm">
+                <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
                   Presenta a tu <span class="text-[#FB4535]">equipo</span>
                 </h2>  
-                <p class="text-[#010101] text-base font-roboto_regular lg:max-w-xl">
+                <p class="text-[#010101] text-base font-roboto_regular">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
                 </p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-5 xl:gap-x-10">
-                <div class="flex flex-col gap-5">
-                  <img src="{{asset('images/imagen/p_icono1.png')}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
-                  <div class="flex flex-col gap-1">
-                    <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
-                      Salud & Bienestar
-                    </h2> 
-                    <p class="text-[#010101] text-base font-roboto_regular">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                    </p> 
-                  </div>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                  <img src="{{asset('images/imagen/p_icono1.png')}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
-                  <div class="flex flex-col gap-1">
-                    <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
-                      Autenticidad
-                    </h2> 
-                    <p class="text-[#010101] text-base font-roboto_regular">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                    </p> 
-                  </div>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                  <img src="{{asset('images/imagen/p_icono1.png')}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
-                  <div class="flex flex-col gap-1">
-                    <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
-                      Perseverancia
-                    </h2> 
-                    <p class="text-[#010101] text-base font-roboto_regular">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                    </p> 
-                  </div>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                  <img src="{{asset('images/imagen/p_icono1.png')}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
-                  <div class="flex flex-col gap-1">
-                    <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
-                      Perseverancia
-                    </h2> 
-                    <p class="text-[#010101] text-base font-roboto_regular">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                    </p> 
-                  </div>
-                </div>
-
-                <div class="flex flex-col gap-5">
-                  <img src="{{asset('images/imagen/p_icono1.png')}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
-                  <div class="flex flex-col gap-1">
-                    <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
-                      Perseverancia
-                    </h2> 
-                    <p class="text-[#010101] text-base font-roboto_regular">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                    </p> 
-                  </div>
-                </div>
-                
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8">
+                  @foreach ($personal as $persona)
+                    <div class="flex flex-col gap-1">
+                        <img src="{{asset($persona->imagen)}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="w-full aspect-square rounded-2xl object-cover" />
+                        <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] mt-3">
+                         {{$persona->titulo}}
+                        </h2>  
+                        <p class="leading-none font-roboto_regular text-base  text-[#010101]">
+                          {{$persona->descripcion}}
+                        </p>  
+                    </div>
+                  @endforeach           
             </div>
-        </div>
 
-        <div class="w-full xl:w-2/5">
-          <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="h-[450px] sm:h-full sm:max-w-md xl:max-w-2xl mx-auto object-cover w-full" />
-        </div>
-
-    </section>
-
-
-    <section class="flex flex-col justify-start items-start px-[5%] xl:px-[8%] gap-10 py-10">
-      
-          <div class="flex flex-col gap-2">
-              <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
-                Presenta a tu <span class="text-[#FB4535]">equipo</span>
-              </h2>  
-              <p class="text-[#010101] text-base font-roboto_regular">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-              </p>
-          </div>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8">
-                <div class="flex flex-col gap-1">
-                    <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="w-full aspect-square rounded-2xl object-cover" />
-                    <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] mt-3">
-                      Nombre completo
-                    </h2>  
-                    <p class="leading-none font-roboto_regular text-base  text-[#010101]">
-                      Título profesional
-                    </p>  
-                 </div>
-
-                 <div class="flex flex-col gap-1">
-                  <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="w-full aspect-square rounded-2xl object-cover" />
-                  <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] mt-3">
-                    Nombre completo
-                  </h2>  
-                  <p class="leading-none font-roboto_regular text-base  text-[#010101]">
-                    Título profesional
-                  </p>  
-               </div>
-
-               <div class="flex flex-col gap-1">
-                <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="w-full aspect-square rounded-2xl object-cover" />
-                <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] mt-3">
-                  Nombre completo
-                </h2>  
-                <p class="leading-none font-roboto_regular text-base  text-[#010101]">
-                  Título profesional
-                </p>  
-             </div>
-
-             <div class="flex flex-col gap-1">
-              <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="w-full aspect-square rounded-2xl object-cover" />
-              <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] mt-3">
-                Nombre completo
-              </h2>  
-              <p class="leading-none font-roboto_regular text-base  text-[#010101]">
-                Título profesional
-              </p>  
-           </div>
-          </div>
-
-    </section>
-
+      </section>
+    @endif
   
     {{-- <section class="flex flex-col gap-5 pt-12 xl:pt-16">
         <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-10 lg:gap-24 px-[5%] pb-12 xl:pb-16">

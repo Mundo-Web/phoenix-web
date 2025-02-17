@@ -262,9 +262,11 @@ class IndexController extends Controller
   public function nosotros()
   {
     $nosotros = AboutUs::all();
-    $benefit = Strength::where('status', '=', 1)->take(3)->get();
+    $valores = Service::where('status', true)->where('visible', true)->get();
+    $personal = Project::where('status', true)->get();
+    $benefit = Strength::where('status', '=', 1)->get();
 
-    return view('public.nosotros', compact('nosotros', 'benefit'));
+    return view('public.nosotros', compact('nosotros', 'benefit', 'valores','personal'));
   }
 
 

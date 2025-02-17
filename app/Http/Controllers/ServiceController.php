@@ -66,21 +66,31 @@ class ServiceController extends Controller
 
         if ($request->hasFile("imagen")) {
 
-            $manager = new ImageManager(new Driver());
-
-            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-            $img =  $manager->read($request->file('imagen'));
-            // $img->coverDown(968, 351, 'center');
+            $imagen = $request->file("imagen");
+            $nombreImagen = Str::random(10) . '_' . $imagen->getClientOriginalName();
             $ruta = 'storage/images/service/';
-           
+        
+            // Verificar si la carpeta existe, si no, crearla
             if (!file_exists($ruta)) {
-                mkdir($ruta, 0777, true); // Se crea la ruta con permisos de lectura, escritura y ejecución
+                mkdir($ruta, 0777, true);
             }
-            
-            $img->save($ruta.$nombreImagen);
-
-            $service ->url_image = $ruta;
-            $service ->name_image = $nombreImagen;
+        
+            // Obtener la extensión del archivo
+            $extension = $imagen->getClientOriginalExtension();
+        
+            if ($extension === 'svg') {
+                // Guardar SVG directamente sin intervención de la librería de imágenes
+                $imagen->move($ruta, $nombreImagen);
+            } else {
+                // Procesar imágenes que no sean SVG con Intervention Image
+                $manager = new ImageManager(new Driver());
+                $img = $manager->read($imagen);
+                $img->save($ruta . $nombreImagen);
+            }
+        
+            // Guardar los datos en el modelo
+            $service->url_image = $ruta;
+            $service->name_image = $nombreImagen;
         }
 
         $service->link = $request->link;
@@ -130,27 +140,41 @@ class ServiceController extends Controller
 
         if ($request->hasFile("imagen")) {
 
-            $manager = new ImageManager(new Driver());
-            $ruta = storage_path() . '/app/public/images/logosfooter/' . $service->name_image;
-
-            if (File::exists($ruta)) {
-                File::delete($ruta);
+            $imagen = $request->file("imagen");
+            $nombreImagen = Str::random(10) . '_' . $imagen->getClientOriginalName();
+            $ruta = 'storage/images/service/';
+        
+            // Eliminar la imagen anterior si existe
+            if ($service->name_image) {
+                $rutaImagenAnterior = $service->url_image . $service->name_image;
+                if (file_exists($rutaImagenAnterior)) {
+                    unlink($rutaImagenAnterior);
+                }
             }
-
-            $rutanueva = 'storage/images/logosfooter/';
-            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName();
-            $img =  $manager->read($request->file('imagen'));
-           
-            if (!file_exists($rutanueva)) {
-                mkdir($rutanueva, 0777, true); 
+        
+            // Verificar si la carpeta existe, si no, crearla
+            if (!file_exists($ruta)) {
+                mkdir($ruta, 0777, true);
             }
-            
-            $img->save($rutanueva . $nombreImagen);
-            $service->url_image = $rutanueva;
+        
+            // Obtener la extensión del archivo
+            $extension = $imagen->getClientOriginalExtension();
+        
+            if ($extension === 'svg') {
+                // Guardar SVG directamente sin procesarlo con Intervention Image
+                $imagen->move($ruta, $nombreImagen);
+            } else {
+                // Procesar imágenes rasterizadas con Intervention Image
+                $manager = new ImageManager(new Driver());
+                $img = $manager->read($imagen);
+                $img->save($ruta . $nombreImagen);
+            }
+        
+            // Actualizar el modelo con la nueva imagen
+            $service->url_image = $ruta;
             $service->name_image = $nombreImagen;
+            $service->save();
         }
-
-
 
         $service->update();
 

@@ -75,7 +75,7 @@
         
         <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fa fa-solid fa-image">Sliders</x-menu.item>
         {{-- <x-menu.item id="banners" href="{{ route('banners.index') }}" icon="fa fa-solid fa-image">Banners</x-menu.item> --}}
-        <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-sliders-h">Servicios</x-menu.item>
+        <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-sliders-h">Beneficios</x-menu.item>
         <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item>
         <x-menu.item id="strength" href="{{ route('strength.index') }}"  icon="fa-regular fa-clipboard">Estadisticas</x-menu.item>
   
@@ -91,7 +91,7 @@
         {{-- <x-menu.item id="plazos-de-reembolso" href="{{ route('plazos-de-reembolso.edit', 1) }}" icon="fas fa-file-contract">Plazos de Reembolso</x-menu.item> --}}
         <x-menu.item id="homeview" href="{{ route('homeview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Home</x-menu.item> 
         <x-menu.item id="sobrenosotros" href="{{ route('aboutus.index') }}" icon="fas fa-pencil-alt">Sobre Nosotros</x-menu.item> 
-        <x-menu.item id="rse" href="{{ route('project.index') }}" icon="fas fa-pencil-alt">Recetas</x-menu.item> 
+        <x-menu.item id="rse" href="{{ route('project.index') }}" icon="fas fa-users">Equipo</x-menu.item> 
         {{-- <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item> --}}
         {{-- <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item> --}}
         {{-- <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item> --}}

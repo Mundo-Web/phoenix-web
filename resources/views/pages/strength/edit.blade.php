@@ -80,7 +80,7 @@
                 </div>
               </div>
               
-              <div class="md:col-span-5">
+              {{-- <div class="md:col-span-5">
                 <label for="descripcion">Descripcion</label>
                 <div class="relative mb-2  mt-2">
                   <div class="absolute top-3 left-0 flex items-center pl-3 pointer-events-none">
@@ -100,7 +100,7 @@
                     class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                     placeholder="Nosotros...">{{ $strength->descripcion }}</textarea>
                 </div>
-              </div>
+              </div> --}}
 
               {{-- <div class="md:col-span-5">
                 <label for="link1">Url botón</label>
