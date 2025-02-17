@@ -21,7 +21,7 @@
       </button>
       <!-- Logo -->
       <a class="block" href="{{ route('dashboard') }}">
-        <img class="h-20 object-contain" src="{{asset('images/svg/cremosofooter.svg')}}" />
+        {{-- <img class="h-20 object-contain" src="{{asset('images/svg/cremosofooter.svg')}}" /> --}}
       </a>
     </div>
 
@@ -46,15 +46,15 @@
             </x-slot>
           @endif
         </x-menu.item>
-        <x-menu.item id="reclamo" href="{{ route('reclamo.index') }}" icon="fas fa-comment-dots">
+        {{-- <x-menu.item id="reclamo" href="{{ route('reclamo.index') }}" icon="fas fa-comment-dots">
           Reclamaciones
           @if ($reclamo !== 0)
             <x-slot name="tag">
               {{ $reclamo }}
             </x-slot>
           @endif
-        </x-menu.item>
-        <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item>
+        </x-menu.item> --}}
+        {{-- <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item> --}}
         <x-menu.item id="testimonios" href="{{ route('testimonios.index') }}" icon="fas fa-star">Testimonios </x-menu.item>
       </x-menu.group>
 
@@ -71,18 +71,18 @@
 
       <x-menu.group title="Contenido de la web">
         
-        <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fa-solid fa-blog">Blog</x-menu.item>
+        {{-- <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fa-solid fa-blog">Blog</x-menu.item> --}}
         
         <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fa fa-solid fa-image">Sliders</x-menu.item>
         {{-- <x-menu.item id="banners" href="{{ route('banners.index') }}" icon="fa fa-solid fa-image">Banners</x-menu.item> --}}
         <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-sliders-h">Beneficios</x-menu.item>
-        <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item>
+        {{-- <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item> --}}
         <x-menu.item id="strength" href="{{ route('strength.index') }}"  icon="fa-regular fa-clipboard">Estadisticas</x-menu.item>
   
         <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">Reglas de descuento</x-menu.item>
-        <x-menu.item id="cupones" href="{{ route('cupones.index') }}" icon="fa-solid fa-ticket">Cupones</x-menu.item>
-        <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">Costos de Envio </x-menu.item>
-        <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">Estados de pedidos</x-menu.item>
+        {{-- <x-menu.item id="cupones" href="{{ route('cupones.index') }}" icon="fa-solid fa-ticket">Cupones</x-menu.item> --}}
+        {{-- <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">Costos de Envio </x-menu.item> --}}
+        {{-- <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">Estados de pedidos</x-menu.item> --}}
         
         
         {{-- <x-menu.item id="politica-datos" href="{{ route('politicadatos.detalle', 1) }}" icon="fas fa-file-contract">Terminos Datos</x-menu.item> --}}
