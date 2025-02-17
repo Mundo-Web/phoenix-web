@@ -1133,7 +1133,7 @@ class IndexController extends Controller
                       margin: 40px 40px 0px 40px;
                     "
                   >
-                    <img src="' . $appUrl . '/mail/logocontacto.png" alt="americanbrands"  style="
+                    <img src="' . $appUrl . '/mail/logocontacto.png" alt="phoenix"  style="
                     margin: auto;
                     width: 200px;
                     height: auto;
@@ -1150,7 +1150,7 @@ class IndexController extends Controller
                         font-weight: 600;
                         font-size: 40px;
                         text-align: center;
-                        color: #052F4E;
+                        color: white;
                         font-family: cursive;
                       "
                     >
@@ -1166,7 +1166,7 @@ class IndexController extends Controller
                         font-weight: 500;
                         font-size: 16px;
                         text-align: center;
-                        color: #052F4E;
+                        color: white;
                         font-family: Google Sans;
                       "
                     >
@@ -1182,7 +1182,7 @@ class IndexController extends Controller
                           font-weight: 500;
                           font-size: 16px;
                           text-align: center;
-                          color: #052F4E;
+                          color: white;
                           font-family: Google Sans;
                         "
                       >
@@ -1202,7 +1202,7 @@ class IndexController extends Controller
                       href="' . $appUrl . '"
                       style="
                         text-decoration: none;
-                        background-color: #052F4E;
+                        background-color: #FB4535;
                         color: white;
                         padding: 8px 16px;
                         display: inline-flex;
@@ -1212,7 +1212,7 @@ class IndexController extends Controller
                         font-family: Google Sans;
                         font-size: 16px;
                         border-radius: 12px;
-                        border: 1px solid #052F4E;
+                        border: 1px solid #FB4535;
                       "
                     >
                       <span>Visita nuestra web</span>
