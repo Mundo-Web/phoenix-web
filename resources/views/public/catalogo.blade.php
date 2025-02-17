@@ -55,7 +55,7 @@
                 <div class="bg-[#F0F1F0] flex flex-wrap justify-center items-center max-w-5xl gap-10 rounded-3xl p-6">
                     @foreach ($categories as $categorias)
                         <a href="{{route('catalogo', $categorias->id)}}">
-                            <h2 class="@if($id_cat == $categorias->id) active @endif underline-this leading-none font-akira_expanded max-w-[200px] text-center text-2xl text-[#010101] basis-auto">
+                            <h2 class="@if($id_cat == $categorias->id) activo @endif underline-this leading-none font-akira_expanded max-w-[200px] text-center text-2xl text-[#010101] basis-auto">
                                 {{$categorias->name}}
                             </h2>
                         </a>

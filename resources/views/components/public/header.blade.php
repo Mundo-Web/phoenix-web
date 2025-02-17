@@ -56,8 +56,8 @@
         z-index: 30;
     }
 
-    .active::before,
-     .active::after {
+    .activo::before,
+     .activo::after {
         content: '';
         position: absolute;
         bottom: 0;
@@ -69,7 +69,7 @@
         transition: transform 0.3s ease;
     }
 
-    .active {
+    .activo {
         position: relative;
         overflow: hidden;
         /*display: inline-block;*/
@@ -77,8 +77,8 @@
         padding-bottom: 4px;
     }
 
-    .active::before,
-     .active::after {
+    .activo::before,
+     .activo::after {
         transform: scaleX(1);
     }
 </style>

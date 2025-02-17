@@ -206,66 +206,48 @@
             </section>
         @endif
 
+        @if(count($faqs) > 0)
+            <section class="bg-cover relative py-10 lg:py-16" >
+                    <div class="">
+                        <div class="flex flex-col justify-center items-center px-[5%] xl:px-[8%] pb-10 w-full max-w-2xl text-center mx-auto gap-5">
+                            <h1 class="text-4xl lg:text-5xl font-akira_expanded font-bold text-[#010101]">
+                                Preguntas
+                                <span class="text-[#FB4535]">frecuentes</span>
+                            </h1>
 
-        <section class="bg-cover relative py-10 lg:py-16" >
-                <div class="">
-                    <div class="flex flex-col justify-center items-center px-[5%] xl:px-[8%] pb-10 w-full max-w-2xl text-center mx-auto gap-5">
-                        <h1 class="text-4xl lg:text-5xl font-akira_expanded font-bold text-[#010101]">
-                            Preguntas
-                            <span class="text-[#FB4535]">frecuentes</span>
-                        </h1>
-
-                        <p class="text-base font-roboto_regular tracking-normal">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="px-[5%] md:px-[10%] flex flex-col gap-5 md:gap-10">  
-                    <div class="flex flex-col items-center justify-center gap-5">
-                        
-                        <div class="grid w-full divide-y gap-y-5 divide-neutral-100 px-0 sm:px-6 py-2 rounded-3xl" data-aos="fade-down">
-
-                           
-                                <div class="py-3 bg-[#F7F7F7] rounded-3xl px-4" key={index}>
-                                    <details class="group">
-                                        <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                                            <span class="font-bold text-lg text-[#010101] font-roboto_bold">
-                                                ¿Necesito experiencia previa para unirme?</span>
-                                            <span class="transition group-open:rotate-180 bg-white rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M17 10L11.9992 14.58L7 10" stroke="#FB4535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </span>
-                                        </summary>
-                                        <p class="text-base text-[#010101] font-roboto_regular">
-                                            No, no es necesario tener experiencia previa. Nuestros entrenadores adaptan los ejercicios a tu nivel físico, ya seas principiante o avanzado.
-                                        </p>
-                                    </details>
-                                </div>
-
-                                <div class="py-3 bg-[#F7F7F7] rounded-3xl px-4" key={index}>
-                                    <details class="group">
-                                        <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
-                                            <span class="font-bold text-lg text-[#010101] font-roboto_bold">
-                                                ¿Necesito experiencia previa para unirme?</span>
-                                            <span class="transition group-open:rotate-180 bg-white rounded-full p-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none">
-                                                    <path d="M17 10L11.9992 14.58L7 10" stroke="#FB4535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                </svg>
-                                            </span>
-                                        </summary>
-                                        <p class="text-base text-[#010101] font-roboto_regular">
-                                            No, no es necesario tener experiencia previa. Nuestros entrenadores adaptan los ejercicios a tu nivel físico, ya seas principiante o avanzado.
-                                        </p>
-                                    </details>
-                                </div>
-                                    
+                            <p class="text-base font-roboto_regular tracking-normal">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            </p>
                         </div>
                     </div>
-                </div>  
-        </section>
 
+                    <div class="px-[5%] md:px-[10%] flex flex-col gap-5 md:gap-10">  
+                        <div class="flex flex-col items-center justify-center gap-5">
+                            
+                            <div class="grid w-full divide-y gap-y-5 divide-neutral-100 px-0 sm:px-6 py-2 rounded-3xl" data-aos="fade-down">
+                                @foreach ($faqs as $faq)
+                                    <div class="py-3 bg-[#F7F7F7] rounded-3xl px-4" key={index}>
+                                        <details class="group">
+                                            <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                                                <span class="font-bold text-lg text-[#010101] font-roboto_bold">
+                                                   {{$faq->pregunta}}</span>
+                                                <span class="transition group-open:rotate-180 bg-white rounded-full p-2">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 24 24" fill="none">
+                                                        <path d="M17 10L11.9992 14.58L7 10" stroke="#FB4535" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    </svg>
+                                                </span>
+                                            </summary>
+                                            <p class="text-base text-[#010101] font-roboto_regular">
+                                                {{$faq->respuesta}}
+                                            </p>
+                                        </details>
+                                    </div>
+                                @endforeach   
+                            </div>
+                        </div>
+                    </div>  
+            </section>
+        @endif
         {{-- <section class="px-[5%] pt-12 xl:pt-16">
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-5">
                 <div class="lg:col-span-4 flex flex-col gap-2 max-w-3xl">
