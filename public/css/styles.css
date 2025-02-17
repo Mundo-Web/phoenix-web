@@ -1188,8 +1188,7 @@ ul.acordeon li {
     *display: inline;
     zoom: 1; /* IE7 */
     width: 10%;
-    height: 530px;
-    padding-bottom: 40%; /* Ratio aspecto imagen = (height*X)/width */
+    padding-bottom: 2%; /* Ratio aspecto imagen = (height*X)/width */
     background: #eee;
     text-align: center;
     /* box-shadow: -2px 0px 8px #999; */

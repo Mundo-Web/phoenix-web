@@ -222,11 +222,11 @@
 
         @if (count($categorias)>0)
             <section class="py-12 xl:py-16 bg-[#F2F2F2]">
-                <ul class="acordeon flex flex-row gap-5 justify-center">
+                <ul class="acordeon flex flex-row gap-5 justify-center items-end">
                     @foreach ($categorias as $category)
-                        <li class="rounded-3xl {{ $loop->first ? 'active' : '' }} bg-cover bg-center bg-no-repeat " style="background-image:  url('{{ asset($category->url_image . $category->name_image) }}')">
+                        <li class="rounded-3xl {{ $loop->first ? 'active' : '' }} bg-cover bg-center bg-no-repeat h-full" style="background-image:  url('{{ asset($category->url_image . $category->name_image) }}')">
                             
-                            <div class="divpadre flex flex-col justify-end items-start h-[530px] relative">
+                            <div class="divpadre flex flex-col justify-end items-start h-[530px] 2xl:h-[700px] relative">
                                 
                                 <div class="divcontain flex flex-row gap-5 xl:gap-20 items-end p-5">
                             
