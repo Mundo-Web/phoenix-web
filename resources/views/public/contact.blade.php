@@ -181,29 +181,30 @@
             </div>
         </section>
 
-
-        <section class="w-full px-[5%] xl:px-[8%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/bannerphoenix.png') }}');">
-            <div class="grid grid-cols-1 md:grid-cols-3 w-full">
-                <div class="md:col-span-2 flex flex-col gap-3">
-                    <div class="flex flex-row">
-                        <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">Team Pheonix Fitness</span>
-                    </div>
-                    <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white">
-                        Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
-                    </h2>
-                    <div class="flex flex-row items-center justify-start">
-                        <a href="{{route('contacto')}}">
-                            <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
-                                Let´s Go!
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                        </a>
+        @if(count($categorias) > 0)
+            <section class="w-full px-[5%] xl:px-[8%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/bannerphoenix.png') }}');">
+                <div class="grid grid-cols-1 md:grid-cols-3 w-full">
+                    <div class="md:col-span-2 flex flex-col gap-3">
+                        <div class="flex flex-row">
+                            <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">Team Pheonix Fitness</span>
+                        </div>
+                        <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white">
+                            Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
+                        </h2>
+                        <div class="flex flex-row items-center justify-start">
+                            <a href="{{route('catalogo', $categorias[0]->id)}}">
+                                <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
+                                    Let´s Go!
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endif
 
 
         <section class="bg-cover relative py-10 lg:py-16" >

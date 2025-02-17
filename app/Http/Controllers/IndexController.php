@@ -328,7 +328,7 @@ class IndexController extends Controller
   public function contacto()
   {
     $general = General::all();
-    $categorias = Category::all();
+    $categorias = Category::where('status', 1)->where('visible', 1)->get();
     $url_env = env('APP_URL');
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
