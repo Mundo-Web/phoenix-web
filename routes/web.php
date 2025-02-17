@@ -36,6 +36,7 @@ use App\Http\Controllers\LogosClientController;
 
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LibroReclamacionesController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\NuestrasTiendasController;
 use App\Http\Controllers\PaymentController;
@@ -122,7 +123,7 @@ Route::get('/obtenerDistritos/{provinceId}', [IndexController::class, 'obtenerDi
 Route::get('/politicas-de-devolucion', [IndexController::class, 'politicasDevolucion'])->name('politicas_dev');
 Route::get('/terminos-y-condiciones', [IndexController::class, 'TerminosyCondiciones'])->name('terms_condition');
 
-
+Route::get('/googlemaps', [MapController::class, 'googlemaps'])->name('googlemaps');
 
 Route::get('/buscarblog', [IndexController::class, 'searchBlog'])->name('buscarblog');
 

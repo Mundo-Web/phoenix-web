@@ -22,12 +22,12 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th>Orden</th>
+                <th class="w-10">Orden</th>
                 <th class="w-32">Imagen</th>
-                <th class="w-32">Fondo</th>
+                {{-- <th class="w-32">Fondo</th> --}}
                 <th>Titulo</th>
                 {{-- <th>Descripcion</th> --}}
-                <th class="w-32">Destacar</th>
+                {{-- <th class="w-32">Destacar</th> --}}
                 <th class="w-32">Visible</th>
                 <th class="w-32">Acciones</th>
               </tr>
@@ -36,10 +36,10 @@
               @foreach ($logos as $logo)
                 <tr>
                   <td>{{$logo->order}}</td>
-                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
-                  <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
+                  <td class="dark:bg-slate-800 bg-slate-200"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
+                  {{-- <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td> --}}
                   <td class="dark:bg-slate-800">{{ $logo->title }}</td>
-                   <td class="">
+                   {{-- <td class="">
                     <form method="POST" action="">
                       @csrf
                       <input type="checkbox" id="hs-basic-usage"
@@ -56,7 +56,7 @@
 
 
 
-                  </td>
+                  </td> --}}
                   <td class="">
                     <form method="POST" action="">
                       @csrf
@@ -96,12 +96,12 @@
               <tr>
                 <th>Orden</th>
                 <th>Imagen</th>
-                <th class="w-32">Fondo</th>
+                {{-- <th class="w-32">Fondo</th> --}}
                 <th>Titulo</th>
-                <th class="w-32">Destacar</th>
+                {{-- <th class="w-32">Destacar</th> --}}
                 <th class="w-32">Visible</th>
                 {{-- <th>Descripcion</th> --}}
-                <th>Acciones</th>
+                <th class="w-32">Acciones</th>
               </tr>
             </tfoot>
           </table>

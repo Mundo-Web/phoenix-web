@@ -31,6 +31,7 @@
                                                 </div>
                                             </div>
 
+                                            
                                             <div class="md:col-span-5">
                                                 <label for="address">Subir una Foto</label>
                                                 <div class="relative mb-2  mt-2">
@@ -55,3 +56,4 @@
 </div>
 
 </x-app-layout>
+

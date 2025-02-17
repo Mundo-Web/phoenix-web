@@ -95,8 +95,6 @@
     border-radius: 2rem;
 }
 
-
-
 .productos-destacados {
     position: relative;
     /* height: 500px; */
@@ -127,7 +125,6 @@
     background-color: #eb5d2c;
     opacity: 1;
 }
-
 
 .productos-oferta {
     position: relative;
@@ -160,9 +157,7 @@
     opacity: 1;
 }
 
-
 /* ----------------------- testimonios -------- */
-
 
 .myTestimonios {
     position: relative;
@@ -1134,4 +1129,143 @@ input:checked + .departamento {
 
 .emptyspan span {
     display: none !important;
+}
+
+@font-face {
+    font-family: "akira_expanded";
+    src: url("/fonts/akira_expanded.woff") format("woff");
+}
+
+@font-face {
+    font-family: "roboto_bold";
+    src: url("/fonts/Roboto-Bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "roboto_light";
+    src: url("/fonts/Roboto-Light.woff") format("woff");
+}
+
+@font-face {
+    font-family: "roboto_medium";
+    src: url("/fonts/Roboto-Medium.woff") format("woff");
+}
+
+@font-face {
+    font-family: "roboto_regular";
+    src: url("/fonts/Roboto-Regular.woff") format("woff");
+}
+
+@font-face {
+    font-family: "roboto_bold";
+    src: url("/fonts/Roboto-Semibold.woff") format("woff");
+}
+
+/* Ajustes generales */
+
+ul.acordeon * {
+    -webkit-transition: all 0.6s ease-in-out;
+    -moz-transition: all 0.6s ease-in-out;
+    transition: all 0.6s ease-in-out;
+}
+/* Contenedor general */
+ul.acordeon {
+    width: 100%; /* Personalizar sncho total */
+    overflow: hidden;
+    padding: 0;
+    background: #f2f2f2;
+    text-align: center;
+    list-style: none;
+    font-size: 0;
+    /* box-shadow: 0 0 10px #333; */
+}
+/* Cada elemento */
+ul.acordeon li {
+    position: relative;
+    
+    display: inline-block;
+    background-size: cover!important;
+    *display: inline;
+    zoom: 1; /* IE7 */
+    width: 10%;
+    height: 530px;
+    padding-bottom: 40%; /* Ratio aspecto imagen = (height*X)/width */
+    background: #eee;
+    text-align: center;
+    /* box-shadow: -2px 0px 8px #999; */
+}
+
+
+/* Hover: Desplegamos elemento aumentando su ancho */
+ul.acordeon li:hover {
+    width: 60%; /* 100 - 10*(nºelem-1) // X=60 para ratio imagen */
+    background: #333;
+}
+
+
+/* Hover: Expandimos el contenido */
+ul.acordeon li:hover a,
+ul.acordeon li:hover a img {
+    width: 100%;
+}
+
+/* VARIACIONES PARA CONSEGUIR QUE EL MENU OCUPE INICIALMENTE TODO EL ANCHO */
+ul.acordeon li {
+    width: 20%;
+}
+ul.acordeon:hover li {
+    width: 10%;
+}
+ul.acordeon li:hover {
+    width: 60%;
+}
+
+/* Ajustar el primer elemento del acordeón para que esté expandido */
+ul.acordeon li.active {
+    width: 40%; /* Ajusta el tamaño expandido según tu diseño */
+}
+
+/* Estilos cuando un elemento está activo */
+ul.acordeon li:hover,
+ul.acordeon li.active {
+    width: 60%; /* Tamaño expandido */
+    
+}
+
+/* Otros elementos reducidos cuando otro está activo */
+ul.acordeon li:not(.active) {
+    width: 10%;
+}
+
+.divcontain {
+  transition: all 0.3s ease-in-out;
+  max-height: 150px; /* Altura cuando está visible */
+  
+}
+
+li:not(.active) .divcontain {
+  max-height: 50px; /* Reducir altura */
+  justify-content: center; /* Centrar título */
+}
+
+li:not(.active) .divcontain p,
+li:not(.active) .divcontain div:last-child {
+  display: none; /* Ocultar descripción y botón */
+}
+
+li:not(.active) .divcontain {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: rotate(-90deg) translate(-50%, -50%);
+    transform-origin: center;
+    transition: transform 0.4s ease-in-out;
+    width: 30%;
+    text-align: left;
+    align-items: center;
+}
+
+
+li:not(.active) .divcontain .divleft{
+    padding: 0px 20px;
 }

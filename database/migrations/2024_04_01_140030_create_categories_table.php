@@ -15,9 +15,12 @@ return new class extends Migration
             $table->id()->unsigned();
             $table->string('name');
             $table->string('slug')->nullable();
-            $table->string('description')->nullable();
+            $table->text('description')->nullable();
             $table->string('url_image')->nullable();
             $table->string('name_image')->nullable();
+            $table->text('duracion')->nullable();
+            $table->text('frecuencia')->nullable();
+            $table->text('horario')->nullable();
             
             $table->boolean('destacar')->default(false);
 

@@ -1,4 +1,4 @@
-<footer class="bg-[#052F4E]">
+<footer >
     <style>
         #modalPoliticasDev 
         #modalTerminosCondiciones 
@@ -40,37 +40,38 @@
         }
     </style>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 w-11/12 mx-auto py-10 gap-10 md:gap-5">
+    <div class="grid grid-cols-1 md:grid-cols-3 px-[5%] w-full py-10 gap-10 md:gap-5 bg-[#010101]">
         <div class="md:col-span-1 w-full md:max-w-[500px] flex flex-col gap-5" data-aos="fade-up" data-aos-offset="150">
             <a href="{{ route('index') }}">
-                <img src="{{ asset('images/svg/cremosofooter.svg') }}" alt="MrCremoso" class="w-[180px]" />
+                <img src="{{ asset('images/svg/logofooterf.svg') }}" alt="Phoenix" class="w-[150px]" />
             </a>
         </div>
 
         <div class="md:col-span-2 grid grid-cols-1 lg:grid-cols-7 gap-10 md:gap-5 justify-start items-start">
 
             <div class="flex flex-col gap-5 col-span-2">
-                <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
+                <p class="font-roboto_bold uppercase tracking-wider text-white text-lg">
                    ENLACES
                 </p>
-                <div class="flex flex-col gap-1 text-[#FFF9F1] font-galano_regular text-sm">
+                <div class="flex flex-col gap-1 text-white font-roboto_light text-base">
                     <a href="{{ route('index') }}">Inicio</a>
                     @if (count($services) > 0)
                         <a href="{{ route('servicios', $services->first()->id) }}">Servicios</a>
                     @endif
-                    <a href="{{route('catalogo',0)}}">Productos</a>
-                    <a href="{{route('rse')}}">Recetas</a>
-                    <a href="{{route('blog',0)}}">Blog</a>
+                    <a href="{{route('nosotros')}}">Nosotros</a>
+                    @if (count($categoriasf) > 0)
+                        <a href="{{route('catalogo', $categoriasf[0]->id )}}">Servicios y Planes</a>
+                    @endif
                     <a href="{{route('contacto')}}">Contacto</a>
                 </div>
             </div>
 
 
             <div class="flex flex-col gap-5 col-span-3">
-                <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
+                <p class="font-roboto_bold uppercase tracking-wider text-white text-lg">
                    DATOS DE CONTACTO
                 </p>
-                <div class="flex flex-col gap-3 text-[#FFF9F1] font-galano_regular text-sm">
+                <div class="flex flex-col gap-3 text-white font-roboto_light text-base">
                     <a>{{ $general[0]->address }}, {{ $general[0]->inside }},
                                         {{ $general[0]->district }} - {{ $general[0]->city }}</a>
                     <a>Correo Electrónico: <br> {{ $general[0]->email }}</a> 
@@ -80,10 +81,10 @@
 
 
             <div class="flex flex-col gap-5 col-span-2">
-                <p class="font-galano_medium uppercase text-[#E1CBB3] text-lg">
+                <p class="font-roboto_bold uppercase tracking-wider text-white text-lg">
                    AVISO LEGAL
                 </p>
-                <div class="flex flex-col gap-3 text-[#FFF9F1] font-galano_regular text-sm">
+                <div class="flex flex-col gap-3 text-white font-roboto_light text-base">
                     <a class="cursor-pointer" id="linkPoliticas">Política de Privacidad</a>
                     <a class="cursor-pointer" id="linkTerminos">Términos y Condiciones</a>
                 </div>
@@ -93,9 +94,8 @@
     </div>
 
     <div
-        class="flex flex-col items-start gap-3 md:flex-row md:justify-between md:items-center w-11/12 mx-auto py-10 border-t border-white">
-        <a href="#" target="_blank" class="text-[#FFF9F1] font-galano_regular font-normal text-text14">&copy; 2024 Cremoso.
-            Reservados todos los derechos</a>
+        class="flex bg-[#FB4535] flex-col items-start gap-3 md:flex-row md:justify-between md:items-center px-[5%] w-full py-4 ">
+        <a href="/" target="_blank" class="text-[#FFF9F1] font-galano_regular font-normal text-text14">Copyright © 2025 Phoenix Fitness Center. Reservados todos los derechos.</a>
         <div class="flex justify-start items-center gap-5">
         <div class="flex flex-row gap-2">
                     @if ($general[0]->facebook)

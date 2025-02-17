@@ -488,35 +488,45 @@
             </ul>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-              <div class="flex items-center w-full">
-                <img src="{{asset('images/bancos/bcp2.jpg')}}" alt="BCP" class="w-10 rounded-lg object-cover object-center" />
-                <span class="ml-2 font-galano_semibold">191-99999999</span>
-              </div>
-      
-              <div class="flex items-center">
-                <img src="{{asset('images/bancos/scotia2.png')}}" alt="Scotiabank" class="w-10 object-cover object-center rounded-lg" />
-                <span class="ml-2 font-galano_semibold">151-999999</span>
-              </div>
-      
-              <div class="flex items-center">
-                <img src="{{asset('images/bancos/bbvau.png')}}" alt="BBVA" class="w-10 object-cover object-center rounded-lg" />
-                <span class="ml-2 font-galano_semibold leading-none">0011-9999-999999</span>
-              </div>
-      
-              <div class="flex items-center">
-                <img src="{{asset('images/bancos/interb.png')}}" alt="Interbank" class="w-10 object-cover object-center rounded-lg" />
-                <span class="ml-2 font-galano_semibold">200-99999999</span>
-              </div>
+              @if ($general->bcp)
+                <div class="flex items-center w-full">
+                  <img src="{{asset('images/bancos/bcp2.jpg')}}" alt="BCP" class="w-10 rounded-lg object-cover object-center" />
+                  <span class="ml-2 font-galano_semibold">{{$general->bcp}}</span>
+                </div>
+              @endif
+              
+              @if ($general->scotiabank)  
+                <div class="flex items-center">
+                  <img src="{{asset('images/bancos/scotia2.png')}}" alt="Scotiabank" class="w-10 object-cover object-center rounded-lg" />
+                  <span class="ml-2 font-galano_semibold">{{$general->scotiabank}}</span>
+                </div>
+              @endif
+
+              @if ($general->bbva)
+                <div class="flex items-center">
+                  <img src="{{asset('images/bancos/bbvau.png')}}" alt="BBVA" class="w-10 object-cover object-center rounded-lg" />
+                  <span class="ml-2 font-galano_semibold leading-none">{{$general->bbva}}</span>
+                </div>
+              @endif
+
+              @if ($general->interbank)
+                <div class="flex items-center">
+                  <img src="{{asset('images/bancos/interb.png')}}" alt="Interbank" class="w-10 object-cover object-center rounded-lg" />
+                  <span class="ml-2 font-galano_semibold">{{$general->interbank}}</span>
+                </div>
+              @endif
+
+              @if ($general->nroyape)
+                <div class="flex items-center">
+                  <img src="{{asset('images/bancos/yapePlin.png')}}" alt="Yape Plin" class="w-16 h-auto" />
+                  <div class="flex flex-col">
+                    <span class="ml-2 font-galano_semibold">{{$general->nroyape}}</span>
+                    <span class="ml-2 font-galano_semibold -mt-1">{{$general->nombreyape}}</span>
+                  </div>
+                </div>
+              @endif
             </div>
-            
-            <div class="flex items-center justify-start md:justify-center mt-4">
-              <img src="{{asset('images/bancos/yapePlin.png')}}" alt="Yape Plin" class="w-16 h-auto" />
-              <div class="ml-2 font-galano_semibold leading-none">
-                <p>123456789</p>
-                <p>Mr Cremoso</p>
-              </div>
-            </div>
-            
+ 
           </div>
           <form  id="formVoucher" method="POST" enctype="multipart/form-data">
             @csrf

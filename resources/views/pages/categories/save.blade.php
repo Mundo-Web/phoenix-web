@@ -1,3 +1,7 @@
+@php
+  use SoDe\Extend\Crypto;
+@endphp
+
 <x-app-layout>
 
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
@@ -38,6 +42,66 @@
                 </div>
               </div>
 
+              <div class="col-span-5 md:col-span-5">
+                <label for="duracion">Duración (Agregar elemento por linea)</label>
+                <div class="relative mb-2 mt-2">
+                  <x-form.quill id="duracion" :value="$category->duracion" />
+                </div>
+              </div>
+
+              <div class="col-span-5 md:col-span-5">
+                <label for="frecuencia">Frecuencia (Agregar elemento por linea)</label>
+                <div class="relative mb-2 mt-2">
+                  <x-form.quill id="frecuencia" :value="$category->frecuencia" />
+                </div>
+              </div>
+
+              <div class="col-span-5 md:col-span-5">
+                <label for="horario">Horario (Agregar elemento por linea)</label>
+                <div class="relative mb-2 mt-2">
+                  <x-form.quill id="horario" :value="$category->horario" />
+                </div>
+              </div>
+
+
+              <div class="md:col-span-5 mt-2">
+                <div class=" flex items-end justify-between gap-2 ">
+                    <label for="specifications">Beneficios del servicio</label>
+                    <button type="button" id="AddEspecifiacion"
+                    class="text-blue-500 hover:underline focus:outline-none font-medium">
+                    <i class="fa fa-plus"></i>
+                    Agregar
+                    </button>
+                </div>
+                @foreach ($especificacion as $key => $item)
+                    @php
+                        $counter = count($especificacion) - $key;
+                    @endphp
+                    <div class="flex w-full gap-2">
+                      <div class="relative mb-2 w-full mt-2">
+                          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <i class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen"></i>
+                          </div>
+                          <input type="text" id="specifications" name="tittle-{{ $counter }}"
+                          value="{{ $item->tittle }}"
+                          class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Titulo">
+                      </div>
+                      <div class="relative mb-2 w-full mt-2">
+                          <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                          <i class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen"></i>
+                          </div>
+                          <input type="text" id="specifications" name="specifications-{{ $counter }}"
+                          value="{{ $item->specifications }}"
+                          class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                          placeholder="Especificacion">
+                      </div>
+                    </div>
+                @endforeach
+            </div>
+
+
+
               {{-- <div class="md:col-span-5">
                 <label for="img_talla">Subir Guia de Tallas</label>
                 <div class="relative mb-2  mt-2 flex flex-wrap items-center gap-2">
@@ -49,7 +113,7 @@
               </div> --}}
 
               <div class="md:col-span-5">
-                <label for="imagen">Subir un icono</label>
+                <label for="imagen">Subir imagen</label>
                 <div class="relative mb-2  mt-2 flex flex-wrap items-center gap-2">
                   <img class="block w-40 h-40 mb-2" src="{{$category->name_image ? asset($category->url_image . $category->name_image) : asset('images/imagen/image-plus.jpg')}}" alt="">
                   <input name="imagen"
@@ -58,7 +122,44 @@
                 </div>
               </div>
 
+              <div class="col-span-5">
+                <label for="imagenes mb-2">Otras imagenes del producto</label>
+                <div id="imagenes" class="w-full flex flex-wrap gap-1">
 
+                  <div id="imagenes_sortable" class="flex flex-wrap gap-1 max-w-full">
+                    @foreach ($galery as $key => $image)
+                      @php
+                        $uuid = Crypto::randomUUID();
+                      @endphp
+                      <div id="galery_container_{{ $uuid }}"
+                        class="relative group block w-[120px] h-[160px] rounded-md border" draggable="true">
+                        <div
+                          class="absolute top-0 left-0 bottom-0 right-0 rounded-md hover:bg-[#00000075] transition-all flex flex-col items-center justify-center gap-1">
+                          <label for="galery_{{ $uuid }}" title="Cambiar Imagen" tippy
+                            class="text-xl text-white hidden group-hover:block cursor-pointer fa-solid fa-camera-rotate z-10"></label>
+                          <i id="btn_delete_galery" data-id="{{ $uuid }}" title="Eliminar Imagen" tippy
+                            class="text-xl text-white hidden group-hover:block cursor-pointer fa-regular fa-trash-can z-10"></i>
+                        </div>
+
+                        <input class="hidden" name="galery[]"
+                          value="{{ $image->id }}|{{ $image->imagen }}|{{ $key }}">
+                        <input class="hidden" type="file" id="galery_{{ $uuid }}" accept="image/*">
+                        <img class="w-full h-full rounded-md object-cover"
+                          src="{{ $image->imagen ? asset($image->imagen) : asset('images/imagen/noimagen.jpg') }}">
+                      </div>
+                    @endforeach
+                  </div>
+                  <label for="galery"
+                    class="block w-[120px] h-[160px] rounded-md border hover:opacity-50 cursor-pointer"
+                    title="Agregar imagen" tippy>
+                    <input class="hidden" type="file" id="galery" accept="image/*" multiple>
+                    <img class="w-full h-full rounded-md object-cover"
+                      src="{{ asset('images/imagen/image-plus.jpg') }}" alt="">
+                  </label>
+                </div>
+              </div>
+
+      
               <label class=" hidden mb-2 text-gray-900 dark:text-white">Visualizacion de productos:</label>
               <ul class="hidden md:col-span-5  w-full gap-6 md:grid-cols-4">
                 <li>
@@ -108,3 +209,177 @@
   </div>
 
 </x-app-layout>
+
+<script>
+  function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  function agregarElementos(elemento, valorInput, name) {
+    elemento.setAttribute("type", "text");
+    elemento.setAttribute("name", `${name}-${valorInput}`);
+    elemento.setAttribute("placeholder", `${name == 'tittle'? 'Titulo': 'Especificacion'}`);
+    elemento.setAttribute("id", `specifications`);
+
+    elemento.classList.add("w-full","mt-1", "bg-gray-50", "border", "border-gray-300", "text-gray-900", "text-sm",
+      "rounded-lg",
+      "focus:ring-blue-500", "focus:border-blue-500", "block", "w-full", "pl-10", "p-2.5",
+      "dark:bg-gray-700",
+      "dark:border-gray-600", "dark:placeholder-gray-400", "dark:text-white",
+      "dark:focus:ring-blue-500",
+      "dark:focus:border-blue-500");
+
+    return elemento
+  }
+  $('document').ready(function() {
+    let valorInput = $('[id="specifications"]').length / 2
+
+    $("#AddEspecifiacion").on('click', function(e) {
+      e.preventDefault()
+      valorInput++
+
+      const addButton = document.getElementById("AddEspecifiacion");
+      const divFlex = document.createElement("div");
+      const dRelative = document.createElement("div");
+      const dRelative2 = document.createElement("div");
+
+      divFlex.classList.add('flex', 'gap-2')
+      dRelative.classList.add('relative', 'mb-2', 'mt-2','w-full')
+      dRelative2.classList.add('relative', 'mb-2', 'mt-2','w-full')
+
+      const iconContainer = document.createElement("div");
+      const icon = `<div class="absolute w-full inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+        <i class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen"></i>
+      </div>`
+      iconContainer.innerHTML = icon;
+
+      // Obtener el nodo del icono
+      const iconNode = iconContainer.firstChild;
+
+
+
+      const inputTittle = document.createElement("input");
+      const inputValue = document.createElement("input");
+
+      let inputT = agregarElementos(inputTittle, valorInput, 'tittle')
+      let inputV = agregarElementos(inputValue, valorInput, 'specifications')
+
+
+      dRelative.appendChild(inputT);
+      dRelative2.appendChild(inputV);
+
+
+      // Agregar el icono como primer hijo de dRelative
+      dRelative.insertBefore(iconNode, inputT);
+
+      // Clonar el nodo del icono para agregarlo como primer hijo de dRelative2
+      const iconNodeCloned = iconNode.cloneNode(true);
+      dRelative2.insertBefore(iconNodeCloned, inputV);
+
+
+      divFlex.appendChild(dRelative);
+      divFlex.appendChild(dRelative2);
+
+      const parentContainer = addButton.parentElement
+        .parentElement; // Obtener el contenedor padre
+      parentContainer.insertBefore(divFlex, addButton.parentElement
+        .nextSibling); // Insertar el input antes del siguiente elemento después del botón
+    })
+
+  })
+</script>
+
+<script>
+  function toggleMenu() {
+    console.log('cambiando toggle')
+    var menuItems = document.getElementById('menu-items');
+    var isExpanded = menuItems.classList.contains('hidden');
+    menuItems.classList.toggle('hidden', !isExpanded);
+    document.getElementById('menu-button').setAttribute('aria-expanded', !isExpanded);
+  }
+
+  const saveImage = async file => {
+    const params = new FormData()
+    params.append('image', file)
+    params.append('_token', $('[name="_token"]').val())
+
+    const data = await fetch('/admin/galery', {
+        method: 'POST',
+        headers: {
+          'XSRF-TOKEN': Cookies.get('XSRF-TOKEN')
+        },
+        body: params
+      })
+      .then(res => res.json())
+
+    return data
+  }
+
+  $('[data-id="input_img"]').on('change', function() {
+    const file = this.files[0]
+    const url = URL.createObjectURL(file)
+
+    $(`#${this.id}_previewer`).attr('src', url)
+  })
+
+  $(document).on('change', '[id^="galery_"]', function() {
+    const input = $(this)
+    const label = input.parent()
+    const input2send = label.find('[name="galery[]"]')
+    const image_container = label.find('img')
+    const file = input.get(0).files[0] ?? null
+    const url = URL.createObjectURL(file)
+
+    const params = new FormData()
+    params.append('image', file)
+    params
+
+    saveImage(file).then((x) => {
+      const data = x.data
+      input2send.val(`0|${data.name}`)
+    })
+
+    image_container.attr('src', url)
+  })
+
+  $('#galery').on('change', (e) => {
+    const files = e.target.files;
+    Array.from(files).forEach(async file => {
+      const {
+        data,
+        message,
+        status
+      } = await saveImage(file)
+      const uuid = crypto.randomUUID()
+      const pos = $('#imagenes_sortable').length
+      $('#imagenes_sortable').append(`<div id="galery_container_${uuid}" class="relative group block w-[120px] h-[160px] rounded-md border">
+        <div class="absolute top-0 left-0 bottom-0 right-0 rounded-md hover:bg-[#00000075] transition-all flex flex-col items-center justify-center gap-1">
+          <label for="galery_${uuid}" title="Cambiar Imagen" tippy
+            class="text-xl text-white hidden group-hover:block cursor-pointer fa-solid fa-camera-rotate z-10"></label>
+          <i id="btn_delete_galery" data-id="${uuid}" title="Eliminar Imagen" tippy
+            class="text-xl text-white hidden group-hover:block cursor-pointer fa-regular fa-trash-can z-10"></i>
+        </div>
+
+        <input class="hidden" name="galery[]"
+          value="${0}|${data.name}|${pos}">
+        <input class="hidden" type="file" id="galery_${uuid}" accept="image/*">
+        <img class="w-full h-full rounded-md object-cover"
+          src="/${data.name}">
+      </div>`)
+
+      tippy('#product-form [tippy]', {
+        arrow: true
+      })
+    })
+    e.target.value = null
+  })
+
+  tippy('#product-form [tippy]', {
+    arrow: true
+  })
+
+  $(document).on('click', '#btn_delete_galery', function() {
+    $(this).parents('[id^="galery_container_"]').remove()
+  })
+
+</script>

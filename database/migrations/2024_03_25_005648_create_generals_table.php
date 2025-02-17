@@ -38,6 +38,12 @@ return new class extends Migration
             $table->text('aboutus')->nullable();
             $table->text('htop')->nullable();
             $table->string('ig_token')->nullable();
+            $table->string('bcp')->nullable();
+            $table->string('scotiabank')->nullable();
+            $table->string('bbva')->nullable();
+            $table->string('interbank')->nullable();
+            $table->string('nroyape')->nullable();
+            $table->string('nombreyape')->nullable();
 
 
             $table->timestamps();

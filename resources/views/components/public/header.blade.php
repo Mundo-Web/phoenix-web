@@ -13,37 +13,37 @@
         text-overflow: ellipsis;
     }
 
-    nav a .underline-this {
+     .underline-this {
         position: relative;
         overflow: hidden;
         /*display: inline-block;*/
         text-decoration: none;
-        /* padding-bottom: 4px; */
+        padding-bottom: 4px;
     }
 
-    nav a .underline-this::before,
-    nav a .underline-this::after {
+     .underline-this::before,
+     .underline-this::after {
         content: '';
         position: absolute;
         bottom: 0;
         left: 0;
         width: 100%;
         height: 2px;
-        background-color: #9b9b9b;
+        background-color: #FB4535;
         transform: scaleX(0);
         transition: transform 0.3s ease;
     }
 
-    nav a .underline-this::after {
+     .underline-this::after {
         transform-origin: right;
     }
 
-    nav a:hover .underline-this::before,
-    nav a:hover .underline-this::after {
+     a:hover .underline-this::before,
+     a:hover .underline-this::after {
         transform: scaleX(1);
     }
 
-    nav a:hover .underline-this::before {
+     a:hover .underline-this::before {
         transform-origin: left;
     }
 
@@ -55,142 +55,130 @@
     .jquery-modal.blocker.current {
         z-index: 30;
     }
+
+    .active::before,
+     .active::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #FB4535;
+        transform: scaleX(0);
+        transition: transform 0.3s ease;
+    }
+
+    .active {
+        position: relative;
+        overflow: hidden;
+        /*display: inline-block;*/
+        text-decoration: none;
+        padding-bottom: 4px;
+    }
+
+    .active::before,
+     .active::after {
+        transform: scaleX(1);
+    }
 </style>
 
 
 <header class="sticky top-0 z-[25]">
-    <div class="left-0 right-0">
+    <div  class="left-0 right-0">
 
-        <div class=" bg-[#052F4E] z-[1000] relative font-galano_medium text-sm">
-            <div class="flex flex-row justify-between items-center py-3 w-11/12 mx-auto text-white text-sm">
-
-                <div className="flex flex-col justify-center items-center">
-                    <p>@cremosos</p>
-                </div>
-
-                <div className="flex flex-col justify-center items-center">
-                    <p>Las mejores ofertas</p>
-                </div>
-
-                <div className="flex flex-col justify-center items-center">
-                    <p>Free delivery</p>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="flex justify-between w-full px-[5%] bg-[#f2f5f7]">
-            <nav class="flex h-[70px] items-center justify-between gap-10 w-full">
+        <div id="header-menu" class="flex justify-between w-full px-[5%]
+        @if ($isIndex ? 1 : 0)
+        @else
+        bg-[#010101]
+        @endif">
+            <nav class="flex h-[100px] items-center justify-between gap-10 w-full">
                 <input type="checkbox" id="menu" class="peer/menu menu hidden" />
                 <label for="menu"
                     class="transition-all flex flex-col gap-1 z-40 lg:hidden hamburguesa justify-center items-center order-3 lg:order-3">
-                    <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
-                    <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
-                    <p class="w-7 h-1 bg-[#082252] transition-transform duration-500"></p>
+                    <p class="w-7 h-1 bg-white transition-transform duration-500"></p>
+                    <p class="w-7 h-1 bg-white transition-transform duration-500"></p>
+                    <p class="w-7 h-1 bg-white transition-transform duration-500"></p>
                 </label>
 
                 <div class="flex justify-center items-center z-40">
                     <a href="{{ route('index') }}">
-                        <img src="{{ asset('images/svg/logomrcremoso.svg') }}" alt="Cremoso" class="w-[170px]">
+                        <img src="{{ asset('images/imagen/p_phoenixlogo.png') }}" alt="Cremoso" class="w-full">
                     </a>
                 </div>
 
 
                 <ul
-                    class="font-galano_medium text-lg text-[#052F4E] pt-40 fixed inset-0 bg-[#f2f5f7] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 gap-5 lg:gap-10 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
+                    class="font-roboto_medium text-lg pt-40 fixed inset-0 bg-[#010101] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
 
                     <div
-                        class="flex flex-col lg:flex-row order-2 lg:order-1 lg:w-[80%] lg:justify-center gap-5 lg:gap-10">
+                        class="flex flex-col lg:flex-row order-2 lg:order-1 lg:w-[80%] lg:justify-end gap-5 lg:gap-10">
 
                         <li class="flex flex-col">
                             <a href="{{ route('nosotros') }}"
-                                class="{{ isset($pagina) && $pagina == 'nosotros' ? 'font-semibold' : '' }}">Nosotros</a>
-                            @if (isset($pagina) && $pagina == 'nosotros')
-                                <p
-                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                                </p>
-                            @endif
+                                class="{{ isset($pagina) && $pagina == 'nosotros' ? 'text-[#FB4535]' : 'text-white' }}">Nosotros</a>
                         </li>
 
-                        <li class="flex flex-col">
-                            <a href="{{ route('catalogo.all') }}"
-                                class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'font-semibold' : '' }}">Productos</a>
-                            @if (isset($pagina) && $pagina == 'catalogo.all')
-                                <p
-                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                                </p>
-                            @endif
-                        </li>
+                        @if (count($categoriasf) > 0)
+                            <li class="flex flex-col">
+                                <a href="{{route('catalogo', $categoriasf[0]->id )}}"
+                                    class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'text-[#FB4535]' : 'text-white' }}">Servicios y Planes</a>
+                            </li>
+                        @endif
 
-
-                        @if (count($services) > 0)
+                        {{-- @if (count($services) > 0)
                             <li class="flex flex-col">
                                 <a href="{{ route('servicios', $services->first()->id) }}"
-                                    class="{{ isset($pagina) && $pagina == 'servicios' ? 'font-semibold' : '' }}">Servicios</a>
-                                @if (isset($pagina) && $pagina == 'servicios')
-                                    <p
-                                        class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                                    </p>
-                                @endif
+                                    class="{{ isset($pagina) && $pagina == 'servicios' ? 'text-[#FB4535]' : 'text-white' }}">Servicios</a>
                             </li>
-                        @endif
+                        @endif --}}
                         
 
-                        <li class="flex flex-col">
+                        {{-- <li class="flex flex-col">
                             <a href="{{ route('rse') }}"
-                                class="{{ isset($pagina) && $pagina == 'rse' ? 'font-semibold' : '' }}">Recetas</a>
-                            @if (isset($pagina) && $pagina == 'rse')
-                                <p
-                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                                </p>
-                            @endif
-                        </li>
+                                class="{{ isset($pagina) && $pagina == 'rse' ? 'text-[#FB4535]' : 'text-white' }}">Recetas</a>
+                        </li> --}}
 
-                        @if (count($blog) > 0)
+                        {{-- @if (count($blog) > 0)
                             <li class="flex flex-col">
                                 <a href="{{ route('blog', 0) }}"
-                                    class="{{ isset($pagina) && $pagina == 'blog' ? 'font-semibold' : '' }}">Blog</a>
-                                @if (isset($pagina) && $pagina == 'blog')
-                                    <p
-                                        class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                                    </p>
-                                @endif
+                                    class="{{ isset($pagina) && $pagina == 'blog' ? 'text-[#FB4535]' : 'text-white' }}">Blog</a>
                             </li>
-                        @endif
+                        @endif --}}
                         <li class="flex flex-col">
                             <a href="{{ route('contacto') }}"
-                                class="{{ isset($pagina) && $pagina == 'contacto' ? 'font-semibold' : '' }}">Contacto</a>
-                            @if (isset($pagina) && $pagina == 'contacto')
-                                <p
-                                    class="hidden lg:block lg:after:content-[''] lg:after:w-full lg:after:h-[2px] lg:after:bg-[#052f4e] lg:after:block">
-                                </p>
-                            @endif
+                                class="{{ isset($pagina) && $pagina == 'contacto' ? 'text-[#FB4535]' : 'text-white' }}">Contacto</a>
                         </li>
                     </div>
 
                     <div
-                        class="relative flex flex-row gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
+                        class="relative flex flex-row justify-end gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
 
                         <div class="flex flex-row items-center justify-center">
-                            <a href="{{route('contacto')}}"><div
-                                class="text-white font-galano_semibold bg-[#052f4e] rounded-xl text-center w-auto py-2 px-6">
-                                Soporte</div></a>
+                            <a href="{{route('contacto')}}">
+                                <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
+                                    Let´s Go!
+                                    
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </a>
                         </div>
 
-                        <div class="flex flex-row justify-center items-center">
+                        {{-- <div class="flex flex-row justify-center items-center">
                             @if (Auth::user() == null)
                                 <a class="md:flex" href="{{ route('login') }}">
                                     <i class="fa-solid fa-user-large fa-lg text-[#052f4e] !leading-none"></i>
-                                    {{-- <img src="{{ asset('images/svg/user.svg') }}" class="text-white w-7" /> --}}
                                 </a>
                             @else
                                 <div class="relative md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
                                     <button class="px-3 py-0 inline-flex justify-center items-center group"
                                         aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
                                         <div class="flex items-center">
-                                            {{-- <span id="username"
+                                            <span id="username"
                                                 class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-white ">
-                                                {{ explode(' ', Auth::user()->name)[0] }}</span> --}}
+                                                {{ explode(' ', Auth::user()->name)[0] }}</span>
                                             <i class="fa-solid fa-user-large fa-lg text-[#052f4e] !leading-none"></i>
                                             <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
                                                 viewBox="0 0 12 12">
@@ -221,15 +209,15 @@
                                     </div>
                                 </div>
                             @endif
-                        </div>
+                        </div> --}}
 
-                        <div class="flex justify-center items-center min-w-[38px]">
+                        {{-- <div class="flex justify-center items-center min-w-[38px]">
                             <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
                                 <span id="itemsCount"
                                     class="bg-[#052f4e] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
                                 <a><i class="fa-solid fa-cart-shopping text-[#052f4e] w-7"></i></a>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
 
@@ -279,7 +267,36 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+        if ({{ $isIndex ? 1 : 0 }}) {
+            function actualizarHeader() {
+                var scroll = $(window).scrollTop();
+                const headerMenu = $('#header-menu');
 
+                if (scroll > 0) {  
+                    headerMenu
+                        .removeClass('bg-transparent')  
+                        .addClass('bg-[#010101] shadow-lg');  
+                } else {
+                    headerMenu
+                        .removeClass('bg-[#010101] shadow-lg')  
+                        .addClass('bg-transparent');  
+                }
+            }
+
+            // Ejecutar al cargar la página
+            actualizarHeader();
+
+            // Ejecutar cuando haya scroll
+            $(window).scroll(function() {
+                actualizarHeader();
+            });
+        }
+
+        mostrarTotalItems();
+    });
+</script>
 <script>
     @auth
     $(document).ready(function() {

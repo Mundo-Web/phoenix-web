@@ -11,6 +11,7 @@ use App\Models\AttributeProductValues;
 use App\Models\Attributes;
 use App\Models\AttributesValues;
 use App\Models\Banners;
+use App\Models\Benefit;
 use App\Models\Blog;
 use App\Models\Faqs;
 use App\Models\General;
@@ -24,6 +25,7 @@ use App\Models\Category;
 use App\Models\ClientLogos;
 use App\Models\Department;
 use App\Models\Galerie;
+use App\Models\GaleryCategory;
 use App\Models\HistoricoCupon;
 use App\Models\HomeView;
 use App\Models\Offer;
@@ -94,7 +96,7 @@ class IndexController extends Controller
     $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->take(2)->get();
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
-    $categorias = Category::where('destacar', '=', 1)->where('visible', '=', 1)->get();
+    $categorias = Category::where('status', '=', 1)->where('destacar', '=', 1)->where('visible', '=', 1)->get();
     $subcategorias = SubCategory::where('destacar', '=', 1)->where('visible', '=', 1)->orderBy('order', 'asc')->get();
     $categoriasAll = Category::where('visible', '=', 1)->get();
     $destacados = Products::where('products.destacar', '=', 1)->where('products.status', '=', 1)
@@ -110,7 +112,7 @@ class IndexController extends Controller
     $testimonie = Testimony::where('status', '=', 1)->where('visible', '=', 1)->get();
     $slider = Slider::where('status', '=', 1)->where('visible', '=', 1)->orderBy('order', 'asc')->get();
     $category = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
-
+    
     $logosdestacados = ClientLogos::where('status', '=', 1)->where('destacar', '=', 1)->orderBy('order', 'asc')->get();
     $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->orderBy('order', 'asc')->get();
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
@@ -131,10 +133,10 @@ class IndexController extends Controller
     $marcas_id = $request->input('marcas');
     $id_cat = $id_cat ?? $catId;
 
-    // $categories = Category::with('subcategories')->where('visible', true)->get();
-    $categories = Category::with(['subcategories' => function ($query) {
-      $query->whereHas('products');
-    }])->where('visible', true)->where('status', true)->get();
+    $categories = Category::where('status', 1)->where('visible', 1)->get();
+    // $categories = Category::with(['subcategories' => function ($query) {
+    //   $query->whereHas('products');
+    // }])->where('visible', true)->where('status', true)->get();
 
     $tags = Tag::where('visible', true)->where('status', true)->get();
 
@@ -145,6 +147,10 @@ class IndexController extends Controller
     $marcas = ClientLogos::where('status', true)->where('visible', true)->get();
 
     $colores = Products::select('color')->distinct()->pluck('color');
+
+    $beneficios = Benefit::where('category_id', '=', $id_cat)->where('visible', true)->where('status', true)->get();
+    
+    $galeria = GaleryCategory::where('category_id', '=', $id_cat)->where('visible', true)->where('status', true)->get();
 
     $sizes = Products::select('peso')->distinct()->orderBy('peso', 'asc')->pluck('peso');
 
@@ -214,7 +220,7 @@ class IndexController extends Controller
       }
     }
 
-    return view('public.catalogo', compact('textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
+    return view('public.catalogo', compact('galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
   }
 
   public function ofertas(Request $request, string $id_cat = null)
@@ -414,6 +420,8 @@ class IndexController extends Controller
       $detalleUsuario = UserDetails::where('email', $user->email)->get();
     }
 
+    $general = General::first();
+
     $historicoCupones = [];
 
     if (Auth::check()) {
@@ -487,7 +495,7 @@ class IndexController extends Controller
 
     //$formToken = IzipayController::token($sale);
 
-    return view('public.checkout_pago', compact('user', 'historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress'));
+    return view('public.checkout_pago', compact('general', 'user', 'historicoCupones', 'sale', 'url_env', 'districts', 'provinces', 'departments', 'detalleUsuario', 'categorias', 'destacados', 'culqi_public_key', 'addresses', 'hasDefaultAddress'));
   }
 
   public function procesarPago(Request $request)

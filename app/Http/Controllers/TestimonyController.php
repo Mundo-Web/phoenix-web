@@ -7,7 +7,12 @@ use App\Http\Requests\StoreTestimonyRequest;
 use App\Http\Requests\UpdateTestimonyRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Spatie\FlareClient\Http\Client;
 class TestimonyController extends Controller
 {
     /**
@@ -33,9 +38,32 @@ class TestimonyController extends Controller
     /**
      * Store a newly created resource in storage.
      */
+    public function saveImg($file, $route, $nombreImagen){
+		$manager = new ImageManager(new Driver());
+       
+		$img =  $manager->read($file);
+        
+		if (!file_exists($route)) {
+			mkdir($route, 0777, true);
+	    }
+
+		$img->save($route . $nombreImagen);
+	}
+
     public function store(Request $request)
     {
         $testimony = new Testimony(); 
+
+        if($request->hasFile("imagen")){
+
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName(); 
+            $file =  $request->file('imagen');
+            $route = 'storage/images/testimonies/';
+            
+            $this->saveImg($file, $route, $nombreImagen);
+
+            $testimony->email =  $route.$nombreImagen; 
+        }
 
         $testimony->name = $request->name;
         $testimony->ocupation = $request->ocupation;
@@ -79,7 +107,17 @@ class TestimonyController extends Controller
         // $testimony->testimonie = $request->testimonie;
         // $testimony->ocupation = $request->ocupation;
         // $testimony->status = $request->status;
+        if($request->hasFile("imagen")){
 
+            $nombreImagen = Str::random(10) . '_' . $request->file('imagen')->getClientOriginalName(); 
+            $file =  $request->file('imagen');
+            $route = 'storage/images/testimonies/';
+            
+            $this->saveImg($file, $route, $nombreImagen);
+
+            $testimony->email =  $route.$nombreImagen; 
+        }
+        
         $testimony->update($request->all());
 
         $testimony->save();

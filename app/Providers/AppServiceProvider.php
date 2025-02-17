@@ -64,7 +64,7 @@ class AppServiceProvider extends ServiceProvider
             // Obtener los datos del footer
             $general = General::all(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
             // Pasar los datos a la vista
-
+            $categoriasf = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
             //jalar datos de un controlador 
             $politicDev = PolyticsCondition::first();
             $termsAndCondicitions = TermsAndCondition::first();
@@ -84,15 +84,15 @@ class AppServiceProvider extends ServiceProvider
                 ->where("visible", "=", true)
                 ->get();
 
-            $view->with(['services'=>$services, 'logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'general' => $general, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
+            $view->with(['categoriasf'=> $categoriasf, 'services'=>$services, 'logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'general' => $general, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
         });
 
         View::composer('components.public.header', function ($view) {
 
             $datosgenerales = General::all();
             $blog = Blog::where('status', '=', 1)->where('visible', '=', 1)->get(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
-            $categoriasMenu = Category::where('visible', '=', 1)->where('is_menu', 1)->get();
-
+            $categoriasMenu = Category::where('status', '=', 1)->where('visible', '=', 1)->where('is_menu', 1)->get();
+            $categoriasf = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
             $categorias = Category::where("status", "=", true)->where('is_menu', 1)->with(['subcategories' => function ($query) {
                 $query->whereHas('products');
             }])->get();
@@ -123,6 +123,7 @@ class AppServiceProvider extends ServiceProvider
                 'offerExists' => $offerExists,
                 'categorias' => $categorias,
                 'services' => $services,
+                'categoriasf'=> $categoriasf
             ]);
         });
 

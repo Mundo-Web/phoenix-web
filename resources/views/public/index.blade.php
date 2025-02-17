@@ -80,44 +80,260 @@
 
       @if ($slider->isEmpty())
       @else
-        <section class="w-full bg-[#052F4E] relative h-[700px] md:h-[550px]">
-            <div class="w-full h-full absolute size-full"><img class="object-cover size-full" src="{{asset('images/imagen/texturacremosof.png')}}"/></div>
-            <div class=" px-[5%] h-full flex flex-col">
-                <div class="h-[580px] md:h-[420px] mt-10 lg:mt-16">
-                <div class="swiper slider">
-                    <div class="swiper-wrapper">
-                        @foreach ($slider as $slide)
-                            <div class="swiper-slide">
-                                <div class="flex flex-col justify-center items-center w-full">
-                                    <div class="bg-[#E6E4E5] h-[580px] md:h-[420px] gap-7 sm:gap-0 flex flex-col md:flex-row rounded-xl overflow-hidden w-full">
-                                        <div class="flex flex-col h-[300px] sm:h-[350px] md:h-full justify-start md:justify-center gap-6 w-full lg:w-1/2 2xl:w-2/3 text-left pt-6 md:pt-0 px-[5%] lg:pl-[5%] lg:pr-0">
-                                            <h2 class="text-[#052F4E] font-maille text-text28 sm:text-4xl md:text-text44 leading-none line-clamp-3">
-                                                {{$slide->title ?? "Ingrese un texto para el titulo del slider"}}</h2>
-                                            <p class="text-[#052F4E] font-galano_regular line-clamp-4">
-                                                {{$slide->description ?? "Ingrese un texto para la descripcion del slider"}}</p>
-                                            <div class="flex flex-row items-start justify-start">
-                                                <a href="{{$slide->link1}}"><div class="text-white font-galano_semibold bg-[#052f4e] rounded-xl text-center w-auto py-2 px-6">{{$slide->botontext1 ?? "Comprar ahora"}}</div></a>
-                                            </div>    
-                                        </div>
-                                        <div class="flex flex-col h-[280px] sm:h-[230px] md:h-full justify-center items-center w-full lg:w-1/2 2xl:w-1/3">
-                                                <img src="{{ asset($slide->url_image . $slide->name_image) }}"
-                                                    onerror="this.onerror=null;this.src='{{ asset('images/imagen/helados.png') }}';" alt="producto"
-                                                    class="w-full h-full object-contain md:object-cover  object-right md:object-center">
+        <section class="w-full -mt-[100px]">
+            <div class="w-full">
+                    <div class="swiper slider">
+                        <div class="swiper-wrapper">
+                            @foreach ($slider as $slide)
+                                <div class="swiper-slide"> 
+                                    <div class="flex flex-col justify-center items-center w-full h-[600px] relative bg-center bg-cover" style="background-image: url({{asset($slide->url_image . $slide->name_image)}})">
+                                        <div class="flex flex-col w-full justify-center items-center ">
+                                            <div class="flex flex-col h-[300px] sm:h-[350px] md:h-full justify-center items-center gap-6 w-full text-center px-[5%] xl:px-[8%]">
+                                                @php
+                                                    $texto1 = $slide->title ?? "Ingrese un texto";
+                                                    $texto_formateado1 = preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', e($texto1));
+                                                @endphp
+                                                <h2 class="leading-none font-akira_expanded text-3xl lg:text-4xl xl:text-5xl text-white max-w-3xl xl:line-clamp-5">
+                                                    {!!$texto_formateado1!!}
+                                                </h2>  
+                                                <p class="text-white text-base font-roboto_regular max-w-xl xl:line-clamp-3">
+                                                    {{$slide->description ?? "Ingrese un texto para la descripcion del slider"}} 
+                                                </p>
+                                                <div class="flex flex-row items-start justify-center">
+                                                    <a href="{{$slide->link1}}">
+                                                        <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-3 px-6">
+                                                            {{$slide->botontext1 ?? "Let´s Go!"}} 
+                                                            
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                            </svg>
+                                                        </div>
+                                                    </a>
+                                                </div>    
+                                            </div>
+                                            <div class="absolute bottom-[5%] md:bottom-[10%] left-[5%] flex flex-row gap-4 md:gap-0 md:flex-col items-center justify-center">
+                                                <img class="object-cover w-28 object-left" src="{{asset('images/imagen/chicos.png')}}"/>
+                                                <div class="flex flex-col md:mt-2 w-40 md:text-center">
+                                                    <h2 class="leading-none font-akira_expanded text-3xl text-white ">
+                                                        200+
+                                                    </h2>
+                                                    <p class="text-white text-sm font-roboto_regular">
+                                                        Miembros activos
+                                                    </p> 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        @endforeach    
+                            @endforeach    
+                        </div>
                     </div>
-                    <div class="swiper-slider !flex justify-center py-3 mt-3"></div>
-                </div>
-                </div>  
             </div>    
-        </section>
+        </section> 
       @endif
 
+        @if (count($logos) > 0)
+            <section class="z-10 col-span-2 bg-[#FB4535]">
+                <div class="px-1 py-2 h-20 bg-azulmundoweb font-Pangea_Bold text-white text-2xl">
+                    <div x-data="{}" x-init="$nextTick(() => {
+                        let ul = $refs.logos;
+                        ul.insertAdjacentHTML('afterend', ul.outerHTML);
+                        ul.nextSibling.setAttribute('aria-hidden', 'true');
+                    })"
+                        class="px-[5%]  bg-azulmw w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
+                        <ul x-ref="logos"
+                            class="h-16 flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll">
+                            @foreach ($logos as $marquesina)
+                                <li class="w-auto py-8 flex justify-center items-center gap-3 px-3"><img class="w-28 h-14 object-contain"
+                                    src="{{asset($marquesina->url_image)}}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 15 14" fill="none">
+                                        <circle cx="7.74219" cy="7" r="7" fill="white"/>
+                                    </svg>
+                                </li>
+                            @endforeach
+                        </ul>
 
-      @if ($categorias->isEmpty())  
+                        <ul x-ref="logos"
+                            class="h-16 flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll"
+                            aria-hidden="true">
+                            @foreach ($logos as $marquesina)
+                                <li class="w-auto py-8 flex justify-center items-center gap-3 px-3"><img class="w-28 h-14 object-contain"
+                                    src="{{asset($marquesina->url_image)}}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 15 14" fill="none">
+                                        <circle cx="7.74219" cy="7" r="7" fill="white"/>
+                                    </svg>
+                                </li>
+                            @endforeach
+                            
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        @endif
+
+        <section class="py-12 px-[5%] xl:px-[8%]">
+            <div class="grid grid-cols-1 md:grid-cols-2 w-full gap-4 xl:gap-16">
+                
+                <div class="flex flex-col justify-center gap-5 sm:gap-3">
+                    <div class="flex flex-row">
+                        <span class="font-roboto_medium w-auto text-white bg-[#010101] rounded-3xl px-3 py-1">Sobre Pheonix Fitness</span>
+                    </div>
+                    <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl text-[#010101]">
+                        Mas que un gimnasio,  <span class="text-[#FB4535]">somos una comunidad</span>
+                    </h2>
+                    <div class="text-[#010101] text-base font-roboto_regular">
+                        <p>Nuestros valores inspiran cada entrenamiento y cada historia de éxito.</p>
+                    </div>
+                    <div class="flex flex-row items-start justify-start mt-2">
+                        <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
+                            Conoce más 
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+      
+                <div class="flex flex-col justify-start items-start">
+                    <img class="object-cover aspect-square max-h-[500px] w-full" src="{{ asset('images/imagen/imagenosotros.png') }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/imagenosotros.png') }}';"  />
+                </div>
+      
+            </div>
+        </section> 
+        
+        <section class="pt-12 xl:pt-16 bg-[#F2F2F2] px-[5%] xl:px-[8%]">
+            <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
+          
+                <div class="flex flex-col justify-start gap-5 lg:gap-7">
+                    <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
+                        Descubre <span class="text-[#FB4535]"> nuestras </span>disciplinas
+                    </h2>
+                </div>
+      
+                <div class="flex flex-col justify-start gap-5 lg:gap-7">
+                  <div class="text-[#010101] text-base font-roboto_regular">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
+                      Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
+                  </div>
+                </div>
+      
+            </div>   
+        </section>
+
+        @if (count($categorias)>0)
+            <section class="py-12 xl:py-16 bg-[#F2F2F2]">
+                <ul class="acordeon flex flex-row gap-5 justify-center">
+                    @foreach ($categorias as $category)
+                        <li class="rounded-3xl {{ $loop->first ? 'active' : '' }} bg-cover bg-center bg-no-repeat " style="background-image:  url('{{ asset($category->url_image . $category->name_image) }}')">
+                            
+                            <div class="divpadre flex flex-col justify-end items-start h-[530px] relative">
+                                
+                                <div class="divcontain flex flex-row gap-5 xl:gap-20 items-end p-5">
+                            
+                                    <div class="divleft flex flex-col justify-center items-start w-full">
+                                        <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-white text-left">
+                                            {{$category->name}}  
+                                        </h2>
+                                        <p class="text-white text-base font-roboto_regular text-left line-clamp-3">
+                                            {{$category->description}}  
+                                        </p>
+                                    </div>
+                
+                                    <div class="flex flex-col justify-center items-center">
+                                        <a href="{{route('catalogo', $category->id)}}"><div class="flex flex-row justify-center items-center gap-2 bg-[#FB4535] rounded-3xl py-3 w-40">
+                                            <p class="font-roboto_medium text-white text-base"> Conoce más</p>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                            </svg>
+                                        </div>
+                                        </a>
+                                    </div>
+                
+                                </div>
+                            </div>
+                        </li>
+                    @endforeach
+                </ul>
+            </section>
+        @endif        
+
+        
+            <section class="w-full px-[5%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/bannerphoenix.png') }}');">
+                <div class="grid grid-cols-1 md:grid-cols-3 w-full">
+                    <div class="md:col-span-2 flex flex-col gap-3">
+                        <div class="flex flex-row">
+                            <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">Team Pheonix Fitness</span>
+                        </div>
+                        <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white xl:line-clamp-2">
+                            Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
+                        </h2>
+                        <div class="flex flex-row items-center justify-start">
+                            <a href="{{route('contacto')}}">
+                                <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
+                                    Let´s Go!
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        
+
+        @if (count($testimonie)>0)
+            <section class="w-full px-[5%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/Servicios.png') }}');">
+                    <div class="w-full max-w-4xl mx-auto relative">
+                        <div class="swiper carrusel_testimonios h-max ">
+                            <div class="swiper-wrapper">
+                              @foreach ($testimonie as $testimony)
+                                @php
+                                    $textot = $testimony->testimonie ?? "Ingrese un texto";
+                                    $texto_formateado_t = preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', e($textot));
+                                @endphp
+                                <div class="swiper-slide">
+                                    <div class="flex flex-col gap-10">
+                                        <p class="leading-none font-akira_expanded text-2xl xl:text-3xl max-w-3xl mx-auto text-center text-[#010101]">
+                                            {!!$texto_formateado_t!!}
+                                        </p>
+                                        <div class="flex flex-row gap-3 justify-center items-center">
+                                            <img class="w-16 h-16 rounded-full object-cover" src="{{ asset($testimony->email) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/snor.png') }}';" />
+                                            <div class="flex flex-col gap-1">
+                                                <p class="leading-none font-akira_expanded text-xl text-center text-[#010101]">
+                                                    {{$testimony->name}}
+                                                </p>
+                                                <p class="font-roboto_regular text-base text-[#010101]">
+                                                    {{$testimony->ocupation}}
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="flex flex-row justify-center">
+                                            <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
+                                                Sé parte de la familia Phoenix 
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                    <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                              @endforeach  
+                            </div>
+                        </div>
+                        <div class="swiper-carrusel_testimonios-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-50 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
+                        <div class="swiper-carrusel_testimonios-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-50 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div>
+                    </div>
+            </section>
+        @endif
+        
+
+        @if ($general[0]->htop && $general[0]->ig_token)
+            <div class="h-[500px]" id="map"></div>
+        @endif
+        
+
+      {{-- @if ($categorias->isEmpty())  
       @else
         <section>
             <div class="flex flex-col gap-10 w-full px-[5%] pt-10 md:pt-20">
@@ -135,7 +351,7 @@
                         </a>
                     </div>
                 </div>
-                {{-- <div>asdasdasdas</div>     --}}
+               
                 <div class="w-full relative">  
                     <div class="swiper categorias h-max ">
                         <div class="swiper-wrapper">
@@ -145,10 +361,7 @@
                                         <a href="{{ route('catalogo', $categoria->id ) }}">   
                                             <div class="flex flex-row w-full bottom-5">
                                                 <div class="flex flex-col gap-4 justify-center items-center w-full">
-                                                    {{-- <svg class="transition-all duration-300 ease-in-out " xmlns="http://www.w3.org/2000/svg" width="65" height="65" viewBox="0 0 65 65" fill="none">
-                                                        <path class="group-hover:stroke-white" d="M20.5 32.6582L22.7051 39.8467C26.6886 52.8321 28.6803 59.3249 32.5 59.3249C36.3197 59.3249 38.3115 52.8321 42.2949 39.8467L44.5 32.6582" stroke="#052F4E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                                                        <path class="group-hover:stroke-white" d="M32.5026 23.7719C32.5026 25.3633 32.9418 26.857 33.7109 28.1491M33.7109 28.1491C31.7487 30.8736 28.4559 32.6608 24.7248 32.6608C18.7111 32.6608 13.8359 28.0179 13.8359 22.2904C13.8359 17.2682 17.5846 13.0797 22.5624 12.1245C24.2644 8.51105 28.0749 5.99414 32.5026 5.99414C38.0277 5.99414 42.5914 9.91299 43.297 14.9913M33.7109 28.1491C35.3143 30.8429 38.3522 32.6608 41.8359 32.6608C46.9906 32.6608 51.1693 28.6811 51.1693 23.7719C51.1693 19.3361 47.7575 15.6591 43.297 14.9913M43.297 14.9913C43.3594 15.4406 43.3914 15.899 43.3914 16.3645C43.3914 17.955 43.0154 19.4619 42.3437 20.809" stroke="#052F4E" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-                                                    </svg> --}}
+                                                
                                                     <img class="group-hover:stroke-white group-hover:brightness-0 group-hover:invert" src="{{ asset($categoria->url_image . $categoria->name_image) }}" 
                                                     onerror="this.onerror=null;this.src='{{ asset('images/svg/heladoicono.svg') }}';" alt="producto"
                                                     class="w-full h-full object-contain md:object-cover object-right md:object-center">
@@ -170,9 +383,9 @@
                 </div>
             </div>
         </section>
-      @endif
+      @endif --}}
     
-      @if ($productosPupulares->isEmpty())
+      {{-- @if ($productosPupulares->isEmpty())
       @else   
         <section>
             <div class="flex flex-col gap-10 w-full px-[5%] pt-10 md:pt-20">
@@ -199,10 +412,10 @@
                 </div>
             </div>
         </section>
-      @endif
+      @endif --}}
 
 
-    <section>
+    {{-- <section>
         <div class="flex flex-col gap-10 w-full px-[5%] pt-10 pb-10 lg:pb-0 bg-[#052F4E] mt-10 lg:mt-20">
             <h2 class="text-white font-maille text-text36 sm:text-4xl md:text-text44 leading-none text-center">
                 {{$textoshome->title3section ?? "Ingrese un texto"}}
@@ -255,9 +468,9 @@
                 
             </div>
         </div>
-    </section>
+    </section> --}}
 
-    @if ($blogs->isEmpty())
+    {{-- @if ($blogs->isEmpty())
     @else
         <section>
             <div class="flex flex-col gap-10 lg:gap-14 w-full px-[5%] pt-10 md:pt-20">
@@ -283,10 +496,10 @@
                 </div>
             </div>
         </section>
-    @endif
+    @endif --}}
    
 
-    <section>
+    {{-- <section>
         <div class="flex flex-col gap-10 lg:gap-14 w-full px-0 md:pl-[5%]  bg-[#EBEDEF] mt-10 md:mt-20">
 
             <div class="w-full grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -313,10 +526,10 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
 
   
-    <section>
+    {{-- <section>
         <div class="flex flex-col gap-10 w-full px-[5%] py-10 md:py-20 bg-white">
             
             <div class="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-0">
@@ -365,10 +578,10 @@
             </div>
 
         </div>
-    </section>
+    </section> --}}
     
     
-    @if ($testimonie->isEmpty())
+    {{-- @if ($testimonie->isEmpty())
     @else
         <section>
             <div class="flex flex-col gap-5 md:gap-10 w-full px-[5%] py-10 md:py-20 bg-[#EBEDEF]">
@@ -413,177 +626,7 @@
                 </div>
             </div>
         </section>
-    @endif
-    {{-- @if (count($logosdestacados) > 0) 
-        <section class="w-full grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-7 md:gap-8 relative mx-auto pt-12 lg:pt-16">
-           @foreach ($logosdestacados as $logosd)
-             <a href="/catalogo?marcas={{$logosd->id}}">
-                <div class="flex flex-col justify-end bg-white h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-contain" 
-                 style=" background-image: url('{{ asset($logosd->url_image2) }}')"
-                 >
-                    <div class="flex flex-col justify-end items-center w-full pb-[7%]">
-                        
-                        <img src="{{ asset($logosd->url_image) }}" class="h-16 object-contain"/>
-                    </div>
-                </div>
-              </a>
-           @endforeach 
-        </section>
-    @endif     --}}
-        
-
-    {{-- @if (count($logos) > 0)    
-        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">TAMBIÉN PUEDES ENCONTRAR</h2>
-        </section>
-    
-         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-            <div class="swiper otrasmarcas h-max">
-                <div class="swiper-wrapper">
-                  @foreach ($logos as $logosn)  
-                    <div class="swiper-slide">
-                      <a href="/catalogo?marcas={{$logosn->id}}">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] flex flex-row  items-center p-2 ">
-                            <img class="w-full h-full object-contain" src="{{ asset($logosn->url_image2) }}" />
-                        </div>
-                      </a>
-                    </div>
-                  @endforeach   
-                </div>
-                <div class="flex flex-row justify-center items-center relative mt-10">
-                    <div class="swiper-pagination-otrasmarcas absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
-                </div>
-            </div>
-        </section>
     @endif --}}
-
-
-
-    {{-- @if (count($logos) > 0)    
-        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">TAMBIÉN PUEDES ENCONTRAR</h2>
-        </section>
-    
-         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-            <div class="swiper otrasmarcas h-max">
-                <div class="swiper-wrapper">
-                  @foreach ($logos as $logosn)  
-                    <div class="swiper-slide">
-                      <a href="/catalogo?marcas={{$logosn->id}}">
-                        <div class="bg-no-repeat object-top bg-center bg-cover h-[350px] md:h-[350px] xl:h-[350px]  flex flex-row  items-center p-5 "
-                            style=" background-image: url('{{ asset($logosn->url_image2) }}')">
-                            <div class="flex flex-col justify-center  h-[300px] lg:h-[350px] w-full bg-no-repeat object-top bg-center bg-cover">
-                                <div class="flex flex-col justify-end items-center w-full">
-                                    <img src="{{ asset($logosn->url_image) }}" class="h-16 object-contain"/>
-                                </div>
-                            </div>
-                        </div>
-                      </a>
-                    </div>
-                  @endforeach   
-                </div>
-                <div class="flex flex-row justify-center items-center relative mt-10">
-                    <div class="swiper-pagination-cat absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
-                </div>
-            </div>
-        </section>
-    @endif --}}
-
-
-    {{-- @if (count($destacados) > 0)  
-        <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-              <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">COMPLEMENTA TU ESTILO</h2>
-        </section>
-            
-         <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-            <div class="swiper complementos h-max">
-                <div class="swiper-wrapper">
-                  @foreach ($destacados as $productosd)       
-                    <div class="swiper-slide">
-                        <a href="{{route('producto', $productosd->id)}}">
-                            <div class="flex flex-row justify-center items-center aspect-square">
-                                <div class="max-w-[350px] rounded-full  flex flex-col items-center p-5 ">
-                                    <img class="w-full h-full object-contain rounded-full" src="{{ asset($productosd->imagen) }}" />
-                                </div>
-                            </div>
-                        </a>
-                        <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                          <p class="font-Urbanist_Semibold text-base text-black line-clamp-1">{{ optional($productosd->category)->name }}</p>
-                          <a href="{{route('producto', $productosd->id)}}">  
-                            <h2 class="font-Urbanist_Semibold text-base text-[#8f8f8f] line-clamp-1">{{$productosd->producto}}</h2>
-                          </a>  
-                          @if($productosd->descuento > 0)
-                            <p class="font-Urbanist_Semibold text-lg text-black">S/ {{$productosd->descuento}} <span class="text-sm line-through text-[#8f8f8f]"> S/ {{$productosd->precio}}</span></p>
-                          @else
-                            <p class="font-Urbanist_Semibold text-lg text-black">S/ {{$productosd->precio}}</p>
-                          @endif
-                        </div>
-                    </div>
-                  @endforeach    
-            </div>
-            <div class="flex flex-row justify-center items-center relative mt-10">
-                <div class="swiper-pagination-complementos absolute top-full bottom-0 z-10 right-full !left-1/2 "></div>
-            </div>
-        </section>
-    @endif --}}
-
-
-
-    {{-- <section class="w-full px-[5%] relative mx-auto pt-12 lg:pt-16">
-        <h2 class="text-center font-Urbanist_Black text-2xl lg:text-3xl text-black">FOLLOW US <span class="font-Urbanist_Regular"> ON </span> 
-        <span class="font-Urbanist_Regular italic"> @americanbrandspe </span></h2>
-    </section> --}}
-
-    {{-- <section class="w-full relative mx-auto pt-12 lg:pt-16">
-            <div class="swiper instagram h-max">
-                <div class="swiper-wrapper">
-                    @php
-                        
-                        $filteredMedia = array_filter($media, function ($item) {
-                            return $item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM';
-                        });
-                    @endphp
-                    @foreach (array_slice($filteredMedia, 0, 12) as $item)
-                        <div class="swiper-slide">
-                            <div class="relative group aspect-square h-full">
-                                <img src="{{ $item['media_url'] }}" alt="Image" class="object-cover h-full w-full">
-                                <a href="{{ $item['permalink'] }}" target="_blank"
-                                    class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
-                                </a>
-                            </div>
-                        </div>
-                    @endforeach    
-                    @foreach (array_slice($media, 0, 12) as $item)
-                        <div class="swiper-slide">
-                            <div class="relative group aspect-square h-full">
-                                @if ($item['media_type'] === 'IMAGE' || $item['media_type'] === 'CAROUSEL_ALBUM')
-                                    <img src="{{ $item['media_url'] }}" alt="Image" class="object-cover h-full w-full">
-                                    <a href="{{ $item['permalink'] }}" target="_blank"
-                                        class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
-                                    </a>
-                                    <img
-                                        class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                        src="{{ asset('img_donas/instagram.svg') }}">
-                                @elseif ($item['media_type'] === 'VIDEO')
-                                    <div class="h-full overflow-hidden">
-                                        <video class="min-h-full min-w-full">
-                                            <source src="{{ $item['media_url'] }}" type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
-                                        <a href="{{ $item['permalink'] }}" target="_blank"
-                                            class="opacity-0 hover:cursor-pointer group-hover:opacity-60 duration-300 absolute inset-0 flex justify-center items-center bg-black bg-opacity-70">
-                                        </a>
-                                        <img
-                                            class="opacity-0 group-hover:opacity-100 duration-300 absolute inset-x-0 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-                                            src="{{ asset('img_donas/instagram.svg') }}">
-                                    </div>
-                                @endif
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-    </section> --}}
 
     </main>
 
@@ -608,6 +651,134 @@
 
 
 @section('scripts_importados')
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries" >
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var latitude = {{ $general[0]->htop }};
+            var longitude = {{ $general[0]->ig_token }};
+
+            var location = [
+                ['center', latitude, longitude],
+            ];
+
+            var mylatlng= {
+                lat:location[0][1],
+                lng: location[0][2]
+            };
+
+            var darkModeStyle = [
+            { elementType: "geometry", stylers: [{ color: "#212121" }] },
+            { elementType: "labels.icon", stylers: [{ visibility: "off" }] },
+            { elementType: "labels.text.fill", stylers: [{ color: "#757575" }] },
+            { elementType: "labels.text.stroke", stylers: [{ color: "#212121" }] },
+            {
+                featureType: "administrative",
+                elementType: "geometry",
+                stylers: [{ color: "#757575" }]
+            },
+            {
+                featureType: "administrative.country",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#9e9e9e" }]
+            },
+            {
+                featureType: "administrative.land_parcel",
+                stylers: [{ visibility: "off" }]
+            },
+            {
+                featureType: "administrative.locality",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#bdbdbd" }]
+            },
+            {
+                featureType: "poi",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#757575" }]
+            },
+            {
+                featureType: "poi.park",
+                elementType: "geometry",
+                stylers: [{ color: "#181818" }]
+            },
+            {
+                featureType: "poi.park",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#616161" }]
+            },
+            {
+                featureType: "poi.park",
+                elementType: "labels.text.stroke",
+                stylers: [{ color: "#1b1b1b" }]
+            },
+            {
+                featureType: "road",
+                elementType: "geometry.fill",
+                stylers: [{ color: "#2c2c2c" }]
+            },
+            {
+                featureType: "road",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#8a8a8a" }]
+            },
+            {
+                featureType: "road.arterial",
+                elementType: "geometry",
+                stylers: [{ color: "#373737" }]
+            },
+            {
+                featureType: "road.highway",
+                elementType: "geometry",
+                stylers: [{ color: "#3c3c3c" }]
+            },
+            {
+                featureType: "road.highway.controlled_access",
+                elementType: "geometry",
+                stylers: [{ color: "#4e4e4e" }]
+            },
+            {
+                featureType: "road.local",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#616161" }]
+            },
+            {
+                featureType: "transit",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#757575" }]
+            },
+            {
+                featureType: "water",
+                elementType: "geometry",
+                stylers: [{ color: "#000000" }]
+            },
+            {
+                featureType: "water",
+                elementType: "labels.text.fill",
+                stylers: [{ color: "#3d3d3d" }]
+            }
+            ];
+            
+
+            var map= new google.maps.Map(document.getElementById("map"),{
+                zoom:15,
+                center: mylatlng,
+                styles: darkModeStyle
+            });
+            for(var i=0; i< location.length; i++){
+                new google.maps.Marker({
+                    position: new google.maps.LatLng(location[i][1],location[i][2]),
+                    map: map,
+                    icon: {
+                        url: "images/imagen/marcador.png", 
+                        scaledSize: new google.maps.Size(60, 60), 
+                        anchor: new google.maps.Point(20, 40) 
+                    }
+    
+                });
+            }
+        });   
+    </script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const popup = document.getElementById('welcome-popup');
@@ -620,6 +791,17 @@
                     popup.classList.add('hidden'); // Ocultar el popup
                 });
             }
+        });
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const items = document.querySelectorAll("ul.acordeon li");
+
+            items.forEach(item => {
+                item.addEventListener("mouseover", function() {
+                    items.forEach(el => el.classList.remove("active"));
+                    this.classList.add("active");
+                });
+            });
         });
     </script>  
 
@@ -667,7 +849,7 @@
     <script>
 
          var swiper = new Swiper(".slider", {
-            slidesPerView: 1.2,
+            slidesPerView: 1,
             spaceBetween: 10,
             centeredSlides: false,
             initialSlide: 1,
@@ -681,14 +863,6 @@
                 0: {
                     slidesPerView: 1,
                 },
-                600: {
-                    slidesPerView: 1.2,
-                    spaceBetween: 50,
-                },
-                1500: {
-                    slidesPerView: 1.2,
-                    spaceBetween: 100,
-                }
             },
             pagination: {
                 el: ".swiper-slider",
@@ -734,31 +908,22 @@
         });
 
 
-        var swiper = new Swiper(".testimonios", {
-            slidesPerView: 2,
+        var swiper = new Swiper(".carrusel_testimonios", {
+            slidesPerView: 1,
             spaceBetween: 25,
             loop: true,
             grabCursor: true,
             centeredSlides: false,
             initialSlide: 0,
             navigation: {
-                nextEl: ".swiper-button-next",
-                prevEl: ".swiper-button-prev",
+                nextEl: ".swiper-carrusel_testimonios-next",
+                prevEl: ".swiper-carrusel_testimonios-prev",
             },
-            pagination: {
-                el: ".swiper-testimonios",
-                clickable: true
-            },
-
             breakpoints: {
                 0: {
                     slidesPerView: 1,
                     spaceBetween: 25,
                 },
-                768: {
-                    slidesPerView: 2,
-                    spaceBetween: 25,
-                }
             },
         });
 

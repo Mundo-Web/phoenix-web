@@ -341,26 +341,155 @@
                             </div>
                           </div>
 
-                          <div class="md:col-span-5">
+
+                          <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
+                            Nros de cuenta - Yape/Plin</h2>
+
+                            <div class="md:col-span-5">
+                              <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-0">
+                                <div>
+                                  <label for="bcp">Nro. de cuenta BCP</label>
+                                  <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                        </path>
+                                      </svg>
+                                    </div>
+                                    <input type="text" id="bcp" name="bcp"
+                                      value="{{ $general->bcp }}"
+                                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      placeholder="Nro. de cuenta BCP">
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label for="scotiabank">Nro. de cuenta Scotiabank</label>
+                                  <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                        </path>
+                                      </svg>
+                                    </div>
+                                    <input type="text" id="scotiabank" name="scotiabank"
+                                      value="{{ $general->scotiabank }}"
+                                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      placeholder="Nro. de cuenta Scotiabank">
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label for="bbva">Nro. de cuenta BBVA</label>
+                                  <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                        </path>
+                                      </svg>
+                                    </div>
+                                    <input type="text" id="bbva" name="bbva"
+                                      value="{{ $general->bbva }}"
+                                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      placeholder="Nro. de cuenta BBVA">
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label for="interbank">Nro. de cuenta Interbank</label>
+                                  <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                        </path>
+                                      </svg>
+                                    </div>
+                                    <input type="text" id="interbank" name="interbank"
+                                      value="{{ $general->interbank }}"
+                                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      placeholder="Nro. de cuenta Interbank">
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label for="nroyape">Yape - Plin</label>
+                                  <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                        </path>
+                                      </svg>
+                                    </div>
+                                    <input type="text" id="nroyape" name="nroyape"
+                                      value="{{ $general->nroyape }}"
+                                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      placeholder="Nro. de Yape - Plin">
+                                  </div>
+                                </div>
+
+                                <div>
+                                  <label for="nombreyape">Nombre Yape</label>
+                                  <div class="relative">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                      <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                        </path>
+                                        <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                        </path>
+                                      </svg>
+                                    </div>
+                                    <input type="text" id="nombreyape" name="nombreyape"
+                                      value="{{ $general->nombreyape }}"
+                                      class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                      placeholder="Nombre Yape">
+                                  </div>
+                                </div>
+
+
+                              </div>
+                            </div>
+
+
+                          <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
+                              Mailing</h2>
+
+
+                          {{-- <div class="md:col-span-5">
                             <label for="imagenmailing">Modificar imagen de mailing</label>
                             <div class="relative mb-2">
                               <input type="file" id="imagenmailing" name="imagenmailing" 
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 >
                             </div>
-                          </div>
+                          </div> --}}
                           
-                          <div class="md:col-span-5">
+                          {{-- <div class="md:col-span-5">
                             <label for="imgactual">Imagen actual (600x710 px - Formato PNG)</label>
                             <div class="mt-1 w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               <img class="w-80" src="{{asset('mail/fondocontacto.png')}}" />
                             </div>
-                          </div>
+                          </div> --}}
 
-                          {{-- <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
-                            Descripción de la empresa</h2> --}}
+                          <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
+                            Descripción de la empresa</h2>
 
-                          {{-- <div class="md:col-span-5">
+                          <div class="md:col-span-5">
                             <label for="aboutus">Acerca de nosotros</label>
                             <div class="relative mb-2">
                               <div class="absolute top-3 left-0 flex items-center pl-3 pointer-events-none">
@@ -376,10 +505,13 @@
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Nosotros...">{{ $general->aboutus }}</textarea>
                             </div>
-                          </div> --}}
+                          </div>
 
-                          {{-- <div class="md:col-span-5">
-                            <label for="htop">Descripción de encabezado</label>
+                          <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
+                            Ubicacion en Google Maps</h2>
+
+                          <div class="md:col-span-2">
+                            <label for="htop">Latitud</label>
                             <div class="relative mb-2">
                               <div class="absolute top-3 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -392,13 +524,13 @@
                               </div>
                               <input type="text" id="htop" name="htop" value="{{ $general->htop }}"
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Headertop...">
+                                placeholder="Ingrese latitud obtenida de google maps">
                             </div>
-                          </div> --}}
+                          </div>
 
 
-                          {{-- <div class="md:col-span-5">
-                            <label for="ig_token">Token Instagram </label>
+                          <div class="md:col-span-2">
+                            <label for="ig_token">Longitud</label>
                             <div class="relative mb-2 ">
                               <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                 <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
@@ -411,9 +543,9 @@
                               </div>
                               <input type="text" id="ig_token" name="ig_token" value="{{ $general->ig_token }}"
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Token Instagram">
+                                placeholder="Ingrese longitud obtenida de google maps">
                             </div>
-                          </div> --}}
+                          </div>
 
                           
                           <!-- <div class="md:col-span-2">

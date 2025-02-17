@@ -63,7 +63,7 @@
         {{-- <x-menu.item id="subcategories" href="{{ route('subcategories.index') }}" icon="fas fa-folder-open">Subcategorias</x-menu.item> --}}
         {{-- <x-menu.item id="tags" href="{{ route('tags.index') }}" icon="fas fa-tag">Etiquetas</x-menu.item> --}}
         <x-menu.item id="products" href="{{ route('products.index') }}" icon="fas fa-box">Productos</x-menu.item>
-        {{-- <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Marcas</x-menu.item> --}}
+        <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Marcas</x-menu.item>
         
         
         {{-- <x-menu.item id="offers" href="{{ route('Admin/Offers.jsx') }}" icon="fas fa-boxes">Combos</x-menu.item> --}}

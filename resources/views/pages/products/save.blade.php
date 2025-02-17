@@ -15,9 +15,9 @@
 
           <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">
             @if (!$product->id)
-              Nuevo producto
+              Nuevo plan
             @else
-              Actualizar producto - {{ $product->producto }}
+              Actualizar plan - {{ $product->producto }}
             @endif
           </h2>
         </header>
@@ -30,9 +30,9 @@
 
                 <div id='general' class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
 
-                  <div class="md:col-span-3">
+                  <div class="md:col-span-5">
 
-                    <label for="producto">Producto <span class="text-red-500 font-bold">*</span></label>
+                    <label for="producto">Tipo de plan <span class="text-red-500 font-bold">*</span></label>
 
                     <div class="relative mb-2  mt-2">
                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -45,7 +45,7 @@
 
                     </div>
                   </div>
-                  <div class="col-span-5 md:col-span-2">
+                  {{-- <div class="col-span-5 md:col-span-2">
 
                     <label for="color">Sabor <span class="text-red-500 font-bold">*</span></label>
 
@@ -59,10 +59,10 @@
 
 
                     </div>
-                  </div>
+                  </div> --}}
 
                   <div class="col-span-5 md:col-span-5 mt-2">
-                    <label for="extract">Extracto</label>
+                    <label for="extract">Nombre de Plan</label>
 
                     <div class="relative mb-2  mt-2">
                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -82,13 +82,13 @@
                   </div>
 
                   <div class="col-span-5 md:col-span-5">
-                    <label for="peso">Peso</label>
+                    <label for="peso">Caracteristicas</label>
                     <div class="relative mb-2 mt-2">
                       <x-form.quill id="peso" :value="$product->peso" />
                     </div>
                   </div>
                 
-                  <div class="col-span-5 md:col-span-5">
+                  {{-- <div class="col-span-5 md:col-span-5">
                     <label for="medidas">Medidas</label>
                     <div class="relative mb-2 mt-2">
                       <x-form.quill id="medidas" :value="$product->medidas" />
@@ -100,18 +100,18 @@
                     <div class="relative mb-2 mt-2">
                       <x-form.quill id="usos" :value="$product->usos" />
                     </div>
-                  </div>
+                  </div> --}}
 
-                  <hr class="col-span-5">
+                  {{-- <hr class="col-span-5"> --}}
 
-                  <div class="col-span-5 md:col-span-5 mb-2">
+                  {{-- <div class="col-span-5 md:col-span-5 mb-2">
                     <label for=""
                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Previsualizacion del
                       producto</label>
                     <div class="flex flex-wrap items-end gap-4">
                       <div for="imagen_ambiente" x-data="{ showAmbiente: false }" 
-                        {{-- @mouseenter="showAmbiente = true"
-                        @mouseleave="showAmbiente = false" --}}
+                        @mouseenter="showAmbiente = true"
+                        @mouseleave="showAmbiente = false"
                         class="relative flex justify-center items-center h-[256px] w-[192px] border rounded-lg">
                         @if ($product->imagen)
                           <img id="imagen_previewer" x-show="!showAmbiente"
@@ -132,7 +132,7 @@
                             onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"
                             class="bg-[#f2f2f2] w-full h-full object-contain absolute inset-0 rounded-lg" />
                         @endif
-                        {{-- @if ($product->imagen_ambiente)
+                        @if ($product->imagen_ambiente)
                           <img id="imagen_ambiente_previewer" x-show="showAmbiente"
                             x-transition:enter="transition ease-out duration-300 transform"
                             x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
@@ -149,10 +149,10 @@
                             x-transition:leave-start="opacity-100 scale-100"
                             x-transition:leave-end="opacity-0 scale-95" src="{{ asset('images/imagen/noimagen.jpg') }}"
                             alt="imagen_alternativa" class="w-full h-full object-cover absolute inset-0 rounded-lg" />
-                        @endif --}}
+                        @endif
                       </div>
                       <div>
-                        {{-- <div class="mb-4">
+                        <div class="mb-4">
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             for="image_texture">Imagen de textura <span
                               class="text-red-500 font-bold">*</span></label>
@@ -164,7 +164,7 @@
                           </label>
                           <input data-id="input_img" class="hidden" id="image_texture" name="image_texture"
                             type="file" accept="image/*">
-                        </div> --}}
+                        </div>
 
                         <div class="mb-4">
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -174,21 +174,21 @@
                             id="imagen" name="imagen" type="file" accept="image/*"
                             title="Cargar imagen de producto" tippy>
                         </div>
-                        {{-- <div>
+                        <div>
                           <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                             for="imagen_ambiente">Imagen Secundaria</label>
                           <input data-id="input_img"
                             class="py-1 px-2 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                             id="imagen_ambiente" name="imagen_ambiente" type="file" accept="image/*"
                             title="Cargar imagen de ambiente" tippy>
-                        </div> --}}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </div> --}}
 
-                  <hr class="col-span-5">
+                  {{-- <hr class="col-span-5"> --}}
 
-                  <div class="col-span-5">
+                  {{-- <div class="col-span-5">
                     <label for="imagenes mb-2">Otras imagenes del producto</label>
                     <div id="imagenes" class="w-full flex flex-wrap gap-1">
 
@@ -223,7 +223,7 @@
                           src="{{ asset('images/imagen/image-plus.jpg') }}" alt="">
                       </label>
                     </div>
-                  </div>
+                  </div> --}}
 
                   
                 </div>
@@ -264,7 +264,8 @@
                     </div>
 
                   </div>
-                  <div class="w-full">
+
+                  {{-- <div class="w-full">
                     <label for="descuento">Precio con descuento</label>
                     <div class="relative mb-2  mt-2">
                       <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -275,8 +276,7 @@
                         class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                         placeholder="descuento">
                     </div>
-
-                  </div>
+                  </div> --}}
 
 
                 </div>
@@ -306,7 +306,7 @@
                   </div>
                 </div> --}}
 
-                <div class="md:col-span-5">
+                {{-- <div class="md:col-span-5">
                   <label for="sku">Sku</label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -318,9 +318,9 @@
                       class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                       placeholder="Sku">
                   </div>
-                </div>
+                </div> --}}
 
-                <div class="md:col-span-5">
+                {{-- <div class="md:col-span-5">
                   <label for="discount_id">Regla de descuento</span></label>
                   <div class="relative mb-2  mt-2">
                     <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
@@ -335,7 +335,7 @@
                       @endforeach
                     </select>
                   </div>
-                </div>
+                </div> --}}
 
                 {{-- <div class="md:col-span-5">
                   <label for="marca_id">Marca</span></label>
@@ -390,11 +390,11 @@
                   </div>
                 </div> --}}
 
-                <div class="md:col-span-5">
-                  {{-- <label class="block mb-1" for="imagen">Imagen del producto</label>
+                {{-- <div class="md:col-span-5">
+                  <label class="block mb-1" for="imagen">Imagen del producto</label>
                   <input id="imagen" name="imagen"
                     class="mb-2 p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
-                    aria-describedby="user_avatar_help" id="user_avatar" type="file"> --}}
+                    aria-describedby="user_avatar_help" id="user_avatar" type="file">
                   <label class="block mb-1" for="imagen_ambiente">Imagen de Medidas</label>
                   @if($product->imagen_ambiente)
                     <span><a class="font-bold"
@@ -421,7 +421,8 @@
                   <input id="imagen_ambiente" name="imagen_ambiente"
                     class="mt-2 mb-2 p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
                     aria-describedby="user_avatar_help" id="user_avatar" type="file">
-                </div>
+                </div> --}}
+
                 {{-- <div class="md:col-span-5 mt-2">
                   <div class=" flex items-end justify-between gap-2 ">
                     <label for="specifications">Especificaciones </label>
@@ -706,21 +707,6 @@
     $('document').ready(function() {
       let valorInput = $('[id="specifications"]').length / 2
 
-      // tinymce.init({
-      //   selector: 'textarea#description',
-      //   height: 300,
-      //   plugins: [
-      //     'advlist', 'autolink', 'lists', 'link', 'charmap', 'preview',
-      //     'searchreplace', 'visualblocks', 'code', 'fullscreen',
-      //     'insertdatetime', 'table'
-      //   ],
-      //   toolbar: 'undo redo | blocks | ' +
-      //     'bold italic backcolor | alignleft aligncenter ' +
-      //     'alignright alignjustify | bullist numlist outdent indent | ' +
-      //     'removeformat | help',
-      //   content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px;}'
-      // });
-
       $("#AddEspecifiacion").on('click', function(e) {
         e.preventDefault()
         valorInput++
@@ -773,23 +759,9 @@
           .nextSibling); // Insertar el input antes del siguiente elemento después del botón
       })
 
-
-      // Note that the name "myFormDropzone" is the camelized
-      // id of the form.
-      /* Dropzone.options.myFormDropzone = {
-              // Configuration options go here
-            };
-       */
-
-
-      // Dropzone.options.myFormDropzone = {
-      //   autoProcessQueue: false,
-      //   uploadMultiple: true,
-      //   maxFilezise: 10,
-      //   maxFiles: 4,
-      // }
     })
   </script>
+  
   <script>
     const pickr = Pickr.create({
       el: '#colorPicker', // Selector CSS del input
@@ -815,6 +787,7 @@
 
     })
   </script>
+  
   <script>
     function toggleMenu() {
       console.log('cambiando toggle')

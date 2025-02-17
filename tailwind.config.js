@@ -49,6 +49,13 @@ export default {
                 galano_regular: ["galano_regular"],
                 galano_light: ["galano_light"],
                 maille: ["maille"],
+                
+                akira_expanded: ["akira_expanded"],
+                roboto_bold: ["roboto_bold"],
+                roboto_light: ["roboto_light"],
+                roboto_medium: ["roboto_medium"],
+                roboto_regular: ["roboto_regular"],
+                roboto_bold: ["roboto_bold"],
             },
             aspectRatio: {
                 '4/3': '4 / 2',
@@ -161,6 +168,16 @@ export default {
             },
             zIndex: {
                 60: '60',
+            },
+            animation: {
+                spin_slow: 'spin 8s linear infinite',
+                'infinite-scroll': 'infinite-scroll 25s linear infinite',
+            },
+            keyframes: {
+                'infinite-scroll': {
+                  from: { transform: 'translateX(0)' },
+                  to: { transform: 'translateX(-100%)' },
+                }
             },
         },
     },

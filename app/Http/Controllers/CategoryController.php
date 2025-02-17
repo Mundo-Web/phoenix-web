@@ -5,13 +5,15 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\StoreCategoryRequest;
 use App\Http\Requests\UpdateCategoryRequest;
+use App\Models\Benefit;
+use App\Models\GaleryCategory;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 use Illuminate\Support\Str;
-
+use Illuminate\Support\Arr;
 
 
 class CategoryController extends Controller
@@ -32,9 +34,11 @@ class CategoryController extends Controller
      * Show the form for creating a new resource.
      */
     public function create()
-    {
+    {   
+        $especificacion = [json_decode('{"tittle":"", "specifications":""}', false)];
         $category = new Category();
-        return view('pages.categories.save', compact('category'));
+        $galery = [];
+        return view('pages.categories.save', compact('category','especificacion','galery'));
     }
 
     /**
@@ -43,8 +47,9 @@ class CategoryController extends Controller
     public function edit(Category $category, $id)
     {
         $category = Category::findOrfail($id);
-
-        return view('pages.categories.save', compact('category'));
+        $especificacion = Benefit::where("category_id", "=", $id)->get();
+        $galery = GaleryCategory::where("category_id", "=", $id)->get();
+        return view('pages.categories.save', compact('category','especificacion','galery'));
     }
 
     /**
@@ -54,6 +59,7 @@ class CategoryController extends Controller
     {   
       
         $body = $request->all();
+        $especificaciones = [];
 
         if ($request->hasFile("imagen")) {
 
@@ -108,17 +114,50 @@ class CategoryController extends Controller
 
         $slug = strtolower(str_replace(' ', '-', $request->name));
 
+        foreach ($body as $key => $value) {
+            if (strstr($key, '-')) {
+              //strpos primera ocurrencia que enuentre
+              if (strpos($key, 'tittle-') === 0 || strpos($key, 'title-') === 0) {
+                $num = substr($key, strrpos($key, '-') + 1); // Obtener el número de la especificación
+                $especificaciones[$num]['tittle'] = $value; // Agregar el título al array asociativo
+              } elseif (strpos($key, 'specifications-') === 0) {
+                $num = substr($key, strrpos($key, '-') + 1); // Obtener el número de la especificación
+                $especificaciones[$num]['specifications'] = $value; // Agregar las especificaciones al array asociativo
+              }
+            }
+        }
+
         if (Category::where('slug', $slug)->exists()) {
             // Si el slug existe, agregar un número aleatorio al final
             $slug .= '-' . rand(1, 1000); // Puedes ajustar el rango según tu necesidad
         }
 
+        $cleanedData = Arr::where($body, function ($value, $key) {
+            return !is_null($value);
+        });
+
         $jpa = Category::find($request->id);
         if (!$jpa) {
             $body['status'] = true;
-            Category::create($body);
+            $jpa = Category::create($cleanedData);
         } else {
-            $jpa->update($body);
+            $jpa->update($cleanedData);
+        }
+
+        $this->GuardarEspecificaciones($jpa->id, $especificaciones);
+
+        GaleryCategory::where('category_id', $jpa->id)->delete();
+        if ($request->galery) {
+            foreach ($request->galery as $value) {
+            [$id, $name] = explode('|', $value);
+            GaleryCategory::updateOrCreate([
+                'category_id' => $id,
+                'id' => $id
+            ], [
+                'imagen' => $name,
+                'category_id' => $jpa->id
+            ]);
+            }
         }
 
         return redirect()->route('categorias.index')->with('success', 'Categoria creada');
@@ -127,6 +166,16 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
+    private function GuardarEspecificaciones($id, $especificaciones)
+    {
+        Benefit::where('category_id', $id)->delete();
+        foreach ($especificaciones as $value) {
+        if (!$value['tittle'] || !$value['specifications']) continue;
+        $value['category_id'] = $id;
+        Benefit::create($value);
+        }
+    }
+
     public function show(Category $category)
     {
         //
