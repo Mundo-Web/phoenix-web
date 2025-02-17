@@ -36,7 +36,7 @@
     </section> --}}
 
 
-    <section class="pt-12 xl:pt-16 px-[5%] xl:px-[8%]">
+    <section class="py-12 xl:py-16 px-[5%] xl:px-[8%]" style="background-image: url({{asset('images/imagen/texturanosotros.jpg')}})">
       <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
           
           <div class="flex flex-col justify-center gap-5 lg:gap-7">

@@ -425,61 +425,66 @@
     },
     columns: [{
         dataField: 'producto',
-        caption: 'PRODUCTO',
+        caption: 'TIPO DE PLAN',
         width: '40%',
         cellTemplate: (container, {
           data
         }) => {
           container.html(
-            `<b class="block text-[12px]">${data.producto}</b><span class="block text-[10px]">${data.color}</span><small class="text-[10px] text-[#c1272d]">${data.discount?.name ?? ''}</small>`
+            `<b class="block text-[12px]">${data.producto}</b>`
             )
         }
+        // <span class="block text-[10px]">${data.color}</span><small class="text-[10px] text-[#c1272d]">${data.discount?.name ?? ''}</small>
+      },
+      {
+        dataField: 'extract',
+        caption: 'NOMBRE DE PLAN'
       },
       {
         dataField: 'precio',
         caption: 'PRECIO'
       },
-      {
-        dataField: 'descuento',
-        caption: 'DESCUENTO'
-      },
-      {
-        dataField: 'stock',
-        caption: 'STOCK'
-      },
-      {
-        caption: 'IMAGEN',
-        cellTemplate: (container, {
-          data
-        }) => {
-          container.addClass('!px-3 !py-2 !text-center')
-          container.css('vertical-align', 'middle')
-          container.html(
-            `<img class="bg-[#f2f2f2] w-16 h-10 object-cover object-center rounded-sm" src="/${data.imagen}" alt=""></td>`
-          )
-        }
-      },
-      {
-        dataField: 'destacar',
-        caption: 'DESTACAR',
-        cellTemplate: (container, {
-          data
-        }) => {
-          container.html(`<form method="POST" action="">
-            @csrf
-            <input type="checkbox" id="hs-basic-usage"
-              class="check_v btn_swithc relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent 
-                    rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none 
-                    checked:bg-none checked:text-blue-600 checked:border-blue-600 focus:checked:border-blue-600 dark:bg-gray-800 dark:border-gray-700 
-                    dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-600 before:inline-block before:size-6
-                    before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
-                    before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
-              id='d_${data.id}' data-field='destacar' data-idService='${data.id}'
-              data-titleService='${data.producto}' ${data.destacar ? 'checked': ''}>
-            <label for="d_${data.id}"></label>
-          </form>`)
-        }
-      },
+      // {
+      //   dataField: 'descuento',
+      //   caption: 'DESCUENTO'
+      // },
+      // {
+      //   dataField: 'stock',
+      //   caption: 'STOCK'
+      // },
+      // {
+      //   caption: 'IMAGEN',
+      //   cellTemplate: (container, {
+      //     data
+      //   }) => {
+      //     container.addClass('!px-3 !py-2 !text-center')
+      //     container.css('vertical-align', 'middle')
+      //     container.html(
+      //       `<img class="bg-[#f2f2f2] w-16 h-10 object-cover object-center rounded-sm" src="/${data.imagen}" alt=""></td>`
+      //     )
+      //   }
+      // },
+      // {
+      //   dataField: 'destacar',
+      //   caption: 'DESTACAR',
+      //   cellTemplate: (container, {
+      //     data
+      //   }) => {
+      //     container.html(`<form method="POST" action="">
+      //       @csrf
+      //       <input type="checkbox" id="hs-basic-usage"
+      //         class="check_v btn_swithc relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent 
+      //               rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none 
+      //               checked:bg-none checked:text-blue-600 checked:border-blue-600 focus:checked:border-blue-600 dark:bg-gray-800 dark:border-gray-700 
+      //               dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-600 before:inline-block before:size-6
+      //               before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
+      //               before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
+      //         id='d_${data.id}' data-field='destacar' data-idService='${data.id}'
+      //         data-titleService='${data.producto}' ${data.destacar ? 'checked': ''}>
+      //       <label for="d_${data.id}"></label>
+      //     </form>`)
+      //   }
+      // },
       /* {
         dataField: 'recomendar',
         caption: 'RECOMENDAR',
