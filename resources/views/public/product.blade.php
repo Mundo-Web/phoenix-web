@@ -534,7 +534,7 @@
         })
     </script>
 
-    {{-- <script>
+    <script>
       $(document).ready(function() {
 
         function buscarTallaProducto() {
@@ -635,7 +635,7 @@
         
           buscarTallaProducto();
       });
-    </script> --}}
+    </script>
 
 
     <script>

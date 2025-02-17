@@ -143,7 +143,7 @@
   </style>
 
   <main>
-    <form id="paymentForm" class="font-poppins w-11/12 mx-auto my-12 flex flex-col gap-10">
+    <form id="paymentForm" class="font-roboto_regular w-11/12 mx-auto my-12 flex flex-col gap-10">
       @csrf
 
       <x-breadcrumb>
@@ -154,14 +154,14 @@
       <div class="flex md:gap-20 flex-col md:flex-row">
         <div class="flex justify-between items-start md:basis-8/12 w-full md:w-auto">
           <x-ecommerce.gateway.container completed="{{ 2 }}">
-            <div class="flex flex-col gap-5 mt-4 font-galano_regular">
+            <div class="flex flex-col gap-5 mt-4 font-roboto_regular">
               <div>
                 <div class="flex flex-col gap-8">
 
                   <input type="hidden" name="_token" value="KetUXGJHlBNXwBFdNlcg8R9ueYHpfGMUECXmlNyQ"
                     autocomplete="off">
                   <div class="flex flex-col gap-5 pb-10 border-b-2 border-gray-200 dark:border-gray-700">
-                    <h2 class="font-semibold text-xl tracking-normal text-[#052F4E]">
+                    <h2 class="font-semibold text-xl tracking-normal text-[#010101]">
                       Información del contacto
                     </h2>
                     <div class="flex flex-col gap-5">
@@ -172,7 +172,7 @@
                               class="text-[#c1272d]">*</span></label>
                           <input id="nombre" type="text" placeholder="Nombre" name="nombre"
                             value="{{ auth()->check() ? auth()->user()->name : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#010101] focus:border-[#010101] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]"
                             required />
                         </div>
                         <div class="basis-1/2 flex flex-col gap-2">
@@ -180,7 +180,7 @@
                               class="text-[#c1272d]">*</span></label>
                           <input id="apellidos" type="text" placeholder="Apellido" name="apellidos"
                             value="{{ auth()->check() ? auth()->user()->lastname : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#010101] focus:border-[#010101] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]"
                             required />
                         </div>
                       </div>
@@ -190,7 +190,7 @@
                               class="text-[#c1272d]">*</span></label>
                           <input id="email" type="email" placeholder="Correo electrónico" required=""
                             name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#010101] focus:border-[#010101] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]"
                             required />
                         </div>
                         <div class="basis-full flex flex-col gap-2">
@@ -198,14 +198,14 @@
                               class="text-[#c1272d]">*</span></label>
                           <input id="celular" type="text" placeholder="(+51) 000 000 000" name="phone"
                             value="{{ auth()->check() ? auth()->user()->phone : '' }}"
-                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                            class="w-full py-3 px-4 focus:outline-none focus:ring-[#010101] focus:border-[#010101] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]"
                             required />
                         </div>
                       </div>
 
                       <div class="basis-2/3 flex flex-row gap-2 ">
                         <input id="termsandconditions" type="checkbox" required checked
-                          class="border-2 rounded-sm w-5 h-5 text-[#052F4E] ring-0 focus:ring-0" />
+                          class="border-2 rounded-sm w-5 h-5 text-[#010101] ring-0 focus:ring-0" />
                         <label for="termsandconditions" class="font-medium text-sm text-[#6C7275]">Estoy de acuerdo con
                           los <a class="font-bold" id="terminoslibro" target="_blanck">terminos y
                             condiciones</a></label>
@@ -395,18 +395,18 @@
           </x-ecommerce.gateway.container>
         </div>
         <div
-          class="basis-4/12 flex flex-col justify-start gap-0 py-4 order-1 2md:order-2 2md:sticky font-galano_regular top-4 h-min border rounded-md">
-          <h2 class="font-galano_bold text-2xl text-[#052F4E] px-4">
+          class="basis-4/12 flex flex-col justify-start gap-0 py-4 order-1 2md:order-2 2md:sticky font-roboto_regular top-4 h-min border rounded-md">
+          <h2 class="font-roboto_bold text-2xl text-[#010101] px-4">
             Resumen del pedido
           </h2>
           <div class="p-4 pb-0">
             <hr>
           </div>
           <div class="px-4 pt-4">
-            <label for="tipo-comprobante" class="block mb-2 text-sm font-medium text-[#052F4E] dark:text-white">Tipo de
+            <label for="tipo-comprobante" class="block mb-2 text-sm font-medium text-[#010101] dark:text-white">Tipo de
               comprobante</label>
             <select id="tipo-comprobante" name="comprobante"
-              class="selectpicker bg-gray-50 border border-gray-300 text-[#052F4E] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+              class="selectpicker bg-gray-50 border border-gray-300 text-[#010101] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
               {{-- <option value="">Seleccione tipo de comprobante</option> --}}
               <option value="boleta">Boleta</option>
               <option value="factura">Factura</option>
@@ -425,28 +425,28 @@
           </div>
           <div class="p-4">
             <div class="font-poppins flex flex-col gap-5">
-              <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
+              <div class="text-[#010101] hidden justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p class="font-normal text-[16px]">Envío</p>
                 <p id="precioEnvio" class="font-semibold text-[16px]">S/. {{ $sale->address_price }}</p>
               </div>
 
-              <div id="descuentocupon">
+              <div id="descuentocupon" class="hidden">
                 
               </div>
 
-              <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
+              <div class="text-[#010101] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p class="font-normal text-[16px]">Subtotal</p>
                 <p id="itemSubtotal" class="font-semibold text-[16px]">S/. 0.00 </p>
               </div>
 
               <div
-                class="text-[#052F4E] text-[20px] flex justify-between font-semibold items-center border-b-[1px] border-[#E8ECEF] pb-5">
+                class="text-[#010101] text-[20px] flex justify-between font-semibold items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p>Total</p>
                 <p id="itemTotal">S/. 0.00 </p>
               </div>
 
               <button id="btnPagar"
-                class="text-white bg-[#052F4E] tracking-wider w-full py-3 rounded-xl cursor-pointer font-semibold text-lg inline-block text-center">Realizar pedido</button>
+                class="text-white bg-[#010101] tracking-wider w-full py-3 rounded-xl cursor-pointer font-semibold text-lg inline-block text-center">Realizar pedido</button>
 
               {{-- <div id="contenedorIzypay" hidden>
                 <div class="flex justify-center content-center ">
@@ -471,13 +471,13 @@
   </main>
 
   <div id="pagocontransferencia" class="modal overflow-y-auto overflow-x-hidden !px-2 !md:px-4" style="max-width: 500px !important; width: 100% !important;  ">
-      <div class="p-1 flex flex-col gap-2 text-[#052F4E]">
+      <div class="p-1 flex flex-col gap-2 text-[#010101]">
 
           <div class="text-center flex flex-col justify-center content-center items-center">
-            <img src="{{asset('images/svg/logomrcremoso.svg')}}" alt="" class='h-auto w-48 text-center' />
+            <img src="{{asset('images/imagen/logotexton.svg')}}" alt="" class='h-auto w-48 text-center' />
           </div>
 
-          <div class="font-galano_regular p-2">
+          <div class="font-roboto_regular p-2">
             
             
 
@@ -540,8 +540,8 @@
                 {{-- href="{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}" --}}
                 type="submit"
                 id="hacerpedido"
-                class="w-full py-2 px-4 border  block text-center bg-white border-[#052F4E] font-galano_bold  rounded-xl hover:text-white  
-              hover:bg-[#052F4E] transition-colors duration-300">
+                class="w-full py-2 px-4 border  block text-center bg-white border-[#010101] font-galano_bold  rounded-xl hover:text-white  
+              hover:bg-[#010101] transition-colors duration-300">
                 Realizar pedido
               </button>
             </div> 
@@ -605,7 +605,7 @@
                       title: '¡Éxito!',
                       text: response.message || 'Voucher subido correctamente.',
                       confirmButtonText: 'Aceptar',
-                      confirmButtonColor: '#052F4E'
+                      confirmButtonColor: '#010101'
                   }).then(() => {
                       // Redirigir a la página de agradecimiento
                       window.location.href = '{{ route('agradecimiento', ['codigoCompra' => $sale->code]) }}';
@@ -616,7 +616,7 @@
                       title: '¡Error!',
                       text: response.message || 'Hubo un problema al subir el archivo.',
                       confirmButtonText: 'Aceptar',
-                      confirmButtonColor: '#052F4E'
+                      confirmButtonColor: '#010101'
                   });
               }
             },
@@ -626,7 +626,7 @@
                     title: '¡Error!',
                     text: xhr.message || 'No se cargó el Voucher.',
                     confirmButtonText: 'Aceptar',
-                    confirmButtonColor: '#052F4E'
+                    confirmButtonColor: '#010101'
               });
             }
         });

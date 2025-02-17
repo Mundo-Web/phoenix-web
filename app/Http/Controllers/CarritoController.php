@@ -76,7 +76,7 @@ class CarritoController extends Controller
       }
         //busco producto 
 
-        $producto = Products::with('discount')->find($id);
+        $producto = Products::with(['category', 'discount'])->findOrFail($id);
        
         return response()->json(['message' => 'Producto encontrado ', 'data' => $producto , 'cantidad'=> $cantidad, 'is_reseller' => $is_reseller] );
     }

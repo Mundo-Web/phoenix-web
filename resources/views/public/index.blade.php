@@ -257,7 +257,7 @@
             </section>
         @endif        
 
-        
+        @if(count($categorias) > 0)
             <section class="w-full px-[5%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/bannerphoenix.png') }}');">
                 <div class="grid grid-cols-1 md:grid-cols-3 w-full">
                     <div class="md:col-span-2 flex flex-col gap-3">
@@ -268,7 +268,7 @@
                             Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
                         </h2>
                         <div class="flex flex-row items-center justify-start">
-                            <a href="{{route('contacto')}}">
+                            <a href="{{route('catalogo', $categorias[0]->id)}}">
                                 <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
                                     Let´s Go!
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -280,7 +280,7 @@
                     </div>
                 </div>
             </section>
-        
+        @endif
 
         @if (count($testimonie)>0)
             <section class="w-full px-[5%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/Servicios.png') }}');">

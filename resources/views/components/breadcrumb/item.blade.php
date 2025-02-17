@@ -1,12 +1,12 @@
 <li>
-  <div class="flex items-center font-galano_semibold">
-    <svg class="rtl:rotate-180 w-3 h-3 text-[#052F4E] mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+  <div class="flex items-center font-roboto_bold">
+    <svg class="rtl:rotate-180 w-3 h-3 text-[#FB4535] mx-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
       fill="none" viewBox="0 0 6 10">
       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4" />
     </svg>
     @if (isset($href))
       <a href="{{ $href }}"
-        class="ms-1 text-base font-medium text-gray-700 hover:text-[#052F4E] md:ms-2">{{ $slot }}</a>
+        class="ms-1 text-base font-medium text-gray-700 hover:text-[#FB4535] md:ms-2">{{ $slot }}</a>
     @else
       <span class="ms-1 text-base font-medium text-gray-700 md:ms-1">{{ $slot }}</span>
     @endisset

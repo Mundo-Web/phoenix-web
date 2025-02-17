@@ -16,7 +16,7 @@
 
 
   <main>
-    <section class="font-poppins w-11/12 mx-auto my-8 flex flex-col gap-5">
+    <section class="font-roboto_medium w-11/12 mx-auto my-8 flex flex-col gap-5">
       <x-breadcrumb>
         <x-breadcrumb.item>Carrito de compras</x-breadcrumb.item>
       </x-breadcrumb>
@@ -44,29 +44,29 @@
             </div>
           </x-ecommerce.gateway.container>
           <div class="flex flex-col gap-5 pb-10 w-full">
-            <h2 class="font-semibold text-xl tracking-normal text-[#052F4E] font-galano_regular">
+            <h2 class="font-semibold text-xl tracking-normal text-[#010101] font-roboto_medium">
               Información de usuario
             </h2>
-            <div class="w-full flex flex-col gap-2 font-galano_regular">
+            <div class="w-full flex flex-col gap-2 font-roboto_medium">
               <label for="email" class="font-medium text-[13px] text-[#6C7275]">E-mail <span
                   class="text-[#c1272d]">*</span></label>
               <input id="email" type="email" placeholder="Correo electrónico" 
                 name="email" value="{{ auth()->check() ? auth()->user()->email : '' }}"
-                class="w-full py-3 px-4 focus:outline-none focus:ring-[#052F4E] focus:border-[#052F4E] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
+                class="w-full py-3 px-4 focus:outline-none focus:ring-[#010101] focus:border-[#010101] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#6C7275]"
                 required>
             </div>
-            <h2 class="font-semibold text-xl tracking-normal text-[#052F4E] font-galano_regular">
+            <h2 class="font-semibold text-xl tracking-normal text-[#010101] font-roboto_medium hidden">
               Dirección de envío
             </h2>
-            <ul class="grid w-full gap-6 md:grid-cols-3 font-galano_regular">
+            <ul class="w-full gap-6 md:grid-cols-3 font-roboto_medium hidden">
               <li>
-                <input type="radio" name="envio" id="recoger-option" value="recoger" class="hidden peer" required 
+                <input type="radio" name="envio" id="recoger-option" value="recoger" class="hidden peer" checked 
                   {{-- @if (!$hasDefaultAddress) checked @endif --}}
                   >
                 <label for="recoger-option"
-                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-[#052F4E] hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-[#052F4E] hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-[#010101] hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-[#010101] hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                   <div class="block">
-                    <svg class="w-6 h-6 mb-2 text-[#052F4E] dark:text-white" aria-hidden="true"
+                    <svg class="w-6 h-6 mb-2 text-[#010101] dark:text-white" aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 10V6a3 3 0 0 1 3-3v0a3 3 0 0 1 3 3v4m3-2 .917 11.923A1 1 0 0 1 17.92 21H6.08a1 1 0 0 1-.997-1.077L6 8h12Z">
@@ -79,13 +79,13 @@
                 </label>
               </li>
               <li>
-                <input type="radio" name="envio" id="express-option" value="express" class="hidden peer" checked
+                <input type="radio" name="envio" id="express-option" value="express" class="hidden peer"
                   {{-- @if ($hasDefaultAddress) checked @endif --}}
                   >
                 <label for="express-option"
-                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-[#052F4E] hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-[#052F4E] hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                  class="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border-2 border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 peer-checked:border-[#010101] hover:text-gray-600 dark:peer-checked:text-gray-300 peer-checked:text-[#010101] hover:bg-gray-50 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                   <div class="block">
-                    <svg class="w-6 h-6 mb-2 text-[#052F4E] dark:text-white" aria-hidden="true"
+                    <svg class="w-6 h-6 mb-2 text-[#010101] dark:text-white" aria-hidden="true"
                       xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                       <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M10 21v-9m3-4H7.5a2.5 2.5 0 1 1 0-5c1.5 0 2.875 1.25 3.875 2.5M14 21v-9m-9 0h14v8a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1v-8ZM4 8h16a1 1 0 0 1 1 1v3H3V9a1 1 0 0 1 1-1Zm12.155-5c-3 0-5.5 5-5.5 5h5.5a2.5 2.5 0 0 0 0-5Z">
@@ -98,7 +98,8 @@
                 </label>
               </li>
             </ul>
-            <div id="direccionContainer" class="flex flex-col gap-5 font-galano_regular">
+            
+            <div id="direccionContainer" class="flex-col gap-5 font-roboto_medium hidden">
               <div class="flex flex-col gap-5">
                 @if (count($addresses) > 0)
                   <div class="flex flex-col gap-5 md:flex-row">
@@ -155,7 +156,7 @@
                         <!-- combo -->
                         <div class="dropdown-provincia w-full">
                           <select name="provincia_id" id="provincia_id"
-                            class="selectpicker mt-1 bg-gray-50 border border-gray-300 text-[#052F4E] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 select2-hidden-accessible"
+                            class="selectpicker mt-1 bg-gray-50 border border-gray-300 text-[#010101] text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 select2-hidden-accessible"
                             data-address>
                             <option value="" data-select2-id="select2-data-4-gokf">Seleccione una
                               provincia
@@ -175,7 +176,7 @@
                         <!-- combo -->
                         <div class="dropdown-distrito w-full">
                           <select name="distrito_id" id="distrito_id"
-                            class="selectpicker mt-1 bg-gray-50 border border-gray-300 text-[#052F4E] text-[13px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 select2-hidden-accessible"
+                            class="selectpicker mt-1 bg-gray-50 border border-gray-300 text-[#010101] text-[13px] rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 select2-hidden-accessible"
                             data-address>
                             <option value="" data-select2-id="select2-data-6-ihrp">Seleccione un distrito
                             </option>
@@ -197,7 +198,7 @@
 
                   <input id="nombre_calle" type="text" name="dir_av_calle"
                     placeholder="Ingresa el nombre de la calle"
-                    class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                    class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]"
                     data-address>
                 </div>
               </div>
@@ -208,7 +209,7 @@
                         class="text-[#c1272d]">*</span></label>
                     <input id="numero_calle" name="dir_numero" type="text"
                       placeholder="Ingresa el número de la callle"
-                      class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]"
+                      class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]"
                       data-address>
                   </div>
 
@@ -218,7 +219,7 @@
                       Lote/ Bloque
                       (opcional)</label>
                     <input id="direccion" type="text" name="dir_bloq_lote" placeholder="Ejem. Casa 3, Dpto 101"
-                      class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#052F4E]">
+                      class="w-full py-3 px-4 focus:outline-none focus:ring-[#c1272d] focus:border-[#c1272d] placeholder-gray-400 font-normal text-[16px] border-[1.5px] border-gray-200 rounded-xl text-[#010101]">
                   </div>
                 </div>
               </div>
@@ -226,14 +227,14 @@
           </div>
         </div>
         <div class="lg:basis-4/12 flex flex-col justify-start gap-5">
-          <h2 class="font-semibold text-2xl tracking-tight text-[#052F4E] font-galano_bold">
+          <h2 class="font-semibold text-2xl tracking-tight text-[#010101] font-roboto_medium">
             Resumen del pedido
           </h2>
           <div>
-            <div class="flex flex-col gap-3 font-galano_bold">
-              @auth
+            <div class="flex flex-col gap-3 font-roboto_medium">
+              {{-- @auth
                 <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
-                  <h2 class="font-bold text-[16px] text-[#052F4E]">
+                  <h2 class="font-bold text-[16px] text-[#010101]">
                     Código de cupon
                   </h2>
                   <div class="flex gap-0 relative">
@@ -241,47 +242,47 @@
                       type="text"
                       id="txtCodigoPromocion"
                       name="txtCodigoPromocion"
-                      class="w-full border-[#052F4E] rounded-0 py-[7px] px-3 focus:outline-none focus:ring-0 focus:border-[#052F4E]"
+                      class="w-full border-[#010101] rounded-0 py-[7px] px-3 focus:outline-none focus:ring-0 focus:border-[#010101]"
                       
                     />
                     <meta name="csrf-token" content="{{ csrf_token() }}">
                     <button id="btnAplicarCupon"
-                      class="absolute rounded-0 border right-0 p-2 px-4 text-white bg-[#052F4E] w-auto top-1/2 transform -translate-y-1/2"
+                      class="absolute rounded-0 border right-0 p-2 px-4 text-white bg-[#010101] w-auto top-1/2 transform -translate-y-1/2"
                     >
                       Aplicar
                     </button>
                   </div>
                 </div>
-              @endauth
+              @endauth --}}
 
-              <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
+              <div class="text-[#010101] hidden justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Envío</p>
                 <p id="precioEnvio" class="font-semibold text-[16px]">Gratis</p>
               </div>
 
-              <div id="descuentocupon">
+              {{-- <div id="descuentocupon">
                 
-              </div>
+              </div> --}}
 
-              <div class="text-[#052F4E] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
+              <div class="text-[#010101] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Subtotal</p>
                 <p id="itemSubtotal" class="font-semibold text-[16px]">S/. 0.00</p>
               </div>
 
               <div
-                class="text-[#052F4E] text-[20px] flex justify-between font-semibold items-center border-b-[1px] border-[#E8ECEF] pb-5">
+                class="text-[#010101] text-[20px] flex justify-between font-semibold items-center border-b-[1px] border-[#E8ECEF] pb-5">
                 <p>Total</p>
                 <p id="itemTotal">S/. 0.00 </p>
               </div>
               <button id="btnSiguiente"
-                class="text-white bg-[#052F4E]  w-full py-3 rounded-xl font-galano_bold cursor-pointer  font-semibold text-lg inline-block text-center" type="button">
+                class="text-white bg-[#FB4535]  w-full py-3 rounded-xl font-roboto_medium cursor-pointer  font-semibold text-lg inline-block text-center" type="button">
                 Continuar</button>
             </div>
           </div>
         </div>
       </div>
       {{-- @if ($destacados->count() > 0)
-        <h1 class="text-2xl md:text-3xl font-semibold font-galano_bold text-[#323232] mb-2 mt-4">Aprovecha estas
+        <h1 class="text-2xl md:text-3xl font-semibold font-roboto_medium text-[#323232] mb-2 mt-4">Aprovecha estas
           ofertas
           especiales
           antes de completar tu compra</h1>

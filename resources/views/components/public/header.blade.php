@@ -103,7 +103,7 @@
 
                 <div class="flex justify-center items-center z-40">
                     <a href="{{ route('index') }}">
-                        <img src="{{ asset('images/imagen/p_phoenixlogo.png') }}" alt="Cremoso" class="w-full">
+                        <img src="{{ asset('images/imagen/p_phoenixlogo.png') }}" alt="Phoenix" class="w-full">
                     </a>
                 </div>
 
@@ -1028,6 +1028,7 @@
                     precio_reseller,
                     discount_id,
                     discount
+                    
                 } = success.data
 
                 let is_reseller = success.is_reseller
@@ -1051,6 +1052,8 @@
                     type_id = null;
                     status = null;
                 }
+
+                
 
                 let cantidad = Number(success.cantidad)
 
@@ -1079,17 +1082,25 @@
 
                 if (existeArticulo) {
                     //sumar al articulo actual 
-                    const prodRepetido = articulosCarrito.map(item => {
-                        if (item.id === detalleProducto.id && item.isCombo == false) {
-                            item.cantidad += Number(detalleProducto.cantidad);
-                            // retorna el objeto actualizado 
-                        }
-                        return item; // retorna los objetos que no son duplicados 
+                    // const prodRepetido = articulosCarrito.map(item => {
+                    //     if (item.id === detalleProducto.id && item.isCombo == false) {
+                    //         item.cantidad += Number(detalleProducto.cantidad);
+                    //         // retorna el objeto actualizado 
+                    //     }
+                    //     return item; // retorna los objetos que no son duplicados 
 
 
-                    });
+                    // });
+                    articulosCarrito = articulosCarrito.filter(item => !(item.id === detalleProducto.id && item.isCombo == false));
+                    articulosCarrito = [...articulosCarrito, detalleProducto];
+                    tipoalerta = "warning";
+                    titulo = "Plan existente";
+                    mensaje = "Ya existe este plan en el carrito";
                 } else {
                     articulosCarrito = [...articulosCarrito, detalleProducto]
+                    tipoalerta = "success"
+                    titulo = "Plan agregado";
+                    mensaje = "Plan agregado al carrito";
 
                 }
 
@@ -1105,9 +1116,9 @@
 
                 Notify.add({
                     icon: '/favicon.ico',
-                    title: 'Producto agregado',
-                    body: 'El producto se agregó al carrito',
-                    type: 'success',
+                    title: titulo,
+                    body: mensaje,
+                    type: tipoalerta,
                 })
 
             },
@@ -1129,7 +1140,8 @@
         let productId = product.data('id');
 
         //item = partesURL[partesURL.length - 1]
-        cantidad = Number($('#cantidadSpan span').text());
+        // cantidad = Number($('#cantidadSpan span').text());
+        cantidad = 1;
         //item = $(this).data('id');
         try {
             agregarAlCarrito(productId, cantidad)

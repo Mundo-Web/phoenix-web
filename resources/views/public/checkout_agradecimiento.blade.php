@@ -12,7 +12,7 @@
 @section('content')
 
   <main>
-    <section class="font-poppins my-12 w-11/12 mx-auto">
+    <section class="font-roboto_regular my-12 w-11/12 mx-auto">
       <div class="flex flex-col 2md:flex-row gap-32 md:gap-10 w-11/12 mx-auto items-center justify-center">
         <div class="md:basis-1/2 flex flex-col gap-10 basis-0">
           <x-breadcrumb>
@@ -23,7 +23,7 @@
             <div class="flex justify-between items-center  w-full md:w-auto">
               <x-ecommerce.gateway.container completed="{{ 3 }}">
                 <div class="flex flex-col justify-start gap-7 max-w-[600px] mx-auto pt-10 text-center">
-                  <div class="font-poppins flex flex-col gap-2 justify-center items-center">
+                  <div class="font-roboto_regular flex flex-col gap-2 justify-center items-center">
                     <p class="text-[#6C7275] font-medium text-[20px]">
                       Gracias por tu compra &#127881;
                     </p>
@@ -93,19 +93,19 @@
 
                   {{-- <div>
                     <a href=""
-                      class="text-white bg-[#052F4E] w-80 py-3 rounded-xl cursor-pointer font-semibold text-[16px] inline-block text-center">
+                      class="text-white bg-[#010101] w-80 py-3 rounded-xl cursor-pointer font-semibold text-[16px] inline-block text-center">
                       Enviar voucher a whatsapp</a>
                   </div> --}}
                   
                   <div>
                     <a href="{{ route('catalogo.all') }}"
-                      class="text-[#052F4E] bg-[#FFFFFF] hover:bg-[#052F4E] hover:text-white w-80 py-3 rounded-xl cursor-pointer font-semibold text-[16px] inline-block text-center border-[1.5px] border-[#052F4E]">Seguir
+                      class="text-[#010101] bg-[#FFFFFF] hover:bg-[#010101] hover:text-white w-80 py-3 rounded-xl cursor-pointer text-[16px] inline-block text-center border-[1.5px] border-[#010101]">Seguir
                       comprando</a>
                   </div>
 
                   <div>
                     <a href="{{ route('pedidos') }}"
-                      class="text-[#052F4E] bg-[#FFFFFF] hover:bg-[#052F4E] hover:text-white w-80 py-3 rounded-xl cursor-pointer font-semibold text-[16px] inline-block text-center border-[1.5px] border-[#052F4E]">Historial
+                      class="text-[#010101] bg-[#FFFFFF] hover:bg-[#010101] hover:text-white w-80 py-3 rounded-xl cursor-pointer text-[16px] inline-block text-center border-[1.5px] border-[#010101]">Historial
                       de compras</a>
                   </div>
                 </div>

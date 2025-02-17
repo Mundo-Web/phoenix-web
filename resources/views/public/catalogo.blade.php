@@ -247,10 +247,10 @@
                                         {!!$producto->description!!}
                                     </div>
                                 </div>
-                                
-                                <a><div class="bg-[#010101] rounded-3xl p-3 flex flex-row items-center justify-center">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}" />
+                                <button id="btnAgregarCarritoPr" data-id="{{ $producto->id }}"> <div class="bg-[#010101] rounded-3xl p-3 flex flex-row items-center justify-center">
                                     <span class="text-white font-roboto_bold text-center">Contratar Plan Básico</span>
-                                </div></a>
+                                </div></button>
 
                                 @php
                                     $caracteristicas = [];

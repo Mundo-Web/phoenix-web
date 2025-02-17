@@ -2,7 +2,7 @@
   <ol class="inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
     <li class="inline-flex items-center">
       <a href="/"
-        class="inline-flex items-center text-base font-medium !font-galano_semibold text-[#052F4E] hover:text-[#052F4E]">
+        class="inline-flex items-center text-base font-medium !font-roboto_bold text-[#010101] hover:text-[#010101]">
         <svg class="w-3 h-3 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
           viewBox="0 0 20 20">
           <path
