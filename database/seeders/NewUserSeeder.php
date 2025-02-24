@@ -14,11 +14,11 @@ class NewUserSeeder extends Seeder
     public function run(): void
     {
         User::updateOrCreate([
-            'email' => 'admin@americanbrands.com'
+            'email' => 'admin@phoenix-fitness.fit'
         ],[
-            'name' => 'Admin AB',
-            'email' => 'admin@americanbrands.com',
-            'password' => Hash::make('@mer1c4B##'),
+            'name' => 'admin',
+            'email' => 'admin@phoenix-fitness.fit',
+            'password' => Hash::make('@phoenix2025#'),
         ])->assignRole('Admin');
     }
 }
