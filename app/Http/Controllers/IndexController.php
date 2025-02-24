@@ -77,6 +77,13 @@ class IndexController extends Controller
     $this->instagramService = $instagramService;
   }
 
+  
+  public function construction()
+  {
+    $url_env = env('APP_URL');
+    return view('public.construction');
+  }
+
   public function index()
   {
     // $productos = Products::all();
