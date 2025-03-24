@@ -24,6 +24,7 @@ class CategoryController extends Controller
     public function index()
     {
         $category = Category::where("status", "=", true)
+        ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
         ->orderByDesc('created_at')
         ->get();
 
@@ -233,6 +234,7 @@ class CategoryController extends Controller
 
         $category->name = $request->name;
         $category->description = $request->description;
+        $category->order = $request->order;
         $category->slug = $slug;
 
         $category->save();

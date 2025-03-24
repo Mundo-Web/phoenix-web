@@ -24,11 +24,11 @@
         <i class="fa fa-plus me-1"></i>
         Agregar producto
       </a>
-      <button id="file-excel-button"
+      {{-- <button id="file-excel-button"
         class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">
         <i class="fas fa-cloud-upload-alt me-1"></i>
         Cargar productos
-      </button>
+      </button> --}}
     </section>
 
     <div

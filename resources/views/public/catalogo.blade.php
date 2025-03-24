@@ -55,7 +55,7 @@
                 <div class="bg-[#F0F1F0] flex flex-wrap justify-center items-center max-w-5xl gap-10 rounded-3xl p-6">
                     @foreach ($categories as $categorias)
                         <a href="{{route('catalogo', $categorias->id)}}">
-                            <h2 class="@if($id_cat == $categorias->id) activo @endif underline-this leading-none font-akira_expanded max-w-[200px] text-center text-2xl text-[#010101] basis-auto">
+                            <h2 class="@if($id_cat == $categorias->id) activo @endif underline-this leading-none font-akira_expanded max-w-[300px] text-center text-2xl text-[#010101] basis-auto">
                                 {{$categorias->name}}
                             </h2>
                         </a>
@@ -225,31 +225,61 @@
     <section id="planes" class="flex flex-col gap-10 w-full px-[5%] xl:px-[8%] py-10 md:py-14 bg-[#F0F1F0]">
 
             <div class="w-full relative">
-                <div class="swiper carrusel_planes h-max ">
+                <div class="swiper carrusel_planes h-max">
                     <div class="swiper-wrapper">
                     @foreach ($productos as $producto)
                         <div class="swiper-slide">
-                            <div class="flex flex-col gap-4 bg-[#FB4535] p-6 rounded-3xl">
+                            <div class="flex flex-col gap-4 
+                                        {{ $producto->sku == 1 ? 'bg-white' : '' }}
+                                        {{ $producto->sku == 2 ? 'bg-[#010101]' : '' }}
+                                        {{ $producto->sku == 3 ? 'bg-[#FB4535]' : '' }}
+                                        {{ !in_array($producto->sku, [1, 2, 3]) ? 'bg-[#FB4535]' : '' }}
+                                        p-6 rounded-3xl max-w-xl mx-auto">
                                 <div class="flex flex-wrap justify-between items-end">
-                                    <h3 class="text-[#010101] text-base font-roboto_medium flex flex-row gap-2 bg-white rounded-3xl text-center w-auto py-1 px-3">
+                                    <h3 class="
+                                                {{ $producto->sku == 1 ? 'text-white' : '' }}
+                                                {{ $producto->sku == 2 ? 'text-[#010101]' : '' }}
+                                                {{ $producto->sku == 3 ? 'text-[#010101]' : '' }}
+                                                {{ !in_array($producto->sku, [1, 2, 3]) ? 'text-[#010101]' : '' }}    
+                                                text-base font-roboto_medium flex flex-row gap-2 
+                                                {{ $producto->sku == 1 ? 'bg-[#010101]' : '' }}
+                                                {{ $producto->sku == 2 ? 'bg-white' : '' }}
+                                                {{ $producto->sku == 3 ? 'bg-white' : '' }}
+                                                {{ !in_array($producto->sku, [1, 2, 3]) ? 'bg-white' : '' }}
+                                                rounded-3xl text-center w-auto py-1 px-3">
                                         {{$producto->producto}}
                                     </h3>
-                                    <h3 class="text-white text-3xl font-roboto_medium flex flex-row w-auto items-center gap-2"> 
+                                    {{-- <h3 class="text-white text-3xl font-roboto_medium flex flex-row w-auto items-center gap-2"> 
                                         S/{{$producto->precio}} <span class="text-base font-roboto_regular">/Mes</span>
-                                    </h3>
+                                    </h3> --}}
                                 </div>
                                 <div class="flex flex-col gap-2">
-                                    <h2 class="leading-none font-akira_expanded text-2xl xl:text-3xl text-white">
+                                    <h2 class="leading-none font-akira_expanded text-2xl xl:text-3xl 
+                                                {{ $producto->sku == 1 ? 'text-[#010101]' : '' }}
+                                                {{ $producto->sku == 2 ? 'text-white' : '' }}
+                                                {{ $producto->sku == 3 ? 'text-white' : '' }}
+                                                {{ !in_array($producto->sku, [1, 2, 3]) ? 'text-white' : '' }}    
+                                                ">
                                         {{$producto->extract}}
                                     </h2>
                                 
-                                    <div class="!text-white text-base font-roboto_regular">
+                                    <div class="text-base font-roboto_regular
+                                                {{ $producto->sku == 1 ? '!text-[#010101]' : '' }}
+                                                {{ $producto->sku == 2 ? '!text-white' : '' }}
+                                                {{ $producto->sku == 3 ? '!text-white' : '' }}
+                                                {{ !in_array($producto->sku, [1, 2, 3]) ? '!text-white' : '' }}
+                                                ">
                                         {!!$producto->description!!}
                                     </div>
                                 </div>
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                                <button id="btnAgregarCarritoPr" data-id="{{ $producto->id }}"> <div class="bg-[#010101] rounded-3xl p-3 flex flex-row items-center justify-center">
-                                    <span class="text-white font-roboto_bold text-center">Contratar Plan Básico</span>
+                                <button id="btnAgregarCarritoPr" data-id="{{ $producto->id }}"> <div class="
+                                    {{ $producto->sku == 1 ? 'bg-[#FB4535]' : '' }}
+                                    {{ $producto->sku == 2 ? 'bg-[#FB4535]' : '' }}
+                                    {{ $producto->sku == 3 ? 'bg-[#010101]' : '' }}
+                                    {{ !in_array($producto->sku, [1, 2, 3]) ? 'bg-[#010101]' : '' }}
+                                    rounded-3xl p-3 flex flex-row items-center justify-center">
+                                    <span class="text-white font-roboto_bold text-center">Contratar {{$producto->producto}}</span>
                                 </div></button>
 
                                 @php
@@ -264,13 +294,29 @@
                                         @foreach ($caracteristicas as $index => $caracteristica)
                                             <div class="flex flex-row gap-2">
                                                 <svg class="w-5" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 16 17" fill="none">
-                                                    <path d="M9.59919 10.0992L6.39919 6.89919M14.3325 14.8325L13.3992 13.8992M2.59919 3.09919L1.66586 2.16586M12.4372 14.8225C12.1872 15.0726 11.8481 15.2132 11.4944 15.2132C11.1408 15.2133 10.8016 15.0729 10.5515 14.8229C10.3014 14.5728 10.1609 14.2337 10.1608 13.8801C10.1608 13.5265 10.3012 13.1873 10.5512 12.9372L9.37319 14.1159C9.12309 14.366 8.78388 14.5065 8.43019 14.5065C8.0765 14.5065 7.73729 14.366 7.48719 14.1159C7.23709 13.8658 7.09659 13.5266 7.09659 13.1729C7.09659 12.8192 7.23709 12.48 7.48719 12.2299L11.7299 7.98719C11.98 7.73709 12.3192 7.59659 12.6729 7.59659C13.0266 7.59659 13.3658 7.73709 13.6159 7.98719C13.866 8.23729 14.0065 8.5765 14.0065 8.93019C14.0065 9.28388 13.866 9.62309 13.6159 9.87319L12.4372 11.0512C12.6873 10.8012 13.0265 10.6608 13.3801 10.6608C13.7337 10.6609 14.0728 10.8014 14.3229 11.0515C14.5729 11.3016 14.7133 11.6408 14.7132 11.9944C14.7132 12.3481 14.5726 12.6872 14.3225 12.9372L12.4372 14.8225ZM4.26852 9.01119C4.01842 9.26129 3.67922 9.40179 3.32552 9.40179C2.97183 9.40179 2.63262 9.26129 2.38252 9.01119C2.13242 8.76109 1.99192 8.42188 1.99192 8.06819C1.99192 7.7145 2.13242 7.37529 2.38252 7.12519L3.56119 5.94719C3.43735 6.07098 3.29035 6.16917 3.12856 6.23615C2.96678 6.30313 2.79339 6.33759 2.61829 6.33756C2.26466 6.3375 1.92553 6.19696 1.67552 5.94686C1.55173 5.82302 1.45354 5.67601 1.38656 5.51423C1.31958 5.35245 1.28513 5.17906 1.28516 5.00395C1.28522 4.65032 1.42576 4.3112 1.67586 4.06119L3.56119 2.17586C3.8112 1.92576 4.15032 1.78522 4.50395 1.78516C4.67906 1.78513 4.85245 1.81958 5.01423 1.88656C5.17601 1.95354 5.32302 2.05173 5.44686 2.17552C5.57069 2.29932 5.66893 2.44629 5.73597 2.60805C5.80301 2.76981 5.83753 2.94319 5.83756 3.11829C5.83759 3.29339 5.80313 3.46678 5.73615 3.62856C5.66917 3.79035 5.57098 3.93735 5.44719 4.06119L6.62519 2.88252C6.87529 2.63242 7.2145 2.49192 7.56819 2.49192C7.92188 2.49192 8.26109 2.63242 8.51119 2.88252C8.76129 3.13262 8.90179 3.47183 8.90179 3.82552C8.90179 4.17922 8.76129 4.51842 8.51119 4.76852L4.26852 9.01119Z" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+                                                    <path d="M9.59919 10.0992L6.39919 6.89919M14.3325 14.8325L13.3992 13.8992M2.59919 3.09919L1.66586 2.16586M12.4372 14.8225C12.1872 15.0726 11.8481 15.2132 11.4944 15.2132C11.1408 15.2133 10.8016 15.0729 10.5515 14.8229C10.3014 14.5728 10.1609 14.2337 10.1608 13.8801C10.1608 13.5265 10.3012 13.1873 10.5512 12.9372L9.37319 14.1159C9.12309 14.366 8.78388 14.5065 8.43019 14.5065C8.0765 14.5065 7.73729 14.366 7.48719 14.1159C7.23709 13.8658 7.09659 13.5266 7.09659 13.1729C7.09659 12.8192 7.23709 12.48 7.48719 12.2299L11.7299 7.98719C11.98 7.73709 12.3192 7.59659 12.6729 7.59659C13.0266 7.59659 13.3658 7.73709 13.6159 7.98719C13.866 8.23729 14.0065 8.5765 14.0065 8.93019C14.0065 9.28388 13.866 9.62309 13.6159 9.87319L12.4372 11.0512C12.6873 10.8012 13.0265 10.6608 13.3801 10.6608C13.7337 10.6609 14.0728 10.8014 14.3229 11.0515C14.5729 11.3016 14.7133 11.6408 14.7132 11.9944C14.7132 12.3481 14.5726 12.6872 14.3225 12.9372L12.4372 14.8225ZM4.26852 9.01119C4.01842 9.26129 3.67922 9.40179 3.32552 9.40179C2.97183 9.40179 2.63262 9.26129 2.38252 9.01119C2.13242 8.76109 1.99192 8.42188 1.99192 8.06819C1.99192 7.7145 2.13242 7.37529 2.38252 7.12519L3.56119 5.94719C3.43735 6.07098 3.29035 6.16917 3.12856 6.23615C2.96678 6.30313 2.79339 6.33759 2.61829 6.33756C2.26466 6.3375 1.92553 6.19696 1.67552 5.94686C1.55173 5.82302 1.45354 5.67601 1.38656 5.51423C1.31958 5.35245 1.28513 5.17906 1.28516 5.00395C1.28522 4.65032 1.42576 4.3112 1.67586 4.06119L3.56119 2.17586C3.8112 1.92576 4.15032 1.78522 4.50395 1.78516C4.67906 1.78513 4.85245 1.81958 5.01423 1.88656C5.17601 1.95354 5.32302 2.05173 5.44686 2.17552C5.57069 2.29932 5.66893 2.44629 5.73597 2.60805C5.80301 2.76981 5.83753 2.94319 5.83756 3.11829C5.83759 3.29339 5.80313 3.46678 5.73615 3.62856C5.66917 3.79035 5.57098 3.93735 5.44719 4.06119L6.62519 2.88252C6.87529 2.63242 7.2145 2.49192 7.56819 2.49192C7.92188 2.49192 8.26109 2.63242 8.51119 2.88252C8.76129 3.13262 8.90179 3.47183 8.90179 3.82552C8.90179 4.17922 8.76129 4.51842 8.51119 4.76852L4.26852 9.01119Z" 
+                                                    stroke="
+                                                    {{ $producto->sku == 1 ? 'black' : '' }}
+                                                    {{ $producto->sku == 2 ? 'white' : '' }}
+                                                    {{ $producto->sku == 3 ? 'white' : '' }}
+                                                    {{ !in_array($producto->sku, [1, 2, 3]) ? 'white' : '' }}
+                                                " stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
-                                                <h2 class="text-white text-base font-roboto_medium w-full">{{$caracteristica}}</h2>
+                                                <h2 class="
+                                                {{ $producto->sku == 1 ? '!text-[#010101]' : '' }}
+                                                {{ $producto->sku == 2 ? '!text-white' : '' }}
+                                                {{ $producto->sku == 3 ? '!text-white' : '' }}
+                                                {{ !in_array($producto->sku, [1, 2, 3]) ? '!text-white' : '' }}
+                                                 text-base font-roboto_medium w-full">{{$caracteristica}}</h2>
                                             </div> 
 
                                             @if ($index < count($caracteristicas) - 1)
-                                                <div class="bg-white h-[1px] w-full mx-auto my-3"></div>
+                                                <div class="
+                                                {{ $producto->sku == 1 ? 'bg-[#010101]' : '' }}
+                                                {{ $producto->sku == 2 ? 'bg-[#FB4535]' : '' }}
+                                                {{ $producto->sku == 3 ? 'bg-white' : '' }}
+                                                {{ !in_array($producto->sku, [1, 2, 3]) ? 'bg-white' : '' }}
+                                                h-[1px] w-full mx-auto my-3"></div>
                                             @endif
                                         @endforeach  
                                     </div>
@@ -385,8 +431,9 @@
       });
   </script>
   <script>
+     const slidesCount = document.querySelectorAll('.carrusel_planes .swiper-slide').length;
      var swiper = new Swiper(".carrusel_planes", {
-            slidesPerView: 2,
+            slidesPerView: slidesCount === 1 ? 1 : 2,
             spaceBetween: 20,
             loop: true,
             grabCursor: true,
@@ -402,7 +449,7 @@
                     spaceBetween: 20,
                 },
                 950: {
-                    slidesPerView: 2,
+                    slidesPerView: slidesCount === 1 ? 1 : 2,
                     spaceBetween: 20,
                 }
             },

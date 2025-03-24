@@ -121,7 +121,7 @@ class IndexController extends Controller
     $category = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
     
     $logosdestacados = ClientLogos::where('status', '=', 1)->where('destacar', '=', 1)->orderBy('order', 'asc')->get();
-    $logos = ClientLogos::where('status', '=', 1)->where('destacar', '=', 0)->orderBy('order', 'asc')->get();
+    $logos = ClientLogos::where('status', '=', 1)->where('visible', '=', 1)->orderBy('order', 'asc')->get();
     $categoriasindex = Category::where('status', '=', 1)->where('destacar', '=', 1)->get();
     $media = $this->instagramService->getUserMedia();
     $textoshome = HomeView::where('id', 1)->first();
@@ -140,7 +140,10 @@ class IndexController extends Controller
     $marcas_id = $request->input('marcas');
     $id_cat = $id_cat ?? $catId;
 
-    $categories = Category::where('status', 1)->where('visible', 1)->get();
+    $categories = Category::where("status", "=", true)->where('visible', 1)
+        ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
     // $categories = Category::with(['subcategories' => function ($query) {
     //   $query->whereHas('products');
     // }])->where('visible', true)->where('status', true)->get();
@@ -155,7 +158,11 @@ class IndexController extends Controller
 
     $colores = Products::select('color')->distinct()->pluck('color');
 
-    $beneficios = Benefit::where('category_id', '=', $id_cat)->where('visible', true)->where('status', true)->get();
+    $beneficios = Benefit::where('category_id', $id_cat)
+    ->where('visible', true)
+    ->where('status', true)
+    ->orderByDesc('id')
+    ->get();
     
     $galeria = GaleryCategory::where('category_id', '=', $id_cat)->where('visible', true)->where('status', true)->get();
 

@@ -109,7 +109,7 @@
 
 
                 <ul
-                    class="font-roboto_medium text-lg pt-40 fixed inset-0 bg-[#010101] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
+                    class="font-roboto_medium text-lg pt-20 fixed inset-0 bg-[#010101] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
 
                     <div
                         class="flex flex-col lg:flex-row order-2 lg:order-1 lg:w-[80%] lg:justify-end gap-5 lg:gap-10">
@@ -152,7 +152,7 @@
                     </div>
 
                     <div
-                        class="relative flex flex-row justify-end gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 border-b lg:border-0 border-[#082252]">
+                        class="relative flex flex-row justify-end gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 ">
 
                         <div class="flex flex-row items-center justify-center">
                             <a href="{{route('contacto')}}">
@@ -228,6 +228,14 @@
     </div>
 </header>
 
+<div class="flex justify-end relative">
+    <div class="fixed bottom-[36px] z-[10] right-[15px] md:right-[25px] animate-bounce animate-twice"  >
+        <a target="_blank" href="https://api.whatsapp.com/send?phone={{ $datosgenerales[0]->whatsapp }}&text={{ $datosgenerales[0]->mensaje_whatsapp }}"
+            class="">
+            <img src="{{ asset('images/svg/botonwhatsapp.svg') }}" alt="whatsapp" class="w-16"  />
+        </a>
+    </div>
+</div>
 
 <div id="cart-modal"
     class="bag !absolute top-0 right-0 md:w-[450px] cartContainer border shadow-2xl  !rounded-l-2xl !p-0 !z-30"

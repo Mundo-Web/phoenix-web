@@ -53,6 +53,7 @@ class DatabaseSeeder extends Seeder
             HomeViewSeeder::class,
             StrengthSeeder::class,
             ShortcodeSeeder::class,
+            NewUserSeeder::class,
             
             //ServiceSeeder::class,
         ]);
