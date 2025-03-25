@@ -19,21 +19,23 @@
         <!-- Table -->
         <div class="overflow-x-auto">
 
-          <table id="tabladatos" class="display text-lg" style="width:100%">
+          <table id="tabladatos" class="display text-lg dark:even:!bg-gray-100/50" style="width:100%">
             <thead>
               <tr>
-                <th class="w-20">Icono</th>
+                <th class="w-4">Orden</th>
+                <th class="w-24">Icono</th>
                 <th>Nombre</th>
-                <th class="w-20">Destacar</th>
+                <th class="w-24">Destacar</th>
                 {{-- <th class="w-32">Menu</th> --}}
-                <th class="w-20">Visible</th>
-                <th class="w-20">Acciones</th>
+                <th class="w-24">Visible</th>
+                <th class="w-24">Acciones</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($category as $item)
                 <tr>
+                  <td>{{$item->order ?? "Sin orden"}}</td>
                   <td class=""><img class="block w-full" src="{{$item->name_image ? asset($item->url_image . $item->name_image) : asset('images/imagen/image-plus.jpg')}}" alt=""></td>
                   <td class="">{{ $item->name }}</td>
                   {{-- <td class="">{{ $item->description }}</td> --}}
@@ -86,7 +88,7 @@
                     </form>
                   </td>
 
-                  <td class="flex flex-row justify-end items-center gap-5 ">
+                  <td class="flex flex-row justify-center items-center gap-5 py-5">
 
                     <a href="{{ route('categorias.edit', $item->id) }}"
                       class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
@@ -107,9 +109,10 @@
             </tbody>
             <tfoot>
               <tr>
-                <th >Icono</th>
+                <th class="w-20">Orden</th>
+                <th>Icono</th>
                 <th>Nombre</th>
-                <th >Destacar</th>
+                <th>Destacar</th>
                 {{-- <th class="w-32">Menu</th> --}}
                 <th>Visible</th>
                 <th>Acciones</th>

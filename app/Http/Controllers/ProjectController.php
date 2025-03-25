@@ -19,7 +19,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::all();
+        
+        $project = Project::orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
 
         return view('pages.project.index', compact('project'));
     }
@@ -69,10 +72,11 @@ class ProjectController extends Controller
             }
       
             $project->titulo = $request->titulo;
+            $project->order = $request->order;
             $project->descripcion = $request->descripcion;
             $project->save();
       
-            return redirect()->route('project.index')->with('success', 'Proyecto creado exitosamente.');
+            return redirect()->route('project.index')->with('success', 'Item creado exitosamente.');
           } catch (\Throwable $th) {
             return response()->json(['messge' => 'Verifique sus datos '], 400);
           }
@@ -119,10 +123,11 @@ class ProjectController extends Controller
                   }
           
                   $project->titulo = $request->titulo;
+                  $project->order = $request->order;
                   $project->descripcion = $request->descripcion;
                   $project->save();
       
-                  return redirect()->route('project.index')->with('success', 'Proyecto actualizado exitosamente.');
+                  return redirect()->route('project.index')->with('success', 'Item actualizado exitosamente.');
       
       
               } catch (\Throwable $th) {
@@ -148,7 +153,7 @@ class ProjectController extends Controller
           }
   
           $project->delete();
-          return response()->json(['message'=>'Proyecto eliminado']);
+          return response()->json(['message'=>'Item eliminado']);
     }
   
     public function updateVisible(Request $request)
@@ -160,6 +165,6 @@ class ProjectController extends Controller
       $staff->status = $stauts;
   
       $staff->save();
-      return response()->json(['message' => 'Proyecto actualizado']);
+      return response()->json(['message' => 'Item actualizado']);
     }
 }

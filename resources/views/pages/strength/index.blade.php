@@ -2,8 +2,8 @@
   <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
 
     <section class="py-4 border-b border-slate-100 dark:border-slate-700">
-      {{-- <a href="{{ route('strength.create') }}"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar</a> --}}
+      <a href="{{ route('strength.create') }}"
+        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar</a>
     </section>
 
 
@@ -12,7 +12,7 @@
 
 
       <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Cifras </h2>
+        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Cifras</h2>
       </header>
       <div class="p-3">
 
@@ -22,19 +22,19 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th class="w-20">Orden</th>
+                <th class="w-4">Orden</th>
                 {{-- <th>Imagen</th> --}}
-                <th>Titulo </th>
+                <th class="w-28">Titulo </th>
                 <th>Descripcion</th> 
-                <th class="w-24">Visible</th>
-                <th class="w-24">Acciones</th>
+                <th class="w-28">Visible</th>
+                <th class="w-28">Acciones</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($strength as $item)
                 <tr>
-                  <td>{{$item->order}}</td>
+                  <td>{{$item->order ?? "Sin orden"}}</td>
                   {{-- <td class="px-3 py-2"><img class="w-20 h-20 object-contain" src="{{ asset($item->imagen) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';" ></td> --}}
                   
                   <td>{!! Str::limit($item->descripcionshort, 100) !!}</td>
@@ -51,12 +51,12 @@
                                           before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
                                           before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
                         id='{{ 'v_' . $item->id }}' data-field='visible' data-idService='{{ $item->id }}'
-                        data-titleService='{{ $item->title }}' {{ $item->status == 1 ? 'checked' : '' }}>
+                        data-titleService='{{ $item->titulo }}' {{ $item->status == 1 ? 'checked' : '' }}>
                       <label for="{{ 'v_' . $item->id }}"></label>
                     </form>
                   </td>
 
-                  <td class="flex flex-row justify-center items-center gap-5">
+                  <td class="flex flex-row justify-center items-center py-5 gap-5">
                     <a href="{{ route('strength.edit', $item->id) }}"
                       class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
                         class="fa-regular fa-pen-to-square"></i></a>
@@ -191,7 +191,7 @@
 
       Swal.fire({
         title: "Seguro que deseas eliminar?",
-        text: "Vas a eliminar un Logo",
+        text: "Vas a eliminar una cifra",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",

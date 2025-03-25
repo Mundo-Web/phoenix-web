@@ -41,18 +41,24 @@
           
           <div class="flex flex-col justify-center gap-5 lg:gap-7">
               <div class="flex flex-row">
-                <span class="font-roboto_medium w-auto text-white bg-[#010101] rounded-3xl px-3 py-1">Sobre Pheonix Fitness</span>
+                @if($textosnosotros->subtitle1section)
+                  <span class="font-roboto_medium w-auto text-white bg-[#010101] rounded-3xl px-3 py-1">{{$textosnosotros->subtitle1section}}</span>
+                @endif
               </div>
-              <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-[#010101]">
-                  Describa por que <span class="text-[#FB4535]">existe</span> su empresa
-              </h2>
-              <div class="text-[#010101] text-lg font-roboto_regular">
-                  Explique en qué está trabajando su empresa y el valor que ofrece a sus clientes.
-              </div>
+              @if($textosnosotros->title1section)
+                <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-[#010101]">
+                  {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title1section) !!}
+                </h2>
+              @endif
+              @if($textosnosotros->description1section)
+                <div class="text-[#010101] text-lg font-roboto_regular">
+                    {{$textosnosotros->description1section}}
+                </div>
+              @endif
           </div>
 
           <div class="flex flex-col justify-center items-center">
-            <img src="{{ asset($nosotros[1]->image) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/p_nosotros.png') }}';" class="object-cover" />
+            <img src="{{ asset($textosnosotros->url_image1section) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/p_nosotros.png') }}';" class="object-cover" />
           </div>
 
       </div>
@@ -63,18 +69,21 @@
       <section class="pt-12 xl:pt-16 px-[5%] xl:px-[8%]">
         <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
             
-            <div class="flex flex-col justify-start gap-5 lg:gap-7">
-                <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
-                    Resalte el <span class="text-[#FB4535]">crecimiento</span> de su empresa
-                </h2>
-            </div>
+            @if($textosnosotros->title2section)
+              <div class="flex flex-col justify-start gap-5 lg:gap-7">
+                  <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
+                    {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title2section) !!}
+                  </h2>
+              </div>
+            @endif
 
             <div class="flex flex-col justify-start gap-5 lg:gap-7">
-              <div class="text-[#010101] text-base font-roboto_regular">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                  Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
-              </div>
-              <div class="grid grid-cols-1 xl:grid-cols-3">
+              @if($textosnosotros->description2section)
+                <div class="text-[#010101] text-base font-roboto_regular">
+                  <p>{{$textosnosotros->description2section}}</p>
+                </div>
+              @endif
+              <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
                 @foreach ($benefit as $estadistica)
                   <div class="flex flex-col gap-0">
                       <h2 class="text-[#010101] font-akira_expanded text-4xl">{{$estadistica->descripcionshort}}</h2>
@@ -90,7 +99,7 @@
 
     
     <section class="flex flex-row justify-center items-center px-[5%] xl:px-[8%] py-12 xl:pb-16">
-        <img src="{{asset('images/imagen/p_bannernosotros.png')}}" onerror="this.src='{{ asset('images/imagen/p_bannernosotros.png') }}';" class="rounded-xl lg:rounded-3xl h-[250px] sm:h-full xl:h-[450px] w-full object-cover sm:object-contain" />
+          <img src="{{asset($textosnosotros->url_image2section)}}" onerror="this.src='{{ asset('images/imagen/p_bannernosotros.png') }}';" class="rounded-xl lg:rounded-3xl h-[250px] sm:h-full xl:h-[450px] w-full object-cover sm:object-contain" />
     </section>
     
 
@@ -99,12 +108,17 @@
           
           <div class="w-full xl:w-3/5 flex flex-col gap-10 py-10">
               <div class="flex flex-col gap-2">
+                @if($textosnosotros->title3section)
                   <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101] lg:max-w-sm">
-                    Presenta a tu <span class="text-[#FB4535]">equipo</span>
+                    {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title3section) !!}
                   </h2>  
+                @endif
+
+                @if($textosnosotros->description3section)
                   <p class="text-[#010101] text-base font-roboto_regular lg:max-w-xl">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
+                      {{$textosnosotros->description3section}}
                   </p>
+                @endif
               </div>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-5 xl:gap-x-10">
                 @foreach ($valores as $valor)
@@ -124,7 +138,7 @@
           </div>
 
           <div class="w-full xl:w-2/5">
-            <img src="{{asset('images/imagen/nosotrosimg2.png')}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="h-[450px] sm:h-full sm:max-w-md xl:max-w-2xl mx-auto object-cover w-full" />
+            <img src="{{asset($textosnosotros->url_image3section)}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="h-[450px] sm:h-full sm:max-w-md xl:max-w-2xl mx-auto object-cover w-full" />
           </div>
 
       </section>
@@ -136,12 +150,17 @@
       <section class="flex flex-col justify-start items-start px-[5%] xl:px-[8%] gap-10 py-10">
         
             <div class="flex flex-col gap-2">
+              @if($textosnosotros->title4section)
                 <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
-                  Presenta a tu <span class="text-[#FB4535]">equipo</span>
+                  {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title4section) !!}
                 </h2>  
+              @endif
+
+              @if($textosnosotros->description4section)
                 <p class="text-[#010101] text-base font-roboto_regular">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
+                  {{$textosnosotros->description4section}}
                 </p>
+              @endif
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-7 md:gap-8">

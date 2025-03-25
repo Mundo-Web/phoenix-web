@@ -27,7 +27,10 @@ class ServiceController extends Controller
     public function index()
     {
         //
-        $servicios = Service::where("status", "=", true)->get();
+        $servicios = Service::where("status", "=", true)
+        ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
 
         return view('pages.service.index', compact('servicios'));
     }
@@ -96,6 +99,7 @@ class ServiceController extends Controller
         $service->link = $request->link;
         $service->namebutton = $request->namebutton;
         $service->title = $request->title;
+        $service->order = $request->order;
         $service->description = $request->description;
         $service->status = 1;
         $service->visible = 1;
@@ -103,7 +107,7 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return redirect()->route('servicios.index')->with('success', 'Servicio creado exitosamente.');
+        return redirect()->route('servicios.index')->with('success', 'Item creado exitosamente.');
     }
 
     /**
@@ -135,6 +139,7 @@ class ServiceController extends Controller
         $service->title = $request->title;
         $service->description = $request->description;
         $service->link = $request->link;
+        $service->order = $request->order;
         $service->namebutton = $request->namebutton;
        
 
@@ -178,7 +183,7 @@ class ServiceController extends Controller
 
         $service->update();
 
-        return redirect()->route('servicios.index')->with('success', 'Servicio actualizado exitosamente.');
+        return redirect()->route('servicios.index')->with('success', 'Item actualizado exitosamente.');
     }
 
     /**
@@ -220,7 +225,7 @@ class ServiceController extends Controller
         $service->save();
 
         // Devuelvo una respuesta JSON u otra respuesta según necesites
-        return response()->json(['message' => 'Servicio eliminado.']);
+        return response()->json(['message' => 'Item eliminado.']);
     }
 
 
@@ -241,6 +246,6 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return response()->json(['message' => 'Servicio eliminado.']);
+        return response()->json(['message' => 'Item eliminado.']);
     }
 }

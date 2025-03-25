@@ -134,37 +134,23 @@
 
         @if (count($logos) > 0)
             <section class="z-10 col-span-2 bg-[#FB4535]">
-                <div class="px-1 py-2 h-20 bg-azulmundoweb font-Pangea_Bold text-white text-2xl">
+                <div class="px-1 py-4 h-24 bg-azulmundoweb font-Pangea_Bold text-white text-2xl">
                     <div x-data="{}" x-init="$nextTick(() => {
                         let ul = $refs.logos;
                         ul.insertAdjacentHTML('afterend', ul.outerHTML);
                         ul.nextSibling.setAttribute('aria-hidden', 'true');
-                    })"
+                        })"
                         class="px-[5%]  bg-azulmw w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
                         <ul x-ref="logos"
-                            class="h-16 flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll">
+                            class="h-16  flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll">
                             @foreach ($logos as $marquesina)
-                                <li class="w-auto py-8 flex justify-center items-center gap-3 px-3"><img class="w-28 h-14 object-contain"
+                                <li class="flex w-48 justify-center items-center gap-3 px-3"><img class="w-48 h-16 object-contain"
                                     src="{{asset($marquesina->url_image)}}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" />
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 15 14" fill="none">
-                                        <circle cx="7.74219" cy="7" r="7" fill="white"/>
-                                    </svg>
                                 </li>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 15 14" fill="none">
+                                    <circle cx="7.74219" cy="7" r="7" fill="white"/>
+                                </svg>
                             @endforeach
-                        </ul>
-
-                        <ul x-ref="logos"
-                            class="h-16 flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll"
-                            aria-hidden="true">
-                            @foreach ($logos as $marquesina)
-                                <li class="w-auto py-8 flex justify-center items-center gap-3 px-3"><img class="w-28 h-14 object-contain"
-                                    src="{{asset($marquesina->url_image)}}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" />
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 15 14" fill="none">
-                                        <circle cx="7.74219" cy="7" r="7" fill="white"/>
-                                    </svg>
-                                </li>
-                            @endforeach
-                            
                         </ul>
                     </div>
                 </div>
@@ -176,21 +162,30 @@
                 
                 <div class="flex flex-col justify-center gap-5 sm:gap-3">
                     <div class="flex flex-row">
-                        <span class="font-roboto_medium w-auto text-white bg-[#010101] rounded-3xl px-3 py-1">Sobre Pheonix Fitness</span>
+                        @if($textoshome->subtitle1section)
+                        <span class="font-roboto_medium w-auto text-white bg-[#010101] rounded-3xl px-3 py-1">{{$textoshome->subtitle1section}}</span>
+                        @endif
                     </div>
-                    <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl text-[#010101]">
-                        Mas que un gimnasio,  <span class="text-[#FB4535]">somos una comunidad</span>
-                    </h2>
-                    <div class="text-[#010101] text-base font-roboto_regular">
-                        <p>Nuestros valores inspiran cada entrenamiento y cada historia de éxito.</p>
-                    </div>
+
+                    @if($textoshome->title1section)
+                        <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl text-[#010101]">
+                            {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoshome->title1section) !!}
+                        </h2>
+                    @endif
+
+                    @if($textoshome->description1section)    
+                        <div class="text-[#010101] text-base font-roboto_regular">
+                            <p>{{$textoshome->description1section}}</p>
+                        </div>
+                    @endif
+                    
                     <div class="flex flex-row items-start justify-start mt-2">
-                        <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
+                        <a href="{{route('nosotros')}}"><div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
                             Conoce más 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                        </div>
+                        </div></a>
                     </div>
                 </div>
       
@@ -203,18 +198,21 @@
         
         <section class="pt-12 xl:pt-16 bg-[#F2F2F2] px-[5%] xl:px-[8%]">
             <div class="grid grid-cols-1 xl:grid-cols-2 w-full gap-12 xl:gap-16">
-          
+                
+                @if($textoshome->title2section)
+                    <div class="flex flex-col justify-start gap-5 lg:gap-7">
+                        <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
+                            {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoshome->title2section) !!}
+                        </h2>
+                    </div>
+                @endif
+
                 <div class="flex flex-col justify-start gap-5 lg:gap-7">
-                    <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
-                        Descubre <span class="text-[#FB4535]"> nuestras </span>disciplinas
-                    </h2>
-                </div>
-      
-                <div class="flex flex-col justify-start gap-5 lg:gap-7">
-                  <div class="text-[#010101] text-base font-roboto_regular">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. 
-                      Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat.</p>
-                  </div>
+                    @if($textoshome->description2section)
+                        <div class="text-[#010101] text-base font-roboto_regular">
+                            <p>{{$textoshome->description2section}}</p>
+                        </div>
+                    @endif
                 </div>
       
             </div>   
@@ -258,24 +256,33 @@
         @endif        
 
         @if(count($categorias) > 0)
-            <section class="w-full px-[5%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/bannerphoenix.png') }}');">
-                <div class="grid grid-cols-1 md:grid-cols-3 w-full">
-                    <div class="md:col-span-2 flex flex-col gap-3">
-                        <div class="flex flex-row">
-                            <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">Team Pheonix Fitness</span>
-                        </div>
-                        <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white xl:line-clamp-2">
-                            Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
-                        </h2>
-                        <div class="flex flex-row items-center justify-start">
-                            <a href="{{route('catalogo', $categorias[0]->id)}}">
-                                <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
-                                    Let´s Go!
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
+            <section class="w-full relative flex flex-col" >
+                <img class="w-full h-full p-0 size-full object-cover object-center absolute z-10" src="{{ asset($textoshome->url_image3section) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/bannerphoenix.png') }}';" />
+                <div class="px-[5%] py-20">
+                    <div class="grid grid-cols-1 md:grid-cols-3 w-full z-20 relative">
+                        <div class="md:col-span-2 flex flex-col gap-3">
+                            @if($textoshome->subtitle3section)
+                                <div class="flex flex-row">
+                                    <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">{{$textoshome->subtitle3section}}</span>
                                 </div>
-                            </a>
+                            @endif
+
+                            @if($textoshome->title3section)
+                                <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white xl:line-clamp-2">
+                                    {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoshome->title3section) !!}
+                                </h2>
+                            @endif
+
+                            <div class="flex flex-row items-center justify-start">
+                                <a href="{{route('catalogo', $categorias[0]->id)}}">
+                                    <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
+                                        Let´s Go!
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -309,12 +316,12 @@
                                             </div>
                                         </div>
                                         <div class="flex flex-row justify-center">
-                                            <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
+                                            <a href="{{route('contacto')}}"><div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
                                                 Sé parte de la familia Phoenix 
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                     <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                 </svg>
-                                            </div>
+                                            </div></a>
                                         </div>
                                     </div>
                                 </div>
@@ -852,7 +859,7 @@
             slidesPerView: 1,
             spaceBetween: 10,
             centeredSlides: false,
-            initialSlide: 1,
+            initialSlide: 0,
             grabCursor: true,
             loop: true,
              autoplay: {

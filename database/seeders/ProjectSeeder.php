@@ -22,30 +22,6 @@ class ProjectSeeder extends Seeder
                 'created_at' => '2024-08-02 21:33:46',
                 'updated_at' => '2024-08-02 23:57:40',
             ],
-            [
-                'titulo' => 'La oportunidad',
-                'descripcion' => 'Quisque pharetra aliquet nibh bibendum vestibulum. Praesent mollis velit at dui venenatis, eu egestas neque suscipit. Maecenas et molestie augue, et rutrum augue. Aliquam mattis urna et nisi dignissim mattis.',
-                'imagen' => 'storage/images/imagen/i4pfzlPd8d_Ima2.png',
-                'status' => 1,
-                'created_at' => '2024-08-02 21:33:56',
-                'updated_at' => '2024-08-03 00:22:01',
-            ],
-            [
-                'titulo' => 'Lo que hicimos',
-                'descripcion' => 'Quisque pharetra aliquet nibh bibendum vestibulum. Praesent mollis velit at dui venenatis, eu egestas neque suscipit. Maecenas et molestie augue, et rutrum augue. Aliquam mattis urna et nisi dignissim mattis.',
-                'imagen' => 'storage/images/imagen/i4pfzlPd8d_Ima2.png',
-                'status' => 1,
-                'created_at' => '2024-08-02 21:33:56',
-                'updated_at' => '2024-08-03 00:22:01',
-            ],
-            [
-                'titulo' => 'El resultado',
-                'descripcion' => 'Quisque pharetra aliquet nibh bibendum vestibulum. Praesent mollis velit at dui venenatis, eu egestas neque suscipit. Maecenas et molestie augue, et rutrum augue. Aliquam mattis urna et nisi dignissim mattis.',
-                'imagen' => 'storage/images/imagen/i4pfzlPd8d_Ima2.png',
-                'status' => 1,
-                'created_at' => '2024-08-02 21:33:56',
-                'updated_at' => '2024-08-03 00:22:01',
-            ],
         ]);
     }
     

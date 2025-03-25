@@ -44,17 +44,16 @@ class DatabaseSeeder extends Seeder
             //BeneficiosSeeder::class,
             //SliderSeeder::class,
             // SubCategorySeeder::class,
-            
             StatusSeeder::class,
             PricesTableSeeder::class,
             PoliticasDatos::class,
             AboutUsSeeder::class,
-            ProjectSeeder::class,
-            HomeViewSeeder::class,
+            
             StrengthSeeder::class,
             ShortcodeSeeder::class,
             NewUserSeeder::class,
-            
+            HomeViewSeeder::class,
+            NosotrosViewSeeder::class,
             //ServiceSeeder::class,
         ]);
         

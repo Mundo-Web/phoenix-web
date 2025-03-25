@@ -161,7 +161,7 @@ class CategoryController extends Controller
             }
         }
 
-        return redirect()->route('categorias.index')->with('success', 'Categoria creada');
+        return redirect()->route('categorias.index')->with('success', 'Item creado');
     }
 
     /**
@@ -239,7 +239,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('categorias.index')->with('success', 'Categoria modificada');
+        return redirect()->route('categorias.index')->with('success', 'Item modificado');
     }
 
     /**
@@ -261,7 +261,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return response()->json(['message' => 'Categoría eliminada']);
+        return response()->json(['message' => 'Item eliminado']);
     }
 
 
@@ -273,7 +273,7 @@ class CategoryController extends Controller
 
 
         if ($cantidad >= 100000 && $request->status == 1) {
-            return response()->json(['message' => 'Solo puedes destacar 4 categorias'], 409);
+            return response()->json(['message' => 'Solo puedes destacar 100000 categorias'], 409);
         }
 
 

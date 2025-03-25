@@ -28,6 +28,7 @@ use App\Models\Galerie;
 use App\Models\GaleryCategory;
 use App\Models\HistoricoCupon;
 use App\Models\HomeView;
+use App\Models\NosotrosView;
 use App\Models\Offer;
 use App\Models\PolyticsCondition;
 use App\Models\Popup;
@@ -276,11 +277,19 @@ class IndexController extends Controller
   public function nosotros()
   {
     $nosotros = AboutUs::all();
-    $valores = Service::where('status', true)->where('visible', true)->get();
-    $personal = Project::where('status', true)->get();
-    $benefit = Strength::where('status', '=', 1)->get();
+    $textosnosotros = NosotrosView::where('id', 1)->first();
+    $valores = Service::where('status', true)->where('visible', true)
+    ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+    ->orderByDesc('created_at')
+    ->get();
+    $personal = Project::where('status', true)->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
+    $benefit = Strength::where('status', '=', true)->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
 
-    return view('public.nosotros', compact('nosotros', 'benefit', 'valores','personal'));
+    return view('public.nosotros', compact('nosotros', 'benefit', 'valores','personal','textosnosotros'));
   }
 
 

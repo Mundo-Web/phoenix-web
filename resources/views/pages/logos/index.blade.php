@@ -19,7 +19,7 @@
         <!-- Table -->
         <div class="overflow-x-auto">
 
-          <table id="tabladatos" class="display text-lg" style="width:100%">
+          <table id="tabladatos" class="display text-lg  dark:even:!bg-gray-100/50" style="width:100%">
             <thead>
               <tr>
                 <th class="w-10">Orden</th>
@@ -36,7 +36,7 @@
               @foreach ($logos as $logo)
                 <tr>
                   <td>{{$logo->order}}</td>
-                  <td class="dark:bg-slate-800 bg-slate-200"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
+                  <td class="dark:bg-slate-800 bg-slate-200"><img class="w-16 h-16 object-contain mx-auto" src="{{ asset($logo->url_image) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td>
                   {{-- <td class="dark:bg-slate-800"><img class="w-20 object-contain mx-auto" src="{{ asset($logo->url_image2) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"/></td> --}}
                   <td class="dark:bg-slate-800">{{ $logo->title }}</td>
                    {{-- <td class="">
@@ -73,7 +73,7 @@
                     </form>
                   </td>
                   
-                  <td class="flex flex-row justify-center items-center gap-5">
+                  <td class="flex flex-row justify-center items-center gap-5 py-5">
                     <a href="{{ route('logos.edit', $logo->id) }}"
                       class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
                         class="fa-regular fa-pen-to-square"></i></a>

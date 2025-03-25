@@ -15,23 +15,16 @@
   "_JSEncrypt-jwo8Dr6z.js": {
     "file": "assets/JSEncrypt-jwo8Dr6z.js"
   },
-  "_ProductCard-jm1PMACs.js": {
-    "file": "assets/ProductCard-jm1PMACs.js",
+  "_ProductCard-6hLppRGz.js": {
+    "file": "assets/ProductCard-6hLppRGz.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
-      "_arrayJoin-Fk5sgFcM.js",
+      "_tippy-react.esm-eBTWK2zw.js",
       "resources/js/components/form/TippyButton.jsx"
     ]
   },
   "__commonjsHelpers-4gQjN7DL.js": {
     "file": "assets/_commonjsHelpers-4gQjN7DL.js"
-  },
-  "_arrayJoin-Fk5sgFcM.js": {
-    "file": "assets/arrayJoin-Fk5sgFcM.js",
-    "imports": [
-      "resources/js/components/Filter/FilterContainer.jsx",
-      "_index-GBzf7Cls.js"
-    ]
   },
   "_axios-_sX4vCAy.js": {
     "file": "assets/axios-_sX4vCAy.js"
@@ -48,20 +41,27 @@
       "__commonjsHelpers-4gQjN7DL.js"
     ]
   },
+  "_tippy-react.esm-eBTWK2zw.js": {
+    "file": "assets/tippy-react.esm-eBTWK2zw.js",
+    "imports": [
+      "resources/js/components/Filter/FilterContainer.jsx",
+      "_index-GBzf7Cls.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-I1dSKW7v.css",
+    "file": "assets/app-osh5thgq.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
   "resources/js/Admin/Offers.jsx": {
-    "file": "assets/Offers-yo6MFlHa.js",
+    "file": "assets/Offers-VbM8Wo47.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-Il069F1S.js",
       "resources/js/components/form/SelectAPIFormGroup.jsx",
       "resources/js/components/Offer/OfferCard.jsx",
-      "_arrayJoin-Fk5sgFcM.js",
+      "_tippy-react.esm-eBTWK2zw.js",
       "resources/js/components/form/TippyButton.jsx",
       "resources/js/components/Offer/OfferForm.jsx",
       "__commonjsHelpers-4gQjN7DL.js",
@@ -93,18 +93,18 @@
     "src": "resources/js/Admin/Products.jsx"
   },
   "resources/js/Catalogo.jsx": {
-    "file": "assets/Catalogo-6Ny_Kbfy.js",
+    "file": "assets/Catalogo-EOb33tG8.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-Il069F1S.js",
-      "_ProductCard-jm1PMACs.js",
+      "_ProductCard-6hLppRGz.js",
       "resources/js/components/form/SelectAPIFormGroup.jsx",
-      "_arrayJoin-Fk5sgFcM.js",
       "_axios-_sX4vCAy.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",
       "resources/js/Utils/CreateReactScript.jsx",
+      "_tippy-react.esm-eBTWK2zw.js",
       "resources/js/components/form/TippyButton.jsx"
     ],
     "isEntry": true,
@@ -145,18 +145,18 @@
     "src": "resources/js/Login.jsx"
   },
   "resources/js/Ofertas.jsx": {
-    "file": "assets/Ofertas-oJZlpJwE.js",
+    "file": "assets/Ofertas-Jfiv7Tvz.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-Il069F1S.js",
-      "_ProductCard-jm1PMACs.js",
+      "_ProductCard-6hLppRGz.js",
       "resources/js/components/form/SelectAPIFormGroup.jsx",
-      "_arrayJoin-Fk5sgFcM.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",
       "resources/js/Utils/CreateReactScript.jsx",
       "_axios-_sX4vCAy.js",
+      "_tippy-react.esm-eBTWK2zw.js",
       "resources/js/components/form/TippyButton.jsx"
     ],
     "isEntry": true,

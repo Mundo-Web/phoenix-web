@@ -21,17 +21,19 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th>Titulo </th>
+                <th class="w-24">Orden</th>
+                <th class="w-24">Titulo</th>
                 <th>Descripcion</th>
-                <th>Imagen</th>
-                <th>Visible</th>
-                <th>Acciones</th>
+                <th class="w-24">Imagen</th>
+                <th class="w-24">Visible</th>
+                <th class="w-24">Acciones</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($project as $item)
                 <tr>
+                  <td>{{ $item->order ?? "Sin orden"}}</td>
                   <td>{{ $item->titulo }}</td>
                   <td>{{ Str::substr($item->descripcion, 0, 50) }}</td>
 
@@ -56,7 +58,7 @@
 
                   </td>
 
-                  <td class="flex flex-row justify-end items-center gap-5">
+                  <td class="flex flex-row justify-end items-center gap-5 py-5">
 
                     <a href="{{ route('project.edit', $item->id) }}"
                       class="bg-yellow-400 px-3 py-2 rounded text-white  "><i
@@ -76,7 +78,8 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Titulo </th>
+                <th>Orden</th>
+                <th>Titulo</th>
                 <th>Descripcion</th>
                 <th>Imagen</th>
                 <th>Visible</th>

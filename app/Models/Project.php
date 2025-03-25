@@ -10,6 +10,7 @@ class Project extends Model
     use HasFactory;
 
     protected $filiable = [
+        'order',
         'titulo',
         'descripcion',
         'imagen',

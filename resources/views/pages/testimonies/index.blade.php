@@ -20,19 +20,19 @@
                     <table id="tabladatos" class="display text-lg" style="width:100%" >
                         <thead>
                             <tr>
+                                <th class="w-28">Imagen</th>
                                 <th>Nombre</th>
-                                {{-- <th>Ocupación</th> --}}
                                 <th>Testimonio</th>
                                 <th class="w-32">Visible</th>
                                 <th class="w-32">Acciones</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="even:bg-gray-50 dark:even:!bg-gray-100/50">
 
                             @foreach($testimony as $item)
                                 <tr>
+                                    <td class="dark:bg-slate-800"><div class="w-16 h-16 rounded-full overflow-hidden"> <img class="w-16 h-16 object-contain" src="{{asset($item->email)}}"> </div></td>
                                     <td class="dark:bg-slate-800">{{$item->name}}</td>
-                                    {{-- <td class="dark:bg-slate-800">{{$item->ocupation}}</td> --}}
                                     <td class="dark:bg-slate-800">{{ Str::limit($item->testimonie, 100) }}</td>
                                     <td class="dark:bg-slate-800">
                                         <form method="POST" action="">
@@ -67,8 +67,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>Imagen</th>
                                 <th>Nombre</th>
-                                {{-- <th>Ocupación</th> --}}
                                 <th>Testimonio</th>
                                 <th>Visible</th>
                                 <th>Acciones</th>

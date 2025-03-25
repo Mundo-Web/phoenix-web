@@ -57,6 +57,7 @@ use App\Http\Controllers\StatusController;
 use App\Http\Controllers\StrengthController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ValoresAtributosController;
+use App\Http\Controllers\NosotrosViewController;
 
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TemporalyImageController;
@@ -180,6 +181,9 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
 
         //Textos Home
         Route::resource('/homeview', HomeViewController::class);
+
+        //Textos Nosotros
+        Route::resource('/nosotrosview', NosotrosViewController::class);
         
         //Testimonies
         Route::resource('/testimonios', TestimonyController::class);

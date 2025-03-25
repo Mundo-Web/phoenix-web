@@ -20,7 +20,8 @@
                     <table id="tabladatos" class="display text-lg" style="width:100%" >
                         <thead>
                             <tr>
-                                <th class="w-32">Imagen</th>
+                                <th class="w-4">Orden</th>
+                                <th class="w-24">Imagen</th>
                                 <th>Titulo</th>
                                 <th class="w-24">Visible</th>
                                 <th class="w-24">Acciones</th>
@@ -29,8 +30,9 @@
                         <tbody>
 
                             @foreach($servicios as $item)
-                                <tr >
-                                    <td class="px-3 py-2 dark:bg-slate-800"><img class="w-20" src="{{ asset($item->url_image.$item->name_image) }}" alt=""></td>
+                                <tr>
+                                    <td>{{$item->order ?? "Sin orden"}}</td>
+                                    <td class="px-3 py-2 dark:bg-slate-800"><img class="w-16 h-16 rounded-full object-contain" src="{{ asset($item->url_image.$item->name_image) }}" alt=""></td>
                                     <td class="dark:bg-slate-800">{{$item->title}}</td>
                                     <td class="dark:bg-slate-800 mx-auto">
                                         <form method="POST" action="">
@@ -44,11 +46,8 @@
                                             id='{{'v_'.$item->id}}' data-field='visible' data-idService='{{$item->id}}' data-titleService='{{$item->title}}' {{$item->visible == 1 ? 'checked' : ''}}>
                                             <label for="{{'v_'.$item->id}}"></label>
                                          </form>
-
-                                       
-
                                     </td>
-                                    <td class="flex flex-row justify-center items-center gap-5 dark:bg-slate-800">
+                                    <td class="flex flex-row justify-center items-center gap-5 dark:bg-slate-800 py-5">
                                   
                                         <a href="{{ route('servicios.edit', $item->id) }}" class="bg-yellow-400 px-3 py-2 rounded text-white  "><i class="fa-regular fa-pen-to-square"></i></a>
                                         {{-- {{  route('servicios.destroy', $item->id) }} --}}
@@ -65,6 +64,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
+                                <th>Orden</th>
                                 <th>Imagen</th>
                                 <th>Titulo</th>
                                 <th>Visible</th>

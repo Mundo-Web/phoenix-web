@@ -20,8 +20,10 @@ class LogosClientController extends Controller
     public function index()
     {
         $logos = ClientLogos::where("status", "=", true)
-        ->orderBy('order', 'asc')
+        ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
         ->get();
+        
         return view('pages.logos.index', compact('logos'));
     }
 
@@ -83,7 +85,7 @@ class LogosClientController extends Controller
         $logo->order = $request->order;
         $logo->status = 1;
         $logo->save();
-        return redirect()->route('logos.index')->with('success', 'Publicación creado exitosamente.');
+        return redirect()->route('logos.index')->with('success', 'Item creado exitosamente.');
     }
 
     /**
@@ -143,7 +145,7 @@ class LogosClientController extends Controller
             $logo->description = $request->description;
 			$logo->save();
 
-			return redirect()->route('logos.index')->with('success', 'Publicación creado exitosamente.');
+			return redirect()->route('logos.index')->with('success', 'Item creado exitosamente.');
 
 
 		} catch (\Throwable $th) {
@@ -175,7 +177,7 @@ class LogosClientController extends Controller
 
         // Eliminar el logo de la base de datos
         $logo->delete();
-        return response()->json(['message'=>'Logo eliminado']);
+        return response()->json(['message'=>'Item eliminado']);
     }
 
 

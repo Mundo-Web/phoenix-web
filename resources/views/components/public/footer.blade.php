@@ -45,6 +45,11 @@
             <a href="{{ route('index') }}">
                 <img src="{{ asset('images/svg/logofooterf.svg') }}" alt="Phoenix" class="w-[150px]" />
             </a>
+
+            <span class="text-[#FFF9F1] font-galano_regular font-normal text-text14 line-clamp-3 max-w-xs">
+                {{$general[0]->aboutus}}
+            </span>
+
         </div>
 
         <div class="md:col-span-2 grid grid-cols-1 lg:grid-cols-7 gap-10 md:gap-5 justify-start items-start">

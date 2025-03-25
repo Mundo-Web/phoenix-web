@@ -10,7 +10,7 @@
                 <!-- Table -->
                 <div class="overflow-x-auto">
                     
-                    <table id="tabladatos" class="display text-lg" style="width:100%">
+                    <table id="tabladatos" class="display text-lg dark:even:!bg-gray-100/50" style="width:100%">
                         <thead>
                             <tr>
                                 <th>Nombre</th>

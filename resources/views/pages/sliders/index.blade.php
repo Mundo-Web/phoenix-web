@@ -20,11 +20,11 @@
                     <table id="tabladatos" class="display text-lg" style="width:100%" >
                         <thead>
                             <tr>
-                                <th>Orden</th>
-                                <th>Titulo</th>
+                                <th class="w-4">Orden</th>
+                                <th class="w-28">Titulo</th>
                                 <th>Foto</th>
-                                <th>Visible</th>
-                                <th>Acciones</th>
+                                <th class="w-28">Visible</th>
+                                <th class="w-28">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,7 +50,7 @@
                                        
 
                                     </td>
-                                    <td class="flex flex-row justify-end items-center gap-5">
+                                    <td class="flex flex-row justify-center items-center gap-5 py-5">
                                   
                                         <a href="{{ route('slider.edit', $item->id) }}" class="bg-yellow-400 px-3 py-2 rounded text-white  "><i class="fa-regular fa-pen-to-square"></i></a>
                                         {{-- {{  route('servicios.destroy', $item->id) }} --}}

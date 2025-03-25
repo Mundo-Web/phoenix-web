@@ -19,7 +19,10 @@ class SliderController extends Controller
      */
     public function index()
     {
-        $slider = Slider::where("status", "=", true)->orderBy('order', 'asc')->get();
+        $slider = Slider::where("status", "=", true)
+        ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
 
         return view('pages.sliders.index', compact('slider'));
     }
@@ -92,7 +95,7 @@ class SliderController extends Controller
 
         $slider ->save();
 
-        return redirect()->route('slider.index')->with('success', 'Slider creado exitosamente.');
+        return redirect()->route('slider.index')->with('success', 'Item creado exitosamente.');
     }
 
     /**
@@ -179,7 +182,7 @@ class SliderController extends Controller
 
         $slider->update();
 
-        return redirect()->route('slider.index')->with('success', 'Slider actualizado exitosamente.');
+        return redirect()->route('slider.index')->with('success', 'Item actualizado exitosamente.');
     }
 
     /**
@@ -205,7 +208,7 @@ class SliderController extends Controller
         $service->save();
 
         // Devuelvo una respuesta JSON u otra respuesta según necesites
-        return response()->json(['message' => 'Slider eliminado.']);
+        return response()->json(['message' => 'Item eliminado.']);
     }
 
 
@@ -226,6 +229,6 @@ class SliderController extends Controller
 
         $service->save();
 
-        return response()->json(['message' => 'Slider eliminado.']);
+        return response()->json(['message' => 'Item eliminado.']);
     }
 }

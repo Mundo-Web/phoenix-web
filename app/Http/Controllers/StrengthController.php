@@ -16,7 +16,9 @@ class StrengthController extends Controller
 	 */
 	public function index()
 	{
-		$strength = Strength::orderBy('order', 'asc')->get();
+		$strength = Strength::orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
 		return view('pages.strength.index', compact('strength'));
 	}
 
@@ -78,7 +80,7 @@ class StrengthController extends Controller
 			$fortaleza->order = $request->order;
 			$fortaleza->save();
 
-			return redirect()->route('strength.index')->with('success', 'Publicación creado exitosamente.');
+			return redirect()->route('strength.index')->with('success', 'Item creado exitosamente.');
 
 
 		} catch (\Throwable $th) {
@@ -150,7 +152,7 @@ class StrengthController extends Controller
 			$fortaleza->order = $request->order;
 			$fortaleza->save();
 
-			return redirect()->route('strength.index')->with('success', 'Publicación creado exitosamente.');
+			return redirect()->route('strength.index')->with('success', 'Item creado exitosamente.');
 
 
 		} catch (\Throwable $th) {
@@ -173,7 +175,7 @@ class StrengthController extends Controller
 		}
 
 		$strength->delete();
-		return response()->json(['message'=>'Logo eliminado']);
+		return response()->json(['message'=>'Item eliminado']);
 	}
 
 	public function updateVisible(Request $request){
@@ -183,6 +185,6 @@ class StrengthController extends Controller
 		$staff->status = $stauts; 
 
 		$staff->save();
-		return response()->json(['message'=> 'registro actualizado']);
+		return response()->json(['message'=> 'Item actualizado']);
 }
 }

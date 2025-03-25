@@ -78,8 +78,11 @@
         <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-sliders-h">Beneficios</x-menu.item>
         {{-- <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item> --}}
         <x-menu.item id="strength" href="{{ route('strength.index') }}"  icon="fa-regular fa-clipboard">Estadisticas</x-menu.item>
+        <x-menu.item id="project" href="{{ route('project.index') }}" icon="fas fa-users">Equipo</x-menu.item> 
+
+        <x-menu.item id="faqs" href="{{ route('faqs.index') }}" icon="fas fa-address-card">Preguntas Frecuentes</x-menu.item>
   
-        <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">Reglas de descuento</x-menu.item>
+        {{-- <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">Reglas de descuento</x-menu.item> --}}
         {{-- <x-menu.item id="cupones" href="{{ route('cupones.index') }}" icon="fa-solid fa-ticket">Cupones</x-menu.item> --}}
         {{-- <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">Costos de Envio </x-menu.item> --}}
         {{-- <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">Estados de pedidos</x-menu.item> --}}
@@ -90,8 +93,7 @@
         {{-- <x-menu.item id="tiempo-y-costos-envio" href="{{ route('tiempo-y-costos-envio.edit', 1) }}" icon="fas fa-file-contract">Tiempo y Costos de Envío</x-menu.item> --}}
         {{-- <x-menu.item id="plazos-de-reembolso" href="{{ route('plazos-de-reembolso.edit', 1) }}" icon="fas fa-file-contract">Plazos de Reembolso</x-menu.item> --}}
         <x-menu.item id="homeview" href="{{ route('homeview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Home</x-menu.item> 
-        <x-menu.item id="sobrenosotros" href="{{ route('aboutus.index') }}" icon="fas fa-pencil-alt">Sobre Nosotros</x-menu.item> 
-        <x-menu.item id="rse" href="{{ route('project.index') }}" icon="fas fa-users">Equipo</x-menu.item> 
+        <x-menu.item id="nosotrosview" href="{{ route('nosotrosview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Nosotros</x-menu.item> 
         {{-- <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item> --}}
         {{-- <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item> --}}
         {{-- <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item> --}}
@@ -100,7 +102,6 @@
         {{-- <x-menu.item id="nuestras-tiendas" href="{{ route('nuestras-tiendas.edit', 1) }}" icon="fas fa-file-contract">Nuestras tiendas</x-menu.item> --}}
 
        
-        <x-menu.item id="faqs" href="{{ route('faqs.index') }}" icon="fas fa-address-card">Preguntas Frecuentes</x-menu.item>
         {{-- <x-menu.item id="staff" href="{{ route('staff.index') }}" icon="fas fa-users">Personal</x-menu.item> --}}
         
         
