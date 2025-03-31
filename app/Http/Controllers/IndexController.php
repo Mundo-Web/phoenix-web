@@ -104,7 +104,12 @@ class IndexController extends Controller
     $blogs = Blog::where('status', '=', 1)->where('visible', '=', 1)->orderBy('created_at', 'desc')->take(2)->get();
     $banners = Banners::where('status',  1)->where('visible',  1)->get()->toArray();
 
-    $categorias = Category::where('status', '=', 1)->where('destacar', '=', 1)->where('visible', '=', 1)->get();
+    // $categorias = Category::where('status', '=', 1)->where('visible', '=', 1)->get();
+    $categorias = Category::where("status", "=", true)->where('destacar', '=', 1)->where('visible', 1)
+        ->orderByRaw("CASE WHEN `order` IS NULL THEN 1 ELSE 0 END, `order` ASC")
+        ->orderByDesc('created_at')
+        ->get();
+        
     $subcategorias = SubCategory::where('destacar', '=', 1)->where('visible', '=', 1)->orderBy('order', 'asc')->get();
     $categoriasAll = Category::where('visible', '=', 1)->get();
     $destacados = Products::where('products.destacar', '=', 1)->where('products.status', '=', 1)
