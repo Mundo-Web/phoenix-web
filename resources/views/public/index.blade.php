@@ -188,9 +188,9 @@
                         </div></a>
                     </div>
                 </div>
-      
+                
                 <div class="flex flex-col justify-start items-start">
-                    <img class="object-cover aspect-square max-h-[500px] w-full" src="{{ asset('images/imagen/imagenosotros.png') }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/imagenosotros.png') }}';"  />
+                    <img class="object-contain aspect-square max-h-[500px] w-full" src="{{ asset($textoshome->url_image1section) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/imagenosotros.png') }}';"  />
                 </div>
       
             </div>
