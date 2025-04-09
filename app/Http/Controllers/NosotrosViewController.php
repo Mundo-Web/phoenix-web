@@ -64,8 +64,8 @@ class NosotrosViewController extends Controller
     {
         $nosotros = NosotrosView::findOrfail($id); 
 
-        if ($request->hasFile("url_image1section")) {
-            $file = $request->file('url_image1section');
+        if ($request->hasFile("imagen")) {
+            $file = $request->file('imagen');
             $routeImg = 'storage/images/nosotroshome/';
             $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
       
@@ -75,8 +75,8 @@ class NosotrosViewController extends Controller
            
         } 
 
-        if ($request->hasFile("url_image2section")) {
-            $file = $request->file('url_image2section');
+        if ($request->hasFile("imagensecond")) {
+            $file = $request->file('imagensecond');
             $routeImg = 'storage/images/nosotroshome/';
             $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
       
@@ -86,8 +86,8 @@ class NosotrosViewController extends Controller
            
         } 
 
-        if ($request->hasFile("url_image3section")) {
-            $file = $request->file('url_image3section');
+        if ($request->hasFile("imagenthird")) {
+            $file = $request->file('imagenthird');
             $routeImg = 'storage/images/nosotroshome/';
             $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
       

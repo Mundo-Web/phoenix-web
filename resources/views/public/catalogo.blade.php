@@ -52,14 +52,24 @@
               </div>
           </div>    
           <div class="w-full relative flex justify-center items-center">  
-                <div class="bg-[#F0F1F0] flex flex-wrap justify-center items-center max-w-5xl gap-10 rounded-3xl p-6">
-                    @foreach ($categories as $categorias)
-                        <a href="{{route('catalogo', $categorias->id)}}">
-                            <h2 class="@if($id_cat == $categorias->id) activo @endif underline-this leading-none font-akira_expanded max-w-[300px] text-center text-2xl text-[#010101] basis-auto">
-                                {{$categorias->name}}
-                            </h2>
-                        </a>
-                    @endforeach
+                <div class="bg-[#F0F1F0]  justify-center items-center max-w-5xl gap-10 rounded-3xl p-6">
+                        <div>
+                            <div class="swiper carrusel_cat h-max">
+                                <div class="swiper-wrapper">
+                                    @foreach ($categories as $categorias)
+                                        <div class="swiper-slide">
+                                            <div class="flex flex-col justify-center items-center">
+                                                <a href="{{route('catalogo', $categorias->id)}}" >
+                                                    <h2 class="@if($id_cat == $categorias->id) activo @endif underline-this leading-none font-akira_expanded max-w-[300px] text-center text-2xl text-[#010101] basis-auto">
+                                                        {{$categorias->name}}
+                                                    </h2>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
                 </div>
           </div>
       </div>
@@ -77,16 +87,6 @@
                     <p class="text-[#010101] text-base font-roboto_regular">
                         {{$categoria->description}}
                     </p>
-
-                    <div class="flex flex-row">
-                        <a href="#planes"><div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
-                            Conoce más 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div></a>
-                    </div>
-
                 </div>
                
                 <div class="flex flex-col gap-3 w-full">
@@ -428,6 +428,39 @@
                 nextEl: ".swiper-galeria-next",
                 prevEl: ".swiper-galeria-prev",
             },
+      });
+
+      var carrusel_cat = new Swiper(".carrusel_cat", {
+      slidesPerView: 3,
+      autoHeight: true,
+      spaceBetween:0,
+      loop: true,
+      centeredSlides: false,
+      initialSlide: 0, 
+      allowTouchMove: true,
+      autoplay: {
+        delay: 5500,
+        disableOnInteraction: true,
+        pauseOnMouseEnter: true
+      },
+      navigation: {
+                nextEl: ".swiper-galeria-next",
+                prevEl: ".swiper-galeria-prev",
+            },
+      breakpoints: {
+            0: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+            },
+            450: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+            },
+            950: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+            }
+       },
       });
   </script>
   <script>

@@ -12,6 +12,9 @@
                     <p> <span class="font-bold">Correo: </span><span> {{ $message->email ?? "Sin correo"}} </span></p> 
                     <p> <span class="font-bold">Teléfono: </span><span> {{ $message->phone ?? "Sin telefono"}} </span></p> 
                     <p> <span class="font-bold">Mensaje: </span><span class="mb-5">{{ $message->message ?? "Sin mensaje" }}</span></p> 
+                    <p> <span class="font-bold">Cumpleaños: </span><span class="mb-5">{{ $message->birthay ?? "Sin mensaje" }}</span></p> 
+                    <p> <span class="font-bold">Objetivo: </span><span class="mb-5">{{ $message->objective ?? "Sin mensaje" }}</span></p> 
+                    <p> <span class="font-bold">Otro: </span><span class="mb-5">{{ $message->objective ?? "Sin mensaje" }}</span></p> 
                     <div>
                       <a href="{{ route('mensajes.index') }}" class="bg-blue-500 px-4 py-2 rounded text-white"><span><i
                                 class="fa-solid fa-arrow-left mr-2 mt-3"></i></span> Volver</a>
