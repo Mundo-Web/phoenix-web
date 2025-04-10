@@ -232,7 +232,7 @@
           </h2>
           <div>
             <div class="flex flex-col gap-3 font-roboto_medium">
-              {{-- @auth
+              @auth
                 <div class="text-[#141718] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                   <h2 class="font-bold text-[16px] text-[#010101]">
                     Código de cupon
@@ -253,16 +253,16 @@
                     </button>
                   </div>
                 </div>
-              @endauth --}}
+              @endauth
 
               <div class="text-[#010101] hidden justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Envío</p>
                 <p id="precioEnvio" class="font-semibold text-[16px]">Gratis</p>
               </div>
 
-              {{-- <div id="descuentocupon">
+              <div id="descuentocupon">
                 
-              </div> --}}
+              </div>
 
               <div class="text-[#010101] flex justify-between items-center border-b-[1px] border-[#E8ECEF] pb-3">
                 <p class="font-normal text-[16px]">Subtotal</p>
