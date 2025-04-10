@@ -58,6 +58,7 @@ use App\Http\Controllers\StrengthController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ValoresAtributosController;
 use App\Http\Controllers\NosotrosViewController;
+use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TemporalyImageController;
@@ -140,6 +141,9 @@ Route::post('/uploadvoucher', [TemporalyImageController::class, 'uploadvoucher']
 Route::delete('/deletevoucher', [TemporalyImageController::class, 'deletevoucher'])->name('deletevoucher');
 Route::post('/guardarvoucher', [SaleController::class, 'guardarvoucher'])->name('guardarvoucher');
 
+Route::post('/guardarcomentario', [CommentController::class, 'store'])->name('comments.store');
+Route::get('/listarcomentarios', [CommentController::class, 'index'])->name('comments.index');
+
 
 Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () {
 
@@ -171,6 +175,12 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         //messages
         Route::resource('/mensajes', MessageController::class);
         Route::post('/mensajes/borrar', [MessageController::class, 'borrar'])->name('mensajes.borrar');
+
+        //comentarios
+        Route::get('/comment/listar', [CommentController::class, 'index'])->name('comentarios.index');
+        Route::get('/comment/listar/{id}', [CommentController::class, 'show'])->name('comentarios.show');
+        Route::post('/comment/borrar', [CommentController::class, 'borrar'])->name('comentarios.borrar');
+        Route::post('/comment/updateVisible', [CommentController::class, 'updateVisible'])->name('comentarios.updateVisible');
 
         //Libro de reclamaciones
         Route::resource('/reclamo', LibroReclamacionesController::class);

@@ -44,6 +44,7 @@ use App\Models\TermsAndCondition;
 use App\Models\User;
 use App\Models\UserDetails;
 use App\Models\Wishlist;
+use App\Models\Comment;
 use Attribute;
 use Culqi\Culqi;
 use Illuminate\Http\Request;
@@ -169,6 +170,12 @@ class IndexController extends Controller
     ->where('status', true)
     ->orderByDesc('id')
     ->get();
+
+    $comments = Comment::where('visible', true)
+    ->where('status', true)
+    ->where('category_id', $id_cat)
+    ->orderBy('created_at', 'desc')
+    ->get();
     
     $galeria = GaleryCategory::where('category_id', '=', $id_cat)->where('visible', true)->where('status', true)->get();
 
@@ -240,7 +247,7 @@ class IndexController extends Controller
       }
     }
 
-    return view('public.catalogo', compact('galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
+    return view('public.catalogo', compact('comments', 'galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
   }
 
   public function ofertas(Request $request, string $id_cat = null)

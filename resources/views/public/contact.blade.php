@@ -133,7 +133,6 @@
                                 <button type="submit"
                                     class="flex flex-row justify-center gap-3 items-center text-lg font-roboto_medium  text-white bg-[#FB4535] py-3 px-6 w-full text-center rounded-3xl">Enviar
                                     formulario
-                                  
                                 </button>
                             </div>
                         </form>

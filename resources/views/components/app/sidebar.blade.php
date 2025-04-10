@@ -56,6 +56,7 @@
         </x-menu.item> --}}
         {{-- <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item> --}}
         <x-menu.item id="testimonios" href="{{ route('testimonios.index') }}" icon="fas fa-star">Testimonios </x-menu.item>
+        <x-menu.item id="comentarios" href="{{ route('comentarios.index') }}" icon="fas fa-star">Comentarios de clientes</x-menu.item>
       </x-menu.group>
 
       <x-menu.group title="Productos">
@@ -63,8 +64,10 @@
         {{-- <x-menu.item id="subcategories" href="{{ route('subcategories.index') }}" icon="fas fa-folder-open">Subcategorias</x-menu.item> --}}
         {{-- <x-menu.item id="tags" href="{{ route('tags.index') }}" icon="fas fa-tag">Etiquetas</x-menu.item> --}}
         <x-menu.item id="products" href="{{ route('products.index') }}" icon="fas fa-box">Productos</x-menu.item>
+        
         <x-menu.item id="logos" href="{{ route('logos.index') }}" icon="fas fa-shapes">Marcas</x-menu.item>
         
+        <x-menu.item id="cupones" href="{{ route('cupones.index') }}" icon="fa-solid fa-ticket">Cupones</x-menu.item>
         
         {{-- <x-menu.item id="offers" href="{{ route('Admin/Offers.jsx') }}" icon="fas fa-boxes">Combos</x-menu.item> --}}
       </x-menu.group>
@@ -83,7 +86,6 @@
         <x-menu.item id="faqs" href="{{ route('faqs.index') }}" icon="fas fa-address-card">Preguntas Frecuentes</x-menu.item>
   
         {{-- <x-menu.item id="reglasdedescuento" href="{{ route('reglasDescuentos.index') }}">Reglas de descuento</x-menu.item> --}}
-        {{-- <x-menu.item id="cupones" href="{{ route('cupones.index') }}" icon="fa-solid fa-ticket">Cupones</x-menu.item> --}}
         {{-- <x-menu.item id="prices" href="{{ route('prices.index') }}" icon="fas fa-truck">Costos de Envio </x-menu.item> --}}
         {{-- <x-menu.item id="estados" href="{{ route('estados.index') }}" icon="fas fa-toggle-on">Estados de pedidos</x-menu.item> --}}
         

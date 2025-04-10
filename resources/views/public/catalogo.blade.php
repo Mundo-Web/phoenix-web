@@ -332,6 +332,101 @@
 
     </section>
   @endif
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 px-[5%] xl:px-[8%] py-10 md:py-14 w-full">
+    
+    <div class="flex flex-col gap-4 rounded-lg">
+        
+        <h2 class="leading-none font-akira_expanded  text-3xl 2xl:text-4xl text-[#010101]">
+            Deja tu <span class="text-[#FB4535]">comentario</span>
+        </h2>
+
+        <form id="commentForm" method="POST" action="{{ route('comments.store') }}" class="flex flex-col gap-4">
+            @csrf
+            {{-- Campo de Nombre --}}
+            <div class="">
+                <label for="name"
+                class="font-roboto_regular font-semibold text-sm 2xl:text-base text-[#010101]">Nombre completo</label>
+                <input name="name" id="name" type="text" placeholder="Nombre completo"
+                    class="mt-1 w-full py-3 px-4 focus:outline-none bg-[#F7F7F7] font-roboto_regular text-sm 2xl:text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+            </div>
+            
+            {{-- Sistema de Estrellas --}}
+            <div class="">
+                <label class="font-roboto_regular font-semibold text-sm 2xl:text-base text-[#010101]">Calificación</label>
+                <div class="star-rating flex items-center">
+                    <input type="radio" id="star1" name="rating" value="1" class="hidden">
+                    <label for="star1" class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400">★</label>
+                    
+                    <input type="radio" id="star2" name="rating" value="2" class="hidden">
+                    <label for="star2" class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400">★</label>
+                    
+                    <input type="radio" id="star3" name="rating" value="3" class="hidden">
+                    <label for="star3" class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400">★</label>
+                    
+                    <input type="radio" id="star4" name="rating" value="4" class="hidden">
+                    <label for="star4" class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400">★</label>
+                    
+                    <input type="radio" id="star5" name="rating" value="5" class="hidden" checked>
+                    <label for="star5" class="star cursor-pointer text-3xl text-gray-300 hover:text-yellow-400">★</label>
+                </div>
+            </div>
+            
+            {{-- Campo de Comentario --}}
+            <div class="w-full">
+                <label for="content" class="font-roboto_regular font-semibold text-sm 2xl:text-base text-[#010101]">Comentario</label>
+                <textarea name="content" id="content" rows="3" cols="30"
+                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-sm 2xl:text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl"
+                    placeholder="Ingresa tu comentario"></textarea>
+            </div>
+
+            {{-- Campo de Categoria --}}
+            <input name="category_id" id="category_id" type="hidden" value="{{ $categoria->id }}" 
+                    class="mt-1 w-full py-3 px-4 focus:outline-none bg-[#F7F7F7] font-roboto_regular text-sm 2xl:text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+
+            {{-- Botón de Enviar --}}
+            <div class="flex justify-end">
+                <button 
+                    type="submit" 
+                    class="flex flex-row justify-center gap-3 items-center text-lg font-roboto_medium  text-white bg-[#FB4535] py-2 px-4 w-full text-center rounded-xl"
+                >
+                    Enviar comentario
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <div class="flex flex-col gap-4">
+        <h2 class="leading-none font-akira_expanded text-2xl md:text-3xl 2xl:text-4xl text-[#010101] mb-4">
+            <span class="text-[#FB4535]">{{ $comments->count() }}</span> Publicaciones
+        </h2>
+        
+        @foreach($comments as $comment)
+        <div class="comment-item bg-white rounded-lg shadow-md p-6">
+            <div class="flex flex-wrap justify-between items-start mb-2">
+                <div>
+                    <h3 class="font-roboto_regular font-semibold text-base md:text-lg 2xl:text-xl text-[#010101]">
+                        {{ $comment->name }}
+                    </h3>
+                    <div class="flex">
+                        @for($i = 1; $i <= 5; $i++)
+                            <span class="text-xl {{ $i <= $comment->rating ? 'text-yellow-400' : 'text-gray-300' }}">★</span>
+                        @endfor
+                    </div>
+                </div>
+                <span class="font-roboto_regular font-semibold text-xs 2xl:text-sm text-[#010101]">
+                    Publicado {{ $comment->created_at->diffForHumans() }}
+                </span>
+            </div>
+            
+            <p class="font-roboto_regular text-sm 2xl:text-base">"{{ $comment->content }}"</p>
+        </div>
+        @endforeach
+    </div>
+  </div>
+  
+
   {{-- <section class="flex flex-col gap-10 w-full px-[5%] pt-10 md:pt-16">
     <div class="flex flex-col gap-2">
         <h2 class="font-galano_bold text-text32 md:text-text40 text-[#082252] leading-none subtitle">
@@ -399,283 +494,418 @@
 @section('scripts_importados')
 
 
-  <script src="{{ asset('js/storage.extend.js') }}"></script>
-  <script>
-    $(document).ready(function () {
-        $(document).on('click', '.galeriatotal', function () {
-            $(`#modalgaleriatotal`).modal({
-                show: true,
-                fadeDuration: 400,
+    <script src="{{ asset('js/storage.extend.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const stars = document.querySelectorAll('.star');
+            const ratingInputs = document.querySelectorAll('input[name="rating"]');
+            
+            // Inicializar con 5 estrellas seleccionadas
+            updateStars(5);
+            
+            stars.forEach(star => {
+                // Evento al hacer clic en una estrella
+                star.addEventListener('click', function() {
+                    const forAttr = this.getAttribute('for');
+                    const selectedRating = document.getElementById(forAttr);
+                    selectedRating.checked = true;
+                    
+                    const value = parseInt(selectedRating.value);
+                    updateStars(value);
+                });
+                
+                // Evento al pasar el mouse sobre una estrella
+                star.addEventListener('mouseover', function() {
+                    const forAttr = this.getAttribute('for');
+                    const value = parseInt(forAttr.replace('star', ''));
+                    
+                    // Iluminar estrellas hasta la posición del mouse
+                    stars.forEach(s => {
+                        const sForAttr = s.getAttribute('for');
+                        const sValue = parseInt(sForAttr.replace('star', ''));
+                        
+                        if (sValue <= value) {
+                            s.classList.add('text-yellow-400');
+                            s.classList.remove('text-gray-300');
+                        } else {
+                            s.classList.add('text-gray-300');
+                            s.classList.remove('text-yellow-400');
+                        }
+                    });
+                });
+            });
+            
+            // Restaurar estrellas seleccionadas cuando el mouse sale del área
+            const starContainer = document.querySelector('.star-rating');
+            starContainer.addEventListener('mouseleave', function() {
+                let selectedValue = 5; // Valor predeterminado
+                
+                ratingInputs.forEach(input => {
+                    if (input.checked) {
+                        selectedValue = parseInt(input.value);
+                    }
+                });
+                
+                updateStars(selectedValue);
+            });
+            
+            // Función para actualizar visualmente las estrellas
+            function updateStars(value) {
+                stars.forEach(star => {
+                    const forAttr = star.getAttribute('for');
+                    const starValue = parseInt(forAttr.replace('star', ''));
+                    
+                    if (starValue <= value) {
+                        star.classList.add('text-yellow-400');
+                        star.classList.remove('text-gray-300');
+                    } else {
+                        star.classList.add('text-gray-300');
+                        star.classList.remove('text-yellow-400');
+                    }
+                });
+            }
+
+            // Manejo del envío del formulario
+            const commentForm = document.getElementById('commentForm');
+
+            $('#commentForm').submit(function(e) {
+                e.preventDefault();
+                
+                // Mostrar loader opcional
+                const submitButton = $(this).find('button[type="submit"]');
+                submitButton.prop('disabled', true);
+                submitButton.html('<i class="fas fa-spinner fa-spin"></i> Enviando...');
+
+                $.ajax({
+                    url: $(this).attr('action'),
+                    method: 'POST',
+                    data: $(this).serialize(),
+                    dataType: 'json',
+                    success: function(response) {
+                        // SweetAlert de éxito
+                        Swal.fire({
+                            title: '¡Comentario enviado!',
+                            text: 'Tu comentario está en revisión y será publicado una vez aprobado.',
+                            icon: 'success',
+                            confirmButtonColor: '#FB4535',
+                            confirmButtonText: 'Entendido'
+                        }).then(() => {
+                            // Resetear formulario
+                            $('#commentForm')[0].reset();
+                            // Resetear estrellas a 5
+                            updateStars(5);
+                            $('input[name="rating"]').val([5]);
+                        });
+                    },
+                    error: function(xhr) {
+                        let errorMessage = 'Ocurrió un error al enviar el comentario';
+                        
+                        // Si hay errores de validación
+                        if (xhr.status === 422) {
+                            const errors = xhr.responseJSON.errors;
+                            errorMessage = '';
+                            
+                            for (const field in errors) {
+                                errorMessage += `${errors[field].join('<br>')}<br>`;
+                            }
+                        }
+                        
+                        // SweetAlert de error
+                        Swal.fire({
+                            title: 'Error',
+                            html: errorMessage,
+                            icon: 'error',
+                            confirmButtonColor: '#FB4535',
+                            confirmButtonText: 'Entendido'
+                        });
+                    },
+                    complete: function() {
+                        // Restaurar botón
+                        submitButton.prop('disabled', false);
+                        submitButton.html('Enviar comentario');
+                    }
+                });
+            });
+
+            
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            $(document).on('click', '.galeriatotal', function () {
+                $(`#modalgaleriatotal`).modal({
+                    show: true,
+                    fadeDuration: 400,
+                });
             });
         });
-    });
-  </script>
-  <script>
-    var galeria = new Swiper(".galeriadeimagenes", {
-      slidesPerView: 1,
-      autoHeight: true,
-      spaceBetween:0,
-      loop: true,
-      centeredSlides: false,
-      initialSlide: 0, 
-      allowTouchMove: true,
-      autoplay: {
-        delay: 5500,
-        disableOnInteraction: true,
-        pauseOnMouseEnter: true
-      },
-      navigation: {
-                nextEl: ".swiper-galeria-next",
-                prevEl: ".swiper-galeria-prev",
-            },
-      });
+    </script>
+    <script>
+        var galeria = new Swiper(".galeriadeimagenes", {
+        slidesPerView: 1,
+        autoHeight: true,
+        spaceBetween:0,
+        loop: true,
+        centeredSlides: false,
+        initialSlide: 0, 
+        allowTouchMove: true,
+        autoplay: {
+            delay: 5500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true
+        },
+        navigation: {
+                    nextEl: ".swiper-galeria-next",
+                    prevEl: ".swiper-galeria-prev",
+                },
+        });
 
-      var carrusel_cat = new Swiper(".carrusel_cat", {
-      slidesPerView: 3,
-      autoHeight: true,
-      spaceBetween:0,
-      loop: true,
-      centeredSlides: false,
-      initialSlide: 0, 
-      allowTouchMove: true,
-      autoplay: {
-        delay: 5500,
-        disableOnInteraction: true,
-        pauseOnMouseEnter: true
-      },
-      navigation: {
-                nextEl: ".swiper-galeria-next",
-                prevEl: ".swiper-galeria-prev",
-            },
-      breakpoints: {
-            0: {
-                slidesPerView: 1,
-                spaceBetween: 20,
-            },
-            450: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-            },
-            950: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-            }
-       },
-      });
-  </script>
-  <script>
-     const slidesCount = document.querySelectorAll('.carrusel_planes .swiper-slide').length;
-     var swiper = new Swiper(".carrusel_planes", {
-            slidesPerView: slidesCount === 1 ? 1 : 2,
-            spaceBetween: 20,
-            loop: true,
-            grabCursor: true,
-            centeredSlides: false,
-            initialSlide: 0,
-            navigation: {
-                nextEl: ".swiper-carrusel_planes-next",
-                prevEl: ".swiper-carrusel_planes-prev",
-            },
-            breakpoints: {
+        var carrusel_cat = new Swiper(".carrusel_cat", {
+        slidesPerView: 3,
+        autoHeight: true,
+        spaceBetween:0,
+        loop: true,
+        centeredSlides: false,
+        initialSlide: 0, 
+        allowTouchMove: true,
+        autoplay: {
+            delay: 5500,
+            disableOnInteraction: true,
+            pauseOnMouseEnter: true
+        },
+        navigation: {
+                    nextEl: ".swiper-galeria-next",
+                    prevEl: ".swiper-galeria-prev",
+                },
+        breakpoints: {
                 0: {
                     slidesPerView: 1,
                     spaceBetween: 20,
                 },
+                450: {
+                    slidesPerView: 2,
+                    spaceBetween: 20,
+                },
                 950: {
-                    slidesPerView: slidesCount === 1 ? 1 : 2,
+                    slidesPerView: 3,
                     spaceBetween: 20,
                 }
-            },
+        },
         });
-  </script>
-  <script>
-    $('document').ready(function() {
-
-        $('.categoryselect').click(function() {
-
-            var id = $(this).attr('id'); 
-
-            $('.categoryselect .select').removeClass('selected');
-            $('.categoryselect img').removeClass('stroke-white');
-            $('.categoryselect img').removeClass('brightness-0');
-            $('.categoryselect img').removeClass('invert');
-            $('.categoryselect h2').removeClass('text-white');
-            $(this).find('.select').addClass('selected');
-            $(this).find('img').addClass('stroke-white');
-            $(this).find('img').addClass('brightness-0');
-            $(this).find('img').addClass('invert');
-            $(this).find('h2').addClass('text-white');
-
-
-            $.ajax({
-                
-                url: '{{ route('getSubcategoria') }}',
-                method: 'POST',
-                data: {
-                    _token: '{{ csrf_token() }}',
-                    id: id
+    </script>
+    <script>
+        const slidesCount = document.querySelectorAll('.carrusel_planes .swiper-slide').length;
+        var swiper = new Swiper(".carrusel_planes", {
+                slidesPerView: slidesCount === 1 ? 1 : 2,
+                spaceBetween: 20,
+                loop: true,
+                grabCursor: true,
+                centeredSlides: false,
+                initialSlide: 0,
+                navigation: {
+                    nextEl: ".swiper-carrusel_planes-next",
+                    prevEl: ".swiper-carrusel_planes-prev",
                 },
-                dataType: "json",
-                success: function(response) {
-                    console.log(response.productos);
-  
-                    $('.subtitle').empty();
-                    $('.subtitle').text(response.categorias[0].extract);
-
-                    $('.description').empty();
-                    $('.description').text(response.categorias[0].description);
-
-                    $('.cargarMas').attr('data-page', response.page);
-
-                    if (response.page == 0) {
-                        $('.cargarMas').hide();
-                    } else {
-                        $('.cargarMas').show();
+                breakpoints: {
+                    0: {
+                        slidesPerView: 1,
+                        spaceBetween: 20,
+                    },
+                    950: {
+                        slidesPerView: slidesCount === 1 ? 1 : 2,
+                        spaceBetween: 20,
                     }
-
-                    $('#getProductAjax').empty();
-                    $.each(response.productos.data, function(key, value) {
-                        console.log(response.productos.data);
-                        var productoUrl = `{{ route('producto', ':id') }}`.replace(
-                            ':id', value.id);
-                        var imagenSrc = `{{ asset(':imagen') }}`.replace(':imagen', value.imagen);
-
-                        $('#getProductAjax').append(
-                            `<div class="flex flex-col group relative">
-                                <a href="${productoUrl}">
-                                    <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
-                                        <div class="max-w-[340px]  flex flex-col items-center justify-center p-5">
-                                            <img class="w-full h-full object-contain object-bottom "
-                                                alt="${value.producto}"
-                                                src="${imagenSrc}"
-                                                onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
-                                        </div>
-                                    </div>
-                                </a>
-                                <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                                    <div class="flex flex-col md:flex-row w-full">
-                                        <div class="flex flex-col w-full lg:w-2/3 gap-1">
-                                            <a class="" href="${productoUrl}">  
-                                                <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">${value.producto}</h2>
-                                            </a>
-                                            <div class="font-galano_regular text-[#052F4E] text-xs line-clamp-2 leading-3">
-                                                ${value.description}
-                                            </div>  
-                                        </div>
-                                        <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
-                                            ${value.descuento == 0 ? `
-                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                            ` : `
-                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                            `}
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="flex flex-row gap-1 mt-2 inset-0 items-end justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                                    <a href="${productoUrl}"
-                                        class="text-white text-sm md:text-base py-2 px-6 w-full bg-[#052F4E] rounded-xl font-galano_regular font-semibold text-center">
-                                        Ver producto
-                                    </a>
-                                </div>
-                            </div>`
-                        );
-                    });
-
-
                 },
-                error: function(error) {
-
-                }
             });
+    </script>
+    <script>
+        $('document').ready(function() {
 
-        });
+            $('.categoryselect').click(function() {
+
+                var id = $(this).attr('id'); 
+
+                $('.categoryselect .select').removeClass('selected');
+                $('.categoryselect img').removeClass('stroke-white');
+                $('.categoryselect img').removeClass('brightness-0');
+                $('.categoryselect img').removeClass('invert');
+                $('.categoryselect h2').removeClass('text-white');
+                $(this).find('.select').addClass('selected');
+                $(this).find('img').addClass('stroke-white');
+                $(this).find('img').addClass('brightness-0');
+                $(this).find('img').addClass('invert');
+                $(this).find('h2').addClass('text-white');
 
 
-        $('body').delegate('.cargarMas', 'click', function() {
-            
-            var page = $(this).attr('data-page');
-            $('.cargarMas').html('Cargando...');
-
-            var id = $('#valorcategoria').val();
- 
-            $.ajax({
-                    url: "{{ route('getTotalProductos') }}?page=" + page,
+                $.ajax({
+                    
+                    url: '{{ route('getSubcategoria') }}',
                     method: 'POST',
                     data: {
                         _token: '{{ csrf_token() }}',
                         id: id
                     },
                     dataType: "json",
-                    cache: false,
                     success: function(response) {
-                        console.log(response.page);
-                      
-                        $.each(response.productos.data, function(key, value) {
+                        console.log(response.productos);
+    
+                        $('.subtitle').empty();
+                        $('.subtitle').text(response.categorias[0].extract);
 
+                        $('.description').empty();
+                        $('.description').text(response.categorias[0].description);
+
+                        $('.cargarMas').attr('data-page', response.page);
+
+                        if (response.page == 0) {
+                            $('.cargarMas').hide();
+                        } else {
+                            $('.cargarMas').show();
+                        }
+
+                        $('#getProductAjax').empty();
+                        $.each(response.productos.data, function(key, value) {
+                            console.log(response.productos.data);
                             var productoUrl = `{{ route('producto', ':id') }}`.replace(
                                 ':id', value.id);
                             var imagenSrc = `{{ asset(':imagen') }}`.replace(':imagen', value.imagen);
 
                             $('#getProductAjax').append(
                                 `<div class="flex flex-col group relative">
-                                <a href="${productoUrl}">
-                                    <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
-                                        <div class="max-w-[340px] flex flex-col items-center justify-center p-5">
-                                            <img class="w-full h-full object-contain object-bottom"
-                                                alt="${value.producto}"
-                                                src="${imagenSrc}"
-                                                onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
+                                    <a href="${productoUrl}">
+                                        <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
+                                            <div class="max-w-[340px]  flex flex-col items-center justify-center p-5">
+                                                <img class="w-full h-full object-contain object-bottom "
+                                                    alt="${value.producto}"
+                                                    src="${imagenSrc}"
+                                                    onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
+                                            </div>
                                         </div>
-                                    </div>
-                                </a>
-                                <div class="flex flex-col justify-center items-center gap-1 mt-3">
-                                    <div class="flex flex-col md:flex-row w-full">
-                                        <div class="flex flex-col w-full lg:w-2/3 gap-1">
-                                            <a class="" href="${productoUrl}">  
-                                                <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">${value.producto}</h2>
-                                            </a>
-                                            <div class="font-galano_regular text-[#052F4E] text-xs line-clamp-2 leading-3">
-                                                ${value.description}
-                                            </div>  
-                                        </div>
-                                        <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
-                                            ${value.descuento == 0 ? `
-                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                            ` : `
-                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                            `}
-                                        </div> 
-                                    </div>
-                                </div>
-                                <div class="flex flex-row gap-1 mt-2 inset-0 items-end justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                                    <a href="${productoUrl}"
-                                        class="text-white text-sm md:text-base py-2 px-6 w-full bg-[#052F4E] rounded-xl font-galano_regular font-semibold text-center">
-                                        Ver producto
                                     </a>
-                                </div>
-                            </div>`
+                                    <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                                        <div class="flex flex-col md:flex-row w-full">
+                                            <div class="flex flex-col w-full lg:w-2/3 gap-1">
+                                                <a class="" href="${productoUrl}">  
+                                                    <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">${value.producto}</h2>
+                                                </a>
+                                                <div class="font-galano_regular text-[#052F4E] text-xs line-clamp-2 leading-3">
+                                                    ${value.description}
+                                                </div>  
+                                            </div>
+                                            <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
+                                                ${value.descuento == 0 ? `
+                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                ` : `
+                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                `}
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row gap-1 mt-2 inset-0 items-end justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                        <a href="${productoUrl}"
+                                            class="text-white text-sm md:text-base py-2 px-6 w-full bg-[#052F4E] rounded-xl font-galano_regular font-semibold text-center">
+                                            Ver producto
+                                        </a>
+                                    </div>
+                                </div>`
                             );
                         });
 
 
-                        $('.cargarMas').attr('data-page', response.page);
-                        $('.cargarMas').html('Cargar más modelos');
-                        
-                        if (response.page == 0) {
-                            $('.cargarMas').hide();
-                        } else {
-                            $('.cargarMas').show();
-                        }
-                       
                     },
-                    error: function(error) {}
+                    error: function(error) {
+
+                    }
+                });
+
             });
 
-        })
 
-    });
+            $('body').delegate('.cargarMas', 'click', function() {
+                
+                var page = $(this).attr('data-page');
+                $('.cargarMas').html('Cargando...');
+
+                var id = $('#valorcategoria').val();
+    
+                $.ajax({
+                        url: "{{ route('getTotalProductos') }}?page=" + page,
+                        method: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            id: id
+                        },
+                        dataType: "json",
+                        cache: false,
+                        success: function(response) {
+                            console.log(response.page);
+                        
+                            $.each(response.productos.data, function(key, value) {
+
+                                var productoUrl = `{{ route('producto', ':id') }}`.replace(
+                                    ':id', value.id);
+                                var imagenSrc = `{{ asset(':imagen') }}`.replace(':imagen', value.imagen);
+
+                                $('#getProductAjax').append(
+                                    `<div class="flex flex-col group relative">
+                                    <a href="${productoUrl}">
+                                        <div class="bg-[#F2F5F7] border-[2px] border-[#052F4E66] rounded-xl flex flex-row aspect-[17/20]">
+                                            <div class="max-w-[340px] flex flex-col items-center justify-center p-5">
+                                                <img class="w-full h-full object-contain object-bottom"
+                                                    alt="${value.producto}"
+                                                    src="${imagenSrc}"
+                                                    onerror="this.onerror=null;this.src='/images/imagen/noimagen.jpg';" />
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <div class="flex flex-col justify-center items-center gap-1 mt-3">
+                                        <div class="flex flex-col md:flex-row w-full">
+                                            <div class="flex flex-col w-full lg:w-2/3 gap-1">
+                                                <a class="" href="${productoUrl}">  
+                                                    <h2 class="font-galano_regular font-semibold text-[#052F4E] leading-5 text-base md:text-lg line-clamp-2">${value.producto}</h2>
+                                                </a>
+                                                <div class="font-galano_regular text-[#052F4E] text-xs line-clamp-2 leading-3">
+                                                    ${value.description}
+                                                </div>  
+                                            </div>
+                                            <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
+                                                ${value.descuento == 0 ? `
+                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                ` : `
+                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                `}
+                                            </div> 
+                                        </div>
+                                    </div>
+                                    <div class="flex flex-row gap-1 mt-2 inset-0 items-end justify-center opacity-0 translate-y-3 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                                        <a href="${productoUrl}"
+                                            class="text-white text-sm md:text-base py-2 px-6 w-full bg-[#052F4E] rounded-xl font-galano_regular font-semibold text-center">
+                                            Ver producto
+                                        </a>
+                                    </div>
+                                </div>`
+                                );
+                            });
+
+
+                            $('.cargarMas').attr('data-page', response.page);
+                            $('.cargarMas').html('Cargar más modelos');
+                            
+                            if (response.page == 0) {
+                                $('.cargarMas').hide();
+                            } else {
+                                $('.cargarMas').show();
+                            }
+                        
+                        },
+                        error: function(error) {}
+                });
+
+            })
+
+        });
     </script>
     <script>
        $(document).ready(function() {
