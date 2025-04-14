@@ -109,10 +109,10 @@
 
 
                 <ul
-                    class="font-roboto_medium text-lg pt-20 fixed inset-0 bg-[#010101] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
+                    class="w-full font-roboto_medium text-lg pt-20 fixed inset-0 bg-[#010101] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
 
                     <div
-                        class="flex flex-col lg:flex-row order-2 lg:order-1 lg:w-[80%] lg:justify-end gap-5 lg:gap-10">
+                        class="flex flex-col lg:flex-row order-2 lg:order-1 w-full lg:justify-end gap-5 lg:gap-10">
 
                         <li class="flex flex-col">
                             <a href="{{ route('nosotros') }}"
@@ -152,9 +152,9 @@
                     </div>
 
                     <div
-                        class="relative flex flex-row justify-end gap-2 w-full order-1 lg:order-2  lg:w-[20%] pb-8 lg:py-0 ">
+                        class="relative flex flex-row justify-end gap-2 min-w-[200px] w-full order-1 lg:order-2 pb-8 lg:py-0 max-w-[250px]">
 
-                        <div class="flex flex-row items-center justify-center">
+                        {{-- <div class="flex flex-row items-center justify-center">
                             <a href="{{route('contacto')}}">
                                 <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
                                     Let´s Go!
@@ -164,22 +164,22 @@
                                     </svg>
                                 </div>
                             </a>
-                        </div>
+                        </div> --}}
 
-                        {{-- <div class="flex flex-row justify-center items-center">
+                        <div class="flex flex-row justify-center items-center font-galano_regular font-semibold">
                             @if (Auth::user() == null)
                                 <a class="md:flex" href="{{ route('login') }}">
-                                    <i class="fa-solid fa-user-large fa-lg text-[#052f4e] !leading-none"></i>
+                                    <i class="fa-solid fa-user-large fa-lg text-[#FB4535] !leading-none"></i>
                                 </a>
                             @else
-                                <div class="relative md:inline-flex font-Urbanist_Bold" x-data="{ open: false }">
+                                <div class="relative md:inline-flex" x-data="{ open: false }">
                                     <button class="px-3 py-0 inline-flex justify-center items-center group"
                                         aria-haspopup="true" @click.prevent="open = !open" :aria-expanded="open">
                                         <div class="flex items-center">
                                             <span id="username"
-                                                class="truncate ml-2 text-sm font-medium dark:text-slate-300 group-hover:opacity-75 dark:group-hover:text-slate-200 text-white ">
+                                                class="truncate ml-2 text-sm dark:text-slate-300 dark:group-hover:text-slate-200 text-white">
                                                 {{ explode(' ', Auth::user()->name)[0] }}</span>
-                                            <i class="fa-solid fa-user-large fa-lg text-[#052f4e] !leading-none"></i>
+                                            <i class="fa-solid fa-user-large fa-lg text-[#FB4535] !leading-none ml-3"></i>
                                             <svg class="w-3 h-3 shrink-0 ml-1 fill-current text-slate-400"
                                                 viewBox="0 0 12 12">
                                                 <path d="M5.9 11.4L.5 6l1.4-1.4 4 4 4-4L11.3 6z" />
@@ -190,16 +190,16 @@
                                         @click.outside="open = false" @keydown.escape.window="open = false" x-show="open">
                                         <ul>
                                             <li class="hover:bg-gray-100">
-                                                <a class="font-medium text-sm text-black flex items-center py-1 px-3"
+                                                <a class=" text-sm text-[#FB4535] flex items-center py-1 px-3"
                                                     href="{{ route('micuenta') }}" @click="open = false"
                                                     @focus="open = true" @focusout="open = false">Mi Cuenta</a>
                                             </li>
-
+    
                                             <li class="hover:bg-gray-100">
                                                 <form class="mb-0" method="POST" action="{{ route('logout') }}" x-data>
                                                     @csrf
                                                     <button type="submit"
-                                                        class="font-medium text-sm text-black flex items-center py-1 px-3"
+                                                        class="text-sm text-[#FB4535] flex items-center py-1 px-3"
                                                         @click.prevent="$root.submit(); open = false">
                                                         {{ __('Cerrar sesión') }}
                                                     </button>
@@ -209,15 +209,15 @@
                                     </div>
                                 </div>
                             @endif
-                        </div> --}}
-
-                        {{-- <div class="flex justify-center items-center min-w-[38px]">
+                        </div>
+    
+                        <div class="flex justify-center items-center min-w-[38px]">
                             <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
                                 <span id="itemsCount"
-                                    class="bg-[#052f4e] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
-                                <a><i class="fa-solid fa-cart-shopping text-[#052f4e] w-7"></i></a>
+                                    class="bg-[#FB4535] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
+                                <a><i class="fa-solid fa-cart-shopping text-[#FB4535] w-7"></i></a>
                             </div>
-                        </div> --}}
+                        </div>
 
                     </div>
 

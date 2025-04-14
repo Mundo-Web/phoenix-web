@@ -88,8 +88,6 @@ class SaleController extends Controller
                 //     } else {
                 //         return response()->json(['message' => 'Todos los datos están correctos']);
                 //     }
-                    
-                    
                 // } else { 
                     $userdetailU = UserDetails::where('email', $invited['email'])->first();
                     $userdetailU->update([
@@ -112,9 +110,7 @@ class SaleController extends Controller
 
             $cupon = Cupon::where('id', '=', $idcupon)->where('fecha_caducidad', '>=', $hoyFecha)->where('status', 1)->where('visible', 1)->first();
             // $Usoesecupon =  HistoricoCupon::where('cupones_id', $cupon->id)->where('usado', true)->first();
-            
             if ($cupon) {
-                
                 if ($cupon->porcentaje === 1) {
                     $descuento = ($totalparcial * (float) $cupon->monto) / 100; // Si el cupón es porcentual
                 } else {
@@ -146,8 +142,6 @@ class SaleController extends Controller
 
             foreach ($cart as $item) {
 
-
-
                 $detailJpa = new SaleDetail();
                 $detailJpa->sale_id = $saleJpa->id;
                 $detailJpa->product_image = $item['imagen'];
@@ -158,7 +152,6 @@ class SaleController extends Controller
                 $detailJpa->product_color = $item['color'];
                 $detailJpa->talla = $item['peso'];
                 
-
                 if (!empty($item['marca_id'])) {
                     $clientLogo = ClientLogos::find($item['marca_id']);
                     if ($clientLogo) {

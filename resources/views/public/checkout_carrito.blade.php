@@ -1000,7 +1000,6 @@
         })
       })
 
-     
       if (!resOrder.ok) {
         const errorData = await resOrder.json();
           return Swal.fire({
@@ -1013,8 +1012,6 @@
         const dataOrder = await resOrder.json()
         location.href = `/pago/${dataOrder.data.code}`
       }
-      
-
       
     })
 

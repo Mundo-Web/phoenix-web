@@ -326,8 +326,8 @@
                     @endforeach  
                     </div>
                 </div>
-                <div class="swiper-carrusel_planes-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-50 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
-                <div class="swiper-carrusel_planes-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-50 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div>
+                <div class="swiper-carrusel_planes-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
+                <div class="swiper-carrusel_planes-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div>
             </div>
 
     </section>
