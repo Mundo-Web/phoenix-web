@@ -206,17 +206,13 @@
         @endif
 
         @if(count($faqs) > 0)
-            <section class="bg-cover relative py-10 lg:py-16" >
+            <section class="bg-cover relative py-10 lg:py-16" id="frecuentes" >
                     <div class="">
                         <div class="flex flex-col justify-center items-center px-[5%] xl:px-[8%] pb-10 w-full max-w-2xl text-center mx-auto gap-5">
                             <h1 class="text-4xl lg:text-5xl font-akira_expanded font-bold text-[#010101]">
                                 Preguntas
                                 <span class="text-[#FB4535]">frecuentes</span>
                             </h1>
-
-                            <p class="text-base font-roboto_regular tracking-normal">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                            </p>
                         </div>
                     </div>
 

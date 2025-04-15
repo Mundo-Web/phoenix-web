@@ -1,7 +1,12 @@
 @extends('components.public.matrix', ['pagina' => 'index'])
 
 @section('css_importados')
-
+  <style>
+      .lista ul li{
+        padding: 2px 0px;
+        list-style: disc;
+      }
+  </style>
 @stop
 
 <style>
@@ -167,12 +172,12 @@
                   @foreach ($personal as $persona)
                     <div class="flex flex-col gap-1">
                         <img src="{{asset($persona->imagen)}}" onerror="this.src='{{ asset('images/imagen/nosotrosimg2.png') }}';" class="w-full aspect-square rounded-2xl object-cover" />
-                        <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] mt-3">
+                        <h2 class="leading-none font-roboto_bold text-xl  text-[#010101] my-2">
                          {{$persona->titulo}}
                         </h2>  
-                        <p class="leading-none font-roboto_regular text-base  text-[#010101]">
-                          {{$persona->descripcion}}
-                        </p>  
+                        <div class="leading-none font-roboto_regular text-base text-[#010101] lista flex flex-col gap-1">
+                          {!!$persona->descripcion!!}
+                        </div>  
                     </div>
                   @endforeach           
             </div>

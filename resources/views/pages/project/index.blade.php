@@ -21,9 +21,9 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th class="w-24">Orden</th>
+                <th class="w-10">Orden</th>
                 <th class="w-24">Titulo</th>
-                <th>Descripcion</th>
+                {{-- <th>Descripcion</th> --}}
                 <th class="w-24">Imagen</th>
                 <th class="w-24">Visible</th>
                 <th class="w-24">Acciones</th>
@@ -33,9 +33,9 @@
 
               @foreach ($project as $item)
                 <tr>
-                  <td>{{ $item->order ?? "Sin orden"}}</td>
+                  <td >{{ $item->order ?? "Sin orden"}}</td>
                   <td>{{ $item->titulo }}</td>
-                  <td>{{ Str::substr($item->descripcion, 0, 50) }}</td>
+                  {{-- <td>{!! Str::substr($item->descripcion, 0, 50) !!}</td> --}}
 
                   <td class="px-3 py-2"><img class="w-20 object-contain h-16" src="{{ asset($item->imagen) }}" alt=""></td>
 
@@ -80,7 +80,7 @@
               <tr>
                 <th>Orden</th>
                 <th>Titulo</th>
-                <th>Descripcion</th>
+                {{-- <th>Descripcion</th> --}}
                 <th>Imagen</th>
                 <th>Visible</th>
                 <th>Acciones</th>

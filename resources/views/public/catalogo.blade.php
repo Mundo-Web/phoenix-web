@@ -59,8 +59,8 @@
                                     @foreach ($categories as $categorias)
                                         <div class="swiper-slide">
                                             <div class="flex flex-col justify-center items-center">
-                                                <a href="{{route('catalogo', $categorias->id)}}" >
-                                                    <h2 class="@if($id_cat == $categorias->id) activo @endif underline-this leading-none font-akira_expanded max-w-[300px] text-center text-2xl text-[#010101] basis-auto">
+                                                <a href="{{route('catalogo', $categorias->id)}}" class="flex flex-row items-center min-h-12">
+                                                    <h2 class="@if($id_cat == $categorias->id) activo @endif  underline-this leading-none font-akira_expanded max-w-[300px] text-center text-2xl text-[#010101]">
                                                         {{$categorias->name}}
                                                     </h2>
                                                 </a>
@@ -333,17 +333,15 @@
     </section>
   @endif
 
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 px-[5%] xl:px-[8%] py-10 md:py-14 w-full">
-    
+  {{-- <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-16 px-[5%] xl:px-[8%] py-10 md:py-14 w-full">
     <div class="flex flex-col gap-4 rounded-lg">
-        
         <h2 class="leading-none font-akira_expanded  text-3xl 2xl:text-4xl text-[#010101]">
             Deja tu <span class="text-[#FB4535]">comentario</span>
         </h2>
 
         <form id="commentForm" method="POST" action="{{ route('comments.store') }}" class="flex flex-col gap-4">
             @csrf
-            {{-- Campo de Nombre --}}
+
             <div class="">
                 <label for="name"
                 class="font-roboto_regular font-semibold text-sm 2xl:text-base text-[#010101]">Nombre completo</label>
@@ -351,7 +349,6 @@
                     class="mt-1 w-full py-3 px-4 focus:outline-none bg-[#F7F7F7] font-roboto_regular text-sm 2xl:text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
             </div>
             
-            {{-- Sistema de Estrellas --}}
             <div class="">
                 <label class="font-roboto_regular font-semibold text-sm 2xl:text-base text-[#010101]">Calificación</label>
                 <div class="star-rating flex items-center">
@@ -372,7 +369,6 @@
                 </div>
             </div>
             
-            {{-- Campo de Comentario --}}
             <div class="w-full">
                 <label for="content" class="font-roboto_regular font-semibold text-sm 2xl:text-base text-[#010101]">Comentario</label>
                 <textarea name="content" id="content" rows="3" cols="30"
@@ -380,11 +376,9 @@
                     placeholder="Ingresa tu comentario"></textarea>
             </div>
 
-            {{-- Campo de Categoria --}}
             <input name="category_id" id="category_id" type="hidden" value="{{ $categoria->id }}" 
                     class="mt-1 w-full py-3 px-4 focus:outline-none bg-[#F7F7F7] font-roboto_regular text-sm 2xl:text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
 
-            {{-- Botón de Enviar --}}
             <div class="flex justify-end">
                 <button 
                     type="submit" 
@@ -424,8 +418,7 @@
         </div>
         @endforeach
     </div>
-  </div>
-  
+  </div> --}}
 
   {{-- <section class="flex flex-col gap-10 w-full px-[5%] pt-10 md:pt-16">
     <div class="flex flex-col gap-2">

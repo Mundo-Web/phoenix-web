@@ -60,13 +60,11 @@
                 </p>
                 <div class="flex flex-col gap-1 text-white font-roboto_light text-base">
                     <a href="{{ route('index') }}">Inicio</a>
-                    @if (count($services) > 0)
-                        <a href="{{ route('servicios', $services->first()->id) }}">Servicios</a>
-                    @endif
                     <a href="{{route('nosotros')}}">Nosotros</a>
                     @if (count($categoriasf) > 0)
                         <a href="{{route('catalogo', $categoriasf[0]->id )}}">Servicios y Planes</a>
                     @endif
+                    <a href="{{route('contacto')}}#frecuentes">Preguntas Frecuentes</a>
                     <a href="{{route('contacto')}}">Contacto</a>
                 </div>
             </div>
