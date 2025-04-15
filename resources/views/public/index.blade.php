@@ -111,17 +111,19 @@
                                                     </a>
                                                 </div>    
                                             </div>
-                                            <div class="absolute bottom-[5%] md:bottom-[10%] left-[5%] flex flex-row gap-4 md:gap-0 md:flex-col items-center justify-center">
-                                                <img class="object-cover w-28 object-left" src="{{asset('images/imagen/chicos.png')}}"/>
-                                                <div class="flex flex-col md:mt-2 w-40 md:text-center">
-                                                    <h2 class="leading-none font-akira_expanded text-3xl text-white ">
-                                                        200+
-                                                    </h2>
-                                                    <p class="text-white text-sm font-roboto_regular">
-                                                        Miembros activos
-                                                    </p> 
+                                            @if ($slide->members)
+                                                <div class="absolute bottom-[5%] md:bottom-[10%] left-[5%] flex flex-row gap-4 md:gap-0 md:flex-col items-center justify-center">
+                                                    <img class="object-cover w-28 object-left" src="{{asset('images/imagen/chicos.png')}}"/>
+                                                    <div class="flex flex-col md:mt-2 w-40 md:text-center">
+                                                        <h2 class="leading-none font-akira_expanded text-3xl text-white ">
+                                                            200+
+                                                        </h2>
+                                                        <p class="text-white text-sm font-roboto_regular">
+                                                            Miembros activos
+                                                        </p> 
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>

@@ -20,11 +20,12 @@
                     <table id="tabladatos" class="display text-lg" style="width:100%" >
                         <thead>
                             <tr>
-                                <th class="w-4">Orden</th>
-                                <th class="w-28">Titulo</th>
-                                <th>Foto</th>
-                                <th class="w-28">Visible</th>
-                                <th class="w-28">Acciones</th>
+                                <th class="w-4 dark:text-white">Orden</th>
+                                <th class="w-28 dark:text-white">Titulo</th>
+                                <th class="dark:text-white">Foto</th>
+                                <th class="w-40 text-center dark:text-white">Miembros activos</th>
+                                <th class="w-28 dark:text-white">Visible</th>
+                                <th class="w-28 dark:text-white">Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -34,6 +35,19 @@
                                     <td>{{$item->order}}</td>
                                     <td>{{$item->title}}</td>
                                     <td class="px-3 py-2"><img class="w-20" src="{{ asset('storage/images/slider/'.$item->name_image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td>
+                                    <td>
+                                        <form method="POST" action="" class="flex flex-row justify-center">
+                                          @csrf
+                                            <input type="checkbox" id="hs-basic-usage" class="check_v btn_swithc relative w-[3.25rem] h-7 p-px bg-gray-100 border-transparent text-transparent 
+                                            rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:ring-transparent disabled:opacity-50 disabled:pointer-events-none 
+                                            checked:bg-none checked:text-blue-600 checked:border-blue-600 focus:checked:border-blue-600 dark:bg-gray-800 dark:border-gray-700 
+                                            dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-600 before:inline-block before:size-6
+                                            before:bg-white checked:before:bg-blue-200 before:translate-x-0 checked:before:translate-x-full before:rounded-full before:shadow 
+                                            before:transform before:ring-0 before:transition before:ease-in-out before:duration-200 dark:before:bg-gray-400 dark:checked:before:bg-blue-200"
+                                            id='{{'v_'.$item->id}}' data-field='members' data-idSlider='{{$item->id}}' data-titleSlider='{{$item->title}}' {{$item->members == 1 ? 'checked' : ''}}>
+                                            <label for="{{'v_'.$item->id}}"></label>
+                                         </form>
+                                    </td>
                                     <td>
                                         <form method="POST" action="">
                                           @csrf
@@ -46,9 +60,6 @@
                                             id='{{'v_'.$item->id}}' data-field='visible' data-idSlider='{{$item->id}}' data-titleSlider='{{$item->title}}' {{$item->visible == 1 ? 'checked' : ''}}>
                                             <label for="{{'v_'.$item->id}}"></label>
                                          </form>
-
-                                       
-
                                     </td>
                                     <td class="flex flex-row justify-center items-center gap-5 py-5">
                                   
@@ -70,6 +81,7 @@
                                 <th>Orden</th>
                                 <th>Titulo</th>
                                 <th>Foto</th>
+                                <th>Miembros activos</th>
                                 <th>Visible</th>
                                 <th>Acciones</th>
                             </tr>

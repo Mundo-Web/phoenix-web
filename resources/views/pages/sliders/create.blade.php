@@ -12,8 +12,6 @@
                     <div class="rounded shadow-lg p-4 px-4 ">
                                 <div class="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
 
-                                           
-
                                             <div class="md:col-span-5">
                                                 <label for="order">Orden (Considera que el número más bajo será el primero)</label>
                                                 <div class="relative mb-2  mt-2">

@@ -229,6 +229,6 @@ class SliderController extends Controller
 
         $service->save();
 
-        return response()->json(['message' => 'Item eliminado.']);
+        return response()->json(['message' => 'Item actualizado.']);
     }
 }
