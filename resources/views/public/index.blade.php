@@ -273,7 +273,7 @@
                             @endif
 
                             <div class="flex flex-row items-center justify-start">
-                                <a href="{{route('catalogo', $categorias[0]->id)}}">
+                                <a href="{{route('contacto')}}">
                                     <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
                                         Let´s Go!
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
