@@ -1088,6 +1088,7 @@ class IndexController extends Controller
       $request->validate($reglasValidacion, $mensajes);
       $formlanding = Message::create($data);
       $this->envioCorreo($formlanding);
+      $this->envioCorreoAdmin($formlanding);
 
       return response()->json(['message' => 'Mensaje enviado con exito']);
     } catch (ValidationException $e) {
