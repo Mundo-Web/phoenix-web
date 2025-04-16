@@ -322,7 +322,7 @@
                                                 {{ $producto->sku == 2 ? '!text-white' : '' }}
                                                 {{ $producto->sku == 3 ? '!text-white' : '' }}
                                                 {{ !in_array($producto->sku, [1, 2, 3]) ? '!text-white' : '' }}
-                                                 text-base font-roboto_medium w-full">{{$caracteristica}}</h2>
+                                                 text-base font-roboto_medium w-full">{!!$caracteristica!!}</h2>
                                             </div> 
 
                                             @if ($index < count($caracteristicas) - 1)
