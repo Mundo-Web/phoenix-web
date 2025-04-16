@@ -1147,7 +1147,7 @@ class IndexController extends Controller
                 width: 600px;
                 margin: 0 auto;
                 text-align: center;
-                background-image: url(' . $appUrl . '/mail/fondo.png);
+                background-image: url(' . $appUrl . '/mail/fondocontacto.png);
                 background-repeat: no-repeat;
                 background-position: center;
                 background-size: cover;
@@ -1165,7 +1165,7 @@ class IndexController extends Controller
                       padding: 0 200px;
                     "
                   >
-                      <a href="' . $appUrl . '" target="_blank" style="text-align:center" ><img src="' . $appUrl .'/mail/logo.png" alt="Phoenix" /></a>
+                      <a href="' . $appUrl . '" target="_blank" style="text-align:center" ><img src="' . $appUrl . '/mail/logocontacto.png" alt="phoenix" /></a>
                   </th>
                 </tr>
               </thead>
@@ -1227,9 +1227,9 @@ class IndexController extends Controller
                 <tr>
                   <td>
                     <a
-                       target="_blank"
-                      href="' . $appUrl .'"
-                      style="
+                        target="_blank"
+                        href="' . $appUrl .'"
+                        style="
                         text-decoration: none;
                         background-color: #FB4535;
                         color: #ffffff;
