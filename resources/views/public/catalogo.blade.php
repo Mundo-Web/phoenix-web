@@ -28,6 +28,18 @@
     div.prose{
         color: white;
     }
+
+    .swiper-pagination-carrusel_cat .swiper-pagination-bullet {
+        width: 14px;
+        height: 8px;
+        border-radius: 6px;
+        background-color: #FB4535 !important;     
+    }
+
+    .swiper-pagination-carrusel_cat .swiper-pagination-bullet:not(.swiper-pagination-bullet-active) {
+        background-color: #05304e56!important;
+        opacity: 1;
+    }
   </style>
 @stop
 
@@ -53,23 +65,26 @@
           </div>    
           <div class="w-full relative flex justify-center items-center">  
                 <div class="bg-[#F0F1F0]  justify-center items-center max-w-5xl gap-10 rounded-3xl p-6">
-                        <div>
-                            <div class="swiper carrusel_cat h-max">
-                                <div class="swiper-wrapper">
-                                    @foreach ($categories as $categorias)
-                                        <div class="swiper-slide">
-                                            <div class="flex flex-col justify-center items-center">
-                                                <a href="{{route('catalogo', $categorias->id)}}" class="flex flex-row items-center min-h-12">
-                                                    <h2 class="@if($id_cat == $categorias->id) activo @endif  underline-this leading-none font-akira_expanded max-w-[300px] text-center text-2xl text-[#010101]">
-                                                        {{$categorias->name}}
-                                                    </h2>
-                                                </a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                </div>
+                    <div>
+                        <div class="swiper carrusel_cat h-max">
+                            <div class="swiper-wrapper">
+                                 @foreach ($categories as $categorias)
+                                    <div class="swiper-slide">
+                                         <div class="flex flex-col justify-center items-center">
+                                            <a href="{{route('catalogo', $categorias->id)}}" class="flex flex-row items-center min-h-[75px]">
+                                                <h2 class="@if($id_cat == $categorias->id) activo @endif  underline-this leading-none font-akira_expanded max-w-[300px] text-center text-4xl text-[#010101]">
+                                                    {{$categorias->name}}
+                                                </h2>
+                                            </a>
+                                         </div>
+                                    </div>
+                                 @endforeach
                             </div>
+                             <div class="swiper-pagination-carrusel_cat flex md:hidden justify-center mt-2"></div>
                         </div>
+                        <div class="hidden md:flex swiper-carrusel_cat-prev absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-5 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-5xl text-[#FB4535]"></i></div>
+                        <div class="hidden md:flex swiper-carrusel_cat-next absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-5 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right text-5xl text-[#FB4535]"></i></div>
+                    </div>
                 </div>
           </div>
       </div>
@@ -659,17 +674,21 @@
         spaceBetween:0,
         loop: true,
         centeredSlides: false,
-        initialSlide: 0, 
+        initialSlide: {{ $categories->search(function($item) use ($id_cat) { return $item->id == $id_cat; }) }}, 
         allowTouchMove: true,
-        autoplay: {
-            delay: 5500,
-            disableOnInteraction: true,
-            pauseOnMouseEnter: true
+        // autoplay: {
+        //     delay: 5500,
+        //     disableOnInteraction: true,
+        //     pauseOnMouseEnter: true
+        // },
+        pagination: {
+                el: ".swiper-pagination-carrusel_cat",
+                clickable: true,
         },
         navigation: {
-                    nextEl: ".swiper-galeria-next",
-                    prevEl: ".swiper-galeria-prev",
-                },
+                nextEl: ".swiper-carrusel_cat-next",
+                prevEl: ".swiper-carrusel_cat-prev",
+        },
         breakpoints: {
                 0: {
                     slidesPerView: 1,

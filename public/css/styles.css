@@ -1137,6 +1137,21 @@ input:checked + .departamento {
 }
 
 @font-face {
+    font-family: "barlow_black";
+    src: url("/fonts/barlow_black.woff") format("woff");
+}
+
+@font-face {
+    font-family: "barlow_bold";
+    src: url("/fonts/barlow_bold.woff") format("woff");
+}
+
+@font-face {
+    font-family: "barlow_extrabold";
+    src: url("/fonts/barlow_extrabold.woff") format("woff");
+}
+
+@font-face {
     font-family: "roboto_bold";
     src: url("/fonts/Roboto-Bold.woff") format("woff");
 }

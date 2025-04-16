@@ -51,7 +51,7 @@
                 @endif
               </div>
               @if($textosnosotros->title1section)
-                <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-[#010101]">
+                <h2 class="leading-none font-akira_expanded  text-5xl xl:text-6xl 2xl:text-7xl text-[#010101]">
                   {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title1section) !!}
                 </h2>
               @endif
@@ -76,7 +76,7 @@
             
             @if($textosnosotros->title2section)
               <div class="flex flex-col justify-start gap-5 lg:gap-7">
-                  <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
+                  <h2 class="leading-none font-akira_expanded text-5xl xl:text-6xl text-[#010101]">
                     {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title2section) !!}
                   </h2>
               </div>
@@ -91,7 +91,7 @@
               <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
                 @foreach ($benefit as $estadistica)
                   <div class="flex flex-col gap-0">
-                      <h2 class="text-[#010101] font-akira_expanded text-4xl">{{$estadistica->descripcionshort}}</h2>
+                      <h2 class="text-[#010101] font-akira_expanded text-5xl">{{$estadistica->descripcionshort}}</h2>
                       <span class="text-[#FB4535] text-base font-roboto_medium">{{$estadistica->titulo}}</span>
                   </div>
                 @endforeach
@@ -114,7 +114,7 @@
           <div class="w-full xl:w-3/5 flex flex-col gap-10 py-10">
               <div class="flex flex-col gap-2">
                 @if($textosnosotros->title3section)
-                  <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101] lg:max-w-sm">
+                  <h2 class="leading-none font-akira_expanded text-5xl xl:text-6xl text-[#010101] lg:max-w-sm">
                     {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title3section) !!}
                   </h2>  
                 @endif
@@ -130,7 +130,7 @@
                   <div class="flex flex-col gap-5">
                     <img src="{{asset($valor->url_image . $valor->name_image)}}" onerror="this.src='{{ asset('images/imagen/p_icono1.png') }}';" class="rounded-full w-14 h-14 object-contain" />
                     <div class="flex flex-col gap-1">
-                      <h2 class="leading-none font-akira_expanded text-xl text-[#010101]">
+                      <h2 class="leading-none font-akira_expanded text-2xl text-[#010101]">
                         {{$valor->title}}
                       </h2> 
                       <div class="text-[#010101] text-base font-roboto_regular">
@@ -156,7 +156,7 @@
         
             <div class="flex flex-col gap-2">
               @if($textosnosotros->title4section)
-                <h2 class="leading-none font-akira_expanded text-3xl xl:text-4xl text-[#010101]">
+                <h2 class="leading-none font-akira_expanded text-5xl xl:text-6xl text-[#010101]">
                   {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title4section) !!}
                 </h2>  
               @endif

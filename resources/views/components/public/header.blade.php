@@ -152,7 +152,7 @@
                     </div>
 
                     <div
-                        class="relative flex flex-row justify-end gap-2 min-w-[200px] w-full order-1 lg:order-2 pb-8 lg:py-0 max-w-[250px]">
+                        class="relative flex flex-row justify-start lg:justify-end gap-2 min-w-[200px] w-full order-1 lg:order-2 pt-8 pb-6 lg:pb-0 lg:py-0 max-w-[250px]">
 
                         {{-- <div class="flex flex-row items-center justify-center">
                             <a href="{{route('contacto')}}">

@@ -131,3 +131,8 @@
   .overlay button:hover {
     background: #bbb;
   }
+
+  .font-akira_expanded{
+    text-transform: uppercase!important;
+    letter-spacing: 0.3px!important;
+  }

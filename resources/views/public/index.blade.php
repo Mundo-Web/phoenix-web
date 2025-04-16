@@ -170,7 +170,7 @@
                     </div>
 
                     @if($textoshome->title1section)
-                        <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl text-[#010101]">
+                        <h2 class="leading-none font-akira_expanded text-4xl xl:text-7xl text-[#010101]">
                             {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoshome->title1section) !!}
                         </h2>
                     @endif
