@@ -18,8 +18,8 @@
   <div class="flex flex-row gap-2"><span>Email: </span><p id="email-client"></p></div>
   <div class="flex flex-row gap-2"><span>Dni/Ruc: </span><p id="dni-client" class=""></p></div>
   <div class="flex flex-row gap-2"><span>Telefono: </span><p id="phone-client" class=""></p></div>
-  <div class="flex flex-row gap-2"><span>Direccion Envio:</span>
-  <p id="invoice-address" class="text-gray-700 mb-2"></p></div>
+  {{-- <div class="flex flex-row gap-2"><span>Direccion Envio:</span>
+  <p id="invoice-address" class="text-gray-700 mb-2"></p></div> --}}
 
   <div id="seccioncomprobante" class="flex flex-col gap-2">
     <p class="font-bold"> Datos Facturacion: </p>
@@ -198,8 +198,6 @@
                     <th scope="row" class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         ${item.product_name} <br>
                         <span class="text-xs font-bold">
-                          SABOR: <span class="text-xs font-normal">${item.product_color}</span><br> 
-                          PESO: <span class="text-xs font-normal">${item.talla}</span><br>
                         </span>
                     </th>
                     <td class="px-6 py-2">
@@ -219,20 +217,7 @@
             `)
         });
 
-        $('#invoice-products').append(`<tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-              Envio 
-            </th>
-            <td class="px-6 py-4">
-              S/. ${envio}
-            </td>
-            <td class="px-6 py-4">
-              1
-            </td>
-            <td class="px-6 py-4">
-              S/. ${envio}
-            </td>
-          </tr>`)
+        
       })
 
     $('#invoice-modal').modal('show')
@@ -292,3 +277,19 @@
     })
   })
 </script>
+{{-- PESO: <span class="text-xs font-normal">${item.talla}</span><br> --}}
+{{-- SABOR: <span class="text-xs font-normal">${item.product_color}</span><br>  --}}
+{{-- $('#invoice-products').append(`<tr class="bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+  <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+    Envio 
+  </th>
+  <td class="px-6 py-4">
+    S/. ${envio}
+  </td>
+  <td class="px-6 py-4">
+    1
+  </td>
+  <td class="px-6 py-4">
+    S/. ${envio}
+  </td>
+</tr>`) --}}

@@ -56,7 +56,7 @@
         </x-menu.item> --}}
         {{-- <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item> --}}
         <x-menu.item id="testimonios" href="{{ route('testimonios.index') }}" icon="fas fa-star">Testimonios </x-menu.item>
-        <x-menu.item id="comentarios" href="{{ route('comentarios.index') }}" icon="fas fa-star">Comentarios de clientes</x-menu.item>
+        {{-- <x-menu.item id="comentarios" href="{{ route('comentarios.index') }}" icon="fas fa-star">Comentarios de clientes</x-menu.item> --}}
       </x-menu.group>
 
       <x-menu.group title="Productos">
@@ -97,7 +97,6 @@
         <x-menu.item id="homeview" href="{{ route('homeview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Home</x-menu.item> 
         <x-menu.item id="nosotrosview" href="{{ route('nosotrosview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Nosotros</x-menu.item> 
         {{-- <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item> --}}
-        <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item>
         {{-- <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item> --}}
         {{-- <x-menu.item id="beneficios-cero-intereses" href="{{ route('beneficios-cero-intereses.edit', 1) }}" icon="fas fa-file-contract">Beneficios 0 Intereses</x-menu.item> --}}
         {{-- <x-menu.item id="seguimiento-de-pedido" href="{{ route('seguimiento-de-pedido.edit', 1) }}" icon="fas fa-file-contract">Seguimiento de pedido</x-menu.item> --}}
@@ -120,6 +119,7 @@
         <x-menu.item id="shortcode" href="{{ route('shortcode.edit', 1) }}" icon="fas fa-address-card">Shortcode Head/Body</x-menu.item>
         <x-menu.item id="politicas-de-devolucion" href="{{ route('politicas-de-devolucion.edit', 1) }}" icon="fas fa-undo-alt">Politicas de Devolucion</x-menu.item>
         <x-menu.item id="terminos-y-condiciones" href="{{ route('terminos-y-condiciones.edit', 1) }}" icon="fas fa-file-contract">Terminos y Condiciones</x-menu.item>
+        <x-menu.item id="politica-cookies" href="{{ route('politica-cookies.edit', 1) }}" icon="fas fa-file-contract">Políticas de cookies</x-menu.item>
       </x-menu.group>
 
     </div>

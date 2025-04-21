@@ -220,10 +220,10 @@
         </section>
 
         @if (count($categorias)>0)
-            <section class="py-12 xl:py-16 bg-[#F2F2F2]">
+            <section class="py-12 xl:py-16 bg-[#F2F2F2] hidden lg:flex">
                 <ul class="acordeon flex flex-row gap-5 justify-center items-end">
                     @foreach ($categorias as $category)
-                        <li class="rounded-3xl {{ $loop->first ? 'active' : '' }} bg-cover bg-center bg-no-repeat h-full" style="background-image:  url('{{ asset($category->url_image . $category->name_image) }}')">
+                        <li class="rounded-2xl xl:rounded-3xl {{ $loop->first ? 'active' : '' }} bg-cover bg-center bg-no-repeat h-full" style="background-image:  url('{{ asset($category->url_image . $category->name_image) }}')">
                             
                             <div class="divpadre flex flex-col justify-end items-start h-[530px] 2xl:h-[700px] relative">
                                 
@@ -254,7 +254,42 @@
                     @endforeach
                 </ul>
             </section>
-        @endif        
+        @endif 
+        
+        <section class="py-12 xl:py-16 bg-[#F2F2F2] px-[5%] xl:px-[8%] flex lg:hidden">
+            <ul class="flex flex-col gap-5 justify-center items-end m-auto">
+                @foreach ($categorias as $category)
+                    <li class="rounded-2xl xl:rounded-3xl bg-cover bg-center bg-no-repeat h-full" style="background-image:  url('{{ asset($category->url_image . $category->name_image) }}')">
+                        
+                        <div class="flex flex-col justify-end items-start h-[330px] relative">
+                            
+                            <div class="flex flex-col gap-2 items-start p-5">
+                        
+                                <div class="flex flex-col justify-start items-start w-full">
+                                    <h2 class="leading-none font-akira_expanded text-2xl sm:text-3xl xl:text-4xl text-white text-left">
+                                        {{$category->name}}  
+                                    </h2>
+                                    <p class="text-white text-sm sm:text-base font-roboto_regular text-left line-clamp-3">
+                                        {{$category->description}}  
+                                    </p>
+                                </div>
+            
+                                <div class="flex flex-col justify-start items-start">
+                                    <a href="{{route('catalogo', $category->id)}}"><div class="flex flex-row justify-center items-center gap-2 bg-[#FB4535] rounded-2xl py-2 w-40">
+                                        <p class="font-roboto_medium text-white text-sm sm:text-base"> Conoce más</p>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    </a>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </li>
+                @endforeach
+            </ul>
+        </section>
 
         @if(count($categorias) > 0)
             <section class="w-full relative flex flex-col" >
@@ -277,7 +312,7 @@
                             <div class="flex flex-row items-center justify-start">
                                 <a href="{{route('contacto')}}">
                                     <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
-                                        Let´s Go!
+                                        ¿Tienes dudas?. Escríbenos
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                             <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                         </svg>

@@ -191,7 +191,7 @@
                             Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
                         </h2>
                         <div class="flex flex-row items-center justify-start">
-                            <a href="{{route('contacto')}}">
+                            <a href="{{route('catalogo', $categorias[0]->id)}}">
                                 <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
                                     ¿Tienes dudas? Escríbenos
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
