@@ -98,8 +98,8 @@
 
 
     @include('components.public.footer')
-
-
+    
+    @include('cookie-consent::index')
 
     @yield('scripts_importados')
     {{-- @vite(['resources/js/functions.js']) --}}

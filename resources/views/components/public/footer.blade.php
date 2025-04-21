@@ -1,4 +1,5 @@
 <footer >
+    
     <style>
         #modalPoliticasDev 
         #modalTerminosCondiciones 
@@ -90,6 +91,7 @@
                 <div class="flex flex-col gap-3 text-white font-roboto_light text-base">
                     <a class="cursor-pointer" id="linkPoliticas">Política de Privacidad</a>
                     <a class="cursor-pointer" id="linkTerminos">Términos y Condiciones</a>
+                    <a class="cursor-pointer" id="linkPoliticasCookies">Política de Cookies</a>
                 </div>
             </div>
  
@@ -280,7 +282,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Términos y Condiciones</h1>
-            <div class="font-galano_regular prose p-2">{!! $terminos->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $terminos->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -288,7 +290,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Cambio de Devolución</h1>
-            <div class="font-galano_regular prose p-2">{!! $politicas->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $politicas->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -296,7 +298,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Datos</h1>
-            <div class="font-galano_regular prose p-2">{!! $politicaDatos->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $politicaDatos->content ?? '' !!}</div>
         </div>
     </div>
         
@@ -304,7 +306,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Tiempo y Costos de Envío</h1>
-            <div class="font-galano_regular prose p-2">{!! $TimeAndPriceDelivery->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $TimeAndPriceDelivery->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -312,7 +314,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Plazos de Reembolso</h1>
-            <div class="font-galano_regular prose p-2">{!! $PlazosDeReembolso->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $PlazosDeReembolso->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -320,7 +322,7 @@
       
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Tratamiento de Datos Adicional</h1>
-            <div class="font-galano_regular prose p-2">{!! $TratamientoAdicionalDatos->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $TratamientoAdicionalDatos->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -328,7 +330,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Cookies</h1>
-            <div class="font-galano_regular prose p-2">{!! $PoliticasCookies->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $PoliticasCookies->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -336,7 +338,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Campanas Publicitarias</h1>
-            <div class="font-galano_regular prose p-2">{!! $CampanasPublicitarias->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $CampanasPublicitarias->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -344,7 +346,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Beneficios 0% Intereses</h1>
-            <div class="font-galano_regular prose p-2">{!! $BeneficiosSinIntereses->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $BeneficiosSinIntereses->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -352,7 +354,7 @@
         
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Seguimiento de Pedido</h1>
-            <div class="font-galano_regular prose p-2">{!! $SeguimientoPedido->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $SeguimientoPedido->content ?? '' !!}</div>
         </div>
     </div>
 
@@ -360,7 +362,7 @@
        
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Nuestras Tiendas</h1>
-            <div class="font-galano_regular prose p-2">{!! $NuestrasTiendas->content ?? '' !!}</div>
+            <div class="font-galano_regular prose p-2 text-black">{!! $NuestrasTiendas->content ?? '' !!}</div>
         </div>
     </div>
 

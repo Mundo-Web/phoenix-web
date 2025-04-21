@@ -23,6 +23,7 @@
         "phpmailer/phpmailer": "^6.9",
         "rmccue/requests": "^2.0",
         "sode/extend": "dev-master",
+        "spatie/laravel-cookie-consent": "^3.2",
         "spatie/laravel-permission": "^6.7"
     },
     "require-dev": {
