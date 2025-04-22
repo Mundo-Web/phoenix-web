@@ -116,7 +116,7 @@
 
                         <li class="flex flex-col">
                             <a href="{{ route('index') }}"
-                                class="{{ isset($pagina) && $pagina == 'index' ? 'text-[#FB4535]' : 'text-white' }}">Nosotros</a>
+                                class="{{ isset($pagina) && $pagina == 'index' ? 'text-[#FB4535]' : 'text-white' }}">Inicio</a>
                         </li>
 
                         <li class="flex flex-col">
