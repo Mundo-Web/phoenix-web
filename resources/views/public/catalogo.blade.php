@@ -58,7 +58,7 @@
       <div class="flex flex-col gap-10 w-full px-[5%] xl:px-[8%] pt-10 md:pt-20">
           <div class="flex flex-col items-center justify-center text-center">
               <div class="flex flex-col gap-2 max-w-3xl mx-auto">
-                <h2 class="leading-none font-akira_expanded  text-4xl xl:text-[56px] text-[#010101]">
+                <h2 class="leading-none font-akira_expanded  text-4xl xl:text-[56px] 2xl:text-6xl text-[#010101]">
                     Explora Todo lo que <span class="text-[#FB4535]"> Ofrecemos</span>
                 </h2>
               </div>
@@ -72,7 +72,7 @@
                                     <div class="swiper-slide">
                                          <div class="flex flex-col justify-center items-center">
                                             <a href="{{route('catalogo', $categorias->id)}}" class="flex flex-row items-center min-h-[75px]">
-                                                <h2 class="@if($id_cat == $categorias->id) activo @endif  underline-this leading-none font-akira_expanded max-w-[300px] text-center text-4xl text-[#010101]">
+                                                <h2 class="@if($id_cat == $categorias->id) activo @endif  underline-this leading-none font-akira_expanded max-w-[300px] text-center text-[26px] text-[#010101]">
                                                     {{$categorias->name}}
                                                 </h2>
                                             </a>

@@ -50,7 +50,7 @@ export default {
                 galano_light: ["galano_light"],
                 maille: ["maille"],
                 
-                akira_expanded: ["barlow_black"],
+                akira_expanded: ["akira_expanded"],
                 roboto_bold: ["roboto_bold"],
                 roboto_light: ["roboto_light"],
                 roboto_medium: ["roboto_medium"],

@@ -1133,7 +1133,7 @@ input:checked + .departamento {
 
 @font-face {
     font-family: "akira_expanded";
-    src: url("/fonts/akira_expanded.woff") format("woff");
+    src: url("/fonts/akira_super_bold.woff") format("woff");
 }
 
 @font-face {

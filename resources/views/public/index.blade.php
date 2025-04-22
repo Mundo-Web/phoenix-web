@@ -91,61 +91,61 @@
         </section>
       @endif --}}
 
-      @if ($slider->isEmpty())
-      @else
-        <section class="w-full -mt-[100px]">
-            <div class="w-full">
-                    <div class="swiper slider">
-                        <div class="swiper-wrapper">
-                            @foreach ($slider as $slide)
-                                <div class="swiper-slide"> 
-                                    <div class="flex flex-col justify-center items-center w-full h-[600px] relative bg-center bg-cover" style="background-image: url({{asset($slide->url_image . $slide->name_image)}})">
-                                        <div class="flex flex-col w-full justify-center items-center ">
-                                            <div class="flex flex-col h-[300px] sm:h-[350px] md:h-full justify-center items-center gap-6 w-full text-center px-[5%] xl:px-[8%]">
-                                                @php
-                                                    $texto1 = $slide->title ?? "Ingrese un texto";
-                                                    $texto_formateado1 = preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', e($texto1));
-                                                @endphp
-                                                <h2 class="leading-none font-akira_expanded text-4xl lg:text-5xl xl:text-6xl text-white max-w-3xl xl:line-clamp-5">
-                                                    {!!$texto_formateado1!!}
-                                                </h2>  
-                                                <p class="text-white text-base font-roboto_regular max-w-xl xl:line-clamp-3">
-                                                    {{$slide->description ?? "Ingrese un texto para la descripcion del slider"}} 
-                                                </p>
-                                                <div class="flex flex-row items-start justify-center">
-                                                    <a href="{{$slide->link1}}">
-                                                        <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-3 px-6">
-                                                            {{$slide->botontext1 ?? "Let´s Go!"}} 
-                                                            
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                </div>    
-                                            </div>
-                                            @if ($slide->members)
-                                                <div class="absolute bottom-[5%] md:bottom-[10%] left-[5%] flex flex-row gap-4 md:gap-0 md:flex-col items-center justify-center">
-                                                    <img class="object-cover w-28 object-left" src="{{asset('images/imagen/chicos.png')}}"/>
-                                                    <div class="flex flex-col md:mt-2 w-40 md:text-center">
-                                                        <h2 class="leading-none font-akira_expanded text-3xl text-white ">
-                                                            200+
-                                                        </h2>
-                                                        <p class="text-white text-sm font-roboto_regular">
-                                                            Miembros activos
-                                                        </p> 
-                                                    </div>
+        @if ($slider->isEmpty())
+        @else
+            <section class="w-full -mt-[100px]">
+                <div class="w-full">
+                        <div class="swiper slider">
+                            <div class="swiper-wrapper">
+                                @foreach ($slider as $slide)
+                                    <div class="swiper-slide"> 
+                                        <div class="flex flex-col justify-center items-center w-full h-[600px] relative bg-center bg-cover" style="background-image: url({{asset($slide->url_image . $slide->name_image)}})">
+                                            <div class="flex flex-col w-full justify-center items-center ">
+                                                <div class="flex flex-col h-[300px] sm:h-[350px] md:h-full justify-center items-center gap-6 w-full text-center px-[5%] xl:px-[8%]">
+                                                    @php
+                                                        $texto1 = $slide->title ?? "Ingrese un texto";
+                                                        $texto_formateado1 = preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', e($texto1));
+                                                    @endphp
+                                                    <h2 class="leading-none font-akira_expanded text-4xl lg:text-5xl xl:text-6xl text-white max-w-3xl xl:line-clamp-5">
+                                                        {!!$texto_formateado1!!}
+                                                    </h2>  
+                                                    <p class="text-white text-base font-roboto_regular max-w-xl xl:line-clamp-3">
+                                                        {{$slide->description ?? "Ingrese un texto para la descripcion del slider"}} 
+                                                    </p>
+                                                    <div class="flex flex-row items-start justify-center">
+                                                        <a href="{{$slide->link1}}">
+                                                            <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-3 px-6">
+                                                                {{$slide->botontext1 ?? "Let´s Go!"}} 
+                                                                
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                                                </svg>
+                                                            </div>
+                                                        </a>
+                                                    </div>    
                                                 </div>
-                                            @endif
+                                                @if ($slide->members)
+                                                    <div class="absolute bottom-[5%] md:bottom-[10%] left-[5%] flex flex-row gap-4 md:gap-0 md:flex-col items-center justify-center">
+                                                        <img class="object-cover w-28 object-left" src="{{asset('images/imagen/chicos.png')}}"/>
+                                                        <div class="flex flex-col md:mt-2 w-40 md:text-center">
+                                                            <h2 class="leading-none font-akira_expanded text-3xl text-white ">
+                                                                200+
+                                                            </h2>
+                                                            <p class="text-white text-sm font-roboto_regular">
+                                                                Miembros activos
+                                                            </p> 
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            @endforeach    
+                                @endforeach    
+                            </div>
                         </div>
-                    </div>
-            </div>    
-        </section> 
-      @endif
+                </div>    
+            </section> 
+        @endif
 
         @if (count($logos) > 0)
             <section class="z-10 col-span-2 bg-[#FB4535]">
@@ -178,24 +178,24 @@
                 <div class="flex flex-col justify-center gap-5 sm:gap-3">
                     <div class="flex flex-row">
                         @if($textoshome->subtitle1section)
-                        <span class="font-roboto_medium w-auto text-white bg-[#010101] rounded-3xl px-3 py-1">{{$textoshome->subtitle1section}}</span>
+                        <span class="font-roboto_medium w-auto text-base 2xl:text-xl text-white bg-[#010101] rounded-3xl px-3 py-1">{{$textoshome->subtitle1section}}</span>
                         @endif
                     </div>
 
                     @if($textoshome->title1section)
-                        <h2 class="leading-none font-akira_expanded text-4xl xl:text-7xl text-[#010101]">
+                        <h2 class="leading-none font-akira_expanded text-4xl xl:text-6xl text-[#010101]">
                             {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoshome->title1section) !!}
                         </h2>
                     @endif
 
                     @if($textoshome->description1section)    
-                        <div class="text-[#010101] text-base font-roboto_regular">
+                        <div class="text-[#010101] text-base 2xl:text-xl font-roboto_regular">
                             <p>{{$textoshome->description1section}}</p>
                         </div>
                     @endif
                     
                     <div class="flex flex-row items-start justify-start mt-2">
-                        <a href="{{route('nosotros')}}"><div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
+                        <a href="{{route('nosotros')}}"><div class="text-white text-base 2xl:text-xl font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2.5 px-6">
                             Conoce más 
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                 <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
