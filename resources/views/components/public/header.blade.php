@@ -115,6 +115,11 @@
                         class="flex flex-col lg:flex-row order-2 lg:order-1 w-full lg:justify-end gap-5 lg:gap-8">
 
                         <li class="flex flex-col">
+                            <a href="{{ route('index') }}"
+                                class="{{ isset($pagina) && $pagina == 'index' ? 'text-[#FB4535]' : 'text-white' }}">Nosotros</a>
+                        </li>
+
+                        <li class="flex flex-col">
                             <a href="{{ route('nosotros') }}"
                                 class="{{ isset($pagina) && $pagina == 'nosotros' ? 'text-[#FB4535]' : 'text-white' }}">Nosotros</a>
                         </li>
