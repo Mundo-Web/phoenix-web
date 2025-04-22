@@ -106,7 +106,7 @@
                                                         $texto1 = $slide->title ?? "Ingrese un texto";
                                                         $texto_formateado1 = preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', e($texto1));
                                                     @endphp
-                                                    <h2 class="leading-none font-akira_expanded text-4xl lg:text-5xl 2xl:text-6xl text-white max-w-3xl xl:line-clamp-5">
+                                                    <h2 class="leading-none font-akira_expanded text-4xl lg:text-5xl 2xl:text-6xl text-white max-w-4xl xl:line-clamp-5">
                                                         {!!$texto_formateado1!!}
                                                     </h2>  
                                                     <p class="text-white text-base xl:text-lg 2xl:text-xl font-roboto_regular max-w-xl xl:line-clamp-3">
