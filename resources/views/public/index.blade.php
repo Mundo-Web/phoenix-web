@@ -57,6 +57,19 @@
             -webkit-line-clamp: 3;
         }
     </style>
+    <style>
+        .popup {
+          opacity: 0;
+          visibility: hidden;
+          transform: translateY(20px);
+          transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+        }
+        .popup.active {
+          opacity: 1;
+          visibility: visible;
+          transform: translateY(0);
+        }
+    </style>
 @stop
 
 @php
@@ -364,8 +377,8 @@
                               @endforeach  
                             </div>
                         </div>
-                        <div class="swiper-carrusel_testimonios-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-50 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
-                        <div class="swiper-carrusel_testimonios-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-50 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div>
+                        <div class="swiper-carrusel_testimonios-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
+                        <div class="swiper-carrusel_testimonios-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div>
                     </div>
             </section>
         @endif
@@ -673,18 +686,22 @@
 
     </main>
 
-
-
-    <!-- Main modal -->
-    <div id="modalofertas" class="modal modalbanner">
-        <!-- Modal body -->
-        <div class="p-1 ">
-            <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+    <div id="popup" class="popup fixed bottom-4 left-4 z-50 rounded-lg shadow-xl h-full max-h-[180px] sm:max-h-[250px] 2xl:max-h-[300px] 3xl:max-h-[350px] max-sm:w-[330px] sm:aspect-4/3 overflow-auto">
+        <div class="h-full relative">
+            <button id="closePopup" class="text-white focus:outline-none absolute right-0 top-0 z-10 bg-[#FB4535] rounded-bl-md">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <div>
+                <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+            </div>
         </div>
     </div>
 
+    <!-- Main modal -->
     @if(Session::has('welcome_message'))
-    <div id="welcome-popup" class="claseocultar fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
+        <div id="welcome-popup" class="claseocultar fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
             <div class="bg-white p-6 rounded shadow-lg text-center">
                 <h2 class="text-lg font-bold mb-4">{{ Session::get('welcome_message') }}</h2>
                 <button id="close-popup" class="bg-blue-500 text-white px-4 py-2 rounded">Cerrar</button>
@@ -694,8 +711,25 @@
 
 
 @section('scripts_importados')
-    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries" >
+    <script type="text/javascript" src="https://maps.google.com/maps/api/js?key={{ env('GOOGLE_MAP_KEY') }}&libraries" ></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        function showPopup() {
+          const popup = document.getElementById('popup');
+          popup.classList.add('active');
+        }
+        
+        function closePopup() {
+          const popup = document.getElementById('popup');
+          popup.classList.remove('active');
+        }
+        
+        window.addEventListener('load', function() {
+          setTimeout(showPopup, 500);
+        });
+        
+        document.getElementById('closePopup').addEventListener('click', closePopup);
+        document.getElementById('closePopupBtn').addEventListener('click', closePopup);
     </script>
     <script type="text/javascript">
         $(document).ready(function(){
@@ -872,13 +906,19 @@
         $(document).ready(function() {
             console.log(pops.length)
             if (pops.length > 0) {
-                $('#modalofertas').modal({
-                    show: true,
-                    fadeDuration: 100
-                })
+                // document.addEventListener('DOMContentLoaded', () => {
+                    const popup = document.getElementById('modalofertas');
+                    const closeButton = document.getElementById('close-modalofertas');
 
+                    if (popup) {
+                        popup.classList.remove('hidden'); // Mostrar el popup
+
+                        closeButton.addEventListener('click', () => {
+                            popup.classList.add('hidden'); // Ocultar el popup
+                        });
+                    }
+                // });
             }
-
 
             $(document).ready(function() {
                 articulosCarrito = Local.get('carrito') || [];

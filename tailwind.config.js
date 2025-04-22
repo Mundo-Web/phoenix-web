@@ -150,6 +150,7 @@ export default {
                 "2lg": "1100px",
                 xl: "1280px",
                 "2xl": "1536px",
+                "3xl": "1736px",
             },
             borderWidth: {
                 3: '3px',

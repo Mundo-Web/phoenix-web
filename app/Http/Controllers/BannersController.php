@@ -42,7 +42,6 @@ class BannersController extends Controller
         if (!$jpa) {
             $body['status'] = true;
             $banner =   Banners::create($body);
-         
             $banner->image = $this->saveImg($request, 'image');
             $banner->price = $this->saveImg($request, 'price');
             $banner->save();
@@ -60,7 +59,6 @@ class BannersController extends Controller
             } else {
               $body['price'] = $this->saveImg($request, 'price');
             }
-            
 
             $jpa->update($body);
         }

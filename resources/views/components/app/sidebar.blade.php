@@ -77,9 +77,9 @@
         {{-- <x-menu.item id="blog" href="{{ route('blog.index') }}" icon="fa-solid fa-blog">Blog</x-menu.item> --}}
         
         <x-menu.item id="slider" href="{{ route('slider.index') }}" icon="fa fa-solid fa-image">Sliders</x-menu.item>
-        {{-- <x-menu.item id="banners" href="{{ route('banners.index') }}" icon="fa fa-solid fa-image">Banners</x-menu.item> --}}
+        <x-menu.item id="banners" href="{{ route('banners.index') }}" icon="fa fa-solid fa-image">Disciplinas</x-menu.item>
         <x-menu.item id="servicios" href="{{ route('servicios.index') }}" icon="fas fa-sliders-h">Beneficios</x-menu.item>
-        {{-- <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item> --}}
+        <x-menu.item id="popup" href="{{ route('popup.index') }}" icon="fas fa-sliders-h">Popup</x-menu.item>
         <x-menu.item id="strength" href="{{ route('strength.index') }}"  icon="fa-regular fa-clipboard">Estadisticas</x-menu.item>
         <x-menu.item id="project" href="{{ route('project.index') }}" icon="fas fa-users">Equipo</x-menu.item> 
 

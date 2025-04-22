@@ -1797,18 +1797,31 @@ class IndexController extends Controller
 
 
   public function subirVoucher(Request $request){
-    // $request->validate([
-    //   'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048', // 2MB
-    //   ]);
-      dd("sadasdasdas");
-      // Guarda el archivo en el directorio 'vouchers'
-      // $path = $request->file('file')->store('vouchers', 'public');
+    $request->validate([
+      'file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048', // 2MB
+      ]);
+      
+      $path = $request->file('file')->store('vouchers', 'public');
 
-      // // Retorna una respuesta JSON con la ruta del archivo
-      // return response()->json([
-      //     'success' => true,
-      //     'path' => $path,
-      //     'message' => 'Archivo subido correctamente',
-      // ]);
+      return response()->json([
+          'success' => true,
+          'path' => $path,
+          'message' => 'Archivo subido correctamente',
+      ]);
+  }
+
+  public function calendario(){
+    return view('public.calendario');
+  }
+
+  public function disciplinas(){
+
+    $productos = Banners::select('banners.*')
+        ->where('banners.status', '=', 1)
+        ->where('banners.visible', '=', 1)
+        ->orderBy('url_btn', 'asc')
+        ->get();
+
+    return view('public.disciplinas', compact('productos'));
   }
 }

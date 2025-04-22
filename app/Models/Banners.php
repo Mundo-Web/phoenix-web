@@ -19,6 +19,7 @@ class Banners extends Model
         'price',
         'potition',
         'url_page',
+        'caracteristicas',
         'visible',
         'status',
        

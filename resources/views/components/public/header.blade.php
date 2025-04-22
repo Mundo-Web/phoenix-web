@@ -112,7 +112,7 @@
                     class="w-full font-roboto_medium text-lg pt-20 fixed inset-0 bg-[#010101] px-[5%] flex flex-col lg:flex-row lg:items-center clip-circle-0 peer-checked/menu:clip-circle-full transition-[clip-path] duration-500 lg:clip-circle-full lg:relative lg:flex lg:justify-items-center lg:p-0 lg:bg-transparent flex-1">
 
                     <div
-                        class="flex flex-col lg:flex-row order-2 lg:order-1 w-full lg:justify-end gap-5 lg:gap-10">
+                        class="flex flex-col lg:flex-row order-2 lg:order-1 w-full lg:justify-end gap-5 lg:gap-8">
 
                         <li class="flex flex-col">
                             <a href="{{ route('nosotros') }}"
@@ -125,6 +125,11 @@
                                     class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'text-[#FB4535]' : 'text-white' }}">Servicios y Planes</a>
                             </li>
                         @endif
+
+                        <li class="flex flex-col">
+                            <a href="{{ route('calendario') }}"
+                                class="{{ isset($pagina) && $pagina == 'calendario' ? 'text-[#FB4535]' : 'text-white' }}">Calendario</a>
+                        </li>
 
                         {{-- @if (count($services) > 0)
                             <li class="flex flex-col">

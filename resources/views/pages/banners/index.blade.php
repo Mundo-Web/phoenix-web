@@ -3,7 +3,7 @@
 
     <section class="py-4 border-b border-slate-100 dark:border-slate-700">
       <a href="{{ route('banners.create') }}"
-        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar Banner</a>
+        class="bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded text-sm">Agregar</a>
     </section>
 
 
@@ -12,7 +12,7 @@
 
 
       <header class="px-5 py-4 border-b border-slate-100 dark:border-slate-700">
-        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Banners</h2>
+        <h2 class="font-semibold text-slate-800 dark:text-slate-100 text-2xl tracking-tight">Disciplinas</h2>
       </header>
       <div class="p-3">
 
@@ -22,22 +22,22 @@
           <table id="tabladatos" class="display text-lg" style="width:100%">
             <thead>
               <tr>
-                <th>Imagen Desktop</th>
-                <th>Imagen Mobile</th>
+                {{-- <th>Imagen Desktop</th> --}}
+                {{-- <th>Imagen Mobile</th> --}}
+                <th class="w-10">Posición</th>
                 <th>Titulo</th>
-                <th>Posición</th>
-                <th>Visible</th>
-                <th>Acciones</th>
+                <th class="w-20">Visible</th>
+                <th class="w-20">Acciones</th>
               </tr>
             </thead>
             <tbody>
 
               @foreach ($banners as $item)
                 <tr>
-                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td>
-                  <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->price) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td>
-                  <td>{{ $item->title }}</td>
+                  {{-- <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->image) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td> --}}
+                  {{-- <td class="px-3 py-2"><img class="w-20" src="{{ asset($item->price) }}" alt="" onerror="this.onerror=null;this.src='{{ asset('images/imagen/noimagen.jpg') }}';"></td> --}}
                   <td>{{ $item->potition }}</td>
+                  <td>{{ $item->title }}</td>
                   <td>
                     <form method="POST" action="">
                       @csrf
@@ -77,9 +77,10 @@
             </tbody>
             <tfoot>
               <tr>
-                <th>Imagen Desktop</th>
-                <th>Imagen Mobile</th>
+                {{-- <th>Imagen Desktop</th> --}}
+                {{-- <th>Imagen Mobile</th> --}}
                 <th>Posición</th>
+                <th>Titulo</th>
                 <th>Visible</th>
                 <th>Acciones</th>
               </tr>

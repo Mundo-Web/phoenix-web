@@ -65,6 +65,7 @@
                     @if (count($categoriasf) > 0)
                         <a href="{{route('catalogo', $categoriasf[0]->id )}}">Servicios y Planes</a>
                     @endif
+                    <a href="{{route('calendario')}}">Calendario</a>
                     <a href="{{route('contacto')}}#frecuentes">Preguntas Frecuentes</a>
                     <a href="{{route('contacto')}}">Contacto</a>
                 </div>
