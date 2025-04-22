@@ -51,7 +51,7 @@
                 @endif
               </div>
               @if($textosnosotros->title1section)
-                <h2 class="leading-none font-akira_expanded  text-5xl xl:text-6xl 2xl:text-7xl text-[#010101]">
+                <h2 class="leading-none font-akira_expanded text-4xl md:text-5xl 2xl:text-6xl text-[#010101]">
                   {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title1section) !!}
                 </h2>
               @endif
