@@ -44,7 +44,7 @@
 
     <main>
 
-        <section class="w-full  py-10 lg:py-16 px-[5%] xl:px-[8%] bg-[#F0F1F0]">
+        <section class="w-full  py-10 lg:py-16 px-[5%] 2xl:px-[8%] bg-[#F0F1F0]">
                 <div class="flex flex-col justify-center items-center gap-10 w-full">
                     <div class="flex flex-col gap-10 bg-white rounded-xl">
                         <h2 class="leading-none font-akira_expanded max-w-6xl mx-auto text-4xl xl:text-[56px] text-[#010101] bg-[#F0F1F0] text-center">
@@ -54,9 +54,9 @@
 
                     <div class="w-full">
                         @if (count($productos)>0)
-                            <section id="planes" class="flex flex-col gap-10 w-full px-[5%] xl:px-[8%] py-10 md:py-14 bg-[#F0F1F0]">
-                                    <div class="w-full relative">
-                                        <div class="swiper carrusel_planes h-max">
+                            <section id="planes" class="flex flex-col gap-10 w-full py-5 bg-[#F0F1F0]">
+                                    {{-- <div class="w-full relative"> --}}
+                                        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                                             <div class="swiper-wrapper">
                                             @foreach ($productos as $producto)
                                                 <div class="swiper-slide">
@@ -154,9 +154,9 @@
                                             @endforeach  
                                             </div>
                                         </div>
-                                        <div class="swiper-carrusel_planes-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
-                                        <div class="swiper-carrusel_planes-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div>
-                                    </div>
+                                        {{-- <div class="swiper-carrusel_planes-prev overflow-hidden absolute top-1/2 -translate-y-1/2 -left-2 lg:-left-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-left text-3xl md:text-5xl text-[#000000]"></i></div>
+                                        <div class="swiper-carrusel_planes-next overflow-hidden absolute top-1/2 -translate-y-1/2 -right-2 lg:-right-12 z-20 bg-white rounded-full"><i class="fa-solid fa-circle-chevron-right  text-3xl md:text-5xl text-[#000000]"></i></div> --}}
+                                    {{-- </div> --}}
                             </section>
                         @endif
                     </div>
