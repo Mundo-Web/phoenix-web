@@ -76,7 +76,7 @@
             
             @if($textosnosotros->title2section)
               <div class="flex flex-col justify-start gap-5 lg:gap-7">
-                  <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl 2xl:text-6xl text-[#010101]">
+                  <h2 class="leading-none font-akira_expanded text-3xl xl:text-5xl 2xl:text-6xl text-[#010101]">
                     {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title2section) !!}
                   </h2>
               </div>
