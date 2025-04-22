@@ -63,8 +63,9 @@
                     <a href="{{ route('index') }}">Inicio</a>
                     <a href="{{route('nosotros')}}">Nosotros</a>
                     @if (count($categoriasf) > 0)
-                        <a href="{{route('catalogo', $categoriasf[0]->id )}}">Servicios y Planes</a>
+                        <a href="{{route('catalogo', $categoriasf[0]->id )}}">Planes</a>
                     @endif
+                    <a href="{{route('disciplinas')}}">Disciplinas</a>
                     <a href="{{route('calendario')}}">Calendario</a>
                     <a href="{{route('contacto')}}#frecuentes">Preguntas Frecuentes</a>
                     <a href="{{route('contacto')}}">Contacto</a>
