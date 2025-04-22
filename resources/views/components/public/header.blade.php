@@ -127,7 +127,7 @@
                         @if (count($categoriasf) > 0)
                             <li class="flex flex-col">
                                 <a href="{{route('catalogo', $categoriasf[0]->id )}}"
-                                    class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'text-[#FB4535]' : 'text-white' }}">Planes</a>
+                                    class="{{ isset($pagina) && $pagina == 'catalogo' ? 'text-[#FB4535]' : 'text-white' }}">Planes</a>
                             </li>
                         @endif
                         
