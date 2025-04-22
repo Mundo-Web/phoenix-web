@@ -76,7 +76,7 @@
             
             @if($textosnosotros->title2section)
               <div class="flex flex-col justify-start gap-5 lg:gap-7">
-                  <h2 class="leading-none font-akira_expanded text-5xl xl:text-6xl text-[#010101]">
+                  <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl 2xl:text-6xl text-[#010101]">
                     {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title2section) !!}
                   </h2>
               </div>
@@ -91,7 +91,7 @@
               <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
                 @foreach ($benefit as $estadistica)
                   <div class="flex flex-col gap-0">
-                      <h2 class="text-[#010101] font-akira_expanded text-5xl">{{$estadistica->descripcionshort}}</h2>
+                      <h2 class="text-[#010101] font-akira_expanded text-4xl">{{$estadistica->descripcionshort}}</h2>
                       <span class="text-[#FB4535] text-base font-roboto_medium">{{$estadistica->titulo}}</span>
                   </div>
                 @endforeach
