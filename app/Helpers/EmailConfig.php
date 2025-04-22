@@ -11,15 +11,15 @@ class EmailConfig
         $mail = new PHPMailer(true);
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
-        $mail->Host = 'mail.phoenix-fitness.fit';
+        $mail->Host = 'smtp-mail.outlook.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'info@phoenix-fitness.fit';
-        $mail->Password = 'phoenix2025#';
+        $mail->Username = 'servicioalcliente@phoenix-fitness.fit';
+        $mail->Password = 'J^307248595226od';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
-        $mail->Port = 465;
+        $mail->Port = 587;
         $mail->Subject = '' . $name . ', '.$mensaje. '';
         $mail->CharSet = 'UTF-8';
-        $mail->setFrom('info@phoenix-fitness.fit', 'Phoenix Fitness Center');
+        $mail->setFrom('servicioalcliente@phoenix-fitness.fit', 'Phoenix Fitness Center');
         return $mail;
     }
 }
