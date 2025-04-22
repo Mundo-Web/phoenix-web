@@ -80,12 +80,12 @@
                             <label name="newsletter" id="newsletter" class="font-normal text-base font-Urbanist_Regular">
 
                                 Acepto la
-                                <span class="font-bold text-[#CF072C] cursor-pointer open-modal font-Urbanist_Regular"
-                                    data-tipo='PoliticaPriv'> Política de
+                                <span id="linkPoliticas" class="font-bold text-[#CF072C] cursor-pointer open-modal font-Urbanist_Regular"
+                                    > Política de
                                     Privacidad</span>
                                 y los
-                                <span class="font-bold text-[#CF072C] cursor-pointer open-modal font-Urbanist_Regular"
-                                    data-tipo='terminosUso'>
+                                <span id="linkTerminos" class="font-bold text-[#CF072C] cursor-pointer open-modal font-Urbanist_Regular"
+                                    >
                                     Términos de Uso
                                 </span>
                             </label>
@@ -108,12 +108,7 @@
 
     </div>
 
-  <div id="modaalpoliticas" class="modal modalbanner">
-    <div class="p-2" id="modal-content">
-      <h1 id="modal-title">MODAL POLITICAS</h1>
-      <div id="modal-body-content"></div>
-    </div>
-  </div>
+ 
 
   <script>
     const politicas = @json($politicas);
