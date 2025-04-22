@@ -59,8 +59,8 @@
                                         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
                                             <div class="w-full">
                                                 @foreach ($productos as $producto)
-                                                    <div class="swiper-slide">
-                                                        <div class="flex flex-col gap-4 
+                                                    
+                                                    <div class="flex flex-col gap-4 
                                                                     {{ $producto->potition == 1 ? 'bg-white' : '' }}
                                                                     {{ $producto->potition == 2 ? 'bg-[#010101]' : '' }}
                                                                     {{ $producto->potition == 3 ? 'bg-[#FB4535]' : '' }}
@@ -149,8 +149,8 @@
                                                                     @endforeach  
                                                                 </div>
                                                             @endif
-                                                        </div>
                                                     </div>
+                                                    
                                                 @endforeach  
                                             </div>
                                         </div>
