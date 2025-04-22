@@ -60,10 +60,10 @@
 
                             <div class="relative w-full ">
                                 <label for="fullNameContacto"
-                                    class="font-roboto_regular font-semibold text-sm text-[#010101]">Nombre completo</label>
+                                    class="font-roboto_regular font-semibold text-sm text-[#010101] ">Nombre completo</label>
                                 <input required name="full_name" id="fullNameContacto" type="text"
                                     placeholder="Nombre completo"
-                                    class="mt-1 w-full py-3 px-4 focus:outline-none bg-[#F7F7F7] font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+                                    class="mt-1 w-full py-3 px-4 focus:outline-none bg-[#F7F7F7] font-roboto_regular text-base placeholder:text-opacity-60 text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
                             </div>
 
                             <div class="relative w-full">
@@ -71,14 +71,14 @@
                                     class="font-roboto_regular font-semibold text-sm text-[#010101]">Fecha de nacimiento (opcional)</label>
                                 <input required name="birthay" id="birthay" type="date"
                                     placeholder="Fecha de nacimiento"
-                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] placeholder:text-opacity-60 text-opacity-60 focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
                             </div>
 
                             <div class="relative w-full">
                                 <label for="emailContacto"
                                     class="font-roboto_regular font-semibold text-sm text-[#010101]">E-Mail</label>
                                 <input type="email" name="email" placeholder="E-mail" required id="emailContacto"
-                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] placeholder:text-opacity-60 focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
                             </div>
 
                             <div class="relative w-full">
@@ -86,13 +86,13 @@
                                     class="font-roboto_regular font-semibold text-sm text-[#010101]">Número de Teléfono</label>
                                 <input id="telefonoContacto" name="phone" placeholder="Teléfono" type="tel"
                                     maxlength="12" required
-                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] placeholder:text-opacity-60 focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
                             </div>
 
                             <div class="lg:col-span-2 w-full flex flex-col gap-1">
                                 <label for="custom-select"
                                     class="font-roboto_regular font-semibold text-sm text-[#010101]">Tus objetivos</label>
-                                <select name="objective" id="custom-select" class="w-full font-roboto_regular font-semibold text-[#010101] bg-[#F7F7F7]">
+                                <select name="objective" id="custom-select" class="w-full font-roboto_regular font-semibold text-[#010101] placeholder:text-opacity-60  bg-[#F7F7F7]">
                                     <option></option>
                                     <option value="sitio-web">Quiero bajar peso</option>
                                     <option value="redes-sociales">Mejorar condición física</option>
@@ -103,7 +103,7 @@
 
                             <div class="lg:col-span-2 relative w-full hidden" id="input-container">
                                 <input id="otro" name="other" placeholder="Mi objetivo es..." type="text" 
-                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
+                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] placeholder:text-opacity-60 focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl" />
                             </div>
 
                             <input class="lg:col-span-2" type="hidden" id="tipo" placeholder="tipo" name="source" value="Inicio" />
@@ -111,7 +111,7 @@
                             <div class="lg:col-span-2 lg:relative w-full">
                                 <label for="message" class="font-roboto_regular font-semibold text-sm text-[#010101]">¿Tienes alguna pregunta? (opcional)</label>
                                 <textarea name="message" id="message" rows="3" cols="30"
-                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl"
+                                    class="mt-1 w-full py-3 px-4 focus:outline-none font-roboto_regular text-base text-[#010101] placeholder:text-opacity-60 focus:ring-0 placeholder:text-[#010101]  border-[#d7dee6] border transition-all focus:outline-0 focus:font-medium bg-[#F7F7F7] focus:bg-[#F7F7F7] focus:border-[#d7dee6] rounded-xl"
                                     placeholder="Mensaje"></textarea>
                             </div>
 
