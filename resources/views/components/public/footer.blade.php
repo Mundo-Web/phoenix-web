@@ -290,7 +290,7 @@
     <div id="modalPoliticasDev" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
        
         <div class="p-4 flex flex-col gap-2">
-            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Cambio de Devolución</h1>
+            <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Privacidad</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $politicas->content ?? '' !!}</div>
         </div>
     </div>
