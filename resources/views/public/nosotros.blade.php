@@ -114,7 +114,7 @@
           <div class="w-full xl:w-3/5 flex flex-col gap-10 py-10">
               <div class="flex flex-col gap-2">
                 @if($textosnosotros->title3section)
-                  <h2 class="leading-none font-akira_expanded text-5xl xl:text-6xl text-[#010101] lg:max-w-sm">
+                  <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl text-[#010101] lg:max-w-sm">
                     {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title3section) !!}
                   </h2>  
                 @endif
@@ -156,7 +156,7 @@
         
             <div class="flex flex-col gap-2">
               @if($textosnosotros->title4section)
-                <h2 class="leading-none font-akira_expanded text-5xl xl:text-6xl text-[#010101]">
+                <h2 class="leading-none font-akira_expanded text-4xl xl:text-5xl text-[#010101]">
                   {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textosnosotros->title4section) !!}
                 </h2>  
               @endif
