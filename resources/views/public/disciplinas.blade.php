@@ -47,7 +47,7 @@
         <section class="w-full  py-10 lg:py-16 px-[5%] xl:px-[8%] bg-[#F0F1F0]">
                 <div class="flex flex-col justify-center items-center gap-10 w-full">
                     <div class="flex flex-col gap-10 bg-white rounded-xl">
-                        <h2 class="leading-none font-akira_expanded  text-4xl xl:text-[56px] text-[#010101] bg-[#F0F1F0]">
+                        <h2 class="leading-none font-akira_expanded max-w-6xl mx-auto text-4xl xl:text-[56px] text-[#010101] bg-[#F0F1F0] text-center">
                             Nuestras disciplinas en <span class="text-[#FB4535]">Phoenix Life</span> 
                         </h2>
                     </div>
