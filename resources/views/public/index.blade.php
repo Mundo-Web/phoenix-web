@@ -685,19 +685,21 @@
     @endif --}}
 
     </main>
-
-    <div id="popup" class="popup fixed bottom-4 left-4 z-50 rounded-lg shadow-xl h-full max-h-[180px] sm:max-h-[250px] 2xl:max-h-[300px] 3xl:max-h-[350px] max-sm:w-[330px] sm:aspect-4/3 overflow-auto">
-        <div class="h-full relative">
-            <button id="closePopup" class="text-white focus:outline-none absolute right-0 top-0 z-10 bg-[#FB4535] rounded-bl-md">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
-            <div>
-                <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+    @if (count($popups) > 0)
+        <div id="popup" class="popup fixed bottom-4 left-4 z-50 rounded-lg shadow-xl h-full max-h-[180px] sm:max-h-[250px] 2xl:max-h-[300px] 3xl:max-h-[350px] max-sm:w-[330px] sm:aspect-4/3 overflow-auto">
+            <div class="h-full relative">
+                <button id="closePopup" class="text-white focus:outline-none absolute right-0 top-0 z-10 bg-[#FB4535] rounded-bl-md">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 2xl:h-7 2xl:w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+                <div>
+                    <x-swipper-card-ofertas :items="$popups" id="modalOfertas" />
+                </div>
             </div>
         </div>
-    </div>
+    @endif
+    
 
     <!-- Main modal -->
     @if(Session::has('welcome_message'))
