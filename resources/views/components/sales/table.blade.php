@@ -241,7 +241,7 @@
             .append(isFree ? 'Envio gratis' : `S/. ${Number(data.address_price).toFixed(2)}`)
 
           div.append(priceContainer)
-          div.append(envioContainer)
+          // div.append(envioContainer)
 
           container.html(div)
         }
