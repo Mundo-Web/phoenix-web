@@ -23,6 +23,7 @@ use App\Models\SeguimientoPedido;
 use App\Models\Service;
 use App\Models\Shortcode;
 use App\Models\Tag;
+use App\Models\Banners;
 use App\Models\TermsAndCondition;
 use App\Models\TimeAndPriceDelivery;
 use App\Models\TratamientoAdicionalDatos;
@@ -60,6 +61,7 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer('components.public.footer', function ($view) {
 
+            $disciplinas = Banners::where('status', true)->where('visible', true)->get();
 
             // Obtener los datos del footer
             $general = General::all(); // Suponiendo que tienes un modelo Footer y un método footerData() en él
@@ -84,7 +86,7 @@ class AppServiceProvider extends ServiceProvider
                 ->where("visible", "=", true)
                 ->get();
 
-            $view->with(['categoriasf'=> $categoriasf, 'services'=>$services, 'logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'general' => $general, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
+            $view->with(['disciplinas'=>$disciplinas, 'categoriasf'=> $categoriasf, 'services'=>$services, 'logosfooter'=> $logosfooter,'NuestrasTiendas'=> $NuestrasTiendas, 'SeguimientoPedido'=> $SeguimientoPedido, 'BeneficiosSinIntereses'=> $BeneficiosSinIntereses, 'CampanasPublicitarias'=> $CampanasPublicitarias, 'TratamientoAdicionalDatos'=> $TratamientoAdicionalDatos, 'PoliticasCookies'=> $PoliticasCookies, 'PoliticasCookies'=> $PoliticasCookies, 'PlazosDeReembolso'=> $PlazosDeReembolso,'TimeAndPriceDelivery'=> $TimeAndPriceDelivery,'general' => $general, 'politicas' => $politicDev, 'terminos' => $termsAndCondicitions, 'politicaDatos' => $politicaDatos]);
         });
 
         View::composer('components.public.header', function ($view) {
@@ -96,6 +98,8 @@ class AppServiceProvider extends ServiceProvider
             $categorias = Category::where("status", "=", true)->where('is_menu', 1)->with(['subcategories' => function ($query) {
                 $query->whereHas('products');
             }])->get();
+
+            $disciplinas = Banners::where('status', true)->where('visible', true)->get();
 
             $marcas = ClientLogos::where('status', true)->where('visible', true)->get();
                  
@@ -115,6 +119,7 @@ class AppServiceProvider extends ServiceProvider
 
             // Pasar los datos a la vista
             $view->with([
+                'disciplinas'=>$disciplinas,
                 'datosgenerales' => $datosgenerales,
                 'blog' => $blog,
                 'categoriasMenu' => $categoriasMenu,

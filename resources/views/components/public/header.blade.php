@@ -122,10 +122,17 @@
                         @if (count($categoriasf) > 0)
                             <li class="flex flex-col">
                                 <a href="{{route('catalogo', $categoriasf[0]->id )}}"
-                                    class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'text-[#FB4535]' : 'text-white' }}">Servicios y Planes</a>
+                                    class="{{ isset($pagina) && $pagina == 'catalogo.all' ? 'text-[#FB4535]' : 'text-white' }}">Planes</a>
                             </li>
                         @endif
-
+                        
+                        @if (count($disciplinas) > 0)
+                            <li class="flex flex-col">
+                                <a href="{{ route('disciplinas') }}"
+                                    class="{{ isset($pagina) && $pagina == 'disciplinas' ? 'text-[#FB4535]' : 'text-white' }}">Disciplinas</a>
+                            </li>
+                        @endif
+                        
                         <li class="flex flex-col">
                             <a href="{{ route('calendario') }}"
                                 class="{{ isset($pagina) && $pagina == 'calendario' ? 'text-[#FB4535]' : 'text-white' }}">Calendario</a>
