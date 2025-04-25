@@ -116,7 +116,7 @@
 
 
                                     <div class="md:col-span-5">
-                                        <label for="imagensecond">Imagen Banner</label>
+                                        <label for="imagensecond">Imagen Banner - Tamaño y Formato (2304x1536 px - Formato PNG)</label>
                                         <div class="relative mb-2  mt-2">
                                             <input id="imagensecond" name="imagensecond"
                                                 class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

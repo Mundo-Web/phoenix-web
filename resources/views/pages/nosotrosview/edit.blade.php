@@ -70,7 +70,7 @@
                                     </div>
 
                                     <div class="md:col-span-5">
-                                        <label for="imagen">Imagen principal</label>
+                                        <label for="imagen">Imagen principal - Tamaño y Formato (385x421 px - Formato PNG)</label>
                                         <div class="relative mb-2  mt-2">
                                             <input id="imagen" name="imagen"
                                                 class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
@@ -112,7 +112,7 @@
 
 
                                     <div class="md:col-span-5">
-                                        <label for="imagensecond">Imagen Banner</label>
+                                        <label for="imagensecond">Imagen Banner - Tamaño y Formato (2304x1536 px - Formato PNG)</label>
                                         <div class="relative mb-2  mt-2">
                                             <input id="imagensecond" name="imagensecond"
                                                 class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
@@ -155,7 +155,7 @@
 
 
                                     <div class="md:col-span-5">
-                                        <label for="imagenthird">Imagen Banner</label>
+                                        <label for="imagenthird">Imagen Banner - Tamaño y Formato (503x900 px - Formato PNG)</label>
                                         <div class="relative mb-2  mt-2">
                                             <input id="imagenthird" name="imagenthird"
                                                 class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"

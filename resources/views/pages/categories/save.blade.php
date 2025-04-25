@@ -135,7 +135,7 @@
               </div> --}}
 
               <div class="md:col-span-5">
-                <label for="imagen">Subir imagen</label>
+                <label for="imagen">Subir imagen - Tamaño y Formato (630x552 px - Formato PNG)</label>
                 <div class="relative mb-2  mt-2 flex flex-wrap items-center gap-2">
                   <img class="block w-40 h-40 mb-2" src="{{$category->name_image ? asset($category->url_image . $category->name_image) : asset('images/imagen/image-plus.jpg')}}" alt="">
                   <input name="imagen"
@@ -145,7 +145,7 @@
               </div>
 
               <div class="col-span-5">
-                <label for="imagenes mb-2">Otras imagenes del producto</label>
+                <label for="imagenes mb-2">Otras imagenes de categoria - Tamaño y Formato (924x616 px - Formato PNG)</label>
                 <div id="imagenes" class="w-full flex flex-wrap gap-1">
 
                   <div id="imagenes_sortable" class="flex flex-wrap gap-1 max-w-full">

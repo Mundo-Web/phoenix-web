@@ -92,7 +92,7 @@
 
 
               <div class="md:col-span-5">
-                <label for="image">Subir una Foto</label>
+                <label for="image">Subir una Foto - Tamaño y Formato (639x360 px - Formato PNG)</label>
                 <div class="relative mb-2  mt-2">
                   <input name="image"
                     class="p-2.5 block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
