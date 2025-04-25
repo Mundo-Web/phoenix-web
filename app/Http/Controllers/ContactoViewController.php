@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\ContactoView;
 use App\Http\Requests\StoreContactoViewRequest;
 use App\Http\Requests\UpdateContactoViewRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class ContactoViewController extends Controller
 {

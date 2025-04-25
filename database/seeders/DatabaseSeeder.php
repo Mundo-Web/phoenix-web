@@ -54,6 +54,7 @@ class DatabaseSeeder extends Seeder
             NewUserSeeder::class,
             HomeViewSeeder::class,
             NosotrosViewSeeder::class,
+            ContactoViewSeeder::class,
             //ServiceSeeder::class,
         ]);
         

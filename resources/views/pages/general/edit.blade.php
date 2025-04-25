@@ -548,28 +548,46 @@
                             </div>
                           </div>
 
-                          
-                          <!-- <div class="md:col-span-2">
-                                            <label for="city">City</label>
-                                            <input type="text" name="city" id="city" class="h-10 border mt-1 rounded px-4 w-full bg-gray-50" value="" placeholder="" />
-                                        </div> -->
+                          <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
+                            Configuracion Mailing</h2>
 
-                          <!-- <div class="md:col-span-2">
-                                            <label for="country">Country / region</label>
-                                            <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
-                                            <input name="country" id="country" placeholder="Country" class="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent" value="" />
-                                            <button tabindex="-1" class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
-                                                <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                                <line x1="18" y1="6" x2="6" y2="18"></line>
-                                                <line x1="6" y1="6" x2="18" y2="18"></line>
-                                                </svg>
-                                            </button>
-                                            <button tabindex="-1" for="show_more" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-blue-600">
-                                                <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-                                            </button>
-                                            </div>
-                                        </div> -->
+                          <div class="md:col-span-2">
+                            <label for="city">Correo mailing</label>
+                            <div class="relative mb-2 ">
+                              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                  </path>
+                                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                  </path>
+                                </svg>
+                              </div>
+                              <input type="text" id="city" name="city" value="{{ $general->city }}"
+                                class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Correo mailing">
+                            </div>
+                          </div>
 
+                          <div class="md:col-span-2">
+                            <label for="country">Contraseña mailing</label>
+                            <div class="relative mb-2 ">
+                              <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor"
+                                  viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z">
+                                  </path>
+                                  <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z">
+                                  </path>
+                                </svg>
+                              </div>
+                              <input type="password" id="country" name="country" value="{{ $general->country }}"
+                                class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Contraseña mailing">
+                            </div>
+                          </div>
+
+                 
                           <!-- <div class="md:col-span-2">
                                             <label for="state">State / province</label>
                                             <div class="h-10 bg-gray-50 flex border border-gray-200 rounded items-center mt-1">
