@@ -58,6 +58,7 @@ use App\Http\Controllers\StrengthController;
 use App\Http\Controllers\SubCategoryController;
 use App\Http\Controllers\ValoresAtributosController;
 use App\Http\Controllers\NosotrosViewController;
+use App\Http\Controllers\ContactoViewController;
 use App\Http\Controllers\CommentController;
 
 use App\Http\Controllers\TagController;
@@ -196,6 +197,9 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
 
         //Textos Nosotros
         Route::resource('/nosotrosview', NosotrosViewController::class);
+
+        //Textos Contacto
+        Route::resource('/contactoview', ContactoviewController::class);
         
         //Testimonies
         Route::resource('/testimonios', TestimonyController::class);

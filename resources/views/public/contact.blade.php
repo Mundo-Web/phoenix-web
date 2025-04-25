@@ -35,6 +35,9 @@
             color: #010101!important;
 
         }
+        .select2-selection__rendered{
+            opacity: 0.7!important;
+        }
        
     </style>
 @stop
@@ -53,7 +56,7 @@
 
                     <div class="flex flex-col gap-10 bg-white rounded-xl">
                         <h2 class="leading-none font-akira_expanded  text-4xl xl:text-[56px] text-[#010101]">
-                            Ponerse en <span class="text-[#FB4535]">Contacto</span>
+                            {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoscontacto->title1section) !!}
                         </h2>
                         <form id="formContactos" class="grid grid-cols-1 lg:grid-cols-2 gap-4 font-roboto_regular">
                             @csrf
@@ -92,7 +95,7 @@
                             <div class="lg:col-span-2 w-full flex flex-col gap-1">
                                 <label for="custom-select"
                                     class="font-roboto_regular font-semibold text-sm text-[#010101]">Tus objetivos</label>
-                                <select name="objective" id="custom-select" class="w-full font-roboto_regular font-semibold text-[#010101] placeholder:text-opacity-60  bg-[#F7F7F7]">
+                                <select name="objective" id="custom-select" class="w-full font-roboto_regular font-semibold text-[#010101] text-opacity-60  bg-[#F7F7F7]">
                                     <option></option>
                                     <option value="sitio-web">Quiero bajar peso</option>
                                     <option value="redes-sociales">Mejorar condición física</option>
@@ -143,10 +146,10 @@
 
                     <div class="flex flex-col gap-4">
                         <h2 class="leading-tight font-roboto_bold  text-2xl text-[#010101]">
-                           {{$textoshome->title6sectio ?? "¿Quieres contactar con nosotros directamente?"}}</h2>
+                           {{$textoscontacto->title1section2 ?? "¿Quieres contactar con nosotros directamente?"}}</h2>
                         
                         <p class="text-[#010101] font-roboto_regular text-base">
-                            {{$textoshome->description6sectin ?? "Ponte en contacto con los expertos en sistemas automáticos de gran trayectoria y alta efectividad."}}
+                            {{$textoscontacto->description1section ?? "Ponte en contacto con los expertos en sistemas automáticos de gran trayectoria y alta efectividad."}}
                         </p>
                     </div>
 
@@ -181,24 +184,31 @@
         </section>
 
         @if(count($categorias) > 0)
-            <section class="w-full px-[5%] xl:px-[8%] py-20 bg-cover bg-center" style="background-image: url('{{ asset('images/imagen/bannerphoenix.png') }}');">
-                <div class="grid grid-cols-1 md:grid-cols-3 w-full">
-                    <div class="md:col-span-2 flex flex-col gap-3">
-                        <div class="flex flex-row">
-                            <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">Team Pheonix Fitness</span>
-                        </div>
-                        <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white">
-                            Tu mejor version comienza <span class="text-[#FB4535]">aqui</span>
-                        </h2>
-                        <div class="flex flex-row items-center justify-start">
-                            <a href="{{route('catalogo', $categorias[0]->id)}}">
-                                <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
-                                    ¿Tienes dudas? Escríbenos
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    </svg>
-                                </div>
-                            </a>
+            <section class="w-full relative flex flex-col" >
+                <img class="w-full h-full p-0 size-full object-cover object-center absolute z-10" src="{{ asset($textoscontacto->url_image2section) }}" onerror="this.onerror=null;this.src='{{ asset('images/imagen/bannerphoenix.png') }}';" />
+                <div class="px-[5%] py-20">
+                    <div class="grid grid-cols-1 md:grid-cols-3 w-full z-20 relative">
+                        <div class="md:col-span-2 flex flex-col gap-3">
+                            
+                            <div class="flex flex-row">
+                                <span class="font-roboto_medium w-auto text-[#010101] bg-white rounded-3xl px-3 py-1">{{$textoscontacto->subtitle2section ?? "Team Pheonix Fitness"}}</span>
+                            </div>
+                        
+                            <h2 class="leading-none font-akira_expanded  text-4xl xl:text-5xl text-white xl:line-clamp-2">
+                                {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoscontacto->title2section) !!}
+                            </h2>
+                        
+                            <div class="flex flex-row items-center justify-start">
+                                <a href="{{route('contacto')}}">
+                                    <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-2 px-6">
+                                        {{$textoscontacto->description3section ?? "¿Tienes dudas? Escríbenos"}}
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                </a>
+                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -210,8 +220,7 @@
                     <div class="">
                         <div class="flex flex-col justify-center items-center px-[5%] xl:px-[8%] pb-10 w-full max-w-2xl text-center mx-auto gap-5">
                             <h1 class="text-4xl lg:text-5xl font-akira_expanded font-bold text-[#010101]">
-                                Preguntas
-                                <span class="text-[#FB4535]">frecuentes</span>
+                                {!! preg_replace('/\*(.*?)\*/', '<span class="text-[#FB4535]">$1</span>', $textoscontacto->title3section) !!}
                             </h1>
                         </div>
                     </div>

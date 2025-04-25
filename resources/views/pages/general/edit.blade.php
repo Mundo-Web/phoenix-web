@@ -471,21 +471,21 @@
                               Mailing</h2> --}}
 
 
-                          {{-- <div class="md:col-span-5">
+                          <div class="md:col-span-5">
                             <label for="imagenmailing">Modificar imagen de mailing</label>
                             <div class="relative mb-2">
                               <input type="file" id="imagenmailing" name="imagenmailing" 
                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 >
                             </div>
-                          </div> --}}
+                          </div>
                           
-                          {{-- <div class="md:col-span-5">
+                          <div class="md:col-span-5">
                             <label for="imgactual">Imagen actual (600x710 px - Formato PNG)</label>
                             <div class="mt-1 w-80 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                               <img class="w-80" src="{{asset('mail/fondocontacto.png')}}" />
                             </div>
-                          </div> --}}
+                          </div>
 
                           <h2 class="md:col-span-5 text-lg font-semibold text-slate-800 mt-2 dark:text-white">
                             Descripción de la empresa</h2>

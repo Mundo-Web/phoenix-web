@@ -29,6 +29,7 @@ use App\Models\GaleryCategory;
 use App\Models\HistoricoCupon;
 use App\Models\HomeView;
 use App\Models\NosotrosView;
+use App\Models\ContactoView;
 use App\Models\Offer;
 use App\Models\PolyticsCondition;
 use App\Models\Popup;
@@ -370,8 +371,9 @@ class IndexController extends Controller
     $faqs = Faqs::where('status', 1)->where('visible', 1)->get();
     $destacados = Products::where('destacar', '=', 1)->where('status', '=', 1)
       ->where('visible', '=', 1)->with('tags')->activeDestacado()->get();
+    $textoscontacto = ContactoView::where('id', 1)->first();
 
-    return view('public.contact', compact('general', 'url_env', 'categorias', 'destacados','faqs'));
+    return view('public.contact', compact('general', 'url_env', 'categorias', 'destacados','faqs','textoscontacto'));
   }
 
   public function carrito()

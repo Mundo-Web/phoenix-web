@@ -96,6 +96,7 @@
         {{-- <x-menu.item id="plazos-de-reembolso" href="{{ route('plazos-de-reembolso.edit', 1) }}" icon="fas fa-file-contract">Plazos de Reembolso</x-menu.item> --}}
         <x-menu.item id="homeview" href="{{ route('homeview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Home</x-menu.item> 
         <x-menu.item id="nosotrosview" href="{{ route('nosotrosview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Nosotros</x-menu.item> 
+        <x-menu.item id="contactoview" href="{{ route('contactoview.edit', 1) }}" icon="fas fa-pencil-alt">Textos Contacto</x-menu.item> 
         {{-- <x-menu.item id="tratamiento-adicional-datos" href="{{ route('tratamiento-adicional-datos.edit', 1) }}" icon="fas fa-file-contract">Tratamiento Adicional Datos</x-menu.item> --}}
         {{-- <x-menu.item id="campanas-publicitarias" href="{{ route('campanas-publicitarias.edit', 1) }}" icon="fas fa-file-contract">Campañas Publicitarias</x-menu.item> --}}
         {{-- <x-menu.item id="beneficios-cero-intereses" href="{{ route('beneficios-cero-intereses.edit', 1) }}" icon="fas fa-file-contract">Beneficios 0 Intereses</x-menu.item> --}}

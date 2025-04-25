@@ -260,7 +260,7 @@
     <div class="p-4 flex flex-col h-[calc(100vh-2px)] justify-between gap-2">
         <div class="flex flex-col">
             <div class="flex justify-between ">
-                <h2 class="font-semibold font-galano_bold text-[28px] text-[#052F4E] tracking-tight pb-5">Carrito de
+                <h2 class="font-semibold font-akira_expanded text-xl text-[#141414] tracking-tight pb-5">Carrito de
                     compras</h2>
                 <div id="close-cart" class="cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -278,13 +278,13 @@
             </div>
         </div>
         <div class="flex flex-col gap-2 pt-2">
-            <div class="text-[#052F4E]  text-xl flex justify-between items-center ">
+            <div class="text-[#141414]  text-xl flex justify-between items-center ">
                 <p class="font-galano_bold font-semibold">Total</p>
                 <p class="font-galano_bold font-semibold" id="itemsTotal">S/ 0.00</p>
             </div>
             <div>
                 <a href="/carrito"
-                    class="font-normal font-galano_semibold rounded-xl text-lg bg-[#052F4E]  py-3 px-5 text-white cursor-pointer w-full inline-block text-center">Ir
+                    class="font-normal font-galano_semibold rounded-xl text-lg bg-[#FB4535]  py-3 px-5 text-white cursor-pointer w-full inline-block text-center">Ir
                     al
                     carrito</a>
             </div>

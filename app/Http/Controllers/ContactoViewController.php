@@ -13,7 +13,7 @@ class ContactoViewController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -21,7 +21,7 @@ class ContactoViewController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -45,17 +45,46 @@ class ContactoViewController extends Controller
      */
     public function edit(ContactoView $contactoView)
     {
-        //
+        $contacto = ContactoView::first();
+        if (!$contacto) {
+            $contacto = ContactoView::create();
+        }
+        return view('pages.contactoview.edit', compact('contacto'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateContactoViewRequest $request, ContactoView $contactoView)
+    public function update(Request $request, $id)
     {
-        //
+        $contacto = ContactoView::findOrfail($id);
+
+        if ($request->hasFile("imagensecond")) {
+            $file = $request->file('imagensecond');
+            $routeImg = 'storage/images/contactoview/';
+            $nombreImagen = Str::random(10) . '_' . $file->getClientOriginalName();
+      
+            $this->saveImg($file, $routeImg, $nombreImagen);
+      
+            $contacto['url_image2section'] = $routeImg . $nombreImagen;
+        } 
+
+        $contacto->update($request->all());
+        $contacto->save();  
+
+        return back()->with('success', 'Registro actualizado correctamente');
     }
 
+
+    public function saveImg($file, $route, $nombreImagen)
+    {
+      $manager = new ImageManager(new Driver());
+      $img =  $manager->read($file);
+      if (!file_exists($route)) {
+        mkdir($route, 0777, true);
+      }
+      $img->save($route . $nombreImagen);
+    }
     /**
      * Remove the specified resource from storage.
      */
