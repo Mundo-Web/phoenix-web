@@ -12,12 +12,13 @@ class EmailConfig
         $general = General::find(1);
         $mail = new PHPMailer(true);
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        // PHPMailer::ENCRYPTION_STARTTLS;
         $mail->isSMTP();
-        $mail->Host = 'smtp.mailersend.net';
+        $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'MS_wIr1Hd@phoenix-fitness.fit';
-        $mail->Password = 'mssp.lHDJFha.3zxk54vy3n14jy6v.dZ0wwuh';
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+        $mail->Username = $general->city;
+        $mail->Password = $general->country;
+        $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
         $mail->Subject = '' . $name . ', '.$mensaje. '';
         $mail->CharSet = 'UTF-8';
