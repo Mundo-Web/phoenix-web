@@ -1089,13 +1089,20 @@ class IndexController extends Controller
       ];
       $request->validate($reglasValidacion, $mensajes);
       $formlanding = Message::create($data);
+
       $this->envioCorreo($formlanding);
+      
       $this->envioCorreoAdmin($formlanding);
 
       return response()->json(['message' => 'Mensaje enviado con exito']);
     } catch (ValidationException $e) {
-
+      
       return response()->json(['message' => $e->validator->errors()], 400);
+    } catch (\Exception $e) {
+      return response()->json([
+          'message' => 'Mensaje guardado pero error al enviar correo',
+          'error' => $e->getMessage()
+      ], 500);
     }
   }
 
@@ -1259,8 +1266,10 @@ class IndexController extends Controller
         ';
         $mail->isHTML(true);
         $mail->send();
+        return true;
       } catch (\Throwable $th) {
-        //throw $th;
+        \Log::error('Error enviando correo admin: ' . $th->getMessage());
+        return false;
       }
   }
 
@@ -1421,7 +1430,7 @@ class IndexController extends Controller
       $mail->isHTML(true);
       $mail->send();
     } catch (\Throwable $th) {
-      //throw $th;
+      throw $th;
     }
   }
 
