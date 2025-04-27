@@ -12,7 +12,7 @@ class EmailConfig
     {   
         $general = General::find(1);
         $mail = new PHPMailer(true);
-        $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         // PHPMailer::ENCRYPTION_STARTTLS;
         $mail->isSMTP();
         $mail->Host = 'smtp.office365.com';
