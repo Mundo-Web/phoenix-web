@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use App\Models\General;
 
 class EmailConfig
