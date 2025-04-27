@@ -13,10 +13,10 @@ class EmailConfig
         $mail = new PHPMailer(true);
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         $mail->isSMTP();
-        $mail->Host = 'smtp.office365.com';
+        $mail->Host = 'smtp.mailersend.net';
         $mail->SMTPAuth = true;
-        $mail->Username = $general->city;
-        $mail->Password = $general->country;
+        $mail->Username = 'MS_wIr1Hd@phoenix-fitness.fit';
+        $mail->Password = 'mssp.lHDJFha.3zxk54vy3n14jy6v.dZ0wwuh';
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
         $mail->Subject = '' . $name . ', '.$mensaje. '';
