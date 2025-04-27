@@ -18,7 +18,7 @@ class EmailConfig
         $mail->SMTPAuth = true;
         $mail->Username = $general->city; // es mi usuario
         $mail->Password = $general->country; // es mi contraseña
-        $mail->SMTPSecure = 'tls';
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
         $mail->Subject = $name . ', '.$mensaje;
