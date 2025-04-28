@@ -15,10 +15,10 @@ class EmailConfig
         // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
         // PHPMailer::ENCRYPTION_STARTTLS;
         $mail->isSMTP();
-        $mail->Host = 'smtp.office365.com';
+        $mail->Host = 'smtp.mailersend.net';
         $mail->SMTPAuth = true;
-        $mail->Username = 'servicioalcliente@phoenix-fitness.fit'; // es mi usuario
-        $mail->Password = 'pmrqwzkdxzyjjnzm'; // es mi contraseña
+        $mail->Username = $general->city; // es mi usuario
+        $mail->Password = $general->country; // es mi contraseña
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
         $mail->Port = 587;
 
