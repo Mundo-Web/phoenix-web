@@ -116,7 +116,6 @@
                                                         <a href="{{$slide->link1}}">
                                                             <div class="text-white font-roboto_medium flex flex-row gap-2 bg-[#FB4535] rounded-3xl text-center w-auto py-3 px-6">
                                                                 {{$slide->botontext1 ?? "Let´s Go!"}} 
-                                                                
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                     <path d="M7 7H17M17 7V17M17 7L7 17" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                                                 </svg>
@@ -159,7 +158,18 @@
                         <ul x-ref="logos"
                             class="h-16  flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll">
                             @foreach ($logos as $marquesina)
-                                <li class="flex w-48 justify-center items-center gap-3 px-3"><img class="w-48 h-16 object-contain"
+                                <li class="flex w-52 justify-center items-center gap-3 px-3"><img class="w-52 h-36 object-contain"
+                                    src="{{asset($marquesina->url_image)}}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" />
+                                </li>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 15 14" fill="none">
+                                    <circle cx="7.74219" cy="7" r="7" fill="white"/>
+                                </svg>
+                            @endforeach
+                        </ul>
+                        <ul x-ref="logos"
+                            class="h-16  flex flex-row justify-between items-center  [&_li]:mx-10   animate-infinite-scroll">
+                            @foreach ($logos as $marquesina)
+                                <li class="flex w-52 justify-center items-center gap-3 px-3"><img class="w-52 h-36 object-contain"
                                     src="{{asset($marquesina->url_image)}}" onerror="this.onerror=null;this.src='{{ asset('images/img/noimagen.jpg') }}';" />
                                 </li>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 15 14" fill="none">
