@@ -12,7 +12,7 @@
 </style>
 
 @section('content')
-  <section class="w-11/12 mx-auto font-Urbanist_Regular">
+  <section class="w-11/12 mx-auto font-roboto_regular">
     @if ($errors->has('g-recaptcha-response'))
       <span class="help-block">
         <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
