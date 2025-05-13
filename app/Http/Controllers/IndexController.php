@@ -248,7 +248,9 @@ class IndexController extends Controller
       }
     }
 
-    return view('public.catalogo', compact('comments', 'galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
+    $cqPublicKey = env('CQ_PUBLIC_KEY');
+
+    return view('public.catalogo', compact('comments', 'galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId', 'cqPublicKey'));
   }
 
   public function ofertas(Request $request, string $id_cat = null)

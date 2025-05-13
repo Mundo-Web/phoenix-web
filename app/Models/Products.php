@@ -13,6 +13,7 @@ class Products extends Model
     'producto',
     'precio',
     'descuento',
+    'planes',
     'stock',
     'imagen',
     'imagen_2',
@@ -48,6 +49,11 @@ class Products extends Model
     'meta_keywords',
     'percent_discount',
     'order',
+  ];
+
+  // casts
+  protected $casts = [
+    'planes' => 'array',
   ];
 
   public function categoria()
