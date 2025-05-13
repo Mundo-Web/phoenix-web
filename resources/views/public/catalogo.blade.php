@@ -1027,77 +1027,95 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
 
     <div class="space-y-4 mb-6">
         <div class="mb-6">
-            {{-- <h3 class="text-2xl font-roboto_bold text-center mb-2">Plan Base</h3> --}}
-            <div class="flex justify-center items-baseline gap-1">
+            <div class="flex flex-col items-center gap-2">
                 <span class="text-3xl font-roboto_bold text-[#FB4535]" x-text="formatPrice(precio)"></span>
-                <span class="text-gray-600">x mes</span>
+                <span class="text-gray-600 text-sm">Precio mensual base</span>
             </div>
         </div>
 
-        <div class="grid gap-4">
-            <template x-for="plan in planes" :key="plan.duracion">
-                <div class="relative overflow-hidden rounded-xl border-2 hover:shadow-lg transition-all duration-300 cursor-pointer"
-                    :class="{
-                        'border-[#FB4535] shadow-lg': selectedPlan?.duracion === plan
-                            .duracion,
-                        'border-gray-200': selectedPlan?.duracion !== plan.duracion
-                    }"
-                    @click="selectPlan(plan)">
+        <template x-if="planes.length === 0">
+            <div class="text-center mb-6">
+                <h4 class="font-roboto_bold text-lg mb-2">Plan de Suscripción Mensual</h4>
+                <p class="text-gray-600 text-sm">
+                    Suscríbete y disfruta de nuestros servicios mes a mes. Cancela cuando quieras.
+                </p>
+            </div>
+        </template>
 
-                    <div class="absolute -right-[36px] top-2 rotate-45 w-[120px] text-center py-1"
-                        x-show="plan.descuento > 0"
-                        :class="selectedPlan?.duracion === plan.duracion ? 'bg-[#FB4535] text-white' : 'bg-gray-100'">
-                        <span class="text-sm font-roboto_medium" x-text="`-${plan.descuento}%`"></span>
-                    </div>
+        <template x-if="planes.length > 0">
+            <div>
+                <h4 class="font-roboto_bold text-lg mb-4 text-center">Elige tu plan preferido</h4>
+                <div class="grid gap-4">
+                    <template x-for="plan in planes" :key="plan.duracion">
+                        <div class="relative overflow-hidden rounded-xl border-2 hover:shadow-lg transition-all duration-300 cursor-pointer"
+                            :class="{
+                                'border-[#FB4535] shadow-lg': selectedPlan?.duracion === plan.duracion,
+                                'border-gray-200': selectedPlan?.duracion !== plan.duracion
+                            }"
+                            @click="selectPlan(plan)">
 
-                    <div class="p-6">
-                        <div class="flex justify-between items-center">
-                            <div>
-                                <h4 class="font-roboto_bold text-xl mb-1" x-text="`${plan.duracion} meses`"></h4>
-                                <template x-if="plan.descuento > 0">
-                                    <div class="flex items-center gap-2 text-sm text-gray-600">
-                                        <svg class="w-5 h-5" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                        </svg>
-                                        <span
-                                            x-text="`Ahorra ${formatPrice(calcularPrecioOriginal(plan) - calcularPrecioDescuento(plan))}`"></span>
-                                    </div>
-                                </template>
+                            <div class="absolute -right-[36px] top-2 rotate-45 w-[120px] text-center py-1"
+                                x-show="plan.descuento > 0"
+                                :class="selectedPlan?.duracion === plan.duracion ? 'bg-[#FB4535] text-white' : 'bg-gray-100'">
+                                <span class="text-sm font-roboto_medium" x-text="`-${plan.descuento}%`"></span>
                             </div>
-                            <div class="text-right">
-                                <template x-if="plan.descuento > 0">
-                                    <p class="text-sm text-gray-400 line-through me-4"
-                                        x-text="formatPrice(calcularPrecioOriginal(plan))">
-                                    </p>
-                                </template>
-                                <p class="text-2xl font-roboto_bold"
-                                    :class="{
-                                        'text-[#FB4535]': plan.descuento > 0 || selectedPlan?.duracion === plan
-                                            .duracion,
-                                        'text-gray-900': !plan.descuento && selectedPlan?.duracion !== plan
-                                            .duracion
-                                    }"
-                                    x-text="formatPrice(calcularPrecioDescuento(plan))">
-                                </p>
+
+                            <div class="p-6">
+                                <div class="flex justify-between items-center">
+                                    <div>
+                                        <h4 class="font-roboto_bold text-xl mb-1" x-text="`Plan ${plan.duracion} meses`"></h4>
+                                        <template x-if="plan.descuento > 0">
+                                            <div class="flex items-center gap-2 text-sm text-gray-600">
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                </svg>
+                                                <span x-text="`Ahorras ${formatPrice(calcularPrecioOriginal(plan) - calcularPrecioDescuento(plan))}`"></span>
+                                            </div>
+                                        </template>
+                                    </div>
+                                    <div class="text-right">
+                                        <template x-if="plan.descuento > 0">
+                                            <p class="text-sm text-gray-400 line-through mb-1"
+                                                x-text="formatPrice(calcularPrecioOriginal(plan))">
+                                            </p>
+                                        </template>
+                                        <p class="text-2xl font-roboto_bold"
+                                            :class="{
+                                                'text-[#FB4535]': plan.descuento > 0 || selectedPlan?.duracion === plan.duracion,
+                                                'text-gray-900': !plan.descuento && selectedPlan?.duracion !== plan.duracion
+                                            }"
+                                            x-text="formatPrice(calcularPrecioDescuento(plan))">
+                                        </p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </template>
                 </div>
-            </template>
-        </div>
+            </div>
+        </template>
     </div>
 
     <div class="flex flex-col gap-3">
-        <button @click="pagarCompleto()"
-            class="w-full bg-[#FB4535] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#fb4535dd]">
-            Pagar todo ahora <template x-if="percent_discount > 0"><span
-                    x-text="`(-${percent_discount}%)`"></span></template>
-        </button>
+        <template x-if="planes.length > 0">
+            <button @click="pagarCompleto()"
+                class="w-full bg-[#FB4535] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#fb4535dd] flex items-center justify-center gap-2">
+                <span>Pago único</span>
+                <template x-if="percent_discount > 0">
+                    <span class="bg-white text-[#FB4535] text-sm px-2 py-1 rounded-full" x-text="`-${percent_discount}% extra`"></span>
+                </template>
+            </button>
+        </template>
+        
         <button @click="iniciarSuscripcion()"
             class="w-full bg-[#010101] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#010101dd]">
-            {Pagar mes a mes}
+            <template x-if="planes.length > 0">
+                <span>Pagar mes a mes</span>
+            </template>
+            <template x-if="planes.length === 0">
+                <span>Iniciar suscripción mensual</span>
+            </template>
         </button>
     </div>
 </div>
@@ -1130,7 +1148,7 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                 this.precio = data.precio;
                 this.planes = data.planes;
                 this.percent_discount = data.percent_discount;
-                if (this.planes.length > 0) {
+                if (this.planes?.length > 0) {
                     this.selectedPlan = this.planes[0];
                 }
                 this.isOpen = true;
