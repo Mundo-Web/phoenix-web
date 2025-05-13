@@ -94,6 +94,10 @@
                     <a class="cursor-pointer" id="linkPoliticas">Política de Privacidad</a>
                     <a class="cursor-pointer" id="linkTerminos">Términos y Condiciones</a>
                     <a class="cursor-pointer" id="linkPoliticasCookies">Política de Cookies</a>
+                    <div class="flex flex-row">
+                        <a href="{{route('librodereclamaciones')}}"><div class="flex flex-row justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs"><img class="w-6 h-auto object-contain" src="{{asset('images/imagen/libro.png')}}" /> LIBRO DE
+                                RECLAMACIONES</div></a>
+                    </div>
                 </div>
             </div>
  

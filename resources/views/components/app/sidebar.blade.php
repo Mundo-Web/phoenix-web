@@ -46,14 +46,14 @@
             </x-slot>
           @endif
         </x-menu.item>
-        {{-- <x-menu.item id="reclamo" href="{{ route('reclamo.index') }}" icon="fas fa-comment-dots">
+        <x-menu.item id="reclamo" href="{{ route('reclamo.index') }}" icon="fas fa-comment-dots">
           Reclamaciones
           @if ($reclamo !== 0)
             <x-slot name="tag">
               {{ $reclamo }}
             </x-slot>
           @endif
-        </x-menu.item> --}}
+        </x-menu.item>
         {{-- <x-menu.item id="subscripciones" href="{{ route('subscripciones') }}" icon="fas fa-images">Subscripciones</x-menu.item> --}}
         <x-menu.item id="testimonios" href="{{ route('testimonios.index') }}" icon="fas fa-star">Testimonios </x-menu.item>
         {{-- <x-menu.item id="comentarios" href="{{ route('comentarios.index') }}" icon="fas fa-star">Comentarios de clientes</x-menu.item> --}}
