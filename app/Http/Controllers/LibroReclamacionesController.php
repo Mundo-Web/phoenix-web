@@ -68,10 +68,12 @@ class LibroReclamacionesController extends Controller
             'date_incident'=> 'required|string',
             'address_incident'=> 'required|string',
             'detail_incident'=> 'required|string',
-            'g-recaptcha-response' => 'required|captcha',
+            // 'g-recaptcha-response' => 'required|captcha',
             
-        ], [ 'g-recaptcha-response.required' => 'Por favor, completa el reCAPTCHA. Queremos asegurarnos de que no eres un robot.',
-        'g-recaptcha-response.captcha' => 'El reCAPTCHA no es válido. Inténtalo de nuevo.',] );
+        ]
+        // [ 'g-recaptcha-response.required' => 'Por favor, completa el reCAPTCHA. Queremos asegurarnos de que no eres un robot.',
+        // 'g-recaptcha-response.captcha' => 'El reCAPTCHA no es válido. Inténtalo de nuevo.',] 
+      );
         
 
         $libro = LibroReclamaciones::create($validatedData);
