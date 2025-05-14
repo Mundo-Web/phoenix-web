@@ -186,6 +186,7 @@
                         <div class="flex flex-row justify-center items-center font-galano_regular font-semibold">
                             @if (Auth::user() == null)
                                 <a class="md:flex" href="{{ route('login') }}">
+                                    <span class="text-white text-sm dark:text-slate-300 me-2">Acceder</span>
                                     <i class="fa-solid fa-user-large fa-lg text-[#FB4535] !leading-none"></i>
                                 </a>
                             @else
@@ -228,13 +229,13 @@
                             @endif
                         </div>
     
-                        <div class="flex justify-center items-center min-w-[38px]">
+                        {{-- <div class="flex justify-center items-center min-w-[38px]">
                             <div id="open-cart" class="relative inline-block cursor-pointer pr-3">
                                 <span id="itemsCount"
                                     class="bg-[#FB4535] text-xs font-medium font-Urbanist_Regular text-white text-center px-[8px] py-[2px]  rounded-full absolute bottom-0 right-0 ml-3">0</span>
                                 <a><i class="fa-solid fa-cart-shopping text-[#FB4535] w-7"></i></a>
                             </div>
-                        </div>
+                        </div> --}}
 
                     </div>
 

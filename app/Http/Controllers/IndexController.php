@@ -673,7 +673,7 @@ class IndexController extends Controller
 
     $body = $request->all();
     // $answer = JSON::parse($body['kr-answer']);
-    $answer = $body['codigoCompra'];
+    $answer = $body['codigoCompra'] ?? 0;
     
     $user = Auth::user();
 
@@ -685,7 +685,8 @@ class IndexController extends Controller
 
     $saleJpa = Sale::where('code', $answer)->first();
     
-    if (!$saleJpa) return \redirect()->route('index');
+    // if (!$saleJpa) return \redirect()->route('index');
+    if (!$saleJpa) $saleJpa = new Sale();
 
     // if ($answer['orderStatus'] != 'PAID') {
     //   $saleJpa->status_id = 2;

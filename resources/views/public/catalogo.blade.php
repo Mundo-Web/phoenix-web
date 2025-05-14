@@ -876,11 +876,11 @@
                                             </div>
                                             <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
                                                 ${value.descuento == 0 ? `
-                                                                                                                                                            <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                        ` : `
-                                                                                                                                                            <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                                                                                                                            <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                        `}
+                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                ` : `
+                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                `}
                                             </div> 
                                         </div>
                                     </div>
@@ -953,11 +953,11 @@
                                             </div>
                                             <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
                                                 ${value.descuento == 0 ? `
-                                                                                                                                                            <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                        ` : `
-                                                                                                                                                            <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                                                                                                                            <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                        `}
+                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                ` : `
+                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                `}
                                             </div> 
                                         </div>
                                     </div>
@@ -1104,10 +1104,20 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
         </template>
     </div>
 
+    <div class="mb-4">
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico <span
+                class="text-red-500">*</span></label>
+        <input type="email" id="email" x-model="email" @input="validateEmail()"
+            class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FB4535] focus:border-[#FB4535]"
+            placeholder="ejemplo@correo.com">
+        <p x-show="emailError" x-text="emailError" class="mt-1 text-sm text-red-600"></p>
+    </div>
+
     <div class="flex flex-col gap-3">
         <template x-if="planes.length > 0">
             <button @click="pagarCompleto()"
-                class="w-full bg-[#FB4535] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#fb4535dd] flex items-center justify-center gap-2">
+                class="w-full bg-[#FB4535] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#fb4535dd] flex items-center justify-center gap-2"
+                :class="{ 'opacity-50 cursor-not-allowed': !isValidEmail }" :disabled="!isValidEmail">
                 <span>Pago único</span>
                 <template x-if="percent_discount > 0">
                     <span class="bg-white text-[#FB4535] text-sm px-2 py-1 rounded-full"
@@ -1118,7 +1128,8 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
 
         <template x-if="selectedPlan?.duracion > 1 || planes.length === 0">
             <button @click="iniciarSuscripcion()"
-                class="w-full bg-[#010101] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#010101dd]">
+                class="w-full bg-[#010101] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#010101dd]"
+                :class="{ 'opacity-50 cursor-not-allowed': !isValidEmail }" :disabled="!isValidEmail">
                 <template x-if="planes.length > 0">
                     <span>Pagar mes a mes</span>
                 </template>
@@ -1130,12 +1141,14 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
     </div>
 </div>
 </div>
+
 <script type="application/javascript" src="https://checkout.culqi.com/js/v4"></script>
 <script>
     Culqi.publicKey = '{{ $cqPublicKey }}';
     let productId = null;
     let paymentType = null;
     let plan = null
+    let email = null;
 
     function planesModal() {
         return {
@@ -1147,6 +1160,8 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
             selectedPlan: null,
             productId: null,
             paymentType: null,
+            email: "{{ Auth::user()->email ?? '' }}",
+            emailError: '',
 
             init() {
                 // Escuchar el evento de apertura del modal
@@ -1188,19 +1203,41 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                 return `S/ ${amount.toFixed(2)}`;
             },
 
+            validateEmail() {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!this.email) {
+                    this.emailError = 'El correo electrónico es requerido';
+                    return false;
+                }
+                if (!emailRegex.test(this.email)) {
+                    this.emailError = 'Por favor, ingrese un correo electrónico válido';
+                    return false;
+                }
+                this.emailError = '';
+                return true;
+            },
+
+            isValidEmail() {
+                return this.email && !this.emailError;
+            },
+
             pagarCompleto() {
                 if (!this.selectedPlan) return;
+                if (!this.validateEmail()) return;
+
                 productId = this.productId;
-                plan = this.selectedPlan.duracion;
+                plan = this.selectedPlan.duracion || null;
                 paymentType = 'completo';
+                email = this.email;
                 const precioBase = this.calcularPrecioDescuento(this.selectedPlan);
-                const precioFinal = precioBase * (1 - (this.percent_discount / 100));
+                const precioFinal = String(Math.round(precioBase * (1 - ((this.percent_discount || 0) / 100)) * 100));
 
                 Culqi.settings({
                     title: this.producto,
                     currency: 'PEN',
-                    amount: precioFinal * 100,
-                    order: Date.now()
+                    amount: precioFinal,
+                    order: Date.now(),
+                    email: this.email
                 });
                 Culqi.options({
                     paymentMethods: {
@@ -1215,9 +1252,12 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
             },
 
             iniciarSuscripcion() {
+                if (!this.validateEmail()) return;
+
                 paymentType = 'suscripcion';
                 productId = this.productId;
                 plan = this.selectedPlan?.duracion || null;
+                email = this.email;
                 let precioMensual = this.precio
                 if (this.selectedPlan) {
                     precioMensual = this.calcularPrecioDescuento(this.selectedPlan) / this.selectedPlan.duracion;
@@ -1228,6 +1268,7 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                     currency: 'PEN',
                     amount: precioMensual * 100,
                     order: Date.now(),
+                    email: this.email,
                 });
 
                 Culqi.options({
@@ -1265,7 +1306,7 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
         if (Culqi.token) {
             console.log(productId, plan, paymentType);
 
-            fetch('/api/payments/process', {
+            fetch('/api/payment/culqi', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -1276,22 +1317,18 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                         plan: plan || null,
                         paymentType: paymentType,
                         productId: productId,
-                        amount: Culqi.token.amount
+                        email: email
                     })
                 })
                 .then(response => response.json())
                 .then(data => {
-                    if (data.success) {
-                        // Mostrar mensaje de éxito
-                        Swal.fire({
-                            icon: 'success',
-                            title: '¡Pago exitoso!',
-                            text: 'Tu pago se ha procesado correctamente'
-                        });
-                        modal.closeModal();
-                    } else {
-                        throw new Error(data.message || 'Error al procesar el pago');
-                    }
+                    Swal.fire({
+                        icon: 'success',
+                        title: '¡Pago exitoso!',
+                        text: 'Tu pago se ha procesado correctamente'
+                    });
+                    Culqi.close();
+                    location.href = "{{ route('agradecimiento') }}"
                 })
                 .catch(error => {
                     Swal.fire({
