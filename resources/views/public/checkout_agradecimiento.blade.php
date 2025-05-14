@@ -25,15 +25,17 @@
                 <div class="flex flex-col justify-start gap-7 max-w-[600px] mx-auto pt-10 text-center">
                   <div class="font-roboto_regular flex flex-col gap-2 justify-center items-center">
                     <p class="text-[#6C7275] font-medium text-[20px]">
-                      Gracias por tu compra &#127881;
+                      Perfecto &#127881;
                     </p>
                     <h2 class="font-semibold text-[40px] text-[#151515]">
-                      Tu pedido ha sido recibido
+                      Tu compra ha sido realizada con éxito
                     </h2>
+                    @if ($code)
                     <p class="font-medium text-[16px] text-[#6C7275]">
                       Código de pedido
                     </p>
                     <p id="codigoPedido" class="font-semibold text-[16px] text-[#141718]">#{{ $code }}</p>
+                    @endif
                   </div>
 
                   {{-- <div class="font-galano_regular p-2">

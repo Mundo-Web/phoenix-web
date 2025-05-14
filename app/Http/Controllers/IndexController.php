@@ -65,6 +65,7 @@ use phpseclib3\File\ASN1\Maps\AttributeValue;
 use SoDe\Extend\JSON;
 use SoDe\Extend\Response;
 use App\Services\InstagramService;
+use Illuminate\Support\Facades\Log;
 
 use function PHPUnit\Framework\isNull;
 
@@ -248,7 +249,9 @@ class IndexController extends Controller
       }
     }
 
-    return view('public.catalogo', compact('comments', 'galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId'));
+    $cqPublicKey = env('CQ_PUBLIC_KEY');
+
+    return view('public.catalogo', compact('comments', 'galeria', 'beneficios', 'textoshome','page', 'productos', 'categoria', 'marcas', 'marcas_id', 'minPrice', 'maxPrice', 'categories', 'tags', 'attribute_values', 'id_cat', 'tag_id', 'colores', 'subCatId', 'cqPublicKey'));
   }
 
   public function ofertas(Request $request, string $id_cat = null)
@@ -670,7 +673,7 @@ class IndexController extends Controller
 
     $body = $request->all();
     // $answer = JSON::parse($body['kr-answer']);
-    $answer = $body['codigoCompra'];
+    $answer = $body['codigoCompra'] ?? 0;
     
     $user = Auth::user();
 
@@ -682,7 +685,8 @@ class IndexController extends Controller
 
     $saleJpa = Sale::where('code', $answer)->first();
     
-    if (!$saleJpa) return \redirect()->route('index');
+    // if (!$saleJpa) return \redirect()->route('index');
+    if (!$saleJpa) $saleJpa = new Sale();
 
     // if ($answer['orderStatus'] != 'PAID') {
     //   $saleJpa->status_id = 2;
@@ -893,7 +897,7 @@ class IndexController extends Controller
 
     $is_reseller = false;
     if (Auth::check()) {
-      $user = Auth::user();
+      $user = User::find(Auth::user()->id);
       $is_reseller = $user->hasRole('Reseller');
     }
 
@@ -1268,7 +1272,7 @@ class IndexController extends Controller
         $mail->send();
         return true;
       } catch (\Throwable $th) {
-        \Log::error('Error enviando correo admin: ' . $th->getMessage());
+        Log::error('Error enviando correo admin: ' . $th->getMessage());
         return false;
       }
   }
