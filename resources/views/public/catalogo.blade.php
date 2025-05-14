@@ -330,7 +330,7 @@
                                     </div>
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <button {{-- id="btnAgregarCarritoPr" --}} data-id="{{ $producto->id }}"
-                                        data-planes=@json($producto->planes)
+                                        data-planes="{{ json_encode($producto->planes) }}"
                                         data-percentdiscount="{{ $producto->percent_discount }}"
                                         onclick="openPlanesModal({{ $producto->id }}, '{{ $producto->producto }}', {{ $producto->precio }})">
                                         <div
@@ -831,8 +831,6 @@
                     },
                     dataType: "json",
                     success: function(response) {
-                        console.log(response.productos);
-
                         $('.subtitle').empty();
                         $('.subtitle').text(response.categorias[0].extract);
 
@@ -849,7 +847,6 @@
 
                         $('#getProductAjax').empty();
                         $.each(response.productos.data, function(key, value) {
-                            console.log(response.productos.data);
                             var productoUrl = `{{ route('producto', ':id') }}`.replace(
                                 ':id', value.id);
                             var imagenSrc = `{{ asset(':imagen') }}`.replace(':imagen',
@@ -879,11 +876,11 @@
                                             </div>
                                             <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
                                                 ${value.descuento == 0 ? `
-                                                                                                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                            ` : `
-                                                                                                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                                                                                                <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                            `}
+                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                ` : `
+                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                `}
                                             </div> 
                                         </div>
                                     </div>
@@ -924,7 +921,6 @@
                     dataType: "json",
                     cache: false,
                     success: function(response) {
-                        console.log(response.page);
 
                         $.each(response.productos.data, function(key, value) {
 
@@ -957,11 +953,11 @@
                                             </div>
                                             <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
                                                 ${value.descuento == 0 ? `
-                                                                                                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                            ` : `
-                                                                                                                                <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                                                                                                <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                            `}
+                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                ` : `
+                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                `}
                                             </div> 
                                         </div>
                                     </div>
@@ -1027,7 +1023,7 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
 
     <div class="space-y-4 mb-6">
         <div class="mb-6">
-            <div class="flex flex-col items-center gap-2">
+            <div class="flex flex-col items-center">
                 <span class="text-3xl font-roboto_bold text-[#FB4535]" x-text="formatPrice(precio)"></span>
                 <span class="text-gray-600 text-sm">Precio mensual base</span>
             </div>
@@ -1063,14 +1059,21 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                             <div class="p-6">
                                 <div class="flex justify-between items-center">
                                     <div>
-                                        <h4 class="font-roboto_bold text-xl mb-1" x-text="`Plan ${plan.duracion} meses`"></h4>
+                                        <h4 class="font-roboto_bold text-xl mb-1"
+                                            x-text="`Plan ${plan.duracion} meses`"
+                                            :class="plan.name ? 'hidden' : ''"></h4>
+                                        <h4 class="font-roboto_bold text-xl mb-1" x-text="plan.name"
+                                            :class="plan.name ? '' : 'hidden'"></h4>
                                         <template x-if="plan.descuento > 0">
                                             <div class="flex items-center gap-2 text-sm text-gray-600">
-                                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                <svg class="w-5 h-5" fill="none" stroke="currentColor"
+                                                    viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                        stroke-width="2"
                                                         d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
-                                                <span x-text="`Ahorras ${formatPrice(calcularPrecioOriginal(plan) - calcularPrecioDescuento(plan))}`"></span>
+                                                <span
+                                                    x-text="`Ahorras ${formatPrice(calcularPrecioOriginal(plan) - calcularPrecioDescuento(plan))}`"></span>
                                             </div>
                                         </template>
                                     </div>
@@ -1082,8 +1085,10 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                                         </template>
                                         <p class="text-2xl font-roboto_bold"
                                             :class="{
-                                                'text-[#FB4535]': plan.descuento > 0 || selectedPlan?.duracion === plan.duracion,
-                                                'text-gray-900': !plan.descuento && selectedPlan?.duracion !== plan.duracion
+                                                'text-[#FB4535]': plan.descuento > 0 || selectedPlan?.duracion === plan
+                                                    .duracion,
+                                                'text-gray-900': !plan.descuento && selectedPlan?.duracion !== plan
+                                                    .duracion
                                             }"
                                             x-text="formatPrice(calcularPrecioDescuento(plan))">
                                         </p>
@@ -1103,20 +1108,23 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                 class="w-full bg-[#FB4535] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#fb4535dd] flex items-center justify-center gap-2">
                 <span>Pago único</span>
                 <template x-if="percent_discount > 0">
-                    <span class="bg-white text-[#FB4535] text-sm px-2 py-1 rounded-full" x-text="`-${percent_discount}% extra`"></span>
+                    <span class="bg-white text-[#FB4535] text-sm px-2 py-1 rounded-full"
+                        x-text="`-${percent_discount}%`"></span>
                 </template>
             </button>
         </template>
-        
-        <button @click="iniciarSuscripcion()"
-            class="w-full bg-[#010101] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#010101dd]">
-            <template x-if="planes.length > 0">
-                <span>Pagar mes a mes</span>
-            </template>
-            <template x-if="planes.length === 0">
-                <span>Iniciar suscripción mensual</span>
-            </template>
-        </button>
+
+        <template x-if="selectedPlan?.duracion > 1">
+            <button @click="iniciarSuscripcion()"
+                class="w-full bg-[#010101] text-white py-3 rounded-lg font-roboto_bold hover:bg-[#010101dd]">
+                <template x-if="planes.length > 0">
+                    <span>Pagar mes a mes</span>
+                </template>
+                <template x-if="planes.length === 0">
+                    <span>Iniciar suscripción mensual</span>
+                </template>
+            </button>
+        </template>
     </div>
 </div>
 </div>
@@ -1142,7 +1150,6 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
             },
 
             openModal(data) {
-                console.log(data);
                 this.productId = data.id;
                 this.producto = data.producto;
                 this.precio = data.precio;

@@ -65,6 +65,7 @@ use phpseclib3\File\ASN1\Maps\AttributeValue;
 use SoDe\Extend\JSON;
 use SoDe\Extend\Response;
 use App\Services\InstagramService;
+use Illuminate\Support\Facades\Log;
 
 use function PHPUnit\Framework\isNull;
 
@@ -895,7 +896,7 @@ class IndexController extends Controller
 
     $is_reseller = false;
     if (Auth::check()) {
-      $user = Auth::user();
+      $user = User::find(Auth::user()->id);
       $is_reseller = $user->hasRole('Reseller');
     }
 
@@ -1270,7 +1271,7 @@ class IndexController extends Controller
         $mail->send();
         return true;
       } catch (\Throwable $th) {
-        \Log::error('Error enviando correo admin: ' . $th->getMessage());
+        Log::error('Error enviando correo admin: ' . $th->getMessage());
         return false;
       }
   }

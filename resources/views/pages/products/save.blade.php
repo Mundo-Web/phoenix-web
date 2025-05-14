@@ -394,50 +394,67 @@
                                     <div id="planes_container" class="space-y-4">
                                         <template x-if="planes.length > 0">
                                             <template x-for="(plan, index) in planes" :key="index">
-                                                <div
-                                                    class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 border rounded-lg">
-                                                    <div>
-                                                        <label :for="'duracion_meses_' + index">Duración (meses) <span
-                                                                class="text-red-500 font-bold">*</span></label>
-                                                        <div class="relative mb-2 mt-2">
+                                                <div class="p-4 border rounded-lg">
+                                                    <div class="mb-4">
+                                                        <label :for="'nombre_' + index">Título (opcional)</label>
+                                                        <div class="relative mt-2">
                                                             <div
                                                                 class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                                                 <i
-                                                                    class="text-lg text-gray-500 dark:text-gray-400 fas fa-calendar"></i>
+                                                                    class="text-lg text-gray-500 dark:text-gray-400 fas fa-pen"></i>
                                                             </div>
-                                                            <input type="number"
-                                                                :name="'planes[' + index + '][duracion]'"
-                                                                x-model="plan.duracion"
+                                                            <input type="text" :name="'planes[' + index + '][name]'"
+                                                                x-model="plan.name"
                                                                 class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                                                                placeholder="Ej: 3" required>
+                                                                placeholder="Ej: mensual, trimestral, extensión">
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <label :for="'descuento_' + index">Descuento (%)</label>
-                                                        <div class="relative mb-2 mt-2">
-                                                            <div
-                                                                class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                                <i
-                                                                    class="text-lg text-gray-500 dark:text-gray-400 fas fa-percent"></i>
+                                                    <div
+                                                        class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                                        <div>
+                                                            <label :for="'duracion_meses_' + index">Duración (meses)
+                                                                <span class="text-red-500 font-bold">*</span></label>
+                                                            <div class="relative mt-2">
+                                                                <div
+                                                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                                    <i
+                                                                        class="text-lg text-gray-500 dark:text-gray-400 fas fa-calendar"></i>
+                                                                </div>
+                                                                <input type="number"
+                                                                    :name="'planes[' + index + '][duracion]'"
+                                                                    x-model="plan.duracion"
+                                                                    class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                                                                    placeholder="Ej: 3" required>
                                                             </div>
-                                                            <input type="number"
-                                                                :name="'planes[' + index + '][descuento]'"
-                                                                x-model="plan.descuento"
-                                                                class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
-                                                                placeholder="Ej: 10">
                                                         </div>
-                                                    </div>
-                                                    <div class="flex items-end">
-                                                        <button type="button" @click="planes.splice(index, 1)"
-                                                            class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
-                                                            <i class="fas fa-trash"></i> Eliminar
-                                                        </button>
+                                                        <div>
+                                                            <label :for="'descuento_' + index">Descuento (%)</label>
+                                                            <div class="relative mt-2">
+                                                                <div
+                                                                    class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                                                    <i
+                                                                        class="text-lg text-gray-500 dark:text-gray-400 fas fa-percent"></i>
+                                                                </div>
+                                                                <input type="number"
+                                                                    :name="'planes[' + index + '][descuento]'"
+                                                                    x-model="plan.descuento"
+                                                                    class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5"
+                                                                    placeholder="Ej: 10">
+                                                            </div>
+                                                        </div>
+                                                        <div class="flex items-end">
+                                                            <button type="button" @click="planes.splice(index, 1)"
+                                                                class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600">
+                                                                <i class="fas fa-trash"></i> Eliminar
+                                                            </button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </template>
                                         </template>
 
-                                        <button type="button" @click="planes.push({duracion: '', descuento: null})"
+                                        <button type="button"
+                                            @click="planes.push({name: '', duracion: '', descuento: null})"
                                             class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600">
                                             <i class="fas fa-plus"></i> Agregar Plan
                                         </button>
@@ -454,8 +471,9 @@
                                             class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <i class="text-lg text-gray-500 dark:text-gray-400 fas fa-percentage"></i>
                                         </div>
-                                        <input type="number" id="percent_discount" name="percent_discount" min="0"
-                                            max="100" step="0.01" value="{{ $product->percent_discount }}"
+                                        <input type="number" id="percent_discount" name="percent_discount"
+                                            min="0" max="100" step="0.01"
+                                            value="{{ $product->percent_discount }}"
                                             class="mt-1 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                             placeholder="Ingrese el porcentaje de descuento (0-100)">
                                     </div>

@@ -15,6 +15,7 @@ use App\Models\Products;
 use App\Models\Specifications;
 use App\Models\SubCategory;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Intervention\Image\ImageManager;
@@ -91,7 +92,7 @@ class ProductsController extends Controller
 
 
       if (Auth::check()) {
-        $user = Auth::user();
+        $user = User::find(Auth::user()->id);
         $user = $user->hasRole('Reseller');
         if ($user) { // Cambia 'admin' por el rol que deseas validar
           $instance->where('products.precio_reseller', '>', 0);
