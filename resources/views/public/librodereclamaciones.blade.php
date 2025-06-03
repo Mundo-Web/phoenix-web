@@ -186,10 +186,10 @@
                 </div> --}}
 
 
-        <div class="flex flex-row col-span-4 gap-2 ">
+        {{-- <div class="flex flex-row col-span-4 gap-2 ">
           {!! NoCaptcha::renderJs() !!}
           {!! NoCaptcha::display() !!}
-        </div>
+        </div> --}}
 
         <div class="flex flex-row col-span-2 gap-2 ">
           <input type="submit" value="Enviar a libro de reclamaciones" id="btnAjax"
