@@ -48,13 +48,39 @@
       "__commonjsHelpers-4gQjN7DL.js"
     ]
   },
+  "_index-XuvBlVkU.js": {
+    "file": "assets/index-XuvBlVkU.js",
+    "imports": [
+      "__commonjsHelpers-4gQjN7DL.js",
+      "resources/js/components/Filter/FilterContainer.jsx",
+      "_index-GBzf7Cls.js",
+      "_index-VFMbf6KQ.js"
+    ]
+  },
   "resources/css/app.css": {
-    "file": "assets/app-0pToohF3.css",
+    "file": "assets/app-ONOUPvzh.css",
     "isEntry": true,
     "src": "resources/css/app.css"
   },
+  "resources/js/Admin/Clients.jsx": {
+    "file": "assets/Clients-kvWKxv3y.js",
+    "imports": [
+      "resources/js/components/Filter/FilterContainer.jsx",
+      "resources/js/Utils/ReactAppend.jsx",
+      "_CreateReactScript-Il069F1S.js",
+      "_index-XuvBlVkU.js",
+      "__commonjsHelpers-4gQjN7DL.js",
+      "_index-GBzf7Cls.js",
+      "resources/js/Utils/CreateReactScript.jsx",
+      "_axios-_sX4vCAy.js",
+      "resources/js/components/form/SelectAPIFormGroup.jsx",
+      "_index-VFMbf6KQ.js"
+    ],
+    "isEntry": true,
+    "src": "resources/js/Admin/Clients.jsx"
+  },
   "resources/js/Admin/Offers.jsx": {
-    "file": "assets/Offers-yo6MFlHa.js",
+    "file": "assets/Offers-LcWSjrbL.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "resources/js/Utils/ReactAppend.jsx",
@@ -63,7 +89,7 @@
       "resources/js/components/Offer/OfferCard.jsx",
       "_arrayJoin-Fk5sgFcM.js",
       "resources/js/components/form/TippyButton.jsx",
-      "resources/js/components/Offer/OfferForm.jsx",
+      "_index-XuvBlVkU.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",
       "resources/js/Utils/CreateReactScript.jsx",
@@ -74,7 +100,7 @@
     "src": "resources/js/Admin/Offers.jsx"
   },
   "resources/js/Admin/Products.jsx": {
-    "file": "assets/Products-VTqiQ6Ku.js",
+    "file": "assets/Products-NTd846Sm.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "resources/js/Utils/ReactAppend.jsx",
@@ -82,7 +108,7 @@
       "resources/js/components/form/SelectAPIFormGroup.jsx",
       "resources/js/components/Offer/OfferCard.jsx",
       "resources/js/components/form/TippyButton.jsx",
-      "resources/js/components/Offer/OfferForm.jsx",
+      "_index-XuvBlVkU.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",
       "resources/js/Utils/CreateReactScript.jsx",
@@ -298,11 +324,12 @@
     "src": "resources/js/components/Offer/OfferCard.jsx"
   },
   "resources/js/components/Offer/OfferForm.jsx": {
-    "file": "assets/OfferForm-ukR-vBLm.js",
+    "file": "assets/OfferForm-1GmPndu-.js",
     "imports": [
       "resources/js/components/Filter/FilterContainer.jsx",
       "resources/js/components/form/TippyButton.jsx",
       "resources/js/components/form/SelectAPIFormGroup.jsx",
+      "_index-XuvBlVkU.js",
       "__commonjsHelpers-4gQjN7DL.js",
       "_index-GBzf7Cls.js",
       "_index-VFMbf6KQ.js"

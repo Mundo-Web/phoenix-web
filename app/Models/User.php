@@ -33,6 +33,7 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
+        'cq_cus_id'
     ];
 
     /**
@@ -79,5 +80,10 @@ class User extends Authenticatable
     public function wishlistItems()
     {
         return $this->hasMany(Wishlist::class);
+    }
+
+    public function memberships()
+    {
+        return $this->hasMany(Membership::class, 'email', 'email');
     }
 }

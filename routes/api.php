@@ -43,6 +43,8 @@ Route::post('/izipay/token', [IzipayController::class, 'token'])->name('izipay.t
 Route::post('/sales', [SaleController::class, 'save'])->name('sales.save');
 Route::patch('/sales', [SaleController::class, 'updateBilling'])->name('sales.update');
 
+Route::post('/coupon/validate', [CuponController::class, 'validateCoupon'])->name('coupon.validate');
+
 Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
 
     Route::get('/dashboard/top-products/{orderBy}', [DashboardController::class, 'topProducts'])->name('dashboard.top-products');
@@ -51,6 +53,7 @@ Route::middleware(['web', 'auth:sanctum', 'verified'])->group(function () {
     Route::delete('/address/{id}', [AddressController::class, 'delete'])->name('address.delete');
     Route::patch('/address/markasfavorite', [AddressController::class, 'markasfavorite'])->name('address.markasfavorite');
 
+    Route::post('/payments/paginate', [PaymentController::class, 'paginate'])->name('payments.paginate');
     Route::post('/sales/paginate', [SaleController::class, 'paginate'])->name('sales.paginate');
     Route::post('/sales/confirmation', [SaleController::class, 'confirmation'])->name('sales.confirmation');
     Route::patch('/sales/status', [SaleController::class, 'status'])->name('sales.status');

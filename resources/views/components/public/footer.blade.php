@@ -1,19 +1,7 @@
-<footer >
-    
+<footer>
+
     <style>
-        #modalPoliticasDev 
-        #modalTerminosCondiciones 
-        #modallinkPoliticasDatos
-        #modallinkTiempoEnvios  
-        #modallinkPlazoReembolso  
-        #modallinkTratamientoDatos  
-        #modallinkPoliticasCookies  
-        #modallinkCampanasPublicitarias  
-        #modallinkBeneficios  
-        #modallinkSeguimientoPedido  
-        #modallinkNuestrasTiendas  
-        
-        {
+        #modalPoliticasDev #modalTerminosCondiciones #modallinkPoliticasDatos #modallinkTiempoEnvios #modallinkPlazoReembolso #modallinkTratamientoDatos #modallinkPoliticasCookies #modallinkCampanasPublicitarias #modallinkBeneficios #modallinkSeguimientoPedido #modallinkNuestrasTiendas {
             height: 70vh;
             overflow-y: auto;
         }
@@ -21,15 +9,14 @@
         #modalPoliticasDev .prose,
         #modalTerminosCondiciones .prose,
         #modallinkPoliticasDatos .prose,
-        #modallinkTiempoEnvios  .prose,
-        #modallinkPlazoReembolso  .prose,
-        #modallinkTratamientoDatos  .prose,
-        #modallinkPoliticasCookies  .prose,
-        #modallinkCampanasPublicitarias  .prose,
-        #modallinkBeneficios  .prose,
-        #modallinkSeguimientoPedido  .prose,
-        #modallinkNuestrasTiendas  .prose
-        {
+        #modallinkTiempoEnvios .prose,
+        #modallinkPlazoReembolso .prose,
+        #modallinkTratamientoDatos .prose,
+        #modallinkPoliticasCookies .prose,
+        #modallinkCampanasPublicitarias .prose,
+        #modallinkBeneficios .prose,
+        #modallinkSeguimientoPedido .prose,
+        #modallinkNuestrasTiendas .prose {
             max-width: 100%;
             text-align: justify;
 
@@ -40,7 +27,7 @@
             margin-top: 0% !important;
         }
     </style>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-3 px-[5%] w-full py-10 gap-10 md:gap-5 bg-[#010101]">
         <div class="md:col-span-1 w-full md:max-w-[500px] flex flex-col gap-5" data-aos="fade-up" data-aos-offset="150">
             <a href="{{ route('index') }}">
@@ -48,7 +35,7 @@
             </a>
 
             <span class="text-[#FFF9F1] font-galano_regular font-normal text-text14 line-clamp-3 max-w-xs">
-                {{$general[0]->aboutus}}
+                {{ $general[0]->aboutus }}
             </span>
 
         </div>
@@ -57,30 +44,30 @@
 
             <div class="flex flex-col gap-5 col-span-2">
                 <p class="font-roboto_bold uppercase tracking-wider text-white text-lg">
-                   ENLACES
+                    ENLACES
                 </p>
                 <div class="flex flex-col gap-1 text-white font-roboto_light text-base">
                     <a href="{{ route('index') }}">Inicio</a>
-                    <a href="{{route('nosotros')}}">Nosotros</a>
+                    <a href="{{ route('nosotros') }}">Nosotros</a>
                     @if (count($categoriasf) > 0)
-                        <a href="{{route('catalogo', $categoriasf[0]->id )}}">Planes</a>
+                        <a href="{{ route('catalogo', $categoriasf[0]->id) }}">Planes</a>
                     @endif
-                    <a href="{{route('disciplinas')}}">Disciplinas</a>
-                    <a href="{{route('calendario')}}">Calendario</a>
-                    <a href="{{route('contacto')}}#frecuentes">Preguntas Frecuentes</a>
-                    <a href="{{route('contacto')}}">Contacto</a>
+                    <a href="{{ route('disciplinas') }}">Disciplinas</a>
+                    <a href="{{ route('calendario') }}">Calendario</a>
+                    <a href="{{ route('contacto') }}#frecuentes">Preguntas Frecuentes</a>
+                    <a href="{{ route('contacto') }}">Contacto</a>
                 </div>
             </div>
 
 
             <div class="flex flex-col gap-5 col-span-3">
                 <p class="font-roboto_bold uppercase tracking-wider text-white text-lg">
-                   DATOS DE CONTACTO
+                    DATOS DE CONTACTO
                 </p>
                 <div class="flex flex-col gap-3 text-white font-roboto_light text-base">
                     <a>{{ $general[0]->address }}, {{ $general[0]->inside }},
-                                        {{ $general[0]->district }} - {{ $general[0]->city }}</a>
-                    <a>Correo Electrónico: <br> {{ $general[0]->email }}</a> 
+                        {{ $general[0]->district }} - {{ $general[0]->city }}</a>
+                    <a>Correo Electrónico: <br> {{ $general[0]->email }}</a>
                     <a>Teléfono:<br> {{ $general[0]->cellphone }}</a>
                 </div>
             </div>
@@ -88,57 +75,62 @@
 
             <div class="flex flex-col gap-5 col-span-2">
                 <p class="font-roboto_bold uppercase tracking-wider text-white text-lg">
-                   AVISO LEGAL
+                    AVISO LEGAL
                 </p>
                 <div class="flex flex-col gap-3 text-white font-roboto_light text-base">
                     <a class="cursor-pointer" id="linkPoliticas">Política de Privacidad</a>
                     <a class="cursor-pointer" id="linkTerminos">Términos y Condiciones</a>
                     <a class="cursor-pointer" id="linkPoliticasCookies">Política de Cookies</a>
                     <div class="flex flex-row">
-                        <a href="{{route('librodereclamaciones')}}"><div class="flex flex-row justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs"><img class="w-6 h-auto object-contain" src="{{asset('images/imagen/libro.png')}}" /> LIBRO DE
-                                RECLAMACIONES</div></a>
+                        <a href="{{ route('librodereclamaciones') }}">
+                            <div class="flex flex-col justify-start items-center gap-3 mt-3 px-4 py-2 border text-xs hover:bg-white hover:bg-opacity-10 transition-all">
+                                <span>LIBRO DE RECLAMACIONES</span>
+                                <img class="w-28 h-auto object-contain" src="{{ asset('images/imagen/libro-reclamaciones.png') }}" />
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
- 
+
         </div>
     </div>
 
     <div
         class="flex bg-[#FB4535] flex-col items-start gap-3 md:flex-row md:justify-between md:items-center px-[5%] w-full py-4 ">
-        <a href="/" target="_blank" class="text-[#FFF9F1] font-galano_regular font-normal text-text14">Copyright © 2025 Phoenix Fitness Center. Reservados todos los derechos.</a>
+        <a href="/" target="_blank" class="text-[#FFF9F1] font-galano_regular font-normal text-text14">Copyright ©
+            2025 Phoenix Fitness Center. Reservados todos los derechos.</a>
         <div class="flex justify-start items-center gap-5">
-        <div class="flex flex-row gap-2">
-                    @if ($general[0]->facebook)
-                        <a href="{{ $general[0]->facebook }}" target="_blank"
-                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
-                            <img class="w-5 h-5" src="{{ asset('images/imagen/facebookcremoso.png') }}" alt="facebook" />
-                        </a>
-                    @endif
-                    @if ($general[0]->instagram)
-                        <a href="{{ $general[0]->instagram }}" target="_blank"
-                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
-                            <img class="w-5 h-5" src="{{ asset('images/imagen/instagramcremoso.png') }}" alt="instagram" /> 
-                        </a>
-                    @endif
-                    @if ($general[0]->linkedin)
-                        <a href="{{ $general[0]->linkedin }}" target="_blank"
-                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
-                            <img class="w-5 h-5" src="{{ asset('images/imagen/linkedincremoso.png') }}" alt="linkedin" />
-                        </a>
-                    @endif
-                    {{-- @if ($general[0]->youtube)
+            <div class="flex flex-row gap-2">
+                @if ($general[0]->facebook)
+                    <a href="{{ $general[0]->facebook }}" target="_blank"
+                        class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                        <img class="w-5 h-5" src="{{ asset('images/imagen/facebookcremoso.png') }}" alt="facebook" />
+                    </a>
+                @endif
+                @if ($general[0]->instagram)
+                    <a href="{{ $general[0]->instagram }}" target="_blank"
+                        class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                        <img class="w-5 h-5" src="{{ asset('images/imagen/instagramcremoso.png') }}" alt="instagram" />
+                    </a>
+                @endif
+                @if ($general[0]->linkedin)
+                    <a href="{{ $general[0]->linkedin }}" target="_blank"
+                        class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                        <img class="w-5 h-5" src="{{ asset('images/imagen/linkedincremoso.png') }}" alt="linkedin" />
+                    </a>
+                @endif
+                {{-- @if ($general[0]->youtube)
                         <a href="{{ $general[0]->youtube }}" target="_blank"
                             class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
                             <img class="w-10 h-10" src="{{ asset('images/svg/whatsapp.svg') }}" alt="youtube" />
                         </a>
                     @endif --}}
-                    @if ($general[0]->tiktok)
-                        <a href="{{ $general[0]->tiktok }}" target="_blank"
-                            class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
-                            <img class="w-5 h-5" src="{{ asset('images/imagen/twittercremoso.png') }}" alt="twitter" />
-                        </a>
-                    @endif
+                @if ($general[0]->tiktok)
+                    <a href="{{ $general[0]->tiktok }}" target="_blank"
+                        class="flex justify-start items-center gap-2 text-white font-roboto font-normal text-text14">
+                        <img class="w-5 h-5" src="{{ asset('images/imagen/twittercremoso.png') }}" alt="twitter" />
+                    </a>
+                @endif
             </div>
         </div>
     </div>
@@ -160,7 +152,7 @@
     </div> --}}
 
 
-    
+
     {{-- <div class="w-full">
         <div class="grid grid-cols-3 lg:grid-cols-6 gap-5 lg:gap-10 md:justify-center w-full px-[7%] pt-16 md:pt-20 bg-black text-white font-Urbanist_Light tracking-wider">
                 @foreach ($logosfooter as $logofoot)
@@ -171,9 +163,9 @@
         </div>
         <div class="w-11/12 h-1 border-b border-white pb-5 lg:pb-10 bg-black mx-auto"></div>
     </div> --}}
-    
-    
-    
+
+
+
     {{-- <div
         class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 md:justify-center w-full px-[5%] pt-10 pb-10 md:pb-20 bg-black text-white font-Urbanist_Light tracking-wider">
 
@@ -285,7 +277,7 @@
     </div> --}}
 
     <div id="modalTerminosCondiciones" class="modal" style="max-width: 900px !important;width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Términos y Condiciones</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $terminos->content ?? '' !!}</div>
@@ -293,7 +285,7 @@
     </div>
 
     <div id="modalPoliticasDev" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Privacidad</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $politicas->content ?? '' !!}</div>
@@ -301,15 +293,15 @@
     </div>
 
     <div id="modallinkPoliticasDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Datos</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $politicaDatos->content ?? '' !!}</div>
         </div>
     </div>
-        
+
     <div id="modallinkTiempoEnvios" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Tiempo y Costos de Envío</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $TimeAndPriceDelivery->content ?? '' !!}</div>
@@ -317,7 +309,7 @@
     </div>
 
     <div id="modallinkPlazoReembolso" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Plazos de Reembolso</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $PlazosDeReembolso->content ?? '' !!}</div>
@@ -325,23 +317,25 @@
     </div>
 
     <div id="modallinkTratamientoDatos" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-      
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Tratamiento de Datos Adicional</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $TratamientoAdicionalDatos->content ?? '' !!}</div>
         </div>
     </div>
 
-    <div id="modallinkPoliticasCookies" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+    <div id="modallinkPoliticasCookies" class="modal"
+        style="max-width: 900px !important; width: 100% !important;  ">
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Políticas de Cookies</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $PoliticasCookies->content ?? '' !!}</div>
         </div>
     </div>
 
-    <div id="modallinkCampanasPublicitarias" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+    <div id="modallinkCampanasPublicitarias" class="modal"
+        style="max-width: 900px !important; width: 100% !important;  ">
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Campanas Publicitarias</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $CampanasPublicitarias->content ?? '' !!}</div>
@@ -349,15 +343,16 @@
     </div>
 
     <div id="modallinkBeneficios" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Beneficios 0% Intereses</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $BeneficiosSinIntereses->content ?? '' !!}</div>
         </div>
     </div>
 
-    <div id="modallinkSeguimientoPedido" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-        
+    <div id="modallinkSeguimientoPedido" class="modal"
+        style="max-width: 900px !important; width: 100% !important;  ">
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Seguimiento de Pedido</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $SeguimientoPedido->content ?? '' !!}</div>
@@ -365,7 +360,7 @@
     </div>
 
     <div id="modallinkNuestrasTiendas" class="modal" style="max-width: 900px !important; width: 100% !important;  ">
-       
+
         <div class="p-4 flex flex-col gap-2">
             <h1 class="font-galano_bold text-2xl lg:text-3xl text-center">Nuestras Tiendas</h1>
             <div class="font-galano_regular prose p-2 text-black">{!! $NuestrasTiendas->content ?? '' !!}</div>
@@ -463,7 +458,7 @@
             })
         })
 
-      
+
 
         function alerta(message) {
             Swal.fire({

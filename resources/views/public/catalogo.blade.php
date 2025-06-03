@@ -876,11 +876,11 @@
                                             </div>
                                             <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
                                                 ${value.descuento == 0 ? `
-                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                                                ` : `
-                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                                                `}
+                                                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                                                ` : `
+                                                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                                                                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                                                `}
                                             </div> 
                                         </div>
                                     </div>
@@ -953,11 +953,11 @@
                                             </div>
                                             <div class="flex flex-row lg:flex-col lg:justify-start items-center gap-2 lg:gap-0 lg:items-end w-full lg:w-1/3">
                                                 ${value.descuento == 0 ? `
-                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                                                ` : `
-                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
-                                                                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
-                                                                                                                                                                                `}
+                                                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                                                ` : `
+                                                                                                                                                                                                                    <p class="font-galano_regular font-bold text-lg text-[#052F4E] text-start lg:text-end">S/ ${value.descuento}</p>
+                                                                                                                                                                                                                    <p class="font-galano_regular text-sm line-through text-[#052F4E] text-start lg:text-end">S/ ${value.precio}</p>
+                                                                                                                                                                                                                `}
                                             </div> 
                                         </div>
                                     </div>
@@ -1104,13 +1104,33 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
         </template>
     </div>
 
-    <div class="mb-4">
+    <div class="mb-4" hidden>
         <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico <span
                 class="text-red-500">*</span></label>
         <input type="email" id="email" x-model="email" @input="validateEmail()"
             class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FB4535] focus:border-[#FB4535]"
             placeholder="ejemplo@correo.com">
         <p x-show="emailError" x-text="emailError" class="mt-1 text-sm text-red-600"></p>
+    </div>
+
+    <div class="mb-6">
+        <div class="flex items-center justify-between mb-1">
+            <label for="cupon" class="block text-sm font-medium text-gray-700">¿Tienes un cupón de
+                descuento?</label>
+            <button type="button" @click="aplicarCupon()"
+                class="text-sm text-[#FB4535] font-medium hover:text-[#fb4535dd]"
+                :class="{ 'opacity-50 cursor-not-allowed': !cupon }" :disabled="!cupon">
+                Aplicar
+            </button>
+        </div>
+        <div class="flex items-center gap-2">
+            <input type="text" id="cupon" x-model="cupon"
+                class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-[#FB4535] focus:border-[#FB4535]"
+                placeholder="Ingresa tu código de cupón">
+        </div>
+        <p x-show="cuponMessage" x-text="cuponMessage"
+            :class="{ 'text-green-600 font-semibold': cuponValid, 'text-red-600': !cuponValid && cuponMessage }"
+            class="mt-1 text-sm"></p>
     </div>
 
     <div class="flex flex-col gap-3">
@@ -1149,6 +1169,7 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
     let paymentType = null;
     let plan = null
     let email = null;
+    let cuponValidated = null;
 
     function planesModal() {
         return {
@@ -1163,10 +1184,31 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
             email: "{{ Auth::user()->email ?? '' }}",
             emailError: '',
 
+            cupon: '',
+            cuponValidated: null,
+            cuponMessage: '',
+            cuponValid: false,
+            cuponDiscountType: null,
+            cuponDiscount: 0,
+
             init() {
                 // Escuchar el evento de apertura del modal
                 window.addEventListener('openPlanesModal', (event) => {
-                    this.openModal(event.detail);
+                    const sessionActive = {{ Auth::check() ? 'true' : 'false' }}
+                    if (!sessionActive) {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Iniciar Sesión',
+                            text: 'Para comprar primero debes iniciar sesión',
+                            showConfirmButton: false,
+                            timer: 3000,
+                            timerProgressBar: true
+                        }).then(() => {
+                            window.location.href = '/login';
+                        });
+                    } else {
+                        this.openModal(event.detail);
+                    }
                 });
             },
 
@@ -1191,12 +1233,72 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                 this.selectedPlan = plan;
             },
 
+            aplicarCupon() {
+                if (!this.cupon) return;
+
+                // Aquí deberías hacer una llamada AJAX para validar el cupón
+                fetch('/api/coupon/validate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Accept': 'application/json',
+                            'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
+                        },
+                        body: JSON.stringify({
+                            cupon: this.cupon,
+                            productId: this.productId
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(({
+                        data,
+                        message
+                    }) => {
+                        if (data) {
+                            this.cuponValid = true;
+                            cuponValidated = data.codigo;
+                            this.cuponDiscountType = data.porcentaje == 1 ? 'porcentaje' : 'monto';
+                            this.cuponDiscount = data.monto;
+                            if (this.cuponDiscountType == 'monto') {
+                                this.cuponMessage = `¡Cupón aplicado! S/ ${this.cuponDiscount} de descuento`;
+                            } else {
+                                this.cuponMessage = `¡Cupón aplicado! ${this.cuponDiscount}% de descuento`;
+                            }
+                        } else {
+                            this.cuponValid = false;
+                            cuponValidated = null;
+                            this.cuponDiscountType = null;
+                            this.cuponDiscount = 0;
+                            this.cuponMessage = message || 'Cupón inválido o expirado';
+                        }
+                    })
+                    .catch(error => {
+                        this.cuponValid = false;
+                        this.cuponDiscount = 0;
+                        this.cuponMessage = 'Error al validar el cupón';
+                        console.error('Error:', error);
+                    });
+            },
+
             calcularPrecioOriginal(plan) {
                 return this.precio * plan.duracion;
             },
 
             calcularPrecioDescuento(plan) {
                 return this.precio * plan.duracion * (1 - plan.descuento / 100);
+            },
+
+            calcularPrecioFinal(precioBase, duracion = 1) {
+                // Aplicar descuento del cupón si es válido
+                let precio = precioBase;
+                if (this.cuponValid && this.cuponDiscount > 0) {
+                    if (this.cuponDiscountType == 'monto') {
+                        precio -= (this.cuponDiscount / duracion);
+                    } else {
+                        precio = precio * (1 - (this.cuponDiscount / 100));
+                    }
+                }
+                return precio;
             },
 
             formatPrice(amount) {
@@ -1229,20 +1331,26 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                 plan = this.selectedPlan.duracion || null;
                 paymentType = 'completo';
                 email = this.email;
+
+                // const precioBase = this.calcularPrecioDescuento(this.selectedPlan);
+                // const precioFinal = String(Math.round(precioBase * (1 - ((this.percent_discount || 0) / 100)) * 100));
+
                 const precioBase = this.calcularPrecioDescuento(this.selectedPlan);
-                const precioFinal = String(Math.round(precioBase * (1 - ((this.percent_discount || 0) / 100)) * 100));
+                const precioFinal = this.calcularPrecioFinal(precioBase * (1 - (this.percent_discount / 100)));
+
+                console.log(precioFinal * 100)
 
                 Culqi.settings({
                     title: this.producto,
                     currency: 'PEN',
-                    amount: precioFinal,
+                    amount: Math.round(precioFinal * 100),
                     order: Date.now(),
                     email: this.email
                 });
                 Culqi.options({
                     paymentMethods: {
                         tarjeta: true,
-                        yape: true
+                        yape: true,
                     },
                     style: {
                         logo: "{{ asset('favicon.ico') }}",
@@ -1258,15 +1366,21 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
                 productId = this.productId;
                 plan = this.selectedPlan?.duracion || null;
                 email = this.email;
-                let precioMensual = this.precio
+                // let precioMensual = this.precio
+                // if (this.selectedPlan) {
+                //     precioMensual = this.calcularPrecioDescuento(this.selectedPlan) / this.selectedPlan.duracion;
+                // };
+
+                let precioMensual = this.precio;
                 if (this.selectedPlan) {
                     precioMensual = this.calcularPrecioDescuento(this.selectedPlan) / this.selectedPlan.duracion;
-                };
+                }
+                precioMensual = this.calcularPrecioFinal(precioMensual, this.selectedPlan.duracion);
 
                 Culqi.settings({
                     title: this.producto,
                     currency: 'PEN',
-                    amount: precioMensual * 100,
+                    amount: Math.round(precioMensual * 100),
                     order: Date.now(),
                     email: this.email,
                 });
@@ -1304,33 +1418,44 @@ class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-5
 
     function culqi() {
         if (Culqi.token) {
-            console.log(productId, plan, paymentType);
 
             fetch('/api/payment/culqi', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value
+                        'X-Xsrf-Token': decodeURIComponent(Cookies.get('XSRF-TOKEN'))
                     },
                     body: JSON.stringify({
                         token: Culqi.token.id,
                         plan: plan || null,
                         paymentType: paymentType,
                         productId: productId,
-                        email: email
+                        email: email,
+                        cupon: cuponValidated || null,
                     })
                 })
                 .then(response => response.json())
-                .then(data => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: '¡Pago exitoso!',
-                        text: 'Tu pago se ha procesado correctamente'
-                    });
-                    Culqi.close();
-                    location.href = "{{ route('agradecimiento') }}"
-                })
-                .catch(error => {
+                .then(({
+                    status,
+                    message
+                }) => {
+                    if (status == 200) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: '¡Pago exitoso!',
+                            text: 'Tu pago se ha procesado correctamente'
+                        });
+                        Culqi.close();
+                        location.href = "{{ route('agradecimiento') }}"
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: message || 'Hubo un error al procesar tu pago'
+                        })
+                        Culqi.close();
+                    }
+                }).catch(error => {
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

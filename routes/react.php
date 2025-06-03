@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\OfferController;
 use App\Http\Controllers\ProductsController;
@@ -17,6 +18,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
   Route::prefix('admin')->group(function () {
     Route::get('/offers', [OfferController::class, 'reactView'])->name('Admin/Offers.jsx');
     Route::get('/products2', [ProductsController::class, 'reactView'])->name('Admin/Products.jsx');
+
+    Route::get('/clients', [ClientController::class,'reactView'])->name('Admin/Clients.jsx');
   });
 });
 // foreach (Router::components as $path => $page) {

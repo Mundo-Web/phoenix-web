@@ -171,6 +171,8 @@ Route::middleware(['auth:sanctum', 'verified', 'can:Admin'])->group(function () 
         Route::resource('/shortcode', ShortcodeController::class);
 
         Route::resource('/pedidos', SaleController::class);
+        
+        Route::resource('/payment-history', PaymentController::class);
 
         Route::get('/politica-datos/{id}', [PoliticaDatosController::class, 'edit'])->name('politicadatos.detalle');
         Route::post('/politica-datos/update/{id}', [PoliticaDatosController::class, 'update'])->name('politicadatos.act');
