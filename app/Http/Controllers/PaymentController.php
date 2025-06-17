@@ -332,7 +332,7 @@ class PaymentController extends BasicController
     $name = Text::keep($plan['duracion']
       . ' - ' . explode(' ', $userJpa->name)[0]
       . ' ' . explode(' ', $userJpa->lastname ?? $userJpa->name)[0]
-      . ' ' . Crypto::short(), 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789- ');
+      . ' ' . Crypto::short() . ' - WEB', 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789- ');
 
     $amount = $amount / $plan['duracion'];
 
